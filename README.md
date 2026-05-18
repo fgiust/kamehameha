@@ -1,50 +1,9 @@
-# React + TypeScript + Vite
+# 亀 kamehameha!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Charge your かめはめ波 and destroy your Japanese barriers!
+### Powerful interactive training for grammar, vocabulary, and kanji. Charge, fire, level up. No mercy.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This app was inspired by the excellent work of Steven Kraft (https://steven-kraft.com/projects/japanese/), with the goal of providing a more up-to-date and interactive set of exercises for learners.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+All exercises included in this app are original and do not reproduce any copyrighted material. While the exercises are organized following the structure of the Genki textbooks for convenience, they are independently created and are not derived from or copied from the Genki books or workbooks.
