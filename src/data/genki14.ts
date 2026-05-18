@@ -67,7 +67,7 @@ export const genki14Lessons: TranslateSessionData[] = [
   },
   {
     id: 'genki14-5',
-    title: 'Number + も/Number + しか + Negative',
+    title: 'も and しか',
     sentenceData: [
       { answer: 'きのう、本[ほん]を三[さん]冊[さつ]も読[よ]みました{。|}', english: 'I read as many as three books yesterday.' },
       { answer: '今日[きょう]、一[いち]時[じ]間[かん]しか寝[ね]ていません{。|}', english: 'I only slept for one hour today.' },

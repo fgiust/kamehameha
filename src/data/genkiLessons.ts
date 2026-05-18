@@ -209,7 +209,7 @@ export const genkiIIChapters: GenkiChapter[] = [
       { id: 'genki14-2', title: '～かもしれません', type: 'sentence', path: '/genki/genki14-2' },
       { id: 'genki14-3', title: 'あげる ◦ くれる ◦ もらう', type: 'sentence', path: '/genki/genki14-3' },
       { id: 'genki14-4', title: '～たらどうですか', type: 'sentence', path: '/genki/genki14-4' },
-      { id: 'genki14-5', title: 'Number + も ◦ Number + しか + Negative', type: 'sentence', path: '/genki/genki14-5' },
+      { id: 'genki14-5', title: 'も and しか', type: 'sentence', path: '/genki/genki14-5' },
     ],
   },
   {
