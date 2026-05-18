@@ -1,0 +1,173 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+export type ProgressSegmentState = 0 | 1 | 2;
+
+const SESSION_PROGRESS_STORAGE_PREFIX = 'kamehameha.sessionProgress.v1.';
+
+export const SESSION_PROGRESS_UPDATED_EVENT = 'kamehameha.sessionProgressUpdated.v1';
+
+const SEGMENT_OK = '🟩';
+const SEGMENT_BAD = '🟥';
+const SEGMENT_EMPTY = '⬜️';
+
+function encodeSegments(segments: ProgressSegmentState[]) {
+  return segments.map(s => (s === 1 ? SEGMENT_OK : s === 2 ? SEGMENT_BAD : SEGMENT_EMPTY)).join('');
+}
+
+function decodeSegments(raw: string): ProgressSegmentState[] | null {
+  if (!raw) return null;
+  const tokens = raw.match(/🟩|🟥|⬜️|⬜/gu);
+  if (!tokens || tokens.length === 0) return null;
+  const out: ProgressSegmentState[] = [];
+  for (const t of tokens) {
+    if (t === SEGMENT_OK) out.push(1);
+    else if (t === SEGMENT_BAD) out.push(2);
+    else out.push(0);
+  }
+  return out;
+}
+
+export function buildSessionProgressStorageKey(persistKey: string) {
+  return SESSION_PROGRESS_STORAGE_PREFIX + encodeURIComponent(persistKey);
+}
+
+export function readPersistedSessionProgress(persistKey: string): ProgressSegmentState[] | null {
+  try {
+    const raw = localStorage.getItem(buildSessionProgressStorageKey(persistKey));
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== 'object') return null;
+    const obj = parsed as { segments?: unknown; total?: unknown };
+    const total = typeof obj.total === 'number' && Number.isFinite(obj.total) ? Math.max(0, Math.floor(obj.total)) : null;
+
+    if (typeof obj.segments === 'string') {
+      const decoded = decodeSegments(obj.segments);
+      if (!decoded) return null;
+      if (total !== null) {
+        if (decoded.length > total) return decoded.slice(0, total);
+        if (decoded.length < total) return [...decoded, ...(Array(total - decoded.length).fill(0) as ProgressSegmentState[])];
+      }
+      return decoded;
+    }
+
+    if (Array.isArray(obj.segments)) {
+      if (!obj.segments.every(v => v === 0 || v === 1 || v === 2)) return null;
+      const arr = obj.segments as ProgressSegmentState[];
+      if (total !== null) {
+        if (arr.length > total) return arr.slice(0, total);
+        if (arr.length < total) return [...arr, ...(Array(total - arr.length).fill(0) as ProgressSegmentState[])];
+      }
+      return arr;
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function writePersistedSessionProgress(persistKey: string, segments: ProgressSegmentState[]) {
+  try {
+    localStorage.setItem(
+      buildSessionProgressStorageKey(persistKey),
+      JSON.stringify({ segments: encodeSegments(segments), total: segments.length, at: Date.now() })
+    );
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function notifySessionProgressUpdated(persistKey: string) {
+  try {
+    window.dispatchEvent(new CustomEvent(SESSION_PROGRESS_UPDATED_EVENT, { detail: { persistKey } }));
+  } catch {
+    return;
+  }
+}
+
+export function useSessionProgress(
+  totalSegments: number,
+  options?: {
+    persistKey?: string;
+  }
+) {
+  const [segments, setSegments] = useState<ProgressSegmentState[]>(() => Array(Math.max(0, totalSegments)).fill(0));
+  const [pulses, setPulses] = useState<number[]>(() => Array(Math.max(0, totalSegments)).fill(0));
+  const segmentsRef = useRef<ProgressSegmentState[]>(Array(Math.max(0, totalSegments)).fill(0));
+  const keyToIndexRef = useRef<Map<string, number>>(new Map());
+  const indexToKeyRef = useRef<Array<string | null>>(Array(Math.max(0, totalSegments)).fill(null));
+  const nextIndexRef = useRef(0);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  useEffect(() => {
+    const n = Math.max(0, totalSegments);
+    segmentsRef.current = Array(n).fill(0);
+    setSegments(Array(n).fill(0));
+    setPulses(Array(n).fill(0));
+    keyToIndexRef.current = new Map();
+    indexToKeyRef.current = Array(n).fill(null);
+    nextIndexRef.current = 0;
+  }, [totalSegments]);
+
+  const record = useCallback((key: string, isCorrect: boolean) => {
+    if (totalSegments <= 0) return;
+    const map = keyToIndexRef.current;
+    let idx = map.get(key);
+    if (idx === undefined) {
+      const empty = indexToKeyRef.current.indexOf(null);
+      if (empty !== -1) {
+        idx = empty;
+      } else {
+        idx = nextIndexRef.current;
+        const oldKey = indexToKeyRef.current[idx];
+        if (oldKey !== null) map.delete(oldKey);
+        nextIndexRef.current = (idx + 1) % totalSegments;
+      }
+      map.set(key, idx);
+      indexToKeyRef.current[idx] = key;
+    }
+
+    const base = segmentsRef.current.length === totalSegments
+      ? segmentsRef.current
+      : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
+    const nextSegments = [...base] as ProgressSegmentState[];
+    nextSegments[idx] = isCorrect ? 1 : 2;
+    segmentsRef.current = nextSegments;
+    setSegments(nextSegments);
+
+    setPulses(prev => {
+      const next = prev.length === totalSegments ? [...prev] : Array(totalSegments).fill(0);
+      next[idx] = (next[idx] ?? 0) + 1;
+      return next;
+    });
+
+    if (options?.persistKey) {
+      const ok = writePersistedSessionProgress(options.persistKey, nextSegments);
+      if (ok) notifySessionProgressUpdated(options.persistKey);
+    }
+
+    try {
+      const AudioContextCtor = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioContextCtor) return;
+      if (!audioCtxRef.current) audioCtxRef.current = new AudioContextCtor();
+      const ctx = audioCtxRef.current;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = isCorrect ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(isCorrect ? 880 : 220, now);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(isCorrect ? 0.05 : 0.06, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + (isCorrect ? 0.12 : 0.18));
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + (isCorrect ? 0.14 : 0.2));
+    } catch {
+      return;
+    }
+  }, [options?.persistKey, totalSegments]);
+
+  return useMemo(() => ({ segments, pulses, record }), [segments, pulses, record]);
+}

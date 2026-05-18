@@ -1,0 +1,477 @@
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { verbEngines } from '../engines/verbConjugation';
+import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS, getConjugationFormHint, readStoredBool, stripRubyTags, updateFeedbackDetails, writeStoredBool } from '../types';
+import verbs from '../data/verbs';
+import { toHiragana } from 'wanakana';
+import SessionProgressBar from '../components/SessionProgressBar';
+import { useSessionProgress } from '../hooks/useSessionProgress';
+import KeyboardTip from '../components/KeyboardTip';
+import OptionToggle from '../components/OptionToggle';
+
+const formIds = [
+  'causativeform', 'conditionalform', 'imperativeform', 'negativeform',
+  'passiveform', 'pastform', 'politeform', 'potentialform',
+  'provisionalform', 'teform', 'volitionalform',
+];
+
+const formLabels: Record<string, string> = {
+  causativeform: 'Causative', conditionalform: 'Conditional', imperativeform: 'Imperative',
+  negativeform: 'Negative', passiveform: 'Passive', pastform: 'Past',
+  politeform: 'Polite', potentialform: 'Potential', provisionalform: 'Provisional',
+  teform: 'て', volitionalform: 'Volitional',
+};
+
+const typeLabels = {
+  u: 'う-Verb (Godan)',
+  ru: 'る-Verb (Ichidan)',
+  irr: 'Irregular Verb',
+};
+
+type GlobalSettings = {
+  reverseQA: boolean;
+  showKanji: boolean;
+  showFurigana: boolean;
+  showType: boolean;
+  showEnglish: boolean;
+};
+
+function toHiraganaIME(raw: string) {
+  const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
+  let s = raw.replace(/nn(?=[aiueoy])/gi, "n'n");
+  if (/nn$/i.test(s)) s = s.slice(0, -1);
+  const out = toHiragana(s);
+  if (trailingSingleN && out.endsWith('ん')) return out.slice(0, -1) + 'n';
+  return out;
+}
+
+function finalizeIME(input: string) {
+  if (input.endsWith('n')) return input.slice(0, -1) + 'ん';
+  return input;
+}
+
+function toRequestedFormHint(label: string) {
+  const trimmed = label.trim();
+  if (!trimmed) return '';
+  if (trimmed === 'て') return 'て-form';
+  const lower = trimmed.toLowerCase();
+  if (/\bform$/.test(lower)) return lower;
+  return `${lower} form`;
+}
+
+const PAGE_TITLE = 'Randomized Verb Forms';
+
+export default function RandomizePage() {
+  const [settings, setSettings] = useState<GlobalSettings>(() => {
+    const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
+    return {
+      reverseQA: readStoredBool(SETTINGS_KEYS.reverseQA, false),
+      showKanji,
+      showFurigana: showKanji ? readStoredBool(SETTINGS_KEYS.showFurigana, false) : false,
+      showType: readStoredBool(SETTINGS_KEYS.showType, true),
+      showEnglish: readStoredBool(SETTINGS_KEYS.showEnglish, false),
+    };
+  });
+
+  const [activeForms, setActiveForms] = useState<Record<string, boolean>>(() => {
+    const f: Record<string, boolean> = {};
+    formIds.forEach(id => { f[id] = true; });
+    return f;
+  });
+  const [seenWordKeys, setSeenWordKeys] = useState<Record<string, true>>({});
+  const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);
+  const [currentForm, setCurrentForm] = useState('');
+  const [currentFormLabel, setCurrentFormLabel] = useState('');
+  const [currentFlags, setCurrentFlags] = useState<OptionFlags>({});
+  const [userInput, setUserInput] = useState('');
+  const [rawInput, setRawInput] = useState('');
+  const [didConvert, setDidConvert] = useState(false);
+  const [isComposing, setIsComposing] = useState(false);
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setIncorrect] = useState(0);
+  const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
+  const [diffDisplay, setDiffDisplay] = useState('');
+  const [awaitingNext, setAwaitingNext] = useState(false);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const pendingCaretRef = useRef<number | null>(null);
+  const isComposingRef = useRef(false);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(verbs.length, { persistKey: '/randomize' });
+
+  const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
+    setSettings(s => {
+      const next: GlobalSettings = { ...s, [key]: value };
+      if (key === 'showKanji' && !value) next.showFurigana = false;
+      return next;
+    });
+    writeStoredBool(SETTINGS_KEYS[key], value);
+    if (key === 'showKanji' && !value) {
+      writeStoredBool(SETTINGS_KEYS.showFurigana, false);
+    }
+  };
+
+  const getWordKey = (w: ConjugationWord) => `${w.type}:${w.kana}:${stripRubyTags(w.kanji)}`;
+
+  const pickNext = useCallback(() => {
+    if (verbs.length === 0) return;
+    const unseen = verbs.filter(w => !seenWordKeys[getWordKey(w)]);
+    const pool = unseen.length > 0 ? unseen : verbs;
+    const word = pool[Math.floor(Math.random() * pool.length)];
+
+    setSeenWordKeys(prev => {
+      const key = getWordKey(word);
+      if (prev[key]) return prev;
+      return { ...prev, [key]: true };
+    });
+
+    const enabledForms = Object.entries(activeForms).filter(([, v]) => v).map(([k]) => k);
+    const forms = enabledForms.length > 0 ? enabledForms : formIds;
+    const form = forms[Math.floor(Math.random() * forms.length)];
+    const engine = verbEngines[form];
+    const flags: OptionFlags = {};
+    engine.opts.forEach(o => { flags[o.id] = Math.random() >= 0.5; });
+    if (flags.polite !== undefined) flags.polite = false;
+
+    const answer = engine.getAnswer(word.kana, word.type, flags);
+    const answers = Array.isArray(answer) ? answer : [answer];
+    if (answers.length === 1 && answers[0] === '') {
+      pickNext();
+      return;
+    }
+
+    const optLabels = engine.opts.filter(o => flags[o.id]).map(o => o.label);
+    const label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + formLabels[form];
+
+    setCurrentWord(word);
+    setCurrentForm(form);
+    setCurrentFormLabel(label);
+    setCurrentFlags(flags);
+    setUserInput('');
+    setRawInput('');
+    setDidConvert(false);
+    setIsComposing(false);
+    setInputState('');
+    setDiffDisplay('');
+    setAwaitingNext(false);
+    setTimeout(() => inputRef.current?.focus(), 50);
+  }, [activeForms, seenWordKeys]);
+
+  useEffect(() => { pickNext(); }, []); // eslint-disable-line
+
+  useEffect(() => {
+    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
+  }, []);
+
+  useEffect(() => {
+    if (!currentWord || !currentForm) return;
+    const engine = verbEngines[currentForm];
+    const hint = getConjugationFormHint(engine, currentFlags);
+
+    const dictKana = currentWord.kana;
+    const dictKanji = stripRubyTags(currentWord.kanji);
+
+    let currentQuestion = '';
+    let currentCorrectAnswer = '';
+
+    if (settings.reverseQA) {
+      const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+      const answers = Array.isArray(answer) ? answer : [answer];
+      const prompt = answers.find(a => a !== '') || '';
+      currentQuestion = prompt || currentWord.kana;
+      currentCorrectAnswer = `${dictKana} (${dictKanji})`;
+    } else {
+      currentQuestion = settings.showKanji ? currentWord.kanji : currentWord.kana;
+      const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+      const answers = Array.isArray(answer) ? answer : [answer];
+      currentCorrectAnswer = answers.join(' / ');
+    }
+
+    updateFeedbackDetails({
+      section: `${formLabels[currentForm]} Form Practice (${hint})`,
+      question: currentQuestion,
+      correctAnswer: currentCorrectAnswer,
+      userAnswer: finalizeIME(userInput.trim()),
+    });
+  }, [currentWord, currentForm, currentFlags, settings.reverseQA, settings.showKanji, userInput]);
+
+  useEffect(() => {
+    const pos = pendingCaretRef.current;
+    if (pos === null) return;
+    const el = inputRef.current;
+    if (!el) return;
+    if (document.activeElement !== el) {
+      pendingCaretRef.current = null;
+      return;
+    }
+    try {
+      el.setSelectionRange(pos, pos);
+    } catch {
+      return;
+    }
+    pendingCaretRef.current = null;
+  }, [userInput]);
+
+  const advanceToNext = useCallback(() => {
+    setAwaitingNext(false);
+    pickNext();
+  }, [pickNext]);
+
+  const checkAnswer = useCallback(() => {
+    if (awaitingNext) return;
+    if (!currentWord || !userInput.trim() || !currentForm) return;
+    const engine = verbEngines[currentForm];
+    const normalized = finalizeIME(userInput.trim());
+    const progressKey = `${getWordKey(currentWord)}|${currentForm}|${Object.entries(currentFlags).filter(([, v]) => v).map(([k]) => k).join(',')}`;
+
+    if (settings.reverseQA) {
+      const dictKana = currentWord.kana;
+      const dictKanji = stripRubyTags(currentWord.kanji);
+      const acceptable = new Set([dictKana, dictKanji]);
+      const isCorrect = acceptable.has(normalized);
+      const correctDisplay = (() => {
+        if (!settings.showKanji) return dictKana;
+        if (settings.showFurigana) return currentWord.kanji;
+        return dictKanji;
+      })();
+
+      if (isCorrect) { setCorrect(c => c + 1); setInputState('correct'); }
+      else { setIncorrect(c => c + 1); setInputState('incorrect'); }
+      setDiffDisplay(correctDisplay);
+
+      setPrevAnswers(prev => [{
+        question: `${dictKana} → ${currentFormLabel}`,
+        userAnswer: normalized,
+        correctAnswer: correctDisplay,
+        isCorrect,
+      }, ...prev]);
+
+      recordProgress(progressKey, isCorrect);
+      setAwaitingNext(true);
+      return;
+    }
+
+    const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+    const answers = Array.isArray(answer) ? answer : [answer];
+    const isCorrect = answers.some(a => a === normalized);
+
+    if (isCorrect) { setCorrect(c => c + 1); setInputState('correct'); }
+    else { setIncorrect(c => c + 1); setInputState('incorrect'); }
+    setDiffDisplay(answers[0] || '');
+
+    setPrevAnswers(prev => [{
+      question: `${currentWord.kana} → ${currentFormLabel}`,
+      userAnswer: normalized,
+      correctAnswer: answers[0] || '',
+      isCorrect,
+    }, ...prev]);
+
+    recordProgress(progressKey, isCorrect);
+    setAwaitingNext(true);
+  }, [awaitingNext, currentWord, currentForm, currentFormLabel, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, settings.showType, settings.showEnglish, userInput, recordProgress]);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (awaitingNext) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        advanceToNext();
+        return;
+      }
+      if (!e.altKey && !e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete')) {
+        e.preventDefault();
+        advanceToNext();
+      }
+      return;
+    }
+
+    if (e.key === 'Enter') {
+      const nativeEvent = e.nativeEvent as unknown as { isComposing?: boolean };
+      if (nativeEvent.isComposing) return;
+      e.preventDefault();
+      checkAnswer();
+    }
+  };
+
+  const engine = currentForm ? verbEngines[currentForm] : null;
+  const formHint = currentFormLabel ? toRequestedFormHint(currentFormLabel) : (engine ? getConjugationFormHint(engine, currentFlags) : '');
+  const displayedType = currentWord ? typeLabels[currentWord.type as keyof typeof typeLabels] : '';
+
+  const questionNode = (() => {
+    if (!currentWord) return '...';
+    if (settings.reverseQA && engine) {
+      const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+      const answers = Array.isArray(answer) ? answer : [answer];
+      const prompt = answers.find(a => a !== '') || '';
+      return (
+        <ruby>
+          {prompt || currentWord.kana}
+          <rt aria-hidden="true">&nbsp;</rt>
+        </ruby>
+      );
+    }
+
+    if (!settings.showKanji) {
+      return (
+        <ruby>
+          {currentWord.kana}
+          <rt aria-hidden="true">&nbsp;</rt>
+        </ruby>
+      );
+    }
+    return <ruby dangerouslySetInnerHTML={{ __html: currentWord.kanji }} />;
+  })();
+
+  const total = correct + incorrect;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
+
+  return (
+    <div className="app-container">
+      <div className="page-header">
+        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <div className="page-actions">
+          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="exercise-container">
+          <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
+            {questionNode}
+          </div>
+          <div className="form-hint">{formHint}</div>
+          {(() => {
+            const showEnglish = !!currentWord && settings.showEnglish;
+            const showType = !!currentWord && settings.showType && !!displayedType;
+            const layoutClass = showEnglish && showType ? 'is-split' : 'is-centered';
+            const isEmpty = !showEnglish && !showType;
+            return (
+              <div className={`exercise-meta-row ${layoutClass} ${isEmpty ? 'is-empty' : ''}`}>
+                {showEnglish && <div className="exercise-meta-item is-english">{currentWord!.eng}</div>}
+                {showType && <div className="exercise-meta-item is-type">{displayedType}</div>}
+                {isEmpty && <div className="exercise-meta-item">&nbsp;</div>}
+              </div>
+            );
+          })()}
+
+          <div className="exercise-input-block">
+            <input
+              ref={inputRef}
+              className={`exercise-input ${inputState}`}
+              value={userInput}
+              onChange={e => {
+                if (awaitingNext) return;
+                const raw = e.target.value;
+                setRawInput(raw);
+
+                const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
+                if (composing) {
+                  setDidConvert(false);
+                  setIsComposing(true);
+                  setUserInput(raw);
+                  return;
+                }
+                setIsComposing(false);
+
+                const didConvertNow = /[A-Za-z]/.test(raw);
+                setDidConvert(didConvertNow);
+                const caret = e.target.selectionStart;
+                const converted = toHiraganaIME(raw);
+                if (caret !== null) {
+                  pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                }
+                setUserInput(converted);
+              }}
+              onCompositionStart={() => {
+                isComposingRef.current = true;
+                setIsComposing(true);
+              }}
+              onCompositionEnd={() => {
+                isComposingRef.current = false;
+                setIsComposing(false);
+              }}
+              onKeyDown={handleKeyDown}
+              autoCorrect="off"
+              autoCapitalize="none"
+              autoComplete="off"
+              spellCheck={false}
+            />
+            <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
+          </div>
+
+          <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
+            {diffDisplay
+              ? (settings.showKanji && settings.showFurigana && diffDisplay.includes('<rt>')
+                ? <ruby dangerouslySetInnerHTML={{ __html: diffDisplay }} />
+                : diffDisplay)
+              : '\u00A0'}
+          </div>
+        </div>
+
+        <div className="options-panel">
+          <div className="switches">
+            <OptionToggle
+              label="Kanji"
+              checked={settings.showKanji}
+              onChange={val => updateSetting('showKanji', val)}
+            />
+            <OptionToggle
+              label="Furigana ⇧"
+              checked={settings.showFurigana}
+              disabled={!settings.showKanji}
+              onChange={val => updateSetting('showFurigana', val)}
+            />
+            <OptionToggle
+              label="English"
+              checked={settings.showEnglish}
+              onChange={val => updateSetting('showEnglish', val)}
+            />
+            <OptionToggle
+              label="Type"
+              checked={settings.showType}
+              onChange={val => updateSetting('showType', val)}
+            />
+            <OptionToggle
+              label="Reverse Q-A"
+              checked={settings.reverseQA}
+              onChange={val => updateSetting('reverseQA', val)}
+            />
+          </div>
+
+          <div className="options-divider" />
+          <div className="options-section-label">Forms:</div>
+
+          <div className="switches">
+            {formIds.map(id => (
+              <OptionToggle
+                key={id}
+                label={formLabels[id]}
+                checked={!!activeForms[id]}
+                onChange={() => setActiveForms(f => ({ ...f, [id]: !f[id] }))}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <SessionProgressBar
+        segments={progressSegments}
+        pulses={progressPulses}
+        correct={correct}
+        incorrect={incorrect}
+        pct={pct}
+      />
+
+      {prevAnswers.length > 0 && (
+        <div className="card prev-answers">
+          {prevAnswers.slice(0, 20).map((a, i) => (
+            <div key={i} className={`prev-answer-item ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
+              <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>
+              <span className="q" style={{ fontSize: 13 }}>{a.question}</span>
+              <span className="user-ans">{a.userAnswer}</span>
+              {!a.isCorrect && <span className="correct-ans">→ {a.correctAnswer}</span>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

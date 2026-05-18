@@ -1,0 +1,90 @@
+import { describe, it, expect } from 'vitest';
+import { diffSentenceAnswer } from './sentenceEngine';
+
+describe('sentenceEngine', () => {
+  describe('diffSentenceAnswer', () => {
+    it('should handle correct kanji matching perfectly', () => {
+      // User typed "佐藤さん和先生です", correct is "佐[さ]藤[とう]さんは先[せん]生[せい]です"
+      const correct = '佐[さ]藤[とう]さんは先[せん]生[せい]です';
+      const user = '佐藤さん和先生です';
+      const ops = diffSentenceAnswer(user, correct);
+
+      // Expected output:
+      // 佐[さ] (kanji) - green
+      // 藤[とう] (kanji) - green
+      // さ (kanji) - green
+      // ん (kanji) - green
+      // 和 (extra) - red
+      // は (missing) - white
+      // 先[せん] (kanji) - green
+      // 生[せい] (kanji) - green
+      // で (kanji) - green
+      // す (kanji) - green
+      expect(ops).toEqual([
+        { kind: 'unit', unit: { kind: 'ruby', surface: '佐', reading: 'さ' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '藤', reading: 'とう' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'さ', reading: 'さ' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'ん', reading: 'ん' }, status: 'correct_kanji' },
+        { kind: 'extra', text: '和' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'は', reading: 'は' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '先', reading: 'せん' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '生', reading: 'せい' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'で', reading: 'で' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'す', reading: 'す' }, status: 'correct_kanji' },
+      ]);
+    });
+
+    it('should handle correct kana matching with yellow kanji', () => {
+      // Correct is "伊[い]藤[とう]", user typed "いとう"
+      const correct = '伊[い]藤[とう]';
+      const user = 'いとう';
+      const ops = diffSentenceAnswer(user, correct);
+
+      expect(ops).toEqual([
+        { kind: 'unit', unit: { kind: 'ruby', surface: '伊', reading: 'い' }, status: 'correct_kana' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '藤', reading: 'とう' }, status: 'correct_kana' },
+      ]);
+    });
+
+    it('should handle partial reading (extra and missing)', () => {
+      // User typed "いと", correct is "伊[い]藤[とう]"
+      const correct = '伊[い]藤[とう]';
+      const user = 'いと';
+      const ops = diffSentenceAnswer(user, correct);
+
+      expect(ops).toEqual([
+        { kind: 'unit', unit: { kind: 'ruby', surface: '伊', reading: 'い' }, status: 'correct_kana' },
+        { kind: 'extra', text: 'と' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '藤', reading: 'とう' }, status: 'missing' },
+      ]);
+    });
+
+    it('should keep ruby tags unaltered even with messy input', () => {
+      const correct = '私[わたし]の名[な]前[まえ]は田[た]中[なか]さんは日[に]本[ほん]人[じん]です';
+      const user = '私の名前は田田中きんはに日本人です';
+      const ops = diffSentenceAnswer(user, correct);
+
+      // Verify that no unit was split or altered.
+      const correctUnits = [
+        { kind: 'ruby', surface: '私', reading: 'わたし' },
+        { kind: 'plain', surface: 'の', reading: 'の' },
+        { kind: 'ruby', surface: '名', reading: 'な' },
+        { kind: 'ruby', surface: '前', reading: 'まえ' },
+        { kind: 'plain', surface: 'は', reading: 'は' },
+        { kind: 'ruby', surface: '田', reading: 'た' },
+        { kind: 'ruby', surface: '中', reading: 'なか' },
+        { kind: 'plain', surface: 'さ', reading: 'さ' },
+        { kind: 'plain', surface: 'ん', reading: 'ん' },
+        { kind: 'plain', surface: 'は', reading: 'は' },
+        { kind: 'ruby', surface: '日', reading: 'に' },
+        { kind: 'ruby', surface: '本', reading: 'ほん' },
+        { kind: 'ruby', surface: '人', reading: 'じん' },
+        { kind: 'plain', surface: 'で', reading: 'で' },
+        { kind: 'plain', surface: 'す', reading: 'す' },
+      ];
+
+      const returnedUnits = ops.filter(o => o.kind === 'unit').map(o => (o.kind === 'unit' ? o.unit : null));
+      expect(returnedUnits).toEqual(correctUnits);
+    });
+  });
+});
