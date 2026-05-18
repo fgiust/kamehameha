@@ -30,9 +30,9 @@ export const genki13Lessons: TranslateSessionData[] = [
     title: '～てみる',
     sentenceData: [
       { answer: 'この漢[かん]字[じ]を書[か]いてみます{。|}', english: 'I will try writing this kanji.' },
-      { answer: '日[に]本[ほん]の料[りょう]理[り]を作[つく]ってみました{。|}', english: 'I tried making Japanese food.' },
+      { answer: '{日[に]本[ほん]の料[りょう]理[り]|和[わ]食[しょく]}を作[つく]ってみました{。|}', english: 'I tried making Japanese food.' },
       { answer: 'この本[ほん]を読[よ]んでみてください{。|}', english: 'Please try reading this book.' },
-      { answer: '新[あたら]しいカフェに行[い]ってみたい{です|です。}', english: 'I want to try going to a new cafe.' },
+      { answer: '新[あたら]しい{カフェ|喫[きっ]茶[さ]店[てん]}に行[い]ってみたい{です|です。}', english: 'I want to try going to a new cafe.' },
       { answer: 'このアプリを使[つか]ってみましょう{。|}', english: "Let's try using this app." },
       { answer: '伊[い]藤[とう]さんに日[に]本[ほん]語[ご]で話[はな]してみます{。|}', english: 'I will try speaking to Ito in Japanese.' },
     ],

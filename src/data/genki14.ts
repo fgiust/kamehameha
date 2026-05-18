@@ -38,15 +38,15 @@ export const genki14Lessons: TranslateSessionData[] = [
     title: 'あげる/くれる/もらう',
     sentenceData: [
       { answer: '{私[わたし]は|}山[やま]田[だ]さんに本[ほん]をあげました{。|}', english: 'I gave a book to Yamada.' },
-      { answer: '佐[さ]藤[とう]さんは私[わたし]にペンをくれました{。|}', english: 'Sato gave me a pen.' },
+      { answer: '佐[さ]藤[とう]さんは{私[わたし]に|}ペンをくれました{。|}', english: 'Sato gave me a pen.' },
       { answer: '{私[わたし]は|}鈴[すず]木[き]さんにプレゼントをもらいました{。|}', english: 'I received a present from Suzuki.' },
-      { answer: '友[とも]達[だち]は私[わたし]にお金[かね]をくれました{。|}', english: 'My friend gave me money.' },
-      { answer: '彼[かの]女[じょ]に花[はな]をあげるつもり{です|です。|だ|だ。}', english: 'I plan to give flowers to my girlfriend.' },
-      { answer: '先[せん]生[せい]は私[わたし]に辞[じ]書[しょ]をくれました{。|}', english: 'The teacher gave me a dictionary.' },
-      { answer: '両[りょう]親[しん]から時[と]計[けい]をもらいました{。|}', english: 'I received a watch from my parents.' },
+      { answer: '友[とも]達[だち]は{私[わたし]に|}お金[かね]をくれました{。|}', english: 'My friend gave me money.' },
+      { answer: '{私[わたし]の|}彼[かの]女[じょ]に花[はな]をあげるつもり{です|です。|だ|だ。}', english: 'I plan to give flowers to my girlfriend.' },
+      { answer: '先[せん]生[せい]は{私[わたし]に|}辞[じ]書[しょ]をくれました{。|}', english: 'The teacher gave me a dictionary.' },
+      { answer: '{私[わたし]は|}両[りょう]親[しん]に時[と]計[けい]をもらいました{。|}', english: 'I received a watch from my parents.' },
       { answer: '妹[いもうと]に服[ふく]をあげました{。|}', english: 'I gave clothes to my younger sister.' },
-      { answer: '誰[だれ]がこのかばんをくれました{か|か。}', english: 'Who gave you this bag?' },
-      { answer: '父[ちち]にネクタイをもらいました{。|}', english: 'I received a tie from my father.' }
+      { answer: '誰[だれ]がこの{かばん|カバン}をくれました{か|か。}', english: 'Who gave you this bag?' },
+      { answer: '{私[わたし]は|}父[ちち]にネクタイをもらいました{。|}', english: 'I received a tie from my father.' }
     ]
   },
   {

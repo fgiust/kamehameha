@@ -128,7 +128,7 @@ export const genkiIChapters: GenkiChapter[] = [
       { id: 'genki6-2', title: '～てください', type: 'sentence', path: '/genki/genki6-2' },
       { id: 'genki6-3', title: '～てもいいです', type: 'sentence', path: '/genki/genki6-3' },
       { id: 'genki6-4', title: '～てはいけません', type: 'sentence', path: '/genki/genki6-4' },
-      { id: 'genki6-5', title: 'Describing Two Activities', type: 'sentence', path: '/genki/genki6-5' },
+      { id: 'genki6-5', title: 'Describing two activities', type: 'sentence', path: '/genki/genki6-5' },
       { id: 'genki6-6', title: '～から', type: 'sentence', path: '/genki/genki6-6' },
       { id: 'genki6-7', title: '～ましょうか', type: 'sentence', path: '/genki/genki6-7' },
     ],
@@ -156,15 +156,15 @@ export const genkiIChapters: GenkiChapter[] = [
     lesson: 9, links: [
       { id: 'genki9-1v', title: 'Past Tense Short Forms (Verbs)', type: 'conjugation', path: '/pastform' },
       { id: 'genki9-1a', title: 'Past Tense Short Forms (Adjectives)', type: 'conjugation', path: '/adj-pastform' },
-      { id: 'genki9-2', title: 'Qualifying Nouns with Verb and Adjectives', type: 'sentence', path: '/genki/genki9-2' },
+      { id: 'genki9-2', title: 'Qualifying nouns with verbs and adjectives', type: 'sentence', path: '/genki/genki9-2' },
       { id: 'genki9-3', title: 'まだ～ていません', type: 'sentence', path: '/genki/genki9-3' },
       { id: 'genki9-4', title: '～から', type: 'sentence', path: '/genki/genki9-4' },
     ],
   },
   {
     lesson: 10, links: [
-      { id: 'genki10-1', title: 'Comparison Between Two Items', type: 'sentence', path: '/genki/genki10-1' },
-      { id: 'genki10-2', title: 'Comparison Among Three or More Items', type: 'sentence', path: '/genki/genki10-2' },
+      { id: 'genki10-1', title: 'Comparison between two items', type: 'sentence', path: '/genki/genki10-1' },
+      { id: 'genki10-2', title: 'Comparison among three items', type: 'sentence', path: '/genki/genki10-2' },
       { id: 'genki10-3', title: 'Adjectives/Noun + の', type: 'sentence', path: '/genki/genki10-3' },
       { id: 'genki10-4', title: '～つもりだ', type: 'sentence', path: '/genki/genki10-4' },
       { id: 'genki10-5', title: 'Adjective + なる', type: 'conjugation', path: '/adj-naruform' },
@@ -215,7 +215,7 @@ export const genkiIIChapters: GenkiChapter[] = [
   {
     lesson: 15, links: [
       { id: 'genki15-1', title: 'Volitional Form', type: 'conjugation', path: '/volitionalform' },
-      { id: 'genki15-2', title: 'Volitional Form + と思っています', type: 'sentence', path: '/genki/genki15-2' },
+      { id: 'genki15-2', title: 'Volitional + と思っています', type: 'sentence', path: '/genki/genki15-2' },
       { id: 'genki15-3', title: '～ておく', type: 'sentence', path: '/genki/genki15-3' },
       { id: 'genki15-4', title: 'Using Sentences to Qualify Nouns', type: 'sentence', path: '/genki/genki15-4' },
     ],
