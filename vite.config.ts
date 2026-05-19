@@ -8,8 +8,14 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf8')) as { version?: string }
+const appVersion = typeof pkg.version === 'string' ? pkg.version : '0.0.0'
+
 // https://vite.dev/config/
 export default defineConfig({
+  define: {
+    __APP_VERSION__: JSON.stringify(appVersion),
+  },
   plugins: [
     react(),
     checker({
@@ -49,10 +55,11 @@ ${data.notes || 'N/A'}
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
                 res.end(JSON.stringify({ success: true, message: 'Feedback saved successfully!' }));
-              } catch (err: any) {
+              } catch (err: unknown) {
+                const message = err instanceof Error ? err.message : 'Unknown error';
                 res.statusCode = 500;
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ success: false, error: err.message }));
+                res.end(JSON.stringify({ success: false, error: message }));
               }
             });
           } else {

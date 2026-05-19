@@ -204,6 +204,8 @@ export default function HomePage() {
       <GenkiBlock bookLabel="Genki II" chapters={genkiIIChapters} />
 
       <footer className="home-footer">
+        <span className="home-footer-text">kamehameha v{__APP_VERSION__}</span>
+        <span className="home-footer-sep">·</span>
         <Link to="/disclaimer" className="home-footer-link">Disclaimer</Link>
         <span className="home-footer-sep">·</span>
         <Link to="/diff-test" className="home-footer-link">TenshinDiff test page</Link>

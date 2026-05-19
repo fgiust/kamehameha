@@ -801,12 +801,17 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-secondary);
 }
 
+.home-footer-text {
+  color: var(--text-secondary);
+}
+
 .home-footer-link {
   color: var(--text-secondary);
 }
 
 .home-footer-link:hover {
   color: var(--accent);
+  text-decoration: underline;
 }
 
 .home-footer-sep {
