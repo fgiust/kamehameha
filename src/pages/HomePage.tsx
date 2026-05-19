@@ -208,6 +208,8 @@ export default function HomePage() {
         <span className="home-footer-sep">·</span>
         <Link to="/disclaimer" className="home-footer-link">Disclaimer</Link>
         <span className="home-footer-sep">·</span>
+        <Link to="/contact" className="home-footer-link">Contact</Link>
+        <span className="home-footer-sep">·</span>
         <Link to="/diff-test" className="home-footer-link">TenshinDiff test page</Link>
       </footer>
     </div>

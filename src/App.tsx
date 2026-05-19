@@ -16,6 +16,7 @@ import TransitivePage from './pages/TransitivePage';
 import FamilyNamesPage from './pages/FamilyNamesPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
+import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
 import { Analytics } from '@vercel/analytics/react';
 
@@ -46,7 +47,7 @@ export default function App() {
 
 function AppShell() {
   const location = useLocation();
-  const showFeedback = !['/', '/disclaimer', '/diff-test'].includes(location.pathname);
+  const showFeedback = !['/', '/disclaimer', '/contact', '/diff-test'].includes(location.pathname);
 
   return (
     <>
@@ -92,6 +93,7 @@ function AppShell() {
         <Route path="/family-names" element={<FamilyNamesPage />} />
         <Route path="/adjectives-nouns" element={<AdjectivesNounsPage />} />
         <Route path="/disclaimer" element={<DisclaimerPage />} />
+        <Route path="/contact" element={<ContactPage />} />
 
         <Route path="/diff-test" element={<DiffTestPage />} />
       </Routes>
