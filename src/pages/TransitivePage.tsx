@@ -65,12 +65,7 @@ export default function TransitivePage() {
   const phaseRef = useRef<0 | 2 | null>(null);
 
   const totalPairs = transitiveData.length;
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalPairs, { persistKey: '/transitive' });
-  const progressSegmentsRef = useRef(progressSegments);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalPairs, { persistKey: '/transitive' });
 
   const pickPair = useCallback(() => {
     if (transitiveData.length === 0) return;
@@ -78,7 +73,7 @@ export default function TransitivePage() {
     const unanswered: number[] = [];
     const incorrect: number[] = [];
     for (let i = 0; i < transitiveData.length; i++) {
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
@@ -118,7 +113,7 @@ export default function TransitivePage() {
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, []);
+  }, [getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -219,7 +214,7 @@ export default function TransitivePage() {
       ...prev,
     ]);
 
-    recordProgressAt(currentIdx, isCorrect);
+    recordProgress(String(currentIdx), isCorrect);
     setAwaitingNext(true);
   };
 

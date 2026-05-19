@@ -53,12 +53,7 @@ export default function FamilyNamesPage() {
     return new KanaReadingEngine(items);
   }, []);
 
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalItems, { persistKey: '/family-names' });
-  const progressSegmentsRef = useRef(progressSegments);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalItems, { persistKey: '/family-names' });
 
   const pickItem = useCallback(() => {
     if (familyNamesData.length === 0) return;
@@ -66,7 +61,7 @@ export default function FamilyNamesPage() {
     const unanswered: number[] = [];
     const incorrect: number[] = [];
     for (let i = 0; i < familyNamesData.length; i++) {
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
@@ -112,7 +107,7 @@ export default function FamilyNamesPage() {
     setRevealAnswer('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, []);
+  }, [getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -187,7 +182,7 @@ export default function FamilyNamesPage() {
       ...prev,
     ]);
 
-    recordProgressAt(currentIdx, isCorrect);
+    recordProgress(String(currentIdx), isCorrect);
     setAwaitingNext(true);
   };
 

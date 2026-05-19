@@ -47,21 +47,16 @@ export default function NaVsNoPage() {
     for (const q of naVsNoData.questions['の']) out.push({ text: q, answer: 'の' });
     return out;
   }, []);
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalQuestions, { persistKey: '/na-vs-no' });
-  const progressSegmentsRef = useRef(progressSegments);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalQuestions, { persistKey: '/na-vs-no' });
   const remainingIdxRef = useRef<number[]>([]);
   const lastIdxRef = useRef<number | null>(null);
   const phaseRef = useRef<0 | 2 | null>(null);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
 
   const newQuestion = useCallback(() => {
     const unanswered: number[] = [];
     const incorrect: number[] = [];
     for (let i = 0; i < allQuestions.length; i++) {
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
@@ -99,7 +94,7 @@ export default function NaVsNoPage() {
     setAnswer(q.answer);
     setStatus('');
     setWait(false);
-  }, [allQuestions]);
+  }, [allQuestions, getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -140,7 +135,7 @@ export default function NaVsNoPage() {
     }
     setWait(true);
 
-    recordProgressAt(currentIdx, isCorrect);
+    recordProgress(String(currentIdx), isCorrect);
 
     setPrevAnswers(prev => [{
       question: question,
@@ -148,7 +143,7 @@ export default function NaVsNoPage() {
       correctAnswer: answer,
       isCorrect,
     }, ...prev]);
-  }, [wait, answer, question, newQuestion, recordProgressAt, currentIdx, isFinished]);
+  }, [wait, answer, question, newQuestion, recordProgress, currentIdx, isFinished]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

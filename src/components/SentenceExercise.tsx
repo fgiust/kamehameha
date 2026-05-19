@@ -66,12 +66,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
   const remainingIdxRef = useRef<number[]>([]);
   const lastIdxRef = useRef<number | null>(null);
   const phaseRef = useRef<0 | 2 | null>(null);
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(sentenceData.length, { persistKey });
-  const progressSegmentsRef = useRef(progressSegments);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(sentenceData.length, { persistKey });
 
   const currentItem = sentenceData[currentIdx];
   const englishPrompt = currentItem?.english || '';
@@ -82,7 +77,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
     const unanswered: number[] = [];
     const incorrect: number[] = [];
     for (let i = 0; i < sentenceData.length; i++) {
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
@@ -123,7 +118,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
     setAnswerFeedback(null);
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [sentenceData.length]);
+  }, [sentenceData.length, getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -204,9 +199,9 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
       diffOps: ops,
     }, ...prev]);
 
-    recordProgressAt(currentIdx, isCorrect);
+    recordProgress(String(currentIdx), isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, currentItem, userInput, englishPrompt, recordProgressAt, currentIdx, isFinished]);
+  }, [awaitingNext, currentItem, userInput, englishPrompt, recordProgress, currentIdx, isFinished]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;

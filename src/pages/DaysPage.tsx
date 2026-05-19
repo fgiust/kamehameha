@@ -40,12 +40,7 @@ export default function DaysPage() {
   const remainingIdxRef = useRef<number[]>([]);
   const lastIdxRef = useRef<number | null>(null);
   const phaseRef = useRef<0 | 2 | null>(null);
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(31, { persistKey: '/days' });
-  const progressSegmentsRef = useRef(progressSegments);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(31, { persistKey: '/days' });
 
   const pickNext = useCallback(() => {
     const max = 31;
@@ -53,7 +48,7 @@ export default function DaysPage() {
     const unanswered: number[] = [];
     const incorrect: number[] = [];
     for (let i = 0; i < max; i++) {
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
@@ -96,7 +91,7 @@ export default function DaysPage() {
     setInputState('');
     setAnswerDisplay('');
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, []);
+  }, [getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -154,7 +149,7 @@ export default function DaysPage() {
       setInputState('incorrect');
     }
     setAnswerDisplay(answer);
-    recordProgressAt(currentDayIdx, ok);
+    recordProgress(String(currentDayIdx), ok);
     setAwaitingNext(true);
   };
 

@@ -38,9 +38,7 @@ export default function TimePage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const lastMinuteRef = useRef<number>(-1);
-  const remainingSlotRef = useRef<number[]>([]);
-  const lastSlotRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
+  const slotTimeRef = useRef<Array<{ hour: number; minute: number; amPm: 0 | 1 | 2 } | null>>(Array(DEFAULT_MASTERY_RANDOM_TOTAL).fill(null));
   const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, { persistKey: '/time' });
   const progressSegmentsRef = useRef(progressSegments);
 
@@ -50,16 +48,19 @@ export default function TimePage() {
 
   const pickNext = useCallback(() => {
     const totalSlots = DEFAULT_MASTERY_RANDOM_TOTAL;
-    const unanswered: number[] = [];
-    const incorrect: number[] = [];
+    let slot = -1;
     for (let i = 0; i < totalSlots; i++) {
       const s = progressSegmentsRef.current[i] ?? 0;
-      if (s === 0) unanswered.push(i);
-      else if (s === 2) incorrect.push(i);
+      if (s === 0) { slot = i; break; }
+    }
+    if (slot === -1) {
+      for (let i = 0; i < totalSlots; i++) {
+        const s = progressSegmentsRef.current[i] ?? 0;
+        if (s === 2) { slot = i; break; }
+      }
     }
 
-    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
-    if (nextPhase === null) {
+    if (slot === -1) {
       setIsFinished(true);
       setAwaitingNext(false);
       setInputState('');
@@ -71,30 +72,22 @@ export default function TimePage() {
     }
 
     setIsFinished(false);
-
-    if (phaseRef.current !== nextPhase || remainingSlotRef.current.length === 0) {
-      remainingSlotRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
-      phaseRef.current = nextPhase;
-    }
-
-    const pool = remainingSlotRef.current;
-    let pickIndex = Math.floor(Math.random() * pool.length);
-    const last = lastSlotRef.current;
-    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
-      pickIndex = (pickIndex + 1) % pool.length;
-    }
-    const slot = pool.splice(pickIndex, 1)[0]!;
-    lastSlotRef.current = slot;
     setCurrentSlot(slot);
 
-    let nextMinute = 0;
-    do {
-      nextMinute = Math.floor(Math.random() * 60);
-    } while (nextMinute === lastMinuteRef.current);
-    lastMinuteRef.current = nextMinute;
+    const state = progressSegmentsRef.current[slot] ?? 0;
+    const stored = state === 2 ? slotTimeRef.current[slot] : null;
+    let nextHour = stored?.hour ?? 0;
+    let nextMinute = stored?.minute ?? 0;
+    const nextAmPm = stored?.amPm ?? 0;
 
-    const nextHour = Math.floor(Math.random() * 24);
-    const nextAmPm = 0;
+    if (!stored) {
+      do {
+        nextMinute = Math.floor(Math.random() * 60);
+      } while (nextMinute === lastMinuteRef.current);
+      lastMinuteRef.current = nextMinute;
+      nextHour = Math.floor(Math.random() * 24);
+      slotTimeRef.current[slot] = { hour: nextHour, minute: nextMinute, amPm: nextAmPm };
+    }
 
     let minStr = nextMinute.toString();
     if (minStr.length === 1) minStr = '0' + minStr;
@@ -113,9 +106,6 @@ export default function TimePage() {
   }, []);
 
   useEffect(() => {
-    remainingSlotRef.current = [];
-    phaseRef.current = null;
-    lastSlotRef.current = null;
     setIsFinished(false);
     pickNext();
   }, [pickNext]);

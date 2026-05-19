@@ -48,9 +48,7 @@ export default function NumbersPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const lastNumberRef = useRef<string>('');
-  const remainingSlotRef = useRef<number[]>([]);
-  const lastSlotRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
+  const slotNumberRef = useRef<Array<string | null>>(Array(DEFAULT_MASTERY_RANDOM_TOTAL).fill(null));
   const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, { persistKey: '/numbers' });
   const progressSegmentsRef = useRef(progressSegments);
 
@@ -60,16 +58,19 @@ export default function NumbersPage() {
 
   const pickNext = useCallback(() => {
     const totalSlots = DEFAULT_MASTERY_RANDOM_TOTAL;
-    const unanswered: number[] = [];
-    const incorrect: number[] = [];
+    let slot = -1;
     for (let i = 0; i < totalSlots; i++) {
       const s = progressSegmentsRef.current[i] ?? 0;
-      if (s === 0) unanswered.push(i);
-      else if (s === 2) incorrect.push(i);
+      if (s === 0) { slot = i; break; }
+    }
+    if (slot === -1) {
+      for (let i = 0; i < totalSlots; i++) {
+        const s = progressSegmentsRef.current[i] ?? 0;
+        if (s === 2) { slot = i; break; }
+      }
     }
 
-    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
-    if (nextPhase === null) {
+    if (slot === -1) {
       setIsFinished(true);
       setAwaitingNext(false);
       setInputState('');
@@ -82,27 +83,18 @@ export default function NumbersPage() {
     }
 
     setIsFinished(false);
-
-    if (phaseRef.current !== nextPhase || remainingSlotRef.current.length === 0) {
-      remainingSlotRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
-      phaseRef.current = nextPhase;
-    }
-
-    const pool = remainingSlotRef.current;
-    let pickIndex = Math.floor(Math.random() * pool.length);
-    const last = lastSlotRef.current;
-    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
-      pickIndex = (pickIndex + 1) % pool.length;
-    }
-    const slot = pool.splice(pickIndex, 1)[0]!;
-    lastSlotRef.current = slot;
     setCurrentSlot(slot);
 
-    let number = '';
-    do {
-      number = Math.floor(Math.random() * Math.pow(10, digits)).toString();
-    } while (number === lastNumberRef.current);
-    lastNumberRef.current = number;
+    let number = slotNumberRef.current[slot];
+    if (!number || (progressSegmentsRef.current[slot] ?? 0) === 0) {
+      let next = '';
+      do {
+        next = Math.floor(Math.random() * Math.pow(10, digits)).toString();
+      } while (next === lastNumberRef.current);
+      number = next;
+      slotNumberRef.current[slot] = number;
+      lastNumberRef.current = number;
+    }
     setCurrentNumber(number);
 
     const readings = getJapaneseNumberReadings(number, true, true).filter(Boolean);
@@ -123,9 +115,6 @@ export default function NumbersPage() {
   }, [digits, reverse]);
 
   useEffect(() => {
-    remainingSlotRef.current = [];
-    phaseRef.current = null;
-    lastSlotRef.current = null;
     setIsFinished(false);
     pickNext();
   }, [pickNext]);

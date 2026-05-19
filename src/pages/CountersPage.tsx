@@ -101,12 +101,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     return out;
   }, [peopleOnly, peopleCounter]);
   const totalQuestions = allQuestions.length;
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalQuestions, { persistKey: peopleOnly ? '/counters-people' : '/counters' });
-  const progressSegmentsRef = useRef(progressSegments);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalQuestions, { persistKey: peopleOnly ? '/counters-people' : '/counters' });
 
   const activeCounters = useMemo(() => {
     if (peopleOnly && peopleCounter) return [peopleCounter];
@@ -145,7 +140,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     for (let i = 0; i < allQuestions.length; i++) {
       const q = allQuestions[i]!;
       if (!activeCounterSet.has(q.counter.counter)) continue;
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
@@ -199,7 +194,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     setInputState('');
     setAnswerDisplay('');
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeCounters, allQuestions]);
+  }, [activeCounters, allQuestions, getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -261,7 +256,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     }
 
     setAnswerDisplay(accepted.length > 1 ? accepted.join(' or ') : accepted[0] ?? '');
-    recordProgressAt(currentQuestionIdx, ok);
+    recordProgress(String(currentQuestionIdx), ok);
     setAwaitingNext(true);
   };
 

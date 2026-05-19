@@ -94,12 +94,7 @@ export default function AdjRandomizePage() {
   const remainingIdxRef = useRef<number[]>([]);
   const lastIdxRef = useRef<number | null>(null);
   const phaseRef = useRef<0 | 2 | null>(null);
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(adjectives.length, { persistKey: '/adj-randomize' });
-  const progressSegmentsRef = useRef(progressSegments);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(adjectives.length, { persistKey: '/adj-randomize' });
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
     setSettings(s => {
@@ -118,7 +113,7 @@ export default function AdjRandomizePage() {
     const unanswered: number[] = [];
     const incorrect: number[] = [];
     for (let i = 0; i < adjectives.length; i++) {
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
@@ -196,7 +191,7 @@ export default function AdjRandomizePage() {
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeForms]);
+  }, [activeForms, getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -293,7 +288,7 @@ export default function AdjRandomizePage() {
         isCorrect,
       }, ...prev]);
 
-      recordProgressAt(currentWordIdx, isCorrect);
+      recordProgress(String(currentWordIdx), isCorrect);
       setAwaitingNext(true);
       return;
     }
@@ -313,9 +308,9 @@ export default function AdjRandomizePage() {
       isCorrect,
     }, ...prev]);
 
-    recordProgressAt(currentWordIdx, isCorrect);
+    recordProgress(String(currentWordIdx), isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, isFinished, currentWord, currentFormKey, currentFormLabel, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, settings.showType, settings.showEnglish, userInput, recordProgressAt, currentWordIdx]);
+  }, [awaitingNext, isFinished, currentWord, currentFormKey, currentFormLabel, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, settings.showType, settings.showEnglish, userInput, recordProgress, currentWordIdx]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;

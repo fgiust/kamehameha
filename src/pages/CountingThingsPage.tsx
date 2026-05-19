@@ -422,12 +422,7 @@ export default function CountingThingsPage() {
   const phaseRef = useRef<0 | 2 | null>(null);
   const lastNumberRef = useRef<number | null>(null);
 
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(ITEMS.length, { persistKey: '/counting-things' });
-  const progressSegmentsRef = useRef(progressSegments);
-
-  useEffect(() => {
-    progressSegmentsRef.current = progressSegments;
-  }, [progressSegments]);
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(ITEMS.length, { persistKey: '/counting-things' });
 
   const buildQuestion = useCallback((idx: number, n: number) => {
     const item = ITEMS[idx]!;
@@ -449,7 +444,7 @@ export default function CountingThingsPage() {
     const unanswered: number[] = [];
     const incorrectIdx: number[] = [];
     for (let i = 0; i < ITEMS.length; i++) {
-      const s = progressSegmentsRef.current[i] ?? 0;
+      const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrectIdx.push(i);
     }
@@ -509,7 +504,7 @@ export default function CountingThingsPage() {
     setAnswerFeedback(null);
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [buildAccepted, buildQuestion]);
+  }, [buildAccepted, buildQuestion, getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -589,9 +584,9 @@ export default function CountingThingsPage() {
       diffOps: ops,
     }, ...prev]);
 
-    recordProgressAt(currentIdx, isCorrect);
+    recordProgress(String(currentIdx), isCorrect);
     setAwaitingNext(true);
-  }, [accepted, awaitingNext, currentIdx, isFinished, question, recordProgressAt, userInput]);
+  }, [accepted, awaitingNext, currentIdx, isFinished, question, recordProgress, userInput]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;
