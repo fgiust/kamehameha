@@ -108,11 +108,16 @@ export interface GenkiChapter {
   links: GenkiLessonLink[];
 }
 
-export type HomeExerciseLink = {
+export type HomeExerciseDefinition = {
   id: string;
   title: string;
   to?: string;
   defaultTotal: number;
+};
+
+export type HomeSectionItem = {
+  id: string;
+  title?: string;
 };
 
 export type HomeSection = {
@@ -122,7 +127,12 @@ export type HomeSection = {
   titleLevel?: 2 | 3;
   description?: string[];
   descriptionClassName?: string;
-  items: HomeExerciseLink[];
+  items: HomeSectionItem[];
+};
+
+export type HomeConfig = {
+  exercises: Record<string, HomeExerciseDefinition>;
+  sections: HomeSection[];
 };
 
 export const APP_TITLE_PREFIX = '';  // '亀 ';

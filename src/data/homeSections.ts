@@ -2,11 +2,11 @@ import adjectives from './adjectives';
 import { adjectivesNounsSentenceData } from './adjectivesNouns';
 import counters from './counters';
 import { familyNamesData } from './familyNamesData';
-import { genkiChapters, getGenkiLinkPath, getGenkiLinkTitle, getGenkiLessonById } from './genkiLessons';
+import { genkiLessons, getGenkiLessonById } from './genkiLessons';
 import { naVsNoData } from './naVsNoData';
 import { transitiveData } from './transitiveData';
 import verbs from './verbs';
-import { DEFAULT_MASTERY_RANDOM_TOTAL, GenkiChapter, HomeSection } from '../types';
+import { DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
 
 const VERB_TOTAL = verbs.length;
 const ADJ_TOTAL = adjectives.length;
@@ -22,122 +22,438 @@ const FAMILY_NAMES_TOTAL = familyNamesData.length;
 const ADJECTIVES_NOUNS_TOTAL = adjectivesNounsSentenceData.length;
 const COUNTING_THINGS_TOTAL = 30;
 
-function getDefaultTotalSegmentsForPath(path: string) {
-  if (path.startsWith('/genki/')) {
-    const id = path.slice('/genki/'.length);
-    const lesson = getGenkiLessonById(id);
-    if (lesson) return lesson.sentenceData.length;
-  }
+const genkiSentenceExercises = Object.fromEntries(
+  genkiLessons.map(l => ([
+    l.id,
+    { id: l.id, title: l.title, to: `/genki/${l.id}`, defaultTotal: l.sentenceData.length },
+  ]))
+);
 
-  if (path === '/randomize') return VERB_TOTAL;
-  if (/^\/(teform|causativeform|conditionalform|imperativeform|negativeform|passiveform|pastform|politeform|potentialform|provisionalform|volitionalform)$/.test(path)) {
-    return VERB_TOTAL;
-  }
-
-  if (path === '/adj-randomize') return ADJ_TOTAL;
-  if (/^\/adj-(naruform|conditionalform|negativeform|pastform|volitionalform)$/.test(path)) {
-    return ADJ_TOTAL;
-  }
-
-  if (path === '/counters') return COUNTERS_DEFAULT_TOTAL;
-  if (path === '/counters-people') return COUNTERS_PEOPLE_TOTAL;
-  if (path === '/counting-things') return COUNTING_THINGS_TOTAL;
-  if (path === '/days') return 31;
-  if (path === '/numbers') return DEFAULT_MASTERY_RANDOM_TOTAL;
-  if (path === '/time') return DEFAULT_MASTERY_RANDOM_TOTAL;
-  if (path === '/transitive') return TRANSITIVE_TOTAL;
-  if (path === '/na-vs-no') return NA_VS_NO_TOTAL;
-  if (path === '/family-names') return FAMILY_NAMES_TOTAL;
-  if (path === '/adjectives-nouns') return ADJECTIVES_NOUNS_TOTAL;
-
-  return 12;
+function genkiSectionTitle(lesson: number) {
+  const bookLabel = lesson <= 12 ? 'Genki I' : 'Genki II';
+  return `${bookLabel} - Lesson ${lesson}`;
 }
 
-function mapGenkiChapter(ch: GenkiChapter) {
-  return ch.links.map(link => {
-    const to = getGenkiLinkPath(link);
-    const title = getGenkiLinkTitle(link);
-    const effectivePath = to ?? link.path ?? '';
-    const defaultTotal = effectivePath ? getDefaultTotalSegmentsForPath(effectivePath) : 12;
-    return {
-      id: link.id,
-      title,
-      to,
-      defaultTotal,
-    };
-  });
-}
+export const homeConfig: HomeConfig = {
+  exercises: {
+    ...genkiSentenceExercises,
 
-export const homeSections: HomeSection[] = [
-  {
-    id: 'verb-conjugation',
-    title: 'Verb Conjugation Practice',
-    titleClassName: 'section-title',
-    items: [
-      { id: 'teform', title: 'て-Form', to: '/teform', defaultTotal: VERB_TOTAL },
-      { id: 'causativeform', title: 'Causative Form', to: '/causativeform', defaultTotal: VERB_TOTAL },
-      { id: 'conditionalform', title: 'Conditional Form', to: '/conditionalform', defaultTotal: VERB_TOTAL },
-      { id: 'imperativeform', title: 'Imperative Form', to: '/imperativeform', defaultTotal: VERB_TOTAL },
-      { id: 'negativeform', title: 'Negative Form', to: '/negativeform', defaultTotal: VERB_TOTAL },
-      { id: 'passiveform', title: 'Passive Form', to: '/passiveform', defaultTotal: VERB_TOTAL },
-      { id: 'pastform', title: 'Past Form', to: '/pastform', defaultTotal: VERB_TOTAL },
-      { id: 'politeform', title: 'Polite Form', to: '/politeform', defaultTotal: VERB_TOTAL },
-      { id: 'potentialform', title: 'Potential Form', to: '/potentialform', defaultTotal: VERB_TOTAL },
-      { id: 'provisionalform', title: 'Provisional Form', to: '/provisionalform', defaultTotal: VERB_TOTAL },
-      { id: 'volitionalform', title: 'Volitional Form', to: '/volitionalform', defaultTotal: VERB_TOTAL },
-      { id: 'randomize', title: 'Randomized Forms', to: '/randomize', defaultTotal: VERB_TOTAL },
-    ],
+    teform: { id: 'teform', title: 'て-Form', to: '/teform', defaultTotal: VERB_TOTAL },
+    causativeform: { id: 'causativeform', title: 'Causative Form', to: '/causativeform', defaultTotal: VERB_TOTAL },
+    conditionalform: { id: 'conditionalform', title: 'Conditional Form', to: '/conditionalform', defaultTotal: VERB_TOTAL },
+    imperativeform: { id: 'imperativeform', title: 'Imperative Form', to: '/imperativeform', defaultTotal: VERB_TOTAL },
+    negativeform: { id: 'negativeform', title: 'Negative Form', to: '/negativeform', defaultTotal: VERB_TOTAL },
+    passiveform: { id: 'passiveform', title: 'Passive Form', to: '/passiveform', defaultTotal: VERB_TOTAL },
+    pastform: { id: 'pastform', title: 'Past Form', to: '/pastform', defaultTotal: VERB_TOTAL },
+    politeform: { id: 'politeform', title: 'Polite Form', to: '/politeform', defaultTotal: VERB_TOTAL },
+    'politeform-short': { id: 'politeform-short', title: 'Short Forms', to: '/politeform?reverse=true', defaultTotal: VERB_TOTAL },
+    potentialform: { id: 'potentialform', title: 'Potential Form', to: '/potentialform', defaultTotal: VERB_TOTAL },
+    provisionalform: { id: 'provisionalform', title: 'Provisional Form', to: '/provisionalform', defaultTotal: VERB_TOTAL },
+    volitionalform: { id: 'volitionalform', title: 'Volitional Form', to: '/volitionalform', defaultTotal: VERB_TOTAL },
+    randomize: { id: 'randomize', title: 'Randomized Forms', to: '/randomize', defaultTotal: VERB_TOTAL },
+
+    'adj-naruform': { id: 'adj-naruform', title: 'なる Form', to: '/adj-naruform', defaultTotal: ADJ_TOTAL },
+    'adj-conditionalform': { id: 'adj-conditionalform', title: 'Conditional Form', to: '/adj-conditionalform', defaultTotal: ADJ_TOTAL },
+    'adj-negativeform': { id: 'adj-negativeform', title: 'Negative Form', to: '/adj-negativeform', defaultTotal: ADJ_TOTAL },
+    'adj-pastform': { id: 'adj-pastform', title: 'Past Form', to: '/adj-pastform', defaultTotal: ADJ_TOTAL },
+    'adj-volitionalform': { id: 'adj-volitionalform', title: 'Volitional Form', to: '/adj-volitionalform', defaultTotal: ADJ_TOTAL },
+    'adj-randomize': { id: 'adj-randomize', title: 'Randomized Forms', to: '/adj-randomize', defaultTotal: ADJ_TOTAL },
+
+    counters: { id: 'counters', title: 'Counters', to: '/counters', defaultTotal: COUNTERS_DEFAULT_TOTAL },
+    'counters-people': { id: 'counters-people', title: 'Counting People', to: '/counters-people', defaultTotal: COUNTERS_PEOPLE_TOTAL },
+    'counting-things': { id: 'counting-things', title: 'Counting things', to: '/counting-things', defaultTotal: COUNTING_THINGS_TOTAL },
+    days: { id: 'days', title: 'Days of the Month', to: '/days', defaultTotal: 31 },
+    numbers: { id: 'numbers', title: 'Numbers', to: '/numbers', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
+    time: { id: 'time', title: 'Time', to: '/time', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
+    transitive: { id: 'transitive', title: 'Transitive / Intransitive pairs', to: '/transitive', defaultTotal: TRANSITIVE_TOTAL },
+    'na-vs-no': { id: 'na-vs-no', title: 'な vs の Adjectives', to: '/na-vs-no', defaultTotal: NA_VS_NO_TOTAL },
+    'family-names': { id: 'family-names', title: 'Common family names', to: '/family-names', defaultTotal: FAMILY_NAMES_TOTAL },
+    'adjectives-nouns': { id: 'adjectives-nouns', title: 'Adjectives + nouns', to: '/adjectives-nouns', defaultTotal: ADJECTIVES_NOUNS_TOTAL },
   },
-  {
-    id: 'adjective-conjugation',
-    title: 'Adjective Conjugation Practice',
-    titleClassName: 'section-title',
-    items: [
-      { id: 'adj-naruform', title: 'なる Form', to: '/adj-naruform', defaultTotal: ADJ_TOTAL },
-      { id: 'adj-conditionalform', title: 'Conditional Form', to: '/adj-conditionalform', defaultTotal: ADJ_TOTAL },
-      { id: 'adj-negativeform', title: 'Negative Form', to: '/adj-negativeform', defaultTotal: ADJ_TOTAL },
-      { id: 'adj-pastform', title: 'Past Form', to: '/adj-pastform', defaultTotal: ADJ_TOTAL },
-      { id: 'adj-volitionalform', title: 'Volitional Form', to: '/adj-volitionalform', defaultTotal: ADJ_TOTAL },
-      { id: 'adj-randomize', title: 'Randomized Forms', to: '/adj-randomize', defaultTotal: ADJ_TOTAL },
-    ],
-  },
-  {
-    id: 'other',
-    title: 'Other',
-    titleClassName: 'section-title',
-    items: [
-      { id: 'counters', title: 'Counters', to: '/counters', defaultTotal: COUNTERS_DEFAULT_TOTAL },
-      { id: 'counting-things', title: 'Counting things', to: '/counting-things', defaultTotal: COUNTING_THINGS_TOTAL },
-      { id: 'days', title: 'Days of the Month', to: '/days', defaultTotal: 31 },
-      { id: 'numbers', title: 'Numbers', to: '/numbers', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
-      { id: 'time', title: 'Time', to: '/time', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
-      { id: 'transitive', title: 'Transitive / Intransitive pairs', to: '/transitive', defaultTotal: TRANSITIVE_TOTAL },
-      { id: 'na-vs-no', title: 'な vs の Adjectives', to: '/na-vs-no', defaultTotal: NA_VS_NO_TOTAL },
-      { id: 'family-names', title: 'Common family names', to: '/family-names', defaultTotal: FAMILY_NAMES_TOTAL },
-      { id: 'adjectives-nouns', title: 'Adjectives + nouns', to: '/adjectives-nouns', defaultTotal: ADJECTIVES_NOUNS_TOTAL },
-    ],
-  },
-  {
-    id: 'genki-intro',
-    title: 'Genki supplementary exercises',
-    titleClassName: 'genki-supp-title',
-    titleLevel: 2,
-    descriptionClassName: 'genki-supp-desc',
-    description: [
-      'Grammar exercises organized by Genki lesson topics.',
-      'This app does not reproduce any copyrighted content from the Genki textbooks.',
-      'The exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.',
-    ],
-    items: [],
-  },
-  ...genkiChapters.map(ch => {
-    const bookLabel = ch.lesson <= 12 ? 'Genki I' : 'Genki II';
-    return {
-      id: `genki-${ch.lesson}`,
-      title: `${bookLabel} - Lesson ${ch.lesson}`,
+  sections: [
+    {
+      id: 'verb-conjugation',
+      title: 'Verb Conjugation Practice',
+      titleClassName: 'section-title',
+      items: [
+        { id: 'teform' },
+        { id: 'causativeform' },
+        { id: 'conditionalform' },
+        { id: 'imperativeform' },
+        { id: 'negativeform' },
+        { id: 'passiveform' },
+        { id: 'pastform' },
+        { id: 'politeform' },
+        { id: 'potentialform' },
+        { id: 'provisionalform' },
+        { id: 'volitionalform' },
+        { id: 'randomize' },
+      ],
+    },
+    {
+      id: 'adjective-conjugation',
+      title: 'Adjective Conjugation Practice',
+      titleClassName: 'section-title',
+      items: [
+        { id: 'adj-naruform' },
+        { id: 'adj-conditionalform' },
+        { id: 'adj-negativeform' },
+        { id: 'adj-pastform' },
+        { id: 'adj-volitionalform' },
+        { id: 'adj-randomize' },
+      ],
+    },
+    {
+      id: 'other',
+      title: 'Other',
+      titleClassName: 'section-title',
+      items: [
+        { id: 'counters' },
+        { id: 'counting-things' },
+        { id: 'days' },
+        { id: 'numbers' },
+        { id: 'time' },
+        { id: 'transitive' },
+        { id: 'na-vs-no' },
+        { id: 'family-names' },
+        { id: 'adjectives-nouns' },
+      ],
+    },
+    {
+      id: 'genki-intro',
+      title: 'Genki supplementary exercises',
+      titleClassName: 'genki-supp-title',
+      titleLevel: 2,
+      descriptionClassName: 'genki-supp-desc',
+      description: [
+        'Grammar exercises organized by Genki lesson topics.',
+        'This app does not reproduce any copyrighted content from the Genki textbooks.',
+        'The exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.',
+      ],
+      items: [],
+    },
+    {
+      id: 'genki-1',
+      title: genkiSectionTitle(1),
       titleClassName: 'section-title',
       titleLevel: 3,
-      items: mapGenkiChapter(ch),
-    } satisfies HomeSection;
-  }),
-];
+      items: [
+        { id: 'genki1-1' },
+        { id: 'genki1-2' },
+        { id: 'genki1-3' },
+        { id: 'numbers', title: 'Numbers Practice' },
+        { id: 'time', title: 'Time Practice' },
+      ],
+    },
+    {
+      id: 'genki-2',
+      title: genkiSectionTitle(2),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki2-1' },
+        { id: 'genki2-2' },
+        { id: 'genki2-3' },
+        { id: 'genki2-4' },
+        { id: 'genki2-5' },
+        { id: 'genki2-6' },
+        { id: 'genki2-7' },
+      ],
+    },
+    {
+      id: 'genki-3',
+      title: genkiSectionTitle(3),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'politeform', title: 'Verb Conjugation' },
+        { id: 'genki3-2' },
+        { id: 'genki3-3' },
+        { id: 'genki3-4' },
+        { id: 'genki3-5' },
+        { id: 'genki3-7' },
+      ],
+    },
+    {
+      id: 'genki-4',
+      title: genkiSectionTitle(4),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki4-1' },
+        { id: 'genki4-2' },
+        { id: 'genki4-3' },
+        { id: 'pastform', title: 'Past Tense of Verbs' },
+        { id: 'genki4-5' },
+        { id: 'genki4-6' },
+        { id: 'genki4-7' },
+        { id: 'genki4-8' },
+      ],
+    },
+    {
+      id: 'genki-5',
+      title: genkiSectionTitle(5),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki5-1' },
+        { id: 'genki5-2' },
+        { id: 'genki5-3' },
+        { id: 'counters', title: 'Counting' },
+      ],
+    },
+    {
+      id: 'genki-6',
+      title: genkiSectionTitle(6),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'teform', title: 'Te-form' },
+        { id: 'genki6-2' },
+        { id: 'genki6-3' },
+        { id: 'genki6-4' },
+        { id: 'genki6-5' },
+        { id: 'genki6-6' },
+        { id: 'genki6-7' },
+      ],
+    },
+    {
+      id: 'genki-7',
+      title: genkiSectionTitle(7),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki7-1' },
+        { id: 'genki7-2' },
+        { id: 'genki7-3' },
+        { id: 'genki7-4' },
+        { id: 'counters-people', title: 'Counting People' },
+      ],
+    },
+    {
+      id: 'genki-8',
+      title: genkiSectionTitle(8),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'politeform-short' },
+        { id: 'genki8-3' },
+        { id: 'genki8-4' },
+        { id: 'genki8-5' },
+        { id: 'genki8-6' },
+        { id: 'genki8-7' },
+      ],
+    },
+    {
+      id: 'genki-9',
+      title: genkiSectionTitle(9),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'pastform', title: 'Past Tense Short Forms (Verbs)' },
+        { id: 'adj-pastform', title: 'Past Tense Short Forms (Adjectives)' },
+        { id: 'genki9-2' },
+        { id: 'genki9-3' },
+        { id: 'genki9-4' },
+      ],
+    },
+    {
+      id: 'genki-10',
+      title: genkiSectionTitle(10),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki10-1' },
+        { id: 'genki10-2' },
+        { id: 'genki10-3' },
+        { id: 'genki10-4' },
+        { id: 'adj-naruform', title: 'Adjective + なる' },
+        { id: 'genki10-6' },
+        { id: 'genki10-7' },
+      ],
+    },
+    {
+      id: 'genki-11',
+      title: genkiSectionTitle(11),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki11-1' },
+        { id: 'genki11-2' },
+        { id: 'genki11-3' },
+        { id: 'genki11-4' },
+      ],
+    },
+    {
+      id: 'genki-12',
+      title: genkiSectionTitle(12),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki12-1' },
+        { id: 'genki12-2' },
+        { id: 'genki12-3' },
+        { id: 'genki12-4' },
+        { id: 'genki12-5' },
+        { id: 'genki12-6' },
+      ],
+    },
+    {
+      id: 'genki-13',
+      title: genkiSectionTitle(13),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'potentialform', title: 'Potential Verbs' },
+        { id: 'genki13-2' },
+        { id: 'genki13-3' },
+        { id: 'genki13-4' },
+        { id: 'genki13-5' },
+        { id: 'genki13-6' },
+      ],
+    },
+    {
+      id: 'genki-14',
+      title: genkiSectionTitle(14),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki14-1' },
+        { id: 'genki14-2' },
+        { id: 'genki14-3' },
+        { id: 'genki14-4' },
+        { id: 'genki14-5' },
+      ],
+    },
+    {
+      id: 'genki-15',
+      title: genkiSectionTitle(15),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'volitionalform', title: 'Volitional Form' },
+        { id: 'genki15-2' },
+        { id: 'genki15-3' },
+        { id: 'genki15-4' },
+      ],
+    },
+    {
+      id: 'genki-16',
+      title: genkiSectionTitle(16),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki16-1' },
+        { id: 'genki16-2' },
+        { id: 'genki16-3' },
+        { id: 'genki16-4' },
+        { id: 'genki16-5' },
+      ],
+    },
+    {
+      id: 'genki-17',
+      title: genkiSectionTitle(17),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki17-1' },
+        { id: 'genki17-2' },
+        { id: 'genki17-3' },
+        { id: 'genki17-4' },
+        { id: 'genki17-5' },
+        { id: 'genki17-6' },
+      ],
+    },
+    {
+      id: 'genki-18',
+      title: genkiSectionTitle(18),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki18-1' },
+        { id: 'genki18-2' },
+        { id: 'genki18-3' },
+        { id: 'genki18-4' },
+        { id: 'genki18-5' },
+      ],
+    },
+    {
+      id: 'genki-19',
+      title: genkiSectionTitle(19),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki19-1' },
+        { id: 'genki19-2' },
+        { id: 'genki19-3' },
+        { id: 'genki19-4' },
+        { id: 'genki19-5' },
+      ],
+    },
+    {
+      id: 'genki-20',
+      title: genkiSectionTitle(20),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki20-1' },
+        { id: 'genki20-2' },
+        { id: 'genki20-3' },
+        { id: 'genki20-4' },
+        { id: 'genki20-5' },
+        { id: 'genki20-6' },
+      ],
+    },
+    {
+      id: 'genki-21',
+      title: genkiSectionTitle(21),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki21-1' },
+        { id: 'genki21-2' },
+        { id: 'genki21-3' },
+        { id: 'genki21-4' },
+        { id: 'genki21-5' },
+      ],
+    },
+    {
+      id: 'genki-22',
+      title: genkiSectionTitle(22),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki22-1' },
+        { id: 'genki22-2' },
+        { id: 'genki22-3' },
+        { id: 'genki22-4' },
+        { id: 'genki22-5' },
+      ],
+    },
+    {
+      id: 'genki-23',
+      title: genkiSectionTitle(23),
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: [
+        { id: 'genki23-1' },
+        { id: 'genki23-2' },
+        { id: 'genki23-3' },
+        { id: 'genki23-4' },
+        { id: 'genki23-5' },
+      ],
+    },
+  ],
+};
+
+export function getHomeExerciseTitle(id: string) {
+  return homeConfig.exercises[id]?.title;
+}
+
+export function getHomeExercisePath(id: string) {
+  return homeConfig.exercises[id]?.to;
+}
+
+export function getHomeExerciseDefaultTotal(id: string) {
+  return homeConfig.exercises[id]?.defaultTotal ?? (id.startsWith('genki') ? (getGenkiLessonById(id)?.sentenceData.length ?? 12) : 12);
+}

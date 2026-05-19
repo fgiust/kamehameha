@@ -1,24 +1,26 @@
 import { Link } from 'react-router-dom';
-import { genkiChapters, getGenkiLinkPath, getGenkiLinkTitle } from '../data/genkiLessons';
-import { GenkiChapter } from '../types';
+import { homeConfig } from '../data/homeSections';
 
-function getGenkiBookLabel(lesson: number) {
-  return lesson <= 12 ? 'Genki I' : 'Genki II';
-}
+type GenkiChapterSection = {
+  lesson: number;
+  title: string;
+  items: Array<{ id: string; title?: string }>;
+};
 
-function ChapterSection({ chapters }: { chapters: GenkiChapter[] }) {
+function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
   return (
     <div className="genki-section">
       {chapters.map(ch => (
         <div key={ch.lesson} style={{ marginBottom: 20 }}>
-          <h3>{getGenkiBookLabel(ch.lesson)} — Lesson {ch.lesson}</h3>
-          {ch.links.length > 0 ? (
+          <h3>{ch.title.replace(' - ', ' — ')}</h3>
+          {ch.items.length > 0 ? (
             <ul className="genki-lesson-list">
-              {ch.links.map(link => {
-                const path = getGenkiLinkPath(link);
-                const title = getGenkiLinkTitle(link);
+              {ch.items.map(item => {
+                const def = homeConfig.exercises[item.id];
+                const path = def?.to;
+                const title = item.title ?? def?.title ?? item.id;
                 return (
-                  <li key={link.id}>
+                  <li key={item.id}>
                     {path ? (
                       <Link to={path}>
                         {title}
@@ -45,6 +47,14 @@ function ChapterSection({ chapters }: { chapters: GenkiChapter[] }) {
 }
 
 export default function GenkiPage() {
+  const chapters: GenkiChapterSection[] = homeConfig.sections
+    .filter(s => /^genki-\d+$/.test(s.id))
+    .map(s => {
+      const lesson = Number(s.id.slice('genki-'.length));
+      return { lesson, title: s.title, items: s.items };
+    })
+    .sort((a, b) => a.lesson - b.lesson);
+
   return (
     <div className="app-container">
       <Link to="/" className="back-btn">Home</Link>
@@ -53,7 +63,7 @@ export default function GenkiPage() {
         Exercises organized by Genki lesson topics. This app does not reproduce Genki textbook content that is protected by copyright.
       </p>
 
-      <ChapterSection chapters={genkiChapters} />
+      <ChapterSection chapters={chapters} />
     </div>
   );
 }

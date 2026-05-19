@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ReactNode, useEffect, useState } from 'react';
-import { homeSections } from '../data/homeSections';
+import { homeConfig } from '../data/homeSections';
 import { APP_TITLE_PREFIX } from '../types';
 import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UPDATED_EVENT } from '../hooks/useSessionProgress';
 
@@ -63,7 +63,7 @@ function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: Re
   );
 }
 
-function renderSection(section: (typeof homeSections)[number]) {
+function renderSection(section: (typeof homeConfig.sections)[number]) {
   const titleClassName = section.titleClassName ?? 'section-title';
   const descriptionClassName = section.descriptionClassName ?? 'genki-supp-desc';
   const titleLevel = section.titleLevel ?? 2;
@@ -83,15 +83,19 @@ function renderSection(section: (typeof homeSections)[number]) {
 
       {section.items.length > 0 && (
         <div className="link-grid">
-          {section.items.map(item => (
-            item.to ? (
-              <HomeLinkCard key={item.id} to={item.to} defaultTotal={item.defaultTotal}>{item.title}</HomeLinkCard>
+          {section.items.map(item => {
+            const def = homeConfig.exercises[item.id];
+            const title = item.title ?? def?.title ?? item.id;
+            const to = def?.to;
+            const defaultTotal = def?.defaultTotal ?? 12;
+            return to ? (
+              <HomeLinkCard key={item.id} to={to} defaultTotal={defaultTotal}>{title}</HomeLinkCard>
             ) : (
               <span key={item.id} className="link-card" style={{ opacity: 0.5 }}>
-                {item.title} <span className="badge">Soon</span>
+                {title} <span className="badge">Soon</span>
               </span>
-            )
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
@@ -117,7 +121,7 @@ export default function HomePage() {
       <p className="home-tagline is-body">
         Powerful interactive training for grammar, vocabulary, and kanji. Charge, fire, level up. No mercy.
       </p>
-      {homeSections.map(renderSection)}
+      {homeConfig.sections.map(renderSection)}
 
       <footer className="home-footer">
         <span className="home-footer-text">kamehameha v{__APP_VERSION__}</span>
