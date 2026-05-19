@@ -72,8 +72,9 @@ export default function AdjRandomizePage() {
     formIds.forEach(id => { f[id] = true; });
     return f;
   });
-  const [seenWordKeys, setSeenWordKeys] = useState<Record<string, true>>({});
+  const [currentWordIdx, setCurrentWordIdx] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);
+  const [isFinished, setIsFinished] = useState(false);
   const [currentFormLabel, setCurrentFormLabel] = useState('');
   const [currentFlags, setCurrentFlags] = useState<OptionFlags>({});
   const [currentFormKey, setCurrentFormKey] = useState('');
@@ -90,7 +91,15 @@ export default function AdjRandomizePage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(adjectives.length, { persistKey: '/adj-randomize' });
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(adjectives.length, { persistKey: '/adj-randomize' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
     setSettings(s => {
@@ -104,28 +113,76 @@ export default function AdjRandomizePage() {
     }
   };
 
-  const getWordKey = (w: ConjugationWord) => `${w.type}:${w.kana}:${stripRubyTags(w.kanji)}`;
-
   const pickNext = useCallback(() => {
     if (adjectives.length === 0) return;
-    const unseen = adjectives.filter(w => !seenWordKeys[getWordKey(w)]);
-    const pool = unseen.length > 0 ? unseen : adjectives;
-    const word = pool[Math.floor(Math.random() * pool.length)];
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < adjectives.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
+    }
 
-    setSeenWordKeys(prev => {
-      const key = getWordKey(word);
-      if (prev[key]) return prev;
-      return { ...prev, [key]: true };
-    });
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setCurrentWord(null);
+      setCurrentFormKey('');
+      setCurrentFormLabel('');
+      setCurrentFlags({});
+      setUserInput('');
+      setRawInput('');
+      setDidConvert(false);
+      setIsComposing(false);
+      setInputState('');
+      setDiffDisplay('');
+      setAwaitingNext(false);
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+    setCurrentWordIdx(nextIdx);
+    const word = adjectives[nextIdx]!;
 
     const enabledForms = Object.entries(activeForms).filter(([, v]) => v).map(([k]) => k);
     const forms = enabledForms.length > 0 ? enabledForms : formIds;
-    const form = forms[Math.floor(Math.random() * forms.length)];
-    const engine = adjEngines[form];
-    const flags: OptionFlags = {};
-    engine.opts.forEach(o => { flags[o.id] = Math.random() >= 0.5; });
-    const optLabels = engine.opts.filter(o => flags[o.id]).map(o => o.label);
-    const label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + formLabels[form];
+    let form = '';
+    let flags: OptionFlags = {};
+    let label = '';
+    let found = false;
+    for (let tries = 0; tries < 20; tries++) {
+      form = forms[Math.floor(Math.random() * forms.length)]!;
+      const eng = adjEngines[form];
+      flags = {};
+      eng.opts.forEach(o => { flags[o.id] = Math.random() >= 0.5; });
+      const ans = eng.getAnswer(word.kana, word.type, flags);
+      const answers = Array.isArray(ans) ? ans : [ans];
+      if (!(answers.length === 1 && answers[0] === '')) {
+        const optLabels = eng.opts.filter(o => flags[o.id]).map(o => o.label);
+        label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + formLabels[form];
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      remainingIdxRef.current.push(nextIdx);
+      return;
+    }
 
     setCurrentWord(word);
     setCurrentFormKey(form);
@@ -139,16 +196,22 @@ export default function AdjRandomizePage() {
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeForms, seenWordKeys]);
+  }, [activeForms]);
 
-  useEffect(() => { pickNext(); }, []); // eslint-disable-line
+  useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    setIsFinished(false);
+    pickNext();
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + PAGE_TITLE;
   }, []);
 
   useEffect(() => {
-    if (!currentWord || !currentFormKey) return;
+    if (!currentWord || !currentFormKey || isFinished) return;
     const engine = adjEngines[currentFormKey];
     const hint = getConjugationFormHint(engine, currentFlags);
 
@@ -177,7 +240,7 @@ export default function AdjRandomizePage() {
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, currentFormKey, currentFlags, settings.reverseQA, settings.showKanji, userInput]);
+  }, [currentWord, currentFormKey, currentFlags, settings.reverseQA, settings.showKanji, userInput, isFinished]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -203,10 +266,10 @@ export default function AdjRandomizePage() {
 
   const checkAnswer = useCallback(() => {
     if (awaitingNext) return;
+    if (isFinished) return;
     if (!currentWord || !userInput.trim() || !currentFormKey) return;
     const engine = adjEngines[currentFormKey];
     const normalized = finalizeIME(userInput.trim());
-    const progressKey = `${getWordKey(currentWord)}|${currentFormKey}|${Object.entries(currentFlags).filter(([, v]) => v).map(([k]) => k).join(',')}`;
 
     if (settings.reverseQA) {
       const dictKana = currentWord.kana;
@@ -230,7 +293,7 @@ export default function AdjRandomizePage() {
         isCorrect,
       }, ...prev]);
 
-      recordProgress(progressKey, isCorrect);
+      recordProgressAt(currentWordIdx, isCorrect);
       setAwaitingNext(true);
       return;
     }
@@ -250,11 +313,12 @@ export default function AdjRandomizePage() {
       isCorrect,
     }, ...prev]);
 
-    recordProgress(progressKey, isCorrect);
+    recordProgressAt(currentWordIdx, isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, currentWord, currentFormKey, currentFormLabel, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, settings.showType, settings.showEnglish, userInput, recordProgress]);
+  }, [awaitingNext, isFinished, currentWord, currentFormKey, currentFormLabel, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, settings.showType, settings.showEnglish, userInput, recordProgressAt, currentWordIdx]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();

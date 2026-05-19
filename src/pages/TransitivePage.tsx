@@ -26,15 +26,16 @@ function finalizeIME(input: string) {
 const PAGE_TITLE = 'Transitive / Intransitive pairs';
 
 export default function TransitivePage() {
+  const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [currentPair, setCurrentPair] = useState<VerbPair | null>(null);
   const [askTransitive, setAskTransitive] = useState(true);
+  const [isFinished, setIsFinished] = useState(false);
   const [userInput, setUserInput] = useState('');
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [diffDisplay, setDiffDisplay] = useState<string>('');
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [seenKeys, setSeenKeys] = useState<Record<string, true>>({});
   const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
   const [showFurigana, setShowFurigana] = useState(() => {
     try {
@@ -59,30 +60,71 @@ export default function TransitivePage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
 
   const totalPairs = transitiveData.length;
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(totalPairs, { persistKey: '/transitive' });
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalPairs, { persistKey: '/transitive' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const pickPair = useCallback(() => {
-    const unseen = transitiveData.filter(p => !seenKeys[p.t.verb]);
-    const pool = unseen.length > 0 ? unseen : transitiveData;
+    if (transitiveData.length === 0) return;
 
-    let pair = pool[Math.floor(Math.random() * pool.length)];
-    if (pool.length > 1 && currentPair && pair.t.verb === currentPair.t.verb) {
-      pair = pool[Math.floor(Math.random() * pool.length)];
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < transitiveData.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
     }
 
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setAwaitingNext(false);
+      setInputState('');
+      setDiffDisplay('');
+      setUserInput('');
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+    setCurrentIdx(nextIdx);
+    const pair = transitiveData[nextIdx]!;
     setCurrentPair(pair);
-    setSeenKeys(prev => ({ ...prev, [pair.t.verb]: true }));
     setAskTransitive(Math.random() < 0.5);
     setUserInput('');
     setInputState('');
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [currentPair, seenKeys]);
+  }, []);
 
   useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    setIsFinished(false);
     pickPair();
   }, []); // eslint-disable-line
 
@@ -92,7 +134,7 @@ export default function TransitivePage() {
 
   // Update feedback details globally
   useEffect(() => {
-    if (!currentPair) return;
+    if (!currentPair || isFinished) return;
     const questionWord = askTransitive ? currentPair.i : currentPair.t;
     const targetWord = askTransitive ? currentPair.t : currentPair.i;
 
@@ -105,7 +147,7 @@ export default function TransitivePage() {
       correctAnswer: `${expectedTargetHiragana} (${expectedTargetKanji}) - ${targetWord.meaning}`,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentPair, askTransitive, userInput]);
+  }, [currentPair, askTransitive, userInput, isFinished]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -140,6 +182,7 @@ export default function TransitivePage() {
   }, [pickPair]);
 
   const checkAnswer = () => {
+    if (isFinished) return;
     if (!currentPair) return;
     const questionWord = askTransitive ? currentPair.i : currentPair.t;
     const targetWord = askTransitive ? currentPair.t : currentPair.i;
@@ -176,12 +219,12 @@ export default function TransitivePage() {
       ...prev,
     ]);
 
-    const progressKey = `${currentPair.t.verb}|${askTransitive ? 't' : 'i'}`;
-    recordProgress(progressKey, isCorrect);
+    recordProgressAt(currentIdx, isCorrect);
     setAwaitingNext(true);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();

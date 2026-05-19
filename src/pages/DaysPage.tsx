@@ -23,6 +23,8 @@ function finalizeIME(input: string) {
 const PAGE_TITLE = 'Days of the Month';
 
 export default function DaysPage() {
+  const [currentDayIdx, setCurrentDayIdx] = useState<number>(0);
+  const [isFinished, setIsFinished] = useState(false);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
@@ -35,19 +37,59 @@ export default function DaysPage() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
-  const lastDayRef = useRef<number>(-1);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(31, { persistKey: '/days' });
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(31, { persistKey: '/days' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const pickNext = useCallback(() => {
     const max = 31;
-    let next = 0;
-    do {
-      next = Math.floor(Math.random() * max);
-    } while (max > 1 && next === lastDayRef.current);
-    lastDayRef.current = next;
 
-    setQuestion(`${next + 1}日`);
-    setAnswer(daysOfMonth[next]);
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < max; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
+    }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setQuestion('');
+      setAnswer('');
+      setUserInput('');
+      setAwaitingNext(false);
+      setInputState('');
+      setAnswerDisplay('');
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+    setCurrentDayIdx(nextIdx);
+
+    setQuestion(`${nextIdx + 1}日`);
+    setAnswer(daysOfMonth[nextIdx]);
 
     setUserInput('');
     setAwaitingNext(false);
@@ -57,6 +99,10 @@ export default function DaysPage() {
   }, []);
 
   useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    setIsFinished(false);
     pickNext();
   }, [pickNext]);
 
@@ -95,6 +141,7 @@ export default function DaysPage() {
 
   const submit = () => {
     if (awaitingNext) return;
+    if (isFinished) return;
     const normalized = finalizeIME(userInput.trim());
     if (!normalized) return;
 
@@ -107,7 +154,7 @@ export default function DaysPage() {
       setInputState('incorrect');
     }
     setAnswerDisplay(answer);
-    recordProgress(question || String(lastDayRef.current), ok);
+    recordProgressAt(currentDayIdx, ok);
     setAwaitingNext(true);
   };
 

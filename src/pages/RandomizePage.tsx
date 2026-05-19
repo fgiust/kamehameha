@@ -78,8 +78,9 @@ export default function RandomizePage() {
     formIds.forEach(id => { f[id] = true; });
     return f;
   });
-  const [seenWordKeys, setSeenWordKeys] = useState<Record<string, true>>({});
+  const [currentWordIdx, setCurrentWordIdx] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);
+  const [isFinished, setIsFinished] = useState(false);
   const [currentForm, setCurrentForm] = useState('');
   const [currentFormLabel, setCurrentFormLabel] = useState('');
   const [currentFlags, setCurrentFlags] = useState<OptionFlags>({});
@@ -96,7 +97,15 @@ export default function RandomizePage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(verbs.length, { persistKey: '/randomize' });
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(verbs.length, { persistKey: '/randomize' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
     setSettings(s => {
@@ -110,37 +119,77 @@ export default function RandomizePage() {
     }
   };
 
-  const getWordKey = (w: ConjugationWord) => `${w.type}:${w.kana}:${stripRubyTags(w.kanji)}`;
-
   const pickNext = useCallback(() => {
     if (verbs.length === 0) return;
-    const unseen = verbs.filter(w => !seenWordKeys[getWordKey(w)]);
-    const pool = unseen.length > 0 ? unseen : verbs;
-    const word = pool[Math.floor(Math.random() * pool.length)];
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < verbs.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
+    }
 
-    setSeenWordKeys(prev => {
-      const key = getWordKey(word);
-      if (prev[key]) return prev;
-      return { ...prev, [key]: true };
-    });
-
-    const enabledForms = Object.entries(activeForms).filter(([, v]) => v).map(([k]) => k);
-    const forms = enabledForms.length > 0 ? enabledForms : formIds;
-    const form = forms[Math.floor(Math.random() * forms.length)];
-    const engine = verbEngines[form];
-    const flags: OptionFlags = {};
-    engine.opts.forEach(o => { flags[o.id] = Math.random() >= 0.5; });
-    if (flags.polite !== undefined) flags.polite = false;
-
-    const answer = engine.getAnswer(word.kana, word.type, flags);
-    const answers = Array.isArray(answer) ? answer : [answer];
-    if (answers.length === 1 && answers[0] === '') {
-      pickNext();
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setCurrentWord(null);
+      setCurrentForm('');
+      setCurrentFormLabel('');
+      setCurrentFlags({});
+      setUserInput('');
+      setRawInput('');
+      setDidConvert(false);
+      setIsComposing(false);
+      setInputState('');
+      setDiffDisplay('');
+      setAwaitingNext(false);
       return;
     }
 
-    const optLabels = engine.opts.filter(o => flags[o.id]).map(o => o.label);
-    const label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + formLabels[form];
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+    setCurrentWordIdx(nextIdx);
+    const word = verbs[nextIdx]!;
+
+    const enabledForms = Object.entries(activeForms).filter(([, v]) => v).map(([k]) => k);
+    const forms = enabledForms.length > 0 ? enabledForms : formIds;
+    let form = '';
+    let flags: OptionFlags = {};
+    let label = '';
+    let found = false;
+    for (let tries = 0; tries < 20; tries++) {
+      form = forms[Math.floor(Math.random() * forms.length)]!;
+      const eng = verbEngines[form];
+      flags = {};
+      eng.opts.forEach(o => { flags[o.id] = Math.random() >= 0.5; });
+      if (flags.polite !== undefined) flags.polite = false;
+      const ans = eng.getAnswer(word.kana, word.type, flags);
+      const answers = Array.isArray(ans) ? ans : [ans];
+      if (!(answers.length === 1 && answers[0] === '')) {
+        const optLabels = eng.opts.filter(o => flags[o.id]).map(o => o.label);
+        label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + formLabels[form];
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      remainingIdxRef.current.push(nextIdx);
+      return;
+    }
 
     setCurrentWord(word);
     setCurrentForm(form);
@@ -154,16 +203,22 @@ export default function RandomizePage() {
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeForms, seenWordKeys]);
+  }, [activeForms]);
 
-  useEffect(() => { pickNext(); }, []); // eslint-disable-line
+  useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    setIsFinished(false);
+    pickNext();
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + PAGE_TITLE;
   }, []);
 
   useEffect(() => {
-    if (!currentWord || !currentForm) return;
+    if (!currentWord || !currentForm || isFinished) return;
     const engine = verbEngines[currentForm];
     const hint = getConjugationFormHint(engine, currentFlags);
 
@@ -192,7 +247,7 @@ export default function RandomizePage() {
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, currentForm, currentFlags, settings.reverseQA, settings.showKanji, userInput]);
+  }, [currentWord, currentForm, currentFlags, settings.reverseQA, settings.showKanji, userInput, isFinished]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -218,10 +273,10 @@ export default function RandomizePage() {
 
   const checkAnswer = useCallback(() => {
     if (awaitingNext) return;
+    if (isFinished) return;
     if (!currentWord || !userInput.trim() || !currentForm) return;
     const engine = verbEngines[currentForm];
     const normalized = finalizeIME(userInput.trim());
-    const progressKey = `${getWordKey(currentWord)}|${currentForm}|${Object.entries(currentFlags).filter(([, v]) => v).map(([k]) => k).join(',')}`;
 
     if (settings.reverseQA) {
       const dictKana = currentWord.kana;
@@ -245,7 +300,7 @@ export default function RandomizePage() {
         isCorrect,
       }, ...prev]);
 
-      recordProgress(progressKey, isCorrect);
+      recordProgressAt(currentWordIdx, isCorrect);
       setAwaitingNext(true);
       return;
     }
@@ -265,11 +320,12 @@ export default function RandomizePage() {
       isCorrect,
     }, ...prev]);
 
-    recordProgress(progressKey, isCorrect);
+    recordProgressAt(currentWordIdx, isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, currentWord, currentForm, currentFormLabel, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, settings.showType, settings.showEnglish, userInput, recordProgress]);
+  }, [awaitingNext, isFinished, currentWord, currentForm, currentFormLabel, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, settings.showType, settings.showEnglish, userInput, recordProgressAt, currentWordIdx]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();

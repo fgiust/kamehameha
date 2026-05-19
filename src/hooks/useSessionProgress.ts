@@ -169,5 +169,58 @@ export function useSessionProgress(
     }
   }, [options?.persistKey, totalSegments]);
 
-  return useMemo(() => ({ segments, pulses, record }), [segments, pulses, record]);
+  const getState = useCallback((key: string): ProgressSegmentState => {
+    const idx = keyToIndexRef.current.get(key);
+    if (idx === undefined) return 0;
+    return segmentsRef.current[idx] ?? 0;
+  }, []);
+
+  const recordAt = useCallback((idx: number, isCorrect: boolean) => {
+    if (totalSegments <= 0) return;
+    if (!Number.isFinite(idx)) return;
+    const slot = Math.floor(idx);
+    if (slot < 0 || slot >= totalSegments) return;
+
+    const base = segmentsRef.current.length === totalSegments
+      ? segmentsRef.current
+      : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
+    const nextSegments = [...base] as ProgressSegmentState[];
+    nextSegments[slot] = isCorrect ? 1 : 2;
+    segmentsRef.current = nextSegments;
+    setSegments(nextSegments);
+
+    setPulses(prev => {
+      const next = prev.length === totalSegments ? [...prev] : Array(totalSegments).fill(0);
+      next[slot] = (next[slot] ?? 0) + 1;
+      return next;
+    });
+
+    if (options?.persistKey) {
+      const ok = writePersistedSessionProgress(options.persistKey, nextSegments);
+      if (ok) notifySessionProgressUpdated(options.persistKey);
+    }
+
+    try {
+      const AudioContextCtor = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+      if (!AudioContextCtor) return;
+      if (!audioCtxRef.current) audioCtxRef.current = new AudioContextCtor();
+      const ctx = audioCtxRef.current;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = isCorrect ? 'sine' : 'triangle';
+      osc.frequency.setValueAtTime(isCorrect ? 880 : 220, now);
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(isCorrect ? 0.05 : 0.06, now + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + (isCorrect ? 0.12 : 0.18));
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + (isCorrect ? 0.14 : 0.2));
+    } catch {
+      return;
+    }
+  }, [options?.persistKey, totalSegments]);
+
+  return useMemo(() => ({ segments, pulses, record, getState, recordAt }), [segments, pulses, record, getState, recordAt]);
 }

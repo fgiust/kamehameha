@@ -50,6 +50,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
+  const [isFinished, setIsFinished] = useState(false);
   const [answerFeedback, setAnswerFeedback] = useState<null | {
     isCorrect: boolean;
     userAnswer: string;
@@ -64,7 +65,13 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
   const lastRawValueRef = useRef('');
   const remainingIdxRef = useRef<number[]>([]);
   const lastIdxRef = useRef<number | null>(null);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(sentenceData.length, { persistKey });
+  const phaseRef = useRef<0 | 2 | null>(null);
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(sentenceData.length, { persistKey });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const currentItem = sentenceData[currentIdx];
   const englishPrompt = currentItem?.english || '';
@@ -72,8 +79,28 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
   const pickNext = useCallback(() => {
     if (sentenceData.length === 0) return;
 
-    if (remainingIdxRef.current.length === 0) {
-      remainingIdxRef.current = Array.from({ length: sentenceData.length }, (_, i) => i);
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < sentenceData.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
+    }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setAwaitingNext(false);
+      setAnswerFeedback(null);
+      setInputState('');
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
     }
 
     const pool = remainingIdxRef.current;
@@ -96,11 +123,13 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
     setAnswerFeedback(null);
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [sentenceData]);
+  }, [sentenceData.length]);
 
   useEffect(() => {
-    remainingIdxRef.current = Array.from({ length: sentenceData.length }, (_, i) => i);
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
     lastIdxRef.current = null;
+    setIsFinished(false);
     pickNext();
   }, [pickNext, sentenceData.length]);
 
@@ -110,7 +139,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
 
   // Update feedback details globally
   useEffect(() => {
-    if (!currentItem) return;
+    if (!currentItem || isFinished) return;
 
     updateFeedbackDetails({
       section: title,
@@ -118,7 +147,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
       correctAnswer: currentItem.answer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentItem, title, userInput]);
+  }, [currentItem, title, userInput, isFinished]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -144,6 +173,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
 
   const checkAnswer = useCallback(() => {
     if (awaitingNext) return;
+    if (isFinished) return;
     if (!currentItem || !userInput.trim()) return;
     const normalized = finalizeIME(userInput.trim());
     const rawAnswers = generateAnswers(parseAnswerTemplate(currentItem.answer));
@@ -174,11 +204,12 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
       diffOps: ops,
     }, ...prev]);
 
-    recordProgress(String(currentIdx), isCorrect);
+    recordProgressAt(currentIdx, isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, currentItem, userInput, englishPrompt, recordProgress, currentIdx]);
+  }, [awaitingNext, currentItem, userInput, englishPrompt, recordProgressAt, currentIdx, isFinished]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -259,90 +290,94 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
 
       <div className="card">
         <div className="exercise-container">
-          <div className="exercise-prompt">Translate into Japanese:</div>
-          <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
-            {englishPrompt}
-          </div>
-          <div className="exercise-input-block">
-            <input
-              ref={inputRef}
-              className={`exercise-input ${inputState}`}
-              value={userInput}
-              onChange={e => {
-                if (awaitingNext) return;
-                const raw = e.target.value;
-                setRawInput(raw);
-                const caret = e.target.selectionStart;
-                const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
-                if (composing) {
-                  setDidConvert(false);
-                  setIsComposing(true);
-                  setUserInput(raw);
-                  lastRawValueRef.current = raw;
-                  return;
-                }
+          {!isFinished && (
+            <>
+              <div className="exercise-prompt">Translate into Japanese:</div>
+              <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
+                {englishPrompt}
+              </div>
+              <div className="exercise-input-block">
+                <input
+                  ref={inputRef}
+                  className={`exercise-input ${inputState}`}
+                  value={userInput}
+                  onChange={e => {
+                    if (awaitingNext) return;
+                    const raw = e.target.value;
+                    setRawInput(raw);
+                    const caret = e.target.selectionStart;
+                    const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
+                    if (composing) {
+                      setDidConvert(false);
+                      setIsComposing(true);
+                      setUserInput(raw);
+                      lastRawValueRef.current = raw;
+                      return;
+                    }
 
-                setIsComposing(false);
+                    setIsComposing(false);
 
-                const prev = lastRawValueRef.current;
-                let prefixLen = 0;
-                const minLen = Math.min(prev.length, raw.length);
-                while (prefixLen < minLen && prev[prefixLen] === raw[prefixLen]) prefixLen++;
+                    const prev = lastRawValueRef.current;
+                    let prefixLen = 0;
+                    const minLen = Math.min(prev.length, raw.length);
+                    while (prefixLen < minLen && prev[prefixLen] === raw[prefixLen]) prefixLen++;
 
-                let suffixLen = 0;
-                while (
-                  suffixLen < (prev.length - prefixLen) &&
-                  suffixLen < (raw.length - prefixLen) &&
-                  prev[prev.length - 1 - suffixLen] === raw[raw.length - 1 - suffixLen]
-                ) {
-                  suffixLen++;
-                }
+                    let suffixLen = 0;
+                    while (
+                      suffixLen < (prev.length - prefixLen) &&
+                      suffixLen < (raw.length - prefixLen) &&
+                      prev[prev.length - 1 - suffixLen] === raw[raw.length - 1 - suffixLen]
+                    ) {
+                      suffixLen++;
+                    }
 
-                let convertStart = prefixLen;
-                while (convertStart > 0 && isLatinImeChar(raw[convertStart - 1] ?? '') && !hasJapaneseChars(raw[convertStart - 1] ?? '')) {
-                  convertStart--;
-                }
+                    let convertStart = prefixLen;
+                    while (convertStart > 0 && isLatinImeChar(raw[convertStart - 1] ?? '') && !hasJapaneseChars(raw[convertStart - 1] ?? '')) {
+                      convertStart--;
+                    }
 
-                const convertEnd = raw.length - suffixLen;
-                const segment = raw.slice(convertStart, convertEnd);
+                    const convertEnd = raw.length - suffixLen;
+                    const segment = raw.slice(convertStart, convertEnd);
 
-                if (hasLatinLetters(segment) && !hasJapaneseChars(segment)) {
-                  setDidConvert(true);
-                  const convertedSegment = toHiraganaIME(segment);
-                  const nextValue = raw.slice(0, convertStart) + convertedSegment + raw.slice(convertEnd);
-                  if (caret !== null) {
-                    const caretSegment = raw.slice(convertStart, caret);
-                    pendingCaretRef.current = convertStart + toHiraganaIME(caretSegment).length;
-                  }
-                  setUserInput(nextValue);
-                  lastRawValueRef.current = nextValue;
-                  return;
-                }
+                    if (hasLatinLetters(segment) && !hasJapaneseChars(segment)) {
+                      setDidConvert(true);
+                      const convertedSegment = toHiraganaIME(segment);
+                      const nextValue = raw.slice(0, convertStart) + convertedSegment + raw.slice(convertEnd);
+                      if (caret !== null) {
+                        const caretSegment = raw.slice(convertStart, caret);
+                        pendingCaretRef.current = convertStart + toHiraganaIME(caretSegment).length;
+                      }
+                      setUserInput(nextValue);
+                      lastRawValueRef.current = nextValue;
+                      return;
+                    }
 
-                setDidConvert(false);
-                if (caret !== null) pendingCaretRef.current = caret;
-                setUserInput(raw);
-                lastRawValueRef.current = raw;
-              }}
-              onCompositionStart={() => {
-                isComposingRef.current = true;
-                setIsComposing(true);
-              }}
-              onCompositionEnd={e => {
-                isComposingRef.current = false;
-                setIsComposing(false);
-                lastRawValueRef.current = e.currentTarget.value;
-              }}
-              onKeyDown={handleKeyDown}
-              placeholder=""
-              autoCorrect="off"
-              autoCapitalize="none"
-              autoComplete="off"
-              spellCheck={false}
-            />
-            <KeyboardTip preferred="japanese" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
-          </div>
-          {diffNode}
+                    setDidConvert(false);
+                    if (caret !== null) pendingCaretRef.current = caret;
+                    setUserInput(raw);
+                    lastRawValueRef.current = raw;
+                  }}
+                  onCompositionStart={() => {
+                    isComposingRef.current = true;
+                    setIsComposing(true);
+                  }}
+                  onCompositionEnd={e => {
+                    isComposingRef.current = false;
+                    setIsComposing(false);
+                    lastRawValueRef.current = e.currentTarget.value;
+                  }}
+                  onKeyDown={handleKeyDown}
+                  placeholder=""
+                  autoCorrect="off"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                <KeyboardTip preferred="japanese" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
+              </div>
+              {diffNode}
+            </>
+          )}
         </div>
       </div>
       <SessionProgressBar

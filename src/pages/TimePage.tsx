@@ -4,7 +4,7 @@ import { toHiragana } from 'wanakana';
 import { getJapaneseTimeReadings } from '../engines/japaneseTime';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
-import { APP_TITLE_PREFIX, updateFeedbackDetails } from '../types';
+import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL, updateFeedbackDetails } from '../types';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -23,8 +23,10 @@ function finalizeIME(input: string) {
 const PAGE_TITLE = 'Time Practice';
 
 export default function TimePage() {
+  const [currentSlot, setCurrentSlot] = useState<number>(0);
   const [question, setQuestion] = useState('');
   const [accepted, setAccepted] = useState<string[]>([]);
+  const [isFinished, setIsFinished] = useState(false);
 
   const [userInput, setUserInput] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
@@ -36,9 +38,55 @@ export default function TimePage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const lastMinuteRef = useRef<number>(-1);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(60, { persistKey: '/time' });
+  const remainingSlotRef = useRef<number[]>([]);
+  const lastSlotRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, { persistKey: '/time' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const pickNext = useCallback(() => {
+    const totalSlots = DEFAULT_MASTERY_RANDOM_TOTAL;
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < totalSlots; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
+    }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setAwaitingNext(false);
+      setInputState('');
+      setAnswerDisplay('');
+      setUserInput('');
+      setQuestion('');
+      setAccepted([]);
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingSlotRef.current.length === 0) {
+      remainingSlotRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingSlotRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastSlotRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+    const slot = pool.splice(pickIndex, 1)[0]!;
+    lastSlotRef.current = slot;
+    setCurrentSlot(slot);
+
     let nextMinute = 0;
     do {
       nextMinute = Math.floor(Math.random() * 60);
@@ -65,6 +113,10 @@ export default function TimePage() {
   }, []);
 
   useEffect(() => {
+    remainingSlotRef.current = [];
+    phaseRef.current = null;
+    lastSlotRef.current = null;
+    setIsFinished(false);
     pickNext();
   }, [pickNext]);
 
@@ -74,7 +126,7 @@ export default function TimePage() {
 
   // Update feedback details globally
   useEffect(() => {
-    if (!question) return;
+    if (!question || isFinished) return;
 
     updateFeedbackDetails({
       section: PAGE_TITLE,
@@ -82,7 +134,7 @@ export default function TimePage() {
       correctAnswer: accepted.join(' / '),
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [question, accepted, userInput]);
+  }, [question, accepted, userInput, isFinished]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -103,6 +155,7 @@ export default function TimePage() {
 
   const submit = () => {
     if (awaitingNext) return;
+    if (isFinished) return;
     const normalized = finalizeIME(userInput.trim());
     if (!normalized) return;
 
@@ -115,11 +168,12 @@ export default function TimePage() {
       setInputState('incorrect');
     }
     setAnswerDisplay(accepted.join(' or '));
-    recordProgress(question, ok);
+    recordProgressAt(currentSlot, ok);
     setAwaitingNext(true);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();

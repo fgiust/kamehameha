@@ -5,7 +5,7 @@ import { getJapaneseNumberReadings } from '../engines/japaneseNumber';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
-import { APP_TITLE_PREFIX, updateFeedbackDetails } from '../types';
+import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL, updateFeedbackDetails } from '../types';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -32,6 +32,8 @@ export default function NumbersPage() {
   const [digits, setDigits] = useState(5);
   const [reverse, setReverse] = useState(false);
 
+  const [currentSlot, setCurrentSlot] = useState<number>(0);
+  const [isFinished, setIsFinished] = useState(false);
   const [currentNumber, setCurrentNumber] = useState('');
   const [question, setQuestion] = useState('');
   const [accepted, setAccepted] = useState<string[] | string>('');
@@ -46,9 +48,56 @@ export default function NumbersPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const lastNumberRef = useRef<string>('');
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(100, { persistKey: '/numbers' });
+  const remainingSlotRef = useRef<number[]>([]);
+  const lastSlotRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, { persistKey: '/numbers' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const pickNext = useCallback(() => {
+    const totalSlots = DEFAULT_MASTERY_RANDOM_TOTAL;
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < totalSlots; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
+    }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setAwaitingNext(false);
+      setInputState('');
+      setAnswerDisplay('');
+      setUserInput('');
+      setCurrentNumber('');
+      setQuestion('');
+      setAccepted('');
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingSlotRef.current.length === 0) {
+      remainingSlotRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingSlotRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastSlotRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+    const slot = pool.splice(pickIndex, 1)[0]!;
+    lastSlotRef.current = slot;
+    setCurrentSlot(slot);
+
     let number = '';
     do {
       number = Math.floor(Math.random() * Math.pow(10, digits)).toString();
@@ -74,6 +123,10 @@ export default function NumbersPage() {
   }, [digits, reverse]);
 
   useEffect(() => {
+    remainingSlotRef.current = [];
+    phaseRef.current = null;
+    lastSlotRef.current = null;
+    setIsFinished(false);
     pickNext();
   }, [pickNext]);
 
@@ -83,7 +136,7 @@ export default function NumbersPage() {
 
   // Update feedback details globally
   useEffect(() => {
-    if (!question) return;
+    if (!question || isFinished) return;
 
     const acceptedList = Array.isArray(accepted) ? accepted : [accepted];
 
@@ -93,7 +146,7 @@ export default function NumbersPage() {
       correctAnswer: acceptedList.join(' / '),
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [question, accepted, digits, reverse, userInput]);
+  }, [question, accepted, digits, reverse, userInput, isFinished]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -114,6 +167,7 @@ export default function NumbersPage() {
 
   const submit = () => {
     if (awaitingNext) return;
+    if (isFinished) return;
     const normalized = reverse ? userInput.trim() : finalizeIME(userInput.trim());
     if (!normalized) return;
 
@@ -133,11 +187,12 @@ export default function NumbersPage() {
       setAnswerDisplay(list.length > 1 ? list.join(' or ') : list[0] ?? '');
     }
 
-    recordProgress(currentNumber || question, ok);
+    recordProgressAt(currentSlot, ok);
     setAwaitingNext(true);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();

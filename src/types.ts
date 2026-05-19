@@ -93,6 +93,8 @@ export const SETTINGS_KEYS = {
 
 export const APP_TITLE_PREFIX = '';  // '亀 ';
 
+export const DEFAULT_MASTERY_RANDOM_TOTAL = 30;
+
 export function readStoredBool(key: string, fallback: boolean) {
   try {
     const v = localStorage.getItem(key);

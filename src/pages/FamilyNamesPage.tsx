@@ -25,19 +25,23 @@ function finalizeIME(input: string) {
 const PAGE_TITLE = 'Common family names';
 
 export default function FamilyNamesPage() {
+  const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [currentItem, setCurrentItem] = useState<ReadingItem | null>(null);
+  const [isFinished, setIsFinished] = useState(false);
   const [userInput, setUserInput] = useState('');
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [revealAnswer, setRevealAnswer] = useState<string>('');
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [seenKeys, setSeenKeys] = useState<Record<string, true>>({});
   const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
 
   const totalItems = familyNamesData.length;
 
@@ -49,16 +53,53 @@ export default function FamilyNamesPage() {
     return new KanaReadingEngine(items);
   }, []);
 
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(totalItems, { persistKey: '/family-names' });
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalItems, { persistKey: '/family-names' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const pickItem = useCallback(() => {
-    const unseen = familyNamesData.filter(p => !seenKeys[p.kanji]);
-    const pool = unseen.length > 0 ? unseen : familyNamesData;
+    if (familyNamesData.length === 0) return;
 
-    let selected = pool[Math.floor(Math.random() * pool.length)];
-    if (pool.length > 1 && currentItem && selected.kanji === currentItem.question) {
-      selected = pool[Math.floor(Math.random() * pool.length)];
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < familyNamesData.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
     }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setAwaitingNext(false);
+      setInputState('');
+      setRevealAnswer('');
+      setUserInput('');
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+    setCurrentIdx(nextIdx);
+
+    const selected = familyNamesData[nextIdx]!;
 
     const nextItem: ReadingItem = {
       question: selected.kanji,
@@ -66,15 +107,18 @@ export default function FamilyNamesPage() {
     };
 
     setCurrentItem(nextItem);
-    setSeenKeys(prev => ({ ...prev, [selected.kanji]: true }));
     setUserInput('');
     setInputState('');
     setRevealAnswer('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [currentItem, seenKeys]);
+  }, []);
 
   useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    setIsFinished(false);
     pickItem();
   }, []); // eslint-disable-line
 
@@ -84,7 +128,7 @@ export default function FamilyNamesPage() {
 
   // Update feedback details globally
   useEffect(() => {
-    if (!currentItem) return;
+    if (!currentItem || isFinished) return;
 
     updateFeedbackDetails({
       section: PAGE_TITLE,
@@ -92,7 +136,7 @@ export default function FamilyNamesPage() {
       correctAnswer: currentItem.answer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentItem, userInput]);
+  }, [currentItem, userInput, isFinished]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -117,6 +161,7 @@ export default function FamilyNamesPage() {
   }, [pickItem]);
 
   const checkAnswer = () => {
+    if (isFinished) return;
     if (!currentItem) return;
 
     const normalized = finalizeIME(userInput.trim());
@@ -142,11 +187,12 @@ export default function FamilyNamesPage() {
       ...prev,
     ]);
 
-    recordProgress(currentItem.question, isCorrect);
+    recordProgressAt(currentIdx, isCorrect);
     setAwaitingNext(true);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();

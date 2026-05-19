@@ -69,10 +69,6 @@ function finalizeIME(input: string) {
   return input;
 }
 
-function serializeFlags(engine: ConjugationEngine, flags: OptionFlags) {
-  return engine.opts.map(o => `${o.id}:${flags[o.id] ? '1' : '0'}`).join(',');
-}
-
 export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, backPath, persistKey }: Props) {
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [randomFlags, setRandomFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
@@ -100,7 +96,9 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       showEnglish: readStoredBool(SETTINGS_KEYS.showEnglish, false),
     };
   });
+  const [currentWordIdx, setCurrentWordIdx] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);
+  const [isFinished, setIsFinished] = useState(false);
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
   const [didConvert, setDidConvert] = useState(false);
@@ -110,13 +108,20 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [diffDisplay, setDiffDisplay] = useState<string>('');
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [seenWordKeys, setSeenWordKeys] = useState<Record<string, true>>({});
   const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
   const totalWords = wordData.length;
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(totalWords, { persistKey });
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalWords, { persistKey });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
     setSettings(s => {
@@ -143,25 +148,49 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     }
   };
 
-  const getWordKey = (w: ConjugationWord) => `${w.type}:${w.kana}:${stripRubyTags(w.kanji)}`;
-
   const pickWord = useCallback(() => {
     if (wordData.length === 0) return;
 
-    const unseen = wordData.filter(w => !seenWordKeys[getWordKey(w)]);
-    const pool = unseen.length > 0 ? unseen : wordData;
-
-    let word = pool[Math.floor(Math.random() * pool.length)];
-    // Try to avoid repeating
-    if (pool.length > 1 && currentWord && word.kana === currentWord.kana) {
-      word = pool[Math.floor(Math.random() * pool.length)];
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < wordData.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
     }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setAwaitingNext(false);
+      setInputState('');
+      setDiffDisplay('');
+      setUserInput('');
+      setRawInput('');
+      setDidConvert(false);
+      setIsComposing(false);
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+    setCurrentWordIdx(nextIdx);
+    const word = wordData[nextIdx]!;
     setCurrentWord(word);
-    setSeenWordKeys(prev => {
-      const key = getWordKey(word);
-      if (prev[key]) return prev;
-      return { ...prev, [key]: true };
-    });
     if (settings.randomizeForm) {
       setRandomFlags(buildRandomFlags(engine));
     }
@@ -173,9 +202,15 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [currentWord, engine, seenWordKeys, settings.randomizeForm, wordData]);
+  }, [engine, settings.randomizeForm, wordData]);
 
-  useEffect(() => { pickWord(); }, []); // eslint-disable-line
+  useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    setIsFinished(false);
+    pickWord();
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + title;
@@ -183,7 +218,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
   // Update feedback details globally
   useEffect(() => {
-    if (!currentWord) return;
+    if (!currentWord || isFinished) return;
     const effectiveFlags = settings.randomizeForm ? randomFlags : flags;
     const displayFormHint = getConjugationFormHint(engine, effectiveFlags);
 
@@ -213,7 +248,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, title, settings.reverseQA, settings.showKanji, flags, randomFlags, settings.randomizeForm, userInput]);
+  }, [currentWord, title, settings.reverseQA, settings.showKanji, flags, randomFlags, settings.randomizeForm, userInput, isFinished]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -254,11 +289,11 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
   const checkAnswer = useCallback(() => {
     if (awaitingNext) return;
+    if (isFinished) return;
     if (!currentWord || !userInput.trim()) return;
     const effectiveFlags = settings.randomizeForm ? randomFlags : flags;
 
     const normalized = finalizeIME(userInput.trim());
-    const progressKey = `${getWordKey(currentWord)}|${settings.reverseQA ? 'rev' : 'fwd'}|${serializeFlags(engine, effectiveFlags)}`;
 
     if (settings.reverseQA) {
       const dictKana = currentWord.kana;
@@ -301,7 +336,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
         isCorrect,
       }, ...prev]);
 
-      recordProgress(progressKey, isCorrect);
+      recordProgressAt(currentWordIdx, isCorrect);
       setAwaitingNext(true);
       return;
     }
@@ -330,11 +365,12 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       isCorrect,
     }, ...prev]);
 
-    recordProgress(progressKey, isCorrect);
+    recordProgressAt(currentWordIdx, isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, currentWord, userInput, engine, flags, randomFlags, pickWord, settings.randomizeForm, settings.reverseQA, settings.showKanji, settings.showFurigana, recordProgress]);
+  }, [awaitingNext, isFinished, currentWord, userInput, engine, flags, randomFlags, pickWord, settings.randomizeForm, settings.reverseQA, settings.showKanji, settings.showFurigana, recordProgressAt, currentWordIdx]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
     if (awaitingNext) {
       if (e.key === 'Enter') {
         e.preventDefault();

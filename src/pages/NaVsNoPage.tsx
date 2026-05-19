@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { naVsNoData } from '../data/naVsNoData';
-import { MultipleChoiceEngine } from '../engines/multipleChoice';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS, updateFeedbackDetails } from '../types';
@@ -13,8 +12,10 @@ const PAGE_TITLE = 'な vs の Adjectives';
 const totalQuestions = naVsNoData.questions['な'].length + naVsNoData.questions['の'].length;
 
 export default function NaVsNoPage() {
+  const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [isFinished, setIsFinished] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
   const [status, setStatus] = useState<'correct' | 'incorrect' | ''>('');
@@ -40,18 +41,71 @@ export default function NaVsNoPage() {
     });
   }, []);
 
-  const engine = useMemo(() => new MultipleChoiceEngine(naVsNoData), []);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress } = useSessionProgress(totalQuestions, { persistKey: '/na-vs-no' });
-
-  const newQuestion = useCallback(() => {
-    const q = engine.generateQuestion();
-    setQuestion(q.text);
-    setAnswer(q.correctAnswer);
-    setStatus('');
-    setWait(false);
-  }, [engine]);
+  const allQuestions = useMemo(() => {
+    const out: Array<{ text: string; answer: 'な' | 'の' }> = [];
+    for (const q of naVsNoData.questions['な']) out.push({ text: q, answer: 'な' });
+    for (const q of naVsNoData.questions['の']) out.push({ text: q, answer: 'の' });
+    return out;
+  }, []);
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalQuestions, { persistKey: '/na-vs-no' });
+  const progressSegmentsRef = useRef(progressSegments);
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
 
   useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
+
+  const newQuestion = useCallback(() => {
+    const unanswered: number[] = [];
+    const incorrect: number[] = [];
+    for (let i = 0; i < allQuestions.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrect.push(i);
+    }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setWait(false);
+      setStatus('');
+      setQuestion('');
+      setAnswer('');
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+    setCurrentIdx(nextIdx);
+    const q = allQuestions[nextIdx]!;
+
+    setQuestion(q.text);
+    setAnswer(q.answer);
+    setStatus('');
+    setWait(false);
+  }, [allQuestions]);
+
+  useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    setIsFinished(false);
     newQuestion();
   }, [newQuestion]);
 
@@ -61,16 +115,17 @@ export default function NaVsNoPage() {
 
   // Update feedback details globally
   useEffect(() => {
-    if (!question) return;
+    if (!question || isFinished) return;
     updateFeedbackDetails({
       section: PAGE_TITLE,
       question,
       correctAnswer: answer,
       userAnswer: status ? (status === 'correct' ? answer : (answer === 'な' ? 'の' : 'な')) : '',
     });
-  }, [question, answer, status]);
+  }, [question, answer, status, isFinished]);
 
   const handleClick = useCallback((choice: string) => {
+    if (isFinished) return;
     if (wait) {
       newQuestion();
       return;
@@ -85,8 +140,7 @@ export default function NaVsNoPage() {
     }
     setWait(true);
 
-    const progressKey = `${question}|${answer}`;
-    recordProgress(progressKey, isCorrect);
+    recordProgressAt(currentIdx, isCorrect);
 
     setPrevAnswers(prev => [{
       question: question,
@@ -94,7 +148,7 @@ export default function NaVsNoPage() {
       correctAnswer: answer,
       isCorrect,
     }, ...prev]);
-  }, [wait, answer, question, newQuestion, recordProgress]);
+  }, [wait, answer, question, newQuestion, recordProgressAt, currentIdx, isFinished]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
