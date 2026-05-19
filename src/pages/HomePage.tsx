@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ReactNode, useEffect, useState } from 'react';
 import { genkiIChapters, genkiIIChapters, GenkiChapter, getGenkiLessonById } from '../data/genkiLessons';
-import { APP_TITLE_PREFIX } from '../types';
+import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
 import adjectives from '../data/adjectives';
 import { adjectivesNounsSentenceData } from '../data/adjectivesNouns';
 import counters from '../data/counters';
@@ -23,6 +23,7 @@ const TRANSITIVE_TOTAL = transitiveData.length;
 const NA_VS_NO_TOTAL = naVsNoData.questions['な'].length + naVsNoData.questions['の'].length;
 const FAMILY_NAMES_TOTAL = familyNamesData.length;
 const ADJECTIVES_NOUNS_TOTAL = adjectivesNounsSentenceData.length;
+const COUNTING_THINGS_TOTAL = 30;
 
 function buildMiniSegments(persistKey: string, totalSegments: number) {
   const total = Math.max(1, totalSegments);
@@ -54,9 +55,10 @@ function getDefaultTotalSegmentsForPath(path: string) {
 
   if (path === '/counters') return COUNTERS_DEFAULT_TOTAL;
   if (path === '/counters-people') return COUNTERS_PEOPLE_TOTAL;
+  if (path === '/counting-things') return COUNTING_THINGS_TOTAL;
   if (path === '/days') return 31;
-  if (path === '/numbers') return 100;
-  if (path === '/time') return 60;
+  if (path === '/numbers') return DEFAULT_MASTERY_RANDOM_TOTAL;
+  if (path === '/time') return DEFAULT_MASTERY_RANDOM_TOTAL;
   if (path === '/transitive') return TRANSITIVE_TOTAL;
   if (path === '/na-vs-no') return NA_VS_NO_TOTAL;
   if (path === '/family-names') return FAMILY_NAMES_TOTAL;
@@ -185,6 +187,7 @@ export default function HomePage() {
       <h2 className="section-title">Other</h2>
       <div className="link-grid">
         <HomeLinkCard to="/counters">Counters</HomeLinkCard>
+        <HomeLinkCard to="/counting-things">Counting things</HomeLinkCard>
         <HomeLinkCard to="/days">Days of the Month</HomeLinkCard>
         <HomeLinkCard to="/numbers">Numbers</HomeLinkCard>
         <HomeLinkCard to="/time">Time</HomeLinkCard>

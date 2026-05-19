@@ -1,0 +1,752 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toHiragana } from 'wanakana';
+import SessionProgressBar from '../components/SessionProgressBar';
+import KeyboardTip from '../components/KeyboardTip';
+import { useSessionProgress } from '../hooks/useSessionProgress';
+import { APP_TITLE_PREFIX, PreviousAnswer, updateFeedbackDetails } from '../types';
+import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
+
+function toHiraganaIME(raw: string) {
+  const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
+  let s = raw.replace(/nn(?=[aiueoy])/gi, "n'n");
+  if (/nn$/i.test(s)) s = s.slice(0, -1);
+  const out = toHiragana(s);
+  if (trailingSingleN && out.endsWith('ん')) return out.slice(0, -1) + 'n';
+  return out;
+}
+
+function finalizeIME(input: string) {
+  if (/[\u3040-\u30ff\u3400-\u9fff]/.test(input)) return input;
+  if (input.endsWith('n')) return input.slice(0, -1) + 'ん';
+  return input;
+}
+
+type CountingItem = {
+  id: string;
+  englishSingular: string;
+  englishPlural: string;
+  nounRuby: string;
+  counter: 'hiki' | 'tou' | 'mune' | 'satsu' | 'mai' | 'dai' | 'nin' | 'hai' | 'hon' | 'kai' | 'floor' | 'day' | 'month' | 'week' | 'hour' | 'minute' | 'second' | 'ko';
+};
+
+const ITEMS: CountingItem[] = [
+  { id: 'cat', englishSingular: 'cat', englishPlural: 'cats', nounRuby: '猫[ねこ]', counter: 'hiki' },
+  { id: 'train', englishSingular: 'train', englishPlural: 'trains', nounRuby: '電車[でんしゃ]', counter: 'dai' },
+  { id: 'rabbit', englishSingular: 'rabbit', englishPlural: 'rabbits', nounRuby: '兎[うさぎ]', counter: 'hiki' },
+  { id: 'horse', englishSingular: 'horse', englishPlural: 'horses', nounRuby: '馬[うま]', counter: 'tou' },
+  { id: 'cow', englishSingular: 'cow', englishPlural: 'cows', nounRuby: '牛[うし]', counter: 'tou' },
+  { id: 'fish', englishSingular: 'fish', englishPlural: 'fish', nounRuby: '魚[さかな]', counter: 'hiki' },
+  { id: 'building', englishSingular: 'building', englishPlural: 'buildings', nounRuby: 'ビル', counter: 'mune' },
+  { id: 'bicycle', englishSingular: 'bicycle', englishPlural: 'bicycles', nounRuby: '自転車[じてんしゃ]', counter: 'dai' },
+  { id: 'car', englishSingular: 'car', englishPlural: 'cars', nounRuby: '車[くるま]', counter: 'dai' },
+  { id: 'book', englishSingular: 'book', englishPlural: 'books', nounRuby: '本[ほん]', counter: 'satsu' },
+  { id: 'sheet', englishSingular: 'sheet of paper', englishPlural: 'sheets of paper', nounRuby: '紙[かみ]', counter: 'mai' },
+  { id: 'shirt', englishSingular: 'shirt', englishPlural: 'shirts', nounRuby: 'シャツ', counter: 'mai' },
+  { id: 'people', englishSingular: 'person', englishPlural: 'people', nounRuby: '', counter: 'nin' },
+  { id: 'credit-card', englishSingular: 'credit card', englishPlural: 'credit cards', nounRuby: 'クレジットカード', counter: 'mai' },
+  { id: 'glass', englishSingular: 'glass', englishPlural: 'glasses', nounRuby: 'コップ', counter: 'hai' },
+  { id: 'owl', englishSingular: 'owl', englishPlural: 'owls', nounRuby: '梟[ふくろう]', counter: 'hiki' },
+  { id: 'chicken', englishSingular: 'chicken', englishPlural: 'chickens', nounRuby: '鶏[にわとり]', counter: 'hiki' },
+  { id: 'elephant', englishSingular: 'elephant', englishPlural: 'elephants', nounRuby: '象[ぞう]', counter: 'tou' },
+  { id: 'floor', englishSingular: 'floor', englishPlural: 'floors', nounRuby: '', counter: 'floor' },
+  { id: 'computer', englishSingular: 'computer', englishPlural: 'computers', nounRuby: 'コンピューター', counter: 'dai' },
+  { id: 'chopsticks', englishSingular: 'chopstick', englishPlural: 'chopsticks', nounRuby: '箸[はし]', counter: 'hon' },
+  { id: 'sake-cup', englishSingular: 'cup of sake', englishPlural: 'cups of sake', nounRuby: '酒[さけ]', counter: 'hai' },
+  { id: 'times', englishSingular: 'time', englishPlural: 'times', nounRuby: '', counter: 'kai' },
+  { id: 'days', englishSingular: 'day', englishPlural: 'days', nounRuby: '', counter: 'day' },
+  { id: 'months', englishSingular: 'month', englishPlural: 'months', nounRuby: '', counter: 'month' },
+  { id: 'weeks', englishSingular: 'week', englishPlural: 'weeks', nounRuby: '', counter: 'week' },
+  { id: 'hours', englishSingular: 'hour', englishPlural: 'hours', nounRuby: '', counter: 'hour' },
+  { id: 'minutes', englishSingular: 'minute', englishPlural: 'minutes', nounRuby: '', counter: 'minute' },
+  { id: 'seconds', englishSingular: 'second', englishPlural: 'seconds', nounRuby: '', counter: 'second' },
+  { id: 'balls', englishSingular: 'ball', englishPlural: 'balls', nounRuby: 'ボール', counter: 'ko' },
+];
+
+const KANJI_NUM: Record<number, string> = {
+  1: '一',
+  2: '二',
+  3: '三',
+  4: '四',
+  5: '五',
+  6: '六',
+  7: '七',
+  8: '八',
+  9: '九',
+  10: '十',
+};
+
+function pickOne<T>(arr: T[]) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function toAltSurface(surface: string, readings: string[]) {
+  const uniq = Array.from(new Set(readings.filter(Boolean)));
+  if (uniq.length <= 1) return `${surface}[${uniq[0] ?? ''}]`;
+  return `{${uniq.map(r => `${surface}[${r}]`).join('|')}}`;
+}
+
+function counterSurfaceAndReadings(kind: CountingItem['counter'], n: number): { surface: string; readings: string[] } {
+  if (n < 1 || n > 10) return { surface: '', readings: [] };
+  const num = KANJI_NUM[n] ?? '';
+
+  if (kind === 'hiki') {
+    const surface = `${num}匹`;
+    const readings: Record<number, string[]> = {
+      1: ['いっぴき'],
+      2: ['にひき'],
+      3: ['さんびき'],
+      4: ['よんひき'],
+      5: ['ごひき'],
+      6: ['ろっぴき'],
+      7: ['ななひき', 'しちひき'],
+      8: ['はちひき', 'はっぴき'],
+      9: ['きゅうひき'],
+      10: ['じゅっぴき', 'じっぴき'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'tou') {
+    const surface = `${num}頭`;
+    const readings: Record<number, string[]> = {
+      1: ['いっとう'],
+      2: ['にとう'],
+      3: ['さんとう'],
+      4: ['よんとう'],
+      5: ['ごとう'],
+      6: ['ろくとう'],
+      7: ['ななとう', 'しちとう'],
+      8: ['はちとう', 'はっとう'],
+      9: ['きゅうとう'],
+      10: ['じゅっとう', 'じっとう'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'mune') {
+    const surface = `${num}棟`;
+    const readings: Record<number, string[]> = {
+      1: ['いっとう'],
+      2: ['にとう'],
+      3: ['さんとう'],
+      4: ['よんとう'],
+      5: ['ごとう'],
+      6: ['ろくとう'],
+      7: ['ななとう', 'しちとう'],
+      8: ['はちとう', 'はっとう'],
+      9: ['きゅうとう'],
+      10: ['じゅっとう', 'じっとう'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'satsu') {
+    const surface = `${num}冊`;
+    const readings: Record<number, string[]> = {
+      1: ['いっさつ'],
+      2: ['にさつ'],
+      3: ['さんさつ'],
+      4: ['よんさつ'],
+      5: ['ごさつ'],
+      6: ['ろくさつ'],
+      7: ['ななさつ', 'しちさつ'],
+      8: ['はちさつ', 'はっさつ'],
+      9: ['きゅうさつ'],
+      10: ['じゅっさつ', 'じっさつ'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'mai') {
+    const surface = `${num}枚`;
+    return { surface, readings: [`${n === 1 ? 'いち' : n === 2 ? 'に' : n === 3 ? 'さん' : n === 4 ? 'よん' : n === 5 ? 'ご' : n === 6 ? 'ろく' : n === 7 ? 'なな' : n === 8 ? 'はち' : n === 9 ? 'きゅう' : 'じゅう'}まい`] };
+  }
+
+  if (kind === 'dai') {
+    const surface = `${num}台`;
+    return { surface, readings: [`${n === 1 ? 'いち' : n === 2 ? 'に' : n === 3 ? 'さん' : n === 4 ? 'よん' : n === 5 ? 'ご' : n === 6 ? 'ろく' : n === 7 ? 'なな' : n === 8 ? 'はち' : n === 9 ? 'きゅう' : 'じゅう'}だい`] };
+  }
+
+  if (kind === 'nin') {
+    const surface = `${num}人`;
+    const readings: Record<number, string[]> = {
+      1: ['ひとり'],
+      2: ['ふたり'],
+      3: ['さんにん'],
+      4: ['よにん'],
+      5: ['ごにん'],
+      6: ['ろくにん'],
+      7: ['ななにん', 'しちにん'],
+      8: ['はちにん'],
+      9: ['きゅうにん', 'くにん'],
+      10: ['じゅうにん'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'hai') {
+    const surface = `${num}杯`;
+    const readings: Record<number, string[]> = {
+      1: ['いっぱい'],
+      2: ['にはい'],
+      3: ['さんばい'],
+      4: ['よんはい'],
+      5: ['ごはい'],
+      6: ['ろっぱい'],
+      7: ['ななはい'],
+      8: ['はっぱい'],
+      9: ['きゅうはい'],
+      10: ['じゅっぱい', 'じっぱい'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'hon') {
+    const surface = `${num}本`;
+    const readings: Record<number, string[]> = {
+      1: ['いっぽん'],
+      2: ['にほん'],
+      3: ['さんぼん'],
+      4: ['よんほん'],
+      5: ['ごほん'],
+      6: ['ろっぽん'],
+      7: ['ななほん', 'しちほん'],
+      8: ['はちほん', 'はっぽん'],
+      9: ['きゅうほん'],
+      10: ['じゅっぽん', 'じっぽん'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'kai') {
+    const surface = `${num}回`;
+    const readings: Record<number, string[]> = {
+      1: ['いっかい'],
+      2: ['にかい'],
+      3: ['さんかい'],
+      4: ['よんかい'],
+      5: ['ごかい'],
+      6: ['ろっかい'],
+      7: ['ななかい', 'しちかい'],
+      8: ['はちかい', 'はっかい'],
+      9: ['きゅうかい'],
+      10: ['じゅっかい', 'じっかい'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'floor') {
+    const surface = `${num}階`;
+    const readings: Record<number, string[]> = {
+      1: ['いっかい'],
+      2: ['にかい'],
+      3: ['さんかい'],
+      4: ['よんかい'],
+      5: ['ごかい'],
+      6: ['ろっかい'],
+      7: ['ななかい', 'しちかい'],
+      8: ['はちかい', 'はっかい'],
+      9: ['きゅうかい'],
+      10: ['じゅっかい', 'じっかい'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'day') {
+    const surface: Record<number, string> = {
+      1: '一日',
+      2: '二日',
+      3: '三日',
+      4: '四日',
+      5: '五日',
+      6: '六日',
+      7: '七日',
+      8: '八日',
+      9: '九日',
+      10: '十日',
+    };
+    const readings: Record<number, string[]> = {
+      1: ['いちにち'],
+      2: ['ふつか'],
+      3: ['みっか'],
+      4: ['よっか'],
+      5: ['いつか'],
+      6: ['むいか'],
+      7: ['なのか'],
+      8: ['ようか'],
+      9: ['ここのか'],
+      10: ['とおか'],
+    };
+    return { surface: surface[n] ?? '', readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'month') {
+    const surface = `${num}ヶ月`;
+    const readings: Record<number, string[]> = {
+      1: ['いっかげつ'],
+      2: ['にかげつ'],
+      3: ['さんかげつ'],
+      4: ['よんかげつ'],
+      5: ['ごかげつ'],
+      6: ['ろっかげつ'],
+      7: ['ななかげつ'],
+      8: ['はっかげつ'],
+      9: ['きゅうかげつ'],
+      10: ['じゅっかげつ', 'じっかげつ'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'week') {
+    const surface = `${num}週間`;
+    const readings: Record<number, string[]> = {
+      1: ['いっしゅうかん'],
+      2: ['にしゅうかん'],
+      3: ['さんしゅうかん'],
+      4: ['よんしゅうかん'],
+      5: ['ごしゅうかん'],
+      6: ['ろくしゅうかん'],
+      7: ['ななしゅうかん'],
+      8: ['はっしゅうかん'],
+      9: ['きゅうしゅうかん'],
+      10: ['じゅっしゅうかん', 'じっしゅうかん'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'hour') {
+    const surface = `${num}時間`;
+    const readings: Record<number, string[]> = {
+      1: ['いちじかん'],
+      2: ['にじかん'],
+      3: ['さんじかん'],
+      4: ['よじかん'],
+      5: ['ごじかん'],
+      6: ['ろくじかん'],
+      7: ['しちじかん'],
+      8: ['はちじかん'],
+      9: ['くじかん'],
+      10: ['じゅうじかん'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'minute') {
+    const surface = `${num}分`;
+    const readings: Record<number, string[]> = {
+      1: ['いっぷん'],
+      2: ['にふん'],
+      3: ['さんぷん'],
+      4: ['よんぷん'],
+      5: ['ごふん'],
+      6: ['ろっぷん'],
+      7: ['ななふん'],
+      8: ['はっぷん'],
+      9: ['きゅうふん'],
+      10: ['じゅっぷん', 'じっぷん'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'second') {
+    const surface = `${num}秒`;
+    const readings: Record<number, string[]> = {
+      1: ['いちびょう'],
+      2: ['にびょう'],
+      3: ['さんびょう'],
+      4: ['よんびょう'],
+      5: ['ごびょう'],
+      6: ['ろくびょう'],
+      7: ['ななびょう'],
+      8: ['はちびょう'],
+      9: ['きゅうびょう'],
+      10: ['じゅうびょう'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  if (kind === 'ko') {
+    const surface = `${num}個`;
+    const readings: Record<number, string[]> = {
+      1: ['いっこ'],
+      2: ['にこ'],
+      3: ['さんこ'],
+      4: ['よんこ'],
+      5: ['ごこ'],
+      6: ['ろっこ'],
+      7: ['ななこ', 'しちこ'],
+      8: ['はちこ', 'はっこ'],
+      9: ['きゅうこ'],
+      10: ['じゅっこ', 'じっこ'],
+    };
+    return { surface, readings: readings[n] ?? [] };
+  }
+
+  return { surface: '', readings: [] };
+}
+
+function englishLabel(n: number, singular: string, plural: string) {
+  return `${n} ${n === 1 ? singular : plural}`;
+}
+
+const PAGE_TITLE = 'Counting things';
+
+export default function CountingThingsPage() {
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [question, setQuestion] = useState('');
+  const [accepted, setAccepted] = useState<string[]>([]);
+
+  const [userInput, setUserInput] = useState('');
+  const [rawInput, setRawInput] = useState('');
+  const [didConvert, setDidConvert] = useState(false);
+  const [isComposing, setIsComposing] = useState(false);
+  const [awaitingNext, setAwaitingNext] = useState(false);
+  const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setIncorrect] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
+  const [answerFeedback, setAnswerFeedback] = useState<null | {
+    isCorrect: boolean;
+    userAnswer: string;
+    displayAnswer: string;
+    ops: ReturnType<typeof diffSentenceAnswer>;
+  }>(null);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const pendingCaretRef = useRef<number | null>(null);
+  const isComposingRef = useRef(false);
+  const remainingIdxRef = useRef<number[]>([]);
+  const lastIdxRef = useRef<number | null>(null);
+  const phaseRef = useRef<0 | 2 | null>(null);
+  const lastNumberRef = useRef<number | null>(null);
+
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(ITEMS.length, { persistKey: '/counting-things' });
+  const progressSegmentsRef = useRef(progressSegments);
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
+
+  const buildQuestion = useCallback((idx: number, n: number) => {
+    const item = ITEMS[idx]!;
+    return englishLabel(n, item.englishSingular, item.englishPlural);
+  }, []);
+
+  const buildAccepted = useCallback((idx: number, n: number) => {
+    const item = ITEMS[idx]!;
+    const { surface, readings } = counterSurfaceAndReadings(item.counter, n);
+    if (!surface || readings.length === 0) return [];
+    const counterTemplate = toAltSurface(surface, readings);
+    const template = `${item.nounRuby}${counterTemplate}`;
+    return generateAnswers(parseAnswerTemplate(template));
+  }, []);
+
+  const pickNext = useCallback(() => {
+    if (ITEMS.length === 0) return;
+
+    const unanswered: number[] = [];
+    const incorrectIdx: number[] = [];
+    for (let i = 0; i < ITEMS.length; i++) {
+      const s = progressSegmentsRef.current[i] ?? 0;
+      if (s === 0) unanswered.push(i);
+      else if (s === 2) incorrectIdx.push(i);
+    }
+
+    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrectIdx.length > 0 ? 2 : null);
+    if (nextPhase === null) {
+      setIsFinished(true);
+      setAwaitingNext(false);
+      setAnswerFeedback(null);
+      setInputState('');
+      setQuestion('');
+      setAccepted([]);
+      setUserInput('');
+      setRawInput('');
+      setDidConvert(false);
+      setIsComposing(false);
+      return;
+    }
+
+    setIsFinished(false);
+
+    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
+      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrectIdx).slice();
+      phaseRef.current = nextPhase;
+    }
+
+    const pool = remainingIdxRef.current;
+    let pickIndex = Math.floor(Math.random() * pool.length);
+    const last = lastIdxRef.current;
+    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
+      pickIndex = (pickIndex + 1) % pool.length;
+    }
+
+    const nextIdx = pool.splice(pickIndex, 1)[0]!;
+    lastIdxRef.current = nextIdx;
+
+    let n = pickOne([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+    if (lastNumberRef.current !== null && n === lastNumberRef.current) {
+      n = ((n % 10) + 1) as number;
+    }
+    lastNumberRef.current = n;
+
+    const nextAccepted = buildAccepted(nextIdx, n);
+    if (nextAccepted.length === 0) {
+      remainingIdxRef.current.push(nextIdx);
+      return;
+    }
+
+    setCurrentIdx(nextIdx);
+    setQuestion(buildQuestion(nextIdx, n));
+    setAccepted(nextAccepted);
+    setUserInput('');
+    setRawInput('');
+    setDidConvert(false);
+    setIsComposing(false);
+    setInputState('');
+    setAnswerFeedback(null);
+    setAwaitingNext(false);
+    setTimeout(() => inputRef.current?.focus(), 50);
+  }, [buildAccepted, buildQuestion]);
+
+  useEffect(() => {
+    remainingIdxRef.current = [];
+    phaseRef.current = null;
+    lastIdxRef.current = null;
+    lastNumberRef.current = null;
+    setIsFinished(false);
+    pickNext();
+  }, [pickNext]);
+
+  useEffect(() => {
+    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
+  }, []);
+
+  useEffect(() => {
+    if (!question || isFinished) return;
+    updateFeedbackDetails({
+      section: PAGE_TITLE,
+      question,
+      correctAnswer: accepted.length > 0 ? stripRuby(accepted[0]!) : '',
+      userAnswer: finalizeIME(userInput.trim()),
+    });
+  }, [question, accepted, userInput, isFinished]);
+
+  useEffect(() => {
+    const pos = pendingCaretRef.current;
+    if (pos === null) return;
+    const el = inputRef.current;
+    if (!el) return;
+    if (document.activeElement !== el) {
+      pendingCaretRef.current = null;
+      return;
+    }
+    try {
+      el.setSelectionRange(pos, pos);
+    } catch {
+      // ignore
+    }
+    pendingCaretRef.current = null;
+  }, [userInput]);
+
+  const advanceToNext = useCallback(() => {
+    setAwaitingNext(false);
+    pickNext();
+  }, [pickNext]);
+
+  const checkAnswer = useCallback(() => {
+    if (awaitingNext) return;
+    if (isFinished) return;
+    if (!question || accepted.length === 0) return;
+    if (!userInput.trim()) return;
+    const normalized = finalizeIME(userInput.trim());
+    const isCorrect = accepted.some(a => matchesByRubyUnits(normalized, a));
+    const { bestAnswer: displayAnswer, ops } = pickBestDiff(normalized, accepted);
+
+    if (isCorrect) {
+      setCorrect(c => c + 1);
+      setInputState('correct');
+    } else {
+      setIncorrect(c => c + 1);
+      setInputState('incorrect');
+    }
+
+    setAnswerFeedback({
+      isCorrect,
+      userAnswer: normalized,
+      displayAnswer,
+      ops,
+    });
+
+    setPrevAnswers(prev => [{
+      question,
+      userAnswer: normalized,
+      correctAnswer: stripRuby(displayAnswer),
+      isCorrect,
+      displayAnswer,
+      diffOps: ops,
+    }, ...prev]);
+
+    recordProgressAt(currentIdx, isCorrect);
+    setAwaitingNext(true);
+  }, [accepted, awaitingNext, currentIdx, isFinished, question, recordProgressAt, userInput]);
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (isFinished) return;
+    if (awaitingNext) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        advanceToNext();
+        return;
+      }
+      if (!e.altKey && !e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete')) {
+        e.preventDefault();
+        advanceToNext();
+      }
+      return;
+    }
+
+    if (e.key === 'Enter') {
+      const nativeEvent = e.nativeEvent as unknown as { isComposing?: boolean };
+      if (isComposingRef.current || nativeEvent.isComposing) return;
+      e.preventDefault();
+      checkAnswer();
+    }
+  };
+
+  const total = correct + incorrect;
+  const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
+
+  const renderDiff = useCallback((ops: DiffUnitOp[]) => {
+    const nodes: JSX.Element[] = [];
+    for (const op of ops) {
+      if (op.kind === 'extra') {
+        nodes.push(<span key={`ext-${nodes.length}`} className="diff-char diff-deleted">{op.text}</span>);
+        continue;
+      }
+
+      const { unit, status } = op;
+
+      if (unit.kind === 'plain') {
+        nodes.push(
+          <span key={`p-${nodes.length}`} className={`diff-char ${status === 'missing' ? 'diff-missing' : 'diff-correct'}`}>
+            {unit.surface}
+          </span>
+        );
+        continue;
+      }
+
+      const kanjiClass =
+        status === 'correct_kanji' ? 'diff-correct'
+          : status === 'correct_kana' ? 'diff-kanji-kana'
+            : 'diff-missing';
+      const rtClass = status === 'missing' ? 'diff-missing' : 'diff-correct';
+
+      nodes.push(
+        <ruby key={`r-${nodes.length}`}>
+          <span className={`diff-char ${kanjiClass}`}>{unit.surface}</span>
+          <rt className={rtClass}>{unit.reading}</rt>
+        </ruby>
+      );
+    }
+    return nodes;
+  }, []);
+
+  return (
+    <div className="app-container">
+      <div className="page-header">
+        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <div className="page-actions">
+          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="exercise-container">
+          {!isFinished && (
+            <>
+              <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
+                {question || '...'}
+              </div>
+
+              <div className="exercise-input-block">
+                <input
+                  ref={inputRef}
+                  className={`exercise-input ${inputState}`}
+                  value={userInput}
+                  onChange={e => {
+                    if (awaitingNext) return;
+                    const raw = e.target.value;
+                    setRawInput(raw);
+                    const caret = e.target.selectionStart;
+                    const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
+                    if (composing) {
+                      setDidConvert(false);
+                      setIsComposing(true);
+                      setUserInput(raw);
+                      return;
+                    }
+                    setIsComposing(false);
+
+                    const didConvertNow = /[A-Za-z]/.test(raw);
+                    setDidConvert(didConvertNow);
+                    const converted = toHiraganaIME(raw);
+                    if (caret !== null) {
+                      pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                    }
+                    setUserInput(converted);
+                  }}
+                  onCompositionStart={() => {
+                    isComposingRef.current = true;
+                    setIsComposing(true);
+                  }}
+                  onCompositionEnd={() => {
+                    isComposingRef.current = false;
+                    setIsComposing(false);
+                  }}
+                  onKeyDown={handleKeyDown}
+                  autoCorrect="off"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
+              </div>
+            </>
+          )}
+
+          <div className={`answer-banner ${answerFeedback ? (answerFeedback.isCorrect ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
+            {answerFeedback ? (
+              <span className="diff-answer">{renderDiff(answerFeedback.ops)}</span>
+            ) : (
+              '\u00A0'
+            )}
+          </div>
+        </div>
+      </div>
+
+      <SessionProgressBar
+        segments={progressSegments}
+        pulses={progressPulses}
+        correct={correct}
+        incorrect={incorrect}
+        pct={pct}
+      />
+
+      {prevAnswers.length > 0 && (
+        <div className="card prev-answers">
+          {prevAnswers.slice(0, 20).map((a, i) => (
+            <div key={i} className={`prev-answer-item ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
+              <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>
+              <span className="q" style={{ fontSize: 13 }}>{a.question}</span>
+              <span className="user-ans">{a.userAnswer}</span>
+              {!a.isCorrect && <span className="correct-ans">→ {a.correctAnswer}</span>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

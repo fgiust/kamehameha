@@ -10,6 +10,7 @@ import CountersPage from './pages/CountersPage';
 import DaysPage from './pages/DaysPage';
 import NumbersPage from './pages/NumbersPage';
 import TimePage from './pages/TimePage';
+import CountingThingsPage from './pages/CountingThingsPage';
 import DiffTestPage from './pages/DiffTestPage';
 import NaVsNoPage from './pages/NaVsNoPage';
 import TransitivePage from './pages/TransitivePage';
@@ -83,6 +84,7 @@ function AppShell() {
         {/* Numbers & Counters */}
         <Route path="/counters" element={<CountersPage />} />
         <Route path="/counters-people" element={<CountersPage peopleOnly={true} />} />
+        <Route path="/counting-things" element={<CountingThingsPage />} />
         <Route path="/days" element={<DaysPage />} />
         <Route path="/numbers" element={<NumbersPage />} />
         <Route path="/time" element={<TimePage />} />
