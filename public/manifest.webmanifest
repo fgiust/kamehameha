@@ -1,0 +1,25 @@
+{
+  "name": "kamehameha!",
+  "short_name": "kamehameha!",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b0c10",
+  "theme_color": "#0b0c10",
+  "description": "Japanese grammar practice: conjugation drills, Genki-style sentence exercises, and more.",
+  "icons": [
+    {
+      "src": "/kame.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
