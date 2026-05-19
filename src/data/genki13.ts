@@ -17,7 +17,7 @@ export const genki13Lessons: TranslateSessionData[] = [
     id: 'genki13-3',
     title: '～そうです (It looks like...)',
     sentenceData: [
-      { english: 'This cake looks delicious.', answer: 'このケーキは美[お]味[い]しそう{です|です。}' },
+      { english: 'This ramen looks delicious.', answer: 'このラメんは美[お]味[い]しそう{です|です。}' },
       { english: 'That bag looks expensive.', answer: '{あの|その}かばんは高[たか]そう{です|です。}' },
       { english: 'This restaurant looks cheap.', answer: 'このレストランは安[やす]そう{です|です。}' },
       { english: 'Suzuki looks sleepy.', answer: '鈴[すず]木[き]さんは眠[ねむ]そう{です|です。}' },
