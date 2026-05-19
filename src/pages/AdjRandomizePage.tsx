@@ -1,7 +1,9 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { adjEngines } from '../engines/adjConjugation';
-import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS, getConjugationFormHint, readStoredBool, stripRubyTags, updateFeedbackDetails, writeStoredBool } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { getConjugationFormHint, readStoredBool, stripRubyTags, writeStoredBool } from '../utils/utils';
 import adjectives from '../data/adjectives';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';

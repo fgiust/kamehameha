@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { naVsNoData } from '../data/naVsNoData';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
-import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS, updateFeedbackDetails } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
 

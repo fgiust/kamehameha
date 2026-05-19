@@ -4,7 +4,8 @@ import { toHiragana } from 'wanakana';
 import daysOfMonth from '../data/daysOfMonth';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
-import { APP_TITLE_PREFIX, updateFeedbackDetails } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX } from '../types';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);

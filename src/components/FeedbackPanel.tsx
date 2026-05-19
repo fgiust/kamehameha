@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { FeedbackDetails } from '../types';
+import { FeedbackDetails } from '../utils/feedback';
 
 export default function FeedbackPanel() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ export default function FeedbackPanel() {
 
   // Sync state with global window object when opening or when a custom update event is fired
   const syncDetails = () => {
-    const current = (window as any).currentQuestionDetails;
+    const current = (window as Window & { currentQuestionDetails?: FeedbackDetails }).currentQuestionDetails;
     if (current) {
       setDetails({
         section: current.section || '',
@@ -80,8 +80,9 @@ export default function FeedbackPanel() {
       } else {
         setMessage({ type: 'error', text: result.error || 'Failed to save feedback.' });
       }
-    } catch (err: any) {
-      setMessage({ type: 'error', text: err.message || 'Error communicating with dev server.' });
+    } catch (err) {
+      const errorText = err instanceof Error ? err.message : 'Error communicating with dev server.';
+      setMessage({ type: 'error', text: errorText });
     } finally {
       setIsSubmitting(false);
     }

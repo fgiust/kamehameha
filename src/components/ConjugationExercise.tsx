@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { APP_TITLE_PREFIX, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS, getConjugationFormHint, readStoredBool, stripRubyTags, updateFeedbackDetails, writeStoredBool } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
+import { getConjugationFormHint, readStoredBool, stripRubyTags, writeStoredBool } from '../utils/utils';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';

@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer, updateFeedbackDetails } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, parseAnswerTemplate, matchesByRubyUnits, stripRuby, pickBestDiff } from '../engines/sentenceEngine';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';

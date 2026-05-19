@@ -5,7 +5,8 @@ import { familyNamesData } from '../data/familyNamesData';
 import { KanaReadingEngine, ReadingItem } from '../engines/kanaReadingEngine';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
-import { APP_TITLE_PREFIX, PreviousAnswer, updateFeedbackDetails } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import JapaneseText from '../components/JapaneseText';
 
 function toHiraganaIME(raw: string) {

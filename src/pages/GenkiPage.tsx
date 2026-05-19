@@ -1,14 +1,17 @@
 import { Link } from 'react-router-dom';
-import { genkiIChapters, genkiIIChapters } from '../data/genkiLessons';
+import { genkiChapters } from '../data/genkiLessons';
 import { GenkiChapter } from '../types';
 
-function ChapterSection({ chapters, sectionTitle }: { chapters: GenkiChapter[]; sectionTitle: string }) {
+function getGenkiBookLabel(lesson: number) {
+  return lesson <= 12 ? 'Genki I' : 'Genki II';
+}
+
+function ChapterSection({ chapters }: { chapters: GenkiChapter[] }) {
   return (
     <div className="genki-section">
-      <h4>{sectionTitle}</h4>
       {chapters.map(ch => (
         <div key={ch.lesson} style={{ marginBottom: 20 }}>
-          <h3>Lesson {ch.lesson}</h3>
+          <h3>{getGenkiBookLabel(ch.lesson)} — Lesson {ch.lesson}</h3>
           {ch.links.length > 0 ? (
             <ul className="genki-lesson-list">
               {ch.links.map(link => (
@@ -46,8 +49,7 @@ export default function GenkiPage() {
         Exercises organized by Genki lesson topics. This app does not reproduce Genki textbook content that is protected by copyright.
       </p>
 
-      <ChapterSection chapters={genkiIChapters} sectionTitle="Genki I" />
-      <ChapterSection chapters={genkiIIChapters} sectionTitle="Genki II" />
+      <ChapterSection chapters={genkiChapters} />
     </div>
   );
 }

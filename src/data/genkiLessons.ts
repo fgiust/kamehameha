@@ -56,7 +56,7 @@ export const genkiLessons: GenkiLesson[] = [
 ];
 
 
-export const genkiIChapters: GenkiChapter[] = [
+export const genkiChapters: GenkiChapter[] = [
   {
     lesson: 1, links: [
       { id: 'genki1-1', title: 'XはYです', type: 'sentence', path: '/genki/genki1-1' },
@@ -175,9 +175,7 @@ export const genkiIChapters: GenkiChapter[] = [
       { id: 'genki12-6', title: '～でしょう', type: 'sentence', path: '/genki/genki12-6' },
     ],
   },
-];
 
-export const genkiIIChapters: GenkiChapter[] = [
   {
     lesson: 13, links: [
       { id: 'genki13-1', title: 'Potential Verbs', type: 'conjugation', path: '/potentialform' },

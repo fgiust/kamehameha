@@ -5,7 +5,8 @@ import counters, { JapaneseCounter } from '../data/counters';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
-import { APP_TITLE_PREFIX, updateFeedbackDetails } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX } from '../types';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);

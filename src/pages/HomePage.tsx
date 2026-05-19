@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ReactNode, useEffect, useState } from 'react';
-import { genkiIChapters, genkiIIChapters, getGenkiLessonById } from '../data/genkiLessons';
+import { genkiChapters, getGenkiLessonById } from '../data/genkiLessons';
 import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL, GenkiChapter } from '../types';
 import adjectives from '../data/adjectives';
 import { adjectivesNounsSentenceData } from '../data/adjectivesNouns';
@@ -115,12 +115,16 @@ function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: Re
   );
 }
 
-function GenkiBlock({ bookLabel, chapters }: { bookLabel: 'Genki I' | 'Genki II'; chapters: GenkiChapter[] }) {
+function getGenkiBookLabel(lesson: number) {
+  return lesson <= 12 ? 'Genki I' : 'Genki II';
+}
+
+function GenkiBlock({ chapters }: { chapters: GenkiChapter[] }) {
   return (
     <>
       {chapters.map(ch => (
-        <div key={`${bookLabel}-${ch.lesson}`}>
-          <h3 className="section-title" style={{ marginTop: 18 }}>{bookLabel} - Lesson {ch.lesson}</h3>
+        <div key={ch.lesson}>
+          <h3 className="section-title" style={{ marginTop: 18 }}>{getGenkiBookLabel(ch.lesson)} - Lesson {ch.lesson}</h3>
           <div className="link-grid">
             {ch.links.map(link => (
               link.path ? (
@@ -203,8 +207,7 @@ export default function HomePage() {
         This app does not reproduce any copyrighted content from the Genki textbooks.
         The exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.
       </p>
-      <GenkiBlock bookLabel="Genki I" chapters={genkiIChapters} />
-      <GenkiBlock bookLabel="Genki II" chapters={genkiIIChapters} />
+      <GenkiBlock chapters={genkiChapters} />
 
       <footer className="home-footer">
         <span className="home-footer-text">kamehameha v{__APP_VERSION__}</span>

@@ -4,7 +4,8 @@ import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
 import KeyboardTip from '../components/KeyboardTip';
 import { useSessionProgress } from '../hooks/useSessionProgress';
-import { APP_TITLE_PREFIX, PreviousAnswer, updateFeedbackDetails } from '../types';
+import { updateFeedbackDetails } from '../utils/feedback';
+import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
 
 function toHiraganaIME(raw: string) {
