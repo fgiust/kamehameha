@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 reference/*
 scratch/*
-feedback.txt
+feedback.*

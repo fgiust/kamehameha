@@ -17,6 +17,25 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(appVersion),
   },
   plugins: [
+    {
+      name: 'dev-favicon',
+      enforce: 'pre',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url !== '/favicon.svg') return next();
+          try {
+            const iconPath = path.resolve(__dirname, 'public', 'favicon-dev.svg');
+            const svg = fs.readFileSync(iconPath);
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'image/svg+xml');
+            res.setHeader('Cache-Control', 'no-store');
+            res.end(svg);
+          } catch {
+            next();
+          }
+        });
+      }
+    },
     react(),
     checker({
       typescript: {
