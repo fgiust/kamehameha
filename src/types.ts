@@ -108,6 +108,23 @@ export interface GenkiChapter {
   links: GenkiLessonLink[];
 }
 
+export type HomeExerciseLink = {
+  id: string;
+  title: string;
+  to?: string;
+  defaultTotal: number;
+};
+
+export type HomeSection = {
+  id: string;
+  title: string;
+  titleClassName?: string;
+  titleLevel?: 2 | 3;
+  description?: string[];
+  descriptionClassName?: string;
+  items: HomeExerciseLink[];
+};
+
 export const APP_TITLE_PREFIX = '';  // '亀 ';
 
 export const DEFAULT_MASTERY_RANDOM_TOTAL = 30;

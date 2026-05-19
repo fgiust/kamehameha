@@ -63,52 +63,37 @@ function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: Re
   );
 }
 
-function getGenkiBookLabel(lesson: number) {
-  return lesson <= 12 ? 'Genki I' : 'Genki II';
-}
-
 function renderSection(section: (typeof homeSections)[number]) {
-  if (section.kind === 'grid') {
-    return (
-      <div key={section.id}>
-        <h2 className="section-title">{section.title}</h2>
-        <div className="link-grid">
-          {section.items.map(item => (
-            <HomeLinkCard key={item.id} to={item.to ?? '/'} defaultTotal={item.defaultTotal}>
-              {item.title}
-            </HomeLinkCard>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  const titleClassName = section.titleClassName ?? 'section-title';
+  const descriptionClassName = section.descriptionClassName ?? 'genki-supp-desc';
+  const titleLevel = section.titleLevel ?? 2;
 
   return (
     <div key={section.id}>
-      <h2 className="genki-supp-title">{section.title}</h2>
-      <p className="genki-supp-desc">
-        {section.description[0]}
-        {' '}
-        {section.description[1]}
-        {' '}
-        {section.description[2]}
-      </p>
-      {section.chapters.map(ch => (
-        <div key={ch.lesson}>
-          <h3 className="section-title" style={{ marginTop: 18 }}>{getGenkiBookLabel(ch.lesson)} - Lesson {ch.lesson}</h3>
-          <div className="link-grid">
-            {ch.items.map(item => (
-              item.to ? (
-                <HomeLinkCard key={item.id} to={item.to} defaultTotal={item.defaultTotal}>{item.title}</HomeLinkCard>
-              ) : (
-                <span key={item.id} className="link-card" style={{ opacity: 0.5 }}>
-                  {item.title} <span className="badge">Soon</span>
-                </span>
-              )
-            ))}
-          </div>
+      {titleLevel === 3 ? (
+        <h3 className={titleClassName} style={{ marginTop: 18 }}>{section.title}</h3>
+      ) : (
+        <h2 className={titleClassName}>{section.title}</h2>
+      )}
+      {section.description && section.description.length > 0 && (
+        <p className={descriptionClassName}>
+          {section.description.join(' ')}
+        </p>
+      )}
+
+      {section.items.length > 0 && (
+        <div className="link-grid">
+          {section.items.map(item => (
+            item.to ? (
+              <HomeLinkCard key={item.id} to={item.to} defaultTotal={item.defaultTotal}>{item.title}</HomeLinkCard>
+            ) : (
+              <span key={item.id} className="link-card" style={{ opacity: 0.5 }}>
+                {item.title} <span className="badge">Soon</span>
+              </span>
+            )
+          ))}
         </div>
-      ))}
+      )}
     </div>
   );
 }

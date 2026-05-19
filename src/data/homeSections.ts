@@ -6,32 +6,7 @@ import { genkiChapters, getGenkiLinkPath, getGenkiLinkTitle, getGenkiLessonById 
 import { naVsNoData } from './naVsNoData';
 import { transitiveData } from './transitiveData';
 import verbs from './verbs';
-import { DEFAULT_MASTERY_RANDOM_TOTAL, GenkiChapter } from '../types';
-
-type HomeExerciseLink = {
-  id: string;
-  title: string;
-  to?: string;
-  defaultTotal: number;
-};
-
-export type HomeSection =
-  | {
-    kind: 'grid';
-    id: string;
-    title: string;
-    items: HomeExerciseLink[];
-  }
-  | {
-    kind: 'genki';
-    id: string;
-    title: string;
-    description: string[];
-    chapters: Array<{
-      lesson: number;
-      items: HomeExerciseLink[];
-    }>;
-  };
+import { DEFAULT_MASTERY_RANDOM_TOTAL, GenkiChapter, HomeSection } from '../types';
 
 const VERB_TOTAL = verbs.length;
 const ADJ_TOTAL = adjectives.length;
@@ -79,7 +54,7 @@ function getDefaultTotalSegmentsForPath(path: string) {
 }
 
 function mapGenkiChapter(ch: GenkiChapter) {
-  const items: HomeExerciseLink[] = ch.links.map(link => {
+  return ch.links.map(link => {
     const to = getGenkiLinkPath(link);
     const title = getGenkiLinkTitle(link);
     const effectivePath = to ?? link.path ?? '';
@@ -91,15 +66,13 @@ function mapGenkiChapter(ch: GenkiChapter) {
       defaultTotal,
     };
   });
-
-  return { lesson: ch.lesson, items };
 }
 
 export const homeSections: HomeSection[] = [
   {
-    kind: 'grid',
     id: 'verb-conjugation',
     title: 'Verb Conjugation Practice',
+    titleClassName: 'section-title',
     items: [
       { id: 'teform', title: 'て-Form', to: '/teform', defaultTotal: VERB_TOTAL },
       { id: 'causativeform', title: 'Causative Form', to: '/causativeform', defaultTotal: VERB_TOTAL },
@@ -116,9 +89,9 @@ export const homeSections: HomeSection[] = [
     ],
   },
   {
-    kind: 'grid',
     id: 'adjective-conjugation',
     title: 'Adjective Conjugation Practice',
+    titleClassName: 'section-title',
     items: [
       { id: 'adj-naruform', title: 'なる Form', to: '/adj-naruform', defaultTotal: ADJ_TOTAL },
       { id: 'adj-conditionalform', title: 'Conditional Form', to: '/adj-conditionalform', defaultTotal: ADJ_TOTAL },
@@ -129,9 +102,9 @@ export const homeSections: HomeSection[] = [
     ],
   },
   {
-    kind: 'grid',
     id: 'other',
     title: 'Other',
+    titleClassName: 'section-title',
     items: [
       { id: 'counters', title: 'Counters', to: '/counters', defaultTotal: COUNTERS_DEFAULT_TOTAL },
       { id: 'counting-things', title: 'Counting things', to: '/counting-things', defaultTotal: COUNTING_THINGS_TOTAL },
@@ -145,14 +118,26 @@ export const homeSections: HomeSection[] = [
     ],
   },
   {
-    kind: 'genki',
-    id: 'genki',
+    id: 'genki-intro',
     title: 'Genki supplementary exercises',
+    titleClassName: 'genki-supp-title',
+    titleLevel: 2,
+    descriptionClassName: 'genki-supp-desc',
     description: [
       'Grammar exercises organized by Genki lesson topics.',
       'This app does not reproduce any copyrighted content from the Genki textbooks.',
       'The exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.',
     ],
-    chapters: genkiChapters.map(mapGenkiChapter),
+    items: [],
   },
+  ...genkiChapters.map(ch => {
+    const bookLabel = ch.lesson <= 12 ? 'Genki I' : 'Genki II';
+    return {
+      id: `genki-${ch.lesson}`,
+      title: `${bookLabel} - Lesson ${ch.lesson}`,
+      titleClassName: 'section-title',
+      titleLevel: 3,
+      items: mapGenkiChapter(ch),
+    } satisfies HomeSection;
+  }),
 ];
