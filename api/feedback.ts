@@ -175,6 +175,10 @@ function parseBody(body: unknown): FeedbackPayload {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'GET') {
+    if (!parseBool(firstQueryValue(req, 'download'))) {
+      jsonOk(res, { success: true });
+      return;
+    }
     await handleExport(req, res);
     return;
   }
@@ -196,4 +200,3 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     jsonError(res, 500, err instanceof Error ? err.message : 'Unknown error');
   }
 }
-

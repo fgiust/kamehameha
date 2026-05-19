@@ -38,7 +38,9 @@ Response (JSON):
 
 ### GET `/api/feedback`
 
-Downloads a text file containing feedback entries in the same format used by `feedback.txt`.
+By default, this endpoint does not download anything. To download the export file you must pass `?download=1`.
+
+When `download=1` is present, it downloads a text file containing feedback entries in the same format used by `feedback.txt`.
 
 The downloaded filename format is:
 
@@ -57,6 +59,7 @@ Downloads only the feedback entries that have not been exported yet (up to `limi
 
 Query parameters:
 
+- `download=1` (required to download)
 - `key` (required if `FEEDBACK_EXPORT_KEY` is set)
 - `limit` (optional, default `1000`, max `5000`)
 - `mark=0` (optional): do not mark entries as exported (preview mode)
@@ -64,11 +67,11 @@ Query parameters:
 Examples:
 
 - Download next batch (default limit):
-  - `/api/feedback?key=YOUR_SECRET_KEY`
+  - `/api/feedback?download=1&key=YOUR_SECRET_KEY`
 - Download next 200 and mark them as exported:
-  - `/api/feedback?key=YOUR_SECRET_KEY&limit=200`
+  - `/api/feedback?download=1&key=YOUR_SECRET_KEY&limit=200`
 - Preview next batch without marking:
-  - `/api/feedback?key=YOUR_SECRET_KEY&limit=200&mark=0`
+  - `/api/feedback?download=1&key=YOUR_SECRET_KEY&limit=200&mark=0`
 
 ### Full export (`all=1`)
 
@@ -76,10 +79,11 @@ Downloads all feedback entries from the beginning, ignoring the exported counter
 
 Query parameters:
 
+- `download=1` (required to download)
 - `key` (required if `FEEDBACK_EXPORT_KEY` is set)
 - `all=1`
 
 Example:
 
 - `/api/feedback?key=YOUR_SECRET_KEY&all=1`
-
+  - `/api/feedback?download=1&key=YOUR_SECRET_KEY&all=1`
