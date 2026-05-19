@@ -17,12 +17,15 @@ export const genki13Lessons: TranslateSessionData[] = [
     id: 'genki13-3',
     title: '～そうです (It looks like...)',
     sentenceData: [
-      { answer: 'このケーキはおいしそう{です|です。}', english: 'This cake looks delicious.' },
-      { answer: 'あのかばんは高[たか]そう{です|です。}', english: 'That bag looks expensive.' },
+      { answer: 'このケーキは美[お]味[い]しそう{です|です。}', english: 'This cake looks delicious.' },
+      { answer: '{あの|その}かばんは高[たか]そう{です|です。}', english: 'That bag looks expensive.' },
       { answer: 'このレストランは安[やす]そう{です|です。}', english: 'This restaurant looks cheap.' },
       { answer: '鈴[すず]木[き]さんは眠[ねむ]そう{です|です。}', english: 'Suzuki looks sleepy.' },
       { answer: 'この問[もん]題[だい]は難[むずか]しそう{です|です。}', english: 'This question looks difficult.' },
       { answer: '山[やま]下[した]さんは元[げん]気[き]そう{です|です。}', english: 'Yamashita looks healthy.' },
+      { answer: 'この町[まち]は便[べん]利[り]そう{です|です。}', english: 'This town looks convenient.' },
+      { answer: 'この部[へ]屋[や]は静[しず]かそう{です|です。}', english: 'This room looks quiet.' },
+      { answer: 'あの先[せん]生[せい]は親[しん]切[せつ]そう{です|です。}', english: 'That teacher looks kind.' },
     ],
   },
   {

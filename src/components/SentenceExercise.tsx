@@ -212,10 +212,10 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
         nodes.push(<span key={`ext-${nodes.length}`} className="diff-char diff-deleted">{op.text}</span>);
         continue;
       }
-      
+
       // op.kind === 'unit'
       const { unit, status } = op;
-      
+
       if (unit.kind === 'plain') {
         nodes.push(
           <span key={`p-${nodes.length}`} className={`diff-char ${status === 'missing' ? 'diff-missing' : 'diff-correct'}`}>
@@ -251,7 +251,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{title} Sentence Practice</h1>
+        <h1 className="page-heading">{title}</h1>
         <div className="page-actions">
           <Link to={backPath} className="header-btn" aria-label="Back">{'<'}</Link>
         </div>
