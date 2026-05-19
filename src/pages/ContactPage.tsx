@@ -8,8 +8,8 @@ export default function ContactPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [submitLabel, setSubmitLabel] = useState('Send');
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + PAGE_TITLE;
@@ -17,10 +17,10 @@ export default function ContactPage() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (isSubmitting) return;
+    if (submitState === 'sending' || submitState === 'success') return;
 
-    setIsSubmitting(true);
-    setStatus(null);
+    setSubmitState('sending');
+    setSubmitLabel('Sending...');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -34,17 +34,18 @@ export default function ContactPage() {
 
       const out = (await res.json()) as { success?: boolean; error?: string; message?: string };
       if (out.success) {
-        setStatus({ type: 'success', text: 'Message sent successfully!' });
+        setSubmitState('success');
+        setSubmitLabel('Message sent');
         setName('');
         setEmail('');
         setMessage('');
       } else {
-        setStatus({ type: 'error', text: out.error || 'Failed to send message.' });
+        setSubmitState('error');
+        setSubmitLabel('Failed to send');
       }
-    } catch (err) {
-      setStatus({ type: 'error', text: err instanceof Error ? err.message : 'Failed to send message.' });
-    } finally {
-      setIsSubmitting(false);
+    } catch {
+      setSubmitState('error');
+      setSubmitLabel('Failed to send');
     }
   };
 
@@ -63,12 +64,6 @@ export default function ContactPage() {
 
       <div className="card">
         <form onSubmit={submit} className="feedback-panel-form">
-          {status && (
-            <div className={`feedback-message ${status.type}`}>
-              {status.text}
-            </div>
-          )}
-
           <div className="feedback-form-group">
             <label>Name</label>
             <input value={name} onChange={e => setName(e.target.value)} required />
@@ -84,8 +79,12 @@ export default function ContactPage() {
             <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={6} />
           </div>
 
-          <button type="submit" className="feedback-submit-btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send'}
+          <button
+            type="submit"
+            className={`feedback-submit-btn contact-submit-btn ${submitState === 'sending' ? 'is-sending' : submitState === 'success' ? 'is-success' : submitState === 'error' ? 'is-error' : ''}`}
+            disabled={submitState === 'sending' || submitState === 'success'}
+          >
+            {submitLabel}
           </button>
         </form>
       </div>

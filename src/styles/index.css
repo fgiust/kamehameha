@@ -1203,6 +1203,49 @@ body.dark .home-mini-progress-cell.is-incorrect {
   cursor: not-allowed;
 }
 
+.contact-submit-btn {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.contact-submit-btn.is-sending {
+  animation: contact-pop 220ms ease-out;
+}
+
+.contact-submit-btn.is-success {
+  background: var(--correct);
+}
+
+.contact-submit-btn.is-error {
+  background: var(--incorrect);
+}
+
+.contact-submit-btn.is-sending::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin-top: -7px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  border-radius: 999px;
+  animation: contact-spin 700ms linear infinite;
+}
+
+@keyframes contact-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes contact-pop {
+  0% { transform: scale(0.98); }
+  60% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
 .feedback-message {
   padding: 12px 16px;
   border-radius: 8px;
