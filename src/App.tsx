@@ -17,6 +17,7 @@ import FamilyNamesPage from './pages/FamilyNamesPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
 import FeedbackPanel from './components/FeedbackPanel';
+import { Analytics } from "@vercel/analytics/next"
 
 function DarkModeToggle() {
   const [dark, setDark] = useState(() => {
@@ -94,6 +95,7 @@ function AppShell() {
 
         <Route path="/diff-test" element={<DiffTestPage />} />
       </Routes>
+      <Analytics />
     </>
   );
 }
