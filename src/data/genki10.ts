@@ -50,7 +50,7 @@ export const genki10Lessons: TranslateSessionData[] = [
     title: 'どこかに/どこにも',
     sentenceData: [
       { english: 'Did you go anywhere on the weekend?', answer: '週末[しゅうまつ]、どこかに行[い]きましたか' },
-      { english: 'No, I didn\'t go anywhere.', answer: 'いいえ、どこにも行[い]きませんでした' },
+      { english: 'No, I didn\'t go anywhere yesterday.', answer: 'いいえ、きのうどこにも行[い]きませんでした' },
       { english: 'I want to go somewhere during summer vacation.', answer: '夏[なつ]休[やす]みにどこかへ行[い]きたいです' },
       { english: 'I don\'t want to go anywhere.', answer: 'どこにも行[い]きたくないです' },
       { english: 'Did you meet anyone?', answer: 'だれかに会[あ]いましたか' },

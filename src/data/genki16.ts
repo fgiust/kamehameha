@@ -29,7 +29,7 @@ export const genki16Lessons: TranslateSessionData[] = [
     sentenceData: [
       { english: 'I hope it will be sunny tomorrow.', answer: '明日[あした]、晴[は]れるといいですね' },
       { english: 'I hope the test will be easy.', answer: 'テストが簡[かん]単[たん]だといいですね' },
-      { english: 'I hope it doesn\'t rain.', answer: '雨[あめ]が降[ふ]らないといいんですが' },
+      { english: 'I hope it doesn\'t get cold.', answer: '寒[さむ]くならないといいんですが' },
       { english: 'I hope you can go to the party.', answer: 'パーテイーに行[い]けるといいですね' },
       { english: 'I hope your cold gets better.', answer: '風[かぜ]がよくなるといいんですが' },
     ],

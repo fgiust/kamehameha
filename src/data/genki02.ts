@@ -5,7 +5,7 @@ export const genki02Lessons: TranslateSessionData[] = [
     id: 'genki2-1',
     title: 'これ それ あれ どれ',
     sentenceData: [
-      { english: 'How much is this?', answer: 'これは{いくら|なん円[えん]}{ですか|か}' },
+      { english: 'How much is that over there?', answer: 'あれは{いくら|なん円[えん]}{ですか|か}' },
       { english: 'That is 300 yen.', answer: 'それは{三[さん]百[びゃく]円[えん]|300円[えん]|３００円[えん]}{です|だ}' },
       { english: 'That over there is my dictionary.', answer: 'あれは私[わたし]の辞[じ]書[しょ]{です|だ}' },
     ],
@@ -14,7 +14,7 @@ export const genki02Lessons: TranslateSessionData[] = [
     id: 'genki2-2',
     title: 'この/その/あの/どの + Noun',
     sentenceData: [
-      { english: 'How much is this watch?', answer: 'この時[と]計[けい]は{いくら|なん円[えん]}{ですか|か}' },
+      { english: 'How much is this shirt?', answer: 'このシャツは{いくら|なん円[えん]}{ですか|か}' },
       { english: 'That book over there is 3000 yen.', answer: 'あの本[ほん]は{三[さん]千[ぜん]円[えん]|3000円[えん]}{です|だ}' },
       { english: 'That umbrella is 2000 yen.', answer: 'そのかさは{二[に]千[せん]円[えん]|2000円[えん]}{です|だ}' },
       { english: 'Which bag is 3000 yen?', answer: 'どのかばんが三[さん]千[ぜん]円[えん]{ですか|か}' },
@@ -35,7 +35,7 @@ export const genki02Lessons: TranslateSessionData[] = [
     id: 'genki2-4',
     title: 'だれの Noun',
     sentenceData: [
-      { english: 'Whose bag is this?', answer: 'これはだれのかばん{ですか|か}' },
+      { english: 'Whose umbrella is this?', answer: 'これはだれのかさ{ですか|か}' },
       { english: 'Whose dictionary is that?', answer: 'それはだれの辞[じ]書[しょ]{ですか|か}' },
       { english: 'Whose book is that over there?', answer: 'あれはだれの本[ほん]{ですか|か}' },
       { english: 'Whose telephone is this?', answer: 'これはだれの電[でん]話[わ]{ですか|か}' },

@@ -52,7 +52,7 @@ export const genki18Lessons: TranslateSessionData[] = [
       { english: 'I wish I had bought that book.', answer: 'あの本[ほん]を買[か]えばよかったです' },
       { english: 'I wish I had studied more.', answer: 'もっと勉[べん]強[きょう]すればよかったです' },
       { english: 'I wish I hadn\'t gone.', answer: '行[い]かなければよかったです' },
-      { english: 'I wish I had brought an umbrella.', answer: '傘[かさ]を持[も]って行[い]けばよかったです' },
+      { english: 'I wish I had brought my wallet.', answer: '財[さい]布[ふ]を持[も]って行[い]けばよかったです' },
       { english: 'I wish I hadn\'t said such a thing.', answer: 'あんなことを言[い]わなければよかったです' },
     ],
   },

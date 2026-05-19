@@ -6,7 +6,7 @@ export const genki14Lessons: TranslateSessionData[] = [
     title: 'ほしい',
     sentenceData: [
       { english: 'Right now, I want a car.', answer: '今[いま]、車[くるま]がほしい{です|です。}' },
-      { english: 'I want a new computer.', answer: '新[あたら]しいパソコンがほしい{です|です。}' },
+      { english: 'I want a new phone.', answer: '新[あたら]しい携[けい]帯[たい]がほしい{です|です。}' },
       { english: 'When I was a child, I wanted a dog.', answer: '子[こ]どもの時[とき]、犬[いぬ]がほしかった{です|です。}' },
       { english: 'I want a lot of friends.', answer: '友[とも]達[だち]がたくさんほしい{です|です。}' },
       { english: "I don't want anything right now.", answer: '今[いま]、何[なに]もほしくない{です|です。|ありません|ありません。}' },

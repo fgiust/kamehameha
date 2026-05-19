@@ -38,7 +38,7 @@ export const genki17Lessons: TranslateSessionData[] = [
     id: 'genki17-4',
     title: '～なくてもいいです',
     sentenceData: [
-      { english: 'You do not need to take off your shoes.', answer: '靴[くつ]を脱[ぬ]がなくてもいいです' },
+      { english: 'You do not need to bring an umbrella.', answer: '傘[かさ]を持[も]ってこなくてもいいです' },
       { english: 'You do not need to come to school tomorrow.', answer: '明日[あした]学[がっ]校[こう]に来[こ]なくてもいいです' },
       { english: 'You do not need to pay.', answer: 'お金[かね]を払[はら]わなくてもいいです' },
       { english: 'You do not need to hurry.', answer: '急[いそ]がなくてもいいです' },

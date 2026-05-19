@@ -17,7 +17,7 @@ export const genki06Lessons: TranslateSessionData[] = [
     title: '～てもいいです',
     sentenceData: [
       { english: 'You may look at the textbook.', answer: '教[きょう]科[か]書[しょ]を見[み]てもいいです' },
-      { english: 'May I go to the restroom?', answer: 'トイレに行[い]ってもいいですか' },
+      { english: 'May I go home early?', answer: '早[はや]く帰[かえ]ってもいいですか' },
       { english: 'May I take a picture here?', answer: 'ここで写[しゃ]真[しん]を撮[と]ってもいいですか' },
       { english: 'You may watch TV.', answer: 'テレビを見[み]てもいいです' },
       { english: 'May I borrow this book?', answer: 'この本[ほん]を借[か]りてもいいですか' },
@@ -27,7 +27,7 @@ export const genki06Lessons: TranslateSessionData[] = [
     id: 'genki6-4',
     title: '～てはいけません',
     sentenceData: [
-      { english: 'You must not take pictures here.', answer: 'ここで写[しゃ]真[しん]を撮[と]ってはいけません' },
+      { english: 'You must not talk on the phone here.', answer: 'ここで電[でん]話[わ]をしてはいけません' },
       { english: 'You must not sleep in class.', answer: 'クラスで寝[ね]てはいけません' },
       { english: 'You must not smoke.', answer: 'たばこを吸[す]ってはいけません' },
       { english: 'You must not talk in the library.', answer: '図[と]書[しょ]館[かん]で話[はな]してはいけません' },
@@ -61,7 +61,7 @@ export const genki06Lessons: TranslateSessionData[] = [
     title: '～ましょうか',
     sentenceData: [
       { english: 'Shall I do it?', answer: '私[わたし]がやりましょうか' },
-      { english: 'Shall I open the window?', answer: '窓[まど]を開[あ]けましょうか' },
+      { english: 'Shall I close the door?', answer: 'ドアを閉[し]めましょうか' },
       { english: 'Shall I turn off the lights?', answer: '電[でん]気[き]を消[け]しましょうか' },
       { english: 'Shall I carry your baggage?', answer: '荷[に]物[もつ]を持[も]ちましょうか' },
       { english: 'Shall I help you?', answer: '手[て]伝[つだ]いましょうか' },

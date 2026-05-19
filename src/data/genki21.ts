@@ -16,7 +16,7 @@ export const genki21Lessons: TranslateSessionData[] = [
     id: 'genki21-2',
     title: '～てある',
     sentenceData: [
-      { english: 'The window has been kept open.', answer: '窓[まど]が開[あ]けてあります' },
+      { english: 'The door has been left open.', answer: 'ドアが開[あ]けてあります' },
       { english: 'A book has been put on the table.', answer: 'テーブルの上[うえ]に本[ほん]が置[お]いてあります' },
       { english: 'Letters have been written on the blackboard.', answer: '黒[こく]板[ばん]に字[じ]が書[か]いてあります' },
       { english: 'The beer has been chilled.', answer: 'ビールが冷[ひや]やしてあります' },
@@ -38,7 +38,7 @@ export const genki21Lessons: TranslateSessionData[] = [
     id: 'genki21-4',
     title: 'Adjective + する',
     sentenceData: [
-      { english: 'I made the room clean.', answer: '部[へ]屋[や]をきれいにしました' },
+      { english: 'I made the room quiet.', answer: '部[へ]屋[や]を静[しず]かにしました' },
       { english: 'Please make the TV volume smaller.', answer: 'テレビの音[おと]を小[ちい]さくしてください' },
       { english: 'I want to make my hair short.', answer: '髪[かみ]を短[みじか]くしたいです' },
       { english: 'Will you make it cheaper?', answer: 'もっと安[やす]くしてくれませんか' },

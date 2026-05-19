@@ -27,8 +27,8 @@ export const genki07Lessons: TranslateSessionData[] = [
     id: 'genki7-3',
     title: 'Te-forms for Joining Sentences',
     sentenceData: [
-      { english: 'The food at that restaurant is inexpensive and delicious.', answer: 'あのレストランの食[た]べ物[もの]は安[やす]くて、おいしいです' },
-      { english: 'The hotel was clean, and we were happy.', answer: 'ホテルはきれいで、よかったです' },
+      { english: 'The food at that cafe is cheap and spicy.', answer: 'あのカフェの食[た]べ物[もの]は安[やす]くて、辛[から]いです' },
+      { english: 'The hotel was quiet, and I slept well.', answer: 'ホテルは静[しず]かで、よく寝[ね]ました' },
       { english: 'Professor Yamashita is Japanese and he is about fifty years old.', answer: '山[やま]下[した]先[せん]生[せい]は日[に]本[ほん]人[じん]で、五[ご]十[じゅう]歳[さい]ぐらいです' },
       { english: 'This book is interesting and cheap.', answer: 'この本[ほん]は面[おも]白[しろ]くて、安[やす]いです' },
       { english: 'My room is small and old.', answer: '私[わたし]の部[へ]屋[や]は狭[せま]くて、古[ふる]いです' },
@@ -38,7 +38,7 @@ export const genki07Lessons: TranslateSessionData[] = [
     id: 'genki7-4',
     title: 'Verb Stem + に行く',
     sentenceData: [
-      { english: 'I went to a department store to buy a bag.', answer: 'デパートにかばんを買[か]いに行[い]きました' },
+      { english: 'I went to the bookstore to buy a dictionary.', answer: '本[ほん]屋[や]に辞[じ]書[しょ]を買[か]いに行[い]きました' },
       { english: 'Mary came to Japan to study Japanese.', answer: 'メアリーさんは日[に]本[ほん]に日[に]本[ほん]語[ご]を勉[べん]強[きょう]しに来[き]ました' },
       { english: 'I will return to see my friends on Sunday.', answer: '日[にち]曜[よう]日[び]に友[とも]達[だち]に会[あ]いに帰[かえ]ります' },
       { english: 'I will go to the sea to swim.', answer: '{私[わたし]は|}海[うみ]に泳[およ]ぎに行[い]きます' },

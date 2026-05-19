@@ -16,9 +16,9 @@ export const genki22Lessons: TranslateSessionData[] = [
     id: 'genki22-2',
     title: 'Verb Stem + なさい',
     sentenceData: [
-      { english: 'Go to sleep early.', answer: '早[はや]く寝[ね]なさい' },
+      { english: 'Go home early.', answer: '早[はや]く帰[かえ]りなさい' },
       { english: 'Do your homework.', answer: '宿[しゅく]題[だい]をしなさい' },
-      { english: 'Eat your vegetables.', answer: '野菜[やさい]を食[た]べなさい' },
+      { english: 'Eat your breakfast.', answer: '朝[あさ]ご飯[はん]を食[た]べなさい' },
       { english: 'Be quiet.', answer: '静[しず]かにしなさい' },
       { english: 'Read this book.', answer: 'この本[ほん]を読[よ]みなさい' },
     ],

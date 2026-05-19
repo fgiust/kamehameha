@@ -6,7 +6,7 @@ export const genki09Lessons: TranslateSessionData[] = [
     title: 'Qualifying Nouns with Verb and Adjectives',
     sentenceData: [
       { english: 'This is the book I read yesterday.', answer: 'これは私[わたし]がきのう読[よ]んだ本[ほん]です' },
-      { english: 'Who is the person taking pictures over there?', answer: 'あそこで写[しゃ]真[しん]を撮[と]っている人[ひと]はだれですか' },
+      { english: 'Who is the person reading a book over there?', answer: 'あそこで本[ほん]を読[よ]んでいる人[ひと]はだれですか' },
       { english: 'People who play sports every day are healthy.', answer: '毎日[まいにち]スポーツをする人[ひと]は元[げん]気[き]です' },
       { english: 'I like people who don\'t smoke.', answer: 'たばこを吸[す]わない人[ひと]が好[す]きです' },
       { english: 'That is the bag that Mary bought.', answer: 'あれはメアリーさんが買[か]ったかばんです' },
@@ -28,7 +28,7 @@ export const genki09Lessons: TranslateSessionData[] = [
     title: '～から',
     sentenceData: [
       { english: 'I will study, because there is a test tomorrow.', answer: '明日[あした]テストがあるから、勉[べん]強[きょう]します' },
-      { english: 'We didn\'t go out, because it was cold.', answer: '寒[さむ]かったから、出[で]かけませんでした' },
+      { english: 'We didn\'t go out, because it was raining.', answer: '雨[あめ]が降[ふ]っていたから、出[で]かけませんでした' },
       { english: 'I eat it every day, because I like it.', answer: '好[す]きだから、毎日[まいにち]食[た]べます' },
       { english: 'I cannot buy it, because I don\'t have money.', answer: 'お金[かね]がないから、買[か]えません' },
       { english: 'Let\'s take a walk, because the weather is nice.', answer: 'いい天[てん]気[き]だから、散[さん]歩[ぽ]しましょう' },

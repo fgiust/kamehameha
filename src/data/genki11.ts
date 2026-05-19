@@ -27,7 +27,7 @@ export const genki11Lessons: TranslateSessionData[] = [
     id: 'genki11-3',
     title: '～ことがある',
     sentenceData: [
-      { english: 'I have had the experience of climbing Mt. Fuji.', answer: '{私[わたし]は|}富[ふ]士[じ]山[さん]に登[のぼ]ったことがあります' },
+      { english: 'I have eaten sushi before.', answer: '{私[わたし]は|}寿[す]司[し]を食[た]べたことがあります' },
       { english: 'Have you ever been to Japan?', answer: '日[に]本[ほん]に行[い]ったことがありますか' },
       { english: 'No, I have never been.', answer: 'いいえ、行[い]ったことがありません' },
       { english: 'He has eaten French food before.', answer: '彼[かれ]はフレンチを食[た]べたことがあります' },

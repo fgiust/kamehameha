@@ -17,8 +17,8 @@ export const genki12Lessons: TranslateSessionData[] = [
     title: '～すぎる',
     sentenceData: [
       { english: 'I watched TV too much yesterday.', answer: 'きのうはテレビを見[み]すぎました' },
-      { english: 'This book is too expensive.', answer: 'この本[ほん]は高[たか]すぎます' },
-      { english: 'This town is too quiet.', answer: 'この町[まち]は静[しず]かすぎます' },
+      { english: 'This book is too difficult.', answer: 'この本[ほん]は難[むずか]しすぎます' },
+      { english: 'This town is too noisy.', answer: 'この町[まち]はうるさすぎます' },
       { english: 'I ate too much dinner.', answer: '晩[ばん]ご飯[はん]を食[た]べすぎました' },
       { english: 'He works too much.', answer: '彼[かれ]は働[はたら]きすぎます' },
     ],
@@ -60,7 +60,7 @@ export const genki12Lessons: TranslateSessionData[] = [
     id: 'genki12-6',
     title: '～でしょう',
     sentenceData: [
-      { english: 'It will probably rain tomorrow.', answer: '明日[あした]は雨[あめ]が降[ふ]るでしょう' },
+      { english: 'It will probably snow tomorrow.', answer: '明日[あした]は雪[ゆき]が降[ふ]るでしょう' },
       { english: 'That teacher\'s class is probably interesting.', answer: 'あの先[せん]生[せい]のクラスは面[おも]白[しろ]いでしょう' },
       { english: 'He probably understands Japanese.', answer: '彼[かれ]は日[に]本[ほん]語[ご]が分[わ]かるでしょう' },
       { english: 'Will this exam probably be difficult?', answer: 'この試[し]験[けん]は難[むずか]しいでしょうか' },

@@ -5,7 +5,7 @@ export const genki08Lessons: TranslateSessionData[] = [
     id: 'genki8-3',
     title: '～と思います/～と言ってました',
     sentenceData: [
-      { english: 'I think Takeshi likes Mary.', answer: 'たけしさんはメアリーさんが好[す]きだと思[おも]います' },
+      { english: 'I think Takeshi likes soccer.', answer: 'たけしさんはサッカーが好[す]きだと思[おも]います' },
       { english: 'I think it will rain tomorrow.', answer: '{私[わたし]は|}明日[あした]雨[あめ]が降[ふ]ると思[おも]います' },
       { english: 'Mary said that the Japanese class is difficult.', answer: 'メアリーさんは日[に]本[ほん]語[ご]のクラスは難[むずか]しいと言[い]っていました' },
       { english: 'Robert said he would go to Japan.', answer: 'ロバートさんは日[に]本[ほん]に行[い]くと言[い]っていました' },
@@ -16,7 +16,7 @@ export const genki08Lessons: TranslateSessionData[] = [
     id: 'genki8-4',
     title: '～ないでください',
     sentenceData: [
-      { english: 'Please don\'t take pictures here.', answer: 'ここで写[しゃ]真[しん]を撮[と]らないでください' },
+      { english: 'Please don\'t eat here.', answer: 'ここで食[た]べないでください' },
       { english: 'Please don\'t look at me.', answer: '私[わたし]を見[み]ないでください' },
       { english: 'Please don\'t go to school today.', answer: '今日[きょう]は学[がっ]校[こう]に行[い]かないでください' },
       { english: 'Please don\'t speak in English.', answer: '英[えい]語[ご]で話[はな]さないでください' },
@@ -51,7 +51,7 @@ export const genki08Lessons: TranslateSessionData[] = [
     sentenceData: [
       { english: 'The cat is eating something.', answer: '猫[ねこ]が何[なに]か食[た]べています' },
       { english: 'Did you do anything on the weekend?', answer: '週末[しゅうまつ]、何[なに]かしましたか' },
-      { english: 'No, I didn\'t do anything.', answer: 'いいえ、何[なに]もしませんでした' },
+      { english: 'No, I didn\'t do anything yesterday.', answer: 'いいえ、きのう何[なに]もしませんでした' },
       { english: 'I didn\'t eat anything today.', answer: '{私[わたし]は|}今日[きょう]何[なに]も食[た]べませんでした' },
       { english: 'Let\'s drink something.', answer: '何[なに]か飲[の]みましょう' },
     ],
