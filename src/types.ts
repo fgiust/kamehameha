@@ -95,7 +95,7 @@ export const SETTINGS_KEYS = {
 // Genki lesson index structure for navigation
 export interface GenkiLessonLink {
   id: string;
-  title: string;
+  title?: string;
   type: 'sentence' | 'conjugation' | 'external' | 'vocab' | 'kanji';
   path?: string;
   externalUrl?: string;

@@ -1,29 +1,8 @@
 import { Link } from 'react-router-dom';
 import { ReactNode, useEffect, useState } from 'react';
-import { genkiChapters, getGenkiLessonById } from '../data/genkiLessons';
-import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL, GenkiChapter } from '../types';
-import adjectives from '../data/adjectives';
-import { adjectivesNounsSentenceData } from '../data/adjectivesNouns';
-import counters from '../data/counters';
-import { familyNamesData } from '../data/familyNamesData';
-import { naVsNoData } from '../data/naVsNoData';
-import { transitiveData } from '../data/transitiveData';
-import verbs from '../data/verbs';
+import { homeSections } from '../data/homeSections';
+import { APP_TITLE_PREFIX } from '../types';
 import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UPDATED_EVENT } from '../hooks/useSessionProgress';
-
-const VERB_TOTAL = verbs.length;
-const ADJ_TOTAL = adjectives.length;
-const COUNTERS_DEFAULT_TOTAL = counters.reduce((acc, c) => acc + c.readings.length + Object.keys(c.extraReadings ?? {}).length, 0);
-const COUNTERS_PEOPLE_TOTAL = (() => {
-  const c = counters.find(x => x.meaning[1] === 'people');
-  if (!c) return 0;
-  return c.readings.length + Object.keys(c.extraReadings ?? {}).length;
-})();
-const TRANSITIVE_TOTAL = transitiveData.length;
-const NA_VS_NO_TOTAL = naVsNoData.questions['な'].length + naVsNoData.questions['の'].length;
-const FAMILY_NAMES_TOTAL = familyNamesData.length;
-const ADJECTIVES_NOUNS_TOTAL = adjectivesNounsSentenceData.length;
-const COUNTING_THINGS_TOTAL = 30;
 
 function buildMiniSegments(persistKey: string, totalSegments: number) {
   const total = Math.max(1, totalSegments);
@@ -34,37 +13,6 @@ function buildMiniSegments(persistKey: string, totalSegments: number) {
     out[i] = persisted[i] ?? 0;
   }
   return out;
-}
-
-function getDefaultTotalSegmentsForPath(path: string) {
-  if (path.startsWith('/genki/')) {
-    const id = path.slice('/genki/'.length);
-    const lesson = getGenkiLessonById(id);
-    if (lesson) return lesson.sentenceData.length;
-  }
-
-  if (path === '/randomize') return VERB_TOTAL;
-  if (/^\/(teform|causativeform|conditionalform|imperativeform|negativeform|passiveform|pastform|politeform|potentialform|provisionalform|volitionalform)$/.test(path)) {
-    return VERB_TOTAL;
-  }
-
-  if (path === '/adj-randomize') return ADJ_TOTAL;
-  if (/^\/adj-(naruform|conditionalform|negativeform|pastform|volitionalform)$/.test(path)) {
-    return ADJ_TOTAL;
-  }
-
-  if (path === '/counters') return COUNTERS_DEFAULT_TOTAL;
-  if (path === '/counters-people') return COUNTERS_PEOPLE_TOTAL;
-  if (path === '/counting-things') return COUNTING_THINGS_TOTAL;
-  if (path === '/days') return 31;
-  if (path === '/numbers') return DEFAULT_MASTERY_RANDOM_TOTAL;
-  if (path === '/time') return DEFAULT_MASTERY_RANDOM_TOTAL;
-  if (path === '/transitive') return TRANSITIVE_TOTAL;
-  if (path === '/na-vs-no') return NA_VS_NO_TOTAL;
-  if (path === '/family-names') return FAMILY_NAMES_TOTAL;
-  if (path === '/adjectives-nouns') return ADJECTIVES_NOUNS_TOTAL;
-
-  return 12;
 }
 
 function MiniProgressBar({ persistKey, defaultTotal }: { persistKey: string; defaultTotal: number }) {
@@ -106,7 +54,7 @@ function MiniProgressBar({ persistKey, defaultTotal }: { persistKey: string; def
 }
 
 function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: ReactNode; defaultTotal?: number }) {
-  const total = defaultTotal ?? getDefaultTotalSegmentsForPath(to);
+  const total = Math.max(1, defaultTotal ?? 12);
   return (
     <div className="link-card-stack">
       <Link to={to} className="link-card">{children}</Link>
@@ -119,26 +67,49 @@ function getGenkiBookLabel(lesson: number) {
   return lesson <= 12 ? 'Genki I' : 'Genki II';
 }
 
-function GenkiBlock({ chapters }: { chapters: GenkiChapter[] }) {
+function renderSection(section: (typeof homeSections)[number]) {
+  if (section.kind === 'grid') {
+    return (
+      <div key={section.id}>
+        <h2 className="section-title">{section.title}</h2>
+        <div className="link-grid">
+          {section.items.map(item => (
+            <HomeLinkCard key={item.id} to={item.to ?? '/'} defaultTotal={item.defaultTotal}>
+              {item.title}
+            </HomeLinkCard>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <>
-      {chapters.map(ch => (
+    <div key={section.id}>
+      <h2 className="genki-supp-title">{section.title}</h2>
+      <p className="genki-supp-desc">
+        {section.description[0]}
+        {' '}
+        {section.description[1]}
+        {' '}
+        {section.description[2]}
+      </p>
+      {section.chapters.map(ch => (
         <div key={ch.lesson}>
           <h3 className="section-title" style={{ marginTop: 18 }}>{getGenkiBookLabel(ch.lesson)} - Lesson {ch.lesson}</h3>
           <div className="link-grid">
-            {ch.links.map(link => (
-              link.path ? (
-                <HomeLinkCard key={link.id} to={link.path}>{link.title}</HomeLinkCard>
+            {ch.items.map(item => (
+              item.to ? (
+                <HomeLinkCard key={item.id} to={item.to} defaultTotal={item.defaultTotal}>{item.title}</HomeLinkCard>
               ) : (
-                <span key={link.id} className="link-card" style={{ opacity: 0.5 }}>
-                  {link.title} <span className="badge">Soon</span>
+                <span key={item.id} className="link-card" style={{ opacity: 0.5 }}>
+                  {item.title} <span className="badge">Soon</span>
                 </span>
               )
             ))}
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 
@@ -161,53 +132,7 @@ export default function HomePage() {
       <p className="home-tagline is-body">
         Powerful interactive training for grammar, vocabulary, and kanji. Charge, fire, level up. No mercy.
       </p>
-
-      <h2 className="section-title">Verb Conjugation Practice</h2>
-      <div className="link-grid">
-        <HomeLinkCard to="/teform">て-Form</HomeLinkCard>
-        <HomeLinkCard to="/causativeform">Causative Form</HomeLinkCard>
-        <HomeLinkCard to="/conditionalform">Conditional Form</HomeLinkCard>
-        <HomeLinkCard to="/imperativeform">Imperative Form</HomeLinkCard>
-        <HomeLinkCard to="/negativeform">Negative Form</HomeLinkCard>
-        <HomeLinkCard to="/passiveform">Passive Form</HomeLinkCard>
-        <HomeLinkCard to="/pastform">Past Form</HomeLinkCard>
-        <HomeLinkCard to="/politeform">Polite Form</HomeLinkCard>
-        <HomeLinkCard to="/potentialform">Potential Form</HomeLinkCard>
-        <HomeLinkCard to="/provisionalform">Provisional Form</HomeLinkCard>
-        <HomeLinkCard to="/volitionalform">Volitional Form</HomeLinkCard>
-        <HomeLinkCard to="/randomize">Randomized Forms</HomeLinkCard>
-      </div>
-
-      <h2 className="section-title">Adjective Conjugation Practice</h2>
-      <div className="link-grid">
-        <HomeLinkCard to="/adj-naruform">なる Form</HomeLinkCard>
-        <HomeLinkCard to="/adj-conditionalform">Conditional Form</HomeLinkCard>
-        <HomeLinkCard to="/adj-negativeform">Negative Form</HomeLinkCard>
-        <HomeLinkCard to="/adj-pastform">Past Form</HomeLinkCard>
-        <HomeLinkCard to="/adj-volitionalform">Volitional Form</HomeLinkCard>
-        <HomeLinkCard to="/adj-randomize">Randomized Forms</HomeLinkCard>
-      </div>
-
-      <h2 className="section-title">Other</h2>
-      <div className="link-grid">
-        <HomeLinkCard to="/counters">Counters</HomeLinkCard>
-        <HomeLinkCard to="/counting-things">Counting things</HomeLinkCard>
-        <HomeLinkCard to="/days">Days of the Month</HomeLinkCard>
-        <HomeLinkCard to="/numbers">Numbers</HomeLinkCard>
-        <HomeLinkCard to="/time">Time</HomeLinkCard>
-        <HomeLinkCard to="/transitive">Transitive / Intransitive pairs</HomeLinkCard>
-        <HomeLinkCard to="/na-vs-no">な vs の Adjectives</HomeLinkCard>
-        <HomeLinkCard to="/family-names">Common family names</HomeLinkCard>
-        <HomeLinkCard to="/adjectives-nouns">Adjectives + nouns</HomeLinkCard>
-      </div>
-
-      <h2 className="genki-supp-title">Genki supplementary exercises</h2>
-      <p className="genki-supp-desc">
-        Grammar exercises organized by Genki lesson topics.
-        This app does not reproduce any copyrighted content from the Genki textbooks.
-        The exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.
-      </p>
-      <GenkiBlock chapters={genkiChapters} />
+      {homeSections.map(renderSection)}
 
       <footer className="home-footer">
         <span className="home-footer-text">kamehameha v{__APP_VERSION__}</span>

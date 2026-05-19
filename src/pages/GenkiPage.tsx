@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { genkiChapters } from '../data/genkiLessons';
+import { genkiChapters, getGenkiLinkPath, getGenkiLinkTitle } from '../data/genkiLessons';
 import { GenkiChapter } from '../types';
 
 function getGenkiBookLabel(lesson: number) {
@@ -14,20 +14,24 @@ function ChapterSection({ chapters }: { chapters: GenkiChapter[] }) {
           <h3>{getGenkiBookLabel(ch.lesson)} — Lesson {ch.lesson}</h3>
           {ch.links.length > 0 ? (
             <ul className="genki-lesson-list">
-              {ch.links.map(link => (
-                <li key={link.id}>
-                  {link.path ? (
-                    <Link to={link.path}>
-                      {link.title}
-                    </Link>
-                  ) : (
-                    <span style={{ opacity: 0.5, padding: '10px 16px', display: 'block' }}>
-                      {link.title}
-                      <span className="badge" style={{ marginLeft: 8 }}>Soon</span>
-                    </span>
-                  )}
-                </li>
-              ))}
+              {ch.links.map(link => {
+                const path = getGenkiLinkPath(link);
+                const title = getGenkiLinkTitle(link);
+                return (
+                  <li key={link.id}>
+                    {path ? (
+                      <Link to={path}>
+                        {title}
+                      </Link>
+                    ) : (
+                      <span style={{ opacity: 0.5, padding: '10px 16px', display: 'block' }}>
+                        {title}
+                        <span className="badge" style={{ marginLeft: 8 }}>Soon</span>
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           ) : (
             <p style={{ color: 'var(--text-secondary)', fontSize: 14, padding: '8px 0' }}>
