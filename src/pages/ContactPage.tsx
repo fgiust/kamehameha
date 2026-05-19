@@ -57,6 +57,10 @@ export default function ContactPage() {
         </div>
       </div>
 
+      <p className="home-tagline is-body">
+        Suggestions, compliments, or concerns? Don’t hesitate to get in touch, I’d love to hear from you.
+      </p>
+
       <div className="card">
         <form onSubmit={submit} className="feedback-panel-form">
           {status && (
@@ -88,4 +92,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
