@@ -6,8 +6,6 @@ self.addEventListener('install', event => {
       '/index.html',
       '/manifest.webmanifest',
       '/favicon.svg',
-      '/kame.svg',
-      '/kame-red.svg',
     ]);
     await self.skipWaiting();
   })());
