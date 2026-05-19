@@ -21,7 +21,7 @@ import { Analytics } from "@vercel/analytics/next"
 
 function DarkModeToggle() {
   const [dark, setDark] = useState(() => {
-    try { return localStorage.getItem('theme') === 'dark'; } catch { return false; }
+    try { return localStorage.getItem('theme') !== 'light'; } catch { return true; }
   });
 
   useEffect(() => {
