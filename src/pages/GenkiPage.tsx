@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { genkiIChapters, genkiIIChapters, GenkiChapter } from '../data/genkiLessons';
+import { genkiIChapters, genkiIIChapters } from '../data/genkiLessons';
+import { GenkiChapter } from '../types';
 
 function ChapterSection({ chapters, sectionTitle }: { chapters: GenkiChapter[]; sectionTitle: string }) {
   return (

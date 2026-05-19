@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ReactNode, useEffect, useState } from 'react';
-import { genkiIChapters, genkiIIChapters, GenkiChapter, getGenkiLessonById } from '../data/genkiLessons';
-import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
+import { genkiIChapters, genkiIIChapters, getGenkiLessonById } from '../data/genkiLessons';
+import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL, GenkiChapter } from '../types';
 import adjectives from '../data/adjectives';
 import { adjectivesNounsSentenceData } from '../data/adjectivesNouns';
 import counters from '../data/counters';

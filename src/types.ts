@@ -91,6 +91,35 @@ export const SETTINGS_KEYS = {
   showEnglish: 'nihongo.showEnglish',
 } as const;
 
+
+// Genki lesson index structure for navigation
+export interface GenkiLessonLink {
+  id: string;
+  title: string;
+  type: 'sentence' | 'conjugation' | 'external' | 'vocab' | 'kanji';
+  path?: string;
+  externalUrl?: string;
+  beta?: boolean;
+  patreon?: boolean;
+}
+
+export interface GenkiChapter {
+  lesson: number;
+  links: GenkiLessonLink[];
+}
+
+
+// Genki lesson index structure for navigation
+export interface GenkiLessonLink {
+  id: string;
+  title: string;
+  type: 'sentence' | 'conjugation' | 'external' | 'vocab' | 'kanji';
+  path?: string;
+  externalUrl?: string;
+  beta?: boolean;
+  patreon?: boolean;
+}
+
 export const APP_TITLE_PREFIX = '';  // '亀 ';
 
 export const DEFAULT_MASTERY_RANDOM_TOTAL = 30;

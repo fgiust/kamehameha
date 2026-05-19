@@ -1,4 +1,4 @@
-import { SentenceItem } from '../types';
+import { GenkiChapter, SentenceItem } from '../types';
 import { genki01Lessons } from './genki01';
 import { genki02Lessons } from './genki02';
 import { genki03Lessons } from './genki03';
@@ -55,21 +55,6 @@ export const genkiLessons: GenkiLesson[] = [
   ...genki23Lessons,
 ];
 
-// Genki lesson index structure for navigation
-export interface GenkiLessonLink {
-  id: string;
-  title: string;
-  type: 'sentence' | 'conjugation' | 'external' | 'vocab' | 'kanji';
-  path?: string;
-  externalUrl?: string;
-  beta?: boolean;
-  patreon?: boolean;
-}
-
-export interface GenkiChapter {
-  lesson: number;
-  links: GenkiLessonLink[];
-}
 
 export const genkiIChapters: GenkiChapter[] = [
   {
