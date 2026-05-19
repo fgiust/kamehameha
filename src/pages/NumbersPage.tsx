@@ -7,6 +7,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
+import { useTranslation } from 'react-i18next';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -27,9 +28,9 @@ function pickOne(items: string[]) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
-const PAGE_TITLE = 'Numbers Practice';
-
 export default function NumbersPage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.numbers.title');
   const [digits, setDigits] = useState(5);
   const [reverse, setReverse] = useState(false);
 
@@ -121,8 +122,8 @@ export default function NumbersPage() {
   }, [pickNext]);
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language]);
 
   // Update feedback details globally
   useEffect(() => {
@@ -131,7 +132,11 @@ export default function NumbersPage() {
     const acceptedList = Array.isArray(accepted) ? accepted : [accepted];
 
     updateFeedbackDetails({
-      section: `${PAGE_TITLE} (${digits} Digits, Mode: ${reverse ? 'Hiragana -> Number' : 'Number -> Hiragana'})`,
+      section: t('numbers.feedbackSection', {
+        title: pageTitle,
+        digits,
+        mode: reverse ? t('numbers.modeHiraToNum') : t('numbers.modeNumToHira'),
+      }),
       question,
       correctAnswer: acceptedList.join(' / '),
       userAnswer: finalizeIME(userInput.trim()),
@@ -174,7 +179,7 @@ export default function NumbersPage() {
       setAnswerDisplay(currentNumber);
     } else {
       const list = Array.isArray(accepted) ? accepted : [accepted];
-      setAnswerDisplay(list.length > 1 ? list.join(' or ') : list[0] ?? '');
+      setAnswerDisplay(list.length > 1 ? list.join(` ${t('common.or')} `) : list[0] ?? '');
     }
 
     recordProgressAt(currentSlot, ok);
@@ -209,17 +214,17 @@ export default function NumbersPage() {
   return (
     <div className="app-container">
       <div className="page-actions">
-        <Link to="/" className="header-btn" aria-label="Back">&lt;</Link>
+        <Link to="/" className="header-btn" aria-label={t('common.back')}>&lt;</Link>
       </div>
 
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
       </div>
 
       <div className="card">
         <div className="exercise-container">
           <div className={`exercise-question ${reverse ? 'is-japanese' : ''}`} style={{ fontFamily: reverse ? 'Noto Sans JP, sans-serif' : 'Open Sans, sans-serif' }}>
-            {question || '...'}
+            {question || t('common.loading')}
           </div>
 
           <input
@@ -251,13 +256,13 @@ export default function NumbersPage() {
         <div className="options-panel">
           <div className="switches">
             <OptionToggle
-              label="Hiragana⇄Number"
+              label={t('numbers.reverseLabel')}
               checked={reverse}
               onChange={val => setReverse(val)}
             />
 
             <div className="switch-item">
-              <span className="switch-text">Digits: {digits}</span>
+              <span className="switch-text">{t('numbers.digits', { count: digits })}</span>
               <input
                 type="range"
                 min={1}

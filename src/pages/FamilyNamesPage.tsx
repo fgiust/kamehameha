@@ -8,6 +8,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import JapaneseText from '../components/JapaneseText';
+import { useTranslation } from 'react-i18next';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -23,9 +24,9 @@ function finalizeIME(input: string) {
   return input;
 }
 
-const PAGE_TITLE = 'Common family names';
-
 export default function FamilyNamesPage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.familyNames.title');
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [currentItem, setCurrentItem] = useState<ReadingItem | null>(null);
   const [isFinished, setIsFinished] = useState(false);
@@ -119,20 +120,20 @@ export default function FamilyNamesPage() {
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language, pageTitle]);
 
   // Update feedback details globally
   useEffect(() => {
     if (!currentItem || isFinished) return;
 
     updateFeedbackDetails({
-      section: PAGE_TITLE,
+      section: pageTitle,
       question: currentItem.question,
       correctAnswer: currentItem.answer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentItem, userInput, isFinished]);
+  }, [currentItem, userInput, isFinished, pageTitle]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -221,9 +222,9 @@ export default function FamilyNamesPage() {
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -234,7 +235,7 @@ export default function FamilyNamesPage() {
           </div>
           
           <div className="form-hint">
-            Write the reading in Hiragana
+            {t('familyNames.hint')}
           </div>
 
           <input
@@ -290,7 +291,7 @@ export default function FamilyNamesPage() {
 
       {prevAnswers.length > 0 && (
         <div className="card prev-answers">
-          <legend>Previous Answers</legend>
+          <legend>{t('common.previousAnswers')}</legend>
           {prevAnswers.slice(0, 20).map((a, i) => (
             <div key={i} className={`prev-answer-item ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
               <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>

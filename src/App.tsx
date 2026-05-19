@@ -20,8 +20,11 @@ import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
 import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
 import { Analytics } from '@vercel/analytics/react';
+import { useTranslation } from 'react-i18next';
+import { setAppLanguage } from './i18n';
 
 function DarkModeToggle() {
+  const { t } = useTranslation();
   const [dark, setDark] = useState(() => {
     try { return localStorage.getItem('theme') !== 'light'; } catch { return true; }
   });
@@ -32,8 +35,26 @@ function DarkModeToggle() {
   }, [dark]);
 
   return (
-    <button className="darkmode-toggle" onClick={() => setDark(d => !d)} title="Toggle dark mode">
+    <button className="darkmode-toggle" onClick={() => setDark(d => !d)} title={t('common.toggleDarkMode')}>
       {dark ? '☀️' : '🌙'}
+    </button>
+  );
+}
+
+function LanguageToggle() {
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
+  const next = lang === 'it' ? 'en' : 'it';
+  const currentLabel = lang === 'it' ? t('common.italian') : t('common.english');
+  const nextLabel = next === 'it' ? t('common.italian') : t('common.english');
+  return (
+    <button
+      className="lang-toggle"
+      onClick={() => void setAppLanguage(next)}
+      title={`${t('common.language')}: ${currentLabel}. ${t('common.switchLanguage')}: ${nextLabel}.`}
+      aria-label={t('common.switchLanguage')}
+    >
+      {lang.toUpperCase()}
     </button>
   );
 }
@@ -53,6 +74,7 @@ function AppShell() {
   return (
     <>
       <DarkModeToggle />
+      <LanguageToggle />
       {showFeedback && <FeedbackPanel />}
       <Routes>
         <Route path="/" element={<HomePage />} />

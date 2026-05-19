@@ -7,6 +7,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX } from '../types';
+import { useTranslation } from 'react-i18next';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -43,19 +44,19 @@ function getAnswers(counter: JapaneseCounter, num: number) {
   return Array.isArray(v) ? v : [v];
 }
 
-const PAGE_TITLE = 'Counters Practice';
-
 type Props = {
   peopleOnly?: boolean;
 };
 
 export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const peopleOnly = useMemo(() => {
     if (typeof peopleOnlyProp === 'boolean') return peopleOnlyProp;
     const params = new URLSearchParams(location.search);
     return params.get('people') === 'true';
   }, [location.search, peopleOnlyProp]);
+  const pageTitle = peopleOnly ? t('pages.countersPeople.title') : t('pages.counters.title');
 
   const peopleCounter = useMemo(() => counters.find(c => c.meaning[1] === 'people') ?? null, []);
   const prevPeopleOnlyRef = useRef<boolean>(peopleOnly);
@@ -208,20 +209,20 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   }, [pickNext]);
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language, pageTitle]);
 
   // Update feedback details globally
   useEffect(() => {
     if (!question) return;
 
     updateFeedbackDetails({
-      section: peopleOnly ? 'Counters (People)' : PAGE_TITLE,
-      question: `${question} (meaning: ${currentCounter ? currentCounter.meaning[0] : ''})`,
+      section: pageTitle,
+      question: t('counters.feedbackQuestion', { question, meaning: currentCounter ? currentCounter.meaning[0] : '' }),
       correctAnswer: accepted.join(' / '),
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [question, accepted, currentCounter, peopleOnly, userInput]);
+  }, [question, accepted, currentCounter, userInput, pageTitle, t]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -256,7 +257,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
       setInputState('incorrect');
     }
 
-    setAnswerDisplay(accepted.length > 1 ? accepted.join(' or ') : accepted[0] ?? '');
+    setAnswerDisplay(accepted.length > 1 ? accepted.join(` ${t('common.or')} `) : accepted[0] ?? '');
     recordProgress(String(currentQuestionIdx), ok);
     setAwaitingNext(true);
   };
@@ -299,17 +300,17 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   return (
     <div className="app-container">
       <div className="page-actions">
-        <Link to="/" className="header-btn" aria-label="Back">&lt;</Link>
+        <Link to="/" className="header-btn" aria-label={t('common.back')}>&lt;</Link>
       </div>
 
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
       </div>
 
       <div className="card">
         <div className="exercise-container">
           <div className="exercise-question" style={{ fontFamily: 'Open Sans, sans-serif' }}>
-            {question || '...'}
+            {question || t('common.loading')}
           </div>
 
           <input
@@ -369,7 +370,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
                   cursor: 'pointer',
                 }}
               >
-                {Object.values(enabled).every(v => v) ? 'Select None' : 'Select All'}
+                {Object.values(enabled).every(v => v) ? t('counters.selectNone') : t('counters.selectAll')}
               </button>
             </div>
           </div>

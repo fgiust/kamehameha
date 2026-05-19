@@ -3,6 +3,8 @@ import { ReactNode, useEffect, useState } from 'react';
 import { homeConfig } from '../data/homeSections';
 import { APP_TITLE_PREFIX } from '../types';
 import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UPDATED_EVENT } from '../hooks/useSessionProgress';
+import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
 
 function buildMiniSegments(persistKey: string, totalSegments: number) {
   const total = Math.max(1, totalSegments);
@@ -63,7 +65,7 @@ function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: Re
   );
 }
 
-function renderSection(section: (typeof homeConfig.sections)[number]) {
+function renderSection(section: (typeof homeConfig.sections)[number], t: TFunction) {
   const titleClassName = section.titleClassName ?? 'section-title';
   const descriptionClassName = section.descriptionClassName ?? 'genki-supp-desc';
   const titleLevel = section.titleLevel ?? 2;
@@ -92,7 +94,7 @@ function renderSection(section: (typeof homeConfig.sections)[number]) {
               <HomeLinkCard key={item.id} to={to} defaultTotal={defaultTotal}>{title}</HomeLinkCard>
             ) : (
               <span key={item.id} className="link-card" style={{ opacity: 0.5 }}>
-                {title} <span className="badge">Soon</span>
+                {title} <span className="badge">{t('common.soon')}</span>
               </span>
             );
           })}
@@ -105,9 +107,10 @@ function renderSection(section: (typeof homeConfig.sections)[number]) {
 const PAGE_TITLE = 'kamehameha!';
 
 export default function HomePage() {
+  const { t, i18n } = useTranslation();
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+  }, [i18n.language]);
 
   return (
     <div className="app-container">
@@ -116,19 +119,19 @@ export default function HomePage() {
         <span className="home-brand-name">{PAGE_TITLE}</span>
       </h1>
       <p className="home-tagline is-lead">
-        Charge your かめはめ波 and destroy your Japanese barriers!
+        {t('home.taglineLead')}
       </p>
       <p className="home-tagline is-body">
-        Powerful interactive training for grammar, vocabulary, and kanji. Charge, fire, level up. No mercy.
+        {t('home.taglineBody')}
       </p>
-      {homeConfig.sections.map(renderSection)}
+      {homeConfig.sections.map(s => renderSection(s, t))}
 
       <footer className="home-footer">
         <span className="home-footer-text">kamehameha v{__APP_VERSION__}</span>
         <span className="home-footer-sep">·</span>
-        <Link to="/disclaimer" className="home-footer-link">Disclaimer</Link>
+        <Link to="/disclaimer" className="home-footer-link">{t('common.disclaimer')}</Link>
         <span className="home-footer-sep">·</span>
-        <Link to="/contact" className="home-footer-link">Contact</Link>
+        <Link to="/contact" className="home-footer-link">{t('common.contact')}</Link>
 
         {/* <span className="home-footer-sep">·</span>
         <Link to="/diff-test" className="home-footer-link">TenshinDiff test page</Link> */}

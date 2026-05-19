@@ -2,16 +2,16 @@ import { useState, useEffect } from 'react';
 import { generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff } from '../engines/sentenceEngine';
 import { Link } from 'react-router-dom';
 import { APP_TITLE_PREFIX } from '../types';
-
-const PAGE_TITLE = 'TenshinDiff test page';
+import { useTranslation } from 'react-i18next';
 
 export default function DiffTestPage() {
+  const { t, i18n } = useTranslation();
   const [correct, setCorrect] = useState('{私[わたし]は|}図[と]書[しょ]館[かん]で{本[ほん]|教科書[きょうかしょ]}を読[よ]みます');
   const [user, setUser] = useState('図書館で教科書を読みます');
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + t('diffTest.title');
+  }, [i18n.language]);
 
   const parsedAlternatives = generateAnswers(parseAnswerTemplate(correct));
   const { ops } = pickBestDiff(user, parsedAlternatives);
@@ -53,15 +53,15 @@ export default function DiffTestPage() {
   return (
     <div className="app-container">
       <div className="page-actions">
-        <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+        <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
       </div>
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{t('diffTest.title')}</h1>
       </div>
       <div className="card">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', width: '100%' }}>
           <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: '100%' }}>
-            <div style={{ fontSize: 16, fontWeight: 'bold' }}>Correct Answer:</div>
+            <div style={{ fontSize: 16, fontWeight: 'bold' }}>{t('diffTest.correctAnswer')}</div>
             <input
               className="exercise-input"
               value={correct}
@@ -70,7 +70,7 @@ export default function DiffTestPage() {
             />
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: '100%' }}>
-            <div style={{ fontSize: 16, fontWeight: 'bold' }}>User Input:</div>
+            <div style={{ fontSize: 16, fontWeight: 'bold' }}>{t('diffTest.userInput')}</div>
             <input
               className="exercise-input"
               value={user}
@@ -99,12 +99,13 @@ export default function DiffTestPage() {
 
 
       <div style={{ marginTop: 18, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-        <div style={{ fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>TenshinDiff - Third Eye Analysis</div>
+        <div style={{ fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{t('diffTest.heading')}</div>
         <div>
-          TenshinDiff is a diff component specialized in matching Japanese sentences. It supports both kanji and kana representations, as well as alternative spellings for parts of a sentence.
+          {t('diffTest.body1')}
         </div>
         <div style={{ marginTop: 10 }}>
-          The target sentence can define kanji readings using square brackets and specify alternatives using curly braces with options separated by |. For example: {'{私[わたし]|僕[ぼく]}'}
+          {t('diffTest.body2')}{' '}
+          {'{私[わたし]|僕[ぼく]}'}
           .
         </div>
       </div>

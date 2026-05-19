@@ -7,12 +7,13 @@ import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
-
-const PAGE_TITLE = 'な vs の Adjectives';
+import { useTranslation } from 'react-i18next';
 
 const totalQuestions = naVsNoData.questions['な'].length + naVsNoData.questions['の'].length;
 
 export default function NaVsNoPage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.naVsNo.title');
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -106,19 +107,19 @@ export default function NaVsNoPage() {
   }, [newQuestion]);
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language, pageTitle]);
 
   // Update feedback details globally
   useEffect(() => {
     if (!question || isFinished) return;
     updateFeedbackDetails({
-      section: PAGE_TITLE,
+      section: pageTitle,
       question,
       correctAnswer: answer,
       userAnswer: status ? (status === 'correct' ? answer : (answer === 'な' ? 'の' : 'な')) : '',
     });
-  }, [question, answer, status, isFinished]);
+  }, [question, answer, status, isFinished, pageTitle]);
 
   const handleClick = useCallback((choice: string) => {
     if (isFinished) return;
@@ -168,9 +169,9 @@ export default function NaVsNoPage() {
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -181,7 +182,7 @@ export default function NaVsNoPage() {
           </div>
           
           <div className="form-hint">
-            Choose whether the adjective is more likely to use な or の
+            {t('naVsNo.hint')}
           </div>
 
           <div className="choices-container">
@@ -202,14 +203,14 @@ export default function NaVsNoPage() {
           </div>
 
           <div className={`answer-banner ${wait ? (status === 'correct' ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
-            {wait ? (status === 'correct' ? 'Correct!' : `Last Answer: ${answer}`) : '\u00A0'}
+            {wait ? (status === 'correct' ? t('naVsNo.correct') : t('naVsNo.lastAnswer', { answer })) : '\u00A0'}
           </div>
         </div>
 
         <div className="options-panel">
           <div className="switches">
             <OptionToggle
-              label="Furigana ⇧"
+              label={t('common.furigana')}
               checked={showFurigana}
               onChange={toggleFurigana}
             />
@@ -227,7 +228,7 @@ export default function NaVsNoPage() {
 
       {prevAnswers.length > 0 && (
         <div className="card prev-answers">
-          <legend>Previous Answers</legend>
+          <legend>{t('common.previousAnswers')}</legend>
           {prevAnswers.slice(0, 20).map((a, i) => (
             <div key={i} className={`prev-answer-item ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
               <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>

@@ -9,6 +9,7 @@ import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
+import { useTranslation } from 'react-i18next';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -24,9 +25,9 @@ function finalizeIME(input: string) {
   return input;
 }
 
-const PAGE_TITLE = 'Transitive / Intransitive pairs';
-
 export default function TransitivePage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.transitive.title');
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [currentPair, setCurrentPair] = useState<VerbPair | null>(null);
   const [askTransitive, setAskTransitive] = useState(true);
@@ -125,8 +126,8 @@ export default function TransitivePage() {
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language, pageTitle]);
 
   // Update feedback details globally
   useEffect(() => {
@@ -138,12 +139,20 @@ export default function TransitivePage() {
     const expectedTargetHiragana = targetWord.verb.replace(/\[.*?\]/g, (match) => match.slice(1, -1));
 
     updateFeedbackDetails({
-      section: PAGE_TITLE,
-      question: `${stripRuby(questionWord.verb)} (${questionWord.meaning}) - Mode: Ask ${askTransitive ? 'Transitive' : 'Intransitive'}`,
-      correctAnswer: `${expectedTargetHiragana} (${expectedTargetKanji}) - ${targetWord.meaning}`,
+      section: pageTitle,
+      question: t('transitive.feedbackQuestion', {
+        verb: stripRuby(questionWord.verb),
+        meaning: questionWord.meaning,
+        ask: askTransitive ? t('transitive.transitive') : t('transitive.intransitive'),
+      }),
+      correctAnswer: t('transitive.feedbackCorrectAnswer', {
+        kana: expectedTargetHiragana,
+        kanji: expectedTargetKanji,
+        meaning: targetWord.meaning,
+      }),
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentPair, askTransitive, userInput, isFinished]);
+  }, [currentPair, askTransitive, userInput, isFinished, pageTitle, t]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -202,8 +211,9 @@ export default function TransitivePage() {
 
     setDiffDisplay(targetWord.verb);
 
-    const promptText = askTransitive ? 'Transitive of: ' : 'Intransitive of: ';
-    const questionText = promptText + stripRuby(questionWord.verb);
+    const questionText = askTransitive
+      ? t('transitive.transitiveOf', { verb: stripRuby(questionWord.verb) })
+      : t('transitive.intransitiveOf', { verb: stripRuby(questionWord.verb) });
 
     setPrevAnswers(prev => [
       {
@@ -254,9 +264,9 @@ export default function TransitivePage() {
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -266,7 +276,7 @@ export default function TransitivePage() {
             <JapaneseText text={questionWord.verb} showFurigana={showFurigana} />
           </div>
           <div className="form-hint">
-            {askTransitive ? 'Transitive Form' : 'Intransitive Form'}
+            {askTransitive ? t('transitive.hintTransitive') : t('transitive.hintIntransitive')}
           </div>
 
           <div className="exercise-meta-row is-centered">
@@ -320,7 +330,7 @@ export default function TransitivePage() {
         <div className="options-panel">
           <div className="switches">
             <OptionToggle
-              label="Furigana ⇧"
+              label={t('common.furigana')}
               checked={showFurigana}
               onChange={toggleFurigana}
             />
@@ -338,7 +348,7 @@ export default function TransitivePage() {
 
       {prevAnswers.length > 0 && (
         <div className="card prev-answers">
-          <legend>Previous Answers</legend>
+          <legend>{t('common.previousAnswers')}</legend>
           {prevAnswers.slice(0, 20).map((a, i) => (
             <div key={i} className={`prev-answer-item ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
               <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>

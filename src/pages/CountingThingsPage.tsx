@@ -7,6 +7,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
+import { useTranslation } from 'react-i18next';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -391,9 +392,9 @@ function englishLabel(n: number, singular: string, plural: string) {
   return `${n} ${n === 1 ? singular : plural}`;
 }
 
-const PAGE_TITLE = 'Counting things';
-
 export default function CountingThingsPage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.countingThings.title');
   const [currentIdx, setCurrentIdx] = useState(0);
   const [question, setQuestion] = useState('');
   const [accepted, setAccepted] = useState<string[]>([]);
@@ -517,18 +518,18 @@ export default function CountingThingsPage() {
   }, [pickNext]);
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language, pageTitle]);
 
   useEffect(() => {
     if (!question || isFinished) return;
     updateFeedbackDetails({
-      section: PAGE_TITLE,
+      section: pageTitle,
       question,
       correctAnswer: accepted.length > 0 ? stripRuby(accepted[0]!) : '',
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [question, accepted, userInput, isFinished]);
+  }, [question, accepted, userInput, isFinished, pageTitle]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -653,9 +654,9 @@ export default function CountingThingsPage() {
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -664,7 +665,7 @@ export default function CountingThingsPage() {
           {!isFinished && (
             <>
               <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
-                {question || '...'}
+                {question || t('common.loading')}
               </div>
 
               <div className="exercise-input-block">

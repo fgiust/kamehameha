@@ -10,6 +10,7 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import KeyboardTip from '../components/KeyboardTip';
+import { useTranslation } from 'react-i18next';
 
 const formIds = ['adj-conditionalform', 'adj-naruform', 'adj-negativeform', 'adj-pastform', 'adj-volitionalform'];
 const formLabels: Record<string, string> = {
@@ -18,11 +19,6 @@ const formLabels: Record<string, string> = {
   'adj-negativeform': 'Negative',
   'adj-pastform': 'Past',
   'adj-volitionalform': 'Volitional',
-};
-
-const typeLabels = {
-  i: 'い-Adjective',
-  na: 'な-Adjective',
 };
 
 type GlobalSettings = {
@@ -55,9 +51,9 @@ function toRequestedFormHint(label: string) {
   return `${lower} form`;
 }
 
-const PAGE_TITLE = 'Randomized Adjective Forms';
-
 export default function AdjRandomizePage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.randomizeAdj.title');
   const [settings, setSettings] = useState<GlobalSettings>(() => {
     const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
     return {
@@ -204,8 +200,8 @@ export default function AdjRandomizePage() {
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language]);
 
   useEffect(() => {
     if (!currentWord || !currentFormKey || isFinished) return;
@@ -232,7 +228,7 @@ export default function AdjRandomizePage() {
     }
 
     updateFeedbackDetails({
-      section: `${formLabels[currentFormKey]} Form Adjective Practice (${hint})`,
+      section: t('randomizeAdj.feedbackSection', { form: formLabels[currentFormKey], hint }),
       question: currentQuestion,
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
@@ -339,10 +335,12 @@ export default function AdjRandomizePage() {
 
   const engine = currentFormKey ? adjEngines[currentFormKey] : null;
   const formHint = currentFormLabel ? toRequestedFormHint(currentFormLabel) : (engine ? getConjugationFormHint(engine, currentFlags) : '');
-  const displayedType = currentWord ? typeLabels[currentWord.type as keyof typeof typeLabels] : '';
+  const displayedType = currentWord
+    ? (currentWord.type === 'i' ? t('adjective.typeLabels.i') : t('adjective.typeLabels.na'))
+    : '';
 
   const questionNode = (() => {
-    if (!currentWord) return '...';
+    if (!currentWord) return t('common.loading');
     if (settings.reverseQA && engine) {
       const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
@@ -372,9 +370,9 @@ export default function AdjRandomizePage() {
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -455,35 +453,35 @@ export default function AdjRandomizePage() {
         <div className="options-panel">
           <div className="switches">
             <OptionToggle
-              label="Kanji"
+              label={t('common.kanji')}
               checked={settings.showKanji}
               onChange={val => updateSetting('showKanji', val)}
             />
             <OptionToggle
-              label="Furigana ⇧"
+              label={t('common.furigana')}
               checked={settings.showFurigana}
               disabled={!settings.showKanji}
               onChange={val => updateSetting('showFurigana', val)}
             />
             <OptionToggle
-              label="English"
+              label={t('common.english')}
               checked={settings.showEnglish}
               onChange={val => updateSetting('showEnglish', val)}
             />
             <OptionToggle
-              label="Type"
+              label={t('common.type')}
               checked={settings.showType}
               onChange={val => updateSetting('showType', val)}
             />
             <OptionToggle
-              label="Reverse Q-A"
+              label={t('common.reverseQA')}
               checked={settings.reverseQA}
               onChange={val => updateSetting('reverseQA', val)}
             />
           </div>
 
           <div className="options-divider" />
-          <div className="options-section-label">Forms:</div>
+          <div className="options-section-label">{t('common.forms')}</div>
 
           <div className="switches">
             {formIds.map(id => (
@@ -508,7 +506,7 @@ export default function AdjRandomizePage() {
 
       {prevAnswers.length > 0 && (
         <div className="card prev-answers">
-          <legend>Previous Answers</legend>
+          <legend>{t('common.previousAnswers')}</legend>
           {prevAnswers.slice(0, 20).map((a, i) => (
             <div key={i} className={`prev-answer-item ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
               <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>

@@ -7,6 +7,7 @@ import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import KeyboardTip from './KeyboardTip';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   title: string;
@@ -43,6 +44,7 @@ function isLatinImeChar(ch: string) {
 }
 
 export default function SentenceExercise({ title, sentenceData, backPath, persistKey }: Props) {
+  const { t } = useTranslation();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
@@ -280,7 +282,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
       <div className="page-header">
         <h1 className="page-heading">{title}</h1>
         <div className="page-actions">
-          <Link to={backPath} className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to={backPath} className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -288,7 +290,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
         <div className="exercise-container">
           {!isFinished && (
             <>
-              <div className="exercise-prompt">Translate into Japanese:</div>
+              <div className="exercise-prompt">{t('sentenceExercise.promptTranslate')}</div>
               <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
                 {englishPrompt}
               </div>
@@ -386,7 +388,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
 
       {prevAnswers.length > 0 && (
         <div className="card prev-answers prev-answers-diff">
-          <legend>Previous Answers</legend>
+          <legend>{t('common.previousAnswers')}</legend>
           {prevAnswers.slice(0, 20).map((a, i) => (
             <div key={i} className={`prev-answer-item prev-answer-item-diff ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
               <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>

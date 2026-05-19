@@ -8,6 +8,7 @@ import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from './OptionToggle';
 import KeyboardTip from './KeyboardTip';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   title: string;
@@ -72,6 +73,7 @@ function finalizeIME(input: string) {
 }
 
 export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, backPath, persistKey }: Props) {
+  const { t } = useTranslation();
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [randomFlags, setRandomFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [settings, setSettings] = useState<GlobalSettings>(() => {
@@ -403,7 +405,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const formHint = getConjugationFormHint(engine, effectiveFlags);
 
   const questionNode = (() => {
-    if (!currentWord) return '...';
+    if (!currentWord) return t('common.loading');
 
     if (settings.reverseQA) {
       const dictKana = currentWord.kana;
@@ -443,7 +445,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       <div className="page-header">
         <h1 className="page-heading">{title}</h1>
         <div className="page-actions">
-          <Link to={backPath} className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to={backPath} className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -523,35 +525,35 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
         <div className="options-panel">
           <div className="switches">
             <OptionToggle
-              label="Kanji"
+              label={t('common.kanji')}
               checked={settings.showKanji}
               onChange={val => updateSetting('showKanji', val)}
             />
             <OptionToggle
-              label="Furigana ⇧"
+              label={t('common.furigana')}
               checked={settings.showFurigana}
               disabled={!settings.showKanji}
               onChange={val => updateSetting('showFurigana', val)}
             />
             <OptionToggle
-              label="English"
+              label={t('common.english')}
               checked={settings.showEnglish}
               onChange={val => updateSetting('showEnglish', val)}
             />
             <OptionToggle
-              label="Type"
+              label={t('common.type')}
               checked={settings.showType}
               onChange={val => updateSetting('showType', val)}
             />
             <OptionToggle
-              label="Reverse Q-A"
+              label={t('common.reverseQA')}
               checked={settings.reverseQA}
               onChange={val => updateSetting('reverseQA', val)}
             />
           </div>
 
           <div className="options-divider" />
-          <div className="options-section-label">Forms:</div>
+          <div className="options-section-label">{t('common.forms')}</div>
 
           <div className="switches">
 
@@ -566,7 +568,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
             ))}
 
             <OptionToggle
-              label="Randomize"
+              label={t('common.randomize')}
               checked={settings.randomizeForm}
               onChange={next => {
                 updateSetting('randomizeForm', next);
@@ -587,7 +589,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
       {prevAnswers.length > 0 && (
         <div className="card prev-answers">
-          <legend>Previous Answers</legend>
+          <legend>{t('common.previousAnswers')}</legend>
           {prevAnswers.slice(0, 20).map((a, i) => (
             <div key={i} className={`prev-answer-item ${a.isCorrect ? 'is-correct' : 'is-incorrect'}`}>
               <span className="icon">{a.isCorrect ? '✓' : '✗'}</span>

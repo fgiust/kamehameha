@@ -6,6 +6,7 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
+import { useTranslation } from 'react-i18next';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -21,9 +22,9 @@ function finalizeIME(input: string) {
   return input;
 }
 
-const PAGE_TITLE = 'Time Practice';
-
 export default function TimePage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.time.title');
   const [currentSlot, setCurrentSlot] = useState<number>(0);
   const [question, setQuestion] = useState('');
   const [accepted, setAccepted] = useState<string[]>([]);
@@ -112,15 +113,15 @@ export default function TimePage() {
   }, [pickNext]);
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language]);
 
   // Update feedback details globally
   useEffect(() => {
     if (!question || isFinished) return;
 
     updateFeedbackDetails({
-      section: PAGE_TITLE,
+      section: pageTitle,
       question,
       correctAnswer: accepted.join(' / '),
       userAnswer: finalizeIME(userInput.trim()),
@@ -158,7 +159,7 @@ export default function TimePage() {
       setIncorrect(c => c + 1);
       setInputState('incorrect');
     }
-    setAnswerDisplay(accepted.join(' or '));
+    setAnswerDisplay(accepted.join(` ${t('common.or')} `));
     recordProgressAt(currentSlot, ok);
     setAwaitingNext(true);
   };
@@ -191,17 +192,17 @@ export default function TimePage() {
   return (
     <div className="app-container">
       <div className="page-actions">
-        <Link to="/" className="header-btn" aria-label="Back">&lt;</Link>
+        <Link to="/" className="header-btn" aria-label={t('common.back')}>&lt;</Link>
       </div>
 
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
       </div>
 
       <div className="card">
         <div className="exercise-container">
           <div className="exercise-question" style={{ fontFamily: 'Open Sans, sans-serif' }}>
-            {question || '...'}
+            {question || t('common.loading')}
           </div>
 
           <input

@@ -10,6 +10,7 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import KeyboardTip from '../components/KeyboardTip';
 import OptionToggle from '../components/OptionToggle';
+import { useTranslation } from 'react-i18next';
 
 const formIds = [
   'causativeform', 'conditionalform', 'imperativeform', 'negativeform',
@@ -61,9 +62,9 @@ function toRequestedFormHint(label: string) {
   return `${lower} form`;
 }
 
-const PAGE_TITLE = 'Randomized Verb Forms';
-
 export default function RandomizePage() {
+  const { t, i18n } = useTranslation();
+  const pageTitle = t('pages.randomizeVerb.title');
   const [settings, setSettings] = useState<GlobalSettings>(() => {
     const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
     return {
@@ -211,8 +212,8 @@ export default function RandomizePage() {
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + pageTitle;
+  }, [i18n.language]);
 
   useEffect(() => {
     if (!currentWord || !currentForm || isFinished) return;
@@ -239,7 +240,7 @@ export default function RandomizePage() {
     }
 
     updateFeedbackDetails({
-      section: `${formLabels[currentForm]} Form Practice (${hint})`,
+      section: t('randomizeVerb.feedbackSection', { form: formLabels[currentForm], hint }),
       question: currentQuestion,
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
@@ -349,7 +350,7 @@ export default function RandomizePage() {
   const displayedType = currentWord ? typeLabels[currentWord.type as keyof typeof typeLabels] : '';
 
   const questionNode = (() => {
-    if (!currentWord) return '...';
+    if (!currentWord) return t('common.loading');
     if (settings.reverseQA && engine) {
       const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
@@ -379,9 +380,9 @@ export default function RandomizePage() {
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
@@ -490,7 +491,7 @@ export default function RandomizePage() {
           </div>
 
           <div className="options-divider" />
-          <div className="options-section-label">Forms:</div>
+          <div className="options-section-label">{t('common.forms')}</div>
 
           <div className="switches">
             {formIds.map(id => (

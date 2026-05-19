@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { homeConfig } from '../data/homeSections';
+import { useTranslation } from 'react-i18next';
 
 type GenkiChapterSection = {
   lesson: number;
@@ -8,6 +9,7 @@ type GenkiChapterSection = {
 };
 
 function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
+  const { t } = useTranslation();
   return (
     <div className="genki-section">
       {chapters.map(ch => (
@@ -28,7 +30,7 @@ function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
                     ) : (
                       <span style={{ opacity: 0.5, padding: '10px 16px', display: 'block' }}>
                         {title}
-                        <span className="badge" style={{ marginLeft: 8 }}>Soon</span>
+                        <span className="badge" style={{ marginLeft: 8 }}>{t('common.soon')}</span>
                       </span>
                     )}
                   </li>
@@ -37,7 +39,7 @@ function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
             </ul>
           ) : (
             <p style={{ color: 'var(--text-secondary)', fontSize: 14, padding: '8px 0' }}>
-              Content coming soon...
+              {t('common.contentComingSoon')}
             </p>
           )}
         </div>
@@ -47,6 +49,7 @@ function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
 }
 
 export default function GenkiPage() {
+  const { t } = useTranslation();
   const chapters: GenkiChapterSection[] = homeConfig.sections
     .filter(s => /^genki-\d+$/.test(s.id))
     .map(s => {
@@ -57,10 +60,10 @@ export default function GenkiPage() {
 
   return (
     <div className="app-container">
-      <Link to="/" className="back-btn">Home</Link>
-      <h1 className="page-heading">Genki Textbook Practice</h1>
+      <Link to="/" className="back-btn">{t('common.home')}</Link>
+      <h1 className="page-heading">{t('genkiPage.title')}</h1>
       <p style={{ color: 'var(--text-secondary)', marginBottom: 24, fontSize: 14, lineHeight: 1.6 }}>
-        Exercises organized by Genki lesson topics. This app does not reproduce Genki textbook content that is protected by copyright.
+        {t('genkiPage.description')}
       </p>
 
       <ChapterSection chapters={chapters} />

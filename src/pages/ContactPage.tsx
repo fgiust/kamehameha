@@ -1,26 +1,29 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { APP_TITLE_PREFIX } from '../types';
-
-const PAGE_TITLE = 'Contact';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactPage() {
+  const { t, i18n } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [submitLabel, setSubmitLabel] = useState('Send');
+  const submitLabel =
+    submitState === 'sending' ? t('contact.sending') :
+      submitState === 'success' ? t('contact.sent') :
+        submitState === 'error' ? t('contact.failed') :
+          t('contact.send');
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + t('common.contact');
+  }, [i18n.language]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitState === 'sending' || submitState === 'success') return;
 
     setSubmitState('sending');
-    setSubmitLabel('Sending...');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -35,47 +38,44 @@ export default function ContactPage() {
       const out = (await res.json()) as { success?: boolean; error?: string; message?: string };
       if (out.success) {
         setSubmitState('success');
-        setSubmitLabel('Message sent');
         setName('');
         setEmail('');
         setMessage('');
       } else {
         setSubmitState('error');
-        setSubmitLabel('Failed to send');
       }
     } catch {
       setSubmitState('error');
-      setSubmitLabel('Failed to send');
     }
   };
 
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{t('common.contact')}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
       <p className="home-tagline is-body">
-        Suggestions, compliments, or concerns? Don’t hesitate to get in touch, I’d love to hear from you.
+        {t('contact.intro')}
       </p>
 
       <div className="card">
         <form onSubmit={submit} className="feedback-panel-form">
           <div className="feedback-form-group">
-            <label>Name</label>
+            <label>{t('contact.name')}</label>
             <input value={name} onChange={e => setName(e.target.value)} required />
           </div>
 
           <div className="feedback-form-group">
-            <label>Email</label>
+            <label>{t('contact.email')}</label>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
           </div>
 
           <div className="feedback-form-group">
-            <label>Your message</label>
+            <label>{t('contact.message')}</label>
             <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={6} />
           </div>
 

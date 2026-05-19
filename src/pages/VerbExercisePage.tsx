@@ -2,14 +2,10 @@ import { useLocation } from 'react-router-dom';
 import ConjugationExercise from '../components/ConjugationExercise';
 import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import verbs from '../data/verbs';
-
-const typeLabels = {
-  u: 'う-Verb (Godan)',
-  ru: 'る-Verb (Ichidan)',
-  irr: 'Irregular Verb',
-};
+import { useTranslation } from 'react-i18next';
 
 export default function VerbExercisePage() {
+  const { t } = useTranslation();
   const location = useLocation();
   // Extract the form key from the URL path (e.g., /teform -> teform)
   const formKey = location.pathname.replace('/', '');
@@ -18,7 +14,7 @@ export default function VerbExercisePage() {
   if (!engine) {
     return (
       <div className="app-container">
-        <h1 className="page-heading">Exercise not found: {formKey}</h1>
+        <h1 className="page-heading">{t('errors.exerciseNotFound', { id: formKey })}</h1>
       </div>
     );
   }
@@ -28,10 +24,14 @@ export default function VerbExercisePage() {
   return (
     <ConjugationExercise
       key={formKey}
-      title={`${title} Practice`}
+      title={t('common.practiceTitle', { title })}
       wordData={verbs}
       engine={engine}
-      typeLabels={typeLabels}
+      typeLabels={{
+        u: t('verb.typeLabels.u'),
+        ru: t('verb.typeLabels.ru'),
+        irr: t('verb.typeLabels.irr'),
+      }}
       backPath="/"
       persistKey={location.pathname}
     />

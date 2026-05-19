@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { FeedbackDetails } from '../utils/feedback';
+import { useTranslation } from 'react-i18next';
 
 export default function FeedbackPanel() {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState<FeedbackDetails>({
     section: '',
@@ -71,17 +73,17 @@ export default function FeedbackPanel() {
 
       const result = await response.json();
       if (result.success) {
-        setMessage({ type: 'success', text: 'Feedback saved successfully!' });
+        setMessage({ type: 'success', text: t('feedbackPanel.saved') });
         setNotes('');
         setTimeout(() => {
           setIsOpen(false);
           setMessage(null);
         }, 1500);
       } else {
-        setMessage({ type: 'error', text: result.error || 'Failed to save feedback.' });
+        setMessage({ type: 'error', text: result.error || t('feedbackPanel.failed') });
       }
     } catch (err) {
-      const errorText = err instanceof Error ? err.message : 'Error communicating with dev server.';
+      const errorText = err instanceof Error ? err.message : t('feedbackPanel.networkError');
       setMessage({ type: 'error', text: errorText });
     } finally {
       setIsSubmitting(false);
@@ -94,10 +96,10 @@ export default function FeedbackPanel() {
       <button
         className={`feedback-tab ${isOpen ? 'is-active' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
-        title="Send Exercise Feedback"
-        aria-label="Feedback"
+        title={t('feedbackPanel.tabTitle')}
+        aria-label={t('common.feedback')}
       >
-        <span>🐞 Feedback</span>
+        <span>🐞 {t('common.feedback')}</span>
       </button>
 
       {/* Floating Panel Panel Container */}
@@ -107,7 +109,7 @@ export default function FeedbackPanel() {
           onClick={e => e.stopPropagation()}
         >
           <div className="feedback-panel-header">
-            <h3>Exercise Feedback</h3>
+            <h3>{t('feedbackPanel.heading')}</h3>
             <button className="close-btn" onClick={() => setIsOpen(false)}>×</button>
           </div>
 
@@ -119,52 +121,52 @@ export default function FeedbackPanel() {
             )}
 
             <div className="feedback-form-group">
-              <label>Section / Exercise</label>
+              <label>{t('feedbackPanel.section')}</label>
               <input
                 type="text"
                 value={details.section}
                 readOnly
-                placeholder="e.g. Days of the Month"
+                placeholder={t('feedbackPanel.sectionPlaceholder')}
               />
             </div>
 
             <div className="feedback-form-group">
-              <label>Question / Prompt</label>
+              <label>{t('feedbackPanel.question')}</label>
               <input
                 type="text"
                 value={details.question}
                 readOnly
-                placeholder="The active prompt/kanji"
+                placeholder={t('feedbackPanel.questionPlaceholder')}
               />
             </div>
 
             <div className="feedback-form-group">
-              <label>Correct Answer(s)</label>
+              <label>{t('feedbackPanel.correctAnswer')}</label>
               <input
                 type="text"
                 value={details.correctAnswer}
                 readOnly
-                placeholder="The expected correct response"
+                placeholder={t('feedbackPanel.correctAnswerPlaceholder')}
               />
             </div>
 
             <div className="feedback-form-group">
-              <label>Your Answer (optional)</label>
+              <label>{t('feedbackPanel.yourAnswer')}</label>
               <input
                 type="text"
                 value={details.userAnswer}
                 onChange={e => setDetails(prev => ({ ...prev, userAnswer: e.target.value }))}
-                placeholder="What was inputted"
+                placeholder={t('feedbackPanel.yourAnswerPlaceholder')}
               />
             </div>
 
             <div className="feedback-form-group">
-              <label>Notes / Issue Description</label>
+              <label>{t('feedbackPanel.notes')}</label>
               <textarea
                 ref={notesRef}
                 value={notes}
                 onChange={e => setNotes(e.target.value)}
-                placeholder="Describe the issue, missing alternative, spelling error, etc. in as much detail as possible..."
+                placeholder={t('feedbackPanel.notesPlaceholder')}
                 required
                 rows={4}
               />
@@ -175,7 +177,7 @@ export default function FeedbackPanel() {
               className="feedback-submit-btn"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Saving...' : 'Save Feedback'}
+              {isSubmitting ? t('feedbackPanel.saving') : t('feedbackPanel.save')}
             </button>
           </form>
         </div>

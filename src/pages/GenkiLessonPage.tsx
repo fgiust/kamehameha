@@ -1,16 +1,18 @@
 import { useParams } from 'react-router-dom';
 import SentenceExercise from '../components/SentenceExercise';
 import { getGenkiLessonById } from '../data/genkiLessons';
+import { useTranslation } from 'react-i18next';
 
 export default function GenkiLessonPage() {
+  const { t } = useTranslation();
   const { lessonId } = useParams<{ lessonId: string }>();
   const lesson = lessonId ? getGenkiLessonById(lessonId) : undefined;
 
   if (!lesson) {
     return (
       <div className="app-container">
-        <h1 className="page-heading">Lesson not found: {lessonId}</h1>
-        <p>This lesson has not been implemented yet.</p>
+        <h1 className="page-heading">{t('genkiLessonPage.notFoundTitle', { id: lessonId })}</h1>
+        <p>{t('genkiLessonPage.notFoundBody')}</p>
       </div>
     );
   }

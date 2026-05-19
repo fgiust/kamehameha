@@ -1,33 +1,37 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { APP_TITLE_PREFIX } from '../types';
-
-const PAGE_TITLE = 'Disclaimer';
+import { useTranslation } from 'react-i18next';
 
 export default function DisclaimerPage() {
+  const { t, i18n } = useTranslation();
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, []);
+    document.title = APP_TITLE_PREFIX + t('common.disclaimer');
+  }, [i18n.language]);
 
   return (
     <div className="app-container">
       <div className="page-header">
-        <h1 className="page-heading">{PAGE_TITLE}</h1>
+        <h1 className="page-heading">{t('common.disclaimer')}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label="Back">{'<'}</Link>
+          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
         </div>
       </div>
 
       <div className="card">
         <div style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
           <p>
-            This app was inspired by the excellent work of Steven Kraft (<a href="https://steven-kraft.com/projects/japanese/" target="_blank" rel="noreferrer">https://steven-kraft.com/projects/japanese/</a>), with the goal of providing a more up-to-date and interactive set of exercises for learners.
+            {t('disclaimer.p1')}{' '}
+            <a href="https://steven-kraft.com/projects/japanese/" target="_blank" rel="noreferrer">
+              https://steven-kraft.com/projects/japanese/
+            </a>
+            {t('disclaimer.p1b')}
           </p>
           <p style={{ marginTop: 12 }}>
-            All exercises included in this app are original and do not reproduce any copyrighted material. While the exercises are organized following the structure of the Genki textbooks for convenience, they are independently created and are not derived from or copied from the Genki books or workbooks.
+            {t('disclaimer.p2')}
           </p>
           <p style={{ marginTop: 12 }}>
-            Please note that, as this is an independent project created by a fellow learner, the content may contain occasional mistakes or inaccuracies. Feedback is highly appreciated: users are encouraged to report any errors or suggest improvements using the feedback tools available within the exercise pages.
+            {t('disclaimer.p3')}
           </p>
         </div>
       </div>
