@@ -17,7 +17,7 @@ import FamilyNamesPage from './pages/FamilyNamesPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
 import FeedbackPanel from './components/FeedbackPanel';
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from '@vercel/analytics/react';
 
 function DarkModeToggle() {
   const [dark, setDark] = useState(() => {
