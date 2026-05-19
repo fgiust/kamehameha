@@ -5,12 +5,12 @@ export const genki13Lessons: TranslateSessionData[] = [
     id: 'genki13-2',
     title: '～し',
     sentenceData: [
-      { english: "This restaurant is cheap, and is delicious, so it's very famous.", answer: 'このレストランは安[やす]い{し|し、}美[お]味[い]しい{し|し}[、|.]とても有[ゆう]名[めい]{です|です。}' },
+      { english: "This restaurant is cheap, and is delicious, so it's very famous.", answer: 'このレストランは安[やす]い{し|し、}美[お]味[い]しい{し|し}{、|.}とても有[ゆう]名[めい]{です|です。}' },
       { english: 'She is beautiful, intelligent, fashionable. I like her a lot.', answer: '彼[かの]女[じょ]は綺[き]麗[れい]だし、かしこいし、おしゃれだし、大[だい]好[す]き{です|です。|だ|だ。}' },
       { english: "It's cold and windy today, I don't feel like going out.", answer: '今日[きょう]は寒[さむ]いし、風[かぜ]が強[つよ]いし、出[で]かけたくない{な|な。}' },
-      { english: "Pedro is cool and sexy. He's perfect.", answer: 'ペドロはかっこいいし、セクシーだし、完[かん]璧[ぺき]{です|です。|だ|だ。}' },
-      { english: 'Professor Shota is good at teaching and he is kind. He is an amazing teacher.', answer: '翔[しょう]太[た]先[せん]生[せい]は教[おし]えるのが上[じょう]手[ず]だし、親[しん]切[せつ]だし、すばらしい先[せん]生[せい]{です|です。|だ|だ。}' },
-      { english: 'Yesterday was a good day because I went out with friends and the weather was good.', answer: '{昨[]日[]|きのう}は友[とも]達[だち]と出[で]かけたし、天[てん]気[き]がよかったし、いい日[ひ]でした{。|}' },
+      { english: "Pedro is cool and sexy. He's perfect.", answer: 'ペドロさんはかっこいいし、セクシーだし{、|.}完[かん]璧[ぺき]{です|です。|だ|だ。}' },
+      { english: 'Professor Shota is good at teaching and he is kind. He is an amazing teacher.', answer: '翔[しょう]太[た]先[せん]生[せい]は教[おし]えるのが上[じょう]手[ず]だし、親[しん]切[せつ]だし{、|.}すばらしい先[せん]生[せい]{です|です。|だ|だ。}' },
+      { english: 'Yesterday was a good day because I went out with friends and the weather was good.', answer: '{昨[]日[]|きのう}は友[とも]達[だち]と出[で]かけたし、天[てん]気[き]がよかったし{、|.}いい日[ひ]でした{。|}' },
     ],
   },
   {
