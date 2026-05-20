@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigationType } from 'react-router-dom';
-import { useLayoutEffect, useRef, useState, useEffect } from 'react';
+import { useLayoutEffect, useMemo, useRef, useState, useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import GenkiLessonPage from './pages/GenkiLessonPage';
 import VerbExercisePage from './pages/VerbExercisePage';
@@ -97,24 +97,93 @@ export default function App() {
   );
 }
 
+const CURRENT_INTERNAL_PATH_KEY = 'nihongo.currentInternalPath';
+const PREV_INTERNAL_PATH_KEY = 'nihongo.prevInternalPath';
+const SCROLL_POSITIONS_KEY = 'nihongo.scrollPositions';
+
+function getScrollMap() {
+  try {
+    const raw = sessionStorage.getItem(SCROLL_POSITIONS_KEY);
+    if (!raw) return {} as Record<string, number>;
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== 'object') return {} as Record<string, number>;
+    return parsed as Record<string, number>;
+  } catch {
+    return {} as Record<string, number>;
+  }
+}
+
+function setScrollMap(next: Record<string, number>) {
+  try {
+    sessionStorage.setItem(SCROLL_POSITIONS_KEY, JSON.stringify(next));
+  } catch {
+    // ignore
+  }
+}
+
 function AppShell() {
   const location = useLocation();
   const navType = useNavigationType();
   const showFeedback = !['/', '/disclaimer', '/contact', '/diff-test'].includes(location.pathname);
-  const scrollPositionsRef = useRef<Map<string, number>>(new Map());
+  const currentPathKey = useMemo(() => location.pathname + location.search, [location.pathname, location.search]);
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    try {
+      history.scrollRestoration = 'manual';
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      const prev = sessionStorage.getItem(CURRENT_INTERNAL_PATH_KEY);
+      if (prev && prev !== currentPathKey) {
+        sessionStorage.setItem(PREV_INTERNAL_PATH_KEY, prev);
+      }
+      sessionStorage.setItem(CURRENT_INTERNAL_PATH_KEY, currentPathKey);
+    } catch {
+      // ignore
+    }
+  }, [currentPathKey]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (rafRef.current !== null) return;
+      rafRef.current = window.requestAnimationFrame(() => {
+        rafRef.current = null;
+        const map = getScrollMap();
+        map[currentPathKey] = window.scrollY;
+        setScrollMap(map);
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [currentPathKey]);
 
   useLayoutEffect(() => {
-    const y = scrollPositionsRef.current.get(location.key);
-    if (navType === 'POP' && typeof y === 'number') {
-      window.scrollTo(0, y);
+    const state = location.state as unknown as { restoreScroll?: boolean } | null;
+    const shouldRestore = navType === 'POP' || !!state?.restoreScroll;
+
+    if (shouldRestore) {
+      const map = getScrollMap();
+      const y = map[currentPathKey];
+      if (typeof y === 'number') {
+        window.scrollTo(0, y);
+        return;
+      }
     } else {
       window.scrollTo(0, 0);
     }
-
-    return () => {
-      scrollPositionsRef.current.set(location.key, window.scrollY);
-    };
-  }, [location.key, navType]);
+  }, [currentPathKey, location.state, navType]);
 
   return (
     <>

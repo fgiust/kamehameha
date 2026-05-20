@@ -16,7 +16,6 @@ interface Props {
   engine: ConjugationEngine;
   typeLabels: TypeLabels;
   formLabel?: string;
-  backPath: string;
   persistKey?: string;
 }
 
@@ -72,7 +71,7 @@ function finalizeIME(input: string) {
   return input;
 }
 
-export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, backPath, persistKey }: Props) {
+export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, persistKey }: Props) {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
@@ -447,7 +446,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       <div className="page-header">
         <h1 className="page-heading">{title}</h1>
         <div className="page-actions">
-          <BackButton fallbackTo={backPath} />
+          <BackButton />
         </div>
       </div>
 

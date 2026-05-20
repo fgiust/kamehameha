@@ -23,7 +23,6 @@ export default function GenkiLessonPage() {
       key={lesson.id}
       title={lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title}
       sentenceData={lesson.sentenceData}
-      backPath="/"
       persistKey={`/genki/${lesson.id}`}
     />
   );

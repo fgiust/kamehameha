@@ -8,9 +8,9 @@ export default function AdjectivesNounsPage() {
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
 
   if (!lesson) {
-    return <SentenceExercise title="Sentence Exercise" sentenceData={[]} backPath="/" persistKey="/adjectives-nouns" />;
+    return <SentenceExercise title="Sentence Exercise" sentenceData={[]} persistKey="/adjectives-nouns" />;
   }
 
   const title = lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title;
-  return <SentenceExercise title={title} sentenceData={lesson.sentenceData} backPath="/" persistKey="/adjectives-nouns" />;
+  return <SentenceExercise title={title} sentenceData={lesson.sentenceData} persistKey="/adjectives-nouns" />;
 }

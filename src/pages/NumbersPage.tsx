@@ -214,7 +214,7 @@ export default function NumbersPage() {
   return (
     <div className="app-container">
       <div className="page-actions">
-        <BackButton fallbackTo="/" />
+        <BackButton />
       </div>
 
       <div className="page-header">

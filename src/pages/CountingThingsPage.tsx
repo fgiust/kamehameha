@@ -620,7 +620,7 @@ export default function CountingThingsPage() {
       <div className="page-header">
         <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <BackButton fallbackTo="/" />
+          <BackButton />
         </div>
       </div>
 

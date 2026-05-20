@@ -14,7 +14,7 @@ export default function DisclaimerPage() {
       <div className="page-header">
         <h1 className="page-heading">{t('common.disclaimer')}</h1>
         <div className="page-actions">
-          <BackButton fallbackTo="/" />
+          <BackButton />
         </div>
       </div>
 

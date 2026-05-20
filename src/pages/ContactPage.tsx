@@ -50,7 +50,7 @@ export default function ContactPage() {
       <div className="page-header">
         <h1 className="page-heading">{t('common.contact')}</h1>
         <div className="page-actions">
-          <BackButton fallbackTo="/" />
+          <BackButton />
         </div>
       </div>
 

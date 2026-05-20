@@ -370,7 +370,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   return (
     <div className="app-container">
       <div className="page-actions">
-        <BackButton fallbackTo="/" />
+        <BackButton />
       </div>
 
       <div className="page-header">

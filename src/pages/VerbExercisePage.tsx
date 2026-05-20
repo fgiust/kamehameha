@@ -33,7 +33,6 @@ export default function VerbExercisePage() {
         ru: t('verb.typeLabels.ru'),
         irr: t('verb.typeLabels.irr'),
       }}
-      backPath="/"
       persistKey={location.pathname}
     />
   );

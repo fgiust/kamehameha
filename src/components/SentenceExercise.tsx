@@ -12,7 +12,6 @@ import BackButton from './BackButton';
 interface Props {
   title: string;
   sentenceData: SentenceItem[];
-  backPath: string;
   persistKey?: string;
 }
 
@@ -43,7 +42,7 @@ function isLatinImeChar(ch: string) {
   return /[A-Za-z'-]/.test(ch);
 }
 
-export default function SentenceExercise({ title, sentenceData, backPath, persistKey }: Props) {
+export default function SentenceExercise({ title, sentenceData, persistKey }: Props) {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const [currentIdx, setCurrentIdx] = useState(0);
@@ -288,7 +287,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
       <div className="page-header">
         <h1 className="page-heading">{title}</h1>
         <div className="page-actions">
-          <BackButton fallbackTo={backPath} />
+          <BackButton />
         </div>
       </div>
 

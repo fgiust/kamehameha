@@ -32,7 +32,6 @@ export default function AdjExercisePage() {
         i: t('adjective.typeLabels.i'),
         na: t('adjective.typeLabels.na'),
       }}
-      backPath="/"
       persistKey={location.pathname}
     />
   );
