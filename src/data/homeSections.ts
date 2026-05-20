@@ -1,8 +1,8 @@
 import adjectives from './adjectives';
 import { adjectivesNounsSentenceData } from './adjectivesNouns';
 import counters from './counters';
-import { familyNamesData } from './familyNamesData';
 import { genkiLessons, getGenkiLessonById } from '../lessons/genkiLessons';
+import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
 import { transitiveData } from './transitiveData';
 import verbs from './verbs';
 import { DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
@@ -16,7 +16,8 @@ const COUNTERS_PEOPLE_TOTAL = (() => {
   return c.readings.length + Object.keys(c.extraReadings ?? {}).length;
 })();
 const TRANSITIVE_TOTAL = transitiveData.length;
-const FAMILY_NAMES_TOTAL = familyNamesData.length;
+const DAYS_TOTAL = getReadingTxtLessonById('reading-days')?.items.length ?? 31;
+const FAMILY_NAMES_TOTAL = getReadingTxtLessonById('reading-familynames')?.items.length ?? 0;
 const ADJECTIVES_NOUNS_TOTAL = adjectivesNounsSentenceData.length;
 const COUNTING_THINGS_TOTAL = 30;
 
@@ -60,7 +61,7 @@ export const homeConfig: HomeConfig = {
     counters: { id: 'counters', title: { key: 'home.exercises.counters' }, to: '/counters', defaultTotal: COUNTERS_DEFAULT_TOTAL },
     'counters-people': { id: 'counters-people', title: { key: 'pages.countersPeople.title' }, to: '/counters-people', defaultTotal: COUNTERS_PEOPLE_TOTAL },
     'counting-things': { id: 'counting-things', title: { key: 'pages.countingThings.title' }, to: '/counting-things', defaultTotal: COUNTING_THINGS_TOTAL },
-    days: { id: 'days', title: { key: 'pages.days.title' }, to: '/days', defaultTotal: 31 },
+    days: { id: 'days', title: { key: 'pages.days.title' }, to: '/days', defaultTotal: DAYS_TOTAL },
     numbers: { id: 'numbers', title: { key: 'home.exercises.numbers' }, to: '/numbers', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
     time: { id: 'time', title: { key: 'home.exercises.time' }, to: '/time', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
     transitive: { id: 'transitive', title: { key: 'pages.transitive.title' }, to: '/transitive', defaultTotal: TRANSITIVE_TOTAL },

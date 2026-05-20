@@ -59,6 +59,18 @@ export interface TranslateSessionData {
   sentenceData: SentenceItem[];
 }
 
+export interface ReadingExerciseItem {
+  question: string;
+  answer: string;
+}
+
+export interface ReadingSessionData {
+  id: string;
+  title: string;
+  titleItalian?: string;
+  items: ReadingExerciseItem[];
+}
+
 /** Configuration for a conjugation exercise */
 export interface ConjugationExerciseConfig {
   id: string;

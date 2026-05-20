@@ -5,6 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { parseTranslateSessionTxt } from './src/lessons/parseTranslateSessionTxt'
+import { parseReadingExerciseTxt } from './src/lessons/parseReadingExerciseTxt'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -29,7 +30,11 @@ function genkiTxtPlugin(): Plugin {
         // Read all txt files in src/data
         const files = fs
           .readdirSync(dataDir)
-          .filter(f => /^genki-\d{2}-\d\.txt$/i.test(f) || /^sentence-[a-z0-9-]+\.txt$/i.test(f))
+          .filter(f =>
+            /^genki-\d{2}-\d\.txt$/i.test(f) ||
+            /^sentence-[a-z0-9-]+\.txt$/i.test(f) ||
+            /^reading-[a-z0-9-]+\.txt$/i.test(f)
+          )
         
         const genkiDescriptors: {
           file: string
@@ -40,6 +45,12 @@ function genkiTxtPlugin(): Plugin {
           filePath: string
         }[] = []
         const sentenceDescriptors: {
+          file: string
+          sessionId: string
+          text: string
+          filePath: string
+        }[] = []
+        const readingDescriptors: {
           file: string
           sessionId: string
           text: string
@@ -66,11 +77,19 @@ function genkiTxtPlugin(): Plugin {
           if (sentenceMatch) {
             const sessionId = sentenceMatch[1]
             sentenceDescriptors.push({ file, sessionId, text, filePath })
+            continue
+          }
+
+          const readingMatch = /^(reading-[a-z0-9-]+)\.txt$/i.exec(file)
+          if (readingMatch) {
+            const sessionId = readingMatch[1]
+            readingDescriptors.push({ file, sessionId, text, filePath })
           }
         }
 
         genkiDescriptors.sort((a, b) => (a.lesson - b.lesson) || (a.exercise - b.exercise))
         sentenceDescriptors.sort((a, b) => a.sessionId.localeCompare(b.sessionId))
+        readingDescriptors.sort((a, b) => a.sessionId.localeCompare(b.sessionId))
 
         const parsedGenkiLessons = genkiDescriptors.map(desc => {
           // This will THROW at build/dev time if the format is invalid, caught directly by Vite!
@@ -90,9 +109,18 @@ function genkiTxtPlugin(): Plugin {
           })
         })
 
+        const parsedReadingLessons = readingDescriptors.map(desc => {
+          return parseReadingExerciseTxt({
+            id: desc.sessionId,
+            text: desc.text,
+            sourceName: desc.filePath
+          })
+        })
+
         return [
           `export const genkiTxtLessons = ${JSON.stringify(parsedGenkiLessons, null, 2)};`,
           `export const sentenceTxtLessons = ${JSON.stringify(parsedSentenceLessons, null, 2)};`,
+          `export const readingTxtLessons = ${JSON.stringify(parsedReadingLessons, null, 2)};`,
           ''
         ].join('\n')
       }

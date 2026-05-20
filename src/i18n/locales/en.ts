@@ -26,6 +26,9 @@ const en = {
   sentenceExercise: {
     promptTranslate: 'Translate into Japanese:',
   },
+  readingExercise: {
+    prompt: 'Write the hiragana reading',
+  },
   home: {
     taglineLead: 'Charge your かめはめ波 and destroy your Japanese barriers!',
     taglineBody: 'Powerful interactive training for grammar, vocabulary, and kanji. Charge, fire, level up. No mercy.',
