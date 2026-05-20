@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import ReadingExercise from '../components/ReadingExercise';
 import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
 import { APP_TITLE_PREFIX } from '../types';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 export default function FamilyNamesPage() {
   const { t, i18n } = useTranslation();
@@ -14,13 +14,7 @@ export default function FamilyNamesPage() {
   const lesson = getReadingTxtLessonById('reading-familynames');
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{pageTitle}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
+    <PageLayout pageTitle={pageTitle}>
       {lesson && (
         <ReadingExercise
           session={lesson}
@@ -31,6 +25,6 @@ export default function FamilyNamesPage() {
           largeAnswer
         />
       )}
-    </div>
+    </PageLayout>
   );
 }

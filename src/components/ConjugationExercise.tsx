@@ -8,7 +8,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from './OptionToggle';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
-import BackButton from './BackButton';
+import PageLayout from './PageLayout';
 
 interface Props {
   title: string;
@@ -442,14 +442,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   })();
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{title}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
-
+    <PageLayout pageTitle={title}>
       <div className="card">
         <div className="exercise-container">
           <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
@@ -601,6 +594,6 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
           ))}
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }

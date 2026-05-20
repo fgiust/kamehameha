@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 export default function DisclaimerPage() {
   const { t, i18n } = useTranslation();
@@ -10,14 +10,7 @@ export default function DisclaimerPage() {
   }, [i18n.language]);
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{t('common.disclaimer')}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
-
+    <PageLayout pageTitle={t('common.disclaimer')}>
       <div className="card">
         <div style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
           <p>
@@ -35,6 +28,6 @@ export default function DisclaimerPage() {
           </p>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 }

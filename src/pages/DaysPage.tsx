@@ -3,7 +3,7 @@ import ReadingExercise from '../components/ReadingExercise';
 import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 export default function DaysPage() {
   const { t, i18n } = useTranslation();
@@ -14,14 +14,7 @@ export default function DaysPage() {
   const lesson = getReadingTxtLessonById('reading-days');
 
   return (
-    <div className="app-container">
-      <div className="page-actions">
-        <BackButton />
-      </div>
-
-      <div className="page-header">
-        <h1 className="page-heading">{pageTitle}</h1>
-      </div>
+    <PageLayout pageTitle={pageTitle}>
       {lesson && (
         <ReadingExercise
           session={lesson}
@@ -29,6 +22,6 @@ export default function DaysPage() {
           sectionTitle={pageTitle}
         />
       )}
-    </div>
+    </PageLayout>
   );
 }

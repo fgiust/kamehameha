@@ -9,7 +9,7 @@ import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -263,14 +263,7 @@ export default function TransitivePage() {
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{pageTitle}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
-
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           <div className="exercise-question">
@@ -360,6 +353,6 @@ export default function TransitivePage() {
           ))}
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }

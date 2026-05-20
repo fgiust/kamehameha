@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
 import SubmitButton, { SubmitState } from '../components/SubmitButton';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 export default function ContactPage() {
   const { t, i18n } = useTranslation();
@@ -46,14 +46,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{t('common.contact')}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
-
+    <PageLayout pageTitle={t('common.contact')}>
       <p className="home-tagline is-body">
         {t('contact.intro')}
       </p>
@@ -88,6 +81,6 @@ export default function ContactPage() {
           />
         </form>
       </div>
-    </div>
+    </PageLayout>
   );
 }

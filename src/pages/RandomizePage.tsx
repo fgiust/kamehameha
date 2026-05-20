@@ -10,7 +10,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import KeyboardTip from '../components/KeyboardTip';
 import OptionToggle from '../components/OptionToggle';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 const formIds = [
   'causativeform', 'conditionalform', 'imperativeform', 'negativeform',
@@ -378,14 +378,7 @@ export default function RandomizePage() {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{pageTitle}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
-
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
@@ -526,6 +519,6 @@ export default function RandomizePage() {
           ))}
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }

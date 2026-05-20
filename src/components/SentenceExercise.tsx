@@ -7,7 +7,7 @@ import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
-import BackButton from './BackButton';
+import PageLayout from './PageLayout';
 
 interface Props {
   title: string;
@@ -283,14 +283,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
   })();
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{title}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
-
+    <PageLayout pageTitle={title}>
       <div className="card">
         <div className="exercise-container">
           {!isFinished && (
@@ -407,6 +400,6 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
           ))}
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }

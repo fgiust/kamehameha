@@ -8,7 +8,7 @@ import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
 import { useTranslation } from 'react-i18next';
 import countingThings, { type CountingThingCounter } from '../data/dictCountingThings';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -616,14 +616,7 @@ export default function CountingThingsPage() {
   }, []);
 
   return (
-    <div className="app-container">
-      <div className="page-header">
-        <h1 className="page-heading">{pageTitle}</h1>
-        <div className="page-actions">
-          <BackButton />
-        </div>
-      </div>
-
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           {!isFinished && (
@@ -708,6 +701,6 @@ export default function CountingThingsPage() {
           ))}
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }

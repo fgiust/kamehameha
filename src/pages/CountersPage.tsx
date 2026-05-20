@@ -8,7 +8,7 @@ import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../components/BackButton';
+import PageLayout from '../components/PageLayout';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -368,15 +368,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
-    <div className="app-container">
-      <div className="page-actions">
-        <BackButton />
-      </div>
-
-      <div className="page-header">
-        <h1 className="page-heading">{pageTitle}</h1>
-      </div>
-
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           <div className="exercise-question" style={{ fontFamily: 'Open Sans, sans-serif' }}>
@@ -453,6 +445,6 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
         incorrect={incorrect}
         pct={pct}
       />
-    </div>
+    </PageLayout>
   );
 }
