@@ -1,4 +1,5 @@
 import type { ConjugationEngine, OptionFlags } from '../types';
+import type { TFunction } from 'i18next';
 
 export function readStoredBool(key: string, fallback: boolean) {
   try {
@@ -72,4 +73,26 @@ export function getConjugationFormHint(engine: ConjugationEngine, flags: OptionF
   if (isPolite) parts.push('polite');
   parts.push('form');
   return parts.join(' ');
+}
+
+export function getConjugationFormHintLocalized(t: TFunction, engine: ConjugationEngine, flags: OptionFlags) {
+  const base = engine.baseFormHint ?? 'plain';
+  const hasNegOpt = engine.opts.some(o => o.id === 'neg');
+  const hasPoliteOpt = engine.opts.some(o => o.id === 'polite');
+
+  const isNeg = base === 'negative' || (hasNegOpt && !!flags.neg);
+  const isPolite = base === 'polite' || (hasPoliteOpt && !!flags.polite);
+  const isPlain = !isNeg && !isPolite;
+
+  const parts: string[] = [];
+  for (const o of engine.opts) {
+    if (o.id === 'neg' || o.id === 'polite') continue;
+    if (!flags[o.id]) continue;
+    parts.push(t(`conjugationHint.opts.${o.id}`));
+  }
+  if (isPlain) parts.push(t('conjugationHint.plain'));
+  if (isNeg) parts.push(t('conjugationHint.negative'));
+  if (isPolite) parts.push(t('conjugationHint.polite'));
+
+  return t('conjugationHint.template', { parts: parts.join(' ') });
 }

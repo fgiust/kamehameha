@@ -142,6 +142,16 @@ const en = {
   randomizeAdj: {
     feedbackSection: '{{form}} Form Adjective Practice ({{hint}})',
   },
+  conjugationHint: {
+    template: '{{parts}} form',
+    plain: 'plain',
+    negative: 'negative',
+    polite: 'polite',
+    opts: {
+      short: 'short',
+      passive: 'passive',
+    },
+  },
   counters: {
     selectAll: 'Select All',
     selectNone: 'Select None',

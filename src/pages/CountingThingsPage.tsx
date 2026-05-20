@@ -8,6 +8,7 @@ import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
 import { useTranslation } from 'react-i18next';
+import countingThings, { type CountingThingCounter } from '../data/dictCountingThings';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -24,46 +25,7 @@ function finalizeIME(input: string) {
   return input;
 }
 
-type CountingItem = {
-  id: string;
-  englishSingular: string;
-  englishPlural: string;
-  nounRuby: string;
-  counter: 'hiki' | 'tou' | 'mune' | 'satsu' | 'mai' | 'dai' | 'nin' | 'hai' | 'hon' | 'kai' | 'floor' | 'day' | 'month' | 'week' | 'hour' | 'minute' | 'second' | 'ko';
-};
-
-const ITEMS: CountingItem[] = [
-  { id: 'cat', englishSingular: 'cat', englishPlural: 'cats', nounRuby: '猫[ねこ]', counter: 'hiki' },
-  { id: 'train', englishSingular: 'train', englishPlural: 'trains', nounRuby: '電車[でんしゃ]', counter: 'dai' },
-  { id: 'rabbit', englishSingular: 'rabbit', englishPlural: 'rabbits', nounRuby: '兎[うさぎ]', counter: 'hiki' },
-  { id: 'horse', englishSingular: 'horse', englishPlural: 'horses', nounRuby: '馬[うま]', counter: 'tou' },
-  { id: 'cow', englishSingular: 'cow', englishPlural: 'cows', nounRuby: '牛[うし]', counter: 'tou' },
-  { id: 'fish', englishSingular: 'fish', englishPlural: 'fish', nounRuby: '魚[さかな]', counter: 'hiki' },
-  { id: 'building', englishSingular: 'building', englishPlural: 'buildings', nounRuby: 'ビル', counter: 'mune' },
-  { id: 'bicycle', englishSingular: 'bicycle', englishPlural: 'bicycles', nounRuby: '自転車[じてんしゃ]', counter: 'dai' },
-  { id: 'car', englishSingular: 'car', englishPlural: 'cars', nounRuby: '車[くるま]', counter: 'dai' },
-  { id: 'book', englishSingular: 'book', englishPlural: 'books', nounRuby: '本[ほん]', counter: 'satsu' },
-  { id: 'sheet', englishSingular: 'sheet of paper', englishPlural: 'sheets of paper', nounRuby: '紙[かみ]', counter: 'mai' },
-  { id: 'shirt', englishSingular: 'shirt', englishPlural: 'shirts', nounRuby: 'シャツ', counter: 'mai' },
-  { id: 'people', englishSingular: 'person', englishPlural: 'people', nounRuby: '', counter: 'nin' },
-  { id: 'credit-card', englishSingular: 'credit card', englishPlural: 'credit cards', nounRuby: 'クレジットカード', counter: 'mai' },
-  { id: 'glass', englishSingular: 'glass', englishPlural: 'glasses', nounRuby: 'コップ', counter: 'hai' },
-  { id: 'owl', englishSingular: 'owl', englishPlural: 'owls', nounRuby: '梟[ふくろう]', counter: 'hiki' },
-  { id: 'chicken', englishSingular: 'chicken', englishPlural: 'chickens', nounRuby: '鶏[にわとり]', counter: 'hiki' },
-  { id: 'elephant', englishSingular: 'elephant', englishPlural: 'elephants', nounRuby: '象[ぞう]', counter: 'tou' },
-  { id: 'floor', englishSingular: 'floor', englishPlural: 'floors', nounRuby: '', counter: 'floor' },
-  { id: 'computer', englishSingular: 'computer', englishPlural: 'computers', nounRuby: 'コンピューター', counter: 'dai' },
-  { id: 'chopsticks', englishSingular: 'chopstick', englishPlural: 'chopsticks', nounRuby: '箸[はし]', counter: 'hon' },
-  { id: 'sake-cup', englishSingular: 'cup of sake', englishPlural: 'cups of sake', nounRuby: '酒[さけ]', counter: 'hai' },
-  { id: 'times', englishSingular: 'time', englishPlural: 'times', nounRuby: '', counter: 'kai' },
-  { id: 'days', englishSingular: 'day', englishPlural: 'days', nounRuby: '', counter: 'day' },
-  { id: 'months', englishSingular: 'month', englishPlural: 'months', nounRuby: '', counter: 'month' },
-  { id: 'weeks', englishSingular: 'week', englishPlural: 'weeks', nounRuby: '', counter: 'week' },
-  { id: 'hours', englishSingular: 'hour', englishPlural: 'hours', nounRuby: '', counter: 'hour' },
-  { id: 'minutes', englishSingular: 'minute', englishPlural: 'minutes', nounRuby: '', counter: 'minute' },
-  { id: 'seconds', englishSingular: 'second', englishPlural: 'seconds', nounRuby: '', counter: 'second' },
-  { id: 'balls', englishSingular: 'ball', englishPlural: 'balls', nounRuby: 'ボール', counter: 'ko' },
-];
+const ITEMS = countingThings;
 
 const KANJI_NUM: Record<number, string> = {
   1: '一',
@@ -88,7 +50,7 @@ function toAltSurface(surface: string, readings: string[]) {
   return `{${uniq.map(r => `${surface}[${r}]`).join('|')}}`;
 }
 
-function counterSurfaceAndReadings(kind: CountingItem['counter'], n: number): { surface: string; readings: string[] } {
+function counterSurfaceAndReadings(kind: CountingThingCounter, n: number): { surface: string; readings: string[] } {
   if (n < 1 || n > 10) return { surface: '', readings: [] };
   const num = KANJI_NUM[n] ?? '';
 
@@ -388,12 +350,13 @@ function counterSurfaceAndReadings(kind: CountingItem['counter'], n: number): { 
   return { surface: '', readings: [] };
 }
 
-function englishLabel(n: number, singular: string, plural: string) {
-  return `${n} ${n === 1 ? singular : plural}`;
+function localizedLabel(n: number, labels: [string, string]) {
+  return `${n} ${n === 1 ? labels[0] : labels[1]}`;
 }
 
 export default function CountingThingsPage() {
   const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.countingThings.title');
   const [currentIdx, setCurrentIdx] = useState(0);
   const [question, setQuestion] = useState('');
@@ -428,8 +391,8 @@ export default function CountingThingsPage() {
 
   const buildQuestion = useCallback((idx: number, n: number) => {
     const item = ITEMS[idx]!;
-    return englishLabel(n, item.englishSingular, item.englishPlural);
-  }, []);
+    return localizedLabel(n, item[lang]);
+  }, [lang]);
 
   const buildAccepted = useCallback((idx: number, n: number) => {
     const item = ITEMS[idx]!;

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHint, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { getConjugationFormHintLocalized, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import adjectives from '../data/dictConjugationAdjectives';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -197,7 +197,7 @@ export default function AdjRandomizePage() {
   useEffect(() => {
     if (!currentWord || !currentFormKey || isFinished) return;
     const engine = adjEngines[currentFormKey];
-    const hint = getConjugationFormHint(engine, currentFlags);
+    const hint = getConjugationFormHintLocalized(t, engine, currentFlags);
 
     const dictKana = toKanaReading(currentWord.japanese);
     const dictKanji = stripRubyTags(currentWord.japanese);
@@ -327,7 +327,7 @@ export default function AdjRandomizePage() {
   const engine = currentFormKey ? adjEngines[currentFormKey] : null;
   const formHint = currentFormKey
     ? (adjFormLabels[currentFormKey] ? t(adjFormLabels[currentFormKey]!) : currentFormLabel)
-    : (engine ? getConjugationFormHint(engine, currentFlags) : '');
+    : (engine ? getConjugationFormHintLocalized(t, engine, currentFlags) : '');
   const displayedType = currentWord
     ? (currentWord.type === 'i' ? t('adjective.typeLabels.i') : t('adjective.typeLabels.na'))
     : '';

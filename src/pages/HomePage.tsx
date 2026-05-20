@@ -67,7 +67,7 @@ function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: Re
   );
 }
 
-function resolveExerciseTitle(t: TFunction, lang: 'en' | 'it', itemId: string, fallback: string) {
+function resolveExerciseTitle(lang: 'en' | 'it', itemId: string, fallback: string) {
   const genki = getGenkiLessonById(itemId);
   if (lang === 'it' && genki?.titleItalian) return genki.titleItalian;
   if (genki) return genki.title;
@@ -103,7 +103,7 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
           {section.items.map(item => {
             const def = homeConfig.exercises[item.id];
             const rawTitle = resolveText(t, item.title ?? def?.title ?? item.id);
-            const title = resolveExerciseTitle(t, lang, item.id, rawTitle);
+            const title = resolveExerciseTitle(lang, item.id, rawTitle);
             const to = def?.to;
             const defaultTotal = def?.defaultTotal ?? 12;
             return to ? (

@@ -142,6 +142,16 @@ const it = {
   randomizeAdj: {
     feedbackSection: 'Esercizi aggettivi {{form}} ({{hint}})',
   },
+  conjugationHint: {
+    template: 'forma {{parts}}',
+    plain: 'piana',
+    negative: 'negativa',
+    polite: 'cortese',
+    opts: {
+      short: 'breve',
+      passive: 'passiva',
+    },
+  },
   counters: {
     selectAll: 'Seleziona tutto',
     selectNone: 'Deseleziona tutto',

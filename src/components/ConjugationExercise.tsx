@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHint, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { getConjugationFormHintLocalized, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
@@ -220,7 +220,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   useEffect(() => {
     if (!currentWord || isFinished) return;
     const effectiveFlags = settings.randomizeForm ? randomFlags : flags;
-    const displayFormHint = getConjugationFormHint(engine, effectiveFlags);
+    const displayFormHint = getConjugationFormHintLocalized(t, engine, effectiveFlags);
 
     const dictKana = toKanaReading(currentWord.japanese);
     const dictKanji = stripRubyTags(currentWord.japanese);
@@ -248,7 +248,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, title, settings.reverseQA, settings.showKanji, flags, randomFlags, settings.randomizeForm, userInput, isFinished]);
+  }, [currentWord, title, settings.reverseQA, settings.showKanji, flags, randomFlags, settings.randomizeForm, userInput, isFinished, t]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -400,7 +400,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
   const effectiveFlags = settings.randomizeForm ? randomFlags : flags;
   const displayedType = currentWord ? typeLabels[currentWord.type] : '';
-  const formHint = getConjugationFormHint(engine, effectiveFlags);
+  const formHint = getConjugationFormHintLocalized(t, engine, effectiveFlags);
 
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
