@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHint, readStoredBool, stripRubyTags, writeStoredBool } from '../utils/utils';
+import { getConjugationFormHint, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
@@ -221,22 +221,22 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     const effectiveFlags = settings.randomizeForm ? randomFlags : flags;
     const displayFormHint = getConjugationFormHint(engine, effectiveFlags);
 
-    const dictKana = currentWord.kana;
-    const dictKanji = stripRubyTags(currentWord.kanji);
+    const dictKana = toKanaReading(currentWord.japanese);
+    const dictKanji = stripRubyTags(currentWord.japanese);
 
     let currentQuestion = '';
     let currentCorrectAnswer = '';
 
     if (settings.reverseQA) {
-      const base = settings.showKanji ? currentWord.kanji : dictKana;
+      const base = dictKana;
       const promptAnswer = engine.getAnswer(base, currentWord.type, effectiveFlags);
       const promptAnswers = Array.isArray(promptAnswer) ? promptAnswer : [promptAnswer];
       const prompt = promptAnswers.find(a => a !== '') || '';
       currentQuestion = prompt || base;
       currentCorrectAnswer = `${dictKana} (${dictKanji})`;
     } else {
-      currentQuestion = settings.showKanji ? currentWord.kanji : dictKana;
-      const answer = engine.getAnswer(currentWord.kana, currentWord.type, effectiveFlags);
+      currentQuestion = settings.showKanji ? dictKanji : dictKana;
+      const answer = engine.getAnswer(dictKana, currentWord.type, effectiveFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
       currentCorrectAnswer = answers.join(' / ');
     }
@@ -295,13 +295,12 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     const normalized = finalizeIME(userInput.trim());
 
     if (settings.reverseQA) {
-      const dictKana = currentWord.kana;
-      const dictKanji = stripRubyTags(currentWord.kanji);
+      const dictKana = toKanaReading(currentWord.japanese);
+      const dictKanji = stripRubyTags(currentWord.japanese);
       const acceptable = new Set([dictKana, dictKanji]);
       const isCorrect = acceptable.has(normalized);
       const correctDisplay = (() => {
         if (!settings.showKanji) return dictKana;
-        if (settings.showFurigana) return currentWord.kanji;
         return dictKanji;
       })();
 
@@ -316,11 +315,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       }
 
       const basePrompt = (() => {
-        const base = (() => {
-          if (!settings.showKanji) return dictKana;
-          if (settings.showFurigana) return currentWord.kanji;
-          return dictKanji;
-        })();
+        const base = dictKana;
         const promptAnswer = engine.getAnswer(base, currentWord.type, effectiveFlags);
         const promptAnswers = Array.isArray(promptAnswer) ? promptAnswer : [promptAnswer];
         const prompt = promptAnswers.find(a => a !== '') || '';
@@ -340,7 +335,9 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       return;
     }
 
-    const answer = engine.getAnswer(currentWord.kana, currentWord.type, effectiveFlags);
+    const dictKana = toKanaReading(currentWord.japanese);
+    const dictKanji = stripRubyTags(currentWord.japanese);
+    const answer = engine.getAnswer(dictKana, currentWord.type, effectiveFlags);
     const answers = Array.isArray(answer) ? answer : [answer];
     if (answers.length === 1 && answers[0] === '') { pickWord(); return; }
 
@@ -356,7 +353,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       setDiffDisplay(answers[0]);
     }
 
-    const questionText = settings.showKanji ? stripRubyTags(currentWord.kanji) : currentWord.kana;
+    const questionText = settings.showKanji ? dictKanji : dictKana;
     setPrevAnswers(prev => [{
       question: questionText,
       userAnswer: normalized,
@@ -408,19 +405,12 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     if (!currentWord) return t('common.loading');
 
     if (settings.reverseQA) {
-      const dictKana = currentWord.kana;
-      const base = (() => {
-        if (!settings.showKanji) return dictKana;
-        if (settings.showFurigana) return currentWord.kanji;
-        return stripRubyTags(currentWord.kanji);
-      })();
+      const dictKana = toKanaReading(currentWord.japanese);
+      const base = dictKana;
       const promptAnswer = engine.getAnswer(base, currentWord.type, effectiveFlags);
       const promptAnswers = Array.isArray(promptAnswer) ? promptAnswer : [promptAnswer];
       const prompt = promptAnswers.find(a => a !== '') || '';
       const shown = prompt || base;
-      if (shown.includes('<rt>')) {
-        return <ruby dangerouslySetInnerHTML={{ __html: shown }} />;
-      }
       return (
         <ruby>
           {shown}
@@ -430,14 +420,25 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     }
 
     if (!settings.showKanji) {
+      const dictKana = toKanaReading(currentWord.japanese);
       return (
         <ruby>
-          {currentWord.kana}
+          {dictKana}
           <rt aria-hidden="true">&nbsp;</rt>
         </ruby>
       );
     }
-    return <ruby dangerouslySetInnerHTML={{ __html: currentWord.kanji }} />;
+
+    if (settings.showFurigana) {
+      return <ruby dangerouslySetInnerHTML={{ __html: toRubyInnerHtml(currentWord.japanese) }} />;
+    }
+
+    return (
+      <ruby>
+        {stripRubyTags(currentWord.japanese)}
+        <rt aria-hidden="true">&nbsp;</rt>
+      </ruby>
+    );
   })();
 
   return (

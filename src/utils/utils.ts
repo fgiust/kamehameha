@@ -20,9 +20,37 @@ export function writeStoredBool(key: string, value: boolean) {
 
 export function stripRubyTags(input: string) {
   return input
-    .replace(/<rt>.*?<\/rt>/g, '')
-    .replace(/<\/?rb>/g, '')
-    .replace(/<\/?ruby>/g, '');
+    .replace(/<rt[^>]*>[\s\S]*?<\/rt>/g, '')
+    .replace(/<\/?rb[^>]*>/g, '')
+    .replace(/<\/?ruby[^>]*>/g, '')
+    .replace(/\[([^\]]*)\]/g, '');
+}
+
+export function toRubyInnerHtml(text: string) {
+  return text.replace(/([^[\]]+?)\[([^\]]*)\]/g, (_m, surface: string, reading: string) => `${surface}<rt>${reading}</rt>`);
+}
+
+export function toKanaReading(text: string) {
+  const normalized = text
+    .replace(/<rt[^>]*>([\s\S]*?)<\/rt>/g, (_m, reading: string) => `[${reading}]`)
+    .replace(/<\/?rb[^>]*>/g, '')
+    .replace(/<\/?ruby[^>]*>/g, '');
+
+  let out = '';
+  for (let i = 0; i < normalized.length; i++) {
+    const ch = normalized[i]!;
+    if (ch === '[') {
+      const end = normalized.indexOf(']', i + 1);
+      if (end === -1) continue;
+      out += normalized.slice(i + 1, end);
+      i = end;
+      continue;
+    }
+    if (/[\u3040-\u309F\u30A0-\u30FFー]/.test(ch)) {
+      out += ch;
+    }
+  }
+  return out;
 }
 
 export function getConjugationFormHint(engine: ConjugationEngine, flags: OptionFlags) {

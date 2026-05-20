@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { verbEngines } from '../engines/verbConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHint, readStoredBool, stripRubyTags, writeStoredBool } from '../utils/utils';
+import { getConjugationFormHint, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import verbs from '../data/verbs';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -175,7 +175,8 @@ export default function RandomizePage() {
       flags = {};
       eng.opts.forEach(o => { flags[o.id] = Math.random() >= 0.5; });
       if (flags.polite !== undefined) flags.polite = false;
-      const ans = eng.getAnswer(word.kana, word.type, flags);
+      const wordKana = toKanaReading(word.japanese);
+      const ans = eng.getAnswer(wordKana, word.type, flags);
       const answers = Array.isArray(ans) ? ans : [ans];
       if (!(answers.length === 1 && answers[0] === '')) {
         const optLabels = eng.opts.filter(o => flags[o.id]).map(o => o.label);
@@ -220,21 +221,21 @@ export default function RandomizePage() {
     const engine = verbEngines[currentForm];
     const hint = getConjugationFormHint(engine, currentFlags);
 
-    const dictKana = currentWord.kana;
-    const dictKanji = stripRubyTags(currentWord.kanji);
+    const dictKana = toKanaReading(currentWord.japanese);
+    const dictKanji = stripRubyTags(currentWord.japanese);
 
     let currentQuestion = '';
     let currentCorrectAnswer = '';
 
     if (settings.reverseQA) {
-      const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
       const prompt = answers.find(a => a !== '') || '';
-      currentQuestion = prompt || currentWord.kana;
+      currentQuestion = prompt || dictKana;
       currentCorrectAnswer = `${dictKana} (${dictKanji})`;
     } else {
-      currentQuestion = settings.showKanji ? currentWord.kanji : currentWord.kana;
-      const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+      currentQuestion = settings.showKanji ? dictKanji : dictKana;
+      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
       currentCorrectAnswer = answers.join(' / ');
     }
@@ -277,13 +278,12 @@ export default function RandomizePage() {
     const normalized = finalizeIME(userInput.trim());
 
     if (settings.reverseQA) {
-      const dictKana = currentWord.kana;
-      const dictKanji = stripRubyTags(currentWord.kanji);
+      const dictKana = toKanaReading(currentWord.japanese);
+      const dictKanji = stripRubyTags(currentWord.japanese);
       const acceptable = new Set([dictKana, dictKanji]);
       const isCorrect = acceptable.has(normalized);
       const correctDisplay = (() => {
         if (!settings.showKanji) return dictKana;
-        if (settings.showFurigana) return currentWord.kanji;
         return dictKanji;
       })();
 
@@ -303,7 +303,8 @@ export default function RandomizePage() {
       return;
     }
 
-    const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+    const dictKana = toKanaReading(currentWord.japanese);
+    const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
     const answers = Array.isArray(answer) ? answer : [answer];
     const isCorrect = answers.some(a => a === normalized);
 
@@ -312,7 +313,7 @@ export default function RandomizePage() {
     setDiffDisplay(answers[0] || '');
 
     setPrevAnswers(prev => [{
-      question: `${currentWord.kana} → ${currentFormLabel}`,
+      question: `${dictKana} → ${currentFormLabel}`,
       userAnswer: normalized,
       correctAnswer: answers[0] || '',
       isCorrect,
@@ -352,26 +353,36 @@ export default function RandomizePage() {
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
     if (settings.reverseQA && engine) {
-      const answer = engine.getAnswer(currentWord.kana, currentWord.type, currentFlags);
+      const dictKana = toKanaReading(currentWord.japanese);
+      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
       const prompt = answers.find(a => a !== '') || '';
       return (
         <ruby>
-          {prompt || currentWord.kana}
+          {prompt || dictKana}
           <rt aria-hidden="true">&nbsp;</rt>
         </ruby>
       );
     }
 
     if (!settings.showKanji) {
+      const dictKana = toKanaReading(currentWord.japanese);
       return (
         <ruby>
-          {currentWord.kana}
+          {dictKana}
           <rt aria-hidden="true">&nbsp;</rt>
         </ruby>
       );
     }
-    return <ruby dangerouslySetInnerHTML={{ __html: currentWord.kanji }} />;
+    if (settings.showFurigana) {
+      return <ruby dangerouslySetInnerHTML={{ __html: toRubyInnerHtml(currentWord.japanese) }} />;
+    }
+    return (
+      <ruby>
+        {stripRubyTags(currentWord.japanese)}
+        <rt aria-hidden="true">&nbsp;</rt>
+      </ruby>
+    );
   })();
 
   const total = correct + incorrect;

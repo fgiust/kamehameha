@@ -8,8 +8,7 @@ export type AdjectiveType = 'i' | 'na';
 
 /** A word used in conjugation exercises */
 export interface ConjugationWord {
-  kana: string;
-  kanji: string;
+  japanese: string;
   type: VerbType | AdjectiveType;
   eng: string;
 }
