@@ -74,7 +74,7 @@ a:hover { color: var(--accent-hover); }
 /* Page heading */
 .page-heading {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 300;
   margin-bottom: 24px;
   letter-spacing: -0.5px;
 }

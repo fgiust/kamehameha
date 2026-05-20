@@ -3,6 +3,7 @@ import { FeedbackDetails } from '../utils/feedback';
 import { useTranslation } from 'react-i18next';
 import SubmitButton, { SubmitState } from './SubmitButton';
 import DiffTestModal from './DiffTestModal';
+import bugIcon from '../assets/icon-bug.svg';
 
 export default function FeedbackPanel() {
   const { t } = useTranslation();
@@ -107,7 +108,15 @@ export default function FeedbackPanel() {
         title={t('feedbackPanel.tabTitle')}
         aria-label={t('common.feedback')}
       >
-        <span>🐞 {t('common.feedback')}</span>
+        <span>
+          <img
+            src={bugIcon}
+            alt=""
+            aria-hidden="true"
+            style={{ width: 14, height: 14, marginRight: 16, verticalAlign: 'text-bottom' }}
+          />
+          {t('common.feedback')}
+        </span>
       </button>
 
       {/* Floating Panel Panel Container */}
@@ -181,9 +190,9 @@ export default function FeedbackPanel() {
         </div>
       </div>
 
-      <DiffTestModal 
-        isOpen={isDiffModalOpen} 
-        onClose={() => setIsDiffModalOpen(false)} 
+      <DiffTestModal
+        isOpen={isDiffModalOpen}
+        onClose={() => setIsDiffModalOpen(false)}
         initialCorrect={details.rawCorrectAnswer || details.correctAnswer}
         initialUser={details.userAnswer || ''}
       />
