@@ -43,19 +43,50 @@ function DarkModeToggle() {
 
 function LanguageToggle() {
   const { t, i18n } = useTranslation();
+  const [isOpen, setIsOpen] = useState(false);
+  
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
-  const next = lang === 'it' ? 'en' : 'it';
-  const currentLabel = lang === 'it' ? t('common.italian') : t('common.english');
-  const nextLabel = next === 'it' ? t('common.italian') : t('common.english');
+
+  const langs: { code: 'en' | 'it'; label: string }[] = [
+    { code: 'en', label: 'English' },
+    { code: 'it', label: 'Italiano' }
+  ];
+
+  // Close when clicking outside
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClose = () => setIsOpen(false);
+    window.addEventListener('click', handleClose);
+    return () => window.removeEventListener('click', handleClose);
+  }, [isOpen]);
+
   return (
-    <button
-      className="lang-toggle"
-      onClick={() => void setAppLanguage(next)}
-      title={`${t('common.language')}: ${currentLabel}. ${t('common.switchLanguage')}: ${nextLabel}.`}
-      aria-label={t('common.switchLanguage')}
-    >
-      {lang.toUpperCase()}
-    </button>
+    <div className="lang-toggle-container" onClick={e => e.stopPropagation()}>
+      <button
+        className="lang-toggle"
+        onClick={() => setIsOpen(!isOpen)}
+        title={t('common.language')}
+        aria-label={t('common.language')}
+      >
+        {lang.toUpperCase()}
+      </button>
+      {isOpen && (
+        <div className="lang-menu">
+          {langs.map(l => (
+            <button
+              key={l.code}
+              className={`lang-menu-item ${lang === l.code ? 'active' : ''}`}
+              onClick={() => {
+                void setAppLanguage(l.code);
+                setIsOpen(false);
+              }}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 

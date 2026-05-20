@@ -968,7 +968,7 @@ body.dark .home-mini-progress-cell.is-incorrect {
 
 /* Dark mode toggle */
 .darkmode-toggle {
-  position: fixed;
+  position: absolute;
   top: 12px;
   right: 12px;
   width: 44px;
@@ -988,10 +988,14 @@ body.dark .home-mini-progress-cell.is-incorrect {
 }
 .darkmode-toggle:hover { transform: scale(1.1); box-shadow: var(--shadow-lg); }
 
-.lang-toggle {
-  position: fixed;
+.lang-toggle-container {
+  position: absolute;
   top: 12px;
   right: 64px;
+  z-index: 100;
+}
+
+.lang-toggle {
   height: 44px;
   min-width: 44px;
   padding: 0 12px;
@@ -1007,9 +1011,44 @@ body.dark .home-mini-progress-cell.is-incorrect {
   align-items: center;
   justify-content: center;
   transition: all var(--transition);
-  z-index: 100;
 }
 .lang-toggle:hover { transform: scale(1.05); box-shadow: var(--shadow-lg); }
+
+.lang-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.lang-menu-item {
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.lang-menu-item:hover {
+  background: var(--border);
+}
+
+.lang-menu-item.active {
+  color: var(--accent);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
 
 @media (max-width: 600px) {
   .app-container { padding: 12px; }
@@ -1021,7 +1060,8 @@ body.dark .home-mini-progress-cell.is-incorrect {
   .link-grid { grid-template-columns: 1fr; }
   .page-heading { font-size: 22px; margin-bottom: 0; }
   .darkmode-toggle { width: 40px; height: 40px; font-size: 18px; }
-  .lang-toggle { height: 40px; min-width: 40px; font-size: 13px; right: 58px; }
+  .lang-toggle-container { right: 58px; }
+  .lang-toggle { height: 40px; min-width: 40px; font-size: 13px; }
   .answer-banner { font-size: 24px; }
 }
 
