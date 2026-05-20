@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import ConjugationExercise from '../components/ConjugationExercise';
 import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
-import verbs from '../data/verbs';
+import verbs from '../data/dictConjugationVerbs';
 import { useTranslation } from 'react-i18next';
 
 export default function VerbExercisePage() {

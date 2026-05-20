@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import ConjugationExercise from '../components/ConjugationExercise';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
-import adjectives from '../data/adjectives';
+import adjectives from '../data/dictConjugationAdjectives';
 import { useTranslation } from 'react-i18next';
 
 export default function AdjExercisePage() {

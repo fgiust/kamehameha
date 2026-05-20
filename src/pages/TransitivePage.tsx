@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { stripRuby } from '../engines/sentenceEngine';
 import { toHiragana } from 'wanakana';
-import { transitiveData, VerbPair } from '../data/transitiveData';
+import { transitiveData, VerbPair } from '../data/dictTransitivePairs';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';

@@ -1,10 +1,10 @@
-import adjectives from './adjectives';
-import counters from './counters';
+import adjectives from './dictConjugationAdjectives';
+import counters from './dictCounters';
 import { genkiLessons, getGenkiLessonById } from '../lessons/genkiLessons';
 import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
 import { getSentenceTxtLessonById } from '../lessons/sentenceTxtLessons';
-import { transitiveData } from './transitiveData';
-import verbs from './verbs';
+import { transitiveData } from './dictTransitivePairs';
+import verbs from './dictConjugationVerbs';
 import { DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
 
 const VERB_TOTAL = verbs.length;
