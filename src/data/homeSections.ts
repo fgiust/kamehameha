@@ -1,8 +1,8 @@
 import adjectives from './adjectives';
-import { adjectivesNounsSentenceData } from './adjectivesNouns';
 import counters from './counters';
 import { genkiLessons, getGenkiLessonById } from '../lessons/genkiLessons';
 import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
+import { getSentenceTxtLessonById } from '../lessons/sentenceTxtLessons';
 import { transitiveData } from './transitiveData';
 import verbs from './verbs';
 import { DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
@@ -18,7 +18,7 @@ const COUNTERS_PEOPLE_TOTAL = (() => {
 const TRANSITIVE_TOTAL = transitiveData.length;
 const DAYS_TOTAL = getReadingTxtLessonById('reading-days')?.items.length ?? 31;
 const FAMILY_NAMES_TOTAL = getReadingTxtLessonById('reading-familynames')?.items.length ?? 0;
-const ADJECTIVES_NOUNS_TOTAL = adjectivesNounsSentenceData.length;
+const ADJECTIVES_NOUNS_TOTAL = getSentenceTxtLessonById('sentence-adjectivenouns')?.sentenceData.length ?? 0;
 const COUNTING_THINGS_TOTAL = 30;
 
 const genkiSentenceExercises = Object.fromEntries(
