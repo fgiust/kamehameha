@@ -204,6 +204,10 @@ const en = {
       na: 'な-Adjective',
     },
   },
+  keyboardTip: {
+    japanese: 'hint: switch to japanese keyboard for kanji input',
+    latin: 'hint: switch to latin keyboard for plain hiragana input without kanji replacement',
+  },
 };
 
 export default en;

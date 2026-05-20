@@ -204,6 +204,10 @@ const it = {
       na: 'Aggettivo な',
     },
   },
+  keyboardTip: {
+    japanese: 'suggerimento: passa alla tastiera giapponese per l\'inserimento dei kanji',
+    latin: 'suggerimento: passa alla tastiera latina per l\'inserimento in hiragana senza conversione kanji',
+  },
 };
 
 export default it;

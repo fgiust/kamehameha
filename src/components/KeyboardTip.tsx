@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export type PreferredKeyboard = 'japanese' | 'latin';
 type DetectedKeyboard = PreferredKeyboard | 'unknown';
@@ -18,12 +19,8 @@ function hasKanji(text: string) {
   return /[\u3400-\u9fff]/.test(text);
 }
 
-const MESSAGES: Record<PreferredKeyboard, string> = {
-  japanese: 'tip: switch to japanese keyboard for kanji input',
-  latin: 'tip: switch to latin keyboard for plain hiragana input without kanji replacement',
-};
-
 export default function KeyboardTip({ preferred, rawValue, isComposing, didConvert }: Props) {
+  const { t } = useTranslation();
   const detectedRef = useRef<DetectedKeyboard>('unknown');
 
   useEffect(() => {
@@ -57,7 +54,7 @@ export default function KeyboardTip({ preferred, rawValue, isComposing, didConve
 
   return (
     <div className={`keyboard-tip ${shouldShow ? 'is-visible' : 'is-hidden'}`}>
-      {shouldShow ? MESSAGES[preferred] : '\u00A0'}
+      {shouldShow ? t(`keyboardTip.${preferred}`) : '\u00A0'}
     </div>
   );
 }
