@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, parseAnswerTemplate, matchesByRubyUnits, stripRuby, pickBestDiff } from '../engines/sentenceEngine';
@@ -8,6 +7,7 @@ import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
+import BackButton from './BackButton';
 
 interface Props {
   title: string;
@@ -288,7 +288,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
       <div className="page-header">
         <h1 className="page-heading">{title}</h1>
         <div className="page-actions">
-          <Link to={backPath} className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
+          <BackButton fallbackTo={backPath} />
         </div>
       </div>
 

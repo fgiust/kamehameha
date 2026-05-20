@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigationType } from 'react-router-dom';
+import { useLayoutEffect, useRef, useState, useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import GenkiLessonPage from './pages/GenkiLessonPage';
 import VerbExercisePage from './pages/VerbExercisePage';
@@ -20,7 +20,7 @@ import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
 import { Analytics } from '@vercel/analytics/react';
 import { useTranslation } from 'react-i18next';
-import { setAppLanguage } from './i18n';
+import { setAppLanguage } from './i18n/index';
 
 function DarkModeToggle() {
   const { t } = useTranslation();
@@ -99,7 +99,22 @@ export default function App() {
 
 function AppShell() {
   const location = useLocation();
+  const navType = useNavigationType();
   const showFeedback = !['/', '/disclaimer', '/contact', '/diff-test'].includes(location.pathname);
+  const scrollPositionsRef = useRef<Map<string, number>>(new Map());
+
+  useLayoutEffect(() => {
+    const y = scrollPositionsRef.current.get(location.key);
+    if (navType === 'POP' && typeof y === 'number') {
+      window.scrollTo(0, y);
+    } else {
+      window.scrollTo(0, 0);
+    }
+
+    return () => {
+      scrollPositionsRef.current.set(location.key, window.scrollY);
+    };
+  }, [location.key, navType]);
 
   return (
     <>

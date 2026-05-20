@@ -84,10 +84,10 @@ const it = {
     body2: 'La frase target può definire le letture dei kanji con le parentesi quadre e specificare alternative usando parentesi graffe con opzioni separate da |. Per esempio:',
   },
   pages: {
-    numbers: { title: 'Esercizi numeri' },
-    time: { title: 'Esercizi orario' },
+    numbers: { title: 'Numeri' },
+    time: { title: 'Orario' },
     days: { title: 'Giorni del mese' },
-    counters: { title: 'Esercizi contatori' },
+    counters: { title: 'Contatori' },
     countersPeople: { title: 'Contare persone' },
     randomizeVerb: { title: 'Forme verbali casuali' },
     randomizeAdj: { title: 'Forme aggettivali casuali' },

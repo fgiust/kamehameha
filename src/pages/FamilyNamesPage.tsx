@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReadingExercise from '../components/ReadingExercise';
 import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
 import { APP_TITLE_PREFIX } from '../types';
+import BackButton from '../components/BackButton';
 
 export default function FamilyNamesPage() {
   const { t, i18n } = useTranslation();
@@ -18,7 +18,7 @@ export default function FamilyNamesPage() {
       <div className="page-header">
         <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
+          <BackButton fallbackTo="/" />
         </div>
       </div>
       {lesson && (

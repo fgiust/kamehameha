@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
+import BackButton from '../components/BackButton';
 
 export default function DisclaimerPage() {
   const { t, i18n } = useTranslation();
@@ -14,7 +14,7 @@ export default function DisclaimerPage() {
       <div className="page-header">
         <h1 className="page-heading">{t('common.disclaimer')}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
+          <BackButton fallbackTo="/" />
         </div>
       </div>
 

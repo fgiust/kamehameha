@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
@@ -11,6 +10,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import KeyboardTip from '../components/KeyboardTip';
 import { useTranslation } from 'react-i18next';
+import BackButton from '../components/BackButton';
 
 const formIds = ['adj-conditionalform', 'adj-naruform', 'adj-negativeform', 'adj-pastform', 'adj-volitionalform'];
 function formIdToShortKeyPart(formId: string) {
@@ -375,7 +375,7 @@ export default function AdjRandomizePage() {
       <div className="page-header">
         <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
+          <BackButton fallbackTo="/" />
         </div>
       </div>
 

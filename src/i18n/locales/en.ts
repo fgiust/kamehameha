@@ -84,10 +84,10 @@ const en = {
     body2: 'The target sentence can define kanji readings using square brackets and specify alternatives using curly braces with options separated by |. For example:',
   },
   pages: {
-    numbers: { title: 'Numbers Practice' },
-    time: { title: 'Time Practice' },
+    numbers: { title: 'Numbers' },
+    time: { title: 'Time' },
     days: { title: 'Days of the Month' },
-    counters: { title: 'Counters Practice' },
+    counters: { title: 'Counters' },
     countersPeople: { title: 'Counting People' },
     randomizeVerb: { title: 'Randomized Verb Forms' },
     randomizeAdj: { title: 'Randomized Adjective Forms' },

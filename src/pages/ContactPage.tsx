@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
 import SubmitButton, { SubmitState } from '../components/SubmitButton';
+import BackButton from '../components/BackButton';
 
 export default function ContactPage() {
   const { t, i18n } = useTranslation();
@@ -50,7 +50,7 @@ export default function ContactPage() {
       <div className="page-header">
         <h1 className="page-heading">{t('common.contact')}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
+          <BackButton fallbackTo="/" />
         </div>
       </div>
 

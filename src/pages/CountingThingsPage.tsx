@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
 import KeyboardTip from '../components/KeyboardTip';
@@ -9,6 +8,7 @@ import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
 import { useTranslation } from 'react-i18next';
 import countingThings, { type CountingThingCounter } from '../data/dictCountingThings';
+import BackButton from '../components/BackButton';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -620,7 +620,7 @@ export default function CountingThingsPage() {
       <div className="page-header">
         <h1 className="page-heading">{pageTitle}</h1>
         <div className="page-actions">
-          <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
+          <BackButton fallbackTo="/" />
         </div>
       </div>
 

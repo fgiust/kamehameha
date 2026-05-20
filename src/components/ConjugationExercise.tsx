@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHintLocalized, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
@@ -9,6 +8,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from './OptionToggle';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
+import BackButton from './BackButton';
 
 interface Props {
   title: string;
@@ -447,7 +447,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       <div className="page-header">
         <h1 className="page-heading">{title}</h1>
         <div className="page-actions">
-          <Link to={backPath} className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
+          <BackButton fallbackTo={backPath} />
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { toHiragana } from 'wanakana';
 import counters, { JapaneseCounter } from '../data/dictCounters';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -8,6 +8,7 @@ import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
+import BackButton from '../components/BackButton';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -369,7 +370,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   return (
     <div className="app-container">
       <div className="page-actions">
-        <Link to="/" className="header-btn" aria-label={t('common.back')}>&lt;</Link>
+        <BackButton fallbackTo="/" />
       </div>
 
       <div className="page-header">
