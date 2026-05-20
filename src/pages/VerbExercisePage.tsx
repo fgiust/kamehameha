@@ -4,12 +4,17 @@ import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import verbs from '../data/dictConjugationVerbs';
 import { useTranslation } from 'react-i18next';
 
-export default function VerbExercisePage() {
+type Props = {
+  forceReverseQA?: boolean;
+};
+
+export default function VerbExercisePage({ forceReverseQA }: Props) {
   const { t } = useTranslation();
   const location = useLocation();
   // Extract the form key from the URL path (e.g., /teform -> teform)
   const formKey = location.pathname.replace('/', '');
-  const engine = verbEngines[formKey];
+  const engineKey = formKey === 'politeform-short' ? 'politeform' : formKey;
+  const engine = verbEngines[engineKey];
 
   if (!engine) {
     return (
@@ -19,8 +24,12 @@ export default function VerbExercisePage() {
     );
   }
 
-  const titleKey = verbFormLabels[formKey];
-  const title = titleKey ? t(titleKey) : formKey;
+  const title = formKey === 'politeform-short'
+    ? t('forms.short')
+    : (() => {
+      const titleKey = verbFormLabels[engineKey];
+      return titleKey ? t(titleKey) : engineKey;
+    })();
 
   return (
     <ConjugationExercise
@@ -34,6 +43,7 @@ export default function VerbExercisePage() {
         irr: t('verb.typeLabels.irr'),
       }}
       persistKey={location.pathname}
+      forceReverseQA={forceReverseQA}
     />
   );
 }

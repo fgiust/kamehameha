@@ -205,6 +205,7 @@ function AppShell() {
         <Route path="/passiveform" element={<VerbExercisePage />} />
         <Route path="/pastform" element={<VerbExercisePage />} />
         <Route path="/politeform" element={<VerbExercisePage />} />
+        <Route path="/politeform-short" element={<VerbExercisePage forceReverseQA={true} />} />
         <Route path="/potentialform" element={<VerbExercisePage />} />
         <Route path="/provisionalform" element={<VerbExercisePage />} />
         <Route path="/volitionalform" element={<VerbExercisePage />} />

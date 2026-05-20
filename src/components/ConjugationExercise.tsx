@@ -17,11 +17,11 @@ interface Props {
   typeLabels: TypeLabels;
   formLabel?: string;
   persistKey?: string;
+  forceReverseQA?: boolean;
 }
 
 type GlobalSettings = {
   randomizeForm: boolean;
-  reverseQA: boolean;
   showKanji: boolean;
   showFurigana: boolean;
   showType: boolean;
@@ -71,35 +71,22 @@ function finalizeIME(input: string) {
   return input;
 }
 
-export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, persistKey }: Props) {
+export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, persistKey, forceReverseQA }: Props) {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [randomFlags, setRandomFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [settings, setSettings] = useState<GlobalSettings>(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const hasReverseParam = searchParams.get('reverse') === 'true' || searchParams.get('reverseQA') === 'true';
-
-    let reverseQA = readStoredBool(SETTINGS_KEYS.reverseQA, false);
-    if (hasReverseParam) {
-      reverseQA = true;
-      try {
-        localStorage.setItem(SETTINGS_KEYS.reverseQA, 'true');
-      } catch {
-        // noop
-      }
-    }
-
     const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
     return {
       randomizeForm: readStoredBool(SETTINGS_KEYS.randomizeForm, false),
-      reverseQA,
       showKanji,
       showFurigana: showKanji ? readStoredBool(SETTINGS_KEYS.showFurigana, false) : false,
       showType: readStoredShowType(true),
       showEnglish: readStoredBool(SETTINGS_KEYS.showEnglish, false),
     };
   });
+  const reverseQA = !!forceReverseQA;
   const [currentWordIdx, setCurrentWordIdx] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);
   const [isFinished, setIsFinished] = useState(false);
@@ -227,7 +214,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     let currentQuestion = '';
     let currentCorrectAnswer = '';
 
-    if (settings.reverseQA) {
+    if (reverseQA) {
       const base = dictKana;
       const promptAnswer = engine.getAnswer(base, currentWord.type, effectiveFlags);
       const promptAnswers = Array.isArray(promptAnswer) ? promptAnswer : [promptAnswer];
@@ -247,7 +234,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, title, settings.reverseQA, settings.showKanji, flags, randomFlags, settings.randomizeForm, userInput, isFinished, t]);
+  }, [currentWord, title, reverseQA, settings.showKanji, flags, randomFlags, settings.randomizeForm, userInput, isFinished, t]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -294,7 +281,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
     const normalized = finalizeIME(userInput.trim());
 
-    if (settings.reverseQA) {
+    if (reverseQA) {
       const dictKana = toKanaReading(currentWord.japanese);
       const dictKanji = stripRubyTags(currentWord.japanese);
       const acceptable = new Set([dictKana, dictKanji]);
@@ -363,7 +350,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
     recordProgress(String(currentWordIdx), isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, isFinished, currentWord, userInput, engine, flags, randomFlags, pickWord, settings.randomizeForm, settings.reverseQA, settings.showKanji, settings.showFurigana, recordProgress, currentWordIdx]);
+  }, [awaitingNext, isFinished, currentWord, userInput, engine, flags, randomFlags, pickWord, settings.randomizeForm, reverseQA, settings.showKanji, settings.showFurigana, recordProgress, currentWordIdx]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;
@@ -404,7 +391,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
 
-    if (settings.reverseQA) {
+    if (reverseQA) {
       const dictKana = toKanaReading(currentWord.japanese);
       const base = dictKana;
       const promptAnswer = engine.getAnswer(base, currentWord.type, effectiveFlags);
@@ -538,11 +525,6 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
               label={t('common.type')}
               checked={settings.showType}
               onChange={val => updateSetting('showType', val)}
-            />
-            <OptionToggle
-              label={t('common.reverseQA')}
-              checked={settings.reverseQA}
-              onChange={val => updateSetting('reverseQA', val)}
             />
           </div>
 

@@ -45,7 +45,7 @@ export const homeConfig: HomeConfig = {
     passiveform: { id: 'passiveform', title: { key: 'forms.passive' }, to: '/passiveform', defaultTotal: VERB_TOTAL },
     pastform: { id: 'pastform', title: { key: 'forms.past' }, to: '/pastform', defaultTotal: VERB_TOTAL },
     politeform: { id: 'politeform', title: { key: 'forms.polite' }, to: '/politeform', defaultTotal: VERB_TOTAL },
-    'politeform-short': { id: 'politeform-short', title: { key: 'forms.short' }, to: '/politeform?reverse=true', defaultTotal: VERB_TOTAL },
+    'politeform-short': { id: 'politeform-short', title: { key: 'forms.short' }, to: '/politeform-short', defaultTotal: VERB_TOTAL },
     potentialform: { id: 'potentialform', title: { key: 'forms.potential' }, to: '/potentialform', defaultTotal: VERB_TOTAL },
     provisionalform: { id: 'provisionalform', title: { key: 'forms.provisional' }, to: '/provisionalform', defaultTotal: VERB_TOTAL },
     volitionalform: { id: 'volitionalform', title: { key: 'forms.volitional' }, to: '/volitionalform', defaultTotal: VERB_TOTAL },
