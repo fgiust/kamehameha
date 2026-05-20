@@ -113,6 +113,7 @@ export default defineConfig({
 ========================================
 [${timestamp}] FEEDBACK ENTRY
 ----------------------------------------
+ID/URL:           ${data.exerciseId || 'N/A'}
 Section/Exercise: ${data.section || 'N/A'}
 Question:         ${data.question || 'N/A'}
 Correct Answer:   ${data.correctAnswer || 'N/A'}

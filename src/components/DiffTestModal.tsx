@@ -1,17 +1,30 @@
 import { useState, useEffect } from 'react';
 import { generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff } from '../engines/sentenceEngine';
-import { Link } from 'react-router-dom';
-import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
 
-export default function DiffTestPage() {
-  const { t, i18n } = useTranslation();
-  const [correct, setCorrect] = useState('{私[わたし]は|}図[と]書[しょ]館[かん]で{本[ほん]|教科書[きょうかしょ]}を読[よ]みます');
-  const [user, setUser] = useState('図書館で教科書を読みます');
+export default function DiffTestModal({
+  isOpen,
+  onClose,
+  initialCorrect = '{私[わたし]は|}図[と]書[しょ]館[かん]で{本[ほん]|教科書[きょうかしょ]}を読[よ]みます',
+  initialUser = '図書館で教科書を読みます'
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  initialCorrect?: string;
+  initialUser?: string;
+}) {
+  const { t } = useTranslation();
+  const [correct, setCorrect] = useState(initialCorrect);
+  const [user, setUser] = useState(initialUser);
 
   useEffect(() => {
-    document.title = APP_TITLE_PREFIX + t('diffTest.title');
-  }, [i18n.language]);
+    if (isOpen) {
+      setCorrect(initialCorrect);
+      setUser(initialUser);
+    }
+  }, [isOpen, initialCorrect, initialUser]);
+
+  if (!isOpen) return null;
 
   const parsedAlternatives = generateAnswers(parseAnswerTemplate(correct));
   const { ops } = pickBestDiff(user, parsedAlternatives);
@@ -51,15 +64,15 @@ export default function DiffTestPage() {
   );
 
   return (
-    <div className="app-container">
-      <div className="page-actions">
-        <Link to="/" className="header-btn" aria-label={t('common.back')}>{'<'}</Link>
-      </div>
-      <div className="page-header">
-        <h1 className="page-heading">{t('diffTest.title')}</h1>
-      </div>
-      <div className="card">
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', width: '100%' }}>
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className="feedback-panel-header">
+          <h3 style={{ margin: 0 }}>{t('diffTest.title')}</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+
+        <div className="card" style={{ boxShadow: 'none', padding: 10 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', width: '100%' }}>
           <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: '100%' }}>
             <div style={{ fontSize: 16, fontWeight: 'bold' }}>{t('diffTest.correctAnswer')}</div>
             <input
@@ -98,18 +111,18 @@ export default function DiffTestPage() {
       </div>
 
 
-      <div style={{ marginTop: 18, color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-        <div style={{ fontWeight: 700, color: 'var(--text)', marginBottom: 8 }}>{t('diffTest.heading')}</div>
+      <div style={{ marginTop: 18, color: 'var(--text-secondary)', lineHeight: 1.6, padding: '0 10px 10px 10px', textAlign: 'center', fontSize: '13px' }}>
+        <div style={{ fontWeight: 700, color: 'var(--text)', marginBottom: 6 }}>{t('diffTest.heading')}</div>
         <div>
           {t('diffTest.body1')}
         </div>
-        <div style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 4 }}>
           {t('diffTest.body2')}{' '}
           {'{私[わたし]|僕[ぼく]}'}
           .
         </div>
       </div>
-
+      </div>
     </div>
   );
 }

@@ -76,7 +76,7 @@ const it = {
     p3: 'Nota: essendo un progetto indipendente creato da un altro studente, i contenuti possono contenere occasionalmente errori o imprecisioni. Il feedback è molto apprezzato: puoi segnalare errori o suggerire miglioramenti usando gli strumenti di feedback disponibili nelle pagine degli esercizi.',
   },
   diffTest: {
-    title: 'Pagina di test TenshinDiff',
+    title: 'TenshinDiff test',
     correctAnswer: 'Risposta corretta:',
     userInput: 'Input utente:',
     heading: 'TenshinDiff - Analisi del Terzo Occhio',

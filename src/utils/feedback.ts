@@ -3,6 +3,7 @@ export interface FeedbackDetails {
   question: string;
   correctAnswer: string;
   userAnswer?: string;
+  exerciseId?: string;
 }
 
 function cleanRubyText(html: string): string {
@@ -27,6 +28,7 @@ export function updateFeedbackDetails(details: Partial<FeedbackDetails>) {
     question: cleanRubyText(details.question ?? current.question ?? ''),
     correctAnswer: cleanRubyText(details.correctAnswer ?? current.correctAnswer ?? ''),
     userAnswer: cleanRubyText(details.userAnswer ?? current.userAnswer ?? ''),
+    exerciseId: details.exerciseId ?? current.exerciseId ?? '',
   };
   w.currentQuestionDetails = updated;
   window.dispatchEvent(new CustomEvent('nihongo-feedback-update', { detail: updated }));

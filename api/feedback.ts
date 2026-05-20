@@ -8,6 +8,7 @@ type FeedbackPayload = {
   correctAnswer?: string;
   userAnswer?: string;
   notes?: string;
+  exerciseId?: string;
 };
 
 type VercelRequest = {
@@ -48,6 +49,7 @@ function buildLogEntry(data: FeedbackPayload) {
 ========================================
 [${timestamp}] FEEDBACK ENTRY
 ----------------------------------------
+ID/URL:           ${data.exerciseId || 'N/A'}
 Section/Exercise: ${data.section || 'N/A'}
 Question:         ${data.question || 'N/A'}
 Correct Answer:   ${data.correctAnswer || 'N/A'}

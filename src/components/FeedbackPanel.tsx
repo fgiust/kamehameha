@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { FeedbackDetails } from '../utils/feedback';
 import { useTranslation } from 'react-i18next';
 import SubmitButton, { SubmitState } from './SubmitButton';
+import DiffTestModal from './DiffTestModal';
 
 export default function FeedbackPanel() {
   const { t } = useTranslation();
@@ -17,15 +18,21 @@ export default function FeedbackPanel() {
 
   const notesRef = useRef<HTMLTextAreaElement>(null);
 
+  const [isDiffModalOpen, setIsDiffModalOpen] = useState(false);
+
   // Sync state with global window object when opening or when a custom update event is fired
   const syncDetails = () => {
     const current = (window as Window & { currentQuestionDetails?: FeedbackDetails }).currentQuestionDetails;
+    const urlParts = window.location.pathname.split('/').filter(Boolean);
+    const exerciseId = urlParts.length > 0 ? urlParts[urlParts.length - 1] : 'home';
+
     if (current) {
       setDetails({
         section: current.section || '',
         question: current.question || '',
         correctAnswer: current.correctAnswer || '',
         userAnswer: current.userAnswer || '',
+        exerciseId: current.exerciseId || exerciseId,
       });
     }
   };
@@ -113,34 +120,18 @@ export default function FeedbackPanel() {
           </div>
 
           <form onSubmit={handleSubmit} className="feedback-panel-form">
-            <div className="feedback-form-group">
-              <label>{t('feedbackPanel.section')}</label>
-              <input
-                type="text"
-                value={details.section}
-                readOnly
-                placeholder={t('feedbackPanel.sectionPlaceholder')}
-              />
+            <div className="feedback-text-group">
+              <div className="feedback-section-title">{details.section}</div>
             </div>
 
-            <div className="feedback-form-group">
+            <div className="feedback-text-group">
               <label>{t('feedbackPanel.question')}</label>
-              <input
-                type="text"
-                value={details.question}
-                readOnly
-                placeholder={t('feedbackPanel.questionPlaceholder')}
-              />
+              <div className="feedback-readonly-text">{details.question}</div>
             </div>
 
-            <div className="feedback-form-group">
+            <div className="feedback-text-group">
               <label>{t('feedbackPanel.correctAnswer')}</label>
-              <input
-                type="text"
-                value={details.correctAnswer}
-                readOnly
-                placeholder={t('feedbackPanel.correctAnswerPlaceholder')}
-              />
+              <div className="feedback-readonly-text">{details.correctAnswer}</div>
             </div>
 
             <div className="feedback-form-group">
@@ -151,6 +142,13 @@ export default function FeedbackPanel() {
                 onChange={e => setDetails(prev => ({ ...prev, userAnswer: e.target.value }))}
                 placeholder={t('feedbackPanel.yourAnswerPlaceholder')}
               />
+              <button
+                type="button"
+                className="diff-test-link"
+                onClick={() => setIsDiffModalOpen(true)}
+              >
+                TenshinDiff test
+              </button>
             </div>
 
             <div className="feedback-form-group">
@@ -178,6 +176,13 @@ export default function FeedbackPanel() {
           </form>
         </div>
       </div>
+
+      <DiffTestModal 
+        isOpen={isDiffModalOpen} 
+        onClose={() => setIsDiffModalOpen(false)} 
+        initialCorrect={details.correctAnswer}
+        initialUser={details.userAnswer || ''}
+      />
     </>
   );
 }

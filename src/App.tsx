@@ -11,7 +11,6 @@ import DaysPage from './pages/DaysPage';
 import NumbersPage from './pages/NumbersPage';
 import TimePage from './pages/TimePage';
 import CountingThingsPage from './pages/CountingThingsPage';
-import DiffTestPage from './pages/DiffTestPage';
 import NaVsNoPage from './pages/NaVsNoPage';
 import TransitivePage from './pages/TransitivePage';
 import FamilyNamesPage from './pages/FamilyNamesPage';
@@ -44,7 +43,7 @@ function DarkModeToggle() {
 function LanguageToggle() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
 
   const langs: { code: 'en' | 'it'; label: string }[] = [
@@ -147,12 +146,16 @@ function AppShell() {
         <Route path="/transitive" element={<TransitivePage />} />
         <Route path="/family-names" element={<FamilyNamesPage />} />
         <Route path="/adjectives-nouns" element={<AdjectivesNounsPage />} />
-        <Route path="/disclaimer" element={<DisclaimerPage />} />
+     <Route path="/disclaimer" element={<DisclaimerPage />} />
         <Route path="/contact" element={<ContactPage />} />
-
-        <Route path="/diff-test" element={<DiffTestPage />} />
-      </Routes>
-      <Analytics />
+        <Route path="*" element={
+          <div className="app-container" style={{ textAlign: 'center', marginTop: 100 }}>
+            <h1>404 - Not Found</h1>
+            <p>Page not found</p>
+            <a href="/" style={{ color: 'var(--accent)' }}>Go to Homepage</a>
+          </div>
+        } />
+      </Routes><Analytics />
     </>
   );
 }

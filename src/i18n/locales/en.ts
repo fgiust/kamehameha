@@ -76,7 +76,7 @@ const en = {
     p3: 'Please note that, as this is an independent project created by a fellow learner, the content may contain occasional mistakes or inaccuracies. Feedback is highly appreciated: users are encouraged to report any errors or suggest improvements using the feedback tools available within the exercise pages.',
   },
   diffTest: {
-    title: 'TenshinDiff test page',
+    title: 'TenshinDiff test',
     correctAnswer: 'Correct Answer:',
     userInput: 'User Input:',
     heading: 'TenshinDiff - Third Eye Analysis',
