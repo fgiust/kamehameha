@@ -138,6 +138,7 @@ export const homeConfig: HomeConfig = {
         { id: 'genki1-3' },
         { id: 'numbers', title: { key: 'pages.numbers.title' } },
         { id: 'time', title: { key: 'pages.time.title' } },
+        { id: 'genki1-4' },
       ],
     },
     {

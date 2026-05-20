@@ -1,3 +1,7 @@
+import { useEffect, useState, useRef } from 'react';
+import kamehamehaAudioUrl from '../assets/kamehameha150.mp3';
+import kamehamehaGifUrl from '../assets/kamehameha.gif';
+
 export default function SessionProgressBar({
   segments,
   pulses,
@@ -11,8 +15,53 @@ export default function SessionProgressBar({
   incorrect?: number;
   pct?: number;
 }) {
+  const [showKamehameha, setShowKamehameha] = useState(false);
+  const [kamehamehaKey, setKamehamehaKey] = useState(0);
+  const hasTriggeredRef = useRef(false);
+
+  useEffect(() => {
+    // Check if we reached 100% correct
+    if (segments.length > 0 && segments.every(s => s === 1)) {
+      if (!hasTriggeredRef.current) {
+        hasTriggeredRef.current = true;
+
+        // Play sound
+        const audio = new Audio(kamehamehaAudioUrl);
+        audio.play().catch(e => console.error('Audio play failed:', e));
+
+        // Show gif
+        setKamehamehaKey(Date.now());
+        setShowKamehameha(true);
+
+        // Hide gif after animation
+        setTimeout(() => {
+          setShowKamehameha(false);
+        }, 3000);
+      }
+    } else {
+      if (segments.some(s => s !== 1)) {
+        hasTriggeredRef.current = false;
+      }
+    }
+  }, [segments]);
+
   return (
-    <div className="session-progress-row" aria-hidden="true">
+    <div className="session-progress-row" aria-hidden="true" style={{ position: 'relative' }}>
+      {showKamehameha && (
+        <img
+          src={`${kamehamehaGifUrl}?v=${kamehamehaKey}`}
+          alt=""
+          style={{
+            position: 'absolute',
+            left: -20, // Slight offset to cover the beginning
+            top: '50%',
+            transform: 'translateY(-50%)',
+            height: '250%', // Make it cover the bar
+            zIndex: 10,
+            pointerEvents: 'none'
+          }}
+        />
+      )}
       <div className="session-progress-left">
         {typeof correct === 'number' && typeof incorrect === 'number' && (
           <>
