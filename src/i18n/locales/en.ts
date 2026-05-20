@@ -93,7 +93,6 @@ const en = {
     randomizeAdj: { title: 'Randomized Adjective Forms' },
     countingThings: { title: 'Counting things' },
     transitive: { title: 'Transitive / Intransitive pairs' },
-    naVsNo: { title: 'な vs の Adjectives' },
     familyNames: { title: 'Common family names' },
     adjectivesNouns: { title: 'Adjectives + nouns' },
   },
@@ -136,11 +135,6 @@ const en = {
   },
   familyNames: {
     hint: 'Write the reading in Hiragana',
-  },
-  naVsNo: {
-    hint: 'Choose whether the adjective is more likely to use な or の',
-    correct: 'Correct!',
-    lastAnswer: 'Last Answer: {{answer}}',
   },
   transitive: {
     transitive: 'Transitive',

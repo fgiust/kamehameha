@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { naVsNoData } from '../data/naVsNoData';
-import SessionProgressBar from '../components/SessionProgressBar';
-import { useSessionProgress } from '../hooks/useSessionProgress';
-import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../types';
-import JapaneseText from '../components/JapaneseText';
-import OptionToggle from '../components/OptionToggle';
+import { naVsNoData } from './naVsNoData';
+import SessionProgressBar from '../src/components/SessionProgressBar';
+import { useSessionProgress } from '../src/hooks/useSessionProgress';
+import { updateFeedbackDetails } from '../src/utils/feedback';
+import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../src/types';
+import JapaneseText from '../src/components/JapaneseText';
+import OptionToggle from '../src/components/OptionToggle';
 import { useTranslation } from 'react-i18next';
 
 const totalQuestions = naVsNoData.questions['な'].length + naVsNoData.questions['の'].length;
@@ -180,7 +180,7 @@ export default function NaVsNoPage() {
           <div className="exercise-question">
             <JapaneseText text={question} showFurigana={showFurigana} />
           </div>
-          
+
           <div className="form-hint">
             {t('naVsNo.hint')}
           </div>

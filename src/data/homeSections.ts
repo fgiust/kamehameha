@@ -3,7 +3,6 @@ import { adjectivesNounsSentenceData } from './adjectivesNouns';
 import counters from './counters';
 import { familyNamesData } from './familyNamesData';
 import { genkiLessons, getGenkiLessonById } from '../lessons/genkiLessons';
-import { naVsNoData } from './naVsNoData';
 import { transitiveData } from './transitiveData';
 import verbs from './verbs';
 import { DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
@@ -17,7 +16,6 @@ const COUNTERS_PEOPLE_TOTAL = (() => {
   return c.readings.length + Object.keys(c.extraReadings ?? {}).length;
 })();
 const TRANSITIVE_TOTAL = transitiveData.length;
-const NA_VS_NO_TOTAL = naVsNoData.questions['な'].length + naVsNoData.questions['の'].length;
 const FAMILY_NAMES_TOTAL = familyNamesData.length;
 const ADJECTIVES_NOUNS_TOTAL = adjectivesNounsSentenceData.length;
 const COUNTING_THINGS_TOTAL = 30;
@@ -66,7 +64,7 @@ export const homeConfig: HomeConfig = {
     numbers: { id: 'numbers', title: { key: 'home.exercises.numbers' }, to: '/numbers', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
     time: { id: 'time', title: { key: 'home.exercises.time' }, to: '/time', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
     transitive: { id: 'transitive', title: { key: 'pages.transitive.title' }, to: '/transitive', defaultTotal: TRANSITIVE_TOTAL },
-    'na-vs-no': { id: 'na-vs-no', title: { key: 'pages.naVsNo.title' }, to: '/na-vs-no', defaultTotal: NA_VS_NO_TOTAL },
+    // 'na-vs-no': { id: 'na-vs-no', title: { key: 'pages.naVsNo.title' }, to: '/na-vs-no', defaultTotal: NA_VS_NO_TOTAL },
     'family-names': { id: 'family-names', title: { key: 'pages.familyNames.title' }, to: '/family-names', defaultTotal: FAMILY_NAMES_TOTAL },
     'adjectives-nouns': { id: 'adjectives-nouns', title: { key: 'pages.adjectivesNouns.title' }, to: '/adjectives-nouns', defaultTotal: ADJECTIVES_NOUNS_TOTAL },
   },
@@ -114,7 +112,7 @@ export const homeConfig: HomeConfig = {
         { id: 'numbers' },
         { id: 'time' },
         { id: 'transitive' },
-        { id: 'na-vs-no' },
+        // { id: 'na-vs-no' },
         { id: 'family-names' },
         { id: 'adjectives-nouns' },
       ],

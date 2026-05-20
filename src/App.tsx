@@ -11,7 +11,7 @@ import DaysPage from './pages/DaysPage';
 import NumbersPage from './pages/NumbersPage';
 import TimePage from './pages/TimePage';
 import CountingThingsPage from './pages/CountingThingsPage';
-import NaVsNoPage from './pages/NaVsNoPage';
+import NaVsNoPage from '../backup/NaVsNoPage';
 import TransitivePage from './pages/TransitivePage';
 import FamilyNamesPage from './pages/FamilyNamesPage';
 import DisclaimerPage from './pages/DisclaimerPage';

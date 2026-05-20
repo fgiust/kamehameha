@@ -93,7 +93,6 @@ const it = {
     randomizeAdj: { title: 'Forme aggettivali casuali' },
     countingThings: { title: 'Contare oggetti' },
     transitive: { title: 'Coppie transitivo / intransitivo' },
-    naVsNo: { title: 'Aggettivi な vs の' },
     familyNames: { title: 'Cognomi comuni' },
     adjectivesNouns: { title: 'Aggettivi + nomi' },
   },
@@ -136,11 +135,6 @@ const it = {
   },
   familyNames: {
     hint: 'Scrivi la lettura in hiragana',
-  },
-  naVsNo: {
-    hint: 'Scegli se l’aggettivo usa più probabilmente な oppure の',
-    correct: 'Giusto!',
-    lastAnswer: 'Risposta corretta: {{answer}}',
   },
   transitive: {
     transitive: 'Transitivo',
