@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import SentenceExercise from '../components/SentenceExercise';
-import { getGenkiLessonById } from '../data/genkiLessons';
+import { getGenkiLessonById } from '../lessons/genkiLessons';
 import { useTranslation } from 'react-i18next';
 
 export default function GenkiLessonPage() {

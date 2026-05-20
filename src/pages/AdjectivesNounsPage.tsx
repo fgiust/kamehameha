@@ -1,5 +1,5 @@
 import SentenceExercise from '../components/SentenceExercise';
-import { getSentenceTxtLessonById } from '../data/sentenceTxtLessons';
+import { getSentenceTxtLessonById } from '../lessons/sentenceTxtLessons';
 import { useTranslation } from 'react-i18next';
 
 export default function AdjectivesNounsPage() {

@@ -2,7 +2,7 @@ import adjectives from './adjectives';
 import { adjectivesNounsSentenceData } from './adjectivesNouns';
 import counters from './counters';
 import { familyNamesData } from './familyNamesData';
-import { genkiLessons, getGenkiLessonById } from './genkiLessons';
+import { genkiLessons, getGenkiLessonById } from '../lessons/genkiLessons';
 import { naVsNoData } from './naVsNoData';
 import { transitiveData } from './transitiveData';
 import verbs from './verbs';

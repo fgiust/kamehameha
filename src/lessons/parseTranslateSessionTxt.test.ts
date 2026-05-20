@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import genki01_2Text from './genki-01-2.txt?raw';
+import genki01_2Text from '../data/genki-01-2.txt?raw';
 import { parseTranslateSessionTxt } from './parseTranslateSessionTxt';
 import { genkiTxtLessons } from './genkiTxtLessons';
 
@@ -39,7 +39,7 @@ describe('parseTranslateSessionTxt', () => {
     expect(() => parseTranslateSessionTxt({ id: 'y', text: invalid })).toThrow(/exactly 3 lines/i);
   });
 
-  it('auto-detects Genki txt lessons via import glob', () => {
+  it('auto-detects Genki txt lessons via virtual module', () => {
     const lesson = genkiTxtLessons.find(l => l.id === 'genki1-2');
     expect(lesson).toBeTruthy();
     expect(lesson?.title).toBe('Question Sentences');
@@ -48,3 +48,4 @@ describe('parseTranslateSessionTxt', () => {
     expect(lesson?.sentenceData[0].italian).toBe('Nakamura è uno studente?');
   });
 });
+

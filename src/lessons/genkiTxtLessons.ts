@@ -5,3 +5,4 @@ import type { TranslateSessionData } from '../types';
 import { genkiTxtLessons as lessons } from 'virtual:genki-txt-lessons';
 
 export const genkiTxtLessons: TranslateSessionData[] = lessons;
+

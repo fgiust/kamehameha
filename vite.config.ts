@@ -4,7 +4,7 @@ import checker from 'vite-plugin-checker'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { parseTranslateSessionTxt } from './src/data/parseTranslateSessionTxt'
+import { parseTranslateSessionTxt } from './src/lessons/parseTranslateSessionTxt'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
