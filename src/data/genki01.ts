@@ -16,7 +16,7 @@ export const genki01Lessons: TranslateSessionData[] = [
       { english: 'I am Korean.', answer: '{私[わたし]は|}韓[かん]国[こく]人[じん]{です|だ}' },
       { english: 'My younger brother is 3 years old.', answer: '{私[わたし]の|}弟[おとうと]は{三[さん]歳[さい]|3歳[さい]|３歳[さい]}{です|だ}' },
       { english: 'My younger sister is 8 years old.', answer: '{私[わたし]の|}妹[いもうと]は{八[はっ]歳[さい]|8歳[さい]|８歳[さい]}{です|だ}' },
-      { english: 'My friend is Swedish.', answer: '{私[わたし]の|}友[とも]達[だち]はスウェーデン人[じん]{です|だ}' },
+      { english: 'My friend is French.', answer: '{私[わたし]の|}友[とも]達[だち]はフランス人[じん]{です|だ}' },
       { english: 'My name is Luca.', answer: '私[わたし]の名[な]前[まえ]はルカ{です|だ}' },
     ],
   },
