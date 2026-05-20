@@ -4,6 +4,7 @@ import checker from 'vite-plugin-checker'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { parseTranslateSessionTxt } from './src/data/parseTranslateSessionTxt'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -28,12 +29,6 @@ function genkiTxtPlugin(): Plugin {
         // Read all txt files in src/data
         const files = fs.readdirSync(dataDir).filter(f => /^genki-\d{2}-\d\.txt$/i.test(f))
         
-        // Use absolute import path so the virtual module can resolve it properly
-        const parseFnPath = path.resolve(__dirname, 'src/data/parseTranslateSessionTxt.ts').replace(/\\/g, '/')
-        
-        let code = `import { parseTranslateSessionTxt } from '${parseFnPath}';\n\n`
-        code += `export const genkiTxtLessons = [\n`
-        
         const descriptors = []
         for (const file of files) {
           const filePath = path.join(dataDir, file)
@@ -47,19 +42,21 @@ function genkiTxtPlugin(): Plugin {
           // We add this file to watch list so Vite knows to re-run this load hook when it changes
           this.addWatchFile(filePath)
           
-          descriptors.push({ file, sessionId, text, lesson, exercise })
+          descriptors.push({ file, sessionId, text, lesson, exercise, filePath })
         }
         
         descriptors.sort((a, b) => (a.lesson - b.lesson) || (a.exercise - b.exercise))
         
-        for (const desc of descriptors) {
-          // Serialize the text safely for JS injection
-          const safeText = JSON.stringify(desc.text)
-          code += `  parseTranslateSessionTxt({ id: "${desc.sessionId}", text: ${safeText}, sourceName: "${desc.file}" }),\n`
-        }
+        const parsedLessons = descriptors.map(desc => {
+          // This will THROW at build/dev time if the format is invalid, caught directly by Vite!
+          return parseTranslateSessionTxt({
+            id: desc.sessionId,
+            text: desc.text,
+            sourceName: desc.filePath
+          })
+        })
         
-        code += `];\n`
-        return code
+        return `export const genkiTxtLessons = ${JSON.stringify(parsedLessons, null, 2)};\n`
       }
     }
   }
