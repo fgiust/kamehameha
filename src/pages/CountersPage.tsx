@@ -98,6 +98,7 @@ type Props = {
 export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   const { t, i18n } = useTranslation();
   const location = useLocation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const peopleOnly = useMemo(() => {
     if (typeof peopleOnlyProp === 'boolean') return peopleOnlyProp;
     const params = new URLSearchParams(location.search);
@@ -105,15 +106,15 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   }, [location.search, peopleOnlyProp]);
   const pageTitle = peopleOnly ? t('pages.countersPeople.title') : t('pages.counters.title');
 
-  const peopleCounter = useMemo(() => counters.find(c => c.meaning[1] === 'people') ?? null, []);
+  const peopleCounter = useMemo(() => counters.find(c => c.en[1] === 'people') ?? null, []);
   const prevPeopleOnlyRef = useRef<boolean>(peopleOnly);
 
   const [enabled, setEnabled] = useState<Record<string, boolean>>(() => {
     const next: Record<string, boolean> = {};
     if (peopleOnly) {
-      for (const c of counters) next[c.meaning[1]] = c.meaning[1] === 'people';
+      for (const c of counters) next[c.en[1]] = c.en[1] === 'people';
     } else {
-      for (const c of counters) next[c.meaning[1]] = true;
+      for (const c of counters) next[c.en[1]] = true;
     }
     return next;
   });
@@ -157,7 +158,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
 
   const activeCounters = useMemo(() => {
     if (peopleOnly && peopleCounter) return [peopleCounter];
-    const list = counters.filter(c => enabled[c.meaning[1]]);
+    const list = counters.filter(c => enabled[c.en[1]]);
     return list.length > 0 ? list : counters;
   }, [enabled, peopleOnly, peopleCounter]);
 
@@ -168,7 +169,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     if (peopleOnly) {
       setEnabled(() => {
         const next: Record<string, boolean> = {};
-        for (const c of counters) next[c.meaning[1]] = c.meaning[1] === 'people';
+        for (const c of counters) next[c.en[1]] = c.en[1] === 'people';
         return next;
       });
       return;
@@ -177,7 +178,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     if (wasPeopleOnly) {
       setEnabled(() => {
         const next: Record<string, boolean> = {};
-        for (const c of counters) next[c.meaning[1]] = true;
+        for (const c of counters) next[c.en[1]] = true;
         return next;
       });
     }
@@ -235,7 +236,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     const chosen = nextQ.counter;
     const num = nextQ.num;
 
-    const meaning = num === 0 ? chosen.meaning[0] : chosen.meaning[1];
+    const meaning = num === 0 ? chosen[lang][0] : chosen[lang][1];
     const shownNumber = num < 10 ? num + 1 : num;
     const qText = `${shownNumber} ${meaning}`;
 
@@ -278,11 +279,11 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
 
     updateFeedbackDetails({
       section: pageTitle,
-      question: t('counters.feedbackQuestion', { question, meaning: currentCounter ? currentCounter.meaning[0] : '' }),
+      question: t('counters.feedbackQuestion', { question, meaning: currentCounter ? currentCounter[lang][0] : '' }),
       correctAnswer: joinAcceptedForDisplay(uniqueStrings([...acceptedKana, kanjiAnswer])),
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [question, acceptedKana, kanjiAnswer, currentCounter, userInput, pageTitle, t]);
+  }, [question, acceptedKana, kanjiAnswer, currentCounter, userInput, pageTitle, t, lang]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -359,7 +360,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   const toggleAll = () => {
     const anyOff = Object.values(enabled).some(v => !v);
     const next: Record<string, boolean> = {};
-    for (const c of counters) next[c.meaning[1]] = anyOff;
+    for (const c of counters) next[c.en[1]] = anyOff;
     setEnabled(next);
   };
 
@@ -411,11 +412,11 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
           <div className="options-panel">
             <div className="switches">
               {counters.map(c => {
-                const id = c.meaning[1];
+                const id = c.en[1];
                 return (
                   <OptionToggle
                     key={id}
-                    label={<>{c.meaning[1]}</>}
+                    label={<>{c[lang][1]}</>}
                     checked={!!enabled[id]}
                     onChange={() => {
                       setEnabled(prev => ({ ...prev, [id]: !prev[id] }));

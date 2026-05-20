@@ -11,7 +11,7 @@ const VERB_TOTAL = verbs.length;
 const ADJ_TOTAL = adjectives.length;
 const COUNTERS_DEFAULT_TOTAL = counters.reduce((acc, c) => acc + c.readings.length + Object.keys(c.extraReadings ?? {}).length, 0);
 const COUNTERS_PEOPLE_TOTAL = (() => {
-  const c = counters.find(x => x.meaning[1] === 'people');
+  const c = counters.find(x => x.en[1] === 'people');
   if (!c) return 0;
   return c.readings.length + Object.keys(c.extraReadings ?? {}).length;
 })();
