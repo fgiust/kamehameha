@@ -14,7 +14,6 @@ const en = {
     english: 'English',
     italian: 'Italian',
     switchLanguage: 'Switch language',
-    practiceTitle: '{{title}} Practice',
     previousAnswers: 'Previous Answers',
     forms: 'Forms:',
     kanji: 'Kanji',
@@ -137,10 +136,10 @@ const en = {
     feedbackSection: '{{title}} ({{digits}} digits, Mode: {{mode}})',
   },
   randomizeVerb: {
-    feedbackSection: '{{form}} Form Practice ({{hint}})',
+    feedbackSection: '{{form}} ({{hint}})',
   },
   randomizeAdj: {
-    feedbackSection: '{{form}} Form Adjective Practice ({{hint}})',
+    feedbackSection: '{{form}} Adjective ({{hint}})',
   },
   conjugationHint: {
     template: '{{parts}} form',

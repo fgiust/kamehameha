@@ -25,7 +25,7 @@ export default function VerbExercisePage() {
   return (
     <ConjugationExercise
       key={formKey}
-      title={t('common.practiceTitle', { title })}
+      title={title}
       wordData={verbs}
       engine={engine}
       typeLabels={{

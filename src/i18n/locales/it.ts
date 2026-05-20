@@ -14,7 +14,6 @@ const it = {
     english: 'Inglese',
     italian: 'Italiano',
     switchLanguage: 'Cambia lingua',
-    practiceTitle: 'Esercizi: {{title}}',
     previousAnswers: 'Risposte precedenti',
     forms: 'Forme:',
     kanji: 'Kanji',
@@ -137,10 +136,10 @@ const it = {
     feedbackSection: '{{title}} ({{digits}} cifre, Modalità: {{mode}})',
   },
   randomizeVerb: {
-    feedbackSection: 'Esercizi {{form}} ({{hint}})',
+    feedbackSection: '{{form}} ({{hint}})',
   },
   randomizeAdj: {
-    feedbackSection: 'Esercizi aggettivi {{form}} ({{hint}})',
+    feedbackSection: 'Aggettivi {{form}} ({{hint}})',
   },
   conjugationHint: {
     template: 'forma {{parts}}',
@@ -176,9 +175,9 @@ const it = {
   feedbackPanel: {
     tabTitle: 'Invia feedback sull’esercizio',
     heading: 'Feedback esercizio',
-    section: 'Sezione / Esercizio',
+    section: 'Sezione',
     sectionPlaceholder: 'es. Giorni del mese',
-    question: 'Domanda / Prompt',
+    question: 'Domanda',
     questionPlaceholder: 'Il prompt/kanji attivo',
     correctAnswer: 'Risposta/e corretta/e',
     correctAnswerPlaceholder: 'La risposta corretta attesa',

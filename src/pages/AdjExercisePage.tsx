@@ -25,7 +25,7 @@ export default function AdjExercisePage() {
   return (
     <ConjugationExercise
       key={formKey}
-      title={t('common.practiceTitle', { title })}
+      title={title}
       wordData={adjectives}
       engine={engine}
       typeLabels={{
