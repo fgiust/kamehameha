@@ -3,6 +3,7 @@ import { homeConfig } from '../data/homeSections';
 import { useTranslation } from 'react-i18next';
 import { resolveText } from '../i18n/resolve';
 import type { LocalizedText } from '../types';
+import { getGenkiLessonById } from '../lessons/genkiLessons';
 
 type GenkiChapterSection = {
   lesson: number;
@@ -11,7 +12,8 @@ type GenkiChapterSection = {
 };
 
 function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   return (
     <div className="genki-section">
       {chapters.map(ch => (
@@ -22,7 +24,11 @@ function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
               {ch.items.map(item => {
                 const def = homeConfig.exercises[item.id];
                 const path = def?.to;
-                const title = resolveText(t, item.title ?? def?.title ?? item.id);
+                const rawTitle = resolveText(t, item.title ?? def?.title ?? item.id);
+                const lesson = getGenkiLessonById(item.id);
+                const title = lesson
+                  ? (lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title)
+                  : rawTitle;
                 return (
                   <li key={item.id}>
                     {path ? (

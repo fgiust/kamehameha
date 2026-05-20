@@ -10,7 +10,8 @@ export type AdjectiveType = 'i' | 'na';
 export interface ConjugationWord {
   japanese: string;
   type: VerbType | AdjectiveType;
-  eng: string;
+  en: string;
+  it: string;
 }
 
 /** Options that can be toggled for conjugation exercises */

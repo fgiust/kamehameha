@@ -73,7 +73,8 @@ function finalizeIME(input: string) {
 }
 
 export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, backPath, persistKey }: Props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [randomFlags, setRandomFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [settings, setSettings] = useState<GlobalSettings>(() => {
@@ -463,7 +464,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
             const isEmpty = !showEnglish && !showType;
             return (
               <div className={`exercise-meta-row ${layoutClass} ${isEmpty ? 'is-empty' : ''}`}>
-                {showEnglish && <div className="exercise-meta-item is-english">{currentWord!.eng}</div>}
+                {showEnglish && <div className="exercise-meta-item is-english">{lang === 'it' ? currentWord!.it : currentWord!.en}</div>}
                 {showType && <div className="exercise-meta-item is-type">{displayedType}</div>}
                 {isEmpty && <div className="exercise-meta-item">&nbsp;</div>}
               </div>

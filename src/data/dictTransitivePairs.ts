@@ -1,27 +1,27 @@
 export interface VerbPair {
-  t: { verb: string; meaning: string };
-  i: { verb: string; meaning: string };
+  t: { verb: string; en: string; it: string };
+  i: { verb: string; en: string; it: string };
 }
 
 export const transitiveData: VerbPair[] = [
-  { t: { verb: '開[あ]ける', meaning: 'to open' }, i: { verb: '開[あ]く', meaning: 'to open' } },
-  { t: { verb: '閉[し]める', meaning: 'to close' }, i: { verb: '閉[し]まる', meaning: 'to close' } },
-  { t: { verb: '入[い]れる', meaning: 'to put in' }, i: { verb: '入[はい]る', meaning: 'to enter' } },
-  { t: { verb: '出[だ]す', meaning: 'to take out' }, i: { verb: '出[で]る', meaning: 'to go out' } },
-  { t: { verb: 'つける', meaning: 'to turn on' }, i: { verb: 'つく', meaning: 'to be on' } },
-  { t: { verb: '消[け]す', meaning: 'to turn off' }, i: { verb: '消[き]える', meaning: 'to go off' } },
-  { t: { verb: '壊[こわ]す', meaning: 'to break' }, i: { verb: '壊[こわ]れる', meaning: 'to be broken' } },
-  { t: { verb: '汚[よご]す', meaning: 'to make dirty' }, i: { verb: '汚[よご]れる', meaning: 'to become dirty' } },
-  { t: { verb: '落[お]とす', meaning: 'to drop' }, i: { verb: '落[お]ちる', meaning: 'to fall' } },
-  { t: { verb: '沸[わ]かす', meaning: 'to boil' }, i: { verb: '沸[わ]く', meaning: 'to boil' } },
-  { t: { verb: '始[はじ]める', meaning: 'to begin' }, i: { verb: '始[はじ]まる', meaning: 'to begin' } },
-  { t: { verb: '終[お]える', meaning: 'to end' }, i: { verb: '終[お]わる', meaning: 'to end' } },
-  { t: { verb: '変[か]える', meaning: 'to change' }, i: { verb: '変[か]わる', meaning: 'to change' } },
-  { t: { verb: '乗[の]せる', meaning: 'to give a ride' }, i: { verb: '乗[の]る', meaning: 'to ride' } },
-  { t: { verb: '降[お]ろす', meaning: 'to take down' }, i: { verb: '降[お]りる', meaning: 'to step down' } },
-  { t: { verb: '止[と]める', meaning: 'to stop' }, i: { verb: '止[と]まる', meaning: 'to stop' } },
-  { t: { verb: '起[お]こす', meaning: 'to wake someone up' }, i: { verb: '起[お]きる', meaning: 'to wake up' } },
-  { t: { verb: '見[み]つける', meaning: 'to find' }, i: { verb: '見[み]つかる', meaning: 'to be found' } },
-  { t: { verb: '集[あつ]める', meaning: 'to collect' }, i: { verb: '集[あつ]まる', meaning: 'to gather' } },
-  { t: { verb: '直[なお]す', meaning: 'to fix' }, i: { verb: '直[なお]る', meaning: 'to be fixed' } }
+  { t: { verb: '開[あ]ける', en: 'to open', it: 'aprire' }, i: { verb: '開[あ]く', en: 'to open', it: 'aprirsi' } },
+  { t: { verb: '閉[し]める', en: 'to close', it: 'chiudere' }, i: { verb: '閉[し]まる', en: 'to close', it: 'chiudersi' } },
+  { t: { verb: '入[い]れる', en: 'to put in', it: 'mettere dentro' }, i: { verb: '入[はい]る', en: 'to enter', it: 'entrare' } },
+  { t: { verb: '出[だ]す', en: 'to take out', it: 'tirare fuori' }, i: { verb: '出[で]る', en: 'to go out', it: 'uscire' } },
+  { t: { verb: 'つける', en: 'to turn on', it: 'accendere' }, i: { verb: 'つく', en: 'to be on', it: 'essere acceso' } },
+  { t: { verb: '消[け]す', en: 'to turn off', it: 'spegnere' }, i: { verb: '消[き]える', en: 'to go off', it: 'spegnersi' } },
+  { t: { verb: '壊[こわ]す', en: 'to break', it: 'rompere' }, i: { verb: '壊[こわ]れる', en: 'to be broken', it: 'rompersi' } },
+  { t: { verb: '汚[よご]す', en: 'to make dirty', it: 'sporcare' }, i: { verb: '汚[よご]れる', en: 'to become dirty', it: 'sporcarsi' } },
+  { t: { verb: '落[お]とす', en: 'to drop', it: 'far cadere' }, i: { verb: '落[お]ちる', en: 'to fall', it: 'cadere' } },
+  { t: { verb: '沸[わ]かす', en: 'to boil', it: 'far bollire' }, i: { verb: '沸[わ]く', en: 'to boil', it: 'bollire' } },
+  { t: { verb: '始[はじ]める', en: 'to begin', it: 'iniziare' }, i: { verb: '始[はじ]まる', en: 'to begin', it: 'cominciare' } },
+  { t: { verb: '終[お]える', en: 'to end', it: 'finire' }, i: { verb: '終[お]わる', en: 'to end', it: 'terminare' } },
+  { t: { verb: '変[か]える', en: 'to change', it: 'cambiare' }, i: { verb: '変[か]わる', en: 'to change', it: 'cambiarsi' } },
+  { t: { verb: '乗[の]せる', en: 'to give a ride', it: 'dare un passaggio' }, i: { verb: '乗[の]る', en: 'to ride', it: 'salire (su)' } },
+  { t: { verb: '降[お]ろす', en: 'to take down', it: 'far scendere' }, i: { verb: '降[お]りる', en: 'to step down', it: 'scendere' } },
+  { t: { verb: '止[と]める', en: 'to stop', it: 'fermare' }, i: { verb: '止[と]まる', en: 'to stop', it: 'fermarsi' } },
+  { t: { verb: '起[お]こす', en: 'to wake someone up', it: 'svegliare (qualcuno)' }, i: { verb: '起[お]きる', en: 'to wake up', it: 'svegliarsi' } },
+  { t: { verb: '見[み]つける', en: 'to find', it: 'trovare' }, i: { verb: '見[み]つかる', en: 'to be found', it: 'essere trovato' } },
+  { t: { verb: '集[あつ]める', en: 'to collect', it: 'raccogliere' }, i: { verb: '集[あつ]まる', en: 'to gather', it: 'radunarsi' } },
+  { t: { verb: '直[なお]す', en: 'to fix', it: 'aggiustare' }, i: { verb: '直[なお]る', en: 'to be fixed', it: 'aggiustarsi' } }
 ];

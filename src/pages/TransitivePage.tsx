@@ -27,6 +27,7 @@ function finalizeIME(input: string) {
 
 export default function TransitivePage() {
   const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.transitive.title');
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [currentPair, setCurrentPair] = useState<VerbPair | null>(null);
@@ -142,17 +143,17 @@ export default function TransitivePage() {
       section: pageTitle,
       question: t('transitive.feedbackQuestion', {
         verb: stripRuby(questionWord.verb),
-        meaning: questionWord.meaning,
+        meaning: questionWord[lang],
         ask: askTransitive ? t('transitive.transitive') : t('transitive.intransitive'),
       }),
       correctAnswer: t('transitive.feedbackCorrectAnswer', {
         kana: expectedTargetHiragana,
         kanji: expectedTargetKanji,
-        meaning: targetWord.meaning,
+        meaning: targetWord[lang],
       }),
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentPair, askTransitive, userInput, isFinished, pageTitle, t]);
+  }, [currentPair, askTransitive, userInput, isFinished, pageTitle, t, lang]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -281,7 +282,7 @@ export default function TransitivePage() {
 
           <div className="exercise-meta-row is-centered">
             <div className="exercise-meta-item is-english">
-              {askTransitive ? `${currentPair.i.meaning} ➔ ${currentPair.t.meaning}` : `${currentPair.t.meaning} ➔ ${currentPair.i.meaning}`}
+              {askTransitive ? `${currentPair.i[lang]} ➔ ${currentPair.t[lang]}` : `${currentPair.t[lang]} ➔ ${currentPair.i[lang]}`}
             </div>
           </div>
 

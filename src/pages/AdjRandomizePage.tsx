@@ -53,6 +53,7 @@ function toRequestedFormHint(label: string) {
 
 export default function AdjRandomizePage() {
   const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.randomizeAdj.title');
   const [settings, setSettings] = useState<GlobalSettings>(() => {
     const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
@@ -400,7 +401,7 @@ export default function AdjRandomizePage() {
             const isEmpty = !showEnglish && !showType;
             return (
               <div className={`exercise-meta-row ${layoutClass} ${isEmpty ? 'is-empty' : ''}`}>
-                {showEnglish && <div className="exercise-meta-item is-english">{currentWord!.eng}</div>}
+                {showEnglish && <div className="exercise-meta-item is-english">{lang === 'it' ? currentWord!.it : currentWord!.en}</div>}
                 {showType && <div className="exercise-meta-item is-type">{displayedType}</div>}
                 {isEmpty && <div className="exercise-meta-item">&nbsp;</div>}
               </div>

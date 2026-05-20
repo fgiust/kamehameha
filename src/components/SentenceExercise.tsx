@@ -44,7 +44,8 @@ function isLatinImeChar(ch: string) {
 }
 
 export default function SentenceExercise({ title, sentenceData, backPath, persistKey }: Props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const [currentIdx, setCurrentIdx] = useState(0);
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
@@ -72,7 +73,11 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
   const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(sentenceData.length, { persistKey });
 
   const currentItem = sentenceData[currentIdx];
-  const englishPrompt = currentItem?.english || '';
+  const promptText = (() => {
+    if (!currentItem) return '';
+    if (lang === 'it' && currentItem.italian) return currentItem.italian;
+    return currentItem.english || '';
+  })();
 
   const pickNext = useCallback(() => {
     if (sentenceData.length === 0) return;
@@ -141,12 +146,12 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
 
     updateFeedbackDetails({
       section: title,
-      question: currentItem.english,
+      question: promptText,
       correctAnswer: currentItem.answer,
       rawCorrectAnswer: currentItem.answer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentItem, title, userInput, isFinished]);
+  }, [currentItem, title, userInput, isFinished, promptText]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -195,7 +200,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
     });
 
     setPrevAnswers(prev => [{
-      question: englishPrompt,
+      question: promptText,
       userAnswer: normalized,
       correctAnswer: stripRuby(displayAnswer),
       isCorrect,
@@ -205,7 +210,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
 
     recordProgress(String(currentIdx), isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, currentItem, userInput, englishPrompt, recordProgress, currentIdx, isFinished]);
+  }, [awaitingNext, currentItem, userInput, promptText, recordProgress, currentIdx, isFinished]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;
@@ -293,7 +298,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
             <>
               <div className="exercise-prompt">{t('sentenceExercise.promptTranslate')}</div>
               <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
-                {englishPrompt}
+                {promptText}
               </div>
               <div className="exercise-input-block">
                 <input

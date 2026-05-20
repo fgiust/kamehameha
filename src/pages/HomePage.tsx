@@ -6,6 +6,7 @@ import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UP
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import { resolveText } from '../i18n/resolve';
+import { getGenkiLessonById } from '../lessons/genkiLessons';
 
 function buildMiniSegments(persistKey: string, totalSegments: number) {
   const total = Math.max(1, totalSegments);
@@ -66,7 +67,14 @@ function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: Re
   );
 }
 
-function renderSection(section: (typeof homeConfig.sections)[number], t: TFunction) {
+function resolveExerciseTitle(t: TFunction, lang: 'en' | 'it', itemId: string, fallback: string) {
+  const genki = getGenkiLessonById(itemId);
+  if (lang === 'it' && genki?.titleItalian) return genki.titleItalian;
+  if (genki) return genki.title;
+  return fallback;
+}
+
+function renderSection(section: (typeof homeConfig.sections)[number], t: TFunction, lang: 'en' | 'it') {
   const titleClassName = section.titleClassName ?? 'section-title';
   const descriptionClassName = section.descriptionClassName ?? 'genki-supp-desc';
   const titleLevel = section.titleLevel ?? 2;
@@ -94,7 +102,8 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
         <div className="link-grid">
           {section.items.map(item => {
             const def = homeConfig.exercises[item.id];
-            const title = resolveText(t, item.title ?? def?.title ?? item.id);
+            const rawTitle = resolveText(t, item.title ?? def?.title ?? item.id);
+            const title = resolveExerciseTitle(t, lang, item.id, rawTitle);
             const to = def?.to;
             const defaultTotal = def?.defaultTotal ?? 12;
             return to ? (
@@ -115,6 +124,7 @@ const PAGE_TITLE = 'kamehameha!';
 
 export default function HomePage() {
   const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + PAGE_TITLE;
   }, [i18n.language]);
@@ -131,7 +141,7 @@ export default function HomePage() {
       <p className="home-tagline is-body">
         {t('home.taglineBody')}
       </p>
-      {homeConfig.sections.map(s => renderSection(s, t))}
+      {homeConfig.sections.map(s => renderSection(s, t, lang))}
 
       <footer className="home-footer">
         <span className="home-footer-text">kamehameha v{__APP_VERSION__}</span>

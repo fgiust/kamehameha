@@ -4,7 +4,8 @@ import { getGenkiLessonById } from '../lessons/genkiLessons';
 import { useTranslation } from 'react-i18next';
 
 export default function GenkiLessonPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const { lessonId } = useParams<{ lessonId: string }>();
   const lesson = lessonId ? getGenkiLessonById(lessonId) : undefined;
 
@@ -20,7 +21,7 @@ export default function GenkiLessonPage() {
   return (
     <SentenceExercise
       key={lesson.id}
-      title={lesson.title}
+      title={lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title}
       sentenceData={lesson.sentenceData}
       backPath="/"
       persistKey={`/genki/${lesson.id}`}
