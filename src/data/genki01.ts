@@ -1,4 +1,6 @@
 import { TranslateSessionData } from '../types';
+import genki01_2Text from './genki-01-2.txt?raw';
+import { parseTranslateSessionTxt } from './parseTranslateSessionTxt';
 
 export const genki01Lessons: TranslateSessionData[] = [
   {
@@ -20,15 +22,7 @@ export const genki01Lessons: TranslateSessionData[] = [
       { english: 'My name is Luca.', answer: '私[わたし]の名[な]前[まえ]はルカ{です|だ}' },
     ],
   },
-  {
-    id: 'genki1-2',
-    title: 'Question Sentences',
-    sentenceData: [
-      { english: 'Is Nakamura a student?', answer: '中[なか]村[むら]さんは学[がく]生[せい]{ですか|か}' },
-      { english: 'Yes, I am a student.', answer: '{はい|ええ}{、|}私[わたし]は学[がく]生[せい]{です|だ}' },
-      { english: 'How old is Yamashita?', answer: '山[やま]下[した]さんは何[なん]年[ねん]生[せい]{ですか|か}' },
-    ],
-  },
+  parseTranslateSessionTxt({ id: 'genki1-2', text: genki01_2Text, sourceName: 'genki-01-2.txt' }),
   {
     id: 'genki1-3',
     title: 'Noun1 の Noun2',

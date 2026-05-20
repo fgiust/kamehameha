@@ -49,12 +49,14 @@ export interface RandomizeEngine {
 export interface SentenceItem {
   answer: string;
   english: string;
+  italian?: string;
 }
 
 /** Configuration for a sentence translation session */
 export interface TranslateSessionData {
   id: string;
   title: string;
+  titleItalian?: string;
   sentenceData: SentenceItem[];
 }
 
