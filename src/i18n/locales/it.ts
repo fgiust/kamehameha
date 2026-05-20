@@ -20,7 +20,7 @@ const it = {
     furigana: 'Furigana ⇧',
     type: 'Tipo',
     reverseQA: 'Inverte D/R',
-    randomize: 'Casuale',
+    randomize: '⤭ Casuale',
   },
   sentenceExercise: {
     promptTranslate: 'Traduci in giapponese:',
@@ -206,7 +206,7 @@ const it = {
   },
   keyboardTip: {
     japanese: 'suggerimento: passa alla tastiera giapponese per l\'inserimento dei kanji',
-    latin: 'suggerimento: passa alla tastiera latina per l\'inserimento in hiragana senza conversione kanji',
+    latin: 'suggerimento: usa la tastiera latina per l\'inserimento in hiragana senza conversione kanji',
   },
 };
 
