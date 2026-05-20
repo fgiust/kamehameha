@@ -19,7 +19,8 @@ export default function VerbExercisePage() {
     );
   }
 
-  const title = verbFormLabels[formKey] || formKey;
+  const titleKey = verbFormLabels[formKey];
+  const title = titleKey ? t(titleKey) : formKey;
 
   return (
     <ConjugationExercise

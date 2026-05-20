@@ -332,8 +332,8 @@ export const verbEngines: Record<string, ConjugationEngine> = {
 };
 
 export const verbFormLabels: Record<string, string> = {
-  teform: 'て-Form', causativeform: 'Causative Form', conditionalform: 'Conditional Form',
-  imperativeform: 'Imperative Form', negativeform: 'Negative Form', passiveform: 'Passive Form',
-  pastform: 'Past Form', politeform: 'Polite Form', potentialform: 'Potential Form',
-  provisionalform: 'Provisional Form', volitionalform: 'Volitional Form',
+  teform: 'forms.te', causativeform: 'forms.causative', conditionalform: 'forms.conditional',
+  imperativeform: 'forms.imperative', negativeform: 'forms.negative', passiveform: 'forms.passive',
+  pastform: 'forms.past', politeform: 'forms.polite', potentialform: 'forms.potential',
+  provisionalform: 'forms.provisional', volitionalform: 'forms.volitional',
 };

@@ -19,7 +19,8 @@ export default function AdjExercisePage() {
     );
   }
 
-  const title = adjFormLabels[formKey] || formKey;
+  const titleKey = adjFormLabels[formKey];
+  const title = titleKey ? t(titleKey) : formKey;
 
   return (
     <ConjugationExercise

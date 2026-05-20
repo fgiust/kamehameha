@@ -85,9 +85,9 @@ export const adjEngines: Record<string, ConjugationEngine> = {
 };
 
 export const adjFormLabels: Record<string, string> = {
-  'adj-negativeform': 'Negative Form',
-  'adj-pastform': 'Past Form',
-  'adj-naruform': 'なる Form',
-  'adj-conditionalform': 'Conditional Form',
-  'adj-volitionalform': 'Volitional Form',
+  'adj-negativeform': 'forms.negative',
+  'adj-pastform': 'forms.past',
+  'adj-naruform': 'forms.naru',
+  'adj-conditionalform': 'forms.conditional',
+  'adj-volitionalform': 'forms.volitional',
 };

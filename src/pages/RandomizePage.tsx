@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { verbEngines } from '../engines/verbConjugation';
+import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHint, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
@@ -18,18 +18,9 @@ const formIds = [
   'provisionalform', 'teform', 'volitionalform',
 ];
 
-const formLabels: Record<string, string> = {
-  causativeform: 'Causative', conditionalform: 'Conditional', imperativeform: 'Imperative',
-  negativeform: 'Negative', passiveform: 'Passive', pastform: 'Past',
-  politeform: 'Polite', potentialform: 'Potential', provisionalform: 'Provisional',
-  teform: 'て', volitionalform: 'Volitional',
-};
-
-const typeLabels = {
-  u: 'う-Verb (Godan)',
-  ru: 'る-Verb (Ichidan)',
-  irr: 'Irregular Verb',
-};
+function formIdToShortKeyPart(formId: string) {
+  return formId.replace(/form$/i, '');
+}
 
 type GlobalSettings = {
   reverseQA: boolean;
@@ -51,15 +42,6 @@ function toHiraganaIME(raw: string) {
 function finalizeIME(input: string) {
   if (input.endsWith('n')) return input.slice(0, -1) + 'ん';
   return input;
-}
-
-function toRequestedFormHint(label: string) {
-  const trimmed = label.trim();
-  if (!trimmed) return '';
-  if (trimmed === 'て') return 'て-form';
-  const lower = trimmed.toLowerCase();
-  if (/\bform$/.test(lower)) return lower;
-  return `${lower} form`;
 }
 
 export default function RandomizePage() {
@@ -181,7 +163,9 @@ export default function RandomizePage() {
       const answers = Array.isArray(ans) ? ans : [ans];
       if (!(answers.length === 1 && answers[0] === '')) {
         const optLabels = eng.opts.filter(o => flags[o.id]).map(o => o.label);
-        label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + formLabels[form];
+        const shortKeyPart = formIdToShortKeyPart(form);
+        const shortFormLabel = t(`formsShort.${shortKeyPart}`);
+        label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + shortFormLabel;
         found = true;
         break;
       }
@@ -203,7 +187,7 @@ export default function RandomizePage() {
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeForms, getProgressState]);
+  }, [activeForms, getProgressState, t]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -242,12 +226,12 @@ export default function RandomizePage() {
     }
 
     updateFeedbackDetails({
-      section: t('randomizeVerb.feedbackSection', { form: formLabels[currentForm], hint }),
+      section: t('randomizeVerb.feedbackSection', { form: t(`formsShort.${formIdToShortKeyPart(currentForm)}`), hint }),
       question: currentQuestion,
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, currentForm, currentFlags, settings.reverseQA, settings.showKanji, userInput, isFinished]);
+  }, [currentWord, currentForm, currentFlags, settings.reverseQA, settings.showKanji, userInput, isFinished, t]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -348,8 +332,12 @@ export default function RandomizePage() {
   };
 
   const engine = currentForm ? verbEngines[currentForm] : null;
-  const formHint = currentFormLabel ? toRequestedFormHint(currentFormLabel) : (engine ? getConjugationFormHint(engine, currentFlags) : '');
-  const displayedType = currentWord ? typeLabels[currentWord.type as keyof typeof typeLabels] : '';
+  const formHint = currentForm
+    ? (verbFormLabels[currentForm] ? t(verbFormLabels[currentForm]!) : currentFormLabel)
+    : (engine ? getConjugationFormHint(engine, currentFlags) : '');
+  const displayedType = currentWord
+    ? (currentWord.type === 'u' ? t('verb.typeLabels.u') : currentWord.type === 'ru' ? t('verb.typeLabels.ru') : t('verb.typeLabels.irr'))
+    : '';
 
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
@@ -509,7 +497,7 @@ export default function RandomizePage() {
             {formIds.map(id => (
               <OptionToggle
                 key={id}
-                label={formLabels[id]}
+                label={t(`formsShort.${formIdToShortKeyPart(id)}`)}
                 checked={!!activeForms[id]}
                 onChange={() => setActiveForms(f => ({ ...f, [id]: !f[id] }))}
               />

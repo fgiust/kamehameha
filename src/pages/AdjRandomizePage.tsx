@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { adjEngines } from '../engines/adjConjugation';
+import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHint, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
@@ -13,13 +13,9 @@ import KeyboardTip from '../components/KeyboardTip';
 import { useTranslation } from 'react-i18next';
 
 const formIds = ['adj-conditionalform', 'adj-naruform', 'adj-negativeform', 'adj-pastform', 'adj-volitionalform'];
-const formLabels: Record<string, string> = {
-  'adj-conditionalform': 'Conditional',
-  'adj-naruform': 'なる',
-  'adj-negativeform': 'Negative',
-  'adj-pastform': 'Past',
-  'adj-volitionalform': 'Volitional',
-};
+function formIdToShortKeyPart(formId: string) {
+  return formId.replace(/^adj-/, '').replace(/form$/i, '');
+}
 
 type GlobalSettings = {
   reverseQA: boolean;
@@ -41,14 +37,6 @@ function toHiraganaIME(raw: string) {
 function finalizeIME(input: string) {
   if (input.endsWith('n')) return input.slice(0, -1) + 'ん';
   return input;
-}
-
-function toRequestedFormHint(label: string) {
-  const trimmed = label.trim();
-  if (!trimmed) return '';
-  const lower = trimmed.toLowerCase();
-  if (/\bform$/.test(lower)) return lower;
-  return `${lower} form`;
 }
 
 export default function AdjRandomizePage() {
@@ -169,7 +157,8 @@ export default function AdjRandomizePage() {
       const answers = Array.isArray(ans) ? ans : [ans];
       if (!(answers.length === 1 && answers[0] === '')) {
         const optLabels = eng.opts.filter(o => flags[o.id]).map(o => o.label);
-        label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + formLabels[form];
+        const shortFormLabel = t(`formsShort.${formIdToShortKeyPart(form)}`);
+        label = (optLabels.length > 0 ? optLabels.join(' ') + ' ' : '') + shortFormLabel;
         found = true;
         break;
       }
@@ -191,7 +180,7 @@ export default function AdjRandomizePage() {
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeForms, getProgressState]);
+  }, [activeForms, getProgressState, t]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -230,12 +219,12 @@ export default function AdjRandomizePage() {
     }
 
     updateFeedbackDetails({
-      section: t('randomizeAdj.feedbackSection', { form: formLabels[currentFormKey], hint }),
+      section: t('randomizeAdj.feedbackSection', { form: t(`formsShort.${formIdToShortKeyPart(currentFormKey)}`), hint }),
       question: currentQuestion,
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, currentFormKey, currentFlags, settings.reverseQA, settings.showKanji, userInput, isFinished]);
+  }, [currentWord, currentFormKey, currentFlags, settings.reverseQA, settings.showKanji, userInput, isFinished, t]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -336,7 +325,9 @@ export default function AdjRandomizePage() {
   };
 
   const engine = currentFormKey ? adjEngines[currentFormKey] : null;
-  const formHint = currentFormLabel ? toRequestedFormHint(currentFormLabel) : (engine ? getConjugationFormHint(engine, currentFlags) : '');
+  const formHint = currentFormKey
+    ? (adjFormLabels[currentFormKey] ? t(adjFormLabels[currentFormKey]!) : currentFormLabel)
+    : (engine ? getConjugationFormHint(engine, currentFlags) : '');
   const displayedType = currentWord
     ? (currentWord.type === 'i' ? t('adjective.typeLabels.i') : t('adjective.typeLabels.na'))
     : '';
@@ -499,7 +490,7 @@ export default function AdjRandomizePage() {
             {formIds.map(id => (
               <OptionToggle
                 key={id}
-                label={formLabels[id]}
+                label={t(`formsShort.${formIdToShortKeyPart(id)}`)}
                 checked={!!activeForms[id]}
                 onChange={() => setActiveForms(f => ({ ...f, [id]: !f[id] }))}
               />
