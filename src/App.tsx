@@ -148,7 +148,24 @@ function AppShell() {
     }
   }, [currentPathKey]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const state = location.state as unknown as { restoreScroll?: boolean } | null;
+    const shouldRestore = navType === 'POP' || !!state?.restoreScroll;
+
+    if (shouldRestore) {
+      const map = getScrollMap();
+      const y = map[currentPathKey];
+      if (typeof y === 'number') {
+        window.scrollTo(0, y);
+      } else {
+        window.scrollTo(0, 0);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [currentPathKey, location.state, navType]);
+
+  useLayoutEffect(() => {
     const onScroll = () => {
       if (rafRef.current !== null) return;
       rafRef.current = window.requestAnimationFrame(() => {
@@ -168,22 +185,6 @@ function AppShell() {
       }
     };
   }, [currentPathKey]);
-
-  useLayoutEffect(() => {
-    const state = location.state as unknown as { restoreScroll?: boolean } | null;
-    const shouldRestore = navType === 'POP' || !!state?.restoreScroll;
-
-    if (shouldRestore) {
-      const map = getScrollMap();
-      const y = map[currentPathKey];
-      if (typeof y === 'number') {
-        window.scrollTo(0, y);
-        return;
-      }
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [currentPathKey, location.state, navType]);
 
   return (
     <>
