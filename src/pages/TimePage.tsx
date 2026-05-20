@@ -4,6 +4,7 @@ import { toHiragana } from 'wanakana';
 import { getJapaneseTimeReadings } from '../engines/japaneseTime';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
 import { useTranslation } from 'react-i18next';
@@ -22,12 +23,19 @@ function finalizeIME(input: string) {
   return input;
 }
 
+function pickOne(items: string[]) {
+  if (items.length === 0) return '';
+  return items[Math.floor(Math.random() * items.length)];
+}
+
 export default function TimePage() {
   const { t, i18n } = useTranslation();
   const pageTitle = t('pages.time.title');
+  const [reverse, setReverse] = useState(false);
   const [currentSlot, setCurrentSlot] = useState<number>(0);
+  const [currentTime, setCurrentTime] = useState('');
   const [question, setQuestion] = useState('');
-  const [accepted, setAccepted] = useState<string[]>([]);
+  const [accepted, setAccepted] = useState<string[] | string>('');
   const [isFinished, setIsFinished] = useState(false);
 
   const [userInput, setUserInput] = useState('');
@@ -68,6 +76,7 @@ export default function TimePage() {
       setInputState('');
       setAnswerDisplay('');
       setUserInput('');
+      setCurrentTime('');
       setQuestion('');
       setAccepted([]);
       return;
@@ -93,19 +102,25 @@ export default function TimePage() {
 
     let minStr = nextMinute.toString();
     if (minStr.length === 1) minStr = '0' + minStr;
-    const q = `${nextHour}:${minStr}`;
+    const timeStr = `${nextHour}:${minStr}`;
 
-    const answers = getJapaneseTimeReadings(nextHour, nextMinute, nextAmPm);
+    const answers = getJapaneseTimeReadings(nextHour, nextMinute, nextAmPm).filter(Boolean);
 
-    setQuestion(q);
-    setAccepted(answers);
+    setCurrentTime(timeStr);
+    if (reverse) {
+      setQuestion(pickOne(answers));
+      setAccepted(timeStr);
+    } else {
+      setQuestion(timeStr);
+      setAccepted(answers);
+    }
 
     setUserInput('');
     setAwaitingNext(false);
     setInputState('');
     setAnswerDisplay('');
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, []);
+  }, [reverse]);
 
   useEffect(() => {
     setIsFinished(false);
@@ -120,13 +135,14 @@ export default function TimePage() {
   useEffect(() => {
     if (!question || isFinished) return;
 
+    const acceptedList = Array.isArray(accepted) ? accepted : [accepted];
     updateFeedbackDetails({
       section: pageTitle,
       question,
-      correctAnswer: accepted.join(' / '),
-      userAnswer: finalizeIME(userInput.trim()),
+      correctAnswer: acceptedList.join(' / '),
+      userAnswer: reverse ? userInput.trim() : finalizeIME(userInput.trim()),
     });
-  }, [question, accepted, userInput, isFinished]);
+  }, [question, accepted, userInput, isFinished, reverse]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -148,10 +164,10 @@ export default function TimePage() {
   const submit = () => {
     if (awaitingNext) return;
     if (isFinished) return;
-    const normalized = finalizeIME(userInput.trim());
+    const normalized = reverse ? userInput.trim() : finalizeIME(userInput.trim());
     if (!normalized) return;
 
-    const ok = accepted.includes(normalized);
+    const ok = Array.isArray(accepted) ? accepted.includes(normalized) : accepted === normalized;
     if (ok) {
       setCorrect(c => c + 1);
       setInputState('correct');
@@ -159,7 +175,12 @@ export default function TimePage() {
       setIncorrect(c => c + 1);
       setInputState('incorrect');
     }
-    setAnswerDisplay(accepted.join(` ${t('common.or')} `));
+    if (reverse) {
+      setAnswerDisplay(currentTime);
+    } else {
+      const list = Array.isArray(accepted) ? accepted : [accepted];
+      setAnswerDisplay(list.join(` ${t('common.or')} `));
+    }
     recordProgressAt(currentSlot, ok);
     setAwaitingNext(true);
   };
@@ -213,9 +234,9 @@ export default function TimePage() {
               if (awaitingNext) return;
               const raw = e.target.value;
               const caret = e.target.selectionStart;
-              const converted = toHiraganaIME(raw);
+              const converted = reverse ? raw : toHiraganaIME(raw);
               if (caret !== null) {
-                pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                pendingCaretRef.current = reverse ? caret : toHiraganaIME(raw.slice(0, caret)).length;
               }
               setUserInput(converted);
             }}
@@ -231,6 +252,15 @@ export default function TimePage() {
           </div>
         </div>
 
+        <div className="options-panel">
+          <div className="switches">
+            <OptionToggle
+              label={t('numbers.reverseLabel')}
+              checked={reverse}
+              onChange={val => setReverse(val)}
+            />
+          </div>
+        </div>
       </div>
       <SessionProgressBar
         segments={progressSegments}

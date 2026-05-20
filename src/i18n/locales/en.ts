@@ -30,11 +30,12 @@ const en = {
     prompt: 'Write the hiragana reading',
   },
   home: {
+    genkitext: 'Grammar exercises organized by Genki lesson topics.\nThis app does not reproduce any copyrighted content from the Genki textbooks, the exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.',
     taglineLead: 'Charge your かめはめ波 and destroy your Japanese barriers!',
     taglineBody: 'Powerful interactive training for grammar, vocabulary, and kanji. Charge, fire, level up. No mercy.',
     sections: {
-      verbConjugation: 'Verb Conjugation Practice',
-      adjectiveConjugation: 'Adjective Conjugation Practice',
+      verbConjugation: 'Verb Conjugation',
+      adjectiveConjugation: 'Adjective Conjugation',
       other: 'Other',
       genkiSupplementary: 'Genki supplementary exercises',
     },
@@ -53,10 +54,6 @@ const en = {
       adjectiveNaru: 'Adjective + なる',
       potentialVerbs: 'Potential Verbs',
     },
-  },
-  genkiPage: {
-    title: 'Genki Textbook Practice',
-    description: 'Exercises organized by Genki lesson topics. This app does not reproduce Genki textbook content that is protected by copyright.',
   },
   genkiLessonPage: {
     notFoundTitle: 'Lesson not found: {{id}}',

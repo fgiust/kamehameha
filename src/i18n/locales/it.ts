@@ -30,12 +30,13 @@ const it = {
     prompt: 'Scrivi la lettura in hiragana',
   },
   home: {
+    genkitext: 'Esercizi di grammatica organizzati per argomenti delle lezioni del Genki.\nQuesta app non riproduce alcun contenuto protetto da copyright dei libri di testo, gli esercizi sono originali e sono semplicemente organizzati seguendo lo stesso ordine delle lezioni per fornire una pratica supplementare ben strutturata per gli studenti di Genki.',
     taglineLead: 'Carica la tua かめはめ波 e distruggi le barriere con il giapponese!',
     taglineBody: 'Allenamento interattivo per grammatica, vocabolario e kanji. Carica, spara, sali di livello. Nessuna pietà.',
     sections: {
-      verbConjugation: 'Esercizi coniugazione verbi',
-      adjectiveConjugation: 'Esercizi coniugazione aggettivi',
-      other: 'Altro',
+      verbConjugation: 'Coniugazione verbi',
+      adjectiveConjugation: 'Coniugazione aggettivi',
+      other: 'Di tutto un po\'',
       genkiSupplementary: 'Esercizi supplementari Genki',
     },
     exercises: {
@@ -53,10 +54,6 @@ const it = {
       adjectiveNaru: 'Aggettivo + なる',
       potentialVerbs: 'Verbi potenziali',
     },
-  },
-  genkiPage: {
-    title: 'Esercizi Genki',
-    description: 'Esercizi organizzati per argomenti delle lezioni di Genki. Questa app non riproduce contenuti del libro Genki protetti da copyright.',
   },
   genkiLessonPage: {
     notFoundTitle: 'Lezione non trovata: {{id}}',

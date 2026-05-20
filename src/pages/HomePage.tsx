@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { homeConfig } from '../data/homeSections';
 import { APP_TITLE_PREFIX } from '../types';
 import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UPDATED_EVENT } from '../hooks/useSessionProgress';
@@ -79,9 +79,14 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
       ) : (
         <h2 className={titleClassName}>{sectionTitle}</h2>
       )}
-      {section.description && section.description.length > 0 && (
+      {section.description && (
         <p className={descriptionClassName}>
-          {section.description.join(' ')}
+          {resolveText(t, section.description).split('\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
         </p>
       )}
 

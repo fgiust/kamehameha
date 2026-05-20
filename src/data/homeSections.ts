@@ -124,11 +124,7 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'genki-supp-title',
       titleLevel: 2,
       descriptionClassName: 'genki-supp-desc',
-      description: [
-        'Grammar exercises organized by Genki lesson topics.',
-        'This app does not reproduce any copyrighted content from the Genki textbooks.',
-        'The exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.',
-      ],
+      description: { key: 'home.genkitext' },
       items: [],
     },
     {

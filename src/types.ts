@@ -145,7 +145,7 @@ export type HomeSection = {
   title: LocalizedText;
   titleClassName?: string;
   titleLevel?: 2 | 3;
-  description?: string[];
+  description?: LocalizedText;
   descriptionClassName?: string;
   items: HomeSectionItem[];
 };

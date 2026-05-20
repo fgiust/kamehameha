@@ -209,7 +209,7 @@ a:hover { color: var(--accent-hover); }
   font-size: 32px;
 }
 
-.exercise-question.is-furigana-hidden rt {
+.is-furigana-hidden rt {
   visibility: hidden;
 }
 
@@ -300,6 +300,11 @@ a:hover { color: var(--accent-hover); }
   min-height: calc(1.2em + 20px);
   text-align: center;
   color: var(--text);
+}
+
+.answer-banner ruby rt {
+  font-size: 0.6em;
+  line-height: 1;
 }
 
 .answer-banner.is-empty {

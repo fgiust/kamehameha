@@ -710,7 +710,7 @@ export default function CountingThingsPage() {
                   autoComplete="off"
                   spellCheck={false}
                 />
-                <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
+                <KeyboardTip preferred="japanese" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>
             </>
           )}

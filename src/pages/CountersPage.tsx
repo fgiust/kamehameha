@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { toHiragana } from 'wanakana';
 import counters, { JapaneseCounter } from '../data/counters';
@@ -32,6 +32,53 @@ function bracketToRubyNode(text: string) {
       <rt>{m[2]}</rt>
     </ruby>
   );
+}
+
+function stripBracketReading(text: string) {
+  const m = /^(.*)\[(.*)\]$/.exec(text);
+  if (!m) return text;
+  return m[1] ?? text;
+}
+
+function numberToKanji(n: number) {
+  const digits: Record<number, string> = {
+    0: '〇',
+    1: '一',
+    2: '二',
+    3: '三',
+    4: '四',
+    5: '五',
+    6: '六',
+    7: '七',
+    8: '八',
+    9: '九',
+  };
+
+  const x = Math.max(0, Math.floor(n));
+  if (x < 10) return digits[x] ?? String(x);
+  if (x === 10) return '十';
+  if (x < 20) return `十${digits[x % 10] ?? ''}`;
+  const tens = Math.floor(x / 10);
+  const ones = x % 10;
+  const tenPart = tens === 1 ? '十' : `${digits[tens] ?? String(tens)}十`;
+  return ones === 0 ? tenPart : `${tenPart}${digits[ones] ?? String(ones)}`;
+}
+
+function uniqueStrings(items: string[]) {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const s of items) {
+    const v = s.trim();
+    if (!v) continue;
+    if (seen.has(v)) continue;
+    seen.add(v);
+    out.push(v);
+  }
+  return out;
+}
+
+function joinAcceptedForDisplay(items: string[]) {
+  return items.length > 1 ? items.join('、') : (items[0] ?? '');
 }
 
 function getAnswers(counter: JapaneseCounter, num: number) {
@@ -75,14 +122,17 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState<number>(0);
   const [isFinished, setIsFinished] = useState(false);
   const [question, setQuestion] = useState('');
-  const [accepted, setAccepted] = useState<string[]>([]);
+  const [acceptedKana, setAcceptedKana] = useState<string[]>([]);
+  const [acceptedAll, setAcceptedAll] = useState<string[]>([]);
+  const [kanjiAnswer, setKanjiAnswer] = useState('');
+  const [answerKanji, setAnswerKanji] = useState<number>(0);
 
   const [userInput, setUserInput] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [correct, setCorrect] = useState(0);
   const [incorrect, setIncorrect] = useState(0);
-  const [answerDisplay, setAnswerDisplay] = useState('');
+  const [answerDisplay, setAnswerDisplay] = useState<ReactNode | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
@@ -152,11 +202,14 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
       setIsFinished(true);
       setCurrentCounter(null);
       setQuestion('');
-      setAccepted([]);
+      setAcceptedKana([]);
+      setAcceptedAll([]);
+      setKanjiAnswer('');
+      setAnswerKanji(0);
       setUserInput('');
       setAwaitingNext(false);
       setInputState('');
-      setAnswerDisplay('');
+      setAnswerDisplay(null);
       return;
     }
 
@@ -186,15 +239,22 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     const shownNumber = num < 10 ? num + 1 : num;
     const qText = `${shownNumber} ${meaning}`;
 
-    const answers = getAnswers(chosen, num).filter(Boolean);
+    const answersKana = getAnswers(chosen, num).filter(Boolean);
+    const nextNumberKanji = numberToKanji(shownNumber);
+    const counterSurface = stripBracketReading(chosen.counter);
+    const nextKanjiAnswer = `${nextNumberKanji}${counterSurface}`;
+    const allAccepted = uniqueStrings([...answersKana, nextKanjiAnswer]);
     setCurrentCounter(chosen);
     setQuestion(qText);
-    setAccepted(answers);
+    setAcceptedKana(uniqueStrings(answersKana));
+    setKanjiAnswer(nextKanjiAnswer);
+    setAnswerKanji(shownNumber);
+    setAcceptedAll(allAccepted);
 
     setUserInput('');
     setAwaitingNext(false);
     setInputState('');
-    setAnswerDisplay('');
+    setAnswerDisplay(null);
     setTimeout(() => inputRef.current?.focus(), 50);
   }, [activeCounters, allQuestions, getProgressState]);
 
@@ -219,10 +279,10 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     updateFeedbackDetails({
       section: pageTitle,
       question: t('counters.feedbackQuestion', { question, meaning: currentCounter ? currentCounter.meaning[0] : '' }),
-      correctAnswer: accepted.join(' / '),
+      correctAnswer: joinAcceptedForDisplay(uniqueStrings([...acceptedKana, kanjiAnswer])),
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [question, accepted, currentCounter, userInput, pageTitle, t]);
+  }, [question, acceptedKana, kanjiAnswer, currentCounter, userInput, pageTitle, t]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -248,7 +308,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     const normalized = finalizeIME(userInput.trim());
     if (!normalized) return;
 
-    const ok = accepted.includes(normalized);
+    const ok = acceptedAll.includes(normalized);
     if (ok) {
       setCorrect(c => c + 1);
       setInputState('correct');
@@ -257,7 +317,15 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
       setInputState('incorrect');
     }
 
-    setAnswerDisplay(accepted.length > 1 ? accepted.join(` ${t('common.or')} `) : accepted[0] ?? '');
+    const kanaDisplay = joinAcceptedForDisplay(acceptedKana);
+    const counterNode = currentCounter ? bracketToRubyNode(currentCounter.counter) : null;
+    const numberKanji = numberToKanji(answerKanji);
+    setAnswerDisplay(
+      <span>
+        <span className="is-japanese">{numberKanji}{counterNode}</span>
+        {kanaDisplay ? <span style={{ fontSize: '0.8em', fontWeight: 600 }}> — {kanaDisplay}</span> : null}
+      </span>
+    );
     recordProgress(String(currentQuestionIdx), ok);
     setAwaitingNext(true);
   };
@@ -335,7 +403,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
           />
 
           <div className={`answer-banner ${answerDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
-            {answerDisplay || '\u00A0'}
+            {answerDisplay ?? '\u00A0'}
           </div>
         </div>
 
@@ -347,7 +415,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
                 return (
                   <OptionToggle
                     key={id}
-                    label={<>～{bracketToRubyNode(c.counter)} ({c.meaning[1]})</>}
+                    label={<>{c.meaning[1]}</>}
                     checked={!!enabled[id]}
                     onChange={() => {
                       setEnabled(prev => ({ ...prev, [id]: !prev[id] }));
