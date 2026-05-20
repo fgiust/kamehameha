@@ -4,6 +4,7 @@ export interface FeedbackDetails {
   correctAnswer: string;
   userAnswer?: string;
   exerciseId?: string;
+  rawCorrectAnswer?: string;
 }
 
 function cleanRubyText(html: string): string {
@@ -22,6 +23,7 @@ export function updateFeedbackDetails(details: Partial<FeedbackDetails>) {
     question: '',
     correctAnswer: '',
     userAnswer: '',
+    rawCorrectAnswer: '',
   };
   const updated = {
     section: details.section ?? current.section ?? '',
@@ -29,6 +31,7 @@ export function updateFeedbackDetails(details: Partial<FeedbackDetails>) {
     correctAnswer: cleanRubyText(details.correctAnswer ?? current.correctAnswer ?? ''),
     userAnswer: cleanRubyText(details.userAnswer ?? current.userAnswer ?? ''),
     exerciseId: details.exerciseId ?? current.exerciseId ?? '',
+    rawCorrectAnswer: details.rawCorrectAnswer ?? current.rawCorrectAnswer ?? '',
   };
   w.currentQuestionDetails = updated;
   window.dispatchEvent(new CustomEvent('nihongo-feedback-update', { detail: updated }));

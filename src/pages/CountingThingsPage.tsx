@@ -527,6 +527,7 @@ export default function CountingThingsPage() {
       section: pageTitle,
       question,
       correctAnswer: accepted.length > 0 ? stripRuby(accepted[0]!) : '',
+      rawCorrectAnswer: accepted.length > 0 ? accepted[0]! : '',
       userAnswer: finalizeIME(userInput.trim()),
     });
   }, [question, accepted, userInput, isFinished, pageTitle]);

@@ -12,6 +12,7 @@ export default function FeedbackPanel() {
     question: '',
     correctAnswer: '',
     userAnswer: '',
+    rawCorrectAnswer: '',
   });
   const [notes, setNotes] = useState('');
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
@@ -33,6 +34,7 @@ export default function FeedbackPanel() {
         correctAnswer: current.correctAnswer || '',
         userAnswer: current.userAnswer || '',
         exerciseId: current.exerciseId || exerciseId,
+        rawCorrectAnswer: current.rawCorrectAnswer || '',
       });
     }
   };
@@ -142,13 +144,15 @@ export default function FeedbackPanel() {
                 onChange={e => setDetails(prev => ({ ...prev, userAnswer: e.target.value }))}
                 placeholder={t('feedbackPanel.yourAnswerPlaceholder')}
               />
-              <button
-                type="button"
-                className="diff-test-link"
-                onClick={() => setIsDiffModalOpen(true)}
-              >
-                TenshinDiff test
-              </button>
+              {details.rawCorrectAnswer && (
+                <button
+                  type="button"
+                  className="diff-test-link"
+                  onClick={() => setIsDiffModalOpen(true)}
+                >
+                  TenshinDiff test
+                </button>
+              )}
             </div>
 
             <div className="feedback-form-group">
@@ -180,7 +184,7 @@ export default function FeedbackPanel() {
       <DiffTestModal 
         isOpen={isDiffModalOpen} 
         onClose={() => setIsDiffModalOpen(false)} 
-        initialCorrect={details.correctAnswer}
+        initialCorrect={details.rawCorrectAnswer || details.correctAnswer}
         initialUser={details.userAnswer || ''}
       />
     </>

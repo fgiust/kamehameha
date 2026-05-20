@@ -143,6 +143,7 @@ export default function SentenceExercise({ title, sentenceData, backPath, persis
       section: title,
       question: currentItem.english,
       correctAnswer: currentItem.answer,
+      rawCorrectAnswer: currentItem.answer,
       userAnswer: finalizeIME(userInput.trim()),
     });
   }, [currentItem, title, userInput, isFinished]);
