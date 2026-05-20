@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { homeConfig } from '../data/homeSections';
 import { useTranslation } from 'react-i18next';
+import { resolveText } from '../i18n/resolve';
+import type { LocalizedText } from '../types';
 
 type GenkiChapterSection = {
   lesson: number;
-  title: string;
-  items: Array<{ id: string; title?: string }>;
+  title: LocalizedText;
+  items: Array<{ id: string; title?: LocalizedText }>;
 };
 
 function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
@@ -14,13 +16,13 @@ function ChapterSection({ chapters }: { chapters: GenkiChapterSection[] }) {
     <div className="genki-section">
       {chapters.map(ch => (
         <div key={ch.lesson} style={{ marginBottom: 20 }}>
-          <h3>{ch.title.replace(' - ', ' — ')}</h3>
+          <h3>{resolveText(t, ch.title).replace(' - ', ' — ')}</h3>
           {ch.items.length > 0 ? (
             <ul className="genki-lesson-list">
               {ch.items.map(item => {
                 const def = homeConfig.exercises[item.id];
                 const path = def?.to;
-                const title = item.title ?? def?.title ?? item.id;
+                const title = resolveText(t, item.title ?? def?.title ?? item.id);
                 return (
                   <li key={item.id}>
                     {path ? (

@@ -31,49 +31,49 @@ const genkiSentenceExercises = Object.fromEntries(
 
 function genkiSectionTitle(lesson: number) {
   const bookLabel = lesson <= 12 ? 'Genki I' : 'Genki II';
-  return `${bookLabel} - Lesson ${lesson}`;
+  return { key: 'genki.lessonTitle', values: { book: bookLabel, lesson } };
 }
 
 export const homeConfig: HomeConfig = {
   exercises: {
     ...genkiSentenceExercises,
 
-    teform: { id: 'teform', title: 'て-Form', to: '/teform', defaultTotal: VERB_TOTAL },
-    causativeform: { id: 'causativeform', title: 'Causative Form', to: '/causativeform', defaultTotal: VERB_TOTAL },
-    conditionalform: { id: 'conditionalform', title: 'Conditional Form', to: '/conditionalform', defaultTotal: VERB_TOTAL },
-    imperativeform: { id: 'imperativeform', title: 'Imperative Form', to: '/imperativeform', defaultTotal: VERB_TOTAL },
-    negativeform: { id: 'negativeform', title: 'Negative Form', to: '/negativeform', defaultTotal: VERB_TOTAL },
-    passiveform: { id: 'passiveform', title: 'Passive Form', to: '/passiveform', defaultTotal: VERB_TOTAL },
-    pastform: { id: 'pastform', title: 'Past Form', to: '/pastform', defaultTotal: VERB_TOTAL },
-    politeform: { id: 'politeform', title: 'Polite Form', to: '/politeform', defaultTotal: VERB_TOTAL },
-    'politeform-short': { id: 'politeform-short', title: 'Short Forms', to: '/politeform?reverse=true', defaultTotal: VERB_TOTAL },
-    potentialform: { id: 'potentialform', title: 'Potential Form', to: '/potentialform', defaultTotal: VERB_TOTAL },
-    provisionalform: { id: 'provisionalform', title: 'Provisional Form', to: '/provisionalform', defaultTotal: VERB_TOTAL },
-    volitionalform: { id: 'volitionalform', title: 'Volitional Form', to: '/volitionalform', defaultTotal: VERB_TOTAL },
-    randomize: { id: 'randomize', title: 'Randomized Forms', to: '/randomize', defaultTotal: VERB_TOTAL },
+    teform: { id: 'teform', title: { key: 'forms.te' }, to: '/teform', defaultTotal: VERB_TOTAL },
+    causativeform: { id: 'causativeform', title: { key: 'forms.causative' }, to: '/causativeform', defaultTotal: VERB_TOTAL },
+    conditionalform: { id: 'conditionalform', title: { key: 'forms.conditional' }, to: '/conditionalform', defaultTotal: VERB_TOTAL },
+    imperativeform: { id: 'imperativeform', title: { key: 'forms.imperative' }, to: '/imperativeform', defaultTotal: VERB_TOTAL },
+    negativeform: { id: 'negativeform', title: { key: 'forms.negative' }, to: '/negativeform', defaultTotal: VERB_TOTAL },
+    passiveform: { id: 'passiveform', title: { key: 'forms.passive' }, to: '/passiveform', defaultTotal: VERB_TOTAL },
+    pastform: { id: 'pastform', title: { key: 'forms.past' }, to: '/pastform', defaultTotal: VERB_TOTAL },
+    politeform: { id: 'politeform', title: { key: 'forms.polite' }, to: '/politeform', defaultTotal: VERB_TOTAL },
+    'politeform-short': { id: 'politeform-short', title: { key: 'forms.short' }, to: '/politeform?reverse=true', defaultTotal: VERB_TOTAL },
+    potentialform: { id: 'potentialform', title: { key: 'forms.potential' }, to: '/potentialform', defaultTotal: VERB_TOTAL },
+    provisionalform: { id: 'provisionalform', title: { key: 'forms.provisional' }, to: '/provisionalform', defaultTotal: VERB_TOTAL },
+    volitionalform: { id: 'volitionalform', title: { key: 'forms.volitional' }, to: '/volitionalform', defaultTotal: VERB_TOTAL },
+    randomize: { id: 'randomize', title: { key: 'forms.randomized' }, to: '/randomize', defaultTotal: VERB_TOTAL },
 
-    'adj-naruform': { id: 'adj-naruform', title: 'なる Form', to: '/adj-naruform', defaultTotal: ADJ_TOTAL },
-    'adj-conditionalform': { id: 'adj-conditionalform', title: 'Conditional Form', to: '/adj-conditionalform', defaultTotal: ADJ_TOTAL },
-    'adj-negativeform': { id: 'adj-negativeform', title: 'Negative Form', to: '/adj-negativeform', defaultTotal: ADJ_TOTAL },
-    'adj-pastform': { id: 'adj-pastform', title: 'Past Form', to: '/adj-pastform', defaultTotal: ADJ_TOTAL },
-    'adj-volitionalform': { id: 'adj-volitionalform', title: 'Volitional Form', to: '/adj-volitionalform', defaultTotal: ADJ_TOTAL },
-    'adj-randomize': { id: 'adj-randomize', title: 'Randomized Forms', to: '/adj-randomize', defaultTotal: ADJ_TOTAL },
+    'adj-naruform': { id: 'adj-naruform', title: { key: 'forms.naru' }, to: '/adj-naruform', defaultTotal: ADJ_TOTAL },
+    'adj-conditionalform': { id: 'adj-conditionalform', title: { key: 'forms.conditional' }, to: '/adj-conditionalform', defaultTotal: ADJ_TOTAL },
+    'adj-negativeform': { id: 'adj-negativeform', title: { key: 'forms.negative' }, to: '/adj-negativeform', defaultTotal: ADJ_TOTAL },
+    'adj-pastform': { id: 'adj-pastform', title: { key: 'forms.past' }, to: '/adj-pastform', defaultTotal: ADJ_TOTAL },
+    'adj-volitionalform': { id: 'adj-volitionalform', title: { key: 'forms.volitional' }, to: '/adj-volitionalform', defaultTotal: ADJ_TOTAL },
+    'adj-randomize': { id: 'adj-randomize', title: { key: 'forms.randomized' }, to: '/adj-randomize', defaultTotal: ADJ_TOTAL },
 
-    counters: { id: 'counters', title: 'Counters', to: '/counters', defaultTotal: COUNTERS_DEFAULT_TOTAL },
-    'counters-people': { id: 'counters-people', title: 'Counting People', to: '/counters-people', defaultTotal: COUNTERS_PEOPLE_TOTAL },
-    'counting-things': { id: 'counting-things', title: 'Counting things', to: '/counting-things', defaultTotal: COUNTING_THINGS_TOTAL },
-    days: { id: 'days', title: 'Days of the Month', to: '/days', defaultTotal: 31 },
-    numbers: { id: 'numbers', title: 'Numbers', to: '/numbers', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
-    time: { id: 'time', title: 'Time', to: '/time', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
-    transitive: { id: 'transitive', title: 'Transitive / Intransitive pairs', to: '/transitive', defaultTotal: TRANSITIVE_TOTAL },
-    'na-vs-no': { id: 'na-vs-no', title: 'な vs の Adjectives', to: '/na-vs-no', defaultTotal: NA_VS_NO_TOTAL },
-    'family-names': { id: 'family-names', title: 'Common family names', to: '/family-names', defaultTotal: FAMILY_NAMES_TOTAL },
-    'adjectives-nouns': { id: 'adjectives-nouns', title: 'Adjectives + nouns', to: '/adjectives-nouns', defaultTotal: ADJECTIVES_NOUNS_TOTAL },
+    counters: { id: 'counters', title: { key: 'home.exercises.counters' }, to: '/counters', defaultTotal: COUNTERS_DEFAULT_TOTAL },
+    'counters-people': { id: 'counters-people', title: { key: 'pages.countersPeople.title' }, to: '/counters-people', defaultTotal: COUNTERS_PEOPLE_TOTAL },
+    'counting-things': { id: 'counting-things', title: { key: 'pages.countingThings.title' }, to: '/counting-things', defaultTotal: COUNTING_THINGS_TOTAL },
+    days: { id: 'days', title: { key: 'pages.days.title' }, to: '/days', defaultTotal: 31 },
+    numbers: { id: 'numbers', title: { key: 'home.exercises.numbers' }, to: '/numbers', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
+    time: { id: 'time', title: { key: 'home.exercises.time' }, to: '/time', defaultTotal: DEFAULT_MASTERY_RANDOM_TOTAL },
+    transitive: { id: 'transitive', title: { key: 'pages.transitive.title' }, to: '/transitive', defaultTotal: TRANSITIVE_TOTAL },
+    'na-vs-no': { id: 'na-vs-no', title: { key: 'pages.naVsNo.title' }, to: '/na-vs-no', defaultTotal: NA_VS_NO_TOTAL },
+    'family-names': { id: 'family-names', title: { key: 'pages.familyNames.title' }, to: '/family-names', defaultTotal: FAMILY_NAMES_TOTAL },
+    'adjectives-nouns': { id: 'adjectives-nouns', title: { key: 'pages.adjectivesNouns.title' }, to: '/adjectives-nouns', defaultTotal: ADJECTIVES_NOUNS_TOTAL },
   },
   sections: [
     {
       id: 'verb-conjugation',
-      title: 'Verb Conjugation Practice',
+      title: { key: 'home.sections.verbConjugation' },
       titleClassName: 'section-title',
       items: [
         { id: 'teform' },
@@ -92,7 +92,7 @@ export const homeConfig: HomeConfig = {
     },
     {
       id: 'adjective-conjugation',
-      title: 'Adjective Conjugation Practice',
+      title: { key: 'home.sections.adjectiveConjugation' },
       titleClassName: 'section-title',
       items: [
         { id: 'adj-naruform' },
@@ -105,7 +105,7 @@ export const homeConfig: HomeConfig = {
     },
     {
       id: 'other',
-      title: 'Other',
+      title: { key: 'home.sections.other' },
       titleClassName: 'section-title',
       items: [
         { id: 'counters' },
@@ -121,7 +121,7 @@ export const homeConfig: HomeConfig = {
     },
     {
       id: 'genki-intro',
-      title: 'Genki supplementary exercises',
+      title: { key: 'home.sections.genkiSupplementary' },
       titleClassName: 'genki-supp-title',
       titleLevel: 2,
       descriptionClassName: 'genki-supp-desc',
@@ -141,8 +141,8 @@ export const homeConfig: HomeConfig = {
         { id: 'genki1-1' },
         { id: 'genki1-2' },
         { id: 'genki1-3' },
-        { id: 'numbers', title: 'Numbers Practice' },
-        { id: 'time', title: 'Time Practice' },
+        { id: 'numbers', title: { key: 'pages.numbers.title' } },
+        { id: 'time', title: { key: 'pages.time.title' } },
       ],
     },
     {
@@ -166,7 +166,7 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'politeform', title: 'Verb Conjugation' },
+        { id: 'politeform', title: { key: 'home.genkiOverrides.verbConjugation' } },
         { id: 'genki3-2' },
         { id: 'genki3-3' },
         { id: 'genki3-4' },
@@ -183,7 +183,7 @@ export const homeConfig: HomeConfig = {
         { id: 'genki4-1' },
         { id: 'genki4-2' },
         { id: 'genki4-3' },
-        { id: 'pastform', title: 'Past Tense of Verbs' },
+        { id: 'pastform', title: { key: 'home.genkiOverrides.pastTenseVerbs' } },
         { id: 'genki4-5' },
         { id: 'genki4-6' },
         { id: 'genki4-7' },
@@ -199,7 +199,7 @@ export const homeConfig: HomeConfig = {
         { id: 'genki5-1' },
         { id: 'genki5-2' },
         { id: 'genki5-3' },
-        { id: 'counters', title: 'Counting' },
+        { id: 'counters', title: { key: 'home.genkiOverrides.counting' } },
       ],
     },
     {
@@ -208,7 +208,7 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'teform', title: 'Te-form' },
+        { id: 'teform', title: { key: 'home.genkiOverrides.teForm' } },
         { id: 'genki6-2' },
         { id: 'genki6-3' },
         { id: 'genki6-4' },
@@ -227,7 +227,7 @@ export const homeConfig: HomeConfig = {
         { id: 'genki7-2' },
         { id: 'genki7-3' },
         { id: 'genki7-4' },
-        { id: 'counters-people', title: 'Counting People' },
+        { id: 'counters-people', title: { key: 'pages.countersPeople.title' } },
       ],
     },
     {
@@ -250,8 +250,8 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'pastform', title: 'Past Tense Short Forms (Verbs)' },
-        { id: 'adj-pastform', title: 'Past Tense Short Forms (Adjectives)' },
+        { id: 'pastform', title: { key: 'home.genkiOverrides.pastShortFormsVerbs' } },
+        { id: 'adj-pastform', title: { key: 'home.genkiOverrides.pastShortFormsAdjectives' } },
         { id: 'genki9-2' },
         { id: 'genki9-3' },
         { id: 'genki9-4' },
@@ -267,7 +267,7 @@ export const homeConfig: HomeConfig = {
         { id: 'genki10-2' },
         { id: 'genki10-3' },
         { id: 'genki10-4' },
-        { id: 'adj-naruform', title: 'Adjective + なる' },
+        { id: 'adj-naruform', title: { key: 'home.genkiOverrides.adjectiveNaru' } },
         { id: 'genki10-6' },
         { id: 'genki10-7' },
       ],
@@ -304,7 +304,7 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'potentialform', title: 'Potential Verbs' },
+        { id: 'potentialform', title: { key: 'home.genkiOverrides.potentialVerbs' } },
         { id: 'genki13-2' },
         { id: 'genki13-3' },
         { id: 'genki13-4' },
@@ -331,7 +331,7 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'volitionalform', title: 'Volitional Form' },
+        { id: 'volitionalform' },
         { id: 'genki15-2' },
         { id: 'genki15-3' },
         { id: 'genki15-4' },

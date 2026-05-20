@@ -108,21 +108,28 @@ export interface GenkiChapter {
   links: GenkiLessonLink[];
 }
 
+export type I18nText = {
+  key: string;
+  values?: Record<string, string | number>;
+};
+
+export type LocalizedText = string | I18nText;
+
 export type HomeExerciseDefinition = {
   id: string;
-  title: string;
+  title: LocalizedText;
   to?: string;
   defaultTotal: number;
 };
 
 export type HomeSectionItem = {
   id: string;
-  title?: string;
+  title?: LocalizedText;
 };
 
 export type HomeSection = {
   id: string;
-  title: string;
+  title: LocalizedText;
   titleClassName?: string;
   titleLevel?: 2 | 3;
   description?: string[];

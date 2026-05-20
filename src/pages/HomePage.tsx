@@ -5,6 +5,7 @@ import { APP_TITLE_PREFIX } from '../types';
 import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UPDATED_EVENT } from '../hooks/useSessionProgress';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
+import { resolveText } from '../i18n/resolve';
 
 function buildMiniSegments(persistKey: string, totalSegments: number) {
   const total = Math.max(1, totalSegments);
@@ -69,13 +70,14 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
   const titleClassName = section.titleClassName ?? 'section-title';
   const descriptionClassName = section.descriptionClassName ?? 'genki-supp-desc';
   const titleLevel = section.titleLevel ?? 2;
+  const sectionTitle = resolveText(t, section.title);
 
   return (
     <div key={section.id}>
       {titleLevel === 3 ? (
-        <h3 className={titleClassName} style={{ marginTop: 18 }}>{section.title}</h3>
+        <h3 className={titleClassName} style={{ marginTop: 18 }}>{sectionTitle}</h3>
       ) : (
-        <h2 className={titleClassName}>{section.title}</h2>
+        <h2 className={titleClassName}>{sectionTitle}</h2>
       )}
       {section.description && section.description.length > 0 && (
         <p className={descriptionClassName}>
@@ -87,7 +89,7 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
         <div className="link-grid">
           {section.items.map(item => {
             const def = homeConfig.exercises[item.id];
-            const title = item.title ?? def?.title ?? item.id;
+            const title = resolveText(t, item.title ?? def?.title ?? item.id);
             const to = def?.to;
             const defaultTotal = def?.defaultTotal ?? 12;
             return to ? (
