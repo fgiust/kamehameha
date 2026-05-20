@@ -1,6 +1,16 @@
 import SentenceExercise from '../components/SentenceExercise';
-import { adjectivesNounsSentenceData } from '../data/adjectivesNouns';
+import { getSentenceTxtLessonById } from '../data/sentenceTxtLessons';
+import { useTranslation } from 'react-i18next';
 
 export default function AdjectivesNounsPage() {
-  return <SentenceExercise title="Adjectives + nouns" sentenceData={adjectivesNounsSentenceData} backPath="/" persistKey="/adjectives-nouns" />;
+  const { i18n } = useTranslation();
+  const lesson = getSentenceTxtLessonById('sentence-adjectivenouns');
+  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
+
+  if (!lesson) {
+    return <SentenceExercise title="Sentence Exercise" sentenceData={[]} backPath="/" persistKey="/adjectives-nouns" />;
+  }
+
+  const title = lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title;
+  return <SentenceExercise title={title} sentenceData={lesson.sentenceData} backPath="/" persistKey="/adjectives-nouns" />;
 }

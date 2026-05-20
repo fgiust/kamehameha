@@ -27,27 +27,52 @@ function genkiTxtPlugin(): Plugin {
     load(id: string) {
       if (id === resolvedVirtualModuleId) {
         // Read all txt files in src/data
-        const files = fs.readdirSync(dataDir).filter(f => /^genki-\d{2}-\d\.txt$/i.test(f))
+        const files = fs
+          .readdirSync(dataDir)
+          .filter(f => /^genki-\d{2}-\d\.txt$/i.test(f) || /^sentence-[a-z0-9-]+\.txt$/i.test(f))
         
-        const descriptors = []
+        const genkiDescriptors: {
+          file: string
+          sessionId: string
+          text: string
+          lesson: number
+          exercise: number
+          filePath: string
+        }[] = []
+        const sentenceDescriptors: {
+          file: string
+          sessionId: string
+          text: string
+          filePath: string
+        }[] = []
+
         for (const file of files) {
           const filePath = path.join(dataDir, file)
           const text = fs.readFileSync(filePath, 'utf-8')
-          
-          const match = /^genki-(\d{2})-(\d)\.txt$/i.exec(file)!
-          const lesson = Number(match[1])
-          const exercise = Number(match[2])
-          const sessionId = `genki${lesson}-${exercise}`
-          
+
           // We add this file to watch list so Vite knows to re-run this load hook when it changes
           this.addWatchFile(filePath)
-          
-          descriptors.push({ file, sessionId, text, lesson, exercise, filePath })
+
+          const genkiMatch = /^genki-(\d{2})-(\d)\.txt$/i.exec(file)
+          if (genkiMatch) {
+            const lesson = Number(genkiMatch[1])
+            const exercise = Number(genkiMatch[2])
+            const sessionId = `genki${lesson}-${exercise}`
+            genkiDescriptors.push({ file, sessionId, text, lesson, exercise, filePath })
+            continue
+          }
+
+          const sentenceMatch = /^(sentence-[a-z0-9-]+)\.txt$/i.exec(file)
+          if (sentenceMatch) {
+            const sessionId = sentenceMatch[1]
+            sentenceDescriptors.push({ file, sessionId, text, filePath })
+          }
         }
-        
-        descriptors.sort((a, b) => (a.lesson - b.lesson) || (a.exercise - b.exercise))
-        
-        const parsedLessons = descriptors.map(desc => {
+
+        genkiDescriptors.sort((a, b) => (a.lesson - b.lesson) || (a.exercise - b.exercise))
+        sentenceDescriptors.sort((a, b) => a.sessionId.localeCompare(b.sessionId))
+
+        const parsedGenkiLessons = genkiDescriptors.map(desc => {
           // This will THROW at build/dev time if the format is invalid, caught directly by Vite!
           return parseTranslateSessionTxt({
             id: desc.sessionId,
@@ -55,8 +80,21 @@ function genkiTxtPlugin(): Plugin {
             sourceName: desc.filePath
           })
         })
-        
-        return `export const genkiTxtLessons = ${JSON.stringify(parsedLessons, null, 2)};\n`
+
+        const parsedSentenceLessons = sentenceDescriptors.map(desc => {
+          // This will THROW at build/dev time if the format is invalid, caught directly by Vite!
+          return parseTranslateSessionTxt({
+            id: desc.sessionId,
+            text: desc.text,
+            sourceName: desc.filePath
+          })
+        })
+
+        return [
+          `export const genkiTxtLessons = ${JSON.stringify(parsedGenkiLessons, null, 2)};`,
+          `export const sentenceTxtLessons = ${JSON.stringify(parsedSentenceLessons, null, 2)};`,
+          ''
+        ].join('\n')
       }
     }
   }
