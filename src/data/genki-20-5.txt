@@ -1,0 +1,22 @@
+Name という Item
+Oggetto という Nome
+
+I have a dog named Pochi.
+Ho un cane di nome Pochi.
+ポチという犬[いぬ]を飼[か]っています
+
+This is a movie called "Your Name."
+Questo è un film intitolato "Il tuo nome".
+これは「君[きみ]の名[な]は」という映[えい]画[が]です
+
+Do you know a person named Sato?
+Conosci una persona di nome Sato?
+佐[さ]藤[とう]さんという人[ひと]を知[し]っていますか
+
+I read a novel called "Snow Country."
+Ho letto un romanzo intitolato "Snow Country".
+「雪[ゆき]国[ぐに]」という小[しょう]説[せつ]を読[よ]みました
+
+I like a song called "Hana."
+Mi piace una canzone chiamata "Hana".
+花[はな]という歌[うた]が好[す]きです

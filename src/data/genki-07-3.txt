@@ -1,0 +1,22 @@
+Te-forms for Joining Sentences
+Moduli Te per unire le frasi
+
+The food at that cafe is cheap and spicy.
+Il cibo in quel bar è economico e piccante.
+あのカフェの食[た]べ物[もの]は安[やす]くて、辛[から]いです
+
+The hotel was quiet, and I slept well.
+L'hotel era tranquillo e ho dormito bene.
+ホテルは静[しず]かで、よく寝[ね]ました
+
+Professor Yamashita is Japanese and he is about fifty years old.
+Il professor Yamashita è giapponese e ha circa cinquant'anni.
+山[やま]下[した]先[せん]生[せい]は日[に]本[ほん]人[じん]で、五[ご]十[じゅう]歳[さい]ぐらいです
+
+This book is interesting and cheap.
+Questo libro è interessante ed economico.
+この本[ほん]は面[おも]白[しろ]くて、安[やす]いです
+
+My room is small and old.
+La mia stanza è piccola e vecchia.
+私[わたし]の部[へ]屋[や]は狭[せま]くて、古[ふる]いです

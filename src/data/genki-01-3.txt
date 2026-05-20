@@ -1,0 +1,10 @@
+Noun1 の Noun2
+Sostantivo1 の Sostantivo2
+
+Tanaka is a student at the University of Tokyo.
+Tanaka è uno studente dell'Università di Tokyo.
+田[た]中[なか]さんは{東[とう]京[きょう]大[だい]学[がく]|とうきょうだいがく}の学[がく]生[せい]{です|だ}
+
+I am a student of Japanese.
+Sono uno studente di giapponese.
+{私[わたし]は|}日[に]本[ほん]語[ご]の学[がく]生[せい]{です|だ}

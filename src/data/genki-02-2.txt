@@ -1,0 +1,22 @@
+この/その/あの/どの + Noun
+この/その/あの/どの + Sostantivo
+
+How much is this shirt?
+Quanto costa questa maglietta?
+このシャツは{いくら|なん円[えん]}{ですか|か}
+
+That book over there is 3000 yen.
+Quel libro laggiù costa 3000 yen.
+あの本[ほん]は{三[さん]千[ぜん]円[えん]|3000円[えん]}{です|だ}
+
+That umbrella is 2000 yen.
+Quell'ombrello costa 2000 yen.
+そのかさは{二[に]千[せん]円[えん]|2000円[えん]}{です|だ}
+
+Which bag is 3000 yen?
+Quale borsa costa 3000 yen?
+どのかばんが三[さん]千[ぜん]円[えん]{ですか|か}
+
+This pen is mine.
+Questa penna è mia.
+このペンは私[わたし]の{です|だ}

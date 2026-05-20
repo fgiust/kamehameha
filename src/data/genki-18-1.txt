@@ -1,0 +1,22 @@
+Transitivity Pairs
+Coppie di transitività
+
+I opened the door.
+Ho aperto la porta.
+{私[わたし]は|}ドアを開[あ]けました
+
+The door opened.
+La porta si aprì.
+ドアが開[あ]きました
+
+I turned off the light.
+Ho spento la luce.
+{私[わたし]は|}電[でん]気[き]を消[け]しました
+
+The light went off.
+La luce si spense.
+電[でん]気[き]が消[き]えました
+
+The cat broke the computer.
+Il gatto ha rotto il computer.
+猫[ねこ]がパソコンを壊[こわ]しました
