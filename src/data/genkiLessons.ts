@@ -22,8 +22,39 @@ import { genki20Lessons } from './genki20';
 import { genki21Lessons } from './genki21';
 import { genki22Lessons } from './genki22';
 import { genki23Lessons } from './genki23';
+import { genkiTxtLessons } from './genkiTxtLessons';
 
-export const genkiLessons: TranslateSessionData[] = [
+function parseGenkiId(id: string) {
+  const match = /^genki(\d+)-(\d+)$/i.exec(id);
+  if (!match) return null;
+  return { lesson: Number(match[1]), exercise: Number(match[2]) };
+}
+
+function mergeGenkiLessons(legacy: TranslateSessionData[], txt: TranslateSessionData[]) {
+  const byId = new Map<string, TranslateSessionData>();
+  for (const item of legacy) byId.set(item.id, item);
+  for (const item of txt) byId.set(item.id, item);
+
+  const out: TranslateSessionData[] = [];
+  for (const item of legacy) {
+    const resolved = byId.get(item.id);
+    if (!resolved) continue;
+    out.push(resolved);
+    byId.delete(item.id);
+  }
+
+  const remaining = Array.from(byId.values());
+  remaining.sort((a, b) => {
+    const pa = parseGenkiId(a.id);
+    const pb = parseGenkiId(b.id);
+    if (!pa || !pb) return a.id.localeCompare(b.id);
+    return (pa.lesson - pb.lesson) || (pa.exercise - pb.exercise);
+  });
+
+  return [...out, ...remaining];
+}
+
+const legacyGenkiLessons: TranslateSessionData[] = [
   ...genki01Lessons,
   ...genki02Lessons,
   ...genki03Lessons,
@@ -48,6 +79,8 @@ export const genkiLessons: TranslateSessionData[] = [
   ...genki22Lessons,
   ...genki23Lessons,
 ];
+
+export const genkiLessons: TranslateSessionData[] = mergeGenkiLessons(legacyGenkiLessons, genkiTxtLessons);
 
 export function getGenkiLessonById(id: string): TranslateSessionData | undefined {
   return genkiLessons.find(l => l.id === id);

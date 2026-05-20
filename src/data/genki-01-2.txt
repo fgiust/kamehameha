@@ -12,3 +12,10 @@ Si, io sono uno studente.
 How old is Yamashita?
 Quanti anni ha Yamashita?
 山[やま]下[した]さんは何[なん]年[ねん]生[せい]{ですか|か}
+
+test con errore
+solo 2 righe
+
+test con errore
+solo 2 righe
+

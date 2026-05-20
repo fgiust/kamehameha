@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import checker from 'vite-plugin-checker'
 import fs from 'fs'
@@ -11,12 +11,67 @@ const __dirname = path.dirname(__filename)
 const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf8')) as { version?: string }
 const appVersion = typeof pkg.version === 'string' ? pkg.version : '0.0.0'
 
+function genkiTxtPlugin(): Plugin {
+  const virtualModuleId = 'virtual:genki-txt-lessons'
+  const resolvedVirtualModuleId = '\0' + virtualModuleId
+  const dataDir = path.resolve(__dirname, 'src/data')
+
+  return {
+    name: 'vite-plugin-genki-txt',
+    resolveId(id: string) {
+      if (id === virtualModuleId) {
+        return resolvedVirtualModuleId
+      }
+    },
+    load(id: string) {
+      if (id === resolvedVirtualModuleId) {
+        // Read all txt files in src/data
+        const files = fs.readdirSync(dataDir).filter(f => /^genki-\d{2}-\d\.txt$/i.test(f))
+        
+        // Use absolute import path so the virtual module can resolve it properly
+        const parseFnPath = path.resolve(__dirname, 'src/data/parseTranslateSessionTxt.ts').replace(/\\/g, '/')
+        
+        let code = `import { parseTranslateSessionTxt } from '${parseFnPath}';\n\n`
+        code += `export const genkiTxtLessons = [\n`
+        
+        const descriptors = []
+        for (const file of files) {
+          const filePath = path.join(dataDir, file)
+          const text = fs.readFileSync(filePath, 'utf-8')
+          
+          const match = /^genki-(\d{2})-(\d)\.txt$/i.exec(file)!
+          const lesson = Number(match[1])
+          const exercise = Number(match[2])
+          const sessionId = `genki${lesson}-${exercise}`
+          
+          // We add this file to watch list so Vite knows to re-run this load hook when it changes
+          this.addWatchFile(filePath)
+          
+          descriptors.push({ file, sessionId, text, lesson, exercise })
+        }
+        
+        descriptors.sort((a, b) => (a.lesson - b.lesson) || (a.exercise - b.exercise))
+        
+        for (const desc of descriptors) {
+          // Serialize the text safely for JS injection
+          const safeText = JSON.stringify(desc.text)
+          code += `  parseTranslateSessionTxt({ id: "${desc.sessionId}", text: ${safeText}, sourceName: "${desc.file}" }),\n`
+        }
+        
+        code += `];\n`
+        return code
+      }
+    }
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
   },
   plugins: [
+    genkiTxtPlugin(),
     {
       name: 'dev-favicon',
       enforce: 'pre',
