@@ -2,18 +2,14 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
+import SubmitButton, { SubmitState } from '../components/SubmitButton';
 
 export default function ContactPage() {
   const { t, i18n } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [submitState, setSubmitState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const submitLabel =
-    submitState === 'sending' ? t('contact.sending') :
-      submitState === 'success' ? t('contact.sent') :
-        submitState === 'error' ? t('contact.failed') :
-          t('contact.send');
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + t('common.contact');
@@ -79,13 +75,17 @@ export default function ContactPage() {
             <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={6} />
           </div>
 
-          <button
-            type="submit"
-            className={`feedback-submit-btn contact-submit-btn ${submitState === 'sending' ? 'is-sending' : submitState === 'success' ? 'is-success' : submitState === 'error' ? 'is-error' : ''}`}
+          <SubmitButton
+            state={submitState}
+            labels={{
+              idle: t('contact.send'),
+              sending: t('contact.sending'),
+              success: t('contact.sent'),
+              error: t('contact.failed')
+            }}
             disabled={submitState === 'sending' || submitState === 'success'}
-          >
-            {submitLabel}
-          </button>
+            className="contact-submit-btn"
+          />
         </form>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FeedbackDetails } from '../utils/feedback';
 import { useTranslation } from 'react-i18next';
+import SubmitButton, { SubmitState } from './SubmitButton';
 
 export default function FeedbackPanel() {
   const { t } = useTranslation();
@@ -12,8 +13,7 @@ export default function FeedbackPanel() {
     userAnswer: '',
   });
   const [notes, setNotes] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
 
   const notesRef = useRef<HTMLTextAreaElement>(null);
 
@@ -47,7 +47,7 @@ export default function FeedbackPanel() {
   useEffect(() => {
     if (isOpen) {
       syncDetails();
-      setMessage(null);
+      setSubmitState('idle');
       setTimeout(() => {
         notesRef.current?.focus();
       }, 300);
@@ -56,8 +56,8 @@ export default function FeedbackPanel() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setMessage(null);
+    if (submitState === 'sending' || submitState === 'success') return;
+    setSubmitState('sending');
 
     try {
       const response = await fetch('/api/feedback', {
@@ -73,20 +73,19 @@ export default function FeedbackPanel() {
 
       const result = await response.json();
       if (result.success) {
-        setMessage({ type: 'success', text: t('feedbackPanel.saved') });
+        setSubmitState('success');
         setNotes('');
         setTimeout(() => {
           setIsOpen(false);
-          setMessage(null);
-        }, 1500);
+          setSubmitState('idle');
+        }, 3000);
       } else {
-        setMessage({ type: 'error', text: result.error || t('feedbackPanel.failed') });
+        setSubmitState('error');
+        setTimeout(() => setSubmitState('idle'), 3000);
       }
-    } catch (err) {
-      const errorText = err instanceof Error ? err.message : t('feedbackPanel.networkError');
-      setMessage({ type: 'error', text: errorText });
-    } finally {
-      setIsSubmitting(false);
+    } catch {
+      setSubmitState('error');
+      setTimeout(() => setSubmitState('idle'), 3000);
     }
   };
 
@@ -114,12 +113,6 @@ export default function FeedbackPanel() {
           </div>
 
           <form onSubmit={handleSubmit} className="feedback-panel-form">
-            {message && (
-              <div className={`feedback-message ${message.type}`}>
-                {message.text}
-              </div>
-            )}
-
             <div className="feedback-form-group">
               <label>{t('feedbackPanel.section')}</label>
               <input
@@ -172,13 +165,16 @@ export default function FeedbackPanel() {
               />
             </div>
 
-            <button
-              type="submit"
-              className="feedback-submit-btn"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? t('feedbackPanel.saving') : t('feedbackPanel.save')}
-            </button>
+            <SubmitButton
+              state={submitState}
+              labels={{
+                idle: t('feedbackPanel.save'),
+                sending: t('feedbackPanel.saving'),
+                success: t('feedbackPanel.saved'),
+                error: t('feedbackPanel.failed')
+              }}
+              disabled={submitState === 'sending' || submitState === 'success'}
+            />
           </form>
         </div>
       </div>

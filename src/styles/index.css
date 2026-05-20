@@ -1248,7 +1248,10 @@ body.dark .home-mini-progress-cell.is-incorrect {
   resize: vertical;
 }
 
-.feedback-submit-btn {
+/* Submit Button Component */
+.animated-submit-btn {
+  position: relative;
+  overflow: hidden;
   background: var(--accent);
   color: white;
   border: none;
@@ -1259,48 +1262,74 @@ body.dark .home-mini-progress-cell.is-incorrect {
   cursor: pointer;
   transition: all var(--transition);
   margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
 }
 
-.feedback-submit-btn:hover:not(:disabled) {
+.animated-submit-btn:hover:not(:disabled) {
   background: color-mix(in srgb, var(--accent) 85%, white);
   box-shadow: 0 4px 12px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
-.feedback-submit-btn:disabled {
+.animated-submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+
+.animated-submit-btn.is-sending::before {
+  animation: btn-fill 1.5s ease-out forwards;
+}
+
+@keyframes btn-fill {
+  0% { width: 0%; }
+  15% { width: 40%; }
+  60% { width: 80%; }
+  100% { width: 98%; }
+}
+
+.animated-submit-btn.is-success {
+  background: var(--correct);
+  animation: btn-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.animated-submit-btn.is-success::before {
+  width: 100%;
+  background: transparent;
+  transition: background 0.3s;
+}
+
+.animated-submit-btn.is-error {
+  background: var(--incorrect);
+  animation: btn-shake 0.4s ease-in-out;
+}
+
+.animated-submit-btn.is-error::before {
+  width: 100%;
+  background: transparent;
+}
+
+.animated-submit-btn:disabled:not(.is-sending):not(.is-success):not(.is-error) {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.contact-submit-btn {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
-
-.contact-submit-btn.is-sending {
-  animation: contact-pop 220ms ease-out;
-}
-
-.contact-submit-btn.is-success {
-  background: var(--correct);
-}
-
-.contact-submit-btn.is-error {
-  background: var(--incorrect);
-}
-
-.contact-submit-btn.is-sending::after {
-  content: '';
-  position: absolute;
-  right: 14px;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  margin-top: -7px;
+.btn-loader {
+  margin-left: 10px;
+  width: 16px;
+  height: 16px;
   border: 2px solid rgba(255, 255, 255, 0.4);
   border-top-color: rgba(255, 255, 255, 0.95);
-  border-radius: 999px;
-  animation: contact-spin 700ms linear infinite;
+  border-radius: 50%;
+  animation: contact-spin 0.7s linear infinite;
 }
 
 @keyframes contact-spin {
@@ -1308,10 +1337,16 @@ body.dark .home-mini-progress-cell.is-incorrect {
   to { transform: rotate(360deg); }
 }
 
-@keyframes contact-pop {
-  0% { transform: scale(0.98); }
-  60% { transform: scale(1.02); }
+@keyframes btn-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
   100% { transform: scale(1); }
+}
+
+@keyframes btn-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
 }
 
 .feedback-message {
