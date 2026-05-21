@@ -29,14 +29,8 @@ export default function SessionProgressBar({
         const audio = new Audio(kamehamehaAudioUrl);
         audio.play().catch(e => console.error('Audio play failed:', e));
 
-        // Show gif
         setKamehamehaKey(Date.now());
         setShowKamehameha(true);
-
-        // Hide gif after animation
-        // setTimeout(() => {
-        //   setShowKamehameha(false);
-        // }, 3000);
       }
     } else {
       if (segments.some(s => s !== 1)) {
