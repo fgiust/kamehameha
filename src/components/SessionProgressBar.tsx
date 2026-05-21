@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import kamehamehaAudioUrl from '../assets/kamehameha150.mp3';
+import kamehamehaAudioUrl from '../assets/kamehameha.mp3';
 import kamehamehaGifUrl from '../assets/kamehameha.gif';
 
 export default function SessionProgressBar({
@@ -34,9 +34,9 @@ export default function SessionProgressBar({
         setShowKamehameha(true);
 
         // Hide gif after animation
-        setTimeout(() => {
-          setShowKamehameha(false);
-        }, 3000);
+        // setTimeout(() => {
+        //   setShowKamehameha(false);
+        // }, 3000);
       }
     } else {
       if (segments.some(s => s !== 1)) {
@@ -47,16 +47,16 @@ export default function SessionProgressBar({
 
   return (
     <div className="session-progress-row" aria-hidden="true" style={{ position: 'relative' }}>
-      {showKamehameha && (
+      {(showKamehameha) && (
         <img
           src={`${kamehamehaGifUrl}?v=${kamehamehaKey}`}
           alt=""
           style={{
             position: 'absolute',
-            left: -20, // Slight offset to cover the beginning
-            top: '50%',
+            left: -100,
+            top: '-30px',
             transform: 'translateY(-50%)',
-            height: '250%', // Make it cover the bar
+            height: '250px',
             zIndex: 10,
             pointerEvents: 'none'
           }}
