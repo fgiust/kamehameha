@@ -1,14 +1,42 @@
 これ それ あれ どれ
 これ それ あれ どれ
 
-How much is that over there?
-Quanto costa laggiù?
-あれは{いくら|なん円[えん]}{ですか|か}
+What is that?
+Cos'è quello?
+それは何[なん]ですか
 
-That is 300 yen.
-Sono 300 yen.
-それは{三[さん]百[びゃく]円[えん]|300円[えん]|３００円[えん]}{です|だ}
+This is my umbrella.
+Questo è il mio ombrello.
+これは私[わたし]の傘[かさ]です
 
-That over there is my dictionary.
-Quello lì è il mio dizionario.
-あれは私[わたし]の辞[じ]書[しょ]{です|だ}
+That (over there) is a bank.
+Quella (laggiù) è una banca.
+あれは銀行[ぎんこう]です
+
+Which one is my bag?
+Qual è la mia borsa?
+私[わたし]のかばんはどれですか
+
+Is this a dictionary?
+Questo è un dizionario?
+これは辞書[じしょ]ですか
+
+How much is that (over there)?
+Quanto costa quello (laggiù)?
+あれはいくらですか
+
+Is that your newspaper?
+Quello è il tuo giornale?
+それは{あなたの|}新聞[しんぶん]ですか
+
+This is fish.
+Questo è pesce.
+これは魚[さかな]です
+
+Which one is it?
+Qual è?
+どれですか
+
+That (over there) is the library.
+Quella (laggiù) è la biblioteca.
+あれは図書館[としょかん]です

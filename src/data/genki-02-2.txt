@@ -1,22 +1,42 @@
 この/その/あの/どの + Noun
 この/その/あの/どの + Sostantivo
 
-How much is this shirt?
-Quanto costa questa maglietta?
-このシャツは{いくら|なん円[えん]}{ですか|か}
+How much is this bag?
+Quanto costa questa borsa?
+このかばんはいくらですか
 
-That book over there is 3000 yen.
-Quel libro laggiù costa 3000 yen.
-あの本[ほん]は{三[さん]千[ぜん]円[えん]|3000円[えん]}{です|だ}
+That book is 1,000 yen.
+Quel libro costa 1.000 yen.
+その本[ほん]は{千円[せんえん]|1000円[えん]}です
 
-That umbrella is 2000 yen.
-Quell'ombrello costa 2000 yen.
-そのかさは{二[に]千[せん]円[えん]|2000円[えん]}{です|だ}
+That bicycle (over there) is expensive.
+Quella bicicletta (laggiù) è costosa.
+あの自転車[じてんしゃ]は高[たか]いです
 
-Which bag is 3000 yen?
-Quale borsa costa 3000 yen?
-どのかばんが三[さん]千[ぜん]円[えん]{ですか|か}
+Which wallet is 5,000 yen?
+Quale portafoglio costa 5.000 yen?
+どの財布[さいふ]が{五千円[ごせんえん]|5000円[えん]}ですか
 
-This pen is mine.
-Questa penna è mia.
-このペンは私[わたし]の{です|だ}
+This fish is delicious.
+Questo pesce è delizioso.
+この魚[さかな]はおいしいです
+
+That dictionary is 4,000 yen.
+Quel dizionario costa 4.000 yen.
+その辞書[じしょ]は{四千円[よんせんえん]|4000円[えん]}です
+
+How much is that hat (over there)?
+Quanto costa quel cappello (laggiù)?
+あの帽子[ぼうし]はいくらですか
+
+Is that bank (over there) a Japanese bank?
+Quella banca (laggiù) è una banca giapponese?
+あの銀行[ぎんこう]は日本[にほん]の銀行[ぎんこう]ですか
+
+Which shoes are 3,000 yen?
+Quali scarpe costano 3.000 yen?
+どの靴[くつ]が{三千円[さんぜんえん]|3000円[えん]}ですか
+
+This newspaper is 100 yen.
+Questo giornale costa 100 yen.
+この新聞[しんぶん]は{百円[ひゃくえん]|100円[えん]}です

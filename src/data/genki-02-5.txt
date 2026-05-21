@@ -33,9 +33,9 @@ Those sunglasses are nice, too.
 Anche quegli occhiali da sole sono belli.
 そのサングラスもいい{です|だ}
 
-I also like cats.
-Anche a me piacciono i gatti.
-私[わたし]も猫[ねこ]が好[す]き{です|だ}
+I like cats as well
+A me piacciono anche i gatti
+{私[わたし]は|}猫[ねこ]も好[す]き{です|だ}
 
 I also drink coffee.
 Anche io bevo caffè.

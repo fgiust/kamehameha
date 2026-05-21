@@ -1,10 +1,42 @@
 Noun1 の Noun2
 Sostantivo1 の Sostantivo2
 
-Tanaka is a student at the University of Tokyo.
-Tanaka è uno studente dell'Università di Tokyo.
-田[た]中[なか]さんは{東[とう]京[きょう]大[だい]学[がく]|とうきょうだいがく}の学[がく]生[せい]{です|だ}
+My major
+La mia materia principale
+私[わたし]の専攻[せんこう]
 
-I am a student of Japanese.
-Sono uno studente di giapponese.
-{私[わたし]は|}日[に]本[ほん]語[ご]の学[がく]生[せい]{です|だ}
+My friend's teacher
+L'insegnante del mio amico
+私[わたし]の友達[ともだち]の先生[せんせい]
+
+Ms. Tanaka's mother
+La madre della signora Tanaka
+田中[たなか]さんのお母[かあ]さん
+
+Japanese university
+Università giapponese
+日本[にほん]の大学[だいがく]
+
+Japanese language student
+Studente di lingua giapponese
+日本語[にほんご]の学生[がくせい]
+
+Mr. Yamashita's friend
+L'amico del signor Yamashita
+山下[やました]さんの友達[ともだち]
+
+American college student
+Studente universitario americano
+アメリカの大学生[だいがくせい]
+
+Mr. Honda's job
+Il lavoro del signor Honda
+本田[ほんだ]さんの{お|}仕事[しごと]
+
+High school teacher
+Insegnante di scuola superiore
+高校[こうこう]の先生[せんせい]
+
+My father's name
+Il nome di mio padre
+私[わたし]のお父[とう]さんの{お|}名前[なまえ]

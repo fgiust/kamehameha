@@ -5,10 +5,6 @@ Tanaka is not Japanese.
 Tanaka non è giapponese.
 田[た]中[なか]さんは日[に]本[ほん]人[じん]{じゃないです|じゃありません|ではないです|ではありません}
 
-This is not my pen.
-Questa non è la mia penna.
-これは私[わたし]のペン{じゃないです|じゃありません|ではないです|ではありません}
-
 I am not a teacher.
 Non sono un insegnante.
 {私[わたし]は|}先[せん]生[せい]{じゃないです|じゃありません|ではないです|ではありません}
@@ -16,3 +12,31 @@ Non sono un insegnante.
 That is not meat.
 Quella non è carne.
 あれは肉[にく]{じゃないです|じゃありません|ではないです|ではありません}
+
+Mr. Yamada is not a student.
+Il signor Yamada non è uno studente.
+山田[やまだ]さんは学生[がくせい]{じゃないです|じゃありません}
+
+My major is not English.
+La mia materia principale non è inglese.
+私[わたし]の専攻[せんこう]は英語[えいご]{じゃないです|じゃありません}
+
+I am not Chinese.
+Non sono cinese.
+{私[わたし]は|}中国人[ちゅうごくじん]{じゃないです|じゃありません}
+
+That is not my dictionary.
+Quello non è il mio dizionario.
+それは私[わたし]の辞書[じしょ]{じゃないです|じゃありません}
+
+Ms. Suzuki's mother is not an office worker.
+La madre della signora Suzuki non è un'impiegata.
+鈴木[すずき]さんの{お|}母[かあ]さんは会社員[かいしゃいん]{じゃないです|じゃありません}
+
+That (over there) is not a post office.
+Quello (laggiù) non è un ufficio postale.
+あれは郵便局[ゆうびんきょく]{じゃないです|じゃありません}
+
+This is not my bag.
+Questa non è la mia borsa.
+これは私[わたし]のかばん{じゃないです|じゃありません}

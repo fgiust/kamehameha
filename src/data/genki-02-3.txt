@@ -1,18 +1,42 @@
 ここ そこ あそこ どこ
 ここ そこ あそこ どこ
 
-Where is the restroom?
-Dov'è la toilette?
-トイレはどこ{ですか|か}
+Excuse me, where is the restroom?
+Mi scusi, dov'è il bagno?
+{すみません、|}トイレはどこですか
 
-The restroom is over there.
-Il bagno è laggiù.
-トイレはあそこ{です|だ}
+The university is here.
+L'università è qui.
+大学[だいがく]はここです
 
-The library is here.
-La biblioteca è qui.
-図[と]書[しょ]館[かん]はここ{です|だ}
+Where is my umbrella?
+Dov'è il mio ombrello?
+私[わたし]の傘[かさ]はどこですか
 
-The post office is right there.
-L'ufficio postale è proprio lì.
-郵[ゆう]便[びん]局[きょく]はそこ{です|だ}
+Your bag is there.
+La tua borsa è lì.
+{あなたの|}かばんはそこです
+
+Where is Ms. Suzuki?
+Dov'è la signora Suzuki?
+鈴木[すずき]さんはどこですか
+
+Ms. Suzuki is over there.
+La signora Suzuki è laggiù.
+鈴木[すずき]さんはあそこです
+
+Where is the dictionary?
+Dov'è il dizionario?
+辞書[じしょ]はどこですか
+
+The post office is there.
+L'ufficio postale è lì.
+郵便局[ゆうびんきょく]はそこです
+
+Where are my shoes?
+Dove sono le mie scarpe?
+私[わたし]の靴[くつ]はどこですか
+
+The library is over there.
+La biblioteca è laggiù.
+図書館[としょかん]はあそこです

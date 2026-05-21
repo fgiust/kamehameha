@@ -5,10 +5,6 @@ My major is English.
 La mia specializzazione è l'inglese.
 私[わたし]の{専[せん]攻[こう]|専[せん]門[もん]}は英[えい]語[ご]{です|だ}
 
-My major is business.
-La mia specializzazione è affari.
-私[わたし]の{専[せん]攻[こう]|専[せん]門[もん]}はビジネス{です|だ}
-
 Tanaka is Japanese.
 Tanaka è giapponese.
 田[た]中[なか]さんは日[に]本[ほん]人[じん]{です|だ}
@@ -33,17 +29,9 @@ I am Italian.
 Sono italiano.
 {私[わたし]は|}イタリア人[じん]{です|だ}
 
-I am Korean.
-Sono coreano.
-{私[わたし]は|}韓[かん]国[こく]人[じん]{です|だ}
-
 My younger brother is 3 years old.
 Mio fratello minore ha 3 anni.
 {私[わたし]の|}弟[おとうと]は{三[さん]歳[さい]|3歳[さい]|３歳[さい]}{です|だ}
-
-My younger sister is 8 years old.
-Mia sorella minore ha 8 anni.
-{私[わたし]の|}妹[いもうと]は{八[はっ]歳[さい]|8歳[さい]|８歳[さい]}{です|だ}
 
 My friend is French.
 Il mio amico è francese.
