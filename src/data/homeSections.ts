@@ -5,15 +5,20 @@ import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
 import { getSentenceTxtLessonById } from '../lessons/sentenceTxtLessons';
 import { transitiveData } from './dictTransitivePairs';
 import verbs from './dictConjugationVerbs';
-import { DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
+import { CONJUGATION_SESSION_TARGET_TOTAL, DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
 
 const VERB_TOTAL = verbs.length;
 const ADJ_TOTAL = adjectives.length;
-const COUNTERS_DEFAULT_TOTAL = counters.reduce((acc, c) => acc + c.readings.length + Object.keys(c.extraReadings ?? {}).length, 0);
+const VERB_CONJ_TOTAL = Math.min(VERB_TOTAL, CONJUGATION_SESSION_TARGET_TOTAL);
+const ADJ_CONJ_TOTAL = Math.min(ADJ_TOTAL, CONJUGATION_SESSION_TARGET_TOTAL);
+const COUNTERS_DEFAULT_TOTAL = Math.min(
+  CONJUGATION_SESSION_TARGET_TOTAL,
+  counters.reduce((acc, c) => acc + c.readings.length + Object.keys(c.extraReadings ?? {}).length, 0)
+);
 const COUNTERS_PEOPLE_TOTAL = (() => {
   const c = counters.find(x => x.en[1] === 'people');
   if (!c) return 0;
-  return c.readings.length + Object.keys(c.extraReadings ?? {}).length;
+  return Math.min(CONJUGATION_SESSION_TARGET_TOTAL, c.readings.length + Object.keys(c.extraReadings ?? {}).length);
 })();
 const TRANSITIVE_TOTAL = transitiveData.length;
 const DAYS_TOTAL = getReadingTxtLessonById('reading-days')?.items.length ?? 31;
@@ -37,26 +42,26 @@ export const homeConfig: HomeConfig = {
   exercises: {
     ...genkiSentenceExercises,
 
-    teform: { id: 'teform', title: { key: 'forms.te' }, to: '/teform', defaultTotal: VERB_TOTAL },
-    causativeform: { id: 'causativeform', title: { key: 'forms.causative' }, to: '/causativeform', defaultTotal: VERB_TOTAL },
-    conditionalform: { id: 'conditionalform', title: { key: 'forms.conditional' }, to: '/conditionalform', defaultTotal: VERB_TOTAL },
-    imperativeform: { id: 'imperativeform', title: { key: 'forms.imperative' }, to: '/imperativeform', defaultTotal: VERB_TOTAL },
-    negativeform: { id: 'negativeform', title: { key: 'forms.negative' }, to: '/negativeform', defaultTotal: VERB_TOTAL },
-    passiveform: { id: 'passiveform', title: { key: 'forms.passive' }, to: '/passiveform', defaultTotal: VERB_TOTAL },
-    pastform: { id: 'pastform', title: { key: 'forms.past' }, to: '/pastform', defaultTotal: VERB_TOTAL },
-    politeform: { id: 'politeform', title: { key: 'forms.polite' }, to: '/politeform', defaultTotal: VERB_TOTAL },
-    'politeform-short': { id: 'politeform-short', title: { key: 'forms.short' }, to: '/politeform-short', defaultTotal: VERB_TOTAL },
-    potentialform: { id: 'potentialform', title: { key: 'forms.potential' }, to: '/potentialform', defaultTotal: VERB_TOTAL },
-    provisionalform: { id: 'provisionalform', title: { key: 'forms.provisional' }, to: '/provisionalform', defaultTotal: VERB_TOTAL },
-    volitionalform: { id: 'volitionalform', title: { key: 'forms.volitional' }, to: '/volitionalform', defaultTotal: VERB_TOTAL },
-    randomize: { id: 'randomize', title: { key: 'forms.randomized' }, to: '/randomize', defaultTotal: VERB_TOTAL },
+    teform: { id: 'teform', title: { key: 'forms.te' }, to: '/teform', defaultTotal: VERB_CONJ_TOTAL },
+    causativeform: { id: 'causativeform', title: { key: 'forms.causative' }, to: '/causativeform', defaultTotal: VERB_CONJ_TOTAL },
+    conditionalform: { id: 'conditionalform', title: { key: 'forms.conditional' }, to: '/conditionalform', defaultTotal: VERB_CONJ_TOTAL },
+    imperativeform: { id: 'imperativeform', title: { key: 'forms.imperative' }, to: '/imperativeform', defaultTotal: VERB_CONJ_TOTAL },
+    negativeform: { id: 'negativeform', title: { key: 'forms.negative' }, to: '/negativeform', defaultTotal: VERB_CONJ_TOTAL },
+    passiveform: { id: 'passiveform', title: { key: 'forms.passive' }, to: '/passiveform', defaultTotal: VERB_CONJ_TOTAL },
+    pastform: { id: 'pastform', title: { key: 'forms.past' }, to: '/pastform', defaultTotal: VERB_CONJ_TOTAL },
+    politeform: { id: 'politeform', title: { key: 'forms.polite' }, to: '/politeform', defaultTotal: VERB_CONJ_TOTAL },
+    'politeform-short': { id: 'politeform-short', title: { key: 'forms.short' }, to: '/politeform-short', defaultTotal: VERB_CONJ_TOTAL },
+    potentialform: { id: 'potentialform', title: { key: 'forms.potential' }, to: '/potentialform', defaultTotal: VERB_CONJ_TOTAL },
+    provisionalform: { id: 'provisionalform', title: { key: 'forms.provisional' }, to: '/provisionalform', defaultTotal: VERB_CONJ_TOTAL },
+    volitionalform: { id: 'volitionalform', title: { key: 'forms.volitional' }, to: '/volitionalform', defaultTotal: VERB_CONJ_TOTAL },
+    randomize: { id: 'randomize', title: { key: 'forms.randomized' }, to: '/randomize', defaultTotal: VERB_CONJ_TOTAL },
 
-    'adj-naruform': { id: 'adj-naruform', title: { key: 'forms.naru' }, to: '/adj-naruform', defaultTotal: ADJ_TOTAL },
-    'adj-conditionalform': { id: 'adj-conditionalform', title: { key: 'forms.conditional' }, to: '/adj-conditionalform', defaultTotal: ADJ_TOTAL },
-    'adj-negativeform': { id: 'adj-negativeform', title: { key: 'forms.negative' }, to: '/adj-negativeform', defaultTotal: ADJ_TOTAL },
-    'adj-pastform': { id: 'adj-pastform', title: { key: 'forms.past' }, to: '/adj-pastform', defaultTotal: ADJ_TOTAL },
-    'adj-volitionalform': { id: 'adj-volitionalform', title: { key: 'forms.volitional' }, to: '/adj-volitionalform', defaultTotal: ADJ_TOTAL },
-    'adj-randomize': { id: 'adj-randomize', title: { key: 'forms.randomized' }, to: '/adj-randomize', defaultTotal: ADJ_TOTAL },
+    'adj-naruform': { id: 'adj-naruform', title: { key: 'forms.naru' }, to: '/adj-naruform', defaultTotal: ADJ_CONJ_TOTAL },
+    'adj-conditionalform': { id: 'adj-conditionalform', title: { key: 'forms.conditional' }, to: '/adj-conditionalform', defaultTotal: ADJ_CONJ_TOTAL },
+    'adj-negativeform': { id: 'adj-negativeform', title: { key: 'forms.negative' }, to: '/adj-negativeform', defaultTotal: ADJ_CONJ_TOTAL },
+    'adj-pastform': { id: 'adj-pastform', title: { key: 'forms.past' }, to: '/adj-pastform', defaultTotal: ADJ_CONJ_TOTAL },
+    'adj-volitionalform': { id: 'adj-volitionalform', title: { key: 'forms.volitional' }, to: '/adj-volitionalform', defaultTotal: ADJ_CONJ_TOTAL },
+    'adj-randomize': { id: 'adj-randomize', title: { key: 'forms.randomized' }, to: '/adj-randomize', defaultTotal: ADJ_CONJ_TOTAL },
 
     counters: { id: 'counters', title: { key: 'home.exercises.counters' }, to: '/counters', defaultTotal: COUNTERS_DEFAULT_TOTAL },
     'counters-people': { id: 'counters-people', title: { key: 'pages.countersPeople.title' }, to: '/counters-people', defaultTotal: COUNTERS_PEOPLE_TOTAL },

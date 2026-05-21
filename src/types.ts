@@ -159,3 +159,5 @@ export type HomeConfig = {
 export const APP_TITLE_PREFIX = '';  // '亀 ';
 
 export const DEFAULT_MASTERY_RANDOM_TOTAL = 30;
+
+export const CONJUGATION_SESSION_TARGET_TOTAL = 30;

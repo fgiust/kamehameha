@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHintLocalized, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import adjectives from '../data/dictConjugationAdjectives';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -44,6 +44,7 @@ export default function AdjRandomizePage() {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.randomizeAdj.title');
+  const [sessionWords] = useState<ConjugationWord[]>(() => pickRandomSubset(adjectives, CONJUGATION_SESSION_TARGET_TOTAL));
   const [settings, setSettings] = useState<GlobalSettings>(() => {
     const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
     return {
@@ -82,7 +83,7 @@ export default function AdjRandomizePage() {
   const remainingIdxRef = useRef<number[]>([]);
   const lastIdxRef = useRef<number | null>(null);
   const phaseRef = useRef<0 | 2 | null>(null);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(adjectives.length, { persistKey: '/adj-randomize' });
+  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(sessionWords.length, { persistKey: '/adj-randomize' });
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
     setSettings(s => {
@@ -97,10 +98,10 @@ export default function AdjRandomizePage() {
   };
 
   const pickNext = useCallback(() => {
-    if (adjectives.length === 0) return;
+    if (sessionWords.length === 0) return;
     const unanswered: number[] = [];
     const incorrect: number[] = [];
-    for (let i = 0; i < adjectives.length; i++) {
+    for (let i = 0; i < sessionWords.length; i++) {
       const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
@@ -140,7 +141,7 @@ export default function AdjRandomizePage() {
     const nextIdx = pool.splice(pickIndex, 1)[0]!;
     lastIdxRef.current = nextIdx;
     setCurrentWordIdx(nextIdx);
-    const word = adjectives[nextIdx]!;
+    const word = sessionWords[nextIdx]!;
 
     const enabledForms = Object.entries(activeForms).filter(([, v]) => v).map(([k]) => k);
     const forms = enabledForms.length > 0 ? enabledForms : formIds;
@@ -181,7 +182,7 @@ export default function AdjRandomizePage() {
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeForms, getProgressState, t]);
+  }, [activeForms, getProgressState, sessionWords, t]);
 
   useEffect(() => {
     remainingIdxRef.current = [];

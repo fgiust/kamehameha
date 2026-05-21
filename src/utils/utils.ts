@@ -54,6 +54,19 @@ export function toKanaReading(text: string) {
   return out;
 }
 
+export function pickRandomSubset<T>(items: T[], maxSize: number) {
+  const n = Math.max(0, Math.min(items.length, Math.floor(maxSize)));
+  if (n >= items.length) return items;
+  const out = items.slice();
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = out[i];
+    out[i] = out[j]!;
+    out[j] = tmp!;
+  }
+  return out.slice(0, n);
+}
+
 export function getConjugationFormHint(engine: ConjugationEngine, flags: OptionFlags) {
   const base = engine.baseFormHint ?? 'plain';
   const hasNegOpt = engine.opts.some(o => o.id === 'neg');

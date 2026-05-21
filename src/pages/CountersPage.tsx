@@ -6,10 +6,11 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX } from '../types';
+import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL } from '../types';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
+import { pickRandomSubset } from '../utils/utils';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -155,7 +156,11 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     }
     return out;
   }, [peopleOnly, peopleCounter]);
-  const totalQuestions = allQuestions.length;
+  const sessionQuestions = useMemo(
+    () => pickRandomSubset(allQuestions, CONJUGATION_SESSION_TARGET_TOTAL),
+    [allQuestions]
+  );
+  const totalQuestions = sessionQuestions.length;
   const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalQuestions, { persistKey: peopleOnly ? '/counters-people' : '/counters' });
 
   const activeCounters = useMemo(() => {
@@ -192,8 +197,8 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     const activeCounterSet = new Set(activeCounters.map(c => c.counter));
     const unanswered: number[] = [];
     const incorrect: number[] = [];
-    for (let i = 0; i < allQuestions.length; i++) {
-      const q = allQuestions[i]!;
+    for (let i = 0; i < sessionQuestions.length; i++) {
+      const q = sessionQuestions[i]!;
       if (!activeCounterSet.has(q.counter.counter)) continue;
       const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
@@ -234,7 +239,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     lastIdxRef.current = nextIdx;
     setCurrentQuestionIdx(nextIdx);
 
-    const nextQ = allQuestions[nextIdx]!;
+    const nextQ = sessionQuestions[nextIdx]!;
     const chosen = nextQ.counter;
     const num = nextQ.num;
 
@@ -259,7 +264,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     setInputState('');
     setAnswerDisplay(null);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeCounters, allQuestions, getProgressState]);
+  }, [activeCounters, getProgressState, sessionQuestions]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
@@ -359,13 +364,6 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     }
   };
 
-  const toggleAll = () => {
-    const anyOff = Object.values(enabled).some(v => !v);
-    const next: Record<string, boolean> = {};
-    for (const c of counters) next[c.en[1]] = anyOff;
-    setEnabled(next);
-  };
-
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
@@ -423,23 +421,6 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
                   />
                 );
               })}
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 14 }}>
-              <button
-                type="button"
-                onClick={toggleAll}
-                style={{
-                  borderRadius: 999,
-                  border: '1px solid var(--border)',
-                  background: 'var(--bg-card)',
-                  color: 'var(--text)',
-                  padding: '8px 14px',
-                  cursor: 'pointer',
-                }}
-              >
-                {Object.values(enabled).every(v => v) ? t('counters.selectNone') : t('counters.selectAll')}
-              </button>
             </div>
           </div>
         )}

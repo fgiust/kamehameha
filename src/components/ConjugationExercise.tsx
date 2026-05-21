@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHintLocalized, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
+import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
@@ -75,6 +75,7 @@ function finalizeIME(input: string) {
 export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, persistKey, forceReverseQA }: Props) {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
+  const [sessionWords] = useState<ConjugationWord[]>(() => pickRandomSubset(wordData, CONJUGATION_SESSION_TARGET_TOTAL));
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [randomFlags, setRandomFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [settings, setSettings] = useState<GlobalSettings>(() => {
@@ -107,7 +108,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const remainingIdxRef = useRef<number[]>([]);
   const lastIdxRef = useRef<number | null>(null);
   const phaseRef = useRef<0 | 2 | null>(null);
-  const totalWords = wordData.length;
+  const totalWords = sessionWords.length;
   const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalWords, { persistKey });
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
@@ -136,11 +137,11 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   };
 
   const pickWord = useCallback(() => {
-    if (wordData.length === 0) return;
+    if (sessionWords.length === 0) return;
 
     const unanswered: number[] = [];
     const incorrect: number[] = [];
-    for (let i = 0; i < wordData.length; i++) {
+    for (let i = 0; i < sessionWords.length; i++) {
       const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
@@ -176,7 +177,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     const nextIdx = pool.splice(pickIndex, 1)[0]!;
     lastIdxRef.current = nextIdx;
     setCurrentWordIdx(nextIdx);
-    const word = wordData[nextIdx]!;
+    const word = sessionWords[nextIdx]!;
     setCurrentWord(word);
     if (settings.randomizeForm) {
       setRandomFlags(buildRandomFlags(engine));
@@ -189,7 +190,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     setDiffDisplay('');
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [engine, settings.randomizeForm, wordData, getProgressState]);
+  }, [engine, settings.randomizeForm, sessionWords, getProgressState]);
 
   useEffect(() => {
     remainingIdxRef.current = [];
