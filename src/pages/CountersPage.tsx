@@ -10,7 +10,6 @@ import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL } from '../types';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
-import { pickRandomSubset } from '../utils/utils';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -90,6 +89,12 @@ function getAnswers(counter: JapaneseCounter, num: number) {
   return Array.isArray(v) ? v : [v];
 }
 
+type CounterQuestion = {
+  id: string;
+  counter: JapaneseCounter;
+  num: number;
+};
+
 type Props = {
   peopleOnly?: boolean;
 };
@@ -136,33 +141,75 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
-  const remainingIdxRef = useRef<number[]>([]);
-  const lastIdxRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
+  const lastSlotRef = useRef<number | null>(null);
 
   const allQuestions = useMemo(() => {
     const list = peopleOnly ? (peopleCounter ? [peopleCounter] : []) : counters;
-    const out: Array<{ counter: JapaneseCounter; num: number }> = [];
+    const out: CounterQuestion[] = [];
     for (const c of list) {
       for (const k of Object.keys(c.readings)) {
         const n = Number(k);
-        if (Number.isFinite(n)) out.push({ counter: c, num: Math.floor(n) });
+        if (!Number.isFinite(n)) continue;
+        const num = Math.floor(n);
+        const id = `${c.en[1]}:${num}`;
+        out.push({ id, counter: c, num });
       }
     }
     return out;
   }, [peopleOnly, peopleCounter]);
-  const sessionQuestions = useMemo(
-    () => pickRandomSubset(allQuestions, CONJUGATION_SESSION_TARGET_TOTAL),
-    [allQuestions]
-  );
-  const totalQuestions = sessionQuestions.length;
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalQuestions, { persistKey: peopleOnly ? '/counters-people' : '/counters' });
+  const totalQuestions = CONJUGATION_SESSION_TARGET_TOTAL;
+  const persistKey = peopleOnly ? '/counters-people' : '/counters';
+  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalQuestions, { persistKey });
 
   const activeCounters = useMemo(() => {
     if (peopleOnly && peopleCounter) return [peopleCounter];
     const list = counters.filter(c => enabled[c.en[1]]);
     return list.length > 0 ? list : counters;
   }, [enabled, peopleOnly, peopleCounter]);
+
+  const activeQuestions = useMemo(() => {
+    const enabledSet = new Set(activeCounters.map(c => c.en[1]));
+    return allQuestions.filter(q => enabledSet.has(q.counter.en[1]));
+  }, [activeCounters, allQuestions]);
+
+  const [sessionSlots, setSessionSlots] = useState<Array<CounterQuestion | null>>(
+    () => Array(CONJUGATION_SESSION_TARGET_TOTAL).fill(null)
+  );
+  const sessionSlotsRef = useRef<Array<CounterQuestion | null>>(sessionSlots);
+
+  useEffect(() => {
+    sessionSlotsRef.current = sessionSlots;
+  }, [sessionSlots]);
+
+  const getRandomCandidate = useCallback((excludeIds: Set<string>) => {
+    if (activeQuestions.length === 0) return null;
+    const available = activeQuestions.filter(q => !excludeIds.has(q.id));
+    const pool = available.length > 0 ? available : activeQuestions;
+    return pool[Math.floor(Math.random() * pool.length)] ?? null;
+  }, [activeQuestions]);
+
+  const ensureSlotQuestion = useCallback((slot: number) => {
+    if (slot < 0 || slot >= totalQuestions) return null;
+    const currentSlots = sessionSlotsRef.current;
+    const current = currentSlots[slot];
+    if (current && activeCounters.some(c => c.en[1] === current.counter.en[1])) return current;
+
+    const used = new Set<string>();
+    for (const q of currentSlots) {
+      if (!q) continue;
+      if (q && q !== current) used.add(q.id);
+    }
+    const next = getRandomCandidate(used);
+    if (!next) return null;
+
+    setSessionSlots(prev => {
+      const out = prev.slice();
+      out[slot] = next;
+      sessionSlotsRef.current = out;
+      return out;
+    });
+    return next;
+  }, [activeCounters, getRandomCandidate, totalQuestions]);
 
   useEffect(() => {
     const wasPeopleOnly = prevPeopleOnlyRef.current;
@@ -187,21 +234,18 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   }, [peopleOnly]);
 
   const pickNext = useCallback(() => {
-    if (activeCounters.length === 0) return;
+    if (activeQuestions.length === 0) return;
 
-    const activeCounterSet = new Set(activeCounters.map(c => c.counter));
     const unanswered: number[] = [];
     const incorrect: number[] = [];
-    for (let i = 0; i < sessionQuestions.length; i++) {
-      const q = sessionQuestions[i]!;
-      if (!activeCounterSet.has(q.counter.counter)) continue;
-      const s = getProgressState(String(i));
+    for (let i = 0; i < totalQuestions; i++) {
+      const s = progressSegments[i] ?? 0;
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
     }
 
-    const nextPhase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
-    if (nextPhase === null) {
+    const phase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    if (phase === null) {
       setIsFinished(true);
       setCurrentCounter(null);
       setQuestion('');
@@ -218,23 +262,18 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
 
     setIsFinished(false);
 
-    if (phaseRef.current !== nextPhase || remainingIdxRef.current.length === 0) {
-      remainingIdxRef.current = (nextPhase === 0 ? unanswered : incorrect).slice();
-      phaseRef.current = nextPhase;
+    const pool = phase === 0 ? unanswered : incorrect;
+    let slot = pool[Math.floor(Math.random() * pool.length)] ?? 0;
+    const last = lastSlotRef.current;
+    if (last !== null && pool.length > 1 && slot === last) {
+      const idx = pool.indexOf(slot);
+      slot = pool[(idx + 1) % pool.length] ?? slot;
     }
+    lastSlotRef.current = slot;
+    setCurrentQuestionIdx(slot);
 
-    const pool = remainingIdxRef.current;
-    let pickIndex = Math.floor(Math.random() * pool.length);
-    const last = lastIdxRef.current;
-    if (last !== null && pool.length > 1 && pool[pickIndex] === last) {
-      pickIndex = (pickIndex + 1) % pool.length;
-    }
-
-    const nextIdx = pool.splice(pickIndex, 1)[0]!;
-    lastIdxRef.current = nextIdx;
-    setCurrentQuestionIdx(nextIdx);
-
-    const nextQ = sessionQuestions[nextIdx]!;
+    const nextQ = ensureSlotQuestion(slot);
+    if (!nextQ) return;
     const chosen = nextQ.counter;
     const num = nextQ.num;
 
@@ -259,12 +298,9 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     setInputState('');
     setAnswerDisplay(null);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeCounters, getProgressState, sessionQuestions]);
+  }, [activeQuestions.length, ensureSlotQuestion, lang, progressSegments, totalQuestions]);
 
   useEffect(() => {
-    remainingIdxRef.current = [];
-    phaseRef.current = null;
-    lastIdxRef.current = null;
     setIsFinished(false);
   }, [peopleOnly]);
   useEffect(() => {
@@ -335,7 +371,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
         )}
       </span>
     );
-    recordProgress(String(currentQuestionIdx), ok);
+    recordProgressAt(currentQuestionIdx, ok);
     setAwaitingNext(true);
   };
 
@@ -417,7 +453,12 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
                     label={<>{c[lang][1]}</>}
                     checked={!!enabled[id]}
                     onChange={() => {
-                      setEnabled(prev => ({ ...prev, [id]: !prev[id] }));
+                      setEnabled(prev => {
+                        const isOn = !!prev[id];
+                        const activeCount = Object.values(prev).filter(Boolean).length;
+                        if (isOn && activeCount <= 1) return prev;
+                        return { ...prev, [id]: !isOn };
+                      });
                     }}
                   />
                 );
