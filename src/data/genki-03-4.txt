@@ -1,22 +1,42 @@
 Time Reference
 Riferimento temporale
 
-I study Japanese every day.
-Studio giapponese ogni giorno.
-{私[わたし]は|}毎[まい]日[にち]日[に]本[ほん]語[ご]を勉[べん]強[きょう]します
+I will go to Kyoto on Sunday.
+Andrò a Kyoto domenica.
+{私[わたし]は|}日曜日[にちようび]に京都[きょうと]{に|へ}行[い]きます
 
-Mary will go to Kyoto on the weekend.
-Mary andrà a Kyoto nel fine settimana.
-メアリーさんは週[しゅう]末[まつ]京[きょう]都[と]に行[い]きます
+I watch TV every day.
+Guardo la TV tutti i giorni.
+{私[わたし]は|}毎日[まいにち]テレビを見[み]ます
 
-I will not watch TV tonight.
-Non guarderò la TV stasera.
-{私[わたし]は|}今[こん]晩[ばん]テレビを見[み]ません
+What will you do on the weekend?
+Cosa farai nel fine settimana?
+{あなた[あなた]は|}週末[しゅうまつ]{に|}何[なに]をしますか
 
-What will you do tomorrow?
-Cosa farai domani?
-明日[あした]、何[なに]をしますか
+I eat breakfast every morning.
+Faccio colazione (mangio la colazione) ogni mattina.
+{私[わたし]は|}毎朝[まいあさ]朝ご飯[あさごはん]を食[た]べます
 
-I will not go to work today.
-Non andrò a lavorare oggi.
-{私[わたし]は|}今日[きょう]仕[し]事[ごと]に行[い]きません
+I will go to bed at 10:30.
+Andrò a letto alle 10:30.
+{私[わたし]は|}十時半[じゅうじはん]に寝[ね]ます
+
+I will return home tomorrow.
+Tornerò a casa domani.
+{私[わたし]は|}明日[あした]、うち{に|へ}帰[かえ]ります
+
+When will you come to Japan?
+Quando verrai in Giappone?
+いつ日本[にほん]{に|へ}来[き]ますか
+
+I get up at 7:00 every day.
+Mi alzo alle 7:00 tutti i giorni.
+{私[わたし]は|}毎日[まいにち]七時[しちじ]に起[お]きます
+
+I will study Japanese tonight.
+Studierò giapponese stasera.
+{私[わたし]は|}今晩[こんばん]、日本語[にほんご]を勉強[べんきょう]します
+
+I read the newspaper in the morning.
+Leggo il giornale al mattino.
+{私[わたし]は|}朝[あさ]、新聞[しんぶん]を読[よ]みます

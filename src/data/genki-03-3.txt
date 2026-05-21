@@ -1,22 +1,42 @@
 Particles
 Particelle
 
-I read books in the library.
-Leggo libri in biblioteca.
-{私[わたし]は|}図[と]書[しょ]館[かん]で本[ほん]を読[よ]みます
+I will read a magazine at the library.
+Leggerò una rivista in biblioteca.
+{私[わたし]は|}図書館[としょかん]で雑誌[ざっし]を読[よ]みます
 
-I watch TV at home.
-Guardo la TV a casa.
-{私[わたし]は|}家[いえ]でテレビを見[み]ます
+I drink green tea at home.
+Bevo tè verde a casa.
+{私[わたし]は|}うちでお茶[ちゃ]を飲[の]みます
 
-Mary will return at 3:00 P.M.
-Mary ritornerà alle 15:00.
-メアリーさんは午[ご]後[ご]三[さん]時[じ]に帰[かえ]ります
+I will go to the bank on Saturday.
+Andrò in banca sabato.
+{私[わたし]は|}土曜日[どようび]に銀行[ぎんこう]{に|へ}行[い]きます
 
-I will go to Osaka on Saturday.
-Sabato andrò a Osaka.
-{私[わたし]は|}土[ど]曜[よう]日[び]に大[おお]阪[さか]に行[い]きます
+I will eat lunch at a café.
+Pranzerò (mangierò il pranzo) in una caffetteria.
+{私[わたし]は|}カフェで昼ご飯[ひるごはん]を食[た]べます
 
-I go to sleep at 11:30.
-Vado a dormire alle 11:30.
-{私[わたし]は|}十一時[じゅういちじ]半[はん]に寝[ね]ます
+I go to bed at eleven.
+Vado a letto alle undici.
+{私[わたし]は|}十一時[じゅういちじ]に寝[ね]ます
+
+I listen to music at school.
+Ascolto la musica a scuola.
+{私[わたし]は|}学校[がっこう]で音楽[おんがく]を聞[き]きます
+
+I will return home at around eight.
+Tornerò a casa verso le otto.
+{私[わたし]は|}八時[はちじ]ごろ{に|}うち{に|へ}帰[かえ]ります
+
+I watch movies at home.
+Guardo i film a casa.
+{私[わたし]は|}うちで映画[えいが]を見[み]ます
+
+Mr. Honda will not go to the post office today.
+Il signor Honda non andrà all'ufficio postale oggi.
+本田[ほんだ]さんは今日[きょう]、郵便局[ゆうびんきょく]{に|へ}行[い]きません
+
+I study Japanese at school.
+Studio giapponese a scuola.
+{私[わたし]は|}学校[がっこう]で日本語[にほんご]を勉強[べんきょう]します

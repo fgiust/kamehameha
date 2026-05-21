@@ -1,22 +1,42 @@
 ～ませんか
 ～ませんか
 
-Would you like to eat lunch?
-Ti piacerebbe pranzare?
-昼[ひる]ご飯[はん]を食[た]べませんか
+Won't you drink coffee with me?
+Non bevi un caffè con me?
+{一緒[いっしょ]に|}コーヒーを飲[の]みませんか
 
-Would you like to watch a movie together?
-Vi piacerebbe vedere un film insieme?
-一[いっ]緒[しょ]に映[えい]画[が]を見[み]ませんか
+Would you like to see a movie on Saturday?
+Ti andrebbe di vedere un film sabato?
+土曜日[どようび]に{一緒[いっしょ]に|}映画[えいが]を見[み]ませんか
 
-Will you study in the library with me?
-Studierai in biblioteca con me?
-一[いっ]緒[しょ]に図[と]書[しょ]館[かん]で勉[べん]強[きょう]しませんか
+Won't you have lunch with me?
+Non pranzi con me?
+{一緒[いっしょ]に|}昼ご飯[ひるごはん]を食[た]べませんか
 
-Would you like to drink coffee at a cafe?
-Ti piacerebbe bere un caffè in un bar?
-喫[きっ]茶[さ]店[てん]でコーヒーを飲[の]みませんか
+Would you like to play tennis tomorrow?
+Ti andrebbe di giocare a tennis domani?
+明日[あした]、{一緒[いっしょ]に|}テニスをしませんか
 
-Would you like to watch TV at my house?
-Ti piacerebbe guardare la TV a casa mia?
-うちでテレビを見[み]ませんか
+Won't you go to the library?
+Non andiamo in biblioteca?
+{一緒[いっしょ]に|}図書館[としょかん]{に|へ}行[い]きませんか
+
+Would you like to study Japanese with me?
+Ti andrebbe di studiare giapponese con me?
+{一緒[いっしょ]に|}日本語[にほんご]を勉強[べんきょう]しませんか
+
+Won't you go to Kyoto on Sunday?
+Non andiamo a Kyoto domenica?
+日曜日[にちようび]に京都[きょうと]{に|へ}行[い]きませんか
+
+Won't you have some tea?
+Non bevi un po' di tè?
+お茶[ちゃ]を飲[の]みませんか
+
+Would you like to come to my house?
+Ti andrebbe di venire a casa mia?
+{私[わたし]の|}うち{に|へ}来[き]ませんか
+
+Would you like to listen to music?
+Ti andrebbe di ascoltare la musica?
+{一緒[いっしょ]に|}音楽[おんがく]を聞[き]きませんか

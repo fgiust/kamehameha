@@ -1,22 +1,42 @@
 Verb Types and the "Present Tense"
 Tipi di verbi e "presente"
 
-I listen to music.
-Ascolto musica.
-{私[わたし]は|}音[おん]楽[がく]を聞[き]きます
+I eat breakfast.
+Faccio colazione (mangio la colazione).
+{私[わたし]は|}朝ご飯[あさごはん]を食[た]べます
 
-I do not watch TV.
-Non guardo la TV.
-{私[わたし]は|}テレビを見[み]ません
+I don't drink coffee.
+Non bevo caffè.
+{私[わたし]は|}コーヒーを飲[の]みません
 
-Mary will go to school.
-Maria andrà a scuola.
-メアリーさんは学[がっ]校[こう]に行[い]きます
+I will go to school tomorrow.
+Andrò a scuola domani.
+{私[わたし]は|}明日[あした]、学校[がっこう]{に|へ}行[い]きます
 
-I do not eat breakfast.
-Non faccio colazione.
-{私[わたし]は|}朝[あさ]ご飯[はん]を食[た]べません
+Mr. Yamada doesn't watch TV.
+Il signor Yamada non guarda la TV.
+山田[やまだ]さんはテレビを見[み]ません
 
-He reads books.
-Legge libri.
-彼[かれ]は本[ほん]を読[よ]みます
+I will read a Japanese book.
+Leggerò un libro di giapponese.
+{私[わたし]は|}日本語[にほんご]の本[ほん]を読[よ]みます
+
+Mary will not return home today.
+Mary non tornerà a casa oggi.
+メアリーさんは今日[きょう]、うち{に|へ}帰[かえ]りません
+
+I get up at seven.
+Mi alzo alle sette.
+{私[わたし]は|}七時[しちじ]に起[お]きます
+
+Ms. Suzuki will come to the university.
+La signora Suzuki verrà all'università.
+鈴木[すずき]さんは大学[だいがく]{に|へ}来[き]ます
+
+I do not listen to music.
+Non ascolto musica.
+{私[わたし]は|}音楽[おんがく]を聞[き]きません
+
+I speak Japanese.
+Parlo giapponese.
+{私[わたし]は|}日本語[にほんご]を話[はな]します
