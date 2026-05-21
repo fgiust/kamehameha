@@ -28,6 +28,12 @@ const en = {
   readingExercise: {
     prompt: 'Write the hiragana reading',
   },
+  exerciseCompleted: {
+    title: 'You did it!',
+    body1: 'Mission accomplished, you crushed this exercise.',
+    body2: 'But don’t relax yet — go back to the list and start a new mission now!',
+    cta: 'Back to the list →',
+  },
   home: {
     genkitext: 'Grammar exercises organized by Genki lesson topics.\nThis app does not reproduce any copyrighted content from the Genki textbooks, the exercises are original and are simply organized following the same lesson order to provide well-structured supplementary practice for Genki learners.',
     taglineLead: 'Charge your かめはめ波 and destroy your Japanese barriers!',

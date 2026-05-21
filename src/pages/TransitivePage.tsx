@@ -10,6 +10,7 @@ import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
+import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -266,59 +267,64 @@ export default function TransitivePage() {
     <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
-          <div className="exercise-question">
-            <JapaneseText text={questionWord.verb} showFurigana={showFurigana} />
-          </div>
-          <div className="form-hint">
-            {askTransitive ? t('transitive.hintTransitive') : t('transitive.hintIntransitive')}
-          </div>
+          {isFinished && <ExerciseCompletedMessage />}
+          {!isFinished && (
+            <>
+              <div className="exercise-question">
+                <JapaneseText text={questionWord.verb} showFurigana={showFurigana} />
+              </div>
+              <div className="form-hint">
+                {askTransitive ? t('transitive.hintTransitive') : t('transitive.hintIntransitive')}
+              </div>
 
-          <div className="exercise-meta-row is-centered">
-            <div className="exercise-meta-item is-english">
-              {askTransitive ? `${currentPair.i[lang]} ➔ ${currentPair.t[lang]}` : `${currentPair.t[lang]} ➔ ${currentPair.i[lang]}`}
-            </div>
-          </div>
+              <div className="exercise-meta-row is-centered">
+                <div className="exercise-meta-item is-english">
+                  {askTransitive ? `${currentPair.i[lang]} ➔ ${currentPair.t[lang]}` : `${currentPair.t[lang]} ➔ ${currentPair.i[lang]}`}
+                </div>
+              </div>
 
-          <input
-            ref={inputRef}
-            className={`exercise-input ${inputState}`}
-            value={userInput}
-            onChange={e => {
-              if (awaitingNext) return;
-              const raw = e.target.value;
-              const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
-              if (composing) {
-                setUserInput(raw);
-                return;
-              }
-              const caret = e.target.selectionStart;
-              const converted = toHiraganaIME(raw);
-              if (caret !== null) {
-                pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
-              }
-              setUserInput(converted);
-            }}
-            onCompositionStart={() => {
-              isComposingRef.current = true;
-            }}
-            onCompositionEnd={() => {
-              isComposingRef.current = false;
-            }}
-            onKeyDown={handleKeyDown}
-            placeholder=""
-            autoCorrect="off"
-            autoCapitalize="none"
-            autoComplete="off"
-            spellCheck={false}
-          />
+              <input
+                ref={inputRef}
+                className={`exercise-input ${inputState}`}
+                value={userInput}
+                onChange={e => {
+                  if (awaitingNext) return;
+                  const raw = e.target.value;
+                  const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
+                  if (composing) {
+                    setUserInput(raw);
+                    return;
+                  }
+                  const caret = e.target.selectionStart;
+                  const converted = toHiraganaIME(raw);
+                  if (caret !== null) {
+                    pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                  }
+                  setUserInput(converted);
+                }}
+                onCompositionStart={() => {
+                  isComposingRef.current = true;
+                }}
+                onCompositionEnd={() => {
+                  isComposingRef.current = false;
+                }}
+                onKeyDown={handleKeyDown}
+                placeholder=""
+                autoCorrect="off"
+                autoCapitalize="none"
+                autoComplete="off"
+                spellCheck={false}
+              />
 
-          <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
-            {diffDisplay ? (
-              <JapaneseText text={diffDisplay} showFurigana={showFurigana} />
-            ) : (
-              '\u00A0'
-            )}
-          </div>
+              <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
+                {diffDisplay ? (
+                  <JapaneseText text={diffDisplay} showFurigana={showFurigana} />
+                ) : (
+                  '\u00A0'
+                )}
+              </div>
+            </>
+          )}
         </div>
 
         <div className="options-panel">

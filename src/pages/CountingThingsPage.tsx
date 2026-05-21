@@ -9,6 +9,7 @@ import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, pa
 import { useTranslation } from 'react-i18next';
 import countingThings, { type CountingThingCounter } from '../data/dictCountingThings';
 import PageLayout from '../components/PageLayout';
+import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -619,6 +620,7 @@ export default function CountingThingsPage() {
     <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
+          {isFinished && <ExerciseCompletedMessage />}
           {!isFinished && (
             <>
               <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
@@ -668,16 +670,16 @@ export default function CountingThingsPage() {
                 />
                 <KeyboardTip preferred="japanese" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>
+
+              <div className={`answer-banner ${answerFeedback ? (answerFeedback.isCorrect ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
+                {answerFeedback ? (
+                  <span className="diff-answer">{renderDiff(answerFeedback.ops)}</span>
+                ) : (
+                  '\u00A0'
+                )}
+              </div>
             </>
           )}
-
-          <div className={`answer-banner ${answerFeedback ? (answerFeedback.isCorrect ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
-            {answerFeedback ? (
-              <span className="diff-answer">{renderDiff(answerFeedback.ops)}</span>
-            ) : (
-              '\u00A0'
-            )}
-          </div>
         </div>
       </div>
 

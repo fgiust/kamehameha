@@ -8,6 +8,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
 import PageLayout from './PageLayout';
+import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 
 interface Props {
   title: string;
@@ -286,6 +287,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
     <PageLayout pageTitle={title}>
       <div className="card">
         <div className="exercise-container">
+          {isFinished && <ExerciseCompletedMessage />}
           {!isFinished && (
             <>
               <div className="exercise-prompt">{t('sentenceExercise.promptTranslate')}</div>

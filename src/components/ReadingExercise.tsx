@@ -7,6 +7,7 @@ import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { didConvertFromLatin, finalizeIME, ReadingExercisePicker, toHiraganaIME } from '../engines/readingExerciseEngine';
+import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 
 type Props = {
   session: ReadingSessionData;
@@ -184,6 +185,9 @@ export default function ReadingExercise({
     <>
       <div className="card">
         <div className="exercise-container">
+          {isFinished && <ExerciseCompletedMessage />}
+          {!isFinished && (
+            <>
           <div className="form-hint">{t('readingExercise.prompt')}</div>
 
           <div className="exercise-question">
@@ -243,6 +247,8 @@ export default function ReadingExercise({
                 : revealAnswer)
               : '\u00A0'}
           </div>
+            </>
+          )}
         </div>
       </div>
 

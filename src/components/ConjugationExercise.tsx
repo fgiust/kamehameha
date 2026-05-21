@@ -9,6 +9,7 @@ import OptionToggle from './OptionToggle';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
 import PageLayout from './PageLayout';
+import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 
 interface Props {
   title: string;
@@ -432,75 +433,80 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     <PageLayout pageTitle={title}>
       <div className="card">
         <div className="exercise-container">
-          <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
-            {questionNode}
-          </div>
-          <div className="form-hint">{formHint}</div>
-          {(() => {
-            const showEnglish = !!currentWord && settings.showEnglish;
-            const showType = !!currentWord && settings.showType && !!displayedType;
-            const layoutClass = showEnglish && showType ? 'is-split' : 'is-centered';
-            const isEmpty = !showEnglish && !showType;
-            return (
-              <div className={`exercise-meta-row ${layoutClass} ${isEmpty ? 'is-empty' : ''}`}>
-                {showEnglish && <div className="exercise-meta-item is-english">{lang === 'it' ? currentWord!.it : currentWord!.en}</div>}
-                {showType && <div className="exercise-meta-item is-type">{displayedType}</div>}
-                {isEmpty && <div className="exercise-meta-item">&nbsp;</div>}
+          {isFinished && <ExerciseCompletedMessage />}
+          {!isFinished && (
+            <>
+              <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
+                {questionNode}
               </div>
-            );
-          })()}
-          {formLabel && <div className="exercise-form-label">{formLabel}</div>}
-          <div className="exercise-input-block">
-            <input
-              ref={inputRef}
-              className={`exercise-input ${inputState}`}
-              value={userInput}
-              onChange={e => {
-                if (awaitingNext) return;
-                const raw = e.target.value;
-                setRawInput(raw);
-                const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
-                if (composing) {
-                  setDidConvert(false);
-                  setIsComposing(true);
-                  setUserInput(raw);
-                  return;
-                }
-                setIsComposing(false);
+              <div className="form-hint">{formHint}</div>
+              {(() => {
+                const showEnglish = !!currentWord && settings.showEnglish;
+                const showType = !!currentWord && settings.showType && !!displayedType;
+                const layoutClass = showEnglish && showType ? 'is-split' : 'is-centered';
+                const isEmpty = !showEnglish && !showType;
+                return (
+                  <div className={`exercise-meta-row ${layoutClass} ${isEmpty ? 'is-empty' : ''}`}>
+                    {showEnglish && <div className="exercise-meta-item is-english">{lang === 'it' ? currentWord!.it : currentWord!.en}</div>}
+                    {showType && <div className="exercise-meta-item is-type">{displayedType}</div>}
+                    {isEmpty && <div className="exercise-meta-item">&nbsp;</div>}
+                  </div>
+                );
+              })()}
+              {formLabel && <div className="exercise-form-label">{formLabel}</div>}
+              <div className="exercise-input-block">
+                <input
+                  ref={inputRef}
+                  className={`exercise-input ${inputState}`}
+                  value={userInput}
+                  onChange={e => {
+                    if (awaitingNext) return;
+                    const raw = e.target.value;
+                    setRawInput(raw);
+                    const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
+                    if (composing) {
+                      setDidConvert(false);
+                      setIsComposing(true);
+                      setUserInput(raw);
+                      return;
+                    }
+                    setIsComposing(false);
 
-                const didConvertNow = /[A-Za-z]/.test(raw);
-                setDidConvert(didConvertNow);
-                const caret = e.target.selectionStart;
-                const converted = toHiraganaIME(raw);
-                if (caret !== null) {
-                  pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
-                }
-                setUserInput(converted);
-              }}
-              onCompositionStart={() => {
-                isComposingRef.current = true;
-                setIsComposing(true);
-              }}
-              onCompositionEnd={() => {
-                isComposingRef.current = false;
-                setIsComposing(false);
-              }}
-              onKeyDown={handleKeyDown}
-              placeholder=""
-              autoCorrect="off"
-              autoCapitalize="none"
-              autoComplete="off"
-              spellCheck={false}
-            />
-            <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
-          </div>
-          <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
-            {diffDisplay
-              ? (settings.showKanji && settings.showFurigana && diffDisplay.includes('<rt>')
-                ? <ruby dangerouslySetInnerHTML={{ __html: diffDisplay }} />
-                : diffDisplay)
-              : '\u00A0'}
-          </div>
+                    const didConvertNow = /[A-Za-z]/.test(raw);
+                    setDidConvert(didConvertNow);
+                    const caret = e.target.selectionStart;
+                    const converted = toHiraganaIME(raw);
+                    if (caret !== null) {
+                      pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                    }
+                    setUserInput(converted);
+                  }}
+                  onCompositionStart={() => {
+                    isComposingRef.current = true;
+                    setIsComposing(true);
+                  }}
+                  onCompositionEnd={() => {
+                    isComposingRef.current = false;
+                    setIsComposing(false);
+                  }}
+                  onKeyDown={handleKeyDown}
+                  placeholder=""
+                  autoCorrect="off"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+                <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
+              </div>
+              <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
+                {diffDisplay
+                  ? (settings.showKanji && settings.showFurigana && diffDisplay.includes('<rt>')
+                    ? <ruby dangerouslySetInnerHTML={{ __html: diffDisplay }} />
+                    : diffDisplay)
+                  : '\u00A0'}
+              </div>
+            </>
+          )}
         </div>
 
         <div className="options-panel">

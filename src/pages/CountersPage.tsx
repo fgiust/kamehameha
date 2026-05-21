@@ -9,6 +9,7 @@ import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
+import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -371,34 +372,39 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
-          <div className="exercise-question" style={{ fontFamily: 'Open Sans, sans-serif' }}>
-            {question || t('common.loading')}
-          </div>
+          {isFinished && <ExerciseCompletedMessage />}
+          {!isFinished && (
+            <>
+              <div className="exercise-question" style={{ fontFamily: 'Open Sans, sans-serif' }}>
+                {question || t('common.loading')}
+              </div>
 
-          <input
-            ref={inputRef}
-            className={`exercise-input ${inputState}`}
-            value={userInput}
-            onChange={e => {
-              if (awaitingNext) return;
-              const raw = e.target.value;
-              const caret = e.target.selectionStart;
-              const converted = toHiraganaIME(raw);
-              if (caret !== null) {
-                pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
-              }
-              setUserInput(converted);
-            }}
-            onKeyDown={handleKeyDown}
-            autoCorrect="off"
-            autoCapitalize="none"
-            autoComplete="off"
-            spellCheck={false}
-          />
+              <input
+                ref={inputRef}
+                className={`exercise-input ${inputState}`}
+                value={userInput}
+                onChange={e => {
+                  if (awaitingNext) return;
+                  const raw = e.target.value;
+                  const caret = e.target.selectionStart;
+                  const converted = toHiraganaIME(raw);
+                  if (caret !== null) {
+                    pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                  }
+                  setUserInput(converted);
+                }}
+                onKeyDown={handleKeyDown}
+                autoCorrect="off"
+                autoCapitalize="none"
+                autoComplete="off"
+                spellCheck={false}
+              />
 
-          <div className={`answer-banner ${answerDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
-            {answerDisplay ?? '\u00A0'}
-          </div>
+              <div className={`answer-banner ${answerDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
+                {answerDisplay ?? '\u00A0'}
+              </div>
+            </>
+          )}
         </div>
 
         {!peopleOnly && (
