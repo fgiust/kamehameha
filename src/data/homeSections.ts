@@ -13,12 +13,12 @@ const VERB_CONJ_TOTAL = Math.min(VERB_TOTAL, CONJUGATION_SESSION_TARGET_TOTAL);
 const ADJ_CONJ_TOTAL = Math.min(ADJ_TOTAL, CONJUGATION_SESSION_TARGET_TOTAL);
 const COUNTERS_DEFAULT_TOTAL = Math.min(
   CONJUGATION_SESSION_TARGET_TOTAL,
-  counters.reduce((acc, c) => acc + c.readings.length + Object.keys(c.extraReadings ?? {}).length, 0)
+  counters.reduce((acc, c) => acc + Object.keys(c.readings).length, 0)
 );
 const COUNTERS_PEOPLE_TOTAL = (() => {
   const c = counters.find(x => x.en[1] === 'people');
   if (!c) return 0;
-  return Math.min(CONJUGATION_SESSION_TARGET_TOTAL, c.readings.length + Object.keys(c.extraReadings ?? {}).length);
+  return Math.min(CONJUGATION_SESSION_TARGET_TOTAL, Object.keys(c.readings).length);
 })();
 const TRANSITIVE_TOTAL = transitiveData.length;
 const DAYS_TOTAL = getReadingTxtLessonById('reading-days')?.items.length ?? 31;

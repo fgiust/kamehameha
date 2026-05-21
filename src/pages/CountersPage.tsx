@@ -85,11 +85,7 @@ function joinAcceptedForDisplay(items: string[]) {
 }
 
 function getAnswers(counter: JapaneseCounter, num: number) {
-  if (num < 10) {
-    const v = counter.readings[num];
-    return Array.isArray(v) ? v : [v];
-  }
-  const v = counter.extraReadings?.[String(num)];
+  const v = counter.readings[String(num)];
   if (!v) return [''];
   return Array.isArray(v) ? v : [v];
 }
@@ -148,8 +144,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     const list = peopleOnly ? (peopleCounter ? [peopleCounter] : []) : counters;
     const out: Array<{ counter: JapaneseCounter; num: number }> = [];
     for (const c of list) {
-      for (let i = 0; i < c.readings.length; i++) out.push({ counter: c, num: i });
-      for (const k of Object.keys(c.extraReadings ?? {})) {
+      for (const k of Object.keys(c.readings)) {
         const n = Number(k);
         if (Number.isFinite(n)) out.push({ counter: c, num: Math.floor(n) });
       }
@@ -243,8 +238,8 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     const chosen = nextQ.counter;
     const num = nextQ.num;
 
-    const meaning = num === 0 ? chosen[lang][0] : chosen[lang][1];
-    const shownNumber = num < 10 ? num + 1 : num;
+    const meaning = num === 1 ? chosen[lang][0] : chosen[lang][1];
+    const shownNumber = num;
     const qText = `${shownNumber} ${meaning}`;
 
     const answersKana = getAnswers(chosen, num).filter(Boolean);
@@ -326,12 +321,18 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     }
 
     const kanaDisplay = joinAcceptedForDisplay(acceptedKana);
-    const counterNode = currentCounter ? bracketToRubyNode(currentCounter.counter) : null;
+    const counterSurface = currentCounter ? stripBracketReading(currentCounter.counter) : '';
     const numberKanji = numberToKanji(answerKanji);
     setAnswerDisplay(
-      <span>
-        <span className="is-japanese">{numberKanji}{counterNode}</span>
-        {kanaDisplay ? <span style={{ fontSize: '0.8em', fontWeight: 600 }}> — {kanaDisplay}</span> : null}
+      <span className="is-japanese">
+        {acceptedKana.length > 0 ? acceptedKana.map((kana, idx) => (
+          <span key={idx}>
+            {bracketToRubyNode(`${numberKanji}${counterSurface}[${kana}]`)}
+            {idx < acceptedKana.length - 1 ? '、' : ''}
+          </span>
+        )) : (
+          bracketToRubyNode(`${numberKanji}${counterSurface}[${kanaDisplay}]`)
+        )}
       </span>
     );
     recordProgress(String(currentQuestionIdx), ok);
