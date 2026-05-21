@@ -30,9 +30,10 @@ const it = {
   },
   exerciseCompleted: {
     title: 'Ce l’hai fatta!',
+    subtitle: 'KAMEHAMEHA: CARICA COMPLETA',
     body1: 'Missione compiuta: hai distrutto questo esercizio.',
-    body2: 'Ma non rilassarti — torna alla lista e inizia subito una nuova missione!',
-    cta: 'Torna alla lista →',
+    body2: 'Ma non rilassarti - torna alla lista e inizia subito una nuova missione!',
+    cta: '← Torna alla lista',
   },
   home: {
     genkitext: 'Esercizi di grammatica organizzati per argomenti delle lezioni del Genki.\nQuesta app non riproduce alcun contenuto protetto da copyright dei libri di testo, gli esercizi sono originali e sono semplicemente organizzati seguendo lo stesso ordine delle lezioni per fornire una pratica supplementare ben strutturata per gli studenti di Genki.',

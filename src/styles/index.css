@@ -733,6 +733,17 @@ a:hover { color: var(--accent-hover); }
   letter-spacing: 0.2px;
   color: var(--accent);
   margin-bottom: 10px;
+  text-shadow: 0 0 0 rgba(0,0,0,0);
+  animation: exercise-completed-glow 1.05s ease-in-out 0.15s 3;
+}
+
+.exercise-completed-subtitle {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: color-mix(in srgb, var(--accent) 70%, var(--text));
+  margin-bottom: 44px;
+  text-transform: uppercase;
 }
 
 .exercise-completed-body {
@@ -740,7 +751,7 @@ a:hover { color: var(--accent-hover); }
   line-height: 1.6;
   color: var(--text);
   max-width: 520px;
-  margin: 0 auto 14px;
+  margin: 0 auto 52px;
 }
 
 .exercise-completed-link {
@@ -762,6 +773,30 @@ a:hover { color: var(--accent-hover); }
   border-color: var(--accent);
   box-shadow: 0 6px 16px rgba(0,0,0,0.25);
   transform: translateY(-1px);
+}
+
+@keyframes exercise-completed-glow {
+  0% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 0 rgba(0,0,0,0);
+    filter: brightness(1);
+  }
+  40% {
+    transform: translateY(-1px) scale(1.03);
+    text-shadow:
+      0 0 10px color-mix(in srgb, var(--accent) 80%, transparent),
+      0 0 26px color-mix(in srgb, var(--accent) 55%, transparent);
+    filter: brightness(1.12);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 0 0 rgba(0,0,0,0);
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exercise-completed-title { animation: none; }
 }
 
 /* Previous answers */

@@ -7,11 +7,12 @@ export default function ExerciseCompletedMessage() {
   return (
     <div className="exercise-completed">
       <div className="exercise-completed-title">{t('exerciseCompleted.title')}</div>
+      <div className="exercise-completed-subtitle">{t('exerciseCompleted.subtitle')}</div>
       <div className="exercise-completed-body">
         <div>{t('exerciseCompleted.body1')}</div>
         <div>{t('exerciseCompleted.body2')}</div>
       </div>
-      <Link to="/" className="exercise-completed-link">{t('exerciseCompleted.cta')}</Link>
+      <Link to="/" state={{ restoreScroll: true }} className="exercise-completed-link">{t('exerciseCompleted.cta')}</Link>
     </div>
   );
 }
