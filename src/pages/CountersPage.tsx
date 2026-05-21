@@ -142,6 +142,8 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const lastSlotRef = useRef<number | null>(null);
+  const progressSegmentsRef = useRef<(0 | 1 | 2)[]>([]);
+  const awaitingNextRef = useRef(false);
 
   const allQuestions = useMemo(() => {
     const list = peopleOnly ? (peopleCounter ? [peopleCounter] : []) : counters;
@@ -160,6 +162,14 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   const totalQuestions = CONJUGATION_SESSION_TARGET_TOTAL;
   const persistKey = peopleOnly ? '/counters-people' : '/counters';
   const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalQuestions, { persistKey });
+
+  useEffect(() => {
+    progressSegmentsRef.current = progressSegments;
+  }, [progressSegments]);
+
+  useEffect(() => {
+    awaitingNextRef.current = awaitingNext;
+  }, [awaitingNext]);
 
   const activeCounters = useMemo(() => {
     if (peopleOnly && peopleCounter) return [peopleCounter];
@@ -234,17 +244,14 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   }, [peopleOnly]);
 
   const pickNext = useCallback(() => {
+    if (awaitingNextRef.current) return;
     if (activeQuestions.length === 0) return;
 
-    const unanswered: number[] = [];
-    const incorrect: number[] = [];
-    for (let i = 0; i < totalQuestions; i++) {
-      const s = progressSegments[i] ?? 0;
-      if (s === 0) unanswered.push(i);
-      else if (s === 2) incorrect.push(i);
-    }
+    const segments = progressSegmentsRef.current;
+    const unansweredFirst = segments.findIndex(s => s === 0);
+    const incorrectFirst = segments.findIndex(s => s === 2);
 
-    const phase: 0 | 2 | null = unanswered.length > 0 ? 0 : (incorrect.length > 0 ? 2 : null);
+    const phase: 0 | 2 | null = unansweredFirst !== -1 ? 0 : (incorrectFirst !== -1 ? 2 : null);
     if (phase === null) {
       setIsFinished(true);
       setCurrentCounter(null);
@@ -262,13 +269,8 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
 
     setIsFinished(false);
 
-    const pool = phase === 0 ? unanswered : incorrect;
-    let slot = pool[Math.floor(Math.random() * pool.length)] ?? 0;
-    const last = lastSlotRef.current;
-    if (last !== null && pool.length > 1 && slot === last) {
-      const idx = pool.indexOf(slot);
-      slot = pool[(idx + 1) % pool.length] ?? slot;
-    }
+    let slot = phase === 0 ? unansweredFirst : incorrectFirst;
+    if (slot < 0) slot = 0;
     lastSlotRef.current = slot;
     setCurrentQuestionIdx(slot);
 
@@ -298,14 +300,14 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     setInputState('');
     setAnswerDisplay(null);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [activeQuestions.length, ensureSlotQuestion, lang, progressSegments, totalQuestions]);
+  }, [activeQuestions.length, ensureSlotQuestion, lang]);
 
   useEffect(() => {
     setIsFinished(false);
   }, [peopleOnly]);
   useEffect(() => {
     pickNext();
-  }, [pickNext]);
+  }, [pickNext, peopleOnly]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + pageTitle;
@@ -376,6 +378,8 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   };
 
   const advance = () => {
+    setAwaitingNext(false);
+    awaitingNextRef.current = false;
     pickNext();
   };
 
