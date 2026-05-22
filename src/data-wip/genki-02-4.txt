@@ -2,31 +2,41 @@
 だれの Sostantivo
 
 Whose bag is this?
+Di chi è questa borsa?
 これはだれのかばんですか
 
-Whose watch is that?
-それはだれの時計[とけい]ですか
+Whose umbrella is that?
+Di chi è quell'ombrello?
+それはだれの傘[かさ]ですか
 
-Whose pencil is this?
-これはだれの鉛筆[えんぴつ]ですか
-
-Whose dictionary is that?
-それはだれの辞書[じしょ]ですか
-
-Whose shoes are these?
-これはだれの靴[くつ]ですか
-
-Whose umbrella is that over there?
-あれはだれの傘[かさ]ですか
-
-Whose notebook is this?
-これはだれのノートですか
-
-Whose bicycle is that?
+Whose bicycle is that (over there)?
+Di chi è quella bicicletta (laggiù)?
 あれはだれの自転車[じてんしゃ]ですか
 
 Whose wallet is this?
+Di chi è questo portafoglio?
 これはだれの財布[さいふ]ですか
 
+Whose shoes are these?
+Di chi sono queste scarpe?
+これはだれの靴[くつ]ですか
+
+Whose dictionary is that?
+Di chi è quel dizionario?
+それはだれの辞書[じしょ]ですか
+
+Whose hat is that (over there)?
+Di chi è quel cappello (laggiù)?
+あれはだれの帽子[ぼうし]ですか
+
+Whose watch is this?
+Di chi è questo orologio?
+これはだれの時計[とけい]ですか
+
+Whose notebook is that?
+Di chi è quel quaderno?
+それはだれのノートですか
+
 Whose book is this?
+Di chi è questo libro?
 これはだれの本[ほん]ですか

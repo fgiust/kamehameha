@@ -1,32 +1,42 @@
 ～ね/～よ
 ～ね/～よ
 
-This is delicious, isn't it?
-これ、おいしいですね
-
-#name is Japanese, right?
-#nameさんは日本人[にほんじん]ですよ
-
-That is not my book, is it?
-それは私[わたし]の本[ほん]じゃないですね
-
-Your father is a teacher, right?
-お父[とう]さんは先生[せんせい]ですよね
-
 This watch is expensive, isn't it?
+Questo orologio è costoso, vero?
 この時計[とけい]は高[たか]いですね
 
-The café is here, you know.
-喫茶店[きっさてん]はここですよ
+Let me assure you, this tonkatsu is delicious.
+Ti assicuro che questo tonkatsu è delizioso.
+このとんかつはおいしいですよ
 
-That bag is not yours, right?
-そのかばんはあなたのじゃないですよね
+Mr. Yamada's major is business, right?
+La materia principale del signor Yamada è economia aziendale, vero?
+山田[やまだ]さんの専攻[せんこう]はビジネスですね
 
-#name is a first-year student, isn't he/she?
-#nameさんは一年生[いちねんせい]ですね
+(In case you were wondering,) my teacher is Japanese.
+(Nel caso te lo stessi chiedendo,) il mio insegnante è giapponese.
+私[わたし]の先生[せんせい]は日本人[にほんじん]ですよ
 
-This is my notebook, you know.
-これは私[わたし]のノートですよ
+That is not a vegetable, is it?
+Quella non è una verdura, vero?
+それは野菜[やさい]{じゃないですね|じゃありませんね}
 
-The dictionary is over there, right?
-辞書[じしょ]はあそこですよね
+Let me assure you, that is not my bag.
+Ti assicuro che quella non è la mia borsa.
+それは私[わたし]のかばん{じゃないですよ|じゃありませんよ}
+
+Mary is an international student, isn't she?
+Mary è una studentessa internazionale, vero?
+メアリーさんは留学生[りゅうがくせい]ですね
+
+(In case you were wondering,) the post office is right over there.
+(Nel caso te lo stessi chiedendo,) l'ufficio postale è proprio laggiù.
+郵便局[ゆうびんきょく]はあそこですよ
+
+This is Ms. Suzuki's umbrella, isn't it?
+Questo è l'ombrello della signora Suzuki, vero?
+これは鈴木[すずき]さんの傘[かさ]ですね
+
+Let me assure you, this dictionary is 5,000 yen.
+Ti assicuro che questo dizionario costa 5.000 yen.
+この辞書[じしょ]は{五千円[ごせんえん]|5000円[えん]}ですよ

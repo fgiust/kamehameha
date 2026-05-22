@@ -1,32 +1,42 @@
 Noun じゃないです
 Sostantivo じゃないです
 
-#name is not a student.
-#nameさんは学生[がくせい]じゃないです
+Mr. Yamada is not a student.
+Il signor Yamada non è uno studente.
+山田[やまだ]さんは学生[がくせい]{じゃないです|じゃありません}
 
-I am not Japanese.
-私は日本人[にほんじん]じゃないです
+My major is not history.
+La mia materia principale non è storia.
+私[わたし]の専攻[せんこう]は歴史[れきし]{じゃないです|じゃありません}
 
-My major is not economics.
-私[わたし]の専攻[せんこう]は経済[けいざい]じゃないです
+I am not Chinese.
+Non sono cinese.
+{私[わたし]は|}中国人[ちゅうごくじん]{じゃないです|じゃありません}
 
-This is not my book.
-これは私[わたし]の本[ほん]じゃないです
+This is not meat.
+Questa non è carne.
+これは肉[にく]{じゃないです|じゃありません}
 
-That is not a dictionary.
-それは辞書[じしょ]じゃないです
+That is not my dictionary.
+Quello non è il mio dizionario.
+それは私[わたし]の辞書[じしょ]{じゃないです|じゃありません}
 
-My father is not a doctor.
-私[わたし]の父[ちち]は医者[いしゃ]じゃないです
+Ms. Suzuki's mother is not an office worker.
+La madre della signora Suzuki non è un'impiegata.
+鈴木[すずき]さんの{お|}母[かあ]さんは会社員[かいしゃいん]{じゃないです|じゃありません}
 
-That café is not expensive.
-その喫茶店[きっさてん]は高[たか]くないです
+That (over there) is not a post office.
+Quello (laggiù) non è un ufficio postale.
+あれは郵便局[ゆうびんきょく]{じゃないです|じゃありません}
 
-This notebook is not mine.
-このノートは私[わたし]のじゃないです
+I am not a high school student.
+Non sono uno studente di scuola superiore.
+{私[わたし]は|}高校生[こうこうせい]{じゃないです|じゃありません}
 
-The umbrella is not yours.
-その傘[かさ]はあなたのじゃないです
+Mr. Honda's major is not English.
+La materia principale del signor Honda non è l'inglese.
+本田[ほんだ]さんの専攻[せんこう]は英語[えいご]{じゃないです|じゃありません}
 
-#name is not a college student.
-#nameさんは大学生[だいがくせい]じゃないです
+This is not my bag.
+Questa non è la mia borsa.
+これは私[わたし]のかばん{じゃないです|じゃありません}
