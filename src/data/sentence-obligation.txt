@@ -1,0 +1,38 @@
+Obligation form
+Forma di dovere
+
+I must study tonight
+Devo studiare stasera
+今晩[こんばん]勉強[べんきょう]しな{ければいけません|きゃいけません|ければならない|くちゃいけません|くちゃならない|いといけません|いとだめです|きゃだめです}
+
+You have to go to school tomorrow
+Devi andare a scuola domani
+あした学校[がっこう]へ行[い]{かなければいけません|かなきゃいけません|かなければならない|かなくちゃいけません|かなくちゃならない|かないといけません|かないとだめです|かなきゃだめです}
+
+You must take the medicine
+Devi prendere la medicina
+薬[くすり]を飲[の]{まなければいけません|まなきゃいけません|まなければならない|まなくちゃいけません|まなくちゃならない|まないといけません|まないとだめです|まなきゃだめです}
+
+You have to open the window
+Devi aprire la finestra
+窓[まど]を開[あ]{けなければいけません|けなきゃいけません|けなければならない|けなくちゃいけません|けなくちゃならない|けないといけません|けないとだめです|けなきゃだめです}
+
+You must not be late
+Non devi fare tardi
+遅[おそ]{くなってはいけません|くなっちゃいけません|くなっちゃだめです|くなってはだめです|くなっちゃだめだよ|くなってはだめだよ}
+
+You have to eat breakfast every day
+Devi fare colazione ogni giorno
+毎日[まいにち]朝[あさ]ご飯[はん]を食[た]{べなければいけません|べなきゃいけません|べなければならない|べなくちゃいけません|べなくちゃならない|べないといけません|べないとだめです|べなきゃだめです}
+
+You have to wash the dishes
+Devi lavare i piatti
+皿[さら]を洗[あ]{わなければいけません|わなきゃいけません|わなければならない|わなくちゃいけません|わなくちゃならない|わないといけません|わないとだめです|わなきゃだめです}
+
+You have to go home early
+Devi tornare a casa presto
+早[はや]く家[いえ]へ帰[かえ]{らなければいけません|らなきゃいけません|らなければならない|らなくちゃいけません|らなくちゃならない|らないといけません|らないとだめです|らなきゃだめです}
+
+You must practice the piano
+Devi esercitarti con il pianoforte
+ピアノを練習[れんしゅう]しな{ければいけません|きゃいけません|ければならない|くちゃいけません|くちゃならない|いといけません|いとだめです|きゃだめです}

@@ -10,10 +10,10 @@ describe('parseTranslateSessionTxt', () => {
     expect(session.id).toBe('genki1-2');
     expect(session.title).toBe('Question Sentences');
     expect(session.titleItalian).toBe('Fare domande');
-    expect(session.sentenceData).toHaveLength(3);
+    expect(session.sentenceData).toHaveLength(10);
     expect(session.sentenceData[0]).toMatchObject({
-      english: 'Is Nakamura a student?',
-      italian: 'Nakamura è uno studente?',
+      english: 'Are you a college student?',
+      italian: 'Sei uno studente universitario?',
     });
   });
 
@@ -44,8 +44,7 @@ describe('parseTranslateSessionTxt', () => {
     expect(lesson).toBeTruthy();
     expect(lesson?.title).toBe('Question Sentences');
     expect(lesson?.titleItalian).toBe('Fare domande');
-    expect(lesson?.sentenceData).toHaveLength(3);
-    expect(lesson?.sentenceData[0].italian).toBe('Nakamura è uno studente?');
+    expect(lesson?.sentenceData).toHaveLength(10);
+    expect(lesson?.sentenceData[0].italian).toBe('Sei uno studente universitario?');
   });
 });
-

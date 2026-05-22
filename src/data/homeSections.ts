@@ -2,7 +2,7 @@ import adjectives from './dictConjugationAdjectives';
 import counters from './dictCounters';
 import { genkiLessons, getGenkiLessonById } from '../lessons/genkiLessons';
 import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
-import { getSentenceTxtLessonById } from '../lessons/sentenceTxtLessons';
+import { getSentenceTxtLessonById, sentenceTxtLessons } from '../lessons/sentenceTxtLessons';
 import { transitiveData } from './dictTransitivePairs';
 import verbs from './dictConjugationVerbs';
 import { CONJUGATION_SESSION_TARGET_TOTAL, DEFAULT_MASTERY_RANDOM_TOTAL, HomeConfig } from '../types';
@@ -33,6 +33,13 @@ const genkiSentenceExercises = Object.fromEntries(
   ]))
 );
 
+const sentenceTxtExercises = Object.fromEntries(
+  sentenceTxtLessons.map(l => ([
+    l.id,
+    { id: l.id, title: l.title, to: `/sentence/${l.id}`, defaultTotal: l.sentenceData.length },
+  ]))
+);
+
 function genkiSectionTitle(lesson: number) {
   const bookLabel = lesson <= 12 ? 'Genki I' : 'Genki II';
   return { key: 'genki.lessonTitle', values: { book: bookLabel, lesson } };
@@ -41,6 +48,7 @@ function genkiSectionTitle(lesson: number) {
 export const homeConfig: HomeConfig = {
   exercises: {
     ...genkiSentenceExercises,
+    ...sentenceTxtExercises,
 
     teform: { id: 'teform', title: { key: 'forms.te' }, to: '/teform', defaultTotal: VERB_CONJ_TOTAL },
     causativeform: { id: 'causativeform', title: { key: 'forms.causative' }, to: '/causativeform', defaultTotal: VERB_CONJ_TOTAL },
@@ -121,6 +129,8 @@ export const homeConfig: HomeConfig = {
         // { id: 'na-vs-no' },
         { id: 'family-names' },
         { id: 'adjectives-nouns' },
+        { id: 'sentence-obligation' },
+        { id: 'sentence-prohibition' },
       ],
     },
     {

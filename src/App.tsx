@@ -16,6 +16,7 @@ import TransitivePage from './pages/TransitivePage';
 import FamilyNamesPage from './pages/FamilyNamesPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
+import SentenceTxtLessonPage from './pages/SentenceTxtLessonPage';
 import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
 import { Analytics } from '@vercel/analytics/react';
@@ -195,6 +196,7 @@ function AppShell() {
         <Route path="/" element={<HomePage />} />
         <Route path="/genki" element={<Navigate to="/" replace />} />
         <Route path="/genki/:lessonId" element={<GenkiLessonPage />} />
+        <Route path="/sentence/:lessonId" element={<SentenceTxtLessonPage />} />
 
         {/* Verb conjugation routes */}
         <Route path="/teform" element={<VerbExercisePage />} />

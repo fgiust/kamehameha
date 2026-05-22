@@ -1,0 +1,42 @@
+Prohibition form
+Forma di divieto
+
+No smoking
+Non fumare
+たばこを吸[す]{ってはいけません|っちゃいけません|っちゃだめです|ってはだめです|っちゃだめだよ|ってはだめだよ}
+
+Don't enter here
+Non entrare qui
+ここに入[はい]{ってはいけません|っちゃいけません|っちゃだめです|ってはだめです|っちゃだめだよ|ってはだめだよ}
+
+Don't drink this water
+Non bere quest'acqua
+この水[みず]を飲[の]{んではいけません|んじゃいけません|んじゃだめです|んではだめです|んじゃだめだよ|んではだめだよ}
+
+Don't use a camera in the library
+Non usare una fotocamera in biblioteca
+図書館[としょかん]でカメラを使[つか]{ってはいけません|っちゃいけません|っちゃだめです|ってはだめです|っちゃだめだよ|ってはだめだよ}
+
+Don't speak English in class
+Non parlare inglese in classe
+クラスで英語[えいご]を話[はな]{してはいけません|しちゃいけません|しちゃだめです|してはだめです|しちゃだめだよ|してはだめだよ}
+
+Don't eat here
+Non mangiare qui
+ここで食[た]{べてはいけません|べちゃいけません|べちゃだめです|べてはだめです|べちゃだめだよ|べてはだめだよ}
+
+Don't take pictures
+Non scattare foto
+写真[しゃしん]を撮[と]{ってはいけません|っちゃいけません|っちゃだめです|ってはだめです|っちゃだめだよ|ってはだめだよ}
+
+Don't open the window
+Non aprire la finestra
+窓[まど]を開[あ]{けてはいけません|けちゃいけません|けちゃだめです|けてはだめです|けちゃだめだよ|けてはだめだよ}
+
+Don't ride a bicycle here
+Non andare in bicicletta qui
+ここで自転車[じてんしゃ]に乗[の]{ってはいけません|っちゃいけません|っちゃだめです|ってはだめです|っちゃだめだよ|ってはだめだよ}
+
+Don't forget your textbook
+Non dimenticare il manuale
+教科書[きょうかしょ]を忘[わす]{れてはいけません|れちゃいけません|れちゃだめです|れてはだめです|れちゃだめだよ|れてはだめだよ}

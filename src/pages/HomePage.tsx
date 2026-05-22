@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
 import { resolveText } from '../i18n/resolve';
 import { getGenkiLessonById } from '../lessons/genkiLessons';
+import { getSentenceTxtLessonById } from '../lessons/sentenceTxtLessons';
 
 function buildMiniSegments(persistKey: string, totalSegments: number) {
   const total = Math.max(1, totalSegments);
@@ -71,6 +72,9 @@ function resolveExerciseTitle(lang: 'en' | 'it', itemId: string, fallback: strin
   const genki = getGenkiLessonById(itemId);
   if (lang === 'it' && genki?.titleItalian) return genki.titleItalian;
   if (genki) return genki.title;
+  const sentence = getSentenceTxtLessonById(itemId);
+  if (lang === 'it' && sentence?.titleItalian) return sentence.titleItalian;
+  if (sentence) return sentence.title;
   return fallback;
 }
 
