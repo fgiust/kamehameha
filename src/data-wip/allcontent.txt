@@ -1,0 +1,4592 @@
+===== genki-01-1.txt =====
+X は Y です
+X は Y です
+
+I am a college student.
+Sono uno studente universitario.
+{私[わたし]は|}大学生[だいがくせい]{です|だ}
+
+My major is economics.
+La mia facoltà è economia.
+{私[わたし]の}専攻[せんこう]{は|が}経済[けいざい]{です|だ}
+
+Takeshi is a teacher.
+Takeshi è un insegnante.
+{武[たけ]志[し]さんは|}先生[せんせい]{です|だ}
+
+My friend is Japanese.
+Il mio amico è giapponese.
+{私[わたし]の}友達[ともだち]{は|}日本人[にほんじん]{です|だ}
+
+I am 20 years old.
+Ho 20 anni.
+{私[わたし]は|}20歳[さい]{です|だ}
+
+Her older brother is a doctor.
+Suo fratello maggiore è un dottore.
+{彼女[かのじょ]の}兄[あに]{は|}医者[いしゃ]{です|だ}
+
+That person is an office worker.
+Quella persona è un impiegato.
+{あの人[ひと]は|}会社員[かいしゃいん]{です|だ}
+
+My younger sister is Australian.
+Mia sorella minore è australiana.
+{私[わたし]の}妹[いもうと]{は|}オーストラリア人[じん]{です|だ}
+
+This is my name card.
+Questo è il mio biglietto da visita.
+{これ[は]|}私[わたし]の名刺[めいし]{です|だ}
+
+My father is at home.
+Mio padre è a casa.
+{父[ちち]は|}家[うち]に{います|いる}
+
+===== genki-01-2.txt =====
+Question
+Domande
+
+Are you a student?
+Sei uno studente?
+{あなたは|}学生[がくせい]{ですか|ですか。}
+
+What is your major?
+Qual è la tua facoltà?
+専攻[せんこう]{は|が}何[なん]{ですか|ですか。}
+
+What time is it now?
+Che ore sono adesso?
+今[いま]何時[なんじ]{ですか|ですか。}
+
+How old is Maria?
+Quanti anni ha Maria?
+{マリアさんは|}何歳[なんさい]{ですか|ですか。}
+
+Is your friend Japanese?
+Il tuo amico è giapponese?
+{あなたの}友達[ともだち]{は|}日本人[にほんじん]{ですか|ですか。}
+
+Is that person a teacher?
+Quella persona è un insegnante?
+{あの人[ひと]は|}先生[せんせい]{ですか|ですか。}
+
+Is your older sister a doctor?
+Tua sorella maggiore è una dottoressa?
+{お姉[ねえ]さんは|}医者[いしゃ]{ですか|ですか。}
+
+What is this?
+Cos'è questo?
+{これ[は]|}何[なん]{ですか|ですか。}
+
+Is this your book?
+Questo è il tuo libro?
+{これ[は]|}あなたの本[ほん]{ですか|ですか。}
+
+Is Mr. Tanaka from Japan?
+Il signor Tanaka è del Giappone?
+{田中[たなか]さんは|}日本[にほん]の出身[しゅっしん]{ですか|ですか。}
+
+===== genki-01-3.txt =====
+Noun₁ の Noun₂
+Nome₁ の Nome₂
+
+My friend’s book.
+Il libro del mio amico.
+{私[わたし]の}友達[ともだち]の本[ほん]
+
+My mother’s name.
+Il nome di mia madre.
+{私[わたし]の}母[はは]の名[な]前[まえ]
+
+A Japanese teacher.
+Un insegnante di giapponese.
+日本語[にほんご]の先生[せんせい]
+
+Tanaka’s car.
+La macchina di Tanaka.
+田中[たなか]さんの車[くるま]
+
+My college’s library.
+La biblioteca della mia università.
+{私[わたし]の}大学[だいがく]の図書館[としょかん]
+
+A friend of Mary.
+Un amico di Mary.
+{メアリーさんの}友達[ともだち]
+
+My older brother’s room.
+La stanza di mio fratello maggiore.
+{私[わたし]の}兄[あに]の部屋[へや]
+
+Japan’s weather.
+Il clima del Giappone.
+日本[にほん]の天気[てんき]
+
+English language textbook.
+Manuale di lingua inglese.
+英語[えいご]の教科書[きょうかしょ]
+
+A friend from Korea.
+Un amico dalla Corea.
+韓国[かんこく]の友達[ともだち]
+
+===== genki-02-1.txt =====
+これ それ あれ どれ
+これ それ あれ どれ
+
+What is this?
+これ[これ]は何[なん]ですか
+
+What is that?
+それは何[なん]ですか
+
+What is that over there?
+あれは何[なん]ですか
+
+Which one is it?
+どれですか
+
+This is my pen.
+これは私[わたし]のペンです
+
+That is my book.
+それは私[わたし]の本[ほん]です
+
+That over there is my bicycle.
+あれは私[わたし]の自転車[じてんしゃ]です
+
+Who is that?
+あの人[ひと]はだれですか
+
+Is this a dictionary?
+これは辞書[じしょ]ですか
+
+Is that a bag?
+それはかばんですか
+
+===== genki-02-2.txt =====
+この/その/あの/どの + Noun
+この/その/あの/どの + Sostantivo
+
+How much is this watch?
+この時計[とけい]はいくらですか
+
+That watch is expensive.
+その時計[とけい]は高[たか]いです
+
+Which notebook is #name's?
+どのノートが#nameさんのですか
+
+This pen is mine.
+このペンは私[わたし]のです
+
+That book over there is cheap.
+あの本[ほん]は安[やす]いです
+
+Which umbrella is yours?
+どの傘[かさ]があなたのですか
+
+This café is very nice.
+この喫茶店[きっさてん]はとてもいいです
+
+That dictionary is big.
+その辞書[じしょ]は大[おお]きいです
+
+Which shoes are these?
+どの靴[くつ]ですか
+
+This hat is not mine.
+この帽子[ぼうし]は私[わたし]のではありません
+
+===== genki-02-3.txt =====
+ここ そこ あそこ どこ
+ここ そこ あそこ どこ
+
+Excuse me, where is the post office?
+すみません、郵便局[ゆうびんきょく]はどこですか
+
+The bank is right here.
+銀行[ぎんこう]はここです
+
+The library is over there.
+図書館[としょかん]はあそこです
+
+Where is the café?
+喫茶店[きっさてん]はどこですか
+
+The restroom is right there.
+トイレはそこです
+
+Where is #name?
+#nameさんはどこですか
+
+The department store is next to the supermarket.
+デパートはスーパーの隣[となり]です
+
+The book is here.
+本[ほん]はここです
+
+The bus stop is over there.
+バス停[てい]はあそこです
+
+The temple is right there.
+お寺[てら]はそこです
+
+===== genki-02-4.txt =====
+だれの Noun
+だれの Sostantivo
+
+Whose bag is this?
+これはだれのかばんですか
+
+Whose watch is that?
+それはだれの時計[とけい]ですか
+
+Whose pencil is this?
+これはだれの鉛筆[えんぴつ]ですか
+
+Whose dictionary is that?
+それはだれの辞書[じしょ]ですか
+
+Whose shoes are these?
+これはだれの靴[くつ]ですか
+
+Whose umbrella is that over there?
+あれはだれの傘[かさ]ですか
+
+Whose notebook is this?
+これはだれのノートですか
+
+Whose bicycle is that?
+あれはだれの自転車[じてんしゃ]ですか
+
+Whose wallet is this?
+これはだれの財布[さいふ]ですか
+
+Whose book is this?
+これはだれの本[ほん]ですか
+
+===== genki-02-5.txt =====
+Noun も
+Sostantivo も
+
+#name is Japanese too.
+#nameさんは日本人[にほんじん]です
+
+Mary is also a student.
+メアリーさんも学生[がくせい]です
+
+This is also my pen.
+これも私[わたし]のペンです
+
+That dictionary is also expensive.
+その辞書[じしょ]も高[たか]いです
+
+I also like coffee.
+私[わたし]もコーヒーが好[す]きです
+
+The café is also here.
+喫茶店[きっさてん]もここです
+
+My major is also economics.
+私[わたし]の専攻[せんこう]も経済[けいざい]です
+
+That book is also good.
+その本[ほん]もいいです
+
+The shoes are also cheap.
+靴[くつ]も安[やす]いです
+
+My friend is also from Korea.
+友達[ともだち]も韓国人[かんこくじん]です
+
+===== genki-02-6.txt =====
+Noun じゃないです
+Sostantivo じゃないです
+
+#name is not a student.
+#nameさんは学生[がくせい]じゃないです
+
+I am not Japanese.
+私は日本人[にほんじん]じゃないです
+
+My major is not economics.
+私[わたし]の専攻[せんこう]は経済[けいざい]じゃないです
+
+This is not my book.
+これは私[わたし]の本[ほん]じゃないです
+
+That is not a dictionary.
+それは辞書[じしょ]じゃないです
+
+My father is not a doctor.
+私[わたし]の父[ちち]は医者[いしゃ]じゃないです
+
+That café is not expensive.
+その喫茶店[きっさてん]は高[たか]くないです
+
+This notebook is not mine.
+このノートは私[わたし]のじゃないです
+
+The umbrella is not yours.
+その傘[かさ]はあなたのじゃないです
+
+#name is not a college student.
+#nameさんは大学生[だいがくせい]じゃないです
+
+===== genki-02-7.txt =====
+～ね/～よ
+～ね/～よ
+
+This is delicious, isn't it?
+これ、おいしいですね
+
+#name is Japanese, right?
+#nameさんは日本人[にほんじん]ですよ
+
+That is not my book, is it?
+それは私[わたし]の本[ほん]じゃないですね
+
+Your father is a teacher, right?
+お父[とう]さんは先生[せんせい]ですよね
+
+This watch is expensive, isn't it?
+この時計[とけい]は高[たか]いですね
+
+The café is here, you know.
+喫茶店[きっさてん]はここですよ
+
+That bag is not yours, right?
+そのかばんはあなたのじゃないですよね
+
+#name is a first-year student, isn't he/she?
+#nameさんは一年生[いちねんせい]ですね
+
+This is my notebook, you know.
+これは私[わたし]のノートですよ
+
+The dictionary is over there, right?
+辞書[じしょ]はあそこですよね
+
+===== genki-03-2.txt =====
+Verb Types and the "Present Tense"
+Tipi di verbi e il "tempo presente"
+
+I eat breakfast.
+Faccio colazione (mangio la colazione).
+{私[わたし]は|}朝ご飯[あさごはん]を食[た]べます
+
+I don't drink coffee.
+Non bevo caffè.
+{私[わたし]は|}コーヒーを飲[の]みません
+
+I will go to school tomorrow.
+Andrò a scuola domani.
+{私[わたし]は|}明日[あした]、学校[がっこう]{に|へ}行[い]きます
+
+Mr. Yamada doesn't watch TV.
+Il signor Yamada non guarda la TV.
+山田[やまだ]さんはテレビを見[み]ません
+
+I will read a Japanese book.
+Leggerò un libro di giapponese.
+{私[わたし]は|}日本語[にほんご]の本[ほん]を読[よ]みます
+
+Mary will not return home today.
+Mary non tornerà a casa oggi.
+メアリーさんは今日[きょう]、うち{に|へ}帰[かえ]りません
+
+I get up at seven.
+Mi alzo alle sette.
+{私[わたし]は|}七時[しちじ]に起[お]きます
+
+Ms. Suzuki will come to the university.
+La signora Suzuki verrà all'università.
+鈴木[すずき]さんは大学[だいがく]{に|へ}来[き]ます
+
+I do not listen to music.
+Non ascolto musica.
+{私[わたし]は|}音楽[おんがく]を聞[き]きません
+
+I speak Japanese.
+Parlo giapponese.
+{私[わたし]は|}日本語[にほんご]を話[はな]します
+
+===== genki-03-3.txt =====
+Particles
+Particelle
+
+I will read a magazine at the library.
+Leggerò una rivista in biblioteca.
+{私[わたし]は|}図書館[としょかん]で雑誌[ざっし]を読[よ]みます
+
+I drink green tea at home.
+Bevo tè verde a casa.
+{私[わたし]は|}うちでお茶[ちゃ]を飲[の]みます
+
+I will go to the bank on Saturday.
+Andrò in banca sabato.
+{私[わたし]は|}土曜日[どようび]に銀行[ぎんこう]{に|へ}行[い]きます
+
+I will eat lunch at a café.
+Pranzerò (mangierò il pranzo) in una caffetteria.
+{私[わたし]は|}カフェで昼ご飯[ひるごはん]を食[た]べます
+
+I go to bed at eleven.
+Vado a letto alle undici.
+{私[わたし]は|}十一時[じゅういちじ]に寝[ね]ます
+
+I listen to music at school.
+Ascolto la musica a scuola.
+{私[わたし]は|}学校[がっこう]で音楽[おんがく]を聞[き]きます
+
+I will return home at around eight.
+Tornerò a casa verso le otto.
+{私[わたし]は|}八時[はちじ]ごろ{に|}うち{に|へ}帰[かえ]ります
+
+I watch movies at home.
+Guardo i film a casa.
+{私[わたし]は|}うちで映画[えいが]を見[み]ます
+
+Mr. Honda will not go to the post office today.
+Il signor Honda non andrà all'ufficio postale oggi.
+本田[ほんだ]さんは今日[きょう]、郵便局[ゆうびんきょく]{に|へ}行[い]きません
+
+I study Japanese at school.
+Studio giapponese a scuola.
+{私[わたし]は|}学校[がっこう]で日本語[にほんご]を勉強[べんきょう]します
+
+===== genki-03-4.txt =====
+Time Reference
+Riferimenti temporali
+
+I will go to Kyoto on Sunday.
+Andrò a Kyoto domenica.
+{私[わたし]は|}日曜日[にちようび]に京都[きょうと]{に|へ}行[い]きます
+
+I watch TV every day.
+Guardo la TV tutti i giorni.
+{私[わたし]は|}毎日[まいにち]テレビを見[み]ます
+
+What will you do on the weekend?
+Cosa farai nel fine settimana?
+{あなた[あなた]は|}週末[しゅうまつ]{に|}何[なに]をしますか
+
+I eat breakfast every morning.
+Faccio colazione (mangio la colazione) ogni mattina.
+{私[わたし]は|}毎朝[まいあさ]朝ご飯[あさごはん]を食[た]べます
+
+I will go to bed at 10:30.
+Andrò a letto alle 10:30.
+{私[わたし]は|}十時半[じゅうじはん]に寝[ね]ます
+
+I will return home tomorrow.
+Tornerò a casa domani.
+{私[わたし]は|}明日[あした]、うち{に|へ}帰[かえ]ります
+
+When will you come to Japan?
+Quando verrai in Giappone?
+いつ日本[にほん]{に|へ}来[き]ますか
+
+I get up at 7:00 every day.
+Mi alzo alle 7:00 tutti i giorni.
+{私[わたし]は|}毎日[まいにち]七時[しちじ]に起[お]きます
+
+I will study Japanese tonight.
+Studierò giapponese stasera.
+{私[わたし]は|}今晩[こんばん]、日本語[にほんご]を勉強[べんきょう]します
+
+I read the newspaper in the morning.
+Leggo il giornale al mattino.
+{私[わたし]は|}朝[あさ]、新聞[しんぶん]を読[よ]みます
+
+===== genki-03-5.txt =====
+～ませんか
+～ませんか
+
+Won't you drink coffee with me?
+Non bevi un caffè con me?
+{一緒[いっしょ]に|}コーヒーを飲[の]みませんか
+
+Would you like to see a movie on Saturday?
+Ti andrebbe di vedere un film sabato?
+土曜日[どようび]に{一緒[いっしょ]に|}映画[えいが]を見[み]ませんか
+
+Won't you have lunch with me?
+Non pranzi con me?
+{一緒[いっしょ]に|}昼ご飯[ひるごはん]を食[た]べませんか
+
+Would you like to play tennis tomorrow?
+Ti andrebbe di giocare a tennis domani?
+明日[あした]、{一緒[いっしょ]に|}テニスをしませんか
+
+Won't you go to the library?
+Non andiamo in biblioteca?
+{一緒[いっしょ]に|}図書館[としょかん]{に|へ}行[い]きませんか
+
+Would you like to study Japanese with me?
+Ti andrebbe di studiare giapponese con me?
+{一緒[いっしょ]に|}日本語[にほんご]を勉強[べんきょう]しませんか
+
+Won't you go to Kyoto on Sunday?
+Non andiamo a Kyoto domenica?
+日曜日[にちようび]に京都[きょうと]{に|へ}行[い]きませんか
+
+Won't you have some tea?
+Non bevi un po' di tè?
+お茶[ちゃ]を飲[の]みませんか
+
+Would you like to come to my house?
+Ti andrebbe di venire a casa mia?
+{私[わたし]の|}うち{に|へ}来[き]ませんか
+
+Would you like to listen to music?
+Ti andrebbe di ascoltare la musica?
+{一緒[いっしょ]に|}音楽[おんがく]を聞[き]きませんか
+
+===== genki-03-7.txt =====
+Frequency Adverbs
+Avverbi di frequenza
+
+I often watch movies.
+Guardo spesso i film.
+{私[わたし]は|}よく映画[えいが]を見[み]ます
+
+Mr. Yamada sometimes drinks green tea.
+Il signor Yamada a volte beve il tè verde.
+山田[やまだ]さんは時々[ときどき]お茶[ちゃ]を飲[の]みます
+
+I do not study much.
+Non studio molto.
+{私[わたし]は|}あまり勉強[べんきょう]しません
+
+I do not read the newspaper at all.
+Non leggo per niente il giornale.
+{私[わたし]は|}全然[ぜんぜん]新聞[しんぶん]を読[よ]みません
+
+I usually get up at seven.
+Di solito mi alzo alle sette.
+{私[わたし]は|}たいてい七時[しちじ]に起[お]きます
+
+Ms. Suzuki often goes to the library.
+La signora Suzuki va spesso in biblioteca.
+鈴木[すずき]さんはよく図書館[としょかん]{に|へ}行[い]きます
+
+I sometimes eat breakfast at a café.
+A volte faccio colazione in una caffetteria.
+{私[わたし]は|}時々[ときどき]カフェで朝ご飯[あさごはん]を食[た]べます
+
+I do not watch TV much.
+Non guardo molto la TV.
+{私[わたし]は|}あまりテレビを見[み]ません
+
+Mr. Honda doesn't drink coffee at all.
+Il signor Honda non beve per niente caffè.
+本田[ほんだ]さんは全然[ぜんぜん]コーヒーを飲[の]みません
+
+I usually listen to music.
+Di solito ascolto la musica.
+{私[わたし]は|}たいてい音楽[おんがく]を聞[き]きます
+
+===== genki-04-1.txt =====
+Xがあります/います
+Xがあります/います
+
+Do you have time?
+Hai tempo?
+時[じ]間[かん]がありますか
+
+There will be a Japanese class tomorrow.
+Ci sarà una lezione di giapponese domani.
+明日[あした]、日本語[にほんご]のクラスがあります
+
+There is a bookstore over there.
+C'è una libreria laggiù.
+あそこに本屋[ほんや]があります
+
+There will be no class on Friday.
+Non ci sarà lezione venerdì.
+金曜日[きんようび]にクラスがありません
+
+I do not have a dictionary.
+Non ho un dizionario.
+{私[わたし]は|}辞書[じしょ]がありません
+
+There's an international student over there.
+C'è uno studente internazionale laggiù.
+あそこに留学生[りゅうがくせい]がいます
+
+There is Takeshi over there.
+C'è Takeshi laggiù.
+あそこにたけしさんがいます
+
+I have a Japanese friend.
+Ho un amico giapponese.
+{私[わたし]は|}日本人[にほんじん]の友達[ともだち]がいます
+
+I have a younger sister.
+Ho una sorella minore.
+{私[わたし]は|}妹[いもうと]がいます
+
+There is a bus stop over there.
+C''è una fermata dell'autobus laggiù.
+あそこにバス停[てい]があります
+
+===== genki-04-2.txt =====
+Describing Where Things Are
+Descrivere dove sono le cose
+
+The café is to the right of the post office.
+Il caffè è a destra dell'ufficio postale.
+カフェは郵便局[ゆうびんきょく]の右[みぎ]です
+
+My notebook is to the right of that bag.
+Il mio quaderno è a destra di quella borsa.
+私[わたし]のノートはそのかばんの右[みぎ]です
+
+The supermarket is to the left of the bookstore.
+Il supermercato è a sinistra della libreria.
+スーパーは本屋[ほんや]の左[ひだり]です
+
+The bank is next to the library.
+La banca è accanto alla biblioteca.
+銀行[ぎんこう]は図書館[としょかん]の隣[となり]です
+
+The umbrella is under the table.
+L'ombrello è sotto il tavolo.
+傘[かさ]はテーブルの下[した]です
+
+The post office is next to the library.
+L'ufficio postale è accanto alla biblioteca.
+郵便局[ゆうびんきょく]は図書館[としょかん]の隣[となり]です
+
+The dog is behind the house.
+Il cane è dietro la casa.
+犬[いぬ]は家[いえ]の後[うし]ろにいます
+
+My wallet is inside that bag.
+Il mio portafoglio è dentro quella borsa.
+私[わたし]の財布[さいふ]はそのかばんの中[なか]です
+
+The book is on the table.
+Il libro è sul tavolo.
+本[ほん]はテーブルの上[うえ]です
+
+The cat is near the child.
+Il gatto è vicino al bambino.
+猫[ねこ]は子供[こども]の近[ちか]くにいます
+
+===== genki-04-3.txt =====
+Past Tense of です
+Passato di です
+
+Robert was a student at Sakura University.
+Robert era uno studente all'Università Sakura.
+ロバートさんはさくら大学[だいがく]の学生[がくせい]でした
+
+Yesterday was Sunday.
+Ieri era domenica.
+昨日[きのう]は日曜日[にちようび]でした
+
+My bicycle was 30,000 yen.
+La mia bicicletta costava 30.000 yen.
+私[わたし]の自転車[じてんしゃ]は三万円[さんまんえん]でした
+
+I was alone.
+Ero solo.
+{私[わたし]は|}一人[ひとり]でした
+
+That was not a Japanese movie.
+Quello non era un film giapponese.
+それは日本[にほん]の映画[えいが]{じゃなかったです|じゃありませんでした}
+
+That was not a Korean book.
+Quello non era un libro coreano.
+それは韓国[かんこく]の本[ほん]{じゃなかったです|じゃありませんでした}
+
+Mary was not a University Student.
+Mary non era una studentessa universitaria.
+メアリーさんは大学生[だいがくせい]{じゃなかったです|じゃありませんでした}
+
+That person was not a doctor.
+Quella persona non era un medico.
+あの人[ひと]は医者[いしゃ]{じゃなかったです|じゃありませんでした}
+
+My major was history.
+La mia materia principale era storia.
+私[わたし]の専攻[せんこう]は歴史[れきし]でした
+
+This is not a hospital.
+Questo non è un ospedale.
+これは病院[びょういん]{じゃないです|じゃありません}
+
+===== genki-04-5.txt =====
+も
+も
+
+Mary went to Kyoto yesterday, too.
+Anche Mary è andata a Kyoto ieri.
+メアリーさんも昨日[きのう]京都[きょうと]{に|へ}行[い]きました
+
+Takeshi went to Tokyo last week, too.
+Anche Takeshi è andato a Tokyo la scorsa settimana.
+たけしさんも先週[せんしゅう]東京[とうきょう]{に|へ}行[い]きました
+
+I bought a bag, too.
+Ho comprato anche una borsa.
+{私[わたし]は|}かばんも買[か]いました
+
+I went to Osaka, too.
+Sono andato anche a Osaka.
+{私[わたし]は|}大阪[おおさか]にも行[い]きました
+
+He went to a party on Sunday, too.
+È andato a una festa anche domenica.
+彼[かれ]は日曜日[にちようび]にもパーティー{に|へ}行[い]きました
+
+Ken went to the park, too.
+Anche Ken è andato al parco.
+けんさんも公園[こうえん]{に|へ}行[い]きました
+
+There is a restaurant, too.
+C'è anche un ristorante.
+レストランもあります
+
+I drink coffee, too.
+Bevo anche caffè.
+{私[わたし]は|}コーヒーも飲[の]みます
+
+She ate hamburgers on Saturday, too.
+Ha mangiato hamburger anche sabato.
+彼女[かのじょ]は土曜日[どようび]にもハンバーガーを食[た]べました
+
+I took pictures at home, too.
+Ho scattato foto anche a casa.
+{私[わたし]は|}家[いえ]でも写真[しゃしん]を撮[と]りました
+
+===== genki-04-6.txt =====
+一時間
+一時間
+
+Mary waited for Takeshi there for an hour.
+Mary ha aspettato Takeshi lì per un'ora.
+メアリーさんはそこでたけしさんを一時間[いちじかん]待[ま]ちました
+
+Takeshi waited for Mary there for an hour and a half.
+Takeshi ha aspettato Mary lì per un'ora e mezza.
+たけしさんはそこでメアリーさんを一時間半[いちじかんはん]待[ま]ちました
+
+Sora watched TV for two hours yesterday.
+Sora ha guardato la TV per due ore ieri.
+ソラさんは昨日[きのう]テレビを二時間[にじかん]見[み]ました
+
+John watched TV for four hours on Sunday.
+John ha guardato la TV per quattro ore domenica.
+ジョンさんは日曜日[にちようび]にテレビを四時間[よじかん]見[み]ました
+
+I studied Japanese for about three hours yesterday.
+Ho studiato giapponese per circa tre ore ieri.
+{私[わたし]は|}昨日[きのう]日本語[にほんご]を三時間[さんじかん]ぐらい勉強[べんきょう]しました
+
+I studied Japanese for about two hours today.
+Ho studiato giapponese per circa due ore oggi.
+{私[わたし]は|}今日[きょう]日本語[にほんご]を二時間[にじかん]ぐらい勉強[べんきょう]しました
+
+Ken studies Japanese at the library for about one hour everyday.
+Ken studia giapponese in biblioteca per circa un'ora ogni giorno.
+けんさんは毎日[まいにち]図書館[としょかん]で一時間[いちじかん]ぐらい日本語[にほんご]を勉強[べんきょう]します
+
+I slept for seven and a half hours last night.
+Ho dormito per sette ore e mezza la scorsa notte.
+{私[わたし]は|}昨日[きのう]の夜[よる]七時間半[しちじかんはん]寝[ね]ました
+
+I slept for eight and a half hours last night.
+Ho dormito per otto ore e mezza la scorsa notte.
+{私[わたし]は|}昨日[きのう]の夜[よる]八時間半[はちじかんはん]寝[ね]ました
+
+I slept for about six hours last night.
+Ho dormito per circa sei ore la scorsa notte.
+{私[わたし]は|}昨日[きのう]の夜[よる]六時間[ろくじかん]ぐらい寝[ね]ました
+
+===== genki-04-7.txt =====
+たくさん
+たくさん
+
+I took many pictures in Kyoto.
+Ho scattato molte foto a Kyoto.
+{私[わたし]は|}京都[きょうと]で写真[しゃしん]をたくさん撮[と]りました
+
+Robert took many pictures in Tokyo.
+Robert ha scattato molte foto a Tokyo.
+ロバートさんは東京[とうきょう]でたくさん写真[しゃしん]を撮[と]りました
+
+I ate a lot of vegetables.
+Ho mangiato molte verdure.
+{私[わたし]は|}野菜[やさい]をたくさん食[た]べました
+
+Yui ate a lot of bread.
+Yui ha mangiato molto pane.
+ゆいさんはパンをたくさん食[た]べました
+
+I drink a lot of coffee.
+Bevo molto caffè.
+{私[わたし]は|}コーヒーをたくさん飲[の]みます
+
+Sue drinks a lot of tea.
+Sue beve molto tè.
+スーさんはお茶[ちゃ]をたくさん飲[の]みます
+
+I bought many magazines.
+Ho comprato molte riviste.
+{私[わたし]は|}雑誌[ざっし]をたくさん買[か]いました
+
+Carlos read a lot of books.
+Carlos ha letto molti libri.
+カルロスさんは本[ほん]をたくさん読[よ]みました
+
+There are many temples in Kyoto.
+Ci sono molti templi a Kyoto.
+京都[きょうと]にお寺[てら]がたくさんあります
+
+I have many friends.
+Ho molti amici.
+{私[わたし]は|}友達[ともだち]がたくさんいます
+
+===== genki-04-8.txt =====
+と
+と
+
+I speak Japanese and English.
+Parlo giapponese e inglese.
+{私[わたし]は|}日本語[にほんご]と英語[えいご]を話[はな]します
+
+I went to Kyoto and Osaka.
+Sono andato a Kyoto e Osaka.
+{私[わたし]は|}京都[きょうと]と大阪[おおさか]{に|へ}行[い]きました
+
+I drink coffee and tea.
+Bevo caffè e tè.
+{私[わたし]は|}コーヒーとお茶[ちゃ]を飲[の]みます
+
+There are dogs and cats here.
+Ci sono cani e gatti qui.
+ここに犬[いぬ]と猫[ねこ]がいます
+
+Michiko bought notebooks and pencils.
+Michiko ha comprato quaderni e matite.
+みちこさんはノートと鉛筆[えんぴつ]を買[か]いました
+
+Mary will go to Korea with Sue.
+Mary andrà in Corea con Sue.
+メアリーさんはスーさんと韓国[かんこく]{に|へ}行[い]きます
+
+Takeshi will go to the restaurant with Robert.
+Takeshi andrà al ristorante con Robert.
+たけしさんはロバートさんとレストラン{に|へ}行[い]きます
+
+I studied Japanese with Ken.
+Ho studiato giapponese con Ken.
+{私[わたし]は|}けんさんと日本語[にほんご]を勉強[べんきょう]しました
+
+Naomi went shopping with me.
+Naomi è andata a fare shopping con me.
+なおみさんは私[わたし]と買[か]い物[もの]{に|へ}行[い]きました
+
+I will eat dinner with my friend tomorrow.
+Mangerò la cena con il mio amico domani.
+{私[わたし]は|}明日[あした]友達[ともだち]と晩[ばん]ご飯[はん]を食[た]べます
+
+===== genki-05-1.txt =====
+Adjectives
+Aggettivi
+
+I saw an interesting movie yesterday.
+Ieri ho visto un film interessante.
+{私[わたし]は|}昨日[きのう]面[おも]白[しろ]い映画[えいが]を見[み]ました
+
+This watch is expensive.
+Questo orologio è costoso.
+この時計[とけい]は高[たか]いです
+
+The weather is good.
+Il tempo è bello.
+天気[てんき]がいいです
+
+The weather was not good.
+Il tempo non era bello.
+天気[てんき]がよくなかったです
+
+I was busy yesterday.
+Ieri ero occupato.
+{私[わたし]は|}昨日[きのう]忙[いそが]しかったです
+
+The trip was not fun.
+Il viaggio non è stato divertente.
+旅行[りょこう]は楽[たの]しくなかったです
+
+It is cold.
+Fa freddo.
+寒[さむ]いです
+
+She is healthy.
+Lei è in salute.
+彼女[かのじょ]は元気[げんき]です
+
+The sea was very beautiful in Okinawa.
+Il mare era molto bello a Okinawa.
+沖縄[おきなわ]の海[うみ]はとてもきれいでした
+
+Professor Yamashita is a scary teacher.
+Il professor Yamashita è un insegnante spaventoso.
+山下[やました]先生[せんせい]は怖[こわ]い先生[せんせい]です
+
+===== genki-05-2.txt =====
+好き/きらい(な)
+好き/きらい(な)
+
+Robert likes his Japanese classes.
+A Robert piacciono le sue lezioni di giapponese.
+ロバートさんは日本語[にほんご]のクラスが好[す]きです
+
+I love dogs.
+Amo i cani.
+{私[わたし]は|}犬[いぬ]が大好[だいす]きです
+
+Mary dislikes her Economics classes.
+A Mary non piacciono le sue lezioni di economia.
+メアリーさんは経済[けいざい]のクラスが嫌[きら]いです
+
+Takeshi hates natto.
+Takeshi odia il natto.
+たけしさんは納豆[なっとう]が大嫌[だいきら]いです
+
+I like surfing.
+Mi piace fare surf.
+{私[わたし]は|}サーフィンが好[す]きです
+
+Professor Yamashita dislikes fish.
+Il professor Yamashita non ama il pesce.
+山下[やました]先生[せんせい]は魚[さかな]が嫌[きら]いです
+
+This is my favorite book.
+Questo è il mio libro preferito.
+これは私[わたし]の好[す]きな本[ほん]です
+
+That is my favorite restaurant.
+Quello è il mio ristorante preferito.
+あれは私[わたし]の好[す]きなレストランです
+
+I hate cold mornings.
+Odio le mattine fredde.
+{私[わたし]は|}寒[さむ]い朝[あさ]が大嫌[だいきら]いです
+
+I like coffee a lot.
+Mi piace molto il caffè.
+{私[わたし]は|}コーヒーが大好[だいす]きです
+
+===== genki-05-3.txt =====
+～ましょう/～ましょうか
+～ましょう/～ましょうか
+
+Let's study in the library together.
+Studiamo insieme in biblioteca.
+一緒[いっしょ]に図書館[としょかん]で勉強[べんきょう]しましょう
+
+Let's take pictures here.
+Scattiamo delle foto qui.
+ここで写真[しゃしん]を撮[と]りましょう
+
+Let's watch this movie tonight.
+Guardiamo questo film stasera.
+今晩[こんばん]この映画[えいが]を見[み]ましょう
+
+Let's ask our teacher.
+Chiediamo al nostro insegnante.
+先生[せんせい]に聞[き]きましょう
+
+Shall we do the homework together?
+Facciamo i compiti insieme?
+一緒[いっしょ]に宿題[しゅくだい]をしましょうか
+
+Shall we drink coffee at a coffee shop?
+Beviamo un caffè in una caffetteria?
+喫茶店[きっさてん]でコーヒーを飲[の]みましょうか
+
+Shall we eat dinner at the restaurant?
+Ceniamo al ristorante?
+レストランで晩[ばん]ご飯[はん]を食[た]べましょうか
+
+Let's wait in the coffee shop.
+Aspettiamo nella caffetteria.
+喫茶店[きっさてん]で待[ま]ちましょう
+
+Let's play tennis tomorrow.
+Giochiamo a tennis domani.
+明日[あした]テニスをしましょう
+
+Shall we go to the sea?
+Andiamo al mare?
+海[うみ]{に|へ}行[い]きましょうか
+
+===== genki-06-2.txt =====
+～てください
+～てください
+
+Please read the textbook.
+Per favore, leggi il libro di testo.
+教科書[きょうかしょ]を読[よ]んでください
+
+Please take a picture.
+Per favore, scatta una foto.
+写真[しゃしん]を撮[と]ってください
+
+Please use this towel.
+Per favore, usa questo asciugamano.
+このタオルを使[つか]ってください
+
+Please sit down.
+Per favore, siediti.
+座[すわ]ってください
+
+Stand up, please.
+Per favore, alzati.
+立[た]ってください
+
+Please turn on the TV.
+Per favore, accendi la TV.
+テレビをつけてください
+
+Please open the window.
+Per favore, apri la finestra.
+窓[まど]を開[あ]けてください
+
+Please teach me this kanji.
+Per favore, insegnami questo kanji.
+この漢字[かんじ]を教[おし]えてください
+
+Please wait a little.
+Per favore, aspetta un po'.
+少[すこ]し待[ま]ってください
+
+Please carry this bag.
+Per favore, porta questa borsa.
+このかばんを持[も]ってください
+
+===== genki-06-3.txt =====
+～てもいいです
+～てもいいです
+
+May I see the textbook?
+Posso vedere il libro di testo?
+教科書[きょうかしょ]を見[み]てもいいですか
+
+May I open the window?
+Posso aprire la finestra?
+窓[まど]を開[あ]けてもいいですか
+
+Is it okay if I sit here?
+Va bene se mi siedo qui?
+ここに座[すわ]ってもいいですか
+
+May I take a picture?
+Posso scattare una foto?
+写真[しゃしん]を撮[と]ってもいいですか
+
+May I enter the room?
+Posso entrare nella stanza?
+部屋[へや]に入[はい]ってもいいですか
+
+May I go to the restroom?
+Posso andare in bagno?
+トイレ{に|へ}行[い]ってもいいですか
+
+Is it okay if I speak English?
+Va bene se parlo in inglese?
+英語[えいご]を話[はな]してもいいですか
+
+May I borrow a textbook?
+Posso prendere in prestito un libro di testo?
+教科書[きょうかしょ]を借[か]りてもいいですか
+
+May I borrow your pencil?
+Posso prendere in prestito la tua matita?
+鉛筆[えんぴつ]を借[か]りてもいいですか
+
+Is it okay if I bring a friend?
+Va bene se porto un amico?
+友達[ともだち]を連[つ]れてきてもいいですか
+
+===== genki-06-4.txt =====
+～てはいけません
+～てはいけません
+
+You must not take pictures here.
+Non devi scattare foto qui.
+ここで写真[しゃしん]を撮[と]ってはいけません
+
+You must not smoke here.
+Non devi fumare qui.
+ここでたばこを吸[す]ってはいけません
+
+You must not talk with friends at the library.
+Non devi parlare con gli amici in biblioteca.
+図書館[としょかん]で友達[ともだち]と話[はな]してはいけません
+
+You must not talk on the phone in class.
+Non devi parlare al telefono in classe.
+クラスで電話[でんわ]をかけてはいけません
+
+You must not forget your ticket.
+Non devi dimenticare il tuo biglietto.
+切符[きっぷ]を忘[わす]れてはいけません
+
+You must not sleep in class.
+Non devi dormire in classe.
+クラスで寝[ね]てはいけません
+
+You must not drink coffee here.
+Non devi bere caffè qui.
+ここでコーヒーを飲[の]んではいけません
+
+You must not return home today.
+Non devi tornare a casa oggi.
+今日[きょう]うち{に|へ}帰[かえ]ってはいけません
+
+You must not open this window.
+Non devi aprire questa finestra.
+この窓[まど]を開[あ]けてはいけません
+
+You must not use this computer.
+Non devi usare questo computer.
+このパソコンを使[つか]ってはいけません
+
+===== genki-06-5.txt =====
+Describing Two Activities
+Descrivere due attività
+
+I got up at six and studied.
+Mi sono alzato alle sei e ho studiato.
+{私[わたし]は|}六時[ろくじ]に起[お]きて、勉強[べんきょう]しました
+
+I got up and ate breakfast.
+Mi sono alzato e ho fatto colazione.
+{私[わたし]は|}起[お]きて、朝[あさ]ご飯[はん]を食[た]べました
+
+Let's go to the café and drink coffee.
+Andiamo in caffetteria a bere un caffè.
+カフェ{に|へ}行[い]って、コーヒーを飲[の]みましょう
+
+I will go to the library and return the book.
+Andrò in biblioteca e restituirò il libro.
+{私[わたし]は|}図書館[としょかん]{に|へ}行[い]って、本[ほん]を返[かえ]します
+
+Mary and Takeshi met and talked for about an hour.
+Mary e Takeshi si sono incontrati e hanno parlato per circa un'ora.
+メアリーさんとたけしさんは会[あ]って、一時間[いちじかん]ぐらい話[はな]しました
+
+I returned home and took a bath.
+Sono tornato a casa e ho fatto il bagno.
+{私[わたし]は|}うち{に|へ}帰[かえ]って、お風呂[ふろ]に入[はい]りました
+
+The children went to the park and played.
+I bambini sono andati al parco e hanno giocato.
+子供[こども]は公園[こうえん]{に|へ}行[い]って、遊[あそ]びました
+
+I turned off the lights and went to sleep.
+Ho spento le luci e sono andato a dormire.
+{私[わたし]は|}電気[でんき]を消[け]して、寝[ね]ました
+
+Let's go to the sea and swim.
+Andiamo al mare a nuotare.
+海[うみ]{に|へ}行[い]って、泳[およ]ぎましょう
+
+I went to the restaurant and ate lunch.
+Sono andato al ristorante e ho pranzato.
+{私[わたし]は|}レストラン{に|へ}行[い]って、昼[ひる]ご飯[はん]を食[た]べました
+
+===== genki-06-6.txt =====
+～から
+～から
+
+I will study this evening, because we will have an exam tomorrow.
+Studierò stasera, perché domani avremo un esame.
+明日[あした]試験[しけん]がありますから、{私[わたし]は|}今晩[こんばん]勉強[べんきょう]します
+
+Let's go by bus, because taxis are expensive.
+Andiamo in autobus, perché i taxi sono costosi.
+タクシーは高[たか]いですから、バスで{行[い]きましょう|行[い]きます}
+
+I am not free today, because I have a test tomorrow.
+Non sono libero oggi, perché ho un test domani.
+明日[あした]テストがありますから、{私[わたし]は|}今日[きょう]暇[ひま]{じゃないです|じゃありません}
+
+The test was not difficult, because I had studied a lot.
+Il test non è stato difficile, perché avevo studiato molto.
+{私[わたし]は|}たくさん勉強[べんきょう]しましたから、テストは難[むずか]しくなかったです
+
+Let's go out tonight, because tomorrow is a holiday.
+Usciamo stasera, perché domani è vacanza.
+明日[あした]は休[やす]みですから、今晩[こんばん]出[で]かけましょう
+
+I will not drink coffee, because I drank coffee in the morning.
+Non berrò caffè, perché ho bevuto caffè al mattino.
+朝[あさ]コーヒーを飲[の]みましたから、コーヒーを飲[の]みません
+
+I will not eat ice cream, because I ate ice cream yesterday.
+Non mangerò il gelato, perché ho mangiato il gelato ieri.
+昨日[きのう]アイスクリームを食[た]べましたから、アイスクリームを食[た]べません
+
+I helped my mother, because she was busy.
+Ho aiutato mia madre, perché era occupata.
+{お|}母[かあ]さんは忙[いそが]しかったですから、{私[わたし]は|}手伝[てつだ]いました
+
+I will not smoke cigarettes, because it is not healthy.
+Non fumerò sigarette, perché non è salutare.
+元気[げんき]{じゃないです|じゃありません}から、たばこを吸[す]いません
+
+Robert went to bed early, because he was tired.
+Robert è andato a letto presto, perché era stanco.
+ロバートさんは疲[つか]れましたから、早[はや]く寝[ね]ました
+
+===== genki-06-7.txt =====
+～ましょうか
+～ましょうか
+
+Shall I carry your bag?
+Porto io la tua borsa?
+{私[わたし]が|}かばんを持[も]ちましょうか
+
+Shall I bring the food?
+Porto io il cibo?
+{私[わたし]が|}食[た]べ物[もの]を持[も]ってきましょうか
+
+Shall I turn on the TV?
+Accendo io la TV?
+{私[わたし]が|}テレビをつけましょうか
+
+Shall I turn off the TV?
+Spengo io la TV?
+{私[わたし]が|}テレビを消[け]しましょうか
+
+Shall I open the window?
+Apro io la finestra?
+{私[わたし]が|}窓[まど]を開[あ]けましょうか
+
+Shall I close the window?
+Chiudo io la finestra?
+{私[わたし]が|}窓[まど]を閉[し]めましょうか
+
+Shall I take the picture?
+Scatto io la foto?
+{私[わたし]が|}写真[しゃしん]を撮[と]りましょうか
+
+Shall I turn on the lights?
+Accendo io le luci?
+{私[わたし]が|}電気[でんき]をつけましょうか
+
+Shall I call a taxi?
+Chiamo io un taxi?
+{私[わたし]が|}タクシーを呼[よ]びましょうか
+
+Shall I write it?
+Lo scrivo io?
+{私[わたし]が|}書[か]きましょうか
+
+===== genki-07-1.txt =====
+～ている
+～ている
+
+Mary is studying right now.
+Mary sta studiando adesso.
+メアリーさんは今[いま]勉強[べんきょう]しています
+
+Professor Yamashita is married.
+Il professor Yamashita è sposato.
+山下[やました]先生[せんせい]は結婚[けっこん]しています
+
+Ken has a lot of money.
+Ken ha molti soldi.
+けんさんはお金[かね]をたくさん持[も]っています
+
+Sora knows my mother.
+Sora conosce mia madre.
+ソラさんは私[わたし]のお母[かあ]さんを知[し]っています
+
+My younger brother is very thin.
+Mio fratello minore è molto magro.
+私[わたし]の弟[おとうと]はとてもやせています
+
+Robert is reading a book in English.
+Robert sta leggendo un libro in inglese.
+ロバートさんは英語[えいご]で本[ほん]を読[よ]んでいます
+
+My family lives in Tokyo.
+La mia famiglia vive a Tokyo.
+私[わたし]の家族[かぞく]は東京[とうきょう]に住[す]んでいます
+
+My older sister works for a Japanese company.
+Mia sorella maggiore lavora per un'azienda giapponese.
+私[わたし]のお姉[ねえ]さんは日本[にほん]の会社[かいしゃ]に勤[つと]めています
+
+Takeshi has gone to China.
+Takeshi è andato in Cina.
+たけしさんは中国[ちゅうごく]{に|へ}行[い]っています
+
+I am teaching English.
+Sto insegnando inglese.
+{私[わたし]は|}英語[えいご]を教[おし]えています
+
+===== genki-07-2.txt =====
+メアリーさんは髪が長いです
+メアリーさんは髪が長いです
+
+Mary has long hair.
+Mary ha i capelli lunghi.
+メアリーさんは髪[かみ]が長[なが]いです
+
+Takeshi is tall.
+Takeshi è alto.
+たけしさんは背[せ]が高[たか]いです
+
+Robert is short.
+Robert è basso.
+ロバートさんは背[せ]が低[ひく]いです
+
+Sora is very smart.
+Sora è molto intelligente.
+ソラさんはとても頭[あたま]がいいです
+
+Ken has small eyes.
+Ken ha gli occhi piccoli.
+けんさんは目[め]が小[ちい]さいです
+
+John has large eyes.
+John ha gli occhi grandi.
+ジョンさんは目[め]が大[おお]きいです
+
+My mother does not have long hair.
+Mia madre non ha i capelli lunghi.
+私[わたし]のお母[かあ]さんは髪[かみ]が長[なが]くないです
+
+Professor Yamashita is not tall.
+Il professor Yamashita non è alto.
+山下[やました]先生[せんせい]は背[せ]が高[たか]くないです
+
+My younger sister has a small mouth.
+Mia sorella minore ha una bocca piccola.
+私[わたし]の妹[いもうと]は口[くち]が小[ちい]さいです
+
+Takeshi is not smart.
+Takeshi non è intelligente.
+たけしさんは頭[あたま]がよくないです
+
+===== genki-07-3.txt =====
+て　forms for Joining Sentences
+Forma て per unire le frasi
+
+The food at that restaurant is inexpensive and delicious.
+Il cibo in quel ristorante è economico e delizioso.
+あのレストランの食[た]べ物[もの]は安[やす]くて、おいしいです
+
+The hotel was clean, and we were happy.
+L'hotel era pulito, ed eravamo felici.
+ホテルはきれいで、{私[わたし]たちは|}よかったです
+
+My town is quiet and boring.
+La mia città è tranquilla e noiosa.
+私[わたし]の町[まち]は静[しず]かで、つまらないです
+
+Mary has long hair and large eyes.
+Mary ha i capelli lunghi e gli occhi grandi.
+メアリーさんは髪[かみ]が長[なが]くて、目[め]が大[おお]きいです
+
+That dog was big and scary.
+Quel cane era grande e spaventoso.
+あの犬[いぬ]は大[おお]きくて、怖[こわ]かったです
+
+School was lively and fun.
+La scuola era vivace e divertente.
+学校[がっこう]はにぎやかで、楽[たの]しかったです
+
+Professor Yamashita is a Japanese person and he is about fifty years old.
+Il professor Yamashita è giapponese e ha circa cinquant'anni.
+山下[やました]先生[せんせい]は日本人[にほんじん]で、五十歳[ごじゅっさい]ぐらいです
+
+This room is new and very clean.
+Questa stanza è nuova e molto pulita.
+この部屋[へや]は新[あたら]しくて、とてもきれいです
+
+My cat is very small and cute.
+Il mio gatto è molto piccolo e carino.
+私[わたし]の猫[ねこ]はとても小[ちい]さくて、かわいいです
+
+Takeshi is a student and he is kind.
+Takeshi è uno studente ed è gentile.
+たけしさんは学生[がくせい]で、親切[しんせつ]です
+
+===== genki-07-4.txt =====
+Verb Stem + に行く
+Radice del verbo + に行く
+
+Mary went to a department store to buy a bag.
+Mary è andata in un grande magazzino a comprare una borsa.
+メアリーさんはデパートにかばんを買[か]い{に|へ}行[い]きました
+
+Takeshi came to Japan to study Japanese.
+Takeshi è venuto in Giappone per studiare giapponese.
+たけしさんは日本[にほん]に日本語[にほんご]を勉強[べんきょう]し{に|へ}来[き]ました
+
+Robert is going to the café to drink coffee.
+Robert va in caffetteria a bere un caffè.
+ロバートさんはカフェにコーヒーを飲[の]み{に|へ}行[い]きます
+
+Sora is going to the library to read a book.
+Sora va in biblioteca a leggere un libro.
+ソラさんは図書館[としょかん]に本[ほん]を読[よ]み{に|へ}行[い]きます
+
+Ken went to the post office to buy stamps.
+Ken è andato all'ufficio postale a comprare dei francobolli.
+けんさんは郵便局[ゆうびんきょく]に切手[きって]を買[か]い{に|へ}行[い]きました
+
+I am going to the park to take pictures.
+Vado al parco a scattare foto.
+{私[わたし]は|}公園[こうえん]に写真[しゃしん]を撮[と]り{に|へ}行[い]きます
+
+John is coming to my house to study.
+John viene a casa mia a studiare.
+ジョンさんは私[わたし]の家[いえ]に勉強[べんきょう]し{に|へ}来[き]ます
+
+Let's go to the convenience store to buy drinks.
+Andiamo al minimarket a comprare delle bevande.
+コンビニに飲[の]み物[もの]を買[か]い{に|へ}行[い]きましょう
+
+Let's return home to eat dinner.
+Torniamo a casa a cenare.
+うち{に|へ}晩[ばん]ご飯[はん]を食[た]べに帰[かえ]りましょう
+
+I am going to the department store to buy shoes.
+Vado al grande magazzino a comprare delle scarpe.
+{私[わたし]は|}デパートに靴[くつ]を買[か]い{に|へ}行[い]きます
+
+===== genki-08-3.txt =====
+～と思います/～と言ってました
+～と思います/～と言ってました
+
+I think Mary often cooks.
+Penso che Mary cucini spesso.
+メアリーさんはよく料理[りょうり]すると思[おも]います
+
+I think Takeshi drives a car.
+Penso che Takeshi guidi la macchina.
+たけしさんは車[くるま]を運転[うんてん]すると思[おも]います
+
+I don't think Robert smokes.
+Non penso che Robert fumi.
+ロバートさんはたばこを吸[す]わないと思[おも]います
+
+I don't think Sora drinks much coffee.
+Non penso che Sora beva molto caffè.
+ソラさんはあまりコーヒーを飲[の]まないと思[おも]います
+
+I think John is busy.
+Penso che John sia occupato.
+ジョンさんは忙[いそが]しいと思[おも]います
+
+I don't think Ken is tall.
+Non penso che Ken sia alto.
+けんさんは背[せ]が高[たか]くないと思[おも]います
+
+Takeshi said that he is going shopping tomorrow.
+Takeshi ha detto che andrà a fare shopping domani.
+たけしさんは明日[あした]買[か]い物[もの]{に|へ}行[い]くと言[い]っていました
+
+Mary said she studies kanji every day.
+Mary ha detto che studia i kanji ogni giorno.
+メアリーさんは毎日[まいにち]漢字[かんじ]を勉強[べんきょう]すると言[い]っていました
+
+The weather forecast said that it will rain tomorrow.
+Le previsioni del tempo dicevano che domani pioverà.
+天気予報[てんきよほう]は明日[あした]雨[あめ]が降[ふ]ると言[い]っていました
+
+Robert said that his mother is good at cooking.
+Robert ha detto che sua madre è brava a cucinare.
+ロバートさんはお母[かあ]さんが料理[りょうり]が上手[じょうず]だと言[い]っていました
+
+===== genki-08-4.txt =====
+～ないでください
+～ないでください
+
+Please don't take pictures here.
+Per favore, non scattare foto qui.
+ここで写真[しゃしん]を撮[と]らないでください
+
+Please don't wait for me.
+Per favore, non aspettarmi.
+{私[わたし]を|}待[ま]たないでください
+
+Please don't forget your umbrella.
+Per favore, non dimenticare il tuo ombrello.
+傘[かさ]を忘[わす]れないでください
+
+Please don't open the window.
+Per favore, non aprire la finestra.
+窓[まど]を開[あ]けないでください
+
+Please don't turn off the TV.
+Per favore, non spegnere la TV.
+テレビを消[け]さないでください
+
+Please don't eat my ice cream.
+Per favore, non mangiare il mio gelato.
+私[わたし]のアイスクリームを食[た]べないでください
+
+Please don't smoke here.
+Per favore, non fumare qui.
+ここでたばこを吸[す]わないでください
+
+Please don't be late to the party.
+Per favore, non fare tardi alla festa.
+パーティーに遅[おそ]くならないでください
+
+Please don't throw away those chopsticks.
+Per favore, non buttare via quelle bacchette.
+その箸[はし]を捨[す]てないでください
+
+Please don't stare at me.
+Per favore, non fissarmi.
+じろじろ見[み]ないでください
+
+===== genki-08-5.txt =====
+Verb のが好きです
+Verbo のが好きです
+
+I like studying the Japanese language.
+Mi piace studiare la lingua giapponese.
+{私[わたし]は|}日本語[にほんご]を勉強[べんきょう]するのが好[す]きです
+
+I like watching TV on the weekends.
+Mi piace guardare la TV nei fine settimana.
+{私[わたし]は|}週末[しゅうまつ]にテレビを見[み]るのが好[す]きです
+
+I like playing sports.
+Mi piace fare sport.
+{私[わたし]は|}スポーツをするのが好[す]きです
+
+I don't like cleaning the room.
+Non mi piace pulire la stanza.
+{私[わたし]は|}部屋[へや]を掃除[そうじ]するのが好[す]き{じゃないです|じゃありません}
+
+Mary is good at cooking meals.
+Mary è brava a cucinare i pasti.
+メアリーさんは料理[りょうり]を作[つく]るのが上手[じょうず]です
+
+Robert is skilled at eating with chopsticks.
+Robert è abile a mangiare con le bacchette.
+ロバートさんは箸[はし]で食[た]べるのが上手[じょうず]です
+
+Takeshi is good at driving a car.
+Takeshi è bravo a guidare la macchina.
+たけしさんは車[くるま]を運転[うんてん]するのが上手[じょうず]です
+
+Ken is bad at making sushi.
+Ken è negato a fare il sushi.
+けんさんは寿司[すし]を作[つく]るのが下手[へた]です
+
+I don't like doing laundry.
+Non mi piace fare il bucato.
+{私[わたし]は|}洗濯[せんたく]するのが好[す]き{じゃないです|じゃありません}
+
+Sora is good at taking pictures.
+Sora è brava a scattare foto.
+ソラさんは写真[しゃしん]を撮[と]るのが上手[じょうず]です
+
+===== genki-08-6.txt =====
+が
+が
+
+Who went to Okinawa?
+Chi è andato a Okinawa?
+だれが沖縄[おきなわ]{に|へ}行[い]きましたか
+
+Takeshi went to Okinawa.
+Takeshi è andato a Okinawa.
+たけしさんが沖縄[おきなわ]{に|へ}行[い]きました
+
+Who went to Tokyo?
+Chi è andato a Tokyo?
+だれが東京[とうきょう]{に|へ}行[い]きましたか
+
+Mary went to Tokyo.
+Mary è andata a Tokyo.
+メアリーさんが東京[とうきょう]{に|へ}行[い]きました
+
+Which class is the most interesting?
+Quale lezione è la più interessante?
+どのクラスが一番[いちばん]面[おも]白[しろ]いですか
+
+Japanese class is interesting.
+La lezione di giapponese è interessante.
+日本語[にほんご]のクラスが面[おも]白[しろ]いです
+
+Who wears glasses?
+Chi indossa gli occhiali?
+だれが眼鏡[めがね]をかけていますか
+
+Professor Yamashita wears glasses.
+Il professor Yamashita indossa gli occhiali.
+山下[やました]先生[せんせい]が眼鏡[めがね]をかけています
+
+Who is a college student?
+Chi è uno studente universitario?
+だれが大学生[だいがくせい]ですか
+
+Robert is a college student.
+Robert è uno studente universitario.
+ロバートさんが大学生[だいがくせい]です
+
+===== genki-09-2.txt =====
+Qualifying Nouns with Verb and Adjectives
+Nomi qualificanti con verbo e aggettivi
+
+The student who is reading a book over there is Takeshi.
+Lo studente che sta leggendo un libro laggiù è Takeshi.
+あそこで本[ほん]を読[よ]んでいる学生[がくせい]はたけしさんです
+
+Who is the person taking pictures over there?
+Chi è la persona che scatta foto laggiù?
+あそこで写真[しゃしん]を撮[と]っている人[ひと]はだれですか
+
+People who do physical exercises every day are healthy.
+Le persone che fanno esercizio fisico ogni giorno sono in salute.
+毎日[まいにち]運動[うんどう]する人[ひと]は元気[げんき]です
+
+I like people who do not smoke.
+Mi piacciono le persone che non fumano.
+{私[わたし]は|}たばこを吸[す]わない人[ひと]が好[す]きです
+
+A letter came from a friend who got married last year.
+È arrivata una lettera da un amico che si è sposato l'anno scorso.
+去年[きょねん]結婚[けっこん]した友達[ともだち]から手紙[てがみ]が来[き]ました
+
+The person who is drinking tea is Mary.
+La persona che sta bevendo tè è Mary.
+お茶[ちゃ]を飲[の]んでいる人[ひと]はメアリーさんです
+
+The girl talking to Robert is Sora.
+La ragazza che parla con Robert è Sora.
+ロバートさんと話[はな]している女[おんな]の子[こ]はソラさんです
+
+The student who is eating pizza is Ken.
+Lo studente che mangia la pizza è Ken.
+ピザを食[た]べている学生[がくせい]はけんさんです
+
+This is the boxed lunch that Michiko made.
+Questo è il pranzo al sacco che Michiko ha preparato.
+これはみちこさんが作[つく]ったお弁当[べんとう]です
+
+That is the bag that I bought.
+Quella è la borsa che ho comprato.
+あれは{私[わたし]が|}買[か]ったかばんです
+
+===== genki-09-3.txt =====
+まだ～ていません
+まだ～ていません
+
+I have not done the homework yet.
+Non ho ancora fatto i compiti.
+{私[わたし]は|}まだ宿題[しゅくだい]をしていません
+
+Takeshi has not woken up yet.
+Takeshi non si è ancora svegliato.
+たけしさんはまだ起[おき]ていません
+
+I haven't eaten lunch yet.
+Non ho ancora pranzato.
+{私[わたし]は|}まだ昼[ひる]ご飯[はん]を食[た]べていません
+
+Robert hasn't written the essay yet.
+Robert non ha ancora scritto il saggio.
+ロバートさんはまだ作文[さくぶん]を書[か]いていません
+
+Mary hasn't taken the medicine yet.
+Mary non ha ancora preso la medicina.
+メアリーさんはまだ薬[くすり]を飲[の]んでいません
+
+I haven't cleaned my room yet.
+Non ho ancora pulito la mia stanza.
+{私[わたし]は|}まだ部屋[へや]を掃除[そうじ]していません
+
+Sora has already woken up.
+Sora si è già svegliata.
+ソラさんはもう起[おき]ました
+
+I have already eaten lunch.
+Ho già pranzato.
+{私[わたし]は|}もう昼[ひる]ご飯[はん]を食[た]べました
+
+I have already written the essay.
+Ho già scritto il saggio.
+{私[わたし]は|}もう作文[さくぶん]を書[か]きました
+
+Ken hasn't said anything yet.
+Ken non ha ancora detto nulla.
+けんさんはまだ何[なに]も言[い]っていません
+
+===== genki-09-4.txt =====
+～から
+～から
+
+I will study this evening, because we will have an exam tomorrow.
+Studierò stasera, perché domani avremo un esame.
+明日[あした]試験[しけん]があるから、{私[わたし]は|}今晩[こんばん]勉強[べんきょう]します
+
+Let's go by bus, because taxis are expensive.
+Andiamo in autobus, perché i taxi sono costosi.
+タクシーは高[たか]いから、バスで{行[い]きましょう|行[い]きます}
+
+I will not take a walk today, because it is raining.
+Non farò una passeggiata oggi, perché sta piovendo.
+雨[あめ]が降[ふ]っているから、{私[わたし]は|}今日[きょう]散歩[さんぽ]しません
+
+Michiko is very popular, because she is good at dancing.
+Michiko è molto popolare, perché è brava a ballare.
+みちこさんは踊[おど]るのが上手[じょうず]だから、人気[にんき]があります
+
+I was very lonely, because I did not have any friends.
+Ero molto solo, perché non avevo amici.
+友達[ともだち]がいなかったから、{私[わたし]は|}とても寂[さび]しかったです
+
+We didn't go out, because it was cold.
+Non siamo usciti, perché faceva freddo.
+寒[さむ]かったから、{私[わたし]たちは|}出[で]かけませんでした
+
+We didn't go out, because it was hot.
+Non siamo usciti, perché faceva caldo.
+暑[あつ]かったから、{私[わたし]たちは|}出[で]かけませんでした
+
+I won't do physical exercises, because I am sick today.
+Non farò esercizio fisico, perché oggi sono malato.
+今日[きょう]病気[びょうき]だから、{私[わたし]は|}運動[うんどう]しません
+
+I will not eat it, because I don't like meat.
+Non lo mangerò, perché non mi piace la carne.
+肉[にく]が嫌[きら]いだから、{私[わたし]は|}食[た]べません
+
+I will go to bed early, because I am sleepy.
+Andrò a letto presto, perché ho sonno.
+眠[ねむ]いから、{私[わたし]は|}早[はや]く寝[ね]ます
+
+===== genki-10-2.txt =====
+Comparison Among Three or More Items
+Confronto tra tre o più elementi
+
+Between Russia, France, and Japan, which country has the coldest climate?
+Tra Russia, Francia e Giappone, qual è il paese più freddo?
+ロシアとフランスと日本[にほん]の中[なか]で、どこが一番[いちばん]寒[さむ]いですか
+
+Russia is the coldest, I think.
+Penso che la Russia sia la più fredda.
+ロシアが一番[いちばん]寒[さむ]いと思[おも]います
+
+What season do you like best?
+Quale stagione ti piace di più?
+季節[きせつ]の中[なか]で、いつが一番[いちばん]好[す]きですか
+
+I like fall the most.
+Mi piace di più l'autunno.
+{私[わたし]は|}秋[あき]が一番[いちばん]好[す]きです
+
+What Japanese food is the most delicious?
+Qual è il cibo giapponese più delizioso?
+日本[にほん]の食[た]べ物[もの]の中[なか]で、何[なに]が一番[いちばん]おいしいですか
+
+Sushi is the most delicious.
+Il sushi è il più delizioso.
+寿司[すし]が一番[いちばん]おいしいです
+
+Between Kanji, Katakana, and Hiragana, Kanji is the most difficult.
+Tra kanji, katakana e hiragana, i kanji sono i più difficili.
+漢字[かんじ]とカタカナとひらがなの中[なか]で、漢字[かんじ]が一番[いちばん]難[むずか]しいです
+
+What sport is the most fun?
+Quale sport è il più divertente?
+スポーツの中[なか]で、何[なに]が一番[いちばん]楽[たの]しいですか
+
+Who is the tallest in this class?
+Chi è il più alto in questa classe?
+このクラスの中[なか]で、だれが一番[いちばん]背[せ]が高[たか]いですか
+
+Takeshi is the tallest.
+Takeshi è il più alto.
+たけしさんが一番[いちばん]背[せ]が高[たか]いです
+
+===== genki-10-3.txt =====
+Adjectives/Noun + の
+Aggettivi/Sostantivi + の
+
+I have a black sweater. I have a red one, too.
+Ho un maglione nero. Ne ho anche uno rosso.
+黒[くろ]いセーターを持[も]っています。赤[あか]いのも持[も]っています
+
+I went to buy an inexpensive dictionary, but there were no good ones.
+Sono andato a comprare un dizionario economico, ma non ce n'erano di buoni.
+安[やす]い辞書[じしょ]を買[か]い{に|へ}行[い]きましたが、いいのがありませんでした
+
+No, that is Takeshi's.
+No, quello è di Takeshi.
+いいえ、それはたけしさんのです
+
+Give me a cheap one.
+Dammi quello economico.
+安[やす]いのをください
+
+My computer is slower than yours.
+Il mio computer è più lento del tuo.
+私[わたし]のパソコンはあなたのより遅[おそ]いです
+
+I like scary ones.
+Mi piacciono quelli spaventosi.
+{私[わたし]は|}怖[こわ]いのが好[す]きです
+
+I will buy a new one.
+Ne comprerò uno nuovo.
+{私[わたし]は|}新[あたら]しいのを買[か]います
+
+This red shirt is more expensive than that white one.
+Questa camicia rossa è più costosa di quella bianca.
+この赤[あか]いシャツはあの白[しろ]いのより高[たか]いです
+
+Is this Mary's bag?
+Questa è la borsa di Mary?
+これはメアリーさんのかばんですか
+
+No, it is Robert's.
+No, è di Robert.
+いいえ、ロバートさんのです
+
+===== genki-10-4.txt =====
+～つもりだ
+～つもりだ
+
+I intend to play tennis with Takeshi this weekend.
+Ho intenzione di giocare a tennis con Takeshi questo fine settimana.
+{私[わたし]は|}今週[こんしゅう]の週末[しゅうまつ]にたけしさんとテニスをするつもりです
+
+Ken does not intend to come to school tomorrow.
+Ken non ha intenzione di venire a scuola domani.
+けんさんは明日[あした]学校[がっこう]{に|へ}来[こ]ないつもりです
+
+We were planning to visit a temple, but we didn't.
+Avevamo intenzione di visitare un tempio, ma non lo abbiamo fatto.
+お寺[てら]{に|へ}行[い]くつもりでしたが、行[い]きませんでした
+
+I intend to see a movie tonight.
+Ho intenzione di vedere un film stasera.
+{私[わたし]は|}今晩[こんばん]映画[えいが]を見[み]るつもりです
+
+I intend to not go out on Sunday.
+Ho intenzione di non uscire domenica.
+{私[わたし]は|}日曜日[にちようび]に出[で]かけないつもりです
+
+I intend to work for a Japanese company.
+Ho intenzione di lavorare per un'azienda giapponese.
+{私[わたし]は|}日本[にほん]の会社[かいしゃ]で働[はたら]くつもりです
+
+I intend to not get married.
+Ho intenzione di non sposarmi.
+{私[わたし]は|}結婚[けっこん]しないつもりです
+
+I intend to study this week.
+Ho intenzione di studiare questa settimana.
+{私[わたし]は|}今週[こんしゅう]勉強[べんきょう]するつもりです
+
+I intend to eat pizza tonight.
+Ho intenzione di mangiare la pizza stasera.
+{私[わたし]は|}今晩[こんばん]ピザを食[た]べるつもりです
+
+Mary intends to stay at a hotel.
+Mary ha intenzione di soggiornare in un hotel.
+メアリーさんはホテルに泊[と]まるつもりです
+
+===== genki-10-5.txt =====
+Adjective + なる
+Diventare... (Cambiamento di stato)
+
+Studying the Japanese language is fun now.
+Studiare la lingua giapponese è divertente ora.
+日本語[にほんご]の勉強[べんきょう]が楽[たの]しくなりました
+
+I have grown fond of studying the Japanese language.
+Ho iniziato ad apprezzare lo studio della lingua giapponese.
+{私[わたし]は|}日本語[にほんご]の勉強[べんきょう]が好[す]きになりました
+
+Mary has become better in Japanese than before.
+Mary è diventata più brava in giapponese rispetto a prima.
+メアリーさんは前[まえ]より日本語[にほんご]が上手[じょうず]になりました
+
+My room has become clean.
+La mia stanza è diventata pulita.
+私[わたし]の部屋[へや]はきれいになりました
+
+I have become sleepy.
+Mi è venuto sonno (sono diventato assonnato).
+{私[わたし]は|}眠[ねむ]くなりました
+
+Takeshi has become healthy.
+Takeshi è diventato in salute (è guarito).
+たけしさんは元気[げんき]になりました
+
+Ken has become tall.
+Ken è diventato alto.
+けんさんは背[せ]が高[たか]くなりました
+
+I will become a teacher.
+Diventerò un insegnante.
+{私[わたし]は|}先生[せんせい]になります
+
+Robert has become good-looking.
+Robert è diventato affascinante.
+ロバートさんはかっこよくなりました
+
+It has become cold.
+È diventato freddo.
+寒[さむ]くなりました
+
+===== genki-10-6.txt =====
+どこかに/どこにも
+どこかに/どこにも
+
+Did you go anywhere?
+Sei andato da qualche parte?
+どこか{に|へ}行[い]きましたか
+
+No, I didn't go anywhere.
+No, non sono andato da nessuna parte.
+いいえ、どこに{も|}行[い]きませんでした
+
+Did you see anybody?
+Hai visto qualcuno?
+だれかに会[あ]いましたか
+
+No, I didn't see anybody.
+No, non ho visto nessuno.
+いいえ、だれに{も|}会[あ]いませんでした
+
+Did you do anything?
+Hai fatto qualcosa?
+何[なに]かしましたか
+
+No, I didn't do anything.
+No, non ho fatto nulla.
+いいえ、何[なに]も{しませんでした|しません}
+
+Did Takeshi drink anything last night?
+Takeshi ha bevuto qualcosa ieri sera?
+たけしさんは昨日[きのう]の夜[よる]何[なに]か飲[み]ましたか
+
+Did Mary go anywhere yesterday?
+Mary è andata da qualche parte ieri?
+メアリーさんは昨日[きのう]どこか{に|へ}行[い]きましたか
+
+I didn't eat anything.
+Non ho mangiato nulla.
+{私[わたし]は|}何[なに]も食[た]べませんでした
+
+I want to go somewhere.
+Voglio andare da qualche parte.
+どこか{に|へ}行[い]きたいです
+
+===== genki-10-7.txt =====
+で
+で
+
+We eat our meals with chopsticks.
+Noi mangiamo i nostri pasti con le bacchette.
+{私[わたし]たちは|}箸[はし]でご飯[はん]を食[た]べます
+
+I eat ice cream with a spoon.
+Io mangio il gelato con il cucchiaio.
+{私[わたし]は|}スプーンでアイスクリームを食[た]べます
+
+Let's talk in Japanese.
+Parliamo in giapponese.
+日本語[にほんご]で話[はな]しましょう
+
+Let's talk in English.
+Parliamo in inglese.
+英語[えいご]で話[はな]しましょう
+
+I went to the station by bus.
+Sono andato in stazione in autobus.
+{私[わたし]は|}バスで駅[えき]{に|へ}行[い]きました
+
+I saw a movie on TV.
+Ho visto un film in TV.
+{私[わたし]は|}テレビで映画[えいが]を見[み]ました
+
+Let's go by car.
+Andiamo in macchina.
+車[くるま]で{行[い]きましょう|行[い]きます}
+
+I went to Japan by airplane.
+Sono andato in Giappone in aereo.
+{私[わたし]は|}飛行機[ひこうき]で日本[にほん]{に|へ}行[い]きました
+
+Takeshi came by bicycle.
+Takeshi è venuto in bicicletta.
+たけしさんは自転車[じてんしゃ]で来[き]ました
+
+I write letters with a pen.
+Io scrivo lettere con la penna.
+{私[わたし]は|}ペンで手紙[てがみ]を書[か]きます
+
+===== genki-11-1.txt =====
+～たい
+～たい
+
+I want to see a film this weekend.
+Voglio vedere un film questo fine settimana.
+{私[わたし]は|}週末[しゅうまつ]に映画[えいが]を見[み]たいです
+
+I want to go to China someday.
+Voglio andare in Cina un giorno.
+{私[わたし]は|}いつか中国[ちゅうごく]{に|へ}行[い]きたいです
+
+I wanted to buy a sweater.
+Volevo comprare un maglione.
+{私[わたし]は|}セーターを買[か]いたかったです
+
+I want to own a dog.
+Voglio avere un cane.
+{私[わたし]は|}犬[いぬ]を飼[か]いたいです
+
+I want to eat snacks.
+Voglio mangiare degli spuntini.
+{私[わたし]は|}お菓子[かし]を食[た]べたいです
+
+Mary said she wanted to go to Korea.
+Mary ha detto che voleva andare in Corea.
+メアリーさんは韓国[かんこく]{に|へ}行[い]きたいと言[い]っていました
+
+I don't want to see that person.
+Non voglio vedere quella persona.
+{私[わたし]は|}あの人[ひと]に会[あ]いたくないです
+
+I don't want to go to school.
+Non voglio andare a scuola.
+{私[わたし]は|}学校[がっこう]{に|へ}行[い]きたくないです
+
+I didn't want to ride the train.
+Non volevo prendere il treno.
+{私[わたし]は|}電車[でんしゃ]に乗[の]りたくなかったです
+
+I don't want to play games today.
+Non voglio fare giochi oggi.
+{私[わたし]は|}今日[きょう]ゲームをしたくないです
+
+===== genki-11-2.txt =====
+～たり～たりする
+～たり～たりする
+
+In Osaka, I will do such things as shopping, and eating dinner.
+A Osaka, farò cose come fare shopping e cenare.
+大阪[おおさか]で買[か]い物[もの]をしたり、晩[ばん]ご飯[はん]を食[た]べたりします
+
+At home, I do such things as cooking, and playing games.
+A casa, faccio cose come cucinare e fare giochi.
+家[いえ]で料理[りょうり]を作[つく]ったり、ゲームをしたりします
+
+I studied and talked with my friends, among other things, over the weekend.
+Ho studiato e parlato con i miei amici, tra le altre cose, durante il fine settimana.
+週末[しゅうまつ]に勉強[べんきょう]したり、友達[ともだち]と話[はな]したりしました
+
+I like dancing, listening to music, and so forth.
+Mi piace ballare, ascoltare musica e così via.
+{私[わたし]は|}踊[おど]ったり、音楽[おんがく]を聞[き]いたりするのが好[す]きです
+
+I saw temples in Kyoto, went to an art museum, etc.
+Ho visto templi a Kyoto, sono andato in un museo d'arte, ecc.
+京都[きょうと]でお寺[てら]を見[み]たり、美術館[びじゅつかん]{に|へ}行[い]ったりしました
+
+On Sunday I cleaned the room, did the laundry, and so forth.
+Domenica ho pulito la stanza, fatto il bucato e così via.
+日曜日[にちようび]に部屋[へや]を掃除[そうじ]したり、洗濯[せんたく]したりしました
+
+Takeshi played tennis, read a book, and so on.
+Takeshi ha giocato a tennis, letto un libro, eccetera.
+たけしさんはテニスをしたり、本[ほん]を読[よ]んだりしました
+
+Mary will do such things as writing a letter and listening to music.
+Mary farà cose come scrivere una lettera e ascoltare musica.
+メアリーさんは手紙[てがみ]を書[か]いたり、音楽[おんがく]を聞[き]いたりします
+
+I want to do things like going to the sea and climbing a mountain.
+Voglio fare cose come andare al mare e scalare una montagna.
+海[うみ]{に|へ}行[い]ったり、山[やま]に登[のぼ]ったりしたいです
+
+Ken drank beer, ate sushi, and so forth.
+Ken ha bevuto birra, mangiato sushi e così via.
+けんさんはビールを飲[の]んだり、寿司[すし]を食[た]べたりしました
+
+===== genki-11-3.txt =====
+～ことがある
+～ことがある
+
+I have had the experience of climbing Mt. Fuji.
+Ho avuto l'esperienza di scalare il Monte Fuji.
+{私[わたし]は|}富士山[ふじさん]に登[のぼ]ったことがあります
+
+Takeshi has never been absent from classes.
+Takeshi non è mai stato assente alle lezioni.
+たけしさんは授業[じゅぎょう]を休[やす]んだことがありません
+
+Have you ever been to Osaka?
+Sei mai stato a Osaka?
+大阪[おおさか]{に|へ}行[い]ったことがありますか
+
+Mary has eaten tempura.
+Mary ha mangiato la tempura.
+メアリーさんは天[てん]ぷらを食[た]べたことがあります
+
+Robert has drank coffee.
+Robert ha bevuto il caffè.
+ロバートさんはコーヒーを飲[の]んだことがあります
+
+Ken has slept in class.
+Ken ha dormito in classe.
+けんさんはクラスで寝[ね]たことがあります
+
+Sora has never driven a car.
+Sora non ha mai guidato una macchina.
+ソラさんは車[くるま]を運転[うんてん]したことがありません
+
+I have never been to Kyoto.
+Non sono mai stato a Kyoto.
+{私[わたし]は|}京都[きょうと]{に|へ}行[い]ったことがありません
+
+Have you ever worked part-time?
+Hai mai fatto un lavoro part-time?
+アルバイトをしたことがありますか
+
+I have met a celebrity.
+Ho incontrato una celebrità.
+有名人[ゆうめいじん]に会[あ]ったことがあります
+
+===== genki-11-4.txt =====
+NounA や NounB
+SostantivoA や SostantivoB
+
+I went to Kyoto and Osaka (among other places).
+Sono andato a Kyoto e Osaka (tra gli altri posti).
+京都[きょうと]や大阪[おおさか]{に|へ}行[い]きました
+
+I like ice cream and cake (among other desserts).
+Mi piacciono il gelato e la torta (tra gli altri dolci).
+{私[わたし]は|}アイスクリームやケーキが好[す]きです
+
+I drink coffee and green tea (among other drinks).
+Bevo caffè e tè verde (tra le altre bevande).
+{私[わたし]は|}コーヒーやお茶[ちゃ]を飲[の]みます
+
+I bought a watch and a new shirt (among other things).
+Ho comprato un orologio e una camicia nuova (tra le altre cose).
+{私[わたし]は|}時計[とけい]や新[あたら]しいシャツを買[か]いました
+
+I like dogs and cats (among other animals).
+Mi piacciono cani e gatti (tra gli altri animali).
+{私[わたし]は|}犬[いぬ]や猫[ねこ]が好[す]きです
+
+I will go to a café and a park (among other places).
+Andrò in una caffetteria e in un parco (tra gli altri posti).
+カフェや公園[こうえん]{に|へ}行[い]きます
+
+There are books and magazines on the desk.
+Ci sono libri e riviste sulla scrivania.
+机[つくえ]の上[うえ]に本[ほん]や雑誌[ざっし]があります
+
+Mary met Takeshi and Robert (among others).
+Mary ha incontrato Takeshi e Robert (tra gli altri).
+メアリーさんはたけしさんやロバートさんに会[あ]いました
+
+I ate sushi and tempura (among other things).
+Ho mangiato sushi e tempura (tra le altre cose).
+{私[わたし]は|}寿司[すし]や天[てん]ぷらを食[た]べました
+
+Ken studies history and politics (among other things).
+Ken studia storia e politica (tra le altre cose).
+けんさんは歴史[れきし]や政治[せいじ]を勉強[べんきょう]します
+
+===== genki-12-1.txt =====
+～んです
+～んです
+
+The bus didn't come.
+L'autobus non è arrivato.
+バスが来[き]なかったんです
+
+I have an exam tomorrow.
+Ho un esame domani.
+明日[あした]試験[しけん]があるんです
+
+I want to go to the bathroom.
+Voglio andare in bagno.
+トイレに行[い]きたいんです
+
+My grade is not good.
+I miei voti non sono buoni.
+成績[せいせき]がよくないんです
+
+The exam is over.
+L'esame è finito.
+試験[しけん]は終[お]わったんです
+
+Why did you break up with your boyfriend?
+Perché hai rotto con il tuo ragazzo?
+どうして彼[かれ]と別[わか]れたんですか
+
+Why did you break up with your girlfriend?
+Perché hai rotto con la tua ragazza?
+どうして彼女[かのじょ]と別[わか]れたんですか
+
+What happened?
+Che cosa è successo?
+どうしたんですか
+
+My cat died.
+Il mio gatto è morto.
+猫[ねこ]が死[し]んだんです
+
+My dog died.
+Il mio cane è morto.
+犬[いぬ]が死[し]んだんです
+
+===== genki-12-2.txt =====
+～すぎる
+～すぎる
+
+I got up too early.
+Mi sono alzato troppo presto.
+早[はや]く起[お]きすぎました
+
+I got up too late.
+Mi sono alzato troppo tardi.
+遅[おそ]く起[お]きすぎました
+
+You must not eat too much.
+Non devi mangiare troppo.
+食[た]べすぎてはいけません
+
+You must not drink too much.
+Non devi bere troppo.
+飲[の]みすぎてはいけません
+
+This book is too expensive.
+Questo libro è troppo costoso.
+この本[ほん]は高[たか]すぎます
+
+This town is too quiet.
+Questa città è troppo tranquilla.
+この町[まち]は静[しず]かすぎます
+
+I made too much.
+Ne ho fatto troppo.
+作[つく]りすぎました
+
+This room is too cramped.
+Questa stanza è troppo stretta.
+この部屋[へや]は狭[せま]すぎます
+
+I watched too much TV.
+Ho guardato troppa TV.
+テレビを見[み]すぎました
+
+This shirt is too large.
+Questa camicia è troppo grande.
+このシャツは大[おお]きすぎます
+
+===== genki-12-3.txt =====
+～ほうがいいです
+～ほうがいいです
+
+You should eat more vegetables.
+Dovresti mangiare più verdure.
+もっと野菜[やさい]を食[た]べたほうがいいです
+
+It is better not to skip classes.
+È meglio non saltare le lezioni.
+授業[じゅぎょう]をサボらないほうがいいです
+
+You shouldn't eat too much ice cream.
+Non dovresti mangiare troppo gelato.
+アイスクリームを食[た]べすぎないほうがいいです
+
+You should take medicine.
+Dovresti prendere la medicina.
+薬[くすり]を飲[の]んだほうがいいです
+
+It is better to sleep early tonight.
+È meglio andare a dormire presto stasera.
+今晩[こんばん]早[はや]く寝[ね]たほうがいいです
+
+You should go to the hospital.
+Dovresti andare in ospedale.
+病院[びょういん]に行[い]ったほうがいいです
+
+You should skip work tomorrow.
+Dovresti assentarti dal lavoro domani.
+明日[あした]仕事[しごと]を休[やす]んだほうがいいです
+
+You should drink some water.
+Dovresti bere un po' d'acqua.
+水[みず]を飲[の]んだほうがいいです
+
+You should not worry too much.
+Non dovresti preoccuparti troppo.
+あまり心配[しんぱい]しないほうがいいです
+
+You should see a doctor.
+Dovresti vedere un medico.
+医者[いしゃ]に行[い]ったほうがいいです
+
+===== genki-12-4.txt =====
+～ので
+～ので
+
+My Japanese has improved, because I always speak Japanese.
+Il mio giapponese è migliorato perché parlo sempre giapponese.
+いつも日本語[にほんご]を話[はな]すので、日本語[にほんご]が上手[じょうず]になりました
+
+I did not sleep last night, because I had a lot of homework.
+Non ho dormito la notte scorsa perché avevo molti compiti.
+宿題[しゅくだい]がたくさんあったので、昨日[きのう]の夜[よる]寝[ね]ませんでした
+
+I do not like that person, because they are mean.
+Non mi piace quella persona perché è cattiva.
+あの人[ひと]は意地悪[いじわる]なので、好[す]きじゃありません
+
+Banks are closed, because today is a Sunday.
+Le banche sono chiuse perché oggi è domenica.
+今日[きょう]は日曜日[にちようび]なので、銀行[ぎんこう]は休[やす]みです
+
+The post office is closed, because today is a Sunday.
+L'ufficio postale è chiuso perché oggi è domenica.
+今日[きょう]は日曜日[にちようび]なので、郵便局[ゆうびんきょく]は休[やす]みです
+
+I will take a walk, because I am feeling good today.
+Farò una passeggiata perché oggi sto bene.
+今日[きょう]は元気[げんき]なので、散歩[さんぽ]します
+
+I will buy this, because it is cheap.
+Comprerò questo perché è economico.
+安[やす]いので、これを買[か]います
+
+Since that movie isn't interesting, I don't want to watch it.
+Dato che quel film non è interessante, non voglio guardarlo.
+あの映画[えいが]は面[おも]白[しろ]くないので、見[み]たくありません
+
+I was absent from class, because I was sick.
+Sono stato assente a lezione perché ero malato.
+病気[びょうき]だったので、授業[じゅぎょう]を休[やす]みました
+
+I won't go out, because it is raining.
+Non uscirò perché piove.
+雨[あめ]が降[ふ]っているので、出[で]かけません
+
+===== genki-12-5.txt =====
+～なければいけません/～なきゃいけません
+～なければいけません/～なきゃいけません
+
+I have to study.
+Devo studiare.
+勉強[べんきょう]しなければいけません
+
+I had to get up at six this morning.
+Ho dovuto alzarmi alle sei stamattina.
+今朝[けさ]六時[ろくじ]に起[お]きなければいけませんでした
+
+I must practice every day.
+Devo esercitarmi ogni giorno.
+毎日[まいにち]練習[れんしゅう]しなければいけません
+
+I must get up at seven o'clock tomorrow.
+Domani devo alzarmi alle sette.
+明日[あした]七時[しちじ]に起[お]きなければいけません
+
+I must leave the house at eight o'clock.
+Devo uscire di casa alle otto.
+八時[はちじ]に家[いえ]を出[で]なければいけません
+
+I have to do homework tonight.
+Devo fare i compiti stasera.
+今晩[こんばん]宿題[しゅくだい]をしなければいけません
+
+I need to take my medicine tonight.
+Devo prendere la medicina stasera.
+今晩[こんばん]薬[くすり]を飲[の]まなければいけません
+
+I have to go to school tomorrow.
+Devo andare a scuola domani.
+明日[あした]学校[がっこう]に行[い]かなければいけません
+
+I have to clean my room today.
+Devo pulire la mia stanza oggi.
+今日[きょう]部屋[へや]を掃除[そうじ]しなければいけません
+
+I have to call my mother.
+Devo chiamare mia madre.
+お母[かあ]さんに電話[でんわ]をかけなければいけません
+
+===== genki-12-6.txt =====
+～でしょう
+～でしょう
+
+It will probably rain tomorrow.
+Probabilmente domani pioverà.
+明日[あした]雨[あめ]が降[ふ]るでしょう
+
+It will probably not rain tomorrow.
+Probabilmente domani non pioverà.
+明日[あした]雨[あめ]が降[ふ]らないでしょう
+
+It is probably cold in Hokkaido.
+Probabilmente fa freddo a Hokkaido.
+北海道[ほっかいどう]は寒[さむ]いでしょう
+
+It is probably not cold in Tokyo.
+Probabilmente a Tokyo non fa freddo.
+東京[とうきょう]は寒[さむ]くないでしょう
+
+Mary probably likes fish.
+Probabilmente a Mary piace il pesce.
+メアリーさんは魚[さかな]が好[す]きでしょう
+
+Robert probably doesn't like fish.
+Probabilmente a Robert non piace il pesce.
+ロバートさんは魚[さかな]が好[す]きじゃないでしょう
+
+That person is probably Japanese.
+Quella persona probabilmente è giapponese.
+あの人[ひと]は日本人[にほんじん]でしょう
+
+That person is probably not Japanese.
+Quella persona probabilmente non è giapponese.
+あの人[ひと]は日本人[にほんじん]じゃないでしょう
+
+I think Ken would be interested in it.
+Penso che Ken ne sarebbe interessato.
+けんさんはそれに興味[きょうみ]があるでしょう
+
+The exam will probably be difficult.
+Probabilmente l'esame sarà difficile.
+試験[しけん]は難[むずか]しいでしょう
+
+===== genki-13-2.txt =====
+～し
+～し
+
+I like my Japanese class, because the Japanese language is interesting, and our teacher is good.
+Mi piace il mio corso di giapponese perché la lingua giapponese è interessante e il nostro insegnante è bravo.
+日本語[にほんご]がおもしろくて、先生[せんせい]もいいので、日本語[にほんご]のクラスが好[す]きです
+
+Yesterday was a good day, because a friend came by, and I talked with my boyfriend on the phone.
+Ieri è stata una bella giornata perché è venuto un amico e ho parlato al telefono con il mio ragazzo.
+友達[ともだち]が来[き]て、彼[かれ]と電話[でんわ]で話[はな]したので、昨日[きのう]はいい日[ひ]でした
+
+Life here in Japan is fun, and I have good friends here, so I don't want to go back.
+La vita qui in Giappone è divertente e ho buoni amici qui, quindi non voglio tornare.
+ここでの生活[せいかつ]は楽[たの]しくて、いい友達[ともだち]もいるので、帰[かえ]りたくありません
+
+Professor Yamashita is a great teacher. He is good at teaching, and he is kind.
+Il professor Yamashita è un ottimo insegnante. È bravo a insegnare ed è gentile.
+山下[やました]先生[せんせい]は教[おし]えるのが上手[じょうず]で、親切[しんせつ]なので、いい先生[せんせい]です
+
+It is cold, and I am sleepy, so I don't want to get up.
+Fa freddo e ho sonno, quindi non voglio alzarmi.
+寒[さむ]くて、眠[ねむ]いので、起[お]きたくありません
+
+Mary is a popular person, because she is smart and can play the guitar.
+Mary è una persona popolare perché è intelligente e sa suonare la chitarra.
+メアリーさんは頭[あたま]がよくて、ギターも弾[ひ]けるので、人気[にんき]があります
+
+I stayed home because I was tired.
+Sono rimasto a casa perché ero stanco.
+疲[つか]れていたので、家[いえ]にいました
+
+I studied a lot, so my Japanese got better.
+Ho studiato molto, quindi il mio giapponese è migliorato.
+たくさん勉強[べんきょう]したので、日本語[にほんご]が上手[じょうず]になりました
+
+The food was spicy, so I drank a lot of water.
+Il cibo era piccante, quindi ho bevuto molta acqua.
+食[た]べ物[もの]が辛[から]かったので、水[みず]をたくさん飲[の]みました
+
+That shop is near, so we often go there.
+Quel negozio è vicino, quindi ci andiamo spesso.
+あの店[みせ]は近[ちか]いので、よく行[い]きます
+
+===== genki-13-3.txt =====
+～そうです (It looks like...)
+～そうです (Sembra che...)
+
+This apple looks delicious.
+Questa mela sembra deliziosa.
+このりんごはおいしそうです
+
+That cake looks delicious.
+Quella torta sembra deliziosa.
+そのケーキはおいしそうです
+
+That curry looks spicy.
+Quel curry sembra piccante.
+そのカレーは辛[から]そうです
+
+This watch looks new.
+Questo orologio sembra nuovo.
+この時計[とけい]は新[あたら]しそうです
+
+That man over there looks lonely.
+Quell'uomo laggiù sembra solo.
+あの男[おとこ]の人[ひと]はさびしそうです
+
+Mary looked fine.
+Mary sembrava stare bene.
+メアリーさんは元気[げんき]そうでした
+
+Takeshi looks sad.
+Takeshi sembra triste.
+たけしさんは悲[かな]しそうです
+
+This book does not look difficult.
+Questo libro non sembra difficile.
+この本[ほん]は難[むずか]しくなさそうです
+
+Ken does not look good at tennis.
+Ken non sembra bravo a tennis.
+けんさんはテニスが上手[じょうず]じゃなさそうです
+
+She is wearing a warm-looking sweater.
+Indossa un maglione che sembra caldo.
+暖[あたた]かそうなセーターを着[き]ています
+
+===== genki-13-4.txt =====
+～てみる
+～てみる
+
+I tried asking a Japanese friend.
+Ho provato a chiedere a un amico giapponese.
+日本人[にほんじん]の友達[ともだち]に聞[き]いてみました
+
+I tried on my new shoes.
+Ho provato le mie scarpe nuove.
+新[あたら]しい靴[くつ]をはいてみました
+
+I tried to lose weight.
+Ho provato a dimagrire.
+やせてみました
+
+I tried going to the library by bike.
+Ho provato ad andare in biblioteca in bicicletta.
+自転車[じてんしゃ]で図書館[としょかん]に行[い]ってみました
+
+I will try on this shirt.
+Proverò questa camicia.
+このシャツを着[き]てみます
+
+I will try playing tennis on Tuesday.
+Proverò a giocare a tennis martedì.
+火曜日[かようび]にテニスをしてみます
+
+I will try to take a lot of pictures.
+Proverò a scattare tante foto.
+写真[しゃしん]をたくさん撮[と]ってみます
+
+I will try to buy some stamps.
+Proverò a comprare dei francobolli.
+切手[きって]を買[か]ってみます
+
+I tried eating natto.
+Ho provato a mangiare il natto.
+納豆[なっとう]を食[た]べてみました
+
+Try reading this book.
+Prova a leggere questo libro.
+この本[ほん]を読[よ]んでみてください
+
+===== genki-13-5.txt =====
+なら
+なら
+
+I've been to Tokyo, but never to Kyoto.
+Sono stato a Tokyo, ma mai a Kyoto.
+東京[とうきょう]なら行[い]ったことがありますが、京都[きょうと]はありません
+
+If it's written in hiragana.
+Se è scritto in hiragana.
+ひらがななら
+
+I often eat fish, but not meat.
+Mangio spesso il pesce, ma non la carne.
+魚[さかな]ならよく食[た]べますが、肉[にく]は食[た]べません
+
+I want to buy a car, but not a motorcycle.
+Voglio comprare una macchina, ma non una moto.
+車[くるま]なら買[か]いたいですが、バイクは買[か]いたくありません
+
+I have owned a dog, but never a cat.
+Ho avuto un cane, ma mai un gatto.
+犬[いぬ]なら飼[か]ったことがありますが、猫[ねこ]はありません
+
+I drank black tea this morning, but not coffee.
+Stamattina ho bevuto tè nero, ma non caffè.
+今朝[けさ]紅茶[こうちゃ]なら飲[の]みましたが、コーヒーは飲[の]みませんでした
+
+I play soccer, but not golf.
+Gioco a calcio, ma non a golf.
+サッカーならしますが、ゴルフはしません
+
+If it's easy, I can do it.
+Se è facile, posso farlo.
+簡単[かんたん]ならできます
+
+If it's near, let's go.
+Se è vicino, andiamoci.
+近[ちか]いなら行[い]きましょう
+
+If it's Japanese food, I like it.
+Se è cibo giapponese, mi piace.
+日本[にほん]の食[た]べ物[もの]なら好[す]きです
+
+===== genki-13-6.txt =====
+Expressing frequencies
+Esprimere le frequenze
+
+I eat three times a day.
+Mangio tre volte al giorno.
+一日[いちにち]に三回[さんかい]食[た]べます
+
+I brush my teeth twice a day.
+Mi lavo i denti due volte al giorno.
+一日[いちにち]に二回[にかい]歯[は]をみがきます
+
+I sleep for seven hours per day.
+Dormo sette ore al giorno.
+一日[いちにち]に七時間[しちじかん]寝[ね]ます
+
+I study for three hours per day.
+Studio per tre ore al giorno.
+一日[いちにち]に三時間[さんじかん]勉強[べんきょう]します
+
+I clean my room once a week.
+Pulisco la mia stanza una volta alla settimana.
+一週間[いっしゅうかん]に一回[いっかい]部屋[へや]を掃除[そうじ]します
+
+I do the laundry twice a week.
+Faccio il bucato due volte alla settimana.
+一週間[いっしゅうかん]に二回[にかい]洗濯[せんたく]します
+
+I do my part-time job three days a week.
+Faccio il mio lavoro part-time tre giorni alla settimana.
+一週間[いっしゅうかん]に三日[みっか]アルバイトをします
+
+My younger sister goes to school five days a week.
+Mia sorella minore va a scuola cinque giorni alla settimana.
+妹[いもうと]は一週間[いっしゅうかん]に五日[いつか]学校[がっこう]に行[い]きます
+
+Mary goes to see a movie once a month.
+Mary va a vedere un film una volta al mese.
+メアリーさんは一か月[いっかげつ]に一回[いっかい]映画[えいが]を見[み]に行[い]きます
+
+I call my family once a month.
+Chiamo la mia famiglia una volta al mese.
+一か月[いっかげつ]に一回[いっかい]家族[かぞく]に電話[でんわ]をかけます
+
+===== genki-14-1.txt =====
+ほしい
+ほしい
+
+I want a good kanji dictionary.
+Voglio un buon dizionario di kanji.
+いい漢字[かんじ]の辞書[じしょ]がほしいです
+
+When I was young, I wanted a toy Godzilla.
+Quando ero piccolo, volevo un giocattolo di Godzilla.
+子供[こども]の時[とき]、ゴジラのおもちゃがほしかったです
+
+I don't have much of a desire for money.
+Non desidero molto il denaro.
+あまりお金[かね]がほしくありません
+
+I understand that Mary wants a friend.
+Capisco che Mary voglia un amico.
+メアリーさんは友達[ともだち]がほしいんです
+
+I want a new computer.
+Voglio un computer nuovo.
+新[あたら]しいパソコンがほしいです
+
+I want a new car.
+Voglio una macchina nuova.
+新[あたら]しい車[くるま]がほしいです
+
+I want ice cream.
+Voglio del gelato.
+アイスクリームがほしいです
+
+I don't want coffee.
+Non voglio caffè.
+コーヒーはほしくありません
+
+I don't want tempura.
+Non voglio tempura.
+天[てん]ぷらはほしくありません
+
+I want a Japanese book.
+Voglio un libro giapponese.
+日本語[にほんご]の本[ほん]がほしいです
+
+===== genki-14-2.txt =====
+～かもしれません
+～かもしれません
+
+It may rain tomorrow.
+Domani potrebbe piovere.
+明日[あした]雨[あめ]が降[ふ]るかもしれません
+
+It may snow tomorrow.
+Domani potrebbe nevicare.
+明日[あした]雪[ゆき]が降[ふ]るかもしれません
+
+Suzuki is perhaps taller than Tanaka.
+Suzuki forse è più alto di Tanaka.
+鈴木[すずき]さんは田中[たなか]さんより背[せ]が高[たか]いかもしれません
+
+The weather may not be good tomorrow.
+Domani il tempo potrebbe non essere bello.
+明日[あした]天気[てんき]がよくないかもしれません
+
+Tom might be a Canadian.
+Tom potrebbe essere canadese.
+トムさんはカナダ人[じん]かもしれません
+
+It is possible that Mary is not fond of dogs.
+È possibile che a Mary non piacciano i cani.
+メアリーさんは犬[いぬ]が好[す]きじゃないかもしれません
+
+It is possible that Robert is not fond of cats.
+È possibile che a Robert non piacciano i gatti.
+ロバートさんは猫[ねこ]が好[す]きじゃないかもしれません
+
+That woman might be an office worker.
+Quella donna potrebbe essere un'impiegata.
+あの女[おんな]の人[ひと]は会社員[かいしゃいん]かもしれません
+
+That man might not be a teacher.
+Quell'uomo potrebbe non essere un insegnante.
+あの男[おとこ]の人[ひと]は先生[せんせい]じゃないかもしれません
+
+Ken might be good at tennis.
+Ken potrebbe essere bravo a tennis.
+けんさんはテニスが上手[じょうず]かもしれません
+
+===== genki-14-3.txt =====
+あげる/くれる/もらう
+あげる/くれる/もらう
+
+I will give the woman flowers.
+Darò dei fiori alla donna.
+女[おんな]の人[ひと]に花[はな]をあげます
+
+The woman gave the man a watch.
+La donna ha dato un orologio all'uomo.
+女[おんな]の人[ひと]は男[おとこ]の人[ひと]に時計[とけい]をあげました
+
+My parents may give me a new car.
+I miei genitori potrebbero darmi una macchina nuova.
+両親[りょうしん]は{私[わたし]に|}新[あたら]しい車[くるま]をくれるかもしれません
+
+I gave my little brother some ice cream.
+Ho dato del gelato a mio fratello minore.
+弟[おとうと]にアイスクリームをあげました
+
+I will give the man chocolate.
+Darò del cioccolato all'uomo.
+男[おとこ]の人[ひと]にチョコレートをあげます
+
+The woman gave me flowers.
+La donna mi ha dato dei fiori.
+女[おんな]の人[ひと]は{私[わたし]に|}花[はな]をくれました
+
+My big sister gave me an old dictionary.
+Mia sorella maggiore mi ha dato un vecchio dizionario.
+姉[あね]は{私[わたし]に|}古[ふる]い辞書[じしょ]をくれました
+
+My roommate gave me a shirt.
+Il mio coinquilino mi ha dato una camicia.
+ルームメートは{私[わたし]に|}シャツをくれました
+
+I received an old dictionary from my big sister.
+Ho ricevuto un vecchio dizionario da mia sorella maggiore.
+姉[あね]に古[ふる]い辞書[じしょ]をもらいました
+
+I received a bicycle from my parents.
+Ho ricevuto una bicicletta dai miei genitori.
+両親[りょうしん]に自転車[じてんしゃ]をもらいました
+
+===== genki-14-4.txt =====
+～たらどうですか
+～たらどうですか
+
+Why don't you study harder?
+Perché non studi di più?
+もっと勉強[べんきょう]したらどうですか
+
+Why don't you run more?
+Perché non corri di più?
+もっと走[はし]ったらどうですか
+
+How about taking some medicine?
+Che ne dici di prendere una medicina?
+薬[くすり]を飲[の]んだらどうですか
+
+How about drinking some water?
+Che ne dici di bere un po' d'acqua?
+水[みず]を飲[の]んだらどうですか
+
+Why don't you consult with the teacher?
+Perché non consulti l'insegnante?
+先生[せんせい]に相談[そうだん]したらどうですか
+
+How about sending a resume to companies?
+Che ne dici di mandare il curriculum alle aziende?
+会社[かいしゃ]に履歴書[りれきしょ]を送[おく]ったらどうですか
+
+Why don't you go to a party?
+Perché non vai a una festa?
+パーティーに行[い]ったらどうですか
+
+How about joining a club?
+Che ne dici di entrare in un club?
+サークルに入[はい]ったらどうですか
+
+Why don't you give up?
+Perché non rinunci?
+あきらめたらどうですか
+
+How about proposing marriage?
+Che ne dici di fare la proposta di matrimonio?
+プロポーズしたらどうですか
+
+===== genki-14-5.txt =====
+も and しか
+も e しか
+
+My mother owns as many as three cats.
+Mia madre ha addirittura tre gatti.
+母[はは]は猫[ねこ]を三匹[さんびき]も飼[か]っています
+
+As many as twenty students showed up to the party yesterday.
+Ieri sono venuti addirittura venti studenti alla festa.
+昨日[きのう]パーティーに学生[がくせい]が二十人[にじゅうにん]も来[き]ました
+
+We bought as many as three umbrellas.
+Abbiamo comprato addirittura tre ombrelli.
+{私[わたし]たちは|}傘[かさ]を三本[さんぼん]も買[か]いました
+
+There are as many as six dogs in this house.
+In questa casa ci sono addirittura sei cani.
+この家[いえ]に犬[いぬ]が六匹[ろっぴき]もいます
+
+I bought as many as five shirts.
+Ho comprato addirittura cinque camicie.
+{私[わたし]は|}シャツを五枚[ごまい]も買[か]いました
+
+I have only one Japanese dictionary.
+Ho solo un dizionario giapponese.
+日本語[にほんご]の辞書[じしょ]を一冊[いっさつ]しか持[も]っていません
+
+I only have one dog.
+Ho solo un cane.
+犬[いぬ]を一匹[いっぴき]しか飼[か]っていません
+
+There are only two computers in this company.
+In questa azienda ci sono solo due computer.
+この会社[かいしゃ]にパソコンが二台[にだい]しかありません
+
+Ken only has two textbooks.
+Ken ha solo due libri di testo.
+けんさんは教科書[きょうかしょ]を二冊[にさつ]しか持[も]っていません
+
+Mary has as few as three plates.
+Mary ha solo tre piatti.
+メアリーさんは皿[さら]を三枚[さんまい]しか持[も]っていません
+
+===== genki-15-2.txt =====
+Volitional Form + と思っています
+Forma volitiva + と思っています
+
+I plan to buy a kanji dictionary.
+Ho intenzione di comprare un dizionario di kanji.
+漢字[かんじ]の辞書[じしょ]を買[か]うつもりです
+
+I plan to have various experiences in Japan.
+Ho intenzione di fare varie esperienze in Giappone.
+日本[にほん]でいろいろな経験[けいけん]をするつもりです
+
+I've decided to do physical exercise.
+Ho deciso di fare esercizio fisico.
+運動[うんどう]することにしました
+
+I've decided to quit smoking.
+Ho deciso di smettere di fumare.
+たばこを吸[す]うのをやめることにしました
+
+I plan to go on a diet.
+Ho intenzione di mettermi a dieta.
+ダイエットをするつもりです
+
+I intend to get up early in the morning.
+Ho intenzione di alzarmi presto la mattina.
+朝[あさ]早[はや]く起[お]きるつもりです
+
+I plan on practicing Japanese all day.
+Ho intenzione di studiare giapponese tutto il giorno.
+一日中[いちにちじゅう]日本語[にほんご]を練習[れんしゅう]するつもりです
+
+I plan on making lots of Japanese friends.
+Ho intenzione di fare tanti amici giapponesi.
+日本人[にほんじん]の友達[ともだち]をたくさん作[つく]るつもりです
+
+Mary intends on eating more vegetables.
+Mary ha intenzione di mangiare più verdure.
+メアリーさんはもっと野菜[やさい]を食[た]べるつもりです
+
+Ken intends on looking for a job.
+Ken ha intenzione di cercare lavoro.
+けんさんは仕事[しごと]を探[さが]すつもりです
+
+===== genki-15-3.txt =====
+～ておく
+～ておく
+
+I will study for it tonight.
+Studierò per quello stasera.
+今晩[こんばん]それのために勉強[べんきょう]します
+
+I will clean the room.
+Pulirò la stanza.
+部屋[へや]を掃除[そうじ]します
+
+I will make a hotel reservation in advance.
+Farò una prenotazione in hotel in anticipo.
+前[まえ]もってホテルを予約[よやく]します
+
+I will make a restaurant reservation in advance.
+Prenoterò un ristorante in anticipo.
+前[まえ]もってレストランを予約[よやく]します
+
+I will withdraw money.
+Preleverò dei soldi.
+お金[かね]を下[お]ろします
+
+I am looking for a nice restaurant.
+Sto cercando un buon ristorante.
+いいレストランを探[さが]しています
+
+I will practice new songs.
+Mi eserciterò con canzoni nuove.
+新[あたら]しい歌[うた]を練習[れんしゅう]します
+
+I will check the time of the train.
+Controllerò l'orario del treno.
+電車[でんしゃ]の時[じ]間[かん]を調[しら]べます
+
+I will buy a map.
+Comprerò una mappa.
+地[ち]図[ず]を買[か]います
+
+I will get ready for the presentation.
+Mi preparerò per la presentazione.
+発[はっ]表[ぴょう]の準[じゅん]備[び]をします
+
+===== genki-15-4.txt =====
+Using Sentences to Qualify Nouns
+Usare le frasi per qualificare i sostantivi
+
+The book that I bought yesterday.
+Il libro che ho comprato ieri.
+昨日[きのう]買[か]った本[ほん]
+
+The book that my boyfriend gave me.
+Il libro che il mio ragazzo mi ha dato.
+彼氏[かれし]が{私[わたし]に|}くれた本[ほん]
+
+The book that is on the table.
+Il libro che è sul tavolo.
+机[つくえ]の上[うえ]にある本[ほん]
+
+The book that you can't buy in Japan.
+Il libro che non puoi comprare in Giappone.
+日本[にほん]で買[か]えない本[ほん]
+
+The watch that my father gave me.
+L'orologio che mio padre mi ha dato.
+父[ちち]が{私[わたし]に|}くれた時[と]計[けい]
+
+A friend who can speak Japanese.
+Un amico che sa parlare giapponese.
+日本語[にほんご]を話[はな]せる友達[ともだち]
+
+A friend who went to China last year.
+Un amico che è andato in Cina l'anno scorso.
+去年[きょねん]中[ちゅう]国[ごく]に行[い]った友達[ともだち]
+
+A bag I use every day.
+Una borsa che uso ogni giorno.
+毎日[まいにち]使[つか]うかばん
+
+A coffee shop I sometimes go to.
+Una caffetteria in cui vado a volte.
+時々[ときどき]行[い]く喫茶店[きっさてん]
+
+A temple I saw last week.
+Un tempio che ho visto la settimana scorsa.
+先週[せんしゅう]見[み]たお寺[てら]
+
+===== genki-16-1.txt =====
+～てあげる/くれる/もらう
+～てあげる/くれる/もらう
+
+I lent my younger sister money.
+Ho prestato soldi a mia sorella minore.
+妹[いもうと]にお金[かね]を貸[か]してあげました
+
+I lent my younger brother money.
+Ho prestato soldi a mio fratello minore.
+弟[おとうと]にお金[かね]を貸[か]してあげました
+
+I took Tom to the station.
+Ho accompagnato Tom alla stazione.
+トムさんを駅[えき]に連[つ]れて行[い]ってあげました
+
+I helped my friend with their homework.
+Ho aiutato il mio amico con i compiti.
+友達[ともだち]の宿題[しゅくだい]を手伝[てつだ]ってあげました
+
+I bought flowers for my mother.
+Ho comprato dei fiori per mia madre.
+母[はは]に花[はな]を買[か]ってあげました
+
+A friend helps me with my homework.
+Un amico mi aiuta con i compiti.
+友達[ともだち]が{私[わたし]に|}宿題[しゅくだい]を手伝[てつだ]ってくれます
+
+My teacher helped me with my homework.
+Il mio insegnante mi ha aiutato con i compiti.
+先生[せんせい]が{私[わたし]に|}宿題[しゅくだい]を手伝[てつだ]ってくれました
+
+My older sister sent me chocolate.
+Mia sorella maggiore mi ha mandato cioccolato.
+姉[あね]が{私[わたし]に|}チョコレートを送[おく]ってくれました
+
+My younger sister lent me money.
+Mia sorella minore mi ha prestato soldi.
+妹[いもうと]が{私[わたし]に|}お金[かね]を貸[か]してくれました
+
+I got a friend of mine to help me with my homework.
+Mi sono fatto aiutare con i compiti da un mio amico.
+友達[ともだち]に宿題[しゅくだい]を手伝[てつだ]ってもらいました
+
+===== genki-16-2.txt =====
+～ていただけませんか
+～ていただけませんか
+
+Would you lend me a hand?
+Potresti darmi una mano?
+手[て]伝[つだ]ってくださいませんか
+
+Will you wait for a second?
+Aspetti un momento?
+少[すこ]し待[ま]ってくださいませんか
+
+Could you pick that thing up and pass it to me?
+Potresti raccogliere quella cosa e passarmela?
+それを拾[ひろ]って、私[わたし]に渡[わた]してくださいませんか
+
+Could you speak more slowly?
+Potrebbe parlare più lentamente?
+もっとゆっくり話[はな]してくださいませんか
+
+Could you wake me up at 7 o'clock?
+Potrebbe svegliarmi alle sette?
+七時[しちじ]に起[お]こしてくださいませんか
+
+Please speak Japanese, will you?
+Per favore parli giapponese, va bene?
+日本語[にほんご]を話[はな]してくださいませんか
+
+Please open the window, will you?
+Per favore apra la finestra, va bene?
+窓[まど]を開[あ]けてくださいませんか
+
+Please help me with the luggage.
+Per favore mi aiuti con i bagagli.
+荷物[にもつ]を手伝[てつだ]ってくださいませんか
+
+Please explain this sentence.
+Per favore spieghi questa frase.
+この文[ぶん]を説明[せつめい]してくださいませんか
+
+Please give me a little time.
+Per favore mi dia un po' di tempo.
+少[すこ]し時間[じかん]をくださいませんか
+
+===== genki-16-3.txt =====
+～といい
+～といい
+
+I hope I find a good part-time job.
+Spero di trovare un buon lavoro part-time.
+いいアルバイトが見[み]つかってほしいです
+
+I hope it doesn't rain.
+Spero che non piova.
+雨[あめ]が降[ふ]らないでほしいです
+
+I hope it doesn't snow.
+Spero che non nevichi.
+雪[ゆき]が降[ふ]らないでほしいです
+
+I am hoping that the exam is easy for my own good.
+Spero che l'esame sia facile per il mio bene.
+試験[しけん]がやさしくてほしいです
+
+I hope I can catch the 8 o'clock train for my own good.
+Spero di prendere il treno delle otto.
+八時[はちじ]の電車[でんしゃ]に間[ま]に合[あ]ってほしいです
+
+I am hoping to go to college.
+Spero di andare all'università.
+大学[だいがく]に行[い]ってほしいです
+
+I hope you get well soon.
+Spero che tu guarisca presto.
+早[はや]く元気[げんき]になってほしいです
+
+I hope it is good weather.
+Spero che il tempo sia bello.
+天気[てんき]がよくてほしいです
+
+I hope you can get into graduate school.
+Spero che tu possa entrare nella scuola di specializzazione.
+大学院[だいがくいん]に入[はい]ってほしいです
+
+I hope Mary comes to the party.
+Spero che Mary venga alla festa.
+メアリーさんにパーティーに来[き]てほしいです
+
+===== genki-16-4.txt =====
+～時
+～時
+
+I will get the visa issued when I go to Tibet.
+Farò emettere il visto quando andrò in Tibet.
+チベットに行[い]くとき、ビザを取[と]ります
+
+I had the visa issued when I was going to go to Tibet.
+Mi sono fatto emettere il visto quando stavo per andare in Tibet.
+チベットに行[い]こうとしたとき、ビザを取[と]りました
+
+I take out the contact lenses when I go to sleep.
+Tolgo le lenti a contatto quando vado a dormire.
+寝[ね]るとき、コンタクトレンズをはずします
+
+I locked the door when I went out.
+Ho chiuso a chiave la porta quando sono uscito.
+出[で]かけるとき、ドアに鍵[かぎ]をかけました
+
+I get a headache when it is cold.
+Mi viene mal di testa quando fa freddo.
+寒[さむ]いとき、頭[あたま]が痛[いた]くなります
+
+I jog in the park when I feel fit.
+Corro nel parco quando mi sento in forma.
+元気[げんき]なとき、公園[こうえん]で走[はし]ります
+
+I took the dog to a vet when it was sick.
+Ho portato il cane dal veterinario quando stava male.
+犬[いぬ]が病気[びょうき]のとき、病院[びょういん]に連[つ]れて行[い]きました
+
+I will buy oolong tea when I go to China.
+Comprerò tè oolong quando andrò in Cina.
+中[ちゅう]国[ごく]に行[い]くとき、ウーロン茶[ちゃ]を買[か]います
+
+I bought oolong tea when I went to China.
+Ho comprato tè oolong quando sono andato in Cina.
+中[ちゅう]国[ごく]に行[い]ったとき、ウーロン茶[ちゃ]を買[か]いました
+
+Before going out, I always watch the weather forecast.
+Prima di uscire, guardo sempre le previsioni del tempo.
+出[で]かけるとき、いつも天気[てんき]予報[よほう]を見[み]ます
+
+===== genki-17-1.txt =====
+～そうです (I hear)
+～そうです (Ho sentito che)
+
+I hear that their Japanese class is fun.
+Ho sentito dire che il loro corso di giapponese è divertente.
+彼[かれ]らの日本語[にほんご]のクラスは楽[たの]しいそうです
+
+I have heard that their professor is very kind.
+Ho sentito dire che il loro professore è molto gentile.
+彼[かれ]らの先生[せんせい]はとても親切[しんせつ]だそうです
+
+I've heard that they didn't have a class that day.
+Ho sentito che quel giorno non avevano lezione.
+その日[ひ]は授業[じゅぎょう]がなかったそうです
+
+According to the weather forecast, a typhoon is approaching.
+Secondo le previsioni del tempo, si sta avvicinando un tifone.
+天気[てんき]予報[よほう]によると、台風[たいふう]が来[き]ているそうです
+
+According to the weather forecast, it is going to snow.
+Secondo le previsioni del tempo, nevicherà.
+天気[てんき]予報[よほう]によると、雪[ゆき]が降[ふ]るそうです
+
+I heard that Ken got a divorce.
+Ho sentito che Ken ha divorziato.
+けんさんは離婚[りこん]したそうです
+
+I have heard that it will not be cold tomorrow.
+Ho sentito che domani non farà freddo.
+明日[あした]は寒[さむ]くないそうです
+
+According to Mary, the movie theater was not crowded.
+Secondo Mary, il cinema non era affollato.
+メアリーさんによると、映画館[えいがかん]は混[こ]んでいなかったそうです
+
+I've heard that Mary's landlord is very stingy.
+Ho sentito dire che il padrone di casa di Mary è molto tirchio.
+メアリーさんの大家[おおや]さんはけちだそうです
+
+I hear that the exam will be difficult.
+Ho sentito che l'esame sarà difficile.
+試験[しけん]は難[むずか]しいそうです
+
+===== genki-17-2.txt =====
+～って
+～って
+
+What did Ken say?
+Che cosa ha detto Ken?
+けんさんは何[なん]と言[い]っていましたか
+
+He said he ate too much ice cream.
+Ha detto che aveva mangiato troppo gelato.
+アイスクリームを食[た]べすぎたと言[い]っていました
+
+She said she ate too much chocolate.
+Ha detto che aveva mangiato troppo cioccolato.
+チョコレートを食[た]べすぎたと言[い]っていました
+
+Mary said she got married.
+Mary ha detto che si è sposata.
+メアリーさんは結婚[けっこん]したと言[い]っていました
+
+Ken said he got married.
+Ken ha detto che si è sposato.
+けんさんは結婚[けっこん]したと言[い]っていました
+
+He says he is busy today.
+Dice che oggi è occupato.
+今日[きょう]は忙[いそが]しいと{言[い]います|言[い]っていました}
+
+The teacher said the exam would be difficult.
+L'insegnante ha detto che l'esame sarebbe stato difficile.
+試験[しけん]は難[むずか]しいと言[い]っていました
+
+Robert said his father is kind.
+Robert ha detto che suo padre è gentile.
+父[ちち]は親切[しんせつ]だと言[い]っていました
+
+The forecast said it would rain tomorrow.
+Le previsioni hanno detto che domani avrebbe piovuto.
+明日[あした]雨[あめ]が降[ふ]ると言[い]っていました
+
+Sora said she likes music.
+Sora ha detto che le piace la musica.
+音楽[おんがく]が好[す]きだと言[い]っていました
+
+===== genki-17-3.txt =====
+～たら
+～たら
+
+I will buy a kimono if I go to Japan.
+Comprerò un kimono se andrò in Giappone.
+日本[にほん]へ行[い]ったら、着物[きもの]を買[か]います
+
+We will go for a walk if the weather is fine.
+Faremo una passeggiata se il tempo è bello.
+天気[てんき]がよかったら、散歩[さんぽ]します
+
+We will go to the park if the weather is nice.
+Andremo al parco se il tempo è bello.
+天気[てんき]がよかったら、公園[こうえん]に行[い]きます
+
+I will ask about it if I see #name.
+Lo chiederò se vedo #name.
+#nameさんに会[あ]ったら、聞[き]きます
+
+I will call #name when I get home tonight.
+Chiamerò #name quando torno a casa stasera.
+今晩[こんばん]家[いえ]に帰[かえ]ったら、#nameさんに電話[でんわ]をかけます
+
+Let's go out and have some fun once we are done with the homework.
+Andiamo fuori a divertirci quando avremo finito i compiti.
+宿題[しゅくだい]が終[お]わったら、出[で]かけましょう
+
+If I were a cat, I would be asleep all day long.
+Se fossi un gatto, dormirei tutto il giorno.
+猫[ねこ]だったら、一日中[いちにちじゅう]寝[ね]ています
+
+If I had money, I would buy a car.
+Se avessi soldi, comprerei una macchina.
+お金[かね]があったら、車[くるま]を買[か]います
+
+If my grades are not good, I become sad.
+Se i miei voti non sono buoni, mi rattristo.
+成績[せいせき]がよくなかったら、悲[かな]しいです
+
+If I am not fine, I will not go out.
+Se non sto bene, non uscirò.
+元気[げんき]じゃなかったら、出[で]かけません
+
+===== genki-17-4.txt =====
+～なくてもいいです
+～なくてもいいです
+
+You do not need to take off your shoes.
+Non è necessario togliersi le scarpe.
+靴[くつ]を脱[ぬ]がなくてもいいです
+
+The present does not need to be anything expensive.
+Il regalo non deve essere niente di costoso.
+プレゼントは高[たか]くなくてもいいです
+
+I do not have to do the dishes at my house.
+Non devo lavare i piatti a casa mia.
+家[いえ]で皿[さら]を洗[あら]わなくてもいいです
+
+We do not need to make a reservation.
+Non dobbiamo fare una prenotazione.
+予約[よやく]しなくてもいいです
+
+You do not need to bring food to the party.
+Non è necessario portare cibo alla festa.
+パーティーに食[た]べ物[もの]を持[も]って行[い]かなくてもいいです
+
+You do not have to pay.
+Non devi pagare.
+払[はら]わなくてもいいです
+
+I do not have to study tonight.
+Non devo studiare stasera.
+今晩[こんばん]勉強[べんきょう]しなくてもいいです
+
+You do not need to come tomorrow.
+Non è necessario venire domani.
+明日[あした]来[こ]なくてもいいです
+
+You do not need to worry.
+Non c'è bisogno di preoccuparsi.
+心配[しんぱい]しなくてもいいです
+
+You do not need to leave now.
+Non è necessario partire adesso.
+今[いま]出[で]かけなくてもいいです
+
+===== genki-17-5.txt =====
+～みたいです
+～みたいです
+
+It looks like it has rained.
+Sembra che abbia piovuto.
+雨[あめ]が降[ふ]ったみたいです
+
+It looks like that person is hungry.
+Sembra che quella persona abbia fame.
+あの人[ひと]はお腹[なか]がすいたみたいです
+
+It looks like that person did not sleep last night.
+Sembra che quella persona non abbia dormito la notte scorsa.
+あの人[ひと]は昨夜[さくや]寝[ね]なかったみたいです
+
+It looks like the professor is not coming to school tomorrow.
+Sembra che il professore non venga a scuola domani.
+先生[せんせい]は明日[あした]学校[がっこう]に来[こ]ないみたいです
+
+Mr. Tanaka acts like my father.
+Il signor Tanaka si comporta come mio padre.
+田中[たなか]さんは父[ちち]みたいです
+
+Ms. Tanaka acts like my mother.
+La signora Tanaka si comporta come mia madre.
+田中[たなか]さんは母[はは]みたいです
+
+It looks like Ken has caught a cold.
+Sembra che Ken abbia preso un raffreddore.
+けんさんは風邪[かぜ]を引[ひ]いたみたいです
+
+It seems that Mary got a divorce.
+Sembra che Mary abbia divorziato.
+メアリーさんは離婚[りこん]したみたいです
+
+It seems that Sora overslept and missed the train.
+Sembra che Sora abbia dormito troppo e perso il treno.
+ソラさんは寝[ね]坊[ぼう]して電車[でんしゃ]に乗[の]り遅[おく]れたみたいです
+
+It seems that Robert didn't eat this morning.
+Sembra che Robert non abbia mangiato stamattina.
+ロバートさんは今朝[けさ]食[た]べなかったみたいです
+
+===== genki-17-6.txt =====
+～前に/～てから
+～前に/～てから
+
+I will go to Tokyo one more time before I go back home.
+Andrò a Tokyo un'altra volta prima di tornare a casa.
+帰[かえ]る前[まえ]に、もう一度[いちど]東京[とうきょう]に行[い]きます
+
+I studied Japanese for one semester before I came to Japan.
+Ho studiato giapponese per un semestre prima di venire in Giappone.
+日本[にほん]へ来[く]る前[まえ]に、一学期[いっがっき]日本語[にほんご]を勉強[べんきょう]しました
+
+I studied and then wrote letters to my friends.
+Ho studiato e poi ho scritto lettere ai miei amici.
+勉強[べんきょう]してから、友達[ともだち]に手紙[てがみ]を書[か]きました
+
+Let's eat after #name has arrived.
+Mangiamo dopo che #name è arrivato.
+#nameさんが着[つ]いてから、食[た]べましょう
+
+Let's drink after #name has arrived.
+Beviamo dopo che #name è arrivato.
+#nameさんが着[つ]いてから、飲[の]みましょう
+
+I have been feeling very lonely since my cat died.
+Mi sento molto solo da quando il mio gatto è morto.
+猫[ねこ]が死[し]んでから、とても寂[さび]しいです
+
+I have been feeling very sad since my dog died.
+Mi sento molto triste da quando il mio cane è morto.
+犬[いぬ]が死[し]んでから、とても悲[かな]しいです
+
+After playing tennis, I studied Japanese for an hour.
+Dopo aver giocato a tennis, ho studiato giapponese per un'ora.
+テニスをしてから、一時間[いちじかん]日本語[にほんご]を勉強[べんきょう]しました
+
+After locking the door, I went to bed.
+Dopo aver chiuso a chiave la porta, sono andato a dormire.
+ドアに鍵[かぎ]をかけてから、寝[ね]ました
+
+Before going out, I always watch the weather forecast.
+Prima di uscire guardo sempre le previsioni del tempo.
+出[で]かける前[まえ]に、いつも天気[てんき]予報[よほう]を見[み]ます
+
+===== genki-18-2.txt =====
+～てしまう
+～てしまう
+
+I read the book completely.
+Ho letto il libro completamente.
+本[ほん]を読[よ]んでしまいました
+
+I finished reading the book.
+Ho finito di leggere il libro.
+本[ほん]を読[よ]み終[お]わってしまいました
+
+I inadvertently left my bag on the train.
+Ho lasciato la mia borsa sul treno per sbaglio.
+電車[でんしゃ]にかばんを忘[わす]れてしまいました
+
+I accidentally left my book on the bus.
+Ho dimenticato il mio libro sull'autobus per sbaglio.
+バスに本[ほん]を忘[わす]れてしまいました
+
+I lost my homework!
+Ho perso i compiti!
+宿題[しゅくだい]をなくしてしまいました
+
+I lost my wallet!
+Ho perso il portafoglio!
+財布[さいふ]をなくしてしまいました
+
+I already finished writing a paper.
+Ho già finito di scrivere un tema.
+レポートを書[か]いてしまいました
+
+I didn't have much money, but I bought an expensive shirt.
+Non avevo molti soldi, ma ho comprato una camicia costosa.
+お金[かね]があまりなかったのに、高[たか]いシャツを買[か]ってしまいました
+
+I borrowed my father's car, but I broke it.
+Ho preso in prestito la macchina di mio padre, ma l'ho rotta.
+父[ちち]の車[くるま]を借[か]りて、壊[こわ]してしまいました
+
+I ate too much.
+Ho mangiato troppo.
+食[た]べすぎてしまいました
+
+===== genki-18-3.txt =====
+～と
+～と
+
+Whenever I talk with that person, I feel uplifted.
+Ogni volta che parlo con quella persona, mi sento sollevato.
+あの人[ひと]と話[はな]すとき、元気[げんき]になります
+
+Whenever the streets are crowded, it takes longer to get there.
+Quando le strade sono affollate, ci vuole più tempo per arrivarci.
+道[みち]が混[こ]んでいるとき、着[つ]くのに時間[じかん]がかかります
+
+If #name goes back home, we will be sad and lonely.
+Se #name torna a casa, saremo tristi e soli.
+#nameさんが帰[かえ]ったとき、さびしくなります
+
+When I was young, whenever winter arrived, I caught a cold.
+Quando ero piccolo, ogni volta che arrivava l'inverno, prendevo un raffreddore.
+子供[こども]のとき、冬[ふゆ]が来[き]ると、風邪[かぜ]を引[ひ]きました
+
+Whenever fall arrives, trees turn red.
+Ogni volta che arriva l'autunno, gli alberi diventano rossi.
+秋[あき]になると、木[き]が赤[あか]くなります
+
+Whenever night comes, the town becomes quiet.
+Ogni volta che arriva la notte, la città diventa silenziosa.
+夜[よる]になると、町[まち]は静[しず]かになります
+
+Whenever letters don't come, I become sad.
+Ogni volta che le lettere non arrivano, divento triste.
+手紙[てがみ]が来[こ]ないと、悲[かな]しくなります
+
+Whenever I use a computer, my eyes hurt.
+Ogni volta che uso un computer, mi fanno male gli occhi.
+パソコンを使[つか]うと、目[め]が痛[いた]くなります
+
+Whenever I overeat, I become sick.
+Ogni volta che mangio troppo, mi sento male.
+食[た]べすぎると、気分[きぶん]が悪[わる]くなります
+
+Whenever I take this medicine, I become sleepy.
+Ogni volta che prendo questa medicina, mi viene sonno.
+この薬[くすり]を飲[の]むと、眠[ねむ]くなります
+
+===== genki-18-4.txt =====
+～ながら
+～ながら
+
+I always study Japanese while listening to music.
+Studio sempre giapponese mentre ascolto musica.
+音楽[おんがく]を聞[き]きながら、いつも日本語[にほんご]を勉強[べんきょう]します
+
+I always study while watching TV.
+Studio sempre mentre guardo la TV.
+テレビを見[み]ながら、いつも勉強[べんきょう]します
+
+#name is doing laundry while singing a song.
+#name sta facendo il bucato mentre canta una canzone.
+歌[うた]を歌[うた]いながら、洗濯[せんたく]しています
+
+It is not easy to go to school while working part-time.
+Non è facile andare a scuola mentre si lavora part-time.
+アルバイトをしながら、学校[がっこう]に行[い]くのは大変[たいへん]です
+
+I brush my teeth while listening to music.
+Mi lavo i denti mentre ascolto musica.
+音楽[おんがく]を聞[き]きながら、歯[は]をみがきます
+
+I read the newspaper while eating breakfast.
+Leggo il giornale mentre faccio colazione.
+朝[あさ]御[ご]飯[はん]を食[た]べながら、新[しん]聞[ぶん]を読[よ]みます
+
+#name is walking while talking on the phone.
+#name sta camminando mentre parla al telefono.
+電[でん]話[わ]をかけながら、歩[ある]いています
+
+#name showed me the picture, laughing.
+#name mi ha mostrato la foto ridendo.
+笑[わら]いながら、写[しゃ]真[しん]を見[み]せてくれました
+
+I think while taking a walk.
+Penso mentre faccio una passeggiata.
+散[さん]歩[ぽ]しながら、考[かんが]えます
+
+#name does homework while watching anime.
+#name fa i compiti mentre guarda anime.
+アニメを見[み]ながら、宿題[しゅくだい]をします
+
+===== genki-18-5.txt =====
+～ばよかったです
+～ばよかったです
+
+I wish I had told her that I loved her.
+Avrei voluto dirle che le volevo bene.
+好[す]きだと彼女[かのじょ]に言[い]えばよかったです
+
+I wish I had told him that I loved him.
+Avrei voluto dirgli che gli volevo bene.
+好[す]きだと彼[かれ]に言[い]えばよかったです
+
+I should not have broken up with her.
+Non avrei dovuto lasciarla.
+彼女[かのじょ]と別[わか]れなければよかったです
+
+I should not have broken up with him.
+Non avrei dovuto lasciarlo.
+彼[かれ]と別[わか]れなければよかったです
+
+I wish I had brought an umbrella.
+Avrei voluto portare un ombrello.
+傘[かさ]を持[も]って来[く]ればよかったです
+
+I wish I had studied.
+Avrei voluto studiare.
+勉強[べんきょう]すればよかったです
+
+I should have brushed my teeth.
+Avrei dovuto lavarmi i denti.
+歯[は]をみがけばよかったです
+
+I wish I had made a hotel reservation.
+Avrei voluto fare una prenotazione in hotel.
+ホテルを予約[よやく]すればよかったです
+
+I should have taken a shower.
+Avrei dovuto fare la doccia.
+シャワーを浴[あ]びればよかったです
+
+I should not have bought the camera.
+Non avrei dovuto comprare la macchina fotografica.
+カメラを買[か]わなければよかったです
+
+===== genki-19-1.txt =====
+Honorific Verbs
+Verbi onorifici
+
+The professor will graciously not be at the school today.
+Il professore oggi non sarà a scuola.
+先生[せんせい]は今日[きょう]学校[がっこう]にいらっしゃいません
+
+What will you graciously eat?
+Che cosa mangerà?
+何[なに]を召[め]し上[あ]がりますか
+
+My mother graciously gave me this book.
+Mia madre mi ha dato questo libro.
+母[はは]がこの本[ほん]を下さいました
+
+My father graciously gave me this watch.
+Mio padre mi ha dato questo orologio.
+父[ちち]がこの時計[とけい]を下さいました
+
+I hear that the professor graciously cooks for himself.
+Ho sentito che il professore cucina da sé.
+先生[せんせい]は自分[じぶん]で料理[りょうり]をなさるそうです
+
+Please don't graciously worry.
+Per favore non si preoccupi.
+心配[しんぱい]しないでください
+
+My father is graciously watching TV.
+Mio padre sta guardando la TV.
+父[ちち]はテレビをご覧[らん]になっています
+
+My mother is graciously talking on the phone.
+Mia madre sta parlando al telefono.
+母[はは]は電話[でんわ]をなさっています
+
+It appears that the professor is graciously tired.
+Sembra che il professore sia stanco.
+先生[せんせい]はお疲[つか]れのようです
+
+The professor has already graciously gone home.
+Il professore è già tornato a casa.
+先生[せんせい]はもうお帰[かえ]りになりました
+
+===== genki-19-2.txt =====
+Giving Respectful Advice
+Dare consigli rispettosi
+
+Please take a ticket.
+Per favore prenda un biglietto.
+切[きっ]符[ぷ]をお取り[とり]ください
+
+Please read the instructions.
+Per favore legga le istruzioni.
+説明[せつめい]をお読[よ]みください
+
+Please watch out.
+Per favore faccia attenzione.
+気[き]をつけてください
+
+Please look.
+Per favore guardi.
+ご覧[らん]ください
+
+Please help yourself.
+Prego, si serva.
+どうぞお食[た]べください
+
+Please have a good rest.
+Per favore riposi bene.
+ゆっくりお休[やす]みください
+
+Please wait.
+Per favore aspetti.
+少[すこ]しお待[ま]ちください
+
+Please enter.
+Per favore entri.
+お入[はい]りください
+
+Please sit down.
+Per favore si sieda.
+お掛[か]けください
+
+Please speak a little more slowly.
+Per favore parli un po' più lentamente.
+少[すこ]しゆっくりお話[はな]しください
+
+===== genki-19-3.txt =====
+～てくれてありがとう
+～てくれてありがとう
+
+Thanks for helping me out.
+Grazie per avermi aiutato.
+手[て]伝[つだ]ってくれてありがとうございます
+
+Thanks for helping me with the homework.
+Grazie per avermi aiutato con i compiti.
+宿題[しゅくだい]を手伝[てつだ]ってくれてありがとうございます
+
+Thanks for tidying up the room for me.
+Grazie per aver riordinato la stanza per me.
+部屋[へや]を片[かた]付[づ]けてくれてありがとうございます
+
+Thanks for treating me to lunch.
+Grazie per avermi offerto il pranzo.
+昼[ひる]御[ご]飯[はん]をごちそうしてくれてありがとうございます
+
+Thank you for writing a letter of recommendation for me.
+Grazie per aver scritto una lettera di raccomandazione per me.
+推[すい]薦[せん]状[じょう]を書[か]いてくれてありがとうございます
+
+Thank you for correcting the mistake on my homework.
+Grazie per aver corretto l'errore nei miei compiti.
+宿題[しゅくだい]の間[ま]違[ちが]いを直[なお]してくれてありがとうございます
+
+Thank you for teaching me Japanese culture.
+Grazie per avermi insegnato la cultura giapponese.
+日[に]本[ほん]文[ぶん]化[か]を教[おし]えてくれてありがとうございます
+
+Thank you for lending me a dictionary.
+Grazie per avermi prestato un dizionario.
+辞[じ]書[しょ]を貸[か]してくれてありがとうございます
+
+Thanks for inviting me to your party.
+Grazie per avermi invitato alla tua festa.
+パーティーに誘[さそ]ってくれてありがとうございます
+
+Thanks for calling me.
+Grazie per avermi chiamato.
+電[でん]話[わ]をかけてくれてありがとうございます
+
+===== genki-19-4.txt =====
+～てよかったです
+～てよかったです
+
+I'm glad that I have studied Japanese.
+Sono contento di aver studiato giapponese.
+日本語[にほんご]を勉強[べんきょう]してよかったです
+
+I'm glad that I have studied Economics.
+Sono contento di aver studiato economia.
+経[けい]済[ざい]を勉強[べんきょう]してよかったです
+
+I'm glad that #name got well.
+Sono contento che #name sia guarito.
+#nameさんが元気[げんき]になってよかったです
+
+I'm glad that I did not go to the party yesterday.
+Sono contento di non essere andato alla festa ieri.
+昨日[きのう]パーティーに行[い]かなくてよかったです
+
+I'm glad that I did not go to school last week.
+Sono contento di non essere andato a scuola la settimana scorsa.
+先週[せんしゅう]学校[がっこう]に行[い]かなくてよかったです
+
+I'm glad that I studied abroad in Japan.
+Sono contento di aver studiato in Giappone.
+日[に]本[ほん]へ留[りゅう]学[がく]してよかったです
+
+I'm glad that I learned honorific language.
+Sono contento di aver imparato il linguaggio onorifico.
+敬[けい]語[ご]を勉強[べんきょう]してよかったです
+
+I'm glad that I chose this university.
+Sono contento di aver scelto questa università.
+この大[だい]学[がく]を選[えら]んでよかったです
+
+I'm glad that I have become acquainted with various people.
+Sono contento di aver conosciuto persone diverse.
+いろいろな人[ひと]に会[あ]ってよかったです
+
+I'm glad that I brought an umbrella.
+Sono contento di aver portato un ombrello.
+傘[かさ]を持[も]って来[き]てよかったです
+
+===== genki-19-5.txt =====
+～はずです
+～はずです
+
+Banks must be closed, because today is a Sunday.
+Le banche dovrebbero essere chiuse, perché oggi è domenica.
+今日[きょう]は日曜日[にちようび]だから、銀行[ぎんこう]は休[やす]みのはずです
+
+I believe that #name did not go anywhere yesterday.
+Credo che #name ieri non sia andato da nessuna parte.
+#nameさんは昨日[きのう]どこにも行[い]かなかったはずです
+
+I was supposed to receive a phone call last week, but I did not.
+Dovevo ricevere una telefonata la settimana scorsa, ma non è arrivata.
+先週[しゅう]電話[でんわ]が来[く]るはずでしたが、来[き]ませんでした
+
+He must be able to use computers, because he works for a computer company.
+Dovrebbe saper usare i computer, perché lavora per una ditta di computer.
+コンピューターの会社[かいしゃ]で働[はたら]いているから、コンピューターが使[つか]えるはずです
+
+She must have a lot of money, because she lives in a big house.
+Dovrebbe avere molti soldi, perché vive in una casa grande.
+大[おお]きい家[いえ]に住[す]んでいるから、お金[かね]がたくさんあるはずです
+
+He must not eat meat, because he is vegetarian.
+Dovrebbe non mangiare carne, perché è vegetariano.
+肉[にく]を食[た]べないから、肉[にく]を食[た]べないはずです
+
+She must not cut classes, because she is a diligent student.
+Dovrebbe non saltare le lezioni, perché è una studentessa diligente.
+まじめな学生[がくせい]だから、授業[じゅぎょう]をサボらないはずです
+
+She must be able to speak Chinese, because she studied abroad in China for one year.
+Dovrebbe saper parlare cinese, perché ha studiato in Cina per un anno.
+一[いち]年[ねん]中[ちゅう]国[ごく]へ留[りゅう]学[がく]したから、中国[ちゅうごく]語[ご]が話[はな]せるはずです
+
+The package should have arrived.
+Il pacco dovrebbe essere arrivato.
+荷[に]物[もつ]はもう着[つ]いたはずです
+
+Ken should be home now.
+Ken dovrebbe essere a casa adesso.
+けんさんは今[いま]家[いえ]にいるはずです
+
+===== genki-20-1.txt =====
+Extra-modest Expressions
+Espressioni extra-modeste
+
+I will be in Japan next year, too.
+Sarò in Giappone anche l'anno prossimo.
+来[らい]年[ねん]も日[に]本[ほん]でございます
+
+I will be in Tokyo next month, too.
+Sarò a Tokyo anche il prossimo mese.
+来[らい]月[げつ]も東[とう]京[きょう]でございます
+
+I graduated from college this June.
+Mi sono laureato quest'anno a giugno.
+今[こん]年[ねん]の六[ろく]月[がつ]に大[だい]学[がく]を卒[そつ]業[ぎょう]いたしました
+
+I have been studying Japanese for a year.
+Studio giapponese da un anno.
+一[いち]年[ねん]間[かん]日[に]本[ほん]語[ご]を勉[べん]強[きょう]しております
+
+I have been studying English for two years.
+Studio inglese da due anni.
+二[に]年[ねん]間[かん]英[えい]語[ご]を勉[べん]強[きょう]しております
+
+I am interested in Japanese culture.
+Sono interessato alla cultura giapponese.
+日[に]本[ほん]文[ぶん]化[か]に興[きょう]味[み]がございます
+
+I am interested in Korean culture.
+Sono interessato alla cultura coreana.
+韓[かん]国[こく]文[ぶん]化[か]に興[きょう]味[み]がございます
+
+A train is pulling in.
+Un treno sta entrando.
+電[でん]車[しゃ]が参[まい]ります
+
+The bathroom is on the second floor.
+Il bagno è al secondo piano.
+お手[て]洗[あら]いは二[に]階[かい]でございます
+
+The café is on the third floor.
+La caffetteria è al terzo piano.
+喫[きっ]茶[さ]店[てん]は三[さん]階[かい]でございます
+
+===== genki-20-2.txt =====
+Humble Expressions
+Espressioni umili
+
+I humbly met my professor yesterday.
+Ieri ho incontrato umilmente il mio professore.
+昨[きのう]先[せん]生[せい]にお会[あ]いしました
+
+I intend to humbly lend my professor a book.
+Ho intenzione di prestare umilmente un libro al professore.
+先[せん]生[せい]に本[ほん]をお貸[か]しします
+
+I borrowed a dictionary from my professor and feel very obliged.
+Ho preso in prestito un dizionario dal professore e ne sono molto grato.
+先[せん]生[せい]から辞[じ]書[しょ]を頂[いただ]きました
+
+I humbly received this book from my professor.
+Ho ricevuto umilmente questo libro dal professore.
+先[せん]生[せい]からこの本[ほん]を頂[いただ]きました
+
+I humbly had my professor teach me kanji.
+Mi sono fatto insegnare i kanji dal professore.
+先[せん]生[せい]に漢[かん]字[じ]を教[おし]えて頂[いただ]きました
+
+I will humbly give my professor flowers.
+Darò umilmente dei fiori al professore.
+先[せん]生[せい]に花[はな]を差[さ]し上[あ]げます
+
+I humbly visited my professor's house.
+Ho visitato umilmente la casa del professore.
+先[せん]生[せい]のお宅[たく]に伺[うかが]いました
+
+I humbly asked my professor about the exam.
+Ho chiesto umilmente al professore dell'esame.
+先[せん]生[せい]に試[し]験[けん]のことを伺[うかが]いました
+
+My father humbly served the guest tea.
+Mio padre ha servito il tè all'ospite.
+父[ちち]がお客[きゃく]様[さま]にお茶[ちゃ]を差[さ]し上[あ]げました
+
+My mother humbly received a letter from the President.
+Mia madre ha ricevuto una lettera dal presidente.
+母[はは]が社[しゃ]長[ちょう]から手[て]紙[がみ]を頂[いただ]きました
+
+===== genki-20-3.txt =====
+～ないで
+～ないで
+
+I studied without getting any sleep.
+Ho studiato senza dormire.
+寝[ね]ないで勉[べん]強[きょう]しました
+
+I read a newspaper without using dictionaries.
+Ho letto un giornale senza usare dizionari.
+辞[じ]書[しょ]を使[つか]わないで新[しん]聞[ぶん]を読[よ]みました
+
+I went to school without eating breakfast.
+Sono andato a scuola senza fare colazione.
+朝[あさ]御[ご]飯[はん]を食[た]べないで学校[がっこう]に行[い]きました
+
+I went to school without brushing my teeth.
+Sono andato a scuola senza lavarmi i denti.
+歯[は]をみがかないで学校[がっこう]に行[い]きました
+
+I went to school without washing my face.
+Sono andato a scuola senza lavarmi il viso.
+顔[かお]を洗[あら]わないで学校[がっこう]に行[い]きました
+
+I went to school without shaving.
+Sono andato a scuola senza radermi.
+髭[ひげ]を剃[そ]らないで学校[がっこう]に行[い]きました
+
+I went to sleep without eating dinner.
+Sono andato a dormire senza cenare.
+晩[ばん]御[ご]飯[はん]を食[た]べないで寝[ね]ました
+
+I went to sleep without doing my homework.
+Sono andato a dormire senza fare i compiti.
+宿題[しゅくだい]をしないで寝[ね]ました
+
+I went to sleep without taking a bath.
+Sono andato a dormire senza fare il bagno.
+お風[ふ]呂[ろ]に入[はい]らないで寝[ね]ました
+
+I left without locking the door.
+Sono uscito senza chiudere a chiave la porta.
+鍵[かぎ]をかけないで出[で]かけました
+
+===== genki-20-4.txt =====
+Questions Within Larger Sentences
+Domande all'interno di frasi più grandi
+
+I don't remember what they ate yesterday.
+Non ricordo cosa abbiano mangiato ieri.
+昨日[きのう]何[なに]を食[た]べたか覚[おぼ]えていません
+
+Do you know where #name lives?
+Sai dove vive #name?
+#nameさんがどこに住[す]んでいるか知[し]っていますか
+
+Let's decide whether we will go on a trip this weekend.
+Decidiamo se andremo in viaggio questo fine settimana.
+今週末[こんしゅうまつ]旅[りょ]行[こう]に行[い]くかどうか決[き]めましょう
+
+I do not know who is the best.
+Non so chi sia il migliore.
+だれが一番[いちばん]いいか知[し]りません
+
+I do not know if that person is a student.
+Non so se quella persona è uno studente.
+あの人[ひと]が学[がく]生[せい]かどうか知[し]りません
+
+I know what #name ate.
+So cosa ha mangiato #name.
+#nameさんが何[なに]を食[た]べたか知[し]っています
+
+Do you know if #name likes tennis?
+Sai se a #name piace il tennis?
+#nameさんがテニスが好[す]きかどうか知[し]っていますか
+
+Do you know if #name is interested in politics?
+Sai se #name è interessato alla politica?
+#nameさんが政[せい]治[じ]に興[きょう]味[み]があるかどうか知[し]っていますか
+
+Do you know what time #name goes to bed?
+Sai a che ora #name va a letto?
+#nameさんが何[なん]時[じ]に寝[ね]るか知[し]っていますか
+
+I do not know what kind of music #name likes.
+Non so che tipo di musica piace a #name.
+#nameさんがどんな音[おん]楽[がく]が好[す]きか知[し]りません
+
+===== genki-20-5.txt =====
+Name という Item
+Oggetto という Nome
+
+A dog called Pochi.
+Un cane chiamato Pochi.
+ポチという犬[いぬ]
+
+A song called Hana.
+Una canzone chiamata Hana.
+花[はな]という歌[うた]
+
+A convenience store called Lawson.
+Un minimarket chiamato Lawson.
+ローソンというコンビニ
+
+A company called Marui.
+Un'azienda chiamata Marui.
+丸井[まるい]という会[かい]社[しゃ]
+
+A town called Akashi.
+Una città chiamata Akashi.
+明石[あかし]という町[まち]
+
+A novel titled Kitchen.
+Un romanzo intitolato Kitchen.
+『キッチン』という小[しょう]説[せつ]
+
+A drink called Ramune.
+Una bevanda chiamata Ramune.
+ラムネという飲[の]み物[もの]
+
+A person named #name.
+Una persona di nome #name.
+#nameという人[ひと]
+
+A shop called Sakura.
+Un negozio chiamato Sakura.
+さくらという店[みせ]
+
+A train called Shinkansen.
+Un treno chiamato Shinkansen.
+新幹線[しんかんせん]という電車[でんしゃ]
+
+===== genki-20-6.txt =====
+～やすい/～にくい
+～やすい/～にくい
+
+This electronic dictionary is easy to use.
+Questo dizionario elettronico è facile da usare.
+この電[でん]子[し]辞[じ]書[しょ]は使[つか]いやすいです
+
+This book was easy to read.
+Questo libro era facile da leggere.
+この本[ほん]は読[よ]みやすかったです
+
+This town is quite livable.
+Questa città è facile in cui vivere.
+この町[まち]は住[す]みやすいです
+
+Hamburgers are easy to eat.
+Gli hamburger sono facili da mangiare.
+ハンバーガーは食[た]べやすいです
+
+#name's speech is easy to understand.
+Il discorso di #name è facile da capire.
+#nameさんのスピーチは分[わ]かりやすいです
+
+Wide roads are easy to drive on.
+Le strade larghe sono facili da percorrere.
+広[ひろ]い道[みち]は運[うん]転[てん]しやすいです
+
+Fish are hard to eat.
+Il pesce è difficile da mangiare.
+魚[さかな]は食[た]べにくいです
+
+This glass is hard to drink from.
+Questo bicchiere è difficile da bere.
+このコップは飲[の]みにくいです
+
+Kanji is hard to memorize.
+I kanji sono difficili da memorizzare.
+漢[かん]字[じ]は覚[おぼ]えにくいです
+
+It is embarrassing to buy this magazine.
+È imbarazzante comprare questa rivista.
+この雑[ざっ]誌[し]は買[か]いにくいです
+
+===== genki-21-1.txt =====
+Passive Sentences
+Frasi passive
+
+My mother was helped by #name.
+Mia madre è stata aiutata da #name.
+母[はは]は#nameさんに手伝[てつだ]われました
+
+My father was called by the teacher.
+Mio padre è stato chiamato dall'insegnante.
+父[ちち]は先生[せんせい]に呼[よ]ばれました
+
+The child was scolded by the mother.
+Il bambino è stato rimproverato dalla madre.
+子供[こども]は母[はは]に怒[おこ]られました
+
+I was invited by #name.
+Sono stato invitato da #name.
+#nameさんに誘[さそ]われました
+
+The book was read by the student.
+Il libro è stato letto dallo studente.
+本[ほん]は学生[がくせい]に読[よ]まれました
+
+The umbrella was forgotten on the train.
+L'ombrello è stato dimenticato sul treno.
+電車[でんしゃ]に傘[かさ]を忘[わす]れられました
+
+I was bitten by a mosquito.
+Sono stato punto da una zanzara.
+蚊[か]に刺[さ]されました
+
+The car was stolen.
+La macchina è stata rubata.
+車[くるま]を盗[ぬす]まれました
+
+My homework was taken by the younger brother.
+I miei compiti sono stati presi da mio fratello minore.
+弟[おとうと]に宿題[しゅくだい]を取[と]られました
+
+My bicycle was broken by the child.
+La mia bicicletta è stata rotta dal bambino.
+子供[こども]に自転車[じてんしゃ]を壊[こわ]されました
+
+===== genki-21-2.txt =====
+～てある
+～てある
+I let my younger brother use my computer.
+Ho lasciato che mio fratello minore usasse il mio computer.
+弟[おとうと]にパソコンを使[つか]わせてあげました
+
+I had my friend help me with the homework.
+Mi sono fatto aiutare con i compiti da un amico.
+友達[ともだち]に宿題[しゅくだい]を手伝[てつだ]ってもらいました
+
+My teacher taught me Japanese.
+Il mio insegnante mi ha insegnato il giapponese.
+先生[せんせい]が{私[わたし]に|}日本語[にほんご]を教[おし]えてくれました
+
+My mother bought me a camera.
+Mia madre mi ha comprato una macchina fotografica.
+母[はは]が{私[わたし]に|}カメラを買[か]ってくれました
+
+I asked my older sister to make dinner for me.
+Ho chiesto a mia sorella maggiore di prepararmi la cena.
+姉[あね]に晩[ばん]御[ご]飯[はん]を作[つく]ってもらいました
+
+My friend carried my bag for me.
+Il mio amico mi ha portato la borsa.
+友達[ともだち]が{私[わたし]に|}かばんを持[も]ってくれました
+
+I helped my mother clean the room.
+Ho aiutato mia madre a pulire la stanza.
+母[はは]に部屋[へや]を掃除[そうじ]してあげました
+
+My father drove me to school.
+Mio padre mi ha accompagnato a scuola in macchina.
+父[ちち]が{私[わたし]を|}学校[がっこう]に車[くるま]で送[おく]ってくれました
+
+I had my friend write the letter.
+Mi sono fatto scrivere la lettera da un amico.
+友達[ともだち]に手紙[てがみ]を書[か]いてもらいました
+
+I let #name borrow my dictionary.
+Ho lasciato che #name prendesse in prestito il mio dizionario.
+#nameさんに辞書[じしょ]を借[か]りさせてあげました
+
+===== genki-21-3.txt =====
+～間に
+～間に
+
+The father made the child study.
+Il padre ha fatto studiare il bambino.
+父[ちち]は子供[こども]に勉強[べんきょう]させました
+
+The mother let the child play in the park.
+La madre ha lasciato giocare il bambino nel parco.
+母[はは]は子供[こども]を公園[こうえん]で遊[あそ]ばせました
+
+The teacher made me write the kanji again.
+L'insegnante mi ha fatto scrivere di nuovo i kanji.
+先生[せんせい]は私[わたし]に漢字[かんじ]をもう一度[いちど]書[か]かせました
+
+My father made me clean my room.
+Mio padre mi ha fatto pulire la mia stanza.
+父[ちち]は私[わたし]に部屋[へや]を掃除[そうじ]させました
+
+I let my younger sister watch TV.
+Ho lasciato guardare la TV a mia sorella minore.
+妹[いもうと]にテレビを見[み]させました
+
+The coach made the players run.
+L'allenatore ha fatto correre i giocatori.
+コーチは選手[せんしゅ]を走[はし]らせました
+
+I made #name wait.
+Ho fatto aspettare #name.
+#nameさんを待[ま]たせました
+
+The manager let us go home early.
+Il responsabile ci ha lasciato tornare a casa presto.
+部長[ぶちょう]は私[わたし]たちを早[はや]く帰[かえ]らせました
+
+The mother made the child eat vegetables.
+La madre ha fatto mangiare le verdure al bambino.
+母[はは]は子供[こども]に野菜[やさい]を食[た]べさせました
+
+The father made his son practice the piano.
+Il padre ha fatto esercitare il figlio con il piano.
+父[ちち]は息子[むすこ]にピアノを練習[れんしゅう]させました
+
+===== genki-22-1.txt =====
+Causative Sentences
+Frasi causative
+
+If I study, I will understand.
+Se studio, capirò.
+勉強[べんきょう]すれば、分[わ]かります
+
+If it is cheap, I will buy it.
+Se è economico, lo comprerò.
+安[やす]ければ、買[か]います
+
+If the weather is good, let's go out.
+Se il tempo è bello, usciamo.
+天気[てんき]がよければ、出[で]かけましょう
+
+If you take a taxi, you will be on time.
+Se prendi un taxi, arriverai in tempo.
+タクシーに乗[の]れば、間[ま]に合[あ]います
+
+If I have money, I will travel.
+Se ho soldi, viaggerò.
+お金[かね]があれば、旅[りょ]行[こう]します
+
+If the teacher is busy, I will wait.
+Se l'insegnante è occupato, aspetterò.
+先生[せんせい]が忙[いそが]しければ、待[ま]ちます
+
+If you read this book, you will know the answer.
+Se leggi questo libro, saprai la risposta.
+この本[ほん]を読[よ]めば、答[こた]えが分[わ]かります
+
+If you use this dictionary, it will be easy.
+Se usi questo dizionario, sarà facile.
+この辞書[じしょ]を使[つか]えば、簡単[かんたん]です
+
+If you go to Kyoto, you should see the temple.
+Se vai a Kyoto, dovresti vedere il tempio.
+京都[きょうと]へ行[い]けば、お寺[てら]を見[み]ます
+
+If she has time, she will study Japanese.
+Se ha tempo, studierà giapponese.
+彼女[かのじょ]が時間[じかん]があれば、日本語[にほんご]を勉強[べんきょう]します
+
+===== genki-22-2.txt =====
+Verb Stem + なさい
+Radice del verbo + なさい
+
+I studied, but I could not pass the test.
+Ho studiato, ma non ho superato il test.
+勉強[べんきょう]したのに、テストに合[ごう]格[かく]しませんでした
+
+He is kind, but he was not praised.
+È gentile, ma non è stato lodato.
+親切[しんせつ]なのに、ほめられませんでした
+
+We made a reservation, but the restaurant was full.
+Abbiamo prenotato, ma il ristorante era pieno.
+予約[よやく]したのに、レストランはいっぱいでした
+
+I bought a camera, but I did not use it.
+Ho comprato una macchina fotografica, ma non l'ho usata.
+カメラを買[か]ったのに、使[つか]いませんでした
+
+It is cheap, but I do not want it.
+È economico, ma non lo voglio.
+安[やす]いのに、欲[ほ]しくないです
+
+The weather was good, but we did not go out.
+Il tempo era bello, ma non siamo usciti.
+天気[てんき]がよかったのに、出[で]かけませんでした
+
+I had free time, but I did not study.
+Avevo tempo libero, ma non ho studiato.
+暇[ひま]だったのに、勉強[べんきょう]しませんでした
+
+The exam was easy, but I made many mistakes.
+L'esame era facile, ma ho fatto molti errori.
+試験[しけん]はやさしかったのに、たくさん間違[まちが]えました
+
+It rained, but the picnic was held.
+Ha piovuto, ma il picnic si è fatto lo stesso.
+雨[あめ]が降[ふ]ったのに、ピクニックをしました
+
+I was tired, but I kept working.
+Ero stanco, ma ho continuato a lavorare.
+疲[つか]れたのに、働[はたら]き続[つづ]けました
+
+===== genki-22-3.txt =====
+～ば
+～ば
+
+I want to be a person like #name.
+Voglio essere una persona come #name.
+#nameさんのような人[ひと]になりたいです
+
+I want to speak like my teacher.
+Voglio parlare come il mio insegnante.
+先生[せんせい]のように話[はな]したいです
+
+This room is as quiet as a library.
+Questa stanza è silenziosa come una biblioteca.
+この部屋[へや]は図書館[としょかん]のように静[しず]かです
+
+He swims like a fish.
+Nuota come un pesce.
+魚[さかな]のように泳[およ]ぎます
+
+She cries like a child.
+Piange come un bambino.
+子供[こども]のように泣[な]きます
+
+That town is like my hometown.
+Quella città è come la mia città natale.
+あの町[まち]は私[わたし]の故郷[ふるさと]のようです
+
+The exam was like a game.
+L'esame era come un gioco.
+試験[しけん]はゲームのようでした
+
+He eats like a bird.
+Mangia come un uccellino.
+鳥[とり]のように食[た]べます
+
+She works like a machine.
+Lavora come una macchina.
+機械[きかい]のように働[はたら]きます
+
+The moon looks like a ball.
+La luna sembra una palla.
+月[つき]はボールのようです
+
+===== genki-23-1.txt =====
+Causative-passive Sentences
+Frasi causativo-passivo
+
+Even if it rains, I will go.
+Anche se piove, andrò.
+雨[あめ]が降[ふ]っても、行[い]きます
+
+Even if I am busy, I will study.
+Anche se sono occupato, studierò.
+忙[いそが]しくても、勉強[べんきょう]します
+
+Even if this is expensive, I will buy it.
+Anche se questo è costoso, lo comprerò.
+これが高[たか]くても、買[か]います
+
+Even if I cannot sleep, I will rest.
+Anche se non riesco a dormire, riposerò.
+寝[ね]られなくても、休[やす]みます
+
+Even if it is cold, the child plays outside.
+Anche se fa freddo, il bambino gioca fuori.
+寒[さむ]くても、子供[こども]は外[そと]で遊[あそ]びます
+
+Even if the teacher says no, I will ask.
+Anche se l'insegnante dice di no, chiederò.
+先生[せんせい]がだめだと言[い]っても、聞[き]きます
+
+Even if there is a test tomorrow, I will go out tonight.
+Anche se c'è un test domani, uscirò stasera.
+明日[あした]テストがあっても、今晩[こんばん]出[で]かけます
+
+Even if I work, I will call you.
+Anche se lavoro, ti chiamerò.
+働[はたら]いても、電話[でんわ]をかけます
+
+Even if the road is long, I will walk.
+Anche se la strada è lunga, camminerò.
+道[みち]が長[なが]くても、歩[ある]きます
+
+Even if I lose, I will not complain.
+Anche se perdo, non mi lamenterò.
+負[ま]けても、文句[もんく]を言[い]いません
+
+===== genki-23-2.txt =====
+～ても
+～ても
+
+I decided to study Japanese every day.
+Ho deciso di studiare giapponese ogni giorno.
+毎日[まいにち]日本語[にほんご]を勉強[べんきょう]することにしました
+
+I decided to get up early.
+Ho deciso di alzarmi presto.
+早[はや]く起[お]きることにしました
+
+I decided not to smoke.
+Ho deciso di non fumare.
+たばこを吸[す]わないことにしました
+
+I decided to go to bed at eleven.
+Ho deciso di andare a letto alle undici.
+十一時[じゅういちじ]に寝[ね]ることにしました
+
+I decided to save money.
+Ho deciso di risparmiare soldi.
+お金[かね]をためることにしました
+
+I decided to practice the piano.
+Ho deciso di esercitarmi con il pianoforte.
+ピアノを練習[れんしゅう]することにしました
+
+I decided not to go out tonight.
+Ho deciso di non uscire stasera.
+今晩[こんばん]は出[で]かけないことにしました
+
+I decided to help my mother.
+Ho deciso di aiutare mia madre.
+母[はは]を手伝[てつだ]うことにしました
+
+I decided to take the exam next year.
+Ho deciso di fare l'esame l'anno prossimo.
+来年[らいねん]試験[しけん]を受[う]けることにしました
+
+I decided to live alone.
+Ho deciso di vivere da solo.
+一人暮[ひとりぐ]らしをすることにしました
+
+===== genki-23-3.txt =====
+～ことにする
+～ことにする
+
+I will wait until my friend comes.
+Aspetterò fino a quando arriva il mio amico.
+友達[ともだち]が来[く]るまで、待[ま]ちます
+
+I studied until midnight.
+Ho studiato fino a mezzanotte.
+真夜中[まよなか]まで勉強[べんきょう]しました
+
+Please stay until the class ends.
+Per favore resti fino a quando finisce la lezione.
+授業[じゅぎょう]が終[お]わるまで、いてください
+
+I will keep walking until I reach the station.
+Continuerò a camminare fino a quando arrivo alla stazione.
+駅[えき]に着[つ]くまで、歩[ある]き続[つづ]けます
+
+I did not sleep until the train arrived.
+Non ho dormito fino all'arrivo del treno.
+電車[でんしゃ]が来[く]るまで、寝[ね]ませんでした
+
+I will wait until it becomes sunny.
+Aspetterò finché non diventa soleggiato.
+晴[は]れるまで、待[ま]ちます
+
+Stay here until I return.
+Resta qui fino a quando torno.
+私[わたし]が戻[もど]るまで、ここにいてください
+
+I will not eat until the meeting ends.
+Non mangerò fino a quando termina la riunione.
+会[かい]議[ぎ]が終[お]わるまで、食[た]べません
+
+I stayed until the guest left.
+Sono rimasto fino a quando l'ospite se n'è andato.
+お客[きゃく]様[さま]が帰[かえ]るまで、いました
+
+I will keep studying until I remember it.
+Continuerò a studiare fino a quando me lo ricorderò.
+覚[おぼ]えるまで、勉強[べんきょう]します
+
+===== genki-23-4.txt =====
+～まで
+～まで
+
+How to swim.
+Come nuotare.
+泳[およ]ぎ方[かた]
+
+How to use chopsticks.
+Come usare le bacchette.
+箸[はし]の使[つか]い方[かた]
+
+How to read kanji.
+Come leggere i kanji.
+漢字[かんじ]の読[よ]み方[かた]
+
+How to make coffee.
+Come fare il caffè.
+コーヒーの入[い]れ方[かた]
+
+How to drive a car.
+Come guidare una macchina.
+車[くるま]の運転[うんてん]の仕方[しかた]
+
+How to take a bath.
+Come fare il bagno.
+お風[ふ]呂[ろ]の入[はい]り方[かた]
+
+How to study Japanese.
+Come studiare giapponese.
+日本語[にほんご]の勉強[べんきょう]の仕方[しかた]
+
+How to make sushi.
+Come fare il sushi.
+寿司[すし]の作[つく]り方[かた]
+
+How to wear a kimono.
+Come indossare un kimono.
+着物[きもの]の着[き]方[かた]
+
+How to go to the airport.
+Come andare all'aeroporto.
+空港[くうこう]への行[い]き方[かた]

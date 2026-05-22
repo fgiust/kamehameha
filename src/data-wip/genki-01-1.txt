@@ -1,32 +1,42 @@
 X は Y です
 X は Y です
 
-I am Japanese.
-私は日本人[にほんじん]です
-
-#name is a student.
-#nameは学生[がくせい]です
+I am a college student.
+Sono uno studente universitario.
+{私[わたし]は|}大学生[だいがくせい]{です|だ}
 
 My major is economics.
-私[わたし]の専攻[せんこう]は経済[けいざい]です
+La mia facoltà è economia.
+{私[わたし]の}専攻[せんこう]{は|が}経済[けいざい]{です|だ}
 
-I am an international student.
-私は留学生[りゅうがくせい]です
+Takeshi is a teacher.
+Takeshi è un insegnante.
+{武[たけ]志[し]さんは|}先生[せんせい]{です|だ}
 
-My father is an office worker.
-私[わたし]の父[ちち]は会社員[かいしゃいん]です
+My friend is Japanese.
+Il mio amico è giapponese.
+{私[わたし]の}友達[ともだち]{は|}日本人[にほんじん]{です|だ}
 
-#name is a doctor.
-#nameは医者[いしゃ]です
+I am 20 years old.
+Ho 20 anni.
+{私[わたし]は|}20歳[さい]{です|だ}
 
-My older sister is a lawyer.
-私[わたし]の姉[あね]は弁護士[べんごし]です
+Her older brother is a doctor.
+Suo fratello maggiore è un dottore.
+{彼女[かのじょ]の}兄[あに]{は|}医者[いしゃ]{です|だ}
 
-I am a first-year college student.
-私は大学[だいがく]の一年生[いちねんせい]です
+That person is an office worker.
+Quella persona è un impiegato.
+{あの人[ひと]は|}会社員[かいしゃいん]{です|だ}
 
-My friend is Korean.
-友達[ともだち]は韓国人[かんこくじん]です
+My younger sister is Australian.
+Mia sorella minore è australiana.
+{私[わたし]の}妹[いもうと]{は|}オーストラリア人[じん]{です|だ}
 
-I am 25 years old.
-私は二十五歳[にじゅうごさい]です
+This is my name card.
+Questo è il mio biglietto da visita.
+{これ[は]|}私[わたし]の名刺[めいし]{です|だ}
+
+My father is at home.
+Mio padre è a casa.
+{父[ちち]は|}家[うち]に{います|いる}
