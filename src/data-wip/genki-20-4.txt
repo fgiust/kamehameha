@@ -5,9 +5,9 @@ I don't remember what they ate yesterday.
 Non ricordo cosa abbiano mangiato ieri.
 昨日[きのう]何[なに]を食[た]べたか覚[おぼ]えていません
 
-Do you know where #name lives?
-Sai dove vive #name?
-#nameさんがどこに住[す]んでいるか知[し]っていますか
+Do you know where Ken lives?
+Sai dove vive Ken?
+けんさんがどこに住[す]んでいるか知[し]っていますか
 
 Let's decide whether we will go on a trip this weekend.
 Decidiamo se andremo in viaggio questo fine settimana.
@@ -21,22 +21,22 @@ I do not know if that person is a student.
 Non so se quella persona è uno studente.
 あの人[ひと]が学[がく]生[せい]かどうか知[し]りません
 
-I know what #name ate.
-So cosa ha mangiato #name.
-#nameさんが何[なに]を食[た]べたか知[し]っています
+I know what Ken ate.
+So cosa ha mangiato Ken.
+けんさんが何[なに]を食[た]べたか知[し]っています
 
-Do you know if #name likes tennis?
-Sai se a #name piace il tennis?
-#nameさんがテニスが好[す]きかどうか知[し]っていますか
+Do you know if Ken likes tennis?
+Sai se a Ken piace il tennis?
+けんさんがテニスが好[す]きかどうか知[し]っていますか
 
-Do you know if #name is interested in politics?
-Sai se #name è interessato alla politica?
-#nameさんが政[せい]治[じ]に興[きょう]味[み]があるかどうか知[し]っていますか
+Do you know if Michiko is interested in politics?
+Sai se Michiko è interessata alla politica?
+みちこさんが政[せい]治[じ]に興[きょう]味[み]があるかどうか知[し]っていますか
 
-Do you know what time #name goes to bed?
-Sai a che ora #name va a letto?
-#nameさんが何[なん]時[じ]に寝[ね]るか知[し]っていますか
+Do you know what time Woody goes to bed?
+Sai a che ora Woody va a letto?
+ウッディさんが何[なん]時[じ]に寝[ね]るか知[し]っていますか
 
-I do not know what kind of music #name likes.
-Non so che tipo di musica piace a #name.
-#nameさんがどんな音[おん]楽[がく]が好[す]きか知[し]りません
+I do not know what kind of music Woody likes.
+Non so che tipo di musica piace a Woody.
+ウッディさんがどんな音[おん]楽[がく]が好[す]きか知[し]りません

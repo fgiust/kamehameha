@@ -25,9 +25,9 @@ The coach made the players run.
 L'allenatore ha fatto correre i giocatori.
 コーチは選手[せんしゅ]を走[はし]らせました
 
-I made #name wait.
-Ho fatto aspettare #name.
-#nameさんを待[ま]たせました
+I made Ken wait.
+Ho fatto aspettare Ken.
+けんさんを待[ま]たせました
 
 The manager let us go home early.
 Il responsabile ci ha lasciato tornare a casa presto.

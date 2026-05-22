@@ -1,24 +1,21 @@
-メアリー
-たけし
-山下先生
-ロバート
-ソラ
-ジョン
-けん
-ゆい
-スー
-カルロス
-みちこ
-なおみ
-ヤスミン
-ウッディ
-ペドロ
-ローラ先生
-翔太先生
-佐藤
-鈴木
-伊藤
-山本
-中村
-山田
-山下
+メアリー Mary
+たけし Takeshi
+ロバート Roberto
+ソラ Sora
+ジョン John
+けん Ken
+ゆい Yui
+スー Sue
+カルロス Carlos
+みちこ Michiko
+なおみ Naomi
+ヤスミン Yasmin
+ウッディ Woody
+ペドロ Pedro
+佐藤 Sato
+鈴木 Suzuki
+伊藤 Ito
+山本 Yamamoto
+中村 Nakamura
+山田 Yamada
+山下 Yamashita

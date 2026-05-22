@@ -9,9 +9,9 @@ Whenever the streets are crowded, it takes longer to get there.
 Quando le strade sono affollate, ci vuole più tempo per arrivarci.
 道[みち]が混[こ]んでいるとき、着[つ]くのに時間[じかん]がかかります
 
-If #name goes back home, we will be sad and lonely.
-Se #name torna a casa, saremo tristi e soli.
-#nameさんが帰[かえ]ったとき、さびしくなります
+If Naomi goes back home, we will be sad and lonely.
+Se Naomi torna a casa, saremo tristi e soli.
+なおみさんが帰[かえ]ったとき、さびしくなります
 
 When I was young, whenever winter arrived, I caught a cold.
 Quando ero piccolo, ogni volta che arrivava l'inverno, prendevo un raffreddore.

@@ -13,13 +13,13 @@ We will go to the park if the weather is nice.
 Andremo al parco se il tempo è bello.
 天気[てんき]がよかったら、公園[こうえん]に行[い]きます
 
-I will ask about it if I see #name.
-Lo chiederò se vedo #name.
-#nameさんに会[あ]ったら、聞[き]きます
+I will ask about it if I see Takeshi.
+Lo chiederò se vedo Takeshi.
+たけしさんに会[あ]ったら、聞[き]きます
 
-I will call #name when I get home tonight.
-Chiamerò #name quando torno a casa stasera.
-今晩[こんばん]家[いえ]に帰[かえ]ったら、#nameさんに電話[でんわ]をかけます
+I will call Mary when I get home tonight.
+Chiamerò Mary quando torno a casa stasera.
+今晩[こんばん]家[いえ]に帰[かえ]ったら、メアリーさんに電話[でんわ]をかけます
 
 Let's go out and have some fun once we are done with the homework.
 Andiamo fuori a divertirci quando avremo finito i compiti.

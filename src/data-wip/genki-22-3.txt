@@ -1,9 +1,9 @@
 ～ば
 ～ば
 
-I want to be a person like #name.
-Voglio essere una persona come #name.
-#nameさんのような人[ひと]になりたいです
+I want to be a person like Ken.
+Voglio essere una persona come Ken.
+けんさんのような人[ひと]になりたいです
 
 I want to speak like my teacher.
 Voglio parlare come il mio insegnante.

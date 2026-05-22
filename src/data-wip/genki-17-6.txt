@@ -13,13 +13,13 @@ I studied and then wrote letters to my friends.
 Ho studiato e poi ho scritto lettere ai miei amici.
 勉強[べんきょう]してから、友達[ともだち]に手紙[てがみ]を書[か]きました
 
-Let's eat after #name has arrived.
-Mangiamo dopo che #name è arrivato.
-#nameさんが着[つ]いてから、食[た]べましょう
+Let's eat after Pedro has arrived.
+Mangiamo dopo che Pedro è arrivato.
+ペドロさんが着[つ]いてから、食[た]べましょう
 
-Let's drink after #name has arrived.
-Beviamo dopo che #name è arrivato.
-#nameさんが着[つ]いてから、飲[の]みましょう
+Let's drink after Pedro has arrived.
+Beviamo dopo che Pedro è arrivato.
+ペドロさんが着[つ]いてから、飲[の]みましょう
 
 I have been feeling very lonely since my cat died.
 Mi sento molto solo da quando il mio gatto è morto.

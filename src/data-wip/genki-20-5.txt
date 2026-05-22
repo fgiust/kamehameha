@@ -29,9 +29,9 @@ A drink called Ramune.
 Una bevanda chiamata Ramune.
 ラムネという飲[の]み物[もの]
 
-A person named #name.
-Una persona di nome #name.
-#nameという人[ひと]
+A person named Carlos.
+Una persona di nome Carlos.
+カルロスという人[ひと]
 
 A shop called Sakura.
 Un negozio chiamato Sakura.

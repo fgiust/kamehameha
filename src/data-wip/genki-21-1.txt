@@ -1,9 +1,9 @@
 Passive Sentences
 Frasi passive
 
-My mother was helped by #name.
-Mia madre è stata aiutata da #name.
-母[はは]は#nameさんに手伝[てつだ]われました
+My mother was helped by Carlos.
+Mia madre è stata aiutata da Carlos.
+母[はは]はカルロスさんに手伝[てつだ]われました
 
 My father was called by the teacher.
 Mio padre è stato chiamato dall'insegnante.
@@ -13,9 +13,9 @@ The child was scolded by the mother.
 Il bambino è stato rimproverato dalla madre.
 子供[こども]は母[はは]に怒[おこ]られました
 
-I was invited by #name.
-Sono stato invitato da #name.
-#nameさんに誘[さそ]われました
+I was invited by Yasmin.
+Sono stato invitato da Yasmin.
+ヤスミンさんに誘[さそ]われました
 
 The book was read by the student.
 Il libro è stato letto dallo studente.

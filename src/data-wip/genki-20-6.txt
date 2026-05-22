@@ -17,9 +17,9 @@ Hamburgers are easy to eat.
 Gli hamburger sono facili da mangiare.
 ハンバーガーは食[た]べやすいです
 
-#name's speech is easy to understand.
-Il discorso di #name è facile da capire.
-#nameさんのスピーチは分[わ]かりやすいです
+Sora's speech is easy to understand.
+Il discorso di Sora è facile da capire.
+ソラさんのスピーチは分[わ]かりやすいです
 
 Wide roads are easy to drive on.
 Le strade larghe sono facili da percorrere.

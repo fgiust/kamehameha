@@ -9,9 +9,9 @@ I'm glad that I have studied Economics.
 Sono contento di aver studiato economia.
 経[けい]済[ざい]を勉強[べんきょう]してよかったです
 
-I'm glad that #name got well.
-Sono contento che #name sia guarito.
-#nameさんが元気[げんき]になってよかったです
+I'm glad that Roberto got well.
+Sono contento che Roberto sia guarito.
+ロバートさんが元気[げんき]になってよかったです
 
 I'm glad that I did not go to the party yesterday.
 Sono contento di non essere andato alla festa ieri.

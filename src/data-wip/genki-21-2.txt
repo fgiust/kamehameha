@@ -36,6 +36,6 @@ I had my friend write the letter.
 Mi sono fatto scrivere la lettera da un amico.
 友達[ともだち]に手紙[てがみ]を書[か]いてもらいました
 
-I let #name borrow my dictionary.
-Ho lasciato che #name prendesse in prestito il mio dizionario.
-#nameさんに辞書[じしょ]を借[か]りさせてあげました
+I let Yamashita borrow my dictionary.
+Ho lasciato che Yamashita prendesse in prestito il mio dizionario.
+山下さんに辞書[じしょ]を借[か]りさせてあげました
