@@ -1,22 +1,42 @@
 ～でしょう
 ～でしょう
 
-It will probably snow tomorrow.
-Probabilmente nevicherà domani.
-明日[あした]は雪[ゆき]が降[ふ]るでしょう
+It will probably rain tomorrow.
+Probabilmente domani pioverà.
+明日[あした]雨[あめ]が降[ふ]るでしょう
 
-That teacher's class is probably interesting.
-La lezione di quell'insegnante probabilmente è interessante.
-あの先[せん]生[せい]のクラスは面[おも]白[しろ]いでしょう
+It will probably not rain tomorrow.
+Probabilmente domani non pioverà.
+明日[あした]雨[あめ]が降[ふ]らないでしょう
 
-He probably understands Japanese.
-Probabilmente capisce il giapponese.
-彼[かれ]は日[に]本[ほん]語[ご]が分[わ]かるでしょう
+It is probably cold in Hokkaido.
+Probabilmente fa freddo a Hokkaido.
+北海道[ほっかいどう]は寒[さむ]いでしょう
 
-Will this exam probably be difficult?
-Probabilmente questo esame sarà difficile?
-この試[し]験[けん]は難[むずか]しいでしょうか
+It is probably not cold in Tokyo.
+Probabilmente a Tokyo non fa freddo.
+東京[とうきょう]は寒[さむ]くないでしょう
 
-You will probably be busy this weekend.
-Probabilmente sarai occupato questo fine settimana.
-今[こん]週[しゅう]の週[しゅう]末[まつ]は忙[いそが]しいでしょう
+Mary probably likes fish.
+Probabilmente a Mary piace il pesce.
+メアリーさんは魚[さかな]が好[す]きでしょう
+
+Robert probably doesn't like fish.
+Probabilmente a Robert non piace il pesce.
+ロバートさんは魚[さかな]が好[す]きじゃないでしょう
+
+That person is probably Japanese.
+Quella persona probabilmente è giapponese.
+あの人[ひと]は日本人[にほんじん]でしょう
+
+That person is probably not Japanese.
+Quella persona probabilmente non è giapponese.
+あの人[ひと]は日本人[にほんじん]じゃないでしょう
+
+I think Ken would be interested in it.
+Penso che Ken ne sarebbe interessato.
+けんさんはそれに興味[きょうみ]があるでしょう
+
+The exam will probably be difficult.
+Probabilmente l'esame sarà difficile.
+試験[しけん]は難[むずか]しいでしょう

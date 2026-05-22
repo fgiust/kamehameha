@@ -1,22 +1,42 @@
 一時間
 一時間
 
-Mary waited there for an hour.
-Mary aspettò lì per un'ora.
-メアリーさんはそこで一[いち]時[じ]間[かん]待[ま]ちました
+Mary waited for Takeshi there for an hour.
+Mary ha aspettato Takeshi lì per un'ora.
+メアリーさんはそこでたけしさんを一時間[いちじかん]待[ま]ちました
 
-I studied Japanese for three hours yesterday.
-Ieri ho studiato giapponese per tre ore.
-{私[わたし]は|}きのう三[さん]時[じ]間[かん]日[に]本[ほん]語[ご]を勉[べん]強[きょう]しました
+Takeshi waited for Mary there for an hour and a half.
+Takeshi ha aspettato Mary lì per un'ora e mezza.
+たけしさんはそこでメアリーさんを一時間半[いちじかんはん]待[ま]ちました
 
-I sleep for seven hours every day.
-Dormo sette ore ogni giorno.
-{私[わたし]は|}毎[まい]日[にち]七[なな]時[じ]間[かん]寝[ね]ます
+Sora watched TV for two hours yesterday.
+Sora ha guardato la TV per due ore ieri.
+ソラさんは昨日[きのう]テレビを二時間[にじかん]見[み]ました
 
-How many hours did you watch TV?
-Quante ore hai guardato la TV?
-何[なん]時[じ]間[かん]テレビを見[み]ましたか
+John watched TV for four hours on Sunday.
+John ha guardato la TV per quattro ore domenica.
+ジョンさんは日曜日[にちようび]にテレビを四時間[よじかん]見[み]ました
 
-I played tennis for an hour and a half.
-Ho giocato a tennis per un'ora e mezza.
-{私[わたし]は|}一[いち]時[じ]間[かん]半[はん]テニスをしました
+I studied Japanese for about three hours yesterday.
+Ho studiato giapponese per circa tre ore ieri.
+{私[わたし]は|}昨日[きのう]日本語[にほんご]を三時間[さんじかん]ぐらい勉強[べんきょう]しました
+
+I studied Japanese for about two hours today.
+Ho studiato giapponese per circa due ore oggi.
+{私[わたし]は|}今日[きょう]日本語[にほんご]を二時間[にじかん]ぐらい勉強[べんきょう]しました
+
+Ken studies Japanese at the library for about one hour everyday.
+Ken studia giapponese in biblioteca per circa un'ora ogni giorno.
+けんさんは毎日[まいにち]図書館[としょかん]で一時間[いちじかん]ぐらい日本語[にほんご]を勉強[べんきょう]します
+
+I slept for seven and a half hours last night.
+Ho dormito per sette ore e mezza la scorsa notte.
+{私[わたし]は|}昨日[きのう]の夜[よる]七時間半[しちじかんはん]寝[ね]ました
+
+I slept for eight and a half hours last night.
+Ho dormito per otto ore e mezza la scorsa notte.
+{私[わたし]は|}昨日[きのう]の夜[よる]八時間半[はちじかんはん]寝[ね]ました
+
+I slept for about six hours last night.
+Ho dormito per circa sei ore la scorsa notte.
+{私[わたし]は|}昨日[きのう]の夜[よる]六時間[ろくじかん]ぐらい寝[ね]ました

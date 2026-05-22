@@ -1,22 +1,42 @@
 が
 が
 
-Who opened the window?
-Chi ha aperto la finestra?
-だれが窓[まど]を開[あ]けましたか
+Who went to Okinawa?
+Chi è andato a Okinawa?
+だれが沖縄[おきなわ]{に|へ}行[い]きましたか
 
-Takeshi opened it.
-Takeshi lo aprì.
-たけしさんが開[あ]けました
+Takeshi went to Okinawa.
+Takeshi è andato a Okinawa.
+たけしさんが沖縄[おきなわ]{に|へ}行[い]きました
 
-Who is going to Japan?
-Chi andrà in Giappone?
-だれが日[に]本[ほん]に行[い]きますか
+Who went to Tokyo?
+Chi è andato a Tokyo?
+だれが東京[とうきょう]{に|へ}行[い]きましたか
 
-Mary is going.
-Maria sta andando.
-メアリーさんが行[い]きます
+Mary went to Tokyo.
+Mary è andata a Tokyo.
+メアリーさんが東京[とうきょう]{に|へ}行[い]きました
 
-Which class is interesting?
-Quale lezione è interessante?
-どのクラスが面[おも]白[しろ]いですか
+Which class is the most interesting?
+Quale lezione è la più interessante?
+どのクラスが一番[いちばん]面[おも]白[しろ]いですか
+
+Japanese class is interesting.
+La lezione di giapponese è interessante.
+日本語[にほんご]のクラスが面[おも]白[しろ]いです
+
+Who wears glasses?
+Chi indossa gli occhiali?
+だれが眼鏡[めがね]をかけていますか
+
+Professor Yamashita wears glasses.
+Il professor Yamashita indossa gli occhiali.
+山下[やました]先生[せんせい]が眼鏡[めがね]をかけています
+
+Who is a college student?
+Chi è uno studente universitario?
+だれが大学生[だいがくせい]ですか
+
+Robert is a college student.
+Robert è uno studente universitario.
+ロバートさんが大学生[だいがくせい]です

@@ -1,22 +1,42 @@
 ～てください
 ～てください
 
-Please use the dictionary.
-Per favore usa il dizionario.
-辞[じ]書[しょ]を使[つか]ってください
+Please read the textbook.
+Per favore, leggi il libro di testo.
+教科書[きょうかしょ]を読[よ]んでください
 
-Please wait a moment.
-Per favore aspetta un momento.
-ちょっと待[ま]ってください
+Please take a picture.
+Per favore, scatta una foto.
+写真[しゃしん]を撮[と]ってください
 
-Please read this kanji.
-Per favore leggi questo kanji.
-この漢[かん]字[じ]を読[よ]んでください
+Please use this towel.
+Per favore, usa questo asciugamano.
+このタオルを使[つか]ってください
 
-Please speak slowly.
-Per favore, parla lentamente.
-ゆっくり話[はな]してください
+Please sit down.
+Per favore, siediti.
+座[すわ]ってください
 
-Please look at the book.
-Per favore guarda il libro.
-本[ほん]を見[み]てください
+Stand up, please.
+Per favore, alzati.
+立[た]ってください
+
+Please turn on the TV.
+Per favore, accendi la TV.
+テレビをつけてください
+
+Please open the window.
+Per favore, apri la finestra.
+窓[まど]を開[あ]けてください
+
+Please teach me this kanji.
+Per favore, insegnami questo kanji.
+この漢字[かんじ]を教[おし]えてください
+
+Please wait a little.
+Per favore, aspetta un po'.
+少[すこ]し待[ま]ってください
+
+Please carry this bag.
+Per favore, porta questa borsa.
+このかばんを持[も]ってください

@@ -1,22 +1,42 @@
 ～ないで
 ～ないで
 
-Yesterday, I studied without sleeping.
-Ieri ho studiato senza dormire.
-昨[きの]日[う]は寝[ね]ないで、勉[べん]強[きょう]しました
+I studied without getting any sleep.
+Ho studiato senza dormire.
+寝[ね]ないで勉[べん]強[きょう]しました
 
-I read books without using a dictionary.
-Leggo libri senza usare il dizionario.
-辞[じ]書[しょ]を使[つか]わないで、本[ほん]を読[よ]みます
+I read a newspaper without using dictionaries.
+Ho letto un giornale senza usare dizionari.
+辞[じ]書[しょ]を使[つか]わないで新[しん]聞[ぶん]を読[よ]みました
 
 I went to school without eating breakfast.
 Sono andato a scuola senza fare colazione.
-朝[あさ]ご飯[はん]を食[た]べないで、学[がっ]校[こう]に行[い]きました
+朝[あさ]御[ご]飯[はん]を食[た]べないで学校[がっこう]に行[い]きました
 
-I went out without carrying an umbrella.
-Sono uscito senza portare l'ombrello.
-傘[かさ]を持[も]たないで、出[で]かけました
+I went to school without brushing my teeth.
+Sono andato a scuola senza lavarmi i denti.
+歯[は]をみがかないで学校[がっこう]に行[い]きました
 
-I went alone without telling anyone.
-Sono andato da solo senza dirlo a nessuno.
-誰[だれ]にも言[い]わないで、一人[ひとり]で行[い]きました
+I went to school without washing my face.
+Sono andato a scuola senza lavarmi il viso.
+顔[かお]を洗[あら]わないで学校[がっこう]に行[い]きました
+
+I went to school without shaving.
+Sono andato a scuola senza radermi.
+髭[ひげ]を剃[そ]らないで学校[がっこう]に行[い]きました
+
+I went to sleep without eating dinner.
+Sono andato a dormire senza cenare.
+晩[ばん]御[ご]飯[はん]を食[た]べないで寝[ね]ました
+
+I went to sleep without doing my homework.
+Sono andato a dormire senza fare i compiti.
+宿題[しゅくだい]をしないで寝[ね]ました
+
+I went to sleep without taking a bath.
+Sono andato a dormire senza fare il bagno.
+お風[ふ]呂[ろ]に入[はい]らないで寝[ね]ました
+
+I left without locking the door.
+Sono uscito senza chiudere a chiave la porta.
+鍵[かぎ]をかけないで出[で]かけました

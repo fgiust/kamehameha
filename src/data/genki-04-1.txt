@@ -1,22 +1,42 @@
 Xがあります/います
 Xがあります/います
 
-There is a McDonald's over there.
-C'è un McDonald's laggiù.
-あそこにマクドナルドがあります
+Do you have time?
+Hai tempo?
+時[じ]間[かん]がありますか
 
-There is no supermarket over there.
-Non c'è nessun supermercato laggiù.
-あそこにスーパーがありません
+There will be a Japanese class tomorrow.
+Ci sarà una lezione di giapponese domani.
+明日[あした]、日本語[にほんご]のクラスがあります
 
-There is a TV.
-C'è una televisione.
-テレビがあります
+There is a bookstore over there.
+C'è una libreria laggiù.
+あそこに本屋[ほんや]があります
 
-There is a foreigner over there.
-C'è uno straniero laggiù.
-あそこに外[がい]国[こく]人[じん]がいます
+There will be no class on Friday.
+Non ci sarà lezione venerdì.
+金曜日[きんようび]にクラスがありません
 
-I have a foreign friend.
-Ho un amico straniero.
-外[がい]国[こく]人[じん]の友[とも]達[だち]がいます
+I do not have a dictionary.
+Non ho un dizionario.
+{私[わたし]は|}辞書[じしょ]がありません
+
+There's an international student over there.
+C'è uno studente internazionale laggiù.
+あそこに留学生[りゅうがくせい]がいます
+
+There is Takeshi over there.
+C'è Takeshi laggiù.
+あそこにたけしさんがいます
+
+I have a Japanese friend.
+Ho un amico giapponese.
+{私[わたし]は|}日本人[にほんじん]の友達[ともだち]がいます
+
+I have a younger sister.
+Ho una sorella minore.
+{私[わたし]は|}妹[いもうと]がいます
+
+There is a bus stop over there.
+C''è una fermata dell'autobus laggiù.
+あそこにバス停[てい]があります

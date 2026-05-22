@@ -1,22 +1,42 @@
 ～てはいけません
 ～てはいけません
 
-You must not talk on the phone here.
-Non devi parlare al telefono qui.
-ここで電[でん]話[わ]をしてはいけません
+You must not take pictures here.
+Non devi scattare foto qui.
+ここで写真[しゃしん]を撮[と]ってはいけません
+
+You must not smoke here.
+Non devi fumare qui.
+ここでたばこを吸[す]ってはいけません
+
+You must not talk with friends at the library.
+Non devi parlare con gli amici in biblioteca.
+図書館[としょかん]で友達[ともだち]と話[はな]してはいけません
+
+You must not talk on the phone in class.
+Non devi parlare al telefono in classe.
+クラスで電話[でんわ]をかけてはいけません
+
+You must not forget your ticket.
+Non devi dimenticare il tuo biglietto.
+切符[きっぷ]を忘[わす]れてはいけません
 
 You must not sleep in class.
 Non devi dormire in classe.
 クラスで寝[ね]てはいけません
 
-You must not smoke.
-Non devi fumare.
-たばこを吸[す]ってはいけません
+You must not drink coffee here.
+Non devi bere caffè qui.
+ここでコーヒーを飲[の]んではいけません
 
-You must not talk in the library.
-Non devi parlare in biblioteca.
-図[と]書[しょ]館[かん]で話[はな]してはいけません
+You must not return home today.
+Non devi tornare a casa oggi.
+今日[きょう]うち{に|へ}帰[かえ]ってはいけません
 
-You must not drink alcohol.
-Non devi bere alcolici.
-お酒[さけ]を飲[の]んではいけません
+You must not open this window.
+Non devi aprire questa finestra.
+この窓[まど]を開[あ]けてはいけません
+
+You must not use this computer.
+Non devi usare questo computer.
+このパソコンを使[つか]ってはいけません

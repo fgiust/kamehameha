@@ -1,29 +1,21 @@
 Noun じゃないです
 Sostantivo じゃないです
 
-Tanaka is not Japanese.
-Tanaka non è giapponese.
-田[た]中[なか]さんは日[に]本[ほん]人[じん]{じゃないです|じゃありません|ではないです|ではありません}
-
-I am not a teacher.
-Non sono un insegnante.
-{私[わたし]は|}先[せん]生[せい]{じゃないです|じゃありません|ではないです|ではありません}
-
-That is not meat.
-Quella non è carne.
-あれは肉[にく]{じゃないです|じゃありません|ではないです|ではありません}
-
 Mr. Yamada is not a student.
 Il signor Yamada non è uno studente.
 山田[やまだ]さんは学生[がくせい]{じゃないです|じゃありません}
 
-My major is not English.
-La mia materia principale non è inglese.
-私[わたし]の専攻[せんこう]は英語[えいご]{じゃないです|じゃありません}
+My major is not history.
+La mia materia principale non è storia.
+私[わたし]の専攻[せんこう]は歴史[れきし]{じゃないです|じゃありません}
 
 I am not Chinese.
 Non sono cinese.
 {私[わたし]は|}中国人[ちゅうごくじん]{じゃないです|じゃありません}
+
+This is not meat.
+Questa non è carne.
+これは肉[にく]{じゃないです|じゃありません}
 
 That is not my dictionary.
 Quello non è il mio dizionario.
@@ -36,6 +28,14 @@ La madre della signora Suzuki non è un'impiegata.
 That (over there) is not a post office.
 Quello (laggiù) non è un ufficio postale.
 あれは郵便局[ゆうびんきょく]{じゃないです|じゃありません}
+
+I am not a high school student.
+Non sono uno studente di scuola superiore.
+{私[わたし]は|}高校生[こうこうせい]{じゃないです|じゃありません}
+
+Mr. Honda's major is not English.
+La materia principale del signor Honda non è l'inglese.
+本田[ほんだ]さんの専攻[せんこう]は英語[えいご]{じゃないです|じゃありません}
 
 This is not my bag.
 Questa non è la mia borsa.

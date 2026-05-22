@@ -1,22 +1,42 @@
 ～と思います/～と言ってました
 ～と思います/～と言ってました
 
-I think Takeshi likes soccer.
-Penso che a Takeshi piaccia il calcio.
-たけしさんはサッカーが好[す]きだと思[おも]います
+I think Mary often cooks.
+Penso che Mary cucini spesso.
+メアリーさんはよく料理[りょうり]すると思[おも]います
 
-I think it will rain tomorrow.
-Penso che domani pioverà.
-{私[わたし]は|}明日[あした]雨[あめ]が降[ふ]ると思[おも]います
+I think Takeshi drives a car.
+Penso che Takeshi guidi la macchina.
+たけしさんは車[くるま]を運転[うんてん]すると思[おも]います
 
-Mary said that the Japanese class is difficult.
-Mary ha detto che la lezione di giapponese è difficile.
-メアリーさんは日[に]本[ほん]語[ご]のクラスは難[むずか]しいと言[い]っていました
+I don't think Robert smokes.
+Non penso che Robert fumi.
+ロバートさんはたばこを吸[す]わないと思[おも]います
 
-Robert said he would go to Japan.
-Robert ha detto che sarebbe andato in Giappone.
-ロバートさんは日[に]本[ほん]に行[い]くと言[い]っていました
+I don't think Sora drinks much coffee.
+Non penso che Sora beva molto caffè.
+ソラさんはあまりコーヒーを飲[の]まないと思[おも]います
 
-I think this book is not interesting.
-Penso che questo libro non sia interessante.
-{私[わたし]は|}この本[ほん]は面白[おもしろ]くないと思[おも]います
+I think John is busy.
+Penso che John sia occupato.
+ジョンさんは忙[いそが]しいと思[おも]います
+
+I don't think Ken is tall.
+Non penso che Ken sia alto.
+けんさんは背[せ]が高[たか]くないと思[おも]います
+
+Takeshi said that he is going shopping tomorrow.
+Takeshi ha detto che andrà a fare shopping domani.
+たけしさんは明日[あした]買[か]い物[もの]{に|へ}行[い]くと言[い]っていました
+
+Mary said she studies kanji every day.
+Mary ha detto che studia i kanji ogni giorno.
+メアリーさんは毎日[まいにち]漢字[かんじ]を勉強[べんきょう]すると言[い]っていました
+
+The weather forecast said that it will rain tomorrow.
+Le previsioni del tempo dicevano che domani pioverà.
+天気予報[てんきよほう]は明日[あした]雨[あめ]が降[ふ]ると言[い]っていました
+
+Robert said that his mother is good at cooking.
+Robert ha detto che sua madre è brava a cucinare.
+ロバートさんはお母[かあ]さんが料理[りょうり]が上手[じょうず]だと言[い]っていました

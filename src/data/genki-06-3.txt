@@ -1,22 +1,42 @@
 ～てもいいです
 ～てもいいです
 
-You may look at the textbook.
-Potresti dare un'occhiata al libro di testo.
-教[きょう]科[か]書[しょ]を見[み]てもいいです
+May I see the textbook?
+Posso vedere il libro di testo?
+教科書[きょうかしょ]を見[み]てもいいですか
 
-May I go home early?
-Posso andare a casa presto?
-早[はや]く帰[かえ]ってもいいですか
+May I open the window?
+Posso aprire la finestra?
+窓[まど]を開[あ]けてもいいですか
 
-May I take a picture here?
-Posso fare una foto qui?
-ここで写[しゃ]真[しん]を撮[と]ってもいいですか
+Is it okay if I sit here?
+Va bene se mi siedo qui?
+ここに座[すわ]ってもいいですか
 
-You may watch TV.
-Potresti guardare la TV.
-テレビを見[み]てもいいです
+May I take a picture?
+Posso scattare una foto?
+写真[しゃしん]を撮[と]ってもいいですか
 
-May I borrow this book?
-Posso prendere in prestito questo libro?
-この本[ほん]を借[か]りてもいいですか
+May I enter the room?
+Posso entrare nella stanza?
+部屋[へや]に入[はい]ってもいいですか
+
+May I go to the restroom?
+Posso andare in bagno?
+トイレ{に|へ}行[い]ってもいいですか
+
+Is it okay if I speak English?
+Va bene se parlo in inglese?
+英語[えいご]を話[はな]してもいいですか
+
+May I borrow a textbook?
+Posso prendere in prestito un libro di testo?
+教科書[きょうかしょ]を借[か]りてもいいですか
+
+May I borrow your pencil?
+Posso prendere in prestito la tua matita?
+鉛筆[えんぴつ]を借[か]りてもいいですか
+
+Is it okay if I bring a friend?
+Va bene se porto un amico?
+友達[ともだち]を連[つ]れてきてもいいですか

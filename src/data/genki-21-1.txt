@@ -1,22 +1,42 @@
 Passive Sentences
 Frasi passive
 
-I had my car used by my friend. (My friend used my car, and I was annoyed.)
-Ho fatto usare la macchina al mio amico. (Il mio amico ha usato la mia macchina ed ero infastidito.)
-{私[わたし]は|}友[とも]達[だち]に車[くるま]を使[つか]われました
+My mother was helped by Carlos.
+Mia madre è stata aiutata da Carlos.
+母[はは]はカルロスさんに手伝[てつだ]われました
 
-I had my money stolen by a thief.
-Mi sono stati rubati i soldi da un ladro.
-{私[わたし]は|}泥[どろ]棒[ぼう]にお金[かね]を盗[ぬす]まれました
+My father was called by the teacher.
+Mio padre è stato chiamato dall'insegnante.
+父[ちち]は先生[せんせい]に呼[よ]ばれました
 
-I was praised by the teacher.
-Sono stato elogiato dall'insegnante.
-{私[わたし]は|}先[せん]生[せい]に褒[ほ]められました
+The child was scolded by the mother.
+Il bambino è stato rimproverato dalla madre.
+子供[こども]は母[はは]に怒[おこ]られました
 
-It rained on me.
-Mi ha piovuto addosso.
-雨[あめ]に降[ふ]られました
+I was invited by Yasmin.
+Sono stato invitato da Yasmin.
+ヤスミンさんに誘[さそ]われました
 
-I was bitten by a dog.
-Sono stato morso da un cane.
-{私[わたし]は|}犬[いぬ]に噛[か]まれました
+The book was read by the student.
+Il libro è stato letto dallo studente.
+本[ほん]は学生[がくせい]に読[よ]まれました
+
+The umbrella was forgotten on the train.
+L'ombrello è stato dimenticato sul treno.
+電車[でんしゃ]に傘[かさ]を忘[わす]れられました
+
+I was bitten by a mosquito.
+Sono stato punto da una zanzara.
+蚊[か]に刺[さ]されました
+
+The car was stolen.
+La macchina è stata rubata.
+車[くるま]を盗[ぬす]まれました
+
+My homework was taken by the younger brother.
+I miei compiti sono stati presi da mio fratello minore.
+弟[おとうと]に宿題[しゅくだい]を取[と]られました
+
+My bicycle was broken by the child.
+La mia bicicletta è stata rotta dal bambino.
+子供[こども]に自転車[じてんしゃ]を壊[こわ]されました

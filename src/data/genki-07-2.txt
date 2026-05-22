@@ -2,21 +2,41 @@
 メアリーさんは髪が長いです
 
 Mary has long hair.
-Maria ha i capelli lunghi.
+Mary ha i capelli lunghi.
 メアリーさんは髪[かみ]が長[なが]いです
 
-Robert is tall.
-Roberto è alto.
-ロバートさんは背[せ]が高[たか]いです
+Takeshi is tall.
+Takeshi è alto.
+たけしさんは背[せ]が高[たか]いです
 
-Takeshi has small eyes.
-Takeshi ha gli occhi piccoli.
-たけしさんは目[め]が小[ちい]さいです
+Robert is short.
+Robert è basso.
+ロバートさんは背[せ]が低[ひく]いです
 
-That person is smart.
-Quella persona è intelligente.
-あの人[ひと]は頭[あたま]がいいです
+Sora is very smart.
+Sora è molto intelligente.
+ソラさんはとても頭[あたま]がいいです
 
-He is short.
-È basso.
-彼[かれ]は背[せ]が低[ひく]いです
+Ken has small eyes.
+Ken ha gli occhi piccoli.
+けんさんは目[め]が小[ちい]さいです
+
+John has large eyes.
+John ha gli occhi grandi.
+ジョンさんは目[め]が大[おお]きいです
+
+My mother does not have long hair.
+Mia madre non ha i capelli lunghi.
+私[わたし]のお母[かあ]さんは髪[かみ]が長[なが]くないです
+
+Professor Yamashita is not tall.
+Il professor Yamashita non è alto.
+山下[やました]先生[せんせい]は背[せ]が高[たか]くないです
+
+My younger sister has a small mouth.
+Mia sorella minore ha una bocca piccola.
+私[わたし]の妹[いもうと]は口[くち]が小[ちい]さいです
+
+Takeshi is not smart.
+Takeshi non è intelligente.
+たけしさんは頭[あたま]がよくないです

@@ -1,22 +1,42 @@
 ～ほうがいいです
 ～ほうがいいです
 
-You had better eat more vegetables.
-Faresti meglio a mangiare più verdure.
-もっと野[や]菜[さい]を食[た]べたほうがいいですよ
+You should eat more vegetables.
+Dovresti mangiare più verdure.
+もっと野菜[やさい]を食[た]べたほうがいいです
 
-You had better not go to school today.
-Faresti meglio a non andare a scuola oggi.
-今日[きょう]は学[がっ]校[こう]に行[い]かないほうがいいです
+It is better not to skip classes.
+È meglio non saltare le lezioni.
+授業[じゅぎょう]をサボらないほうがいいです
 
-You had better take some medicine.
-Faresti meglio a prendere qualche medicina.
-薬[くすり]を飲[の]んだほうがいいですよ
+You shouldn't eat too much ice cream.
+Non dovresti mangiare troppo gelato.
+アイスクリームを食[た]べすぎないほうがいいです
 
-You had better not go to sleep late at night.
-Faresti meglio a non andare a dormire tardi la notte.
-夜[よる]遅[おそ]く寝[ね]ないほうがいいです
+You should take medicine.
+Dovresti prendere la medicina.
+薬[くすり]を飲[の]んだほうがいいです
 
-You had better exercise every day.
-Faresti meglio a esercitarti ogni giorno.
-毎[まい]日[にち]運[うん]動[どう]したほうがいいです
+It is better to sleep early tonight.
+È meglio andare a dormire presto stasera.
+今晩[こんばん]早[はや]く寝[ね]たほうがいいです
+
+You should go to the hospital.
+Dovresti andare in ospedale.
+病院[びょういん]に行[い]ったほうがいいです
+
+You should skip work tomorrow.
+Dovresti assentarti dal lavoro domani.
+明日[あした]仕事[しごと]を休[やす]んだほうがいいです
+
+You should drink some water.
+Dovresti bere un po' d'acqua.
+水[みず]を飲[の]んだほうがいいです
+
+You should not worry too much.
+Non dovresti preoccuparti troppo.
+あまり心配[しんぱい]しないほうがいいです
+
+You should see a doctor.
+Dovresti vedere un medico.
+医者[いしゃ]に行[い]ったほうがいいです

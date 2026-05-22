@@ -1,42 +1,42 @@
-Question Sentences
-Fare domande
+Question
+Domande
 
-Are you a college student?
-Sei uno studente universitario?
-{あなたは|}大学生[だいがくせい]ですか
+Are you a student?
+Sei uno studente?
+{あなたは|}学生[がくせい]{ですか|ですか。}
 
-What is Ms. Suzuki's major?
-Qual è la materia principale della signora Suzuki?
-鈴木[すずき]さんの専攻[せんこう]は何[なん]ですか
+What is your major?
+Qual è la tua facoltà?
+専攻[せんこう]{は|が}何[なん]{ですか|ですか。}
 
-What time is it in London now?
-Che ore sono adesso a Londra?
-今[いま]{、|}ロンドンは何時[なんじ]ですか
+What time is it now?
+Che ore sono adesso?
+今[いま]何時[なんじ]{ですか|ですか。}
 
-How old is your older brother?
-Quanti anni ha tuo fratello maggiore?
-お兄[にい]さんは何歳[なんさい]ですか
+How old is Maria?
+Quanti anni ha Maria?
+{マリアさんは|}何歳[なんさい]{ですか|ですか。}
 
-What is your teacher's phone number?
-Qual è il numero di telefono del tuo insegnante?
-{あなたの|}先生[せんせい]の電話番号[でんわばんごう]は何番[なんばん]ですか
+Is your friend Japanese?
+Il tuo amico è giapponese?
+{あなたの}友達[ともだち]{は|}日本人[にほんじん]{ですか|ですか。}
 
-Is your older sister an office worker?
-Tua sorella maggiore è un'impiegata?
-お姉[ねえ]さんは会社員[かいしゃいん]ですか
+Is that person a teacher?
+Quella persona è un insegnante?
+{あの人[ひと]は|}先生[せんせい]{ですか|ですか。}
 
-Are you a first-year student?
-Sei uno studente del primo anno?
-{あなたは|}一年生[いちねんせい]ですか
+Is your older sister a doctor?
+Tua sorella maggiore è una dottoressa?
+{お姉[ねえ]さんは|}医者[いしゃ]{ですか|ですか。}
 
-What is the teacher's name?
-Qual è il nome dell'insegnante?
-先生[せんせい]の{お|}名前[なまえ]は何[なん]ですか
+What is this?
+Cos'è questo?
+{これ[は]|}何[なん]{ですか|ですか。}
 
-Is that so?
-È così?
-そうですか
+Is this your book?
+Questo è il tuo libro?
+{これ[は]|}あなたの本[ほん]{ですか|ですか。}
 
-Is Mr. Honda a doctor?
-Il signor Honda è un medico?
-本田[ほんだ]さんは医者[いしゃ]ですか
+Is Mr. Tanaka from Japan?
+Il signor Tanaka è del Giappone?
+{田中[たなか]さんは|}日本[にほん]の出身[しゅっしん]{ですか|ですか。}

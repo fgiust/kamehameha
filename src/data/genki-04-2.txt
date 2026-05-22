@@ -1,22 +1,42 @@
 Describing Where Things Are
 Descrivere dove sono le cose
 
-McDonald's is next to the supermarket.
-McDonald's è vicino al supermercato.
-マクドナルドはスーパーの隣[となり]です
+The café is to the right of the post office.
+Il caffè è a destra dell'ufficio postale.
+カフェは郵便局[ゆうびんきょく]の右[みぎ]です
 
-My bag is under the desk.
-La mia borsa è sotto la scrivania.
-私[わたし]のかばんは机[つくえ]の下[した]です
+My notebook is to the right of that bag.
+Il mio quaderno è a destra di quella borsa.
+私[わたし]のノートはそのかばんの右[みぎ]です
 
-The bank is in front of the library.
-La banca è di fronte alla biblioteca.
-銀[ぎん]行[こう]は図[と]書[しょ]館[かん]の前[まえ]です
+The supermarket is to the left of the bookstore.
+Il supermercato è a sinistra della libreria.
+スーパーは本屋[ほんや]の左[ひだり]です
 
-The cafe is inside that department store.
-Il bar è all'interno di quel grande magazzino.
-カフェはあのデパートの中[なか]です
+The bank is next to the library.
+La banca è accanto alla biblioteca.
+銀行[ぎんこう]は図書館[としょかん]の隣[となり]です
 
-The cafe is between the bank and the post office.
-Il bar è tra la banca e l'ufficio postale.
-カフェは銀[ぎん]行[こう]と郵[ゆう]便[びん]局[きょく]の間[あいだ]です
+The umbrella is under the table.
+L'ombrello è sotto il tavolo.
+傘[かさ]はテーブルの下[した]です
+
+The post office is next to the library.
+L'ufficio postale è accanto alla biblioteca.
+郵便局[ゆうびんきょく]は図書館[としょかん]の隣[となり]です
+
+The dog is behind the house.
+Il cane è dietro la casa.
+犬[いぬ]は家[いえ]の後[うし]ろにいます
+
+My wallet is inside that bag.
+Il mio portafoglio è dentro quella borsa.
+私[わたし]の財布[さいふ]はそのかばんの中[なか]です
+
+The book is on the table.
+Il libro è sul tavolo.
+本[ほん]はテーブルの上[うえ]です
+
+The cat is near the child.
+Il gatto è vicino al bambino.
+猫[ねこ]は子供[こども]の近[ちか]くにいます

@@ -1,22 +1,42 @@
 NounA や NounB
 SostantivoA や SostantivoB
 
-I went to places like Kyoto and Osaka.
-Sono andato in posti come Kyoto e Osaka.
-京[きょう]都[と]や大[おお]阪[さか]に行[い]きました
+I went to Kyoto and Osaka (among other places).
+Sono andato a Kyoto e Osaka (tra gli altri posti).
+京都[きょうと]や大阪[おおさか]{に|へ}行[い]きました
 
-In my room, there are things like a bed and a desk.
-Nella mia stanza ci sono cose come un letto e una scrivania.
-私[わたし]の部[へ]屋[や]にはベッドや机[つくえ]があります
+I like ice cream and cake (among other desserts).
+Mi piacciono il gelato e la torta (tra gli altri dolci).
+{私[わたし]は|}アイスクリームやケーキが好[す]きです
 
-I ate things like sushi and tempura in Japan.
-Ho mangiato cose come sushi e tempura in Giappone.
-日[に]本[ほん]で寿[す]司[し]や天[てん]ぷらを食[た]べました
+I drink coffee and green tea (among other drinks).
+Bevo caffè e tè verde (tra le altre bevande).
+{私[わたし]は|}コーヒーやお茶[ちゃ]を飲[の]みます
 
-I bought things like shoes and bags at the department store.
-Ho comprato cose come scarpe e borse al grande magazzino.
-デパートで靴[くつ]やかばんを買[か]いました
+I bought a watch and a new shirt (among other things).
+Ho comprato un orologio e una camicia nuova (tra le altre cose).
+{私[わたし]は|}時計[とけい]や新[あたら]しいシャツを買[か]いました
 
-I will buy things like meat and vegetables at the supermarket.
-Comprerò cose come carne e verdure al supermercato.
-スーパーで肉[にく]や野[や]菜[さい]を買[か]います
+I like dogs and cats (among other animals).
+Mi piacciono cani e gatti (tra gli altri animali).
+{私[わたし]は|}犬[いぬ]や猫[ねこ]が好[す]きです
+
+I will go to a café and a park (among other places).
+Andrò in una caffetteria e in un parco (tra gli altri posti).
+カフェや公園[こうえん]{に|へ}行[い]きます
+
+There are books and magazines on the desk.
+Ci sono libri e riviste sulla scrivania.
+机[つくえ]の上[うえ]に本[ほん]や雑誌[ざっし]があります
+
+Mary met Takeshi and Robert (among others).
+Mary ha incontrato Takeshi e Robert (tra gli altri).
+メアリーさんはたけしさんやロバートさんに会[あ]いました
+
+I ate sushi and tempura (among other things).
+Ho mangiato sushi e tempura (tra le altre cose).
+{私[わたし]は|}寿司[すし]や天[てん]ぷらを食[た]べました
+
+Ken studies history and politics (among other things).
+Ken studia storia e politica (tra le altre cose).
+けんさんは歴史[れきし]や政治[せいじ]を勉強[べんきょう]します

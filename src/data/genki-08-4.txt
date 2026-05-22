@@ -1,22 +1,42 @@
 ～ないでください
 ～ないでください
 
-Please don't eat here.
-Per favore, non mangiare qui.
-ここで食[た]べないでください
+Please don't take pictures here.
+Per favore, non scattare foto qui.
+ここで写真[しゃしん]を撮[と]らないでください
 
-Please don't look at me.
-Per favore, non guardarmi.
-私[わたし]を見[み]ないでください
+Please don't wait for me.
+Per favore, non aspettarmi.
+{私[わたし]を|}待[ま]たないでください
 
-Please don't go to school today.
-Per favore, non andare a scuola oggi.
-今日[きょう]は学[がっ]校[こう]に行[い]かないでください
+Please don't forget your umbrella.
+Per favore, non dimenticare il tuo ombrello.
+傘[かさ]を忘[わす]れないでください
 
-Please don't speak in English.
-Per favore, non parlare in inglese.
-英[えい]語[ご]で話[はな]さないでください
+Please don't open the window.
+Per favore, non aprire la finestra.
+窓[まど]を開[あ]けないでください
 
-Please don't read that book.
-Per favore, non leggere quel libro.
-その本[ほん]を読[よ]まないでください
+Please don't turn off the TV.
+Per favore, non spegnere la TV.
+テレビを消[け]さないでください
+
+Please don't eat my ice cream.
+Per favore, non mangiare il mio gelato.
+私[わたし]のアイスクリームを食[た]べないでください
+
+Please don't smoke here.
+Per favore, non fumare qui.
+ここでたばこを吸[す]わないでください
+
+Please don't be late to the party.
+Per favore, non fare tardi alla festa.
+パーティーに遅[おそ]くならないでください
+
+Please don't throw away those chopsticks.
+Per favore, non buttare via quelle bacchette.
+その箸[はし]を捨[す]てないでください
+
+Please don't stare at me.
+Per favore, non fissarmi.
+じろじろ見[み]ないでください

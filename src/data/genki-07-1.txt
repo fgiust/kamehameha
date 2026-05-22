@@ -1,22 +1,42 @@
 ～ている
 ～ている
 
-Sue is studying right now.
-Sue sta studiando in questo momento.
-スーさんは今[いま]勉[べん]強[きょう]しています
+Mary is studying right now.
+Mary sta studiando adesso.
+メアリーさんは今[いま]勉強[べんきょう]しています
 
-Takeshi is reading a book.
-Takeshi sta leggendo un libro.
-たけしさんは本[ほん]を読[よ]んでいます
+Professor Yamashita is married.
+Il professor Yamashita è sposato.
+山下[やました]先生[せんせい]は結婚[けっこん]しています
 
-I am married.
-Sono sposato.
-{私[わたし]は|}結[けっ]婚[こん]しています
+Ken has a lot of money.
+Ken ha molti soldi.
+けんさんはお金[かね]をたくさん持[も]っています
 
-Professor Yamashita lives in a house.
-Il professor Yamashita vive in una casa.
-山[やま]下[した]先[せん]生[せい]は家[いえ]に住[す]んでいます
+Sora knows my mother.
+Sora conosce mia madre.
+ソラさんは私[わたし]のお母[かあ]さんを知[し]っています
 
-Mary knows my phone number.
-Mary conosce il mio numero di telefono.
-メアリーさんは私[わたし]の電[でん]話[わ]番[ばん]号[ごう]を知[し]っています
+My younger brother is very thin.
+Mio fratello minore è molto magro.
+私[わたし]の弟[おとうと]はとてもやせています
+
+Robert is reading a book in English.
+Robert sta leggendo un libro in inglese.
+ロバートさんは英語[えいご]で本[ほん]を読[よ]んでいます
+
+My family lives in Tokyo.
+La mia famiglia vive a Tokyo.
+私[わたし]の家族[かぞく]は東京[とうきょう]に住[す]んでいます
+
+My older sister works for a Japanese company.
+Mia sorella maggiore lavora per un'azienda giapponese.
+私[わたし]のお姉[ねえ]さんは日本[にほん]の会社[かいしゃ]に勤[つと]めています
+
+Takeshi has gone to China.
+Takeshi è andato in Cina.
+たけしさんは中国[ちゅうごく]{に|へ}行[い]っています
+
+I am teaching English.
+Sto insegnando inglese.
+{私[わたし]は|}英語[えいご]を教[おし]えています

@@ -1,22 +1,42 @@
 Adjectives
 Aggettivi
 
-The sea in Okinawa is very beautiful.
-Il mare ad Okinawa è molto bello.
-沖縄[おきなわ]の海[うみ]はとてもきれいです
+I saw an interesting movie yesterday.
+Ieri ho visto un film interessante.
+{私[わたし]は|}昨日[きのう]面[おも]白[しろ]い映画[えいが]を見[み]ました
 
-This room is a little cold.
-Questa stanza è un po' fredda.
-この部[へ]屋[や]はちょっと寒[さむ]いです
+This watch is expensive.
+Questo orologio è costoso.
+この時計[とけい]は高[たか]いです
 
-Professor Yamashita is a funny teacher.
-Il professor Yamashita è un insegnante divertente.
-山[やま]下[した]先[せん]生[せい]は面白[おもしろ]い先[せん]生[せい]です
+The weather is good.
+Il tempo è bello.
+天気[てんき]がいいです
 
-Japanese is difficult.
-Il giapponese è difficile.
-日[に]本[ほん]語[ご]は難[むずか]しいです
+The weather was not good.
+Il tempo non era bello.
+天気[てんき]がよくなかったです
 
-This book is not very interesting.
-Questo libro non è molto interessante.
-この本[ほん]はあまり面白[おもしろ]くないです
+I was busy yesterday.
+Ieri ero occupato.
+{私[わたし]は|}昨日[きのう]忙[いそが]しかったです
+
+The trip was not fun.
+Il viaggio non è stato divertente.
+旅行[りょこう]は楽[たの]しくなかったです
+
+It is cold.
+Fa freddo.
+寒[さむ]いです
+
+She is healthy.
+Lei è in salute.
+彼女[かのじょ]は元気[げんき]です
+
+The sea was very beautiful in Okinawa.
+Il mare era molto bello a Okinawa.
+沖縄[おきなわ]の海[うみ]はとてもきれいでした
+
+Professor Yamashita is a scary teacher.
+Il professor Yamashita è un insegnante spaventoso.
+山下[やました]先生[せんせい]は怖[こわ]い先生[せんせい]です

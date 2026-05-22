@@ -1,42 +1,42 @@
-Noun1 の Noun2
-Sostantivo1 の Sostantivo2
+Noun₁ の Noun₂
+Nome₁ の Nome₂
 
-My major
-La mia materia principale
-私[わたし]の専攻[せんこう]
+My friend’s book.
+Il libro del mio amico.
+{私[わたし]の}友達[ともだち]の本[ほん]
 
-My friend's teacher
-L'insegnante del mio amico
-私[わたし]の友達[ともだち]の先生[せんせい]
+My mother’s name.
+Il nome di mia madre.
+{私[わたし]の}母[はは]の名[な]前[まえ]
 
-Ms. Tanaka's mother
-La madre della signora Tanaka
-田中[たなか]さんのお母[かあ]さん
+A Japanese teacher.
+Un insegnante di giapponese.
+日本語[にほんご]の先生[せんせい]
 
-Japanese university
-Università giapponese
-日本[にほん]の大学[だいがく]
+Tanaka’s car.
+La macchina di Tanaka.
+田中[たなか]さんの車[くるま]
 
-Japanese language student
-Studente di lingua giapponese
-日本語[にほんご]の学生[がくせい]
+My college’s library.
+La biblioteca della mia università.
+{私[わたし]の}大学[だいがく]の図書館[としょかん]
 
-Mr. Yamashita's friend
-L'amico del signor Yamashita
-山下[やました]さんの友達[ともだち]
+A friend of Mary.
+Un amico di Mary.
+{メアリーさんの}友達[ともだち]
 
-American college student
-Studente universitario americano
-アメリカの大学生[だいがくせい]
+My older brother’s room.
+La stanza di mio fratello maggiore.
+{私[わたし]の}兄[あに]の部屋[へや]
 
-Mr. Honda's job
-Il lavoro del signor Honda
-本田[ほんだ]さんの{お|}仕事[しごと]
+Japan’s weather.
+Il clima del Giappone.
+日本[にほん]の天気[てんき]
 
-High school teacher
-Insegnante di scuola superiore
-高校[こうこう]の先生[せんせい]
+English language textbook.
+Manuale di lingua inglese.
+英語[えいご]の教科書[きょうかしょ]
 
-My father's name
-Il nome di mio padre
-私[わたし]のお父[とう]さんの{お|}名前[なまえ]
+A friend from Korea.
+Un amico dalla Corea.
+韓国[かんこく]の友達[ともだち]

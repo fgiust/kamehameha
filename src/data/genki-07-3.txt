@@ -1,22 +1,42 @@
 て　forms for Joining Sentences
 Forma て per unire le frasi
 
-The food at that cafe is cheap and spicy.
-Il cibo in quel bar è economico e piccante.
-あのカフェの食[た]べ物[もの]は安[やす]くて、辛[から]いです
+The food at that restaurant is inexpensive and delicious.
+Il cibo in quel ristorante è economico e delizioso.
+あのレストランの食[た]べ物[もの]は安[やす]くて、おいしいです
 
-The hotel was quiet, and I slept well.
-L'hotel era tranquillo e ho dormito bene.
-ホテルは静[しず]かで、よく寝[ね]ました
+The hotel was clean, and we were happy.
+L'hotel era pulito, ed eravamo felici.
+ホテルはきれいで、{私[わたし]たちは|}よかったです
 
-Professor Yamashita is Japanese and he is about fifty years old.
+My town is quiet and boring.
+La mia città è tranquilla e noiosa.
+私[わたし]の町[まち]は静[しず]かで、つまらないです
+
+Mary has long hair and large eyes.
+Mary ha i capelli lunghi e gli occhi grandi.
+メアリーさんは髪[かみ]が長[なが]くて、目[め]が大[おお]きいです
+
+That dog was big and scary.
+Quel cane era grande e spaventoso.
+あの犬[いぬ]は大[おお]きくて、怖[こわ]かったです
+
+School was lively and fun.
+La scuola era vivace e divertente.
+学校[がっこう]はにぎやかで、楽[たの]しかったです
+
+Professor Yamashita is a Japanese person and he is about fifty years old.
 Il professor Yamashita è giapponese e ha circa cinquant'anni.
-山[やま]下[した]先[せん]生[せい]は日[に]本[ほん]人[じん]で、五[ご]十[じゅう]歳[さい]ぐらいです
+山下[やました]先生[せんせい]は日本人[にほんじん]で、五十歳[ごじゅっさい]ぐらいです
 
-This book is interesting and cheap.
-Questo libro è interessante ed economico.
-この本[ほん]は面[おも]白[しろ]くて、安[やす]いです
+This room is new and very clean.
+Questa stanza è nuova e molto pulita.
+この部屋[へや]は新[あたら]しくて、とてもきれいです
 
-My room is small and old.
-La mia stanza è piccola e vecchia.
-私[わたし]の部[へ]屋[や]は狭[せま]くて、古[ふる]いです
+My cat is very small and cute.
+Il mio gatto è molto piccolo e carino.
+私[わたし]の猫[ねこ]はとても小[ちい]さくて、かわいいです
+
+Takeshi is a student and he is kind.
+Takeshi è uno studente ed è gentile.
+たけしさんは学生[がくせい]で、親切[しんせつ]です

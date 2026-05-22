@@ -1,42 +1,42 @@
 X は Y です
 X は Y です
 
-My major is English.
-La mia specializzazione è l'inglese.
-私[わたし]の{専[せん]攻[こう]|専[せん]門[もん]}は英[えい]語[ご]{です|だ}
-
-Tanaka is Japanese.
-Tanaka è giapponese.
-田[た]中[なか]さんは日[に]本[ほん]人[じん]{です|だ}
-
-Sato is a teacher.
-Sato è un insegnante.
-佐[さ]藤[とう]さんは先[せん]生[せい]{です|だ}
-
-I am a university student.
+I am a college student.
 Sono uno studente universitario.
-{私[わたし]は|}大[だい]学[がく]生[せい]{です|だ}
+{私[わたし]は|}大学生[だいがくせい]{です|だ}
 
-Suzuki is a first-year student.
-Suzuki è uno studente del primo anno.
-鈴[すず]木[き]さんは一[いち]年[ねん]生[せい]{です|だ}
+My major is economics.
+La mia facoltà è economia.
+{私[わたし]の}専攻[せんこう]{は|が}経済[けいざい]{です|だ}
 
-Ito is 25 years old.
-Ito ha 25 anni.
-伊[い]藤[とう]さんは{二[に]十[じゅう]五[ご]歳[さい]|25歳[さい]|２５歳[さい]}{です|だ}
+Takeshi is a teacher.
+Takeshi è un insegnante.
+{武[たけ]志[し]さんは|}先生[せんせい]{です|だ}
 
-I am Italian.
-Sono italiano.
-{私[わたし]は|}イタリア人[じん]{です|だ}
+My friend is Japanese.
+Il mio amico è giapponese.
+{私[わたし]の}友達[ともだち]{は|}日本人[にほんじん]{です|だ}
 
-My younger brother is 3 years old.
-Mio fratello minore ha 3 anni.
-{私[わたし]の|}弟[おとうと]は{三[さん]歳[さい]|3歳[さい]|３歳[さい]}{です|だ}
+I am 20 years old.
+Ho 20 anni.
+{私[わたし]は|}20歳[さい]{です|だ}
 
-My friend is French.
-Il mio amico è francese.
-{私[わたし]の|}友[とも]達[だち]はフランス人[じん]{です|だ}
+Her older brother is a doctor.
+Suo fratello maggiore è un dottore.
+{彼女[かのじょ]の}兄[あに]{は|}医者[いしゃ]{です|だ}
 
-My name is Luca.
-Mi chiamo Luca.
-私[わたし]の名[な]前[まえ]はルカ{です|だ}
+That person is an office worker.
+Quella persona è un impiegato.
+{あの人[ひと]は|}会社員[かいしゃいん]{です|だ}
+
+My younger sister is Australian.
+Mia sorella minore è australiana.
+{私[わたし]の}妹[いもうと]{は|}オーストラリア人[じん]{です|だ}
+
+This is my name card.
+Questo è il mio biglietto da visita.
+{これ[は]|}私[わたし]の名刺[めいし]{です|だ}
+
+My father is at home.
+Mio padre è a casa.
+{父[ちち]は|}家[うち]に{います|いる}

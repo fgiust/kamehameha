@@ -1,22 +1,42 @@
 Verb のが好きです
 Verbo のが好きです
 
-I like reading books.
-Mi piace leggere libri.
-{私[わたし]は|}本[ほん]を読[よ]むのが好[す]きです
+I like studying the Japanese language.
+Mi piace studiare la lingua giapponese.
+{私[わたし]は|}日本語[にほんご]を勉強[べんきょう]するのが好[す]きです
 
-Robert is good at cooking.
-Robert è bravo a cucinare.
-ロバートさんは料[りょう]理[り]を作[つく]るのが上[じょう]手[ず]です
+I like watching TV on the weekends.
+Mi piace guardare la TV nei fine settimana.
+{私[わたし]は|}週末[しゅうまつ]にテレビを見[み]るのが好[す]きです
 
-Takeshi is poor at speaking English.
-Takeshi è scarso nel parlare inglese.
-たけしさんは英[えい]語[ご]を話[はな]すのが下[へ]手[た]です
+I like playing sports.
+Mi piace fare sport.
+{私[わたし]は|}スポーツをするのが好[す]きです
 
-Mary loves singing songs.
-Mary ama cantare canzoni.
-メアリーさんは歌[うた]を歌[うた]うのが大[だい]好[す]きです
+I don't like cleaning the room.
+Non mi piace pulire la stanza.
+{私[わたし]は|}部屋[へや]を掃除[そうじ]するのが好[す]き{じゃないです|じゃありません}
 
-I dislike studying.
-Non mi piace studiare.
-{私[わたし]は|}勉[べん]強[きょう]するのが嫌[きら]いです
+Mary is good at cooking meals.
+Mary è brava a cucinare i pasti.
+メアリーさんは料理[りょうり]を作[つく]るのが上手[じょうず]です
+
+Robert is skilled at eating with chopsticks.
+Robert è abile a mangiare con le bacchette.
+ロバートさんは箸[はし]で食[た]べるのが上手[じょうず]です
+
+Takeshi is good at driving a car.
+Takeshi è bravo a guidare la macchina.
+たけしさんは車[くるま]を運転[うんてん]するのが上手[じょうず]です
+
+Ken is bad at making sushi.
+Ken è negato a fare il sushi.
+けんさんは寿司[すし]を作[つく]るのが下手[へた]です
+
+I don't like doing laundry.
+Non mi piace fare il bucato.
+{私[わたし]は|}洗濯[せんたく]するのが好[す]き{じゃないです|じゃありません}
+
+Sora is good at taking pictures.
+Sora è brava a scattare foto.
+ソラさんは写真[しゃしん]を撮[と]るのが上手[じょうず]です
