@@ -1,5 +1,5 @@
-～という
-Chiamato...
+Name という Item
+Oggetto という Nome
 
 A dog called Pochi.
 Un cane chiamato Pochi.

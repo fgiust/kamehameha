@@ -1,5 +1,5 @@
 X は Y です
-X is Y
+X は Y です
 
 I am Japanese.
 私は日本人[にほんじん]です

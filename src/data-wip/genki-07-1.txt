@@ -1,5 +1,5 @@
 ～ている
-～ている (Azione in corso / Stato)
+～ている
 
 Mary is studying right now.
 Mary sta studiando adesso.

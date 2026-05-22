@@ -1,5 +1,5 @@
-Question
-質問[しつもん]
+Question Sentences
+Fare domande
 
 Are you a student?
 あなたは学生[がくせい]ですか

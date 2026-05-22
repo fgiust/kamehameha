@@ -1,5 +1,5 @@
 Noun じゃないです
-Noun is not
+Sostantivo じゃないです
 
 #name is not a student.
 #nameさんは学生[がくせい]じゃないです

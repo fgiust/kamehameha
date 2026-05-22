@@ -1,5 +1,5 @@
-Number + も/Number + しか + Negative
-Numero + も / Numero + しか + negativo
+も and しか
+も e しか
 
 My mother owns as many as three cats.
 Mia madre ha addirittura tre gatti.
