@@ -1,31 +1,31 @@
 一時間
 一時間
 
-Mary waited for Takeshi there for an hour.
+* Mary waited for Takeshi there for an hour.
 Mary ha aspettato Takeshi lì per un'ora.
 メアリーさんはそこでたけしさんを一時間[いちじかん]待[ま]ちました
 
-Takeshi waited for Mary there for an hour and a half.
+* Takeshi waited for Mary there for an hour and a half.
 Takeshi ha aspettato Mary lì per un'ora e mezza.
 たけしさんはそこでメアリーさんを一時間半[いちじかんはん]待[ま]ちました
 
-Sora watched TV for two hours yesterday.
+* Sora watched TV for two hours yesterday.
 Sora ha guardato la TV per due ore ieri.
 ソラさんは昨日[きのう]テレビを二時間[にじかん]見[み]ました
 
-John watched TV for four hours on Sunday.
+* John watched TV for four hours on Sunday.
 John ha guardato la TV per quattro ore domenica.
 ジョンさんは日曜日[にちようび]にテレビを四時間[よじかん]見[み]ました
 
-I studied Japanese for about three hours yesterday.
+* I studied Japanese for about three hours yesterday.
 Ho studiato giapponese per circa tre ore ieri.
 {私[わたし]は|}昨日[きのう]日本語[にほんご]を三時間[さんじかん]ぐらい勉強[べんきょう]しました
 
-I studied Japanese for about two hours today.
+* I studied Japanese for about two hours today.
 Ho studiato giapponese per circa due ore oggi.
 {私[わたし]は|}今日[きょう]日本語[にほんご]を二時間[にじかん]ぐらい勉強[べんきょう]しました
 
-Ken studies Japanese at the library for about one hour everyday.
+* Ken studies Japanese at the library for about one hour everyday.
 Ken studia giapponese in biblioteca per circa un'ora ogni giorno.
 けんさんは毎日[まいにち]図書館[としょかん]で一時間[いちじかん]ぐらい日本語[にほんご]を勉強[べんきょう]します
 

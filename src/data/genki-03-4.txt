@@ -1,7 +1,7 @@
 Time Reference
 Riferimenti temporali
 
-I will go to Kyoto on Sunday.
+* I will go to Kyoto on Sunday.
 Andrò a Kyoto domenica.
 {私[わたし]は|}日曜日[にちようび]に京都[きょうと]{に|へ}行[い]きます
 
@@ -13,7 +13,7 @@ What will you do on the weekend?
 Cosa farai nel fine settimana?
 {あなた[あなた]は|}週末[しゅうまつ]{に|}何[なに]をしますか
 
-I eat breakfast every morning.
+* I eat breakfast every morning.
 Faccio colazione (mangio la colazione) ogni mattina.
 {私[わたし]は|}毎朝[まいあさ]朝ご飯[あさごはん]を食[た]べます
 
@@ -37,6 +37,6 @@ I will study Japanese tonight.
 Studierò giapponese stasera.
 {私[わたし]は|}今晩[こんばん]、日本語[にほんご]を勉強[べんきょう]します
 
-I read the newspaper in the morning.
+* I read the newspaper in the morning.
 Leggo il giornale al mattino.
 {私[わたし]は|}朝[あさ]、新聞[しんぶん]を読[よ]みます

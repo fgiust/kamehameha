@@ -1,35 +1,35 @@
 ～から
 ～から
 
-I will study this evening, because we will have an exam tomorrow.
+* I will study this evening, because we will have an exam tomorrow.
 Studierò stasera, perché domani avremo un esame.
 明日[あした]試験[しけん]があるから、{私[わたし]は|}今晩[こんばん]勉強[べんきょう]します
 
-Let's go by bus, because taxis are expensive.
+* Let's go by bus, because taxis are expensive.
 Andiamo in autobus, perché i taxi sono costosi.
 タクシーは高[たか]いから、バスで{行[い]きましょう|行[い]きます}
 
-I will not take a walk today, because it is raining.
+* I will not take a walk today, because it is raining.
 Non farò una passeggiata oggi, perché sta piovendo.
 雨[あめ]が降[ふ]っているから、{私[わたし]は|}今日[きょう]散歩[さんぽ]しません
 
-Michiko is very popular, because she is good at dancing.
+* Michiko is very popular, because she is good at dancing.
 Michiko è molto popolare, perché è brava a ballare.
 みちこさんは踊[おど]るのが上手[じょうず]だから、人気[にんき]があります
 
-I was very lonely, because I did not have any friends.
+* I was very lonely, because I did not have any friends.
 Ero molto solo, perché non avevo amici.
 友達[ともだち]がいなかったから、{私[わたし]は|}とても寂[さび]しかったです
 
-We didn't go out, because it was cold.
+* We didn't go out, because it was cold.
 Non siamo usciti, perché faceva freddo.
 寒[さむ]かったから、{私[わたし]たちは|}出[で]かけませんでした
 
-We didn't go out, because it was hot.
+* We didn't go out, because it was hot.
 Non siamo usciti, perché faceva caldo.
 暑[あつ]かったから、{私[わたし]たちは|}出[で]かけませんでした
 
-I won't do physical exercises, because I am sick today.
+* I won't do physical exercises, because I am sick today.
 Non farò esercizio fisico, perché oggi sono malato.
 今日[きょう]病気[びょうき]だから、{私[わたし]は|}運動[うんどう]しません
 

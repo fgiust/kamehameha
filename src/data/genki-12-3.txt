@@ -1,31 +1,31 @@
 ～ほうがいいです
 ～ほうがいいです
 
-You should eat more vegetables.
+* You should eat more vegetables.
 Dovresti mangiare più verdure.
 もっと野菜[やさい]を食[た]べたほうがいいです
 
-It is better not to skip classes.
+* It is better not to skip classes.
 È meglio non saltare le lezioni.
 授業[じゅぎょう]をサボらないほうがいいです
 
-You shouldn't eat too much ice cream.
+* You shouldn't eat too much ice cream.
 Non dovresti mangiare troppo gelato.
 アイスクリームを食[た]べすぎないほうがいいです
 
-You should take medicine.
+* You should take medicine.
 Dovresti prendere la medicina.
 薬[くすり]を飲[の]んだほうがいいです
 
-It is better to sleep early tonight.
+* It is better to sleep early tonight.
 È meglio andare a dormire presto stasera.
 今晩[こんばん]早[はや]く寝[ね]たほうがいいです
 
-You should go to the hospital.
+* You should go to the hospital.
 Dovresti andare in ospedale.
 病院[びょういん]に行[い]ったほうがいいです
 
-You should skip work tomorrow.
+* You should skip work tomorrow.
 Dovresti assentarti dal lavoro domani.
 明日[あした]仕事[しごと]を休[やす]んだほうがいいです
 

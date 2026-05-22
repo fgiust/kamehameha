@@ -1,11 +1,11 @@
 ～てあげる/くれる/もらう
 ～てあげる/くれる/もらう
 
-I lent my younger sister money.
+* I lent my younger sister money.
 Ho prestato soldi a mia sorella minore.
 妹[いもうと]にお金[かね]を貸[か]してあげました
 
-I lent my younger brother money.
+* I lent my younger brother money.
 Ho prestato soldi a mio fratello minore.
 弟[おとうと]にお金[かね]を貸[か]してあげました
 
@@ -13,30 +13,30 @@ I took Tom to the station.
 Ho accompagnato Tom alla stazione.
 トムさんを駅[えき]に連[つ]れて行[い]ってあげました
 
-I helped my friend with their homework.
+* I helped my friend with their homework.
 Ho aiutato il mio amico con i compiti.
 友達[ともだち]の宿題[しゅくだい]を手伝[てつだ]ってあげました
 
-I bought flowers for my mother.
+* I bought flowers for my mother.
 Ho comprato dei fiori per mia madre.
 母[はは]に花[はな]を買[か]ってあげました
 
-A friend helps me with my homework.
+* A friend helps me with my homework.
 Un amico mi aiuta con i compiti.
 友達[ともだち]が{私[わたし]に|}宿題[しゅくだい]を手伝[てつだ]ってくれます
 
-My teacher helped me with my homework.
+* My teacher helped me with my homework.
 Il mio insegnante mi ha aiutato con i compiti.
 先生[せんせい]が{私[わたし]に|}宿題[しゅくだい]を手伝[てつだ]ってくれました
 
-My older sister sent me chocolate.
+* My older sister sent me chocolate.
 Mia sorella maggiore mi ha mandato cioccolato.
 姉[あね]が{私[わたし]に|}チョコレートを送[おく]ってくれました
 
-My younger sister lent me money.
+* My younger sister lent me money.
 Mia sorella minore mi ha prestato soldi.
 妹[いもうと]が{私[わたし]に|}お金[かね]を貸[か]してくれました
 
-I got a friend of mine to help me with my homework.
+* I got a friend of mine to help me with my homework.
 Mi sono fatto aiutare con i compiti da un mio amico.
 友達[ともだち]に宿題[しゅくだい]を手伝[てつだ]ってもらいました

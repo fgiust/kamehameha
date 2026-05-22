@@ -1,7 +1,7 @@
 Xがあります/います
 Xがあります/います
 
-Do you have time?
+* Do you have time?
 Hai tempo?
 時[じ]間[かん]がありますか
 
@@ -9,34 +9,34 @@ There will be a Japanese class tomorrow.
 Ci sarà una lezione di giapponese domani.
 明日[あした]、日本語[にほんご]のクラスがあります
 
-There is a bookstore over there.
+* There is a bookstore over there.
 C'è una libreria laggiù.
 あそこに本屋[ほんや]があります
 
-There will be no class on Friday.
+* There will be no class on Friday.
 Non ci sarà lezione venerdì.
 金曜日[きんようび]にクラスがありません
 
-I do not have a dictionary.
+* I do not have a dictionary.
 Non ho un dizionario.
 {私[わたし]は|}辞書[じしょ]がありません
 
-There's an international student over there.
+* There's an international student over there.
 C'è uno studente internazionale laggiù.
 あそこに留学生[りゅうがくせい]がいます
 
-There is Takeshi over there.
+* There is Takeshi over there.
 C'è Takeshi laggiù.
 あそこにたけしさんがいます
 
-I have a Japanese friend.
+* I have a Japanese friend.
 Ho un amico giapponese.
 {私[わたし]は|}日本人[にほんじん]の友達[ともだち]がいます
 
-I have a younger sister.
+* I have a younger sister.
 Ho una sorella minore.
 {私[わたし]は|}妹[いもうと]がいます
 
-There is a bus stop over there.
+* There is a bus stop over there.
 C''è una fermata dell'autobus laggiù.
 あそこにバス停[てい]があります

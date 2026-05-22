@@ -1,27 +1,27 @@
 ～と思います/～と言ってました
 ～と思います/～と言ってました
 
-I think Mary often cooks.
+* I think Mary often cooks.
 Penso che Mary cucini spesso.
 メアリーさんはよく料理[りょうり]すると思[おも]います
 
-I think Takeshi drives a car.
+* I think Takeshi drives a car.
 Penso che Takeshi guidi la macchina.
 たけしさんは車[くるま]を運転[うんてん]すると思[おも]います
 
-I don't think Robert smokes.
+* I don't think Robert smokes.
 Non penso che Robert fumi.
 ロバートさんはたばこを吸[す]わないと思[おも]います
 
-I don't think Sora drinks much coffee.
+* I don't think Sora drinks much coffee.
 Non penso che Sora beva molto caffè.
 ソラさんはあまりコーヒーを飲[の]まないと思[おも]います
 
-I think John is busy.
+* I think John is busy.
 Penso che John sia occupato.
 ジョンさんは忙[いそが]しいと思[おも]います
 
-I don't think Ken is tall.
+* I don't think Ken is tall.
 Non penso che Ken sia alto.
 けんさんは背[せ]が高[たか]くないと思[おも]います
 
@@ -29,7 +29,7 @@ Takeshi said that he is going shopping tomorrow.
 Takeshi ha detto che andrà a fare shopping domani.
 たけしさんは明日[あした]買[か]い物[もの]{に|へ}行[い]くと言[い]っていました
 
-Mary said she studies kanji every day.
+* Mary said she studies kanji every day.
 Mary ha detto che studia i kanji ogni giorno.
 メアリーさんは毎日[まいにち]漢字[かんじ]を勉強[べんきょう]すると言[い]っていました
 
@@ -37,6 +37,6 @@ The weather forecast said that it will rain tomorrow.
 Le previsioni del tempo dicevano che domani pioverà.
 天気予報[てんきよほう]は明日[あした]雨[あめ]が降[ふ]ると言[い]っていました
 
-Robert said that his mother is good at cooking.
+* Robert said that his mother is good at cooking.
 Robert ha detto che sua madre è brava a cucinare.
 ロバートさんはお母[かあ]さんが料理[りょうり]が上手[じょうず]だと言[い]っていました

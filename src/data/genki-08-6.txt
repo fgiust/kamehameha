@@ -1,19 +1,19 @@
 が
 が
 
-Who went to Okinawa?
+* Who went to Okinawa?
 Chi è andato a Okinawa?
 だれが沖縄[おきなわ]{に|へ}行[い]きましたか
 
-Takeshi went to Okinawa.
+* Takeshi went to Okinawa.
 Takeshi è andato a Okinawa.
 たけしさんが沖縄[おきなわ]{に|へ}行[い]きました
 
-Who went to Tokyo?
+* Who went to Tokyo?
 Chi è andato a Tokyo?
 だれが東京[とうきょう]{に|へ}行[い]きましたか
 
-Mary went to Tokyo.
+* Mary went to Tokyo.
 Mary è andata a Tokyo.
 メアリーさんが東京[とうきょう]{に|へ}行[い]きました
 
@@ -21,7 +21,7 @@ Which class is the most interesting?
 Quale lezione è la più interessante?
 どのクラスが一番[いちばん]面[おも]白[しろ]いですか
 
-Japanese class is interesting.
+* Japanese class is interesting.
 La lezione di giapponese è interessante.
 日本語[にほんご]のクラスが面[おも]白[しろ]いです
 
@@ -29,7 +29,7 @@ Who wears glasses?
 Chi indossa gli occhiali?
 だれが眼鏡[めがね]をかけていますか
 
-Professor Yamashita wears glasses.
+* Professor Yamashita wears glasses.
 Il professor Yamashita indossa gli occhiali.
 山下[やました]先生[せんせい]が眼鏡[めがね]をかけています
 

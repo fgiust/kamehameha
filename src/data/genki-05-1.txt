@@ -1,27 +1,27 @@
 Adjectives
 Aggettivi
 
-I saw an interesting movie yesterday.
+* I saw an interesting movie yesterday.
 Ieri ho visto un film interessante.
 {私[わたし]は|}昨日[きのう]面[おも]白[しろ]い映画[えいが]を見[み]ました
 
-This watch is expensive.
+* This watch is expensive.
 Questo orologio è costoso.
 この時計[とけい]は高[たか]いです
 
-The weather is good.
+* The weather is good.
 Il tempo è bello.
 天気[てんき]がいいです
 
-The weather was not good.
+* The weather was not good.
 Il tempo non era bello.
 天気[てんき]がよくなかったです
 
-I was busy yesterday.
+* I was busy yesterday.
 Ieri ero occupato.
 {私[わたし]は|}昨日[きのう]忙[いそが]しかったです
 
-The trip was not fun.
+* The trip was not fun.
 Il viaggio non è stato divertente.
 旅行[りょこう]は楽[たの]しくなかったです
 
@@ -29,14 +29,14 @@ It is cold.
 Fa freddo.
 寒[さむ]いです
 
-She is healthy.
+* She is healthy.
 Lei è in salute.
 彼女[かのじょ]は元気[げんき]です
 
-The sea was very beautiful in Okinawa.
+* The sea was very beautiful in Okinawa.
 Il mare era molto bello a Okinawa.
 沖縄[おきなわ]の海[うみ]はとてもきれいでした
 
-Professor Yamashita is a scary teacher.
+* Professor Yamashita is a scary teacher.
 Il professor Yamashita è un insegnante spaventoso.
 山下[やました]先生[せんせい]は怖[こわ]い先生[せんせい]です

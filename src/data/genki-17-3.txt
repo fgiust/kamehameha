@@ -1,7 +1,7 @@
 ～たら
 ～たら
 
-I will buy a kimono if I go to Japan.
+* I will buy a kimono if I go to Japan.
 Comprerò un kimono se andrò in Giappone.
 日本[にほん]へ行[い]ったら、着物[きもの]を買[か]います
 
@@ -17,26 +17,26 @@ I will ask about it if I see Takeshi.
 Lo chiederò se vedo Takeshi.
 たけしさんに会[あ]ったら、聞[き]きます
 
-I will call Mary when I get home tonight.
+* I will call Mary when I get home tonight.
 Chiamerò Mary quando torno a casa stasera.
 今晩[こんばん]家[いえ]に帰[かえ]ったら、メアリーさんに電話[でんわ]をかけます
 
-Let's go out and have some fun once we are done with the homework.
+* Let's go out and have some fun once we are done with the homework.
 Andiamo fuori a divertirci quando avremo finito i compiti.
 宿題[しゅくだい]が終[お]わったら、出[で]かけましょう
 
-If I were a cat, I would be asleep all day long.
+* If I were a cat, I would be asleep all day long.
 Se fossi un gatto, dormirei tutto il giorno.
 猫[ねこ]だったら、一日中[いちにちじゅう]寝[ね]ています
 
-If I had money, I would buy a car.
+* If I had money, I would buy a car.
 Se avessi soldi, comprerei una macchina.
 お金[かね]があったら、車[くるま]を買[か]います
 
-If my grades are not good, I become sad.
+* If my grades are not good, I become sad.
 Se i miei voti non sono buoni, mi rattristo.
 成績[せいせき]がよくなかったら、悲[かな]しいです
 
-If I am not fine, I will not go out.
+* If I am not fine, I will not go out.
 Se non sto bene, non uscirò.
 元気[げんき]じゃなかったら、出[で]かけません

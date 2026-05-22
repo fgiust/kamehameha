@@ -1,27 +1,27 @@
 メアリーさんは髪が長いです
 メアリーさんは髪が長いです
 
-Mary has long hair.
+* Mary has long hair.
 Mary ha i capelli lunghi.
 メアリーさんは髪[かみ]が長[なが]いです
 
-Takeshi is tall.
+* Takeshi is tall.
 Takeshi è alto.
 たけしさんは背[せ]が高[たか]いです
 
-Robert is short.
+* Robert is short.
 Robert è basso.
 ロバートさんは背[せ]が低[ひく]いです
 
-Sora is very smart.
+* Sora is very smart.
 Sora è molto intelligente.
 ソラさんはとても頭[あたま]がいいです
 
-Ken has small eyes.
+* Ken has small eyes.
 Ken ha gli occhi piccoli.
 けんさんは目[め]が小[ちい]さいです
 
-John has large eyes.
+* John has large eyes.
 John ha gli occhi grandi.
 ジョンさんは目[め]が大[おお]きいです
 
@@ -37,6 +37,6 @@ My younger sister has a small mouth.
 Mia sorella minore ha una bocca piccola.
 私[わたし]の妹[いもうと]は口[くち]が小[ちい]さいです
 
-Takeshi is not smart.
+* Takeshi is not smart.
 Takeshi non è intelligente.
 たけしさんは頭[あたま]がよくないです

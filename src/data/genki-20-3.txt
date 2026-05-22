@@ -13,15 +13,15 @@ I went to school without eating breakfast.
 Sono andato a scuola senza fare colazione.
 朝[あさ]御[ご]飯[はん]を食[た]べないで学校[がっこう]に行[い]きました
 
-I went to school without brushing my teeth.
+* I went to school without brushing my teeth.
 Sono andato a scuola senza lavarmi i denti.
 歯[は]をみがかないで学校[がっこう]に行[い]きました
 
-I went to school without washing my face.
+* I went to school without washing my face.
 Sono andato a scuola senza lavarmi il viso.
 顔[かお]を洗[あら]わないで学校[がっこう]に行[い]きました
 
-I went to school without shaving.
+* I went to school without shaving.
 Sono andato a scuola senza radermi.
 髭[ひげ]を剃[そ]らないで学校[がっこう]に行[い]きました
 
@@ -29,7 +29,7 @@ I went to sleep without eating dinner.
 Sono andato a dormire senza cenare.
 晩[ばん]御[ご]飯[はん]を食[た]べないで寝[ね]ました
 
-I went to sleep without doing my homework.
+* I went to sleep without doing my homework.
 Sono andato a dormire senza fare i compiti.
 宿題[しゅくだい]をしないで寝[ね]ました
 

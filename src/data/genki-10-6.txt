@@ -1,35 +1,35 @@
 どこかに/どこにも
 どこかに/どこにも
 
-Did you go anywhere?
+* Did you go anywhere?
 Sei andato da qualche parte?
 どこか{に|へ}行[い]きましたか
 
-No, I didn't go anywhere.
+* No, I didn't go anywhere.
 No, non sono andato da nessuna parte.
 いいえ、どこに{も|}行[い]きませんでした
 
-Did you see anybody?
+* Did you see anybody?
 Hai visto qualcuno?
 だれかに会[あ]いましたか
 
-No, I didn't see anybody.
+* No, I didn't see anybody.
 No, non ho visto nessuno.
 いいえ、だれに{も|}会[あ]いませんでした
 
-Did you do anything?
+* Did you do anything?
 Hai fatto qualcosa?
 何[なに]かしましたか
 
-No, I didn't do anything.
+* No, I didn't do anything.
 No, non ho fatto nulla.
 いいえ、何[なに]も{しませんでした|しません}
 
-Did Takeshi drink anything last night?
+* Did Takeshi drink anything last night?
 Takeshi ha bevuto qualcosa ieri sera?
 たけしさんは昨日[きのう]の夜[よる]何[なに]か飲[み]ましたか
 
-Did Mary go anywhere yesterday?
+* Did Mary go anywhere yesterday?
 Mary è andata da qualche parte ieri?
 メアリーさんは昨日[きのう]どこか{に|へ}行[い]きましたか
 

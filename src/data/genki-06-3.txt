@@ -1,42 +1,42 @@
 ～てもいいです
 ～てもいいです
 
-May I see the textbook?
+* May I see the textbook?
 Posso vedere il libro di testo?
 教科書[きょうかしょ]を見[み]てもいいですか
 
-May I open the window?
+* May I open the window?
 Posso aprire la finestra?
 窓[まど]を開[あ]けてもいいですか
 
-Is it okay if I sit here?
+* Is it okay if I sit here?
 Va bene se mi siedo qui?
 ここに座[すわ]ってもいいですか
 
-May I take a picture?
+* May I take a picture?
 Posso scattare una foto?
 写真[しゃしん]を撮[と]ってもいいですか
 
-May I enter the room?
+* May I enter the room?
 Posso entrare nella stanza?
 部屋[へや]に入[はい]ってもいいですか
 
-May I go to the restroom?
+* May I go to the restroom?
 Posso andare in bagno?
 トイレ{に|へ}行[い]ってもいいですか
 
-Is it okay if I speak English?
+* Is it okay if I speak English?
 Va bene se parlo in inglese?
 英語[えいご]を話[はな]してもいいですか
 
-May I borrow a textbook?
+* May I borrow a textbook?
 Posso prendere in prestito un libro di testo?
 教科書[きょうかしょ]を借[か]りてもいいですか
 
-May I borrow your pencil?
+* May I borrow your pencil?
 Posso prendere in prestito la tua matita?
 鉛筆[えんぴつ]を借[か]りてもいいですか
 
-Is it okay if I bring a friend?
+* Is it okay if I bring a friend?
 Va bene se porto un amico?
 友達[ともだち]を連[つ]れてきてもいいですか

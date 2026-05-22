@@ -1,27 +1,27 @@
 NounA や NounB
 SostantivoA や SostantivoB
 
-I went to Kyoto and Osaka (among other places).
+* I went to Kyoto and Osaka (among other places).
 Sono andato a Kyoto e Osaka (tra gli altri posti).
 京都[きょうと]や大阪[おおさか]{に|へ}行[い]きました
 
-I like ice cream and cake (among other desserts).
+* I like ice cream and cake (among other desserts).
 Mi piacciono il gelato e la torta (tra gli altri dolci).
 {私[わたし]は|}アイスクリームやケーキが好[す]きです
 
-I drink coffee and green tea (among other drinks).
+* I drink coffee and green tea (among other drinks).
 Bevo caffè e tè verde (tra le altre bevande).
 {私[わたし]は|}コーヒーやお茶[ちゃ]を飲[の]みます
 
-I bought a watch and a new shirt (among other things).
+* I bought a watch and a new shirt (among other things).
 Ho comprato un orologio e una camicia nuova (tra le altre cose).
 {私[わたし]は|}時計[とけい]や新[あたら]しいシャツを買[か]いました
 
-I like dogs and cats (among other animals).
+* I like dogs and cats (among other animals).
 Mi piacciono cani e gatti (tra gli altri animali).
 {私[わたし]は|}犬[いぬ]や猫[ねこ]が好[す]きです
 
-I will go to a café and a park (among other places).
+* I will go to a café and a park (among other places).
 Andrò in una caffetteria e in un parco (tra gli altri posti).
 カフェや公園[こうえん]{に|へ}行[い]きます
 
