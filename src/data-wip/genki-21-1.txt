@@ -1,0 +1,42 @@
+Passive sentences
+Frasi passive
+
+My mother was helped by #name.
+Mia madre è stata aiutata da #name.
+母[はは]は#nameさんに手伝[てつだ]われました
+
+My father was called by the teacher.
+Mio padre è stato chiamato dall'insegnante.
+父[ちち]は先生[せんせい]に呼[よ]ばれました
+
+The child was scolded by the mother.
+Il bambino è stato rimproverato dalla madre.
+子供[こども]は母[はは]に怒[おこ]られました
+
+I was invited by #name.
+Sono stato invitato da #name.
+#nameさんに誘[さそ]われました
+
+The book was read by the student.
+Il libro è stato letto dallo studente.
+本[ほん]は学生[がくせい]に読[よ]まれました
+
+The umbrella was forgotten on the train.
+L'ombrello è stato dimenticato sul treno.
+電車[でんしゃ]に傘[かさ]を忘[わす]れられました
+
+I was bitten by a mosquito.
+Sono stato punto da una zanzara.
+蚊[か]に刺[さ]されました
+
+The car was stolen.
+La macchina è stata rubata.
+車[くるま]を盗[ぬす]まれました
+
+My homework was taken by the younger brother.
+I miei compiti sono stati presi da mio fratello minore.
+弟[おとうと]に宿題[しゅくだい]を取[と]られました
+
+My bicycle was broken by the child.
+La mia bicicletta è stata rotta dal bambino.
+子供[こども]に自転車[じてんしゃ]を壊[こわ]されました

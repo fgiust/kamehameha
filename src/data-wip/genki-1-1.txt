@@ -1,0 +1,32 @@
+X は Y です
+X is Y
+
+I am Japanese.
+私は日本人[にほんじん]です
+
+#name is a student.
+#nameは学生[がくせい]です
+
+My major is economics.
+私[わたし]の専攻[せんこう]は経済[けいざい]です
+
+I am an international student.
+私は留学生[りゅうがくせい]です
+
+My father is an office worker.
+私[わたし]の父[ちち]は会社員[かいしゃいん]です
+
+#name is a doctor.
+#nameは医者[いしゃ]です
+
+My older sister is a lawyer.
+私[わたし]の姉[あね]は弁護士[べんごし]です
+
+I am a first-year college student.
+私は大学[だいがく]の一年生[いちねんせい]です
+
+My friend is Korean.
+友達[ともだち]は韓国人[かんこくじん]です
+
+I am 25 years old.
+私は二十五歳[にじゅうごさい]です

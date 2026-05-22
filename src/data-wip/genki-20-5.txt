@@ -1,0 +1,42 @@
+～という
+Chiamato...
+
+A dog called Pochi.
+Un cane chiamato Pochi.
+ポチという犬[いぬ]
+
+A song called Hana.
+Una canzone chiamata Hana.
+花[はな]という歌[うた]
+
+A convenience store called Lawson.
+Un minimarket chiamato Lawson.
+ローソンというコンビニ
+
+A company called Marui.
+Un'azienda chiamata Marui.
+丸井[まるい]という会[かい]社[しゃ]
+
+A town called Akashi.
+Una città chiamata Akashi.
+明石[あかし]という町[まち]
+
+A novel titled Kitchen.
+Un romanzo intitolato Kitchen.
+『キッチン』という小[しょう]説[せつ]
+
+A drink called Ramune.
+Una bevanda chiamata Ramune.
+ラムネという飲[の]み物[もの]
+
+A person named #name.
+Una persona di nome #name.
+#nameという人[ひと]
+
+A shop called Sakura.
+Un negozio chiamato Sakura.
+さくらという店[みせ]
+
+A train called Shinkansen.
+Un treno chiamato Shinkansen.
+新幹線[しんかんせん]という電車[でんしゃ]

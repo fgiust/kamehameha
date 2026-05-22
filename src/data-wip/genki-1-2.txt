@@ -1,0 +1,32 @@
+Question
+質問[しつもん]
+
+Are you a student?
+あなたは学生[がくせい]ですか
+
+What is your major?
+あなたの専攻[せんこう]は何[なん]ですか
+
+What is your name?
+名前[なまえ]は何[なん]ですか
+
+How old are you?
+何歳[なんさい]ですか
+
+Is #name a teacher?
+#nameは先生[せんせい]ですか
+
+Is your father Japanese?
+あなたのお父[とう]さんは日本人[にほんじん]ですか
+
+What time is it now?
+今[いま]何時[なんじ]ですか
+
+Are you Japanese?
+あなたは日本人[にほんじん]ですか
+
+Is your older brother a college student?
+お兄[にい]さんは大学生[だいがくせい]ですか
+
+Is that so?
+そうですか

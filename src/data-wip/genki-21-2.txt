@@ -1,0 +1,41 @@
+～てあげる / ～てもらう / ～てくれる
+
+I let my younger brother use my computer.
+Ho lasciato che mio fratello minore usasse il mio computer.
+弟[おとうと]にパソコンを使[つか]わせてあげました
+
+I had my friend help me with the homework.
+Mi sono fatto aiutare con i compiti da un amico.
+友達[ともだち]に宿題[しゅくだい]を手伝[てつだ]ってもらいました
+
+My teacher taught me Japanese.
+Il mio insegnante mi ha insegnato il giapponese.
+先生[せんせい]が{私[わたし]に|}日本語[にほんご]を教[おし]えてくれました
+
+My mother bought me a camera.
+Mia madre mi ha comprato una macchina fotografica.
+母[はは]が{私[わたし]に|}カメラを買[か]ってくれました
+
+I asked my older sister to make dinner for me.
+Ho chiesto a mia sorella maggiore di prepararmi la cena.
+姉[あね]に晩[ばん]御[ご]飯[はん]を作[つく]ってもらいました
+
+My friend carried my bag for me.
+Il mio amico mi ha portato la borsa.
+友達[ともだち]が{私[わたし]に|}かばんを持[も]ってくれました
+
+I helped my mother clean the room.
+Ho aiutato mia madre a pulire la stanza.
+母[はは]に部屋[へや]を掃除[そうじ]してあげました
+
+My father drove me to school.
+Mio padre mi ha accompagnato a scuola in macchina.
+父[ちち]が{私[わたし]を|}学校[がっこう]に車[くるま]で送[おく]ってくれました
+
+I had my friend write the letter.
+Mi sono fatto scrivere la lettera da un amico.
+友達[ともだち]に手紙[てがみ]を書[か]いてもらいました
+
+I let #name borrow my dictionary.
+Ho lasciato che #name prendesse in prestito il mio dizionario.
+#nameさんに辞書[じしょ]を借[か]りさせてあげました

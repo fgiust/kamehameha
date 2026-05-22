@@ -1,0 +1,42 @@
+～ましょうか
+～ましょうか
+
+Shall I carry your bag?
+Porto io la tua borsa?
+{私[わたし]が|}かばんを持[も]ちましょうか
+
+Shall I bring the food?
+Porto io il cibo?
+{私[わたし]が|}食[た]べ物[もの]を持[も]ってきましょうか
+
+Shall I turn on the TV?
+Accendo io la TV?
+{私[わたし]が|}テレビをつけましょうか
+
+Shall I turn off the TV?
+Spengo io la TV?
+{私[わたし]が|}テレビを消[け]しましょうか
+
+Shall I open the window?
+Apro io la finestra?
+{私[わたし]が|}窓[まど]を開[あ]けましょうか
+
+Shall I close the window?
+Chiudo io la finestra?
+{私[わたし]が|}窓[まど]を閉[し]めましょうか
+
+Shall I take the picture?
+Scatto io la foto?
+{私[わたし]が|}写真[しゃしん]を撮[と]りましょうか
+
+Shall I turn on the lights?
+Accendo io le luci?
+{私[わたし]が|}電気[でんき]をつけましょうか
+
+Shall I call a taxi?
+Chiamo io un taxi?
+{私[わたし]が|}タクシーを呼[よ]びましょうか
+
+Shall I write it?
+Lo scrivo io?
+{私[わたし]が|}書[か]きましょうか

@@ -1,0 +1,32 @@
+Noun じゃないです
+Noun is not
+
+#name is not a student.
+#nameさんは学生[がくせい]じゃないです
+
+I am not Japanese.
+私は日本人[にほんじん]じゃないです
+
+My major is not economics.
+私[わたし]の専攻[せんこう]は経済[けいざい]じゃないです
+
+This is not my book.
+これは私[わたし]の本[ほん]じゃないです
+
+That is not a dictionary.
+それは辞書[じしょ]じゃないです
+
+My father is not a doctor.
+私[わたし]の父[ちち]は医者[いしゃ]じゃないです
+
+That café is not expensive.
+その喫茶店[きっさてん]は高[たか]くないです
+
+This notebook is not mine.
+このノートは私[わたし]のじゃないです
+
+The umbrella is not yours.
+その傘[かさ]はあなたのじゃないです
+
+#name is not a college student.
+#nameさんは大学生[だいがくせい]じゃないです

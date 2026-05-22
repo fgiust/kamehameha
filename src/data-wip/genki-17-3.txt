@@ -1,0 +1,42 @@
+～たら
+Se...
+
+I will buy a kimono if I go to Japan.
+Comprerò un kimono se andrò in Giappone.
+日本[にほん]へ行[い]ったら、着物[きもの]を買[か]います
+
+We will go for a walk if the weather is fine.
+Faremo una passeggiata se il tempo è bello.
+天気[てんき]がよかったら、散歩[さんぽ]します
+
+We will go to the park if the weather is nice.
+Andremo al parco se il tempo è bello.
+天気[てんき]がよかったら、公園[こうえん]に行[い]きます
+
+I will ask about it if I see #name.
+Lo chiederò se vedo #name.
+#nameさんに会[あ]ったら、聞[き]きます
+
+I will call #name when I get home tonight.
+Chiamerò #name quando torno a casa stasera.
+今晩[こんばん]家[いえ]に帰[かえ]ったら、#nameさんに電話[でんわ]をかけます
+
+Let's go out and have some fun once we are done with the homework.
+Andiamo fuori a divertirci quando avremo finito i compiti.
+宿題[しゅくだい]が終[お]わったら、出[で]かけましょう
+
+If I were a cat, I would be asleep all day long.
+Se fossi un gatto, dormirei tutto il giorno.
+猫[ねこ]だったら、一日中[いちにちじゅう]寝[ね]ています
+
+If I had money, I would buy a car.
+Se avessi soldi, comprerei una macchina.
+お金[かね]があったら、車[くるま]を買[か]います
+
+If my grades are not good, I become sad.
+Se i miei voti non sono buoni, mi rattristo.
+成績[せいせき]がよくなかったら、悲[かな]しいです
+
+If I am not fine, I will not go out.
+Se non sto bene, non uscirò.
+元気[げんき]じゃなかったら、出[で]かけません

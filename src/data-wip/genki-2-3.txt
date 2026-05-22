@@ -1,0 +1,32 @@
+ここ そこ あそこ どこ
+Here, there, over there, where
+
+Excuse me, where is the post office?
+すみません、郵便局[ゆうびんきょく]はどこですか
+
+The bank is right here.
+銀行[ぎんこう]はここです
+
+The library is over there.
+図書館[としょかん]はあそこです
+
+Where is the café?
+喫茶店[きっさてん]はどこですか
+
+The restroom is right there.
+トイレはそこです
+
+Where is #name?
+#nameさんはどこですか
+
+The department store is next to the supermarket.
+デパートはスーパーの隣[となり]です
+
+The book is here.
+本[ほん]はここです
+
+The bus stop is over there.
+バス停[てい]はあそこです
+
+The temple is right there.
+お寺[てら]はそこです

@@ -1,0 +1,32 @@
+Noun の Noun
+Noun の Noun
+
+My friend
+私[わたし]の友達[ともだち]
+
+My teacher
+私[わたし]の先生[せんせい]
+
+My major
+私[わたし]の専攻[せんこう]
+
+#name's mother
+#nameさんの母[はは]
+
+#name's father
+#nameさんの父[ちち]
+
+Japanese university
+日本[にほん]の大学[だいがく]
+
+#name's job
+#nameさんの仕事[しごと]
+
+My friend's major
+友達[ともだち]の専攻[せんこう]
+
+My friend's teacher
+友達[ともだち]の先生[せんせい]
+
+My friend's father
+友達[ともだち]の父[ちち]
