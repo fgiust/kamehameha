@@ -37,6 +37,6 @@ This is my name card.
 Questo è il mio biglietto da visita.
 {これ[は]|}私[わたし]の名刺[めいし]{です|だ}
 
-My father is at home.
-Mio padre è a casa.
-{父[ちち]は|}家[うち]に{います|いる}
+My pet is a cat.
+Il mio animale domestico è un gatto.
+{私[わたし]の}ペットは猫[ねこ]{です|だ}

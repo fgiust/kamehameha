@@ -17,14 +17,34 @@ describe('parseTranslateSessionTxt', () => {
     });
   });
 
+  it('ignores standalone comment lines after the title', () => {
+    const input = [
+      'Title EN',
+      'Title IT',
+      '',
+      '# Grammar note: (reason 1)し, (reason 2)し, situation',
+      'English one',
+      'Italian one',
+      'Japanese one',
+      '',
+      'English two',
+      'Italian two',
+      'Japanese two',
+    ].join('\n');
+
+    const session = parseTranslateSessionTxt({ id: 'x', text: input });
+    expect(session.sentenceData).toHaveLength(2);
+    expect(session.sentenceData[0].english).toBe('English one');
+  });
+
   it('ignores blocks that contain commented lines and validates block length', () => {
     const input = [
       'Title EN',
       'Title IT',
       '',
       '# Commented exercise',
-      'Should be ignored',
-      'Should be ignored',
+      '# Should be ignored',
+      '# Should be ignored',
       '',
       'A',
       'B',

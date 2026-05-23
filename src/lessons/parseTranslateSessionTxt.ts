@@ -60,6 +60,8 @@ export function parseTranslateSessionTxt(input: ParseTranslateSessionTxtInput): 
       continue;
     }
 
+    if (trimmed.startsWith('#')) continue;
+
     if (currentBlock.length === 0) {
       currentStartLine = lineIndex + 1;
     }

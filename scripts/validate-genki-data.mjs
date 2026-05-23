@@ -19,12 +19,16 @@ const starredFiles = [];
 const blockErrorFiles = [];
 const countErrorFiles = [];
 
+function isCommentLine(line) {
+  return line.trim().startsWith('#');
+}
+
 function countExercises(lines) {
   let i = 2;
   if (lines[i]?.trim() === '') i++;
   let n = 0;
   while (i < lines.length) {
-    while (i < lines.length && lines[i].trim() === '') i++;
+    while (i < lines.length && (lines[i].trim() === '' || isCommentLine(lines[i]))) i++;
     if (i >= lines.length) break;
     if (i + 2 < lines.length) {
       n++;
@@ -53,7 +57,7 @@ function validateTranslateFile(name) {
   i++;
 
   while (i < lines.length) {
-    while (i < lines.length && lines[i].trim() === '') i++;
+    while (i < lines.length && (lines[i].trim() === '' || isCommentLine(lines[i]))) i++;
     if (i >= lines.length) break;
 
     const en = lines[i];
