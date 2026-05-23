@@ -302,16 +302,8 @@ export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUn
 
     if (u < units.length) {
       const unit = units[u];
-      
-      // 2. Skip unit (missing)
-      const resMissing = dfs(u + 1, c);
-      const costMissing = resMissing.cost + 1;
-      if (costMissing < bestCost) {
-        bestCost = costMissing;
-        bestOps = [{ kind: 'unit', unit, status: 'missing' }, ...resMissing.ops];
-      }
 
-      // 3. Match surface
+      // 2. Match surface (before "missing" so equal-cost paths consume input left-to-right)
       if (unit.surface && user.startsWith(unit.surface, c)) {
         const resSurf = dfs(u + 1, c + unit.surface.length);
         const costSurf = resSurf.cost;
@@ -321,7 +313,7 @@ export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUn
         }
       }
 
-      // 4. Match reading
+      // 3. Match reading
       if (unit.reading && user.startsWith(unit.reading, c)) {
         const resRead = dfs(u + 1, c + unit.reading.length);
         // Add a tiny penalty to prefer kanji match over kana match if both are possible
@@ -330,6 +322,14 @@ export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUn
           bestCost = costRead;
           bestOps = [{ kind: 'unit', unit, status: 'correct_kana' }, ...resRead.ops];
         }
+      }
+
+      // 4. Skip unit (missing)
+      const resMissing = dfs(u + 1, c);
+      const costMissing = resMissing.cost + 1;
+      if (costMissing < bestCost) {
+        bestCost = costMissing;
+        bestOps = [{ kind: 'unit', unit, status: 'missing' }, ...resMissing.ops];
       }
     }
 

@@ -59,6 +59,25 @@ describe('sentenceEngine', () => {
       ]);
     });
 
+    it('should align passive かま with かまれました (first ま, not second)', () => {
+      const correct = '私[わたし]は犬[いぬ]に噛[か]まれました';
+      const user = '私は犬にかま';
+      const ops = diffSentenceAnswer(user, correct);
+
+      expect(ops).toEqual([
+        { kind: 'unit', unit: { kind: 'ruby', surface: '私', reading: 'わたし' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'は', reading: 'は' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '犬', reading: 'いぬ' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'に', reading: 'に' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '噛', reading: 'か' }, status: 'correct_kana' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'ま', reading: 'ま' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'れ', reading: 'れ' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'ま', reading: 'ま' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'し', reading: 'し' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'た', reading: 'た' }, status: 'missing' },
+      ]);
+    });
+
     it('should keep ruby tags unaltered even with messy input', () => {
       const correct = '私[わたし]の名[な]前[まえ]は田[た]中[なか]さんは日[に]本[ほん]人[じん]です';
       const user = '私の名前は田田中きんはに日本人です';
