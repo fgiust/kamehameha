@@ -190,7 +190,7 @@ The title displays the focus of the sentences, e.g. "～てみる" should includ
 New phrases should keep the focus on the syntax topic and use a simple vocabulary, targeted to the expected user level (N5 learner for chapters 1-12 and N4 learner for chapters 13-23). 
 In particular the usage of terms used in Genki textbooks should be preferred, for this reason the file genki_vocabulary.txt is provided. Each exercise should mostly use terms included in the lessons up to this chapter (e.g. exercise 13-4 should mostly use vocabulary from chapters 1-13 from the genki_vocabulary.txt file). This is only a preference, additional terms could be used while keeping a similar level of complexity.
 For people names always select a name from the genki_cast.txt file.
-
+Exercises should never reuse exactly the same phrase used in original Genki exercises or in the reference application steven-kraft.com/projects/japanese due to copyright restrictions.
 
 ---
 
@@ -208,4 +208,5 @@ For people names always select a name from the genki_cast.txt file.
 
 ### Missing implementation and next steps
 - At the moment the main focus is stabilizing the application for a beta test. Apart from fixing any detected bug, the main issue is the reuse in the test data of same exact senteces from the initial reference steven-kraft.com/projects/japanese - the agent that built the dataset for the genki lessons (genki-**-*-txt files in src/data) incorrectly reused many of the phrases from the reference that could be copyright protected, instead of following the recomendation of only using those as a reference for generating similar original exercises. 
-All the reused exercised are now marked with a "*" in the txt file, we should replace each of them with new phrases either with basic variations (e.g. "I like curry" -> "I like ramen") or with completely different phrases focused on the grammar topic tested in the lesson and using a simple vocabulary, with a preference of using the vocabulary in genki_vocabulary.txt and people names in genki_cast.txt
+All the reused exercised are now marked with a "*" in the txt file, we should replace each of them with new phrases either with basic variations (e.g. "I like curry" -> "I like ramen") or with completely different phrases focused on the grammar topic tested in the lesson and using a simple vocabulary, with a preference of using the vocabulary in genki_vocabulary.txt and people names in genki_cast.txt.
+Note that changing only people names in a sentence doesn't qualifies as a meaningful variation.
