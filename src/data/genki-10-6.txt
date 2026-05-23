@@ -2,11 +2,11 @@
 どこかに/どこにも
 
 Did you travel anywhere during the vacation?
-Sei viaggiato da qualche parte durante le vacanze?
+Sei andato in viaggio da qualche parte durante le vacanze?
 休み[やすみ]にどこか{に|へ}旅行[りょこう]しましたか
 
 No, I didn't travel anywhere.
-No, non sono viaggiato da nessuna parte.
+No, non sono andato in viaggio da nessuna parte.
 いいえ、どこに{も|}旅行[りょこう]しませんでした
 
 Did you meet anyone new?
