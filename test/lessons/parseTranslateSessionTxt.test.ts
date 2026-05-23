@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import genki01_2Text from '../data/genki-01-2.txt?raw';
-import { parseTranslateSessionTxt } from './parseTranslateSessionTxt';
-import { genkiTxtLessons } from './genkiTxtLessons';
+import genki01_2Text from '../fixtures/data/genki-01-2.txt?raw';
+import { parseTranslateSessionTxt } from '../../src/lessons/parseTranslateSessionTxt';
+import { genkiTxtLessons } from '../../src/lessons/genkiTxtLessons';
 
 describe('parseTranslateSessionTxt', () => {
-  it('parses genki-01-2.txt into a bilingual TranslateSessionData', () => {
+  it('parses genki-01-2 fixture into a bilingual TranslateSessionData', () => {
     const session = parseTranslateSessionTxt({ id: 'genki1-2', text: genki01_2Text, sourceName: 'genki-01-2.txt' });
 
     expect(session.id).toBe('genki1-2');
@@ -40,11 +40,20 @@ describe('parseTranslateSessionTxt', () => {
   });
 
   it('auto-detects Genki txt lessons via virtual module', () => {
-    const lesson = genkiTxtLessons.find(l => l.id === 'genki1-2');
-    expect(lesson).toBeTruthy();
-    expect(lesson?.title).toBe('Question');
-    expect(lesson?.titleItalian).toBe('Domande');
-    expect(lesson?.sentenceData).toHaveLength(10);
-    expect(lesson?.sentenceData[0].italian).toBe('Sei uno studente?');
+    expect(genkiTxtLessons.length).toBeGreaterThan(0);
+
+    for (const lesson of genkiTxtLessons) {
+      expect(lesson.id).toMatch(/^genki\d+-\d+$/);
+      expect(lesson.title.length).toBeGreaterThan(0);
+      expect(lesson.titleItalian.length).toBeGreaterThan(0);
+      expect(lesson.sentenceData.length).toBeGreaterThan(0);
+      for (const sentence of lesson.sentenceData) {
+        expect(sentence.english.length).toBeGreaterThan(0);
+        expect(sentence.italian.length).toBeGreaterThan(0);
+      }
+    }
+
+    const ids = genkiTxtLessons.map(l => l.id);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 });

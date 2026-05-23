@@ -130,6 +130,9 @@ function genkiTxtPlugin(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
+  test: {
+    include: ['test/**/*.test.ts'],
+  },
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
   },
