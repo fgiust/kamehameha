@@ -3,14 +3,19 @@ import { FeedbackDetails } from '../utils/feedback';
 import { useTranslation } from 'react-i18next';
 import SubmitButton, { SubmitState } from './SubmitButton';
 import DiffTestModal from './DiffTestModal';
+import AlternateLanguageLine from './AlternateLanguageLine';
+import { resolveUiLang } from '../utils/bilingualPrompt';
 import bugIcon from '../assets/icon-bug.svg';
 
 export default function FeedbackPanel() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = resolveUiLang(i18n.resolvedLanguage ?? i18n.language);
+  const questionAltLabel = lang === 'it' ? t('feedbackPanel.altLangEnglish') : t('feedbackPanel.altLangItalian');
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState<FeedbackDetails>({
     section: '',
     question: '',
+    questionAlt: '',
     correctAnswer: '',
     userAnswer: '',
     rawCorrectAnswer: '',
@@ -32,6 +37,7 @@ export default function FeedbackPanel() {
       setDetails({
         section: current.section || '',
         question: current.question || '',
+        questionAlt: current.questionAlt || '',
         correctAnswer: current.correctAnswer || '',
         userAnswer: current.userAnswer || '',
         exerciseId: current.exerciseId || exerciseId,
@@ -137,7 +143,14 @@ export default function FeedbackPanel() {
 
             <div className="feedback-text-group">
               <label>{t('feedbackPanel.question')}</label>
-              <div className="feedback-readonly-text">{details.question}</div>
+              <div className="feedback-readonly-block">
+                <div className="feedback-readonly-text">{details.question}</div>
+                <AlternateLanguageLine
+                  text={details.questionAlt ?? ''}
+                  label={questionAltLabel}
+                  className="feedback-alt-lang"
+                />
+              </div>
             </div>
 
             <div className="feedback-text-group">

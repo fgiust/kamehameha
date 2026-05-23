@@ -18,9 +18,11 @@ import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
 import SentenceTxtLessonPage from './pages/SentenceTxtLessonPage';
 import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
+import DebugModeIndicator from './components/DebugModeIndicator';
 import { Analytics } from '@vercel/analytics/react';
 import { useTranslation } from 'react-i18next';
 import { setAppLanguage } from './i18n/index';
+import { syncDebugModeFromSearch } from './utils/debugMode';
 
 function DarkModeToggle() {
   const { t } = useTranslation();
@@ -137,6 +139,10 @@ function AppShell() {
   }, []);
 
   useEffect(() => {
+    syncDebugModeFromSearch(location.search);
+  }, [location.search]);
+
+  useEffect(() => {
     try {
       const prev = sessionStorage.getItem(CURRENT_INTERNAL_PATH_KEY);
       if (prev && prev !== currentPathKey) {
@@ -190,6 +196,7 @@ function AppShell() {
     <>
       <DarkModeToggle />
       <LanguageToggle />
+      <DebugModeIndicator />
       {showFeedback && <FeedbackPanel />}
       <Routes>
         <Route path="/" element={<HomePage />} />

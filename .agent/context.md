@@ -157,6 +157,17 @@ When creating a diff with the sentence inputted by the user:
 The app supports english and italian. All the content (UI+exercises) must be translated in these 2 languages. Localization uses i18next for UI parts and bilingual tests in exercises data.
 Exercise titles in the UI must directly use the translated text from the test data and not duplicate the title using i18n labels.
 
+### Debug / test mode (hidden)
+For content validation, a hidden debug mode can show both EN/IT prompts on sentence (Genki) exercises and extend the feedback panel.
+
+- **Enable**: visit any URL with `?debug=42` (persisted in `localStorage` key `nihongo.debugMode`).
+- **Disable**: `?debug=off` clears the flag.
+- **Indicator**: small bug icon fixed at bottom-left while active (`DebugModeIndicator`, reuses feedback tab SVG).
+- **Sentence exercises** (`SentenceExercise`): when debug is on, the alternate-language prompt appears smaller under the main question (no prefix).
+- **Feedback panel** (always): shows the alternate prompt under the current one with prefix `Inglese:` / `Italiano:` (i18n). Question and correct-answer readonly blocks no longer use the dashed input-style border.
+- **Utilities**: `src/utils/debugMode.ts`, `src/utils/bilingualPrompt.ts`, `src/hooks/useDebugMode.ts`.
+- Future test-only UI can gate on `useDebugMode()` the same way.
+
 ### Data format
 Most of the exercises (called "sentence" exercises) using the same schema and the same data format. Each of these exercises are configured using a txt file in the src/data folder with the naming genki-xxx.txt or sentence-xxx.txt. The format of the file is the same, the only difference is that genki-xxx files are related to topics matching Genki textbooks and sentence-xxx are for additional exercises with other topics.
 The format of the file is the following:

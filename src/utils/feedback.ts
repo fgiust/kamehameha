@@ -1,6 +1,8 @@
 export interface FeedbackDetails {
   section: string;
   question: string;
+  /** Other UI language prompt (EN/IT), when available (sentence exercises). */
+  questionAlt?: string;
   correctAnswer: string;
   userAnswer?: string;
   exerciseId?: string;
@@ -21,6 +23,7 @@ export function updateFeedbackDetails(details: Partial<FeedbackDetails>) {
   const current: FeedbackDetails = w.currentQuestionDetails ?? {
     section: '',
     question: '',
+    questionAlt: '',
     correctAnswer: '',
     userAnswer: '',
     rawCorrectAnswer: '',
@@ -28,6 +31,7 @@ export function updateFeedbackDetails(details: Partial<FeedbackDetails>) {
   const updated = {
     section: details.section ?? current.section ?? '',
     question: cleanRubyText(details.question ?? current.question ?? ''),
+    questionAlt: cleanRubyText(details.questionAlt ?? current.questionAlt ?? ''),
     correctAnswer: cleanRubyText(details.correctAnswer ?? current.correctAnswer ?? ''),
     userAnswer: cleanRubyText(details.userAnswer ?? current.userAnswer ?? ''),
     exerciseId: details.exerciseId ?? current.exerciseId ?? '',

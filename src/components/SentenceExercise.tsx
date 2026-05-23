@@ -9,6 +9,9 @@ import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
 import PageLayout from './PageLayout';
 import ExerciseCompletedMessage from './ExerciseCompletedMessage';
+import AlternateLanguageLine from './AlternateLanguageLine';
+import { useDebugMode } from '../hooks/useDebugMode';
+import { getSentencePrompts, resolveUiLang } from '../utils/bilingualPrompt';
 
 interface Props {
   title: string;
@@ -45,7 +48,8 @@ function isLatinImeChar(ch: string) {
 
 export default function SentenceExercise({ title, sentenceData, persistKey }: Props) {
   const { t, i18n } = useTranslation();
-  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
+  const lang = resolveUiLang(i18n.resolvedLanguage ?? i18n.language);
+  const debugMode = useDebugMode();
   const [currentIdx, setCurrentIdx] = useState(0);
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
@@ -73,11 +77,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
   const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(sentenceData.length, { persistKey });
 
   const currentItem = sentenceData[currentIdx];
-  const promptText = (() => {
-    if (!currentItem) return '';
-    if (lang === 'it' && currentItem.italian) return currentItem.italian;
-    return currentItem.english || '';
-  })();
+  const { primary: promptText, alternate: alternatePromptText } = getSentencePrompts(currentItem, lang);
 
   const pickNext = useCallback(() => {
     if (sentenceData.length === 0) return;
@@ -147,11 +147,12 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
     updateFeedbackDetails({
       section: title,
       question: promptText,
+      questionAlt: alternatePromptText,
       correctAnswer: currentItem.answer,
       rawCorrectAnswer: currentItem.answer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentItem, title, userInput, isFinished, promptText]);
+  }, [currentItem, title, userInput, isFinished, promptText, alternatePromptText]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -291,8 +292,14 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
           {!isFinished && (
             <>
               <div className="exercise-prompt">{t('sentenceExercise.promptTranslate')}</div>
-              <div className="exercise-question" style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}>
-                {promptText}
+              <div
+                className={`exercise-question${debugMode && alternatePromptText ? ' has-alt-prompt' : ''}`}
+                style={{ fontSize: 20, fontFamily: 'Open Sans, sans-serif' }}
+              >
+                <span className="exercise-question-main">{promptText}</span>
+                {debugMode && (
+                  <AlternateLanguageLine text={alternatePromptText} className="exercise-question-alt" />
+                )}
               </div>
               <div className="exercise-input-block">
                 <input
