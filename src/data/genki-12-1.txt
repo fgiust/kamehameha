@@ -37,6 +37,6 @@ My cat died.
 Il mio gatto è morto.
 猫[ねこ]が死[し]んだんです
 
-My dog died.
-Il mio cane è morto.
-犬[いぬ]が死[し]んだんです
+My dog ran away.
+Il mio cane è scappato.
+犬[いぬ]が逃[に]げたんです
