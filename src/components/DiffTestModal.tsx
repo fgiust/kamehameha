@@ -1,6 +1,14 @@
-import { useState, useEffect } from 'react';
-import { generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff } from '../engines/sentenceEngine';
+import { useState, useEffect, useRef } from 'react';
+import {
+  generateAnswers,
+  matchesByRubyUnits,
+  parseAnswerTemplate,
+  pickBestDiff,
+  primarySurfaceFromTemplate,
+} from '../engines/sentenceEngine';
+import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
+import KeyboardTip from './KeyboardTip';
 
 export default function DiffTestModal({
   isOpen,
@@ -16,13 +24,43 @@ export default function DiffTestModal({
   const { t } = useTranslation();
   const [correct, setCorrect] = useState(initialCorrect);
   const [user, setUser] = useState(initialUser);
+  const [rawUser, setRawUser] = useState(initialUser);
+  const [isComposing, setIsComposing] = useState(false);
+  const [didConvert, setDidConvert] = useState(false);
+
+  const userInputRef = useRef<HTMLInputElement>(null);
+  const pendingCaretRef = useRef<number | null>(null);
+  const isComposingRef = useRef(false);
 
   useEffect(() => {
     if (isOpen) {
       setCorrect(initialCorrect);
-      setUser(initialUser);
+      const preloaded = initialUser.trim() || primarySurfaceFromTemplate(initialCorrect);
+      setUser(preloaded);
+      setRawUser(preloaded);
+      setIsComposing(false);
+      setDidConvert(false);
+      isComposingRef.current = false;
+      pendingCaretRef.current = null;
     }
   }, [isOpen, initialCorrect, initialUser]);
+
+  useEffect(() => {
+    const pos = pendingCaretRef.current;
+    if (pos === null) return;
+    const el = userInputRef.current;
+    if (!el) return;
+    if (document.activeElement !== el) {
+      pendingCaretRef.current = null;
+      return;
+    }
+    try {
+      el.setSelectionRange(pos, pos);
+    } catch {
+      return;
+    }
+    pendingCaretRef.current = null;
+  }, [user]);
 
   if (!isOpen) return null;
 
@@ -84,12 +122,50 @@ export default function DiffTestModal({
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: '100%' }}>
             <div style={{ fontSize: 16, fontWeight: 'bold' }}>{t('diffTest.userInput')}</div>
-            <input
-              className="exercise-input"
-              value={user}
-              onChange={e => setUser(e.target.value)}
-              style={{ width: '100%', textAlign: 'center', boxSizing: 'border-box' }}
-            />
+            <div className="exercise-input-block" style={{ width: '100%' }}>
+              <input
+                ref={userInputRef}
+                className="exercise-input"
+                value={user}
+                onChange={e => {
+                  const raw = e.target.value;
+                  setRawUser(raw);
+
+                  const composing = isComposingRef.current || (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
+                  if (composing) {
+                    setDidConvert(false);
+                    setIsComposing(true);
+                    setUser(raw);
+                    return;
+                  }
+                  setIsComposing(false);
+
+                  const didConvertNow = didConvertFromLatin(raw);
+                  setDidConvert(didConvertNow);
+
+                  const caret = e.target.selectionStart;
+                  const converted = toHiraganaIME(raw);
+                  if (caret !== null) {
+                    pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                  }
+                  setUser(converted);
+                }}
+                onCompositionStart={() => {
+                  isComposingRef.current = true;
+                  setIsComposing(true);
+                }}
+                onCompositionEnd={() => {
+                  isComposingRef.current = false;
+                  setIsComposing(false);
+                }}
+                style={{ width: '100%', textAlign: 'center', boxSizing: 'border-box' }}
+                autoCorrect="off"
+                autoCapitalize="none"
+                autoComplete="off"
+                spellCheck={false}
+              />
+              <KeyboardTip preferred="japanese" rawValue={rawUser} isComposing={isComposing} didConvert={didConvert} />
+            </div>
           </label>
         </div>
 

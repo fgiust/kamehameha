@@ -1,7 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { diffSentenceAnswer } from '../../src/engines/sentenceEngine';
+import { diffSentenceAnswer, primarySurfaceFromTemplate } from '../../src/engines/sentenceEngine';
 
 describe('sentenceEngine', () => {
+  describe('primarySurfaceFromTemplate', () => {
+    it('picks first alternatives and strips ruby readings', () => {
+      const template = '{私[わたし]は|}図[と]書[しょ]館[かん]で{本[ほん]|教科書[きょうかしょ]}を読[よ]みます';
+      expect(primarySurfaceFromTemplate(template)).toBe('私は図書館で本を読みます');
+    });
+  });
+
   describe('diffSentenceAnswer', () => {
     it('should handle correct kanji matching perfectly', () => {
       // User typed "佐藤さん和先生です", correct is "佐[さ]藤[とう]さんは先[せん]生[せい]です"
