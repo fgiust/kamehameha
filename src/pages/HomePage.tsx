@@ -58,11 +58,24 @@ function MiniProgressBar({ persistKey, defaultTotal }: { persistKey: string; def
   );
 }
 
-function HomeLinkCard({ to, children, defaultTotal }: { to: string; children: ReactNode; defaultTotal?: number }) {
+function HomeLinkCard({
+  to,
+  children,
+  defaultTotal,
+  beta,
+}: {
+  to: string;
+  children: ReactNode;
+  defaultTotal?: number;
+  beta?: boolean;
+}) {
   const total = Math.max(1, defaultTotal ?? 12);
   return (
     <div className="link-card-stack">
-      <Link to={to} className="link-card">{children}</Link>
+      <Link to={to} className="link-card">
+        {children}
+        {beta ? <span className="link-card-beta-dot" aria-hidden="true" /> : null}
+      </Link>
       <MiniProgressBar persistKey={to} defaultTotal={total} />
     </div>
   );
@@ -111,7 +124,9 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
             const to = def?.to;
             const defaultTotal = def?.defaultTotal ?? 12;
             return to ? (
-              <HomeLinkCard key={item.id} to={to} defaultTotal={defaultTotal}>{title}</HomeLinkCard>
+              <HomeLinkCard key={item.id} to={to} defaultTotal={defaultTotal} beta={item.beta}>
+                {title}
+              </HomeLinkCard>
             ) : (
               <span key={item.id} className="link-card" style={{ opacity: 0.5 }}>
                 {title} <span className="badge">{t('common.soon')}</span>

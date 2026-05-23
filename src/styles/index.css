@@ -912,6 +912,7 @@ a:hover { color: var(--accent-hover); }
 }
 
 .link-card {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -924,6 +925,18 @@ a:hover { color: var(--accent-hover); }
   font-weight: 500;
   transition: all var(--transition);
   text-decoration: none;
+}
+
+.link-card-beta-dot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow: 0 0 0 1px var(--bg-card);
+  pointer-events: none;
 }
 .link-card:hover {
   border-color: var(--accent);

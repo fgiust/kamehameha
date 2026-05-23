@@ -139,6 +139,7 @@ export type HomeExerciseDefinition = {
 export type HomeSectionItem = {
   id: string;
   title?: LocalizedText;
+  beta?: boolean;
 };
 
 export type HomeSection = {

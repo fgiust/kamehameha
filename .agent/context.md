@@ -157,6 +157,9 @@ When creating a diff with the sentence inputted by the user:
 The app supports english and italian. All the content (UI+exercises) must be translated in these 2 languages. Localization uses i18next for UI parts and bilingual tests in exercises data.
 Exercise titles in the UI must directly use the translated text from the test data and not duplicate the title using i18n labels.
 
+### Home content review flag (`beta`)
+`homeSections.ts` items may set `beta: true` to mark sentence/Genki exercises not yet manually reviewed. The home page shows a small dot (same color as body text) on the top-right of the link card. Remove `beta: true` (or set `beta: false`) after validating that exercise’s TXT content.
+
 ### Debug / test mode (hidden)
 For content validation, a hidden debug mode can show both EN/IT prompts on sentence (Genki) exercises and extend the feedback panel.
 
