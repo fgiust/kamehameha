@@ -931,8 +931,8 @@ a:hover { color: var(--accent-hover); }
   position: absolute;
   top: 7px;
   right: 7px;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--text);
   box-shadow: 0 0 0 1px var(--bg-card);
