@@ -20,3 +20,23 @@ Non voglio che parli inglese.
 Who do you want to help you?
 Chi vuoi che ti aiuti?
 誰[だれ]に手[て]伝[つだ]ってほしいですか
+
+I want Mary to study with me.
+Voglio che Mary studi con me.
+{私[わたし]は|}メアリーさんに一緒[いっしょ]に勉[べん]強[きょう]してほしいです
+
+Please wait a little.
+Per favore, aspetta un momento.
+ちょっと待[ま]ってほしいです
+
+I want my mother to cook tonight.
+Voglio che mia madre cucini stasera.
+{私[わたし]は|}母[はは]に今晩[こんばん]料理[りょうり]してほしいです
+
+I don't want him to forget the appointment.
+Non voglio che dimentichi l'appuntamento.
+{私[わたし]は|}彼[かれ]に約束[やくそく]を忘[わす]れてほしくないです
+
+I want the doctor to examine me.
+Voglio che il dottore mi visiti.
+医者[いしゃ]に診[み]てほしいです

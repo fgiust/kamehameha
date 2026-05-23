@@ -218,6 +218,8 @@ Phrases copied from the reference app are marked with a leading `*` on the Engli
 
 **2025-05 cleanup:** ~587 starred prompts across 76 files were replaced with original EN/IT/JP exercises (chapters 3–20 batches). `npm run validate:data` is part of `npm run build`.
 
+**Genki lesson size:** Each `genki-NN-N.txt` file must contain exactly **10** exercises (3-line EN/IT/JP blocks after the title). Nine lessons previously had only 5; five exercises were added to each (`08-7`, `10-1`, `16-5`, `18-1`, `21-4`, `21-5`, `22-4`, `22-5`, `23-5`). The validate script enforces this count for all Genki files.
+
 After future data edits: run `npm run validate:data` and `npm run build`, update counts here if needed.
 
 ### Missing / next steps

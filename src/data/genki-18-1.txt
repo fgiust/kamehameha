@@ -20,3 +20,23 @@ La luce si spense.
 The cat broke the computer.
 Il gatto ha rotto il computer.
 猫[ねこ]がパソコンを壊[こわ]しました
+
+I closed the window.
+Ho chiuso la finestra.
+{私[わたし]は|}窓[まど]を閉[し]めました
+
+The window closed.
+La finestra si è chiusa.
+窓[まど]が閉[し]まりました
+
+I dropped the book.
+Ho fatto cadere il libro.
+{私[わたし]は|}本[ほん]を落[お]としました
+
+The book fell.
+Il libro è caduto.
+本[ほん]が落[お]ちました
+
+Mary turned on the TV.
+Mary ha acceso la TV.
+メアリーさんがテレビをつけました

@@ -20,3 +20,23 @@ Cosa preferisci, i cani o i gatti?
 I like dogs better.
 Preferisco i cani.
 犬[いぬ]のほうが好[す]きです
+
+Summer is hotter than spring.
+L'estate è più calda della primavera.
+夏[なつ]のほうが春[はる]より暑[あつ]いです
+
+Which is more difficult, kanji or grammar?
+Cosa è più difficile, i kanji o la grammatica?
+漢[かん]字[じ]と文[ぶん]法[ぽう]とどちらのほうが難[むずか]しいですか
+
+Trains are faster than buses.
+I treni sono più veloci degli autobus.
+電[でん]車[しゃ]のほうがバスより速[はや]いです
+
+I think Japanese food is tastier than American food.
+Penso che il cibo giapponese sia più gustoso di quello americano.
+{私[わたし]は|}アメリカの食[た]べ物[もの]より日[に]本[ほん]の食[た]べ物[もの]のほうがおいしいと思[おも]います
+
+Who is taller, Ken or Takeshi?
+Chi è più alto, Ken o Takeshi?
+けんさんとたけしさんとどちらのほうが背[せ]が高[たか]いですか

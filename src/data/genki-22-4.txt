@@ -20,3 +20,23 @@ Anche se è delizioso, nessuno lo mangia.
 Although I promised, she did not come.
 Anche se avevo promesso, non è venuta.
 約束[やくそく]したのに、彼女[かのじょ]は来[き]ませんでした
+
+Although I am busy, I will help you.
+Anche se sono occupato, ti aiuterò.
+忙[いそが]しいのに、手伝[てつだ]います
+
+Although it is cheap, I will not buy it.
+Anche se è economico, non lo comprerò.
+安[やす]いのに、買[か]いません
+
+Although he is young, he is reliable.
+Anche se è giovane, è affidabile.
+若[わか]いのに、頼[たよ]もしいです
+
+Although I slept well, I am still tired.
+Anche se ho dormito bene, sono ancora stanco.
+よく寝[ね]たのに、まだ疲[つか]れています
+
+Although the station is nearby, I was late.
+Anche se la stazione è vicina, sono arrivato in ritardo.
+駅[えき]が近[ちか]いのに、遅[おく]れました

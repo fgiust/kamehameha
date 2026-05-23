@@ -20,3 +20,23 @@ Questa città è una città come Kyoto.
 I want to become good at Japanese like Mary.
 Voglio diventare brava in giapponese come Mary.
 メアリーさんのように日[に]本[ほん]語[ご]が上手[じょうず]になりたいです
+
+She sings like a professional singer.
+Canta come una cantante professionista.
+彼女[かのじょ]はプロのように歌[うた]います
+
+I want a desk like this one.
+Voglio una scrivania come questa.
+このような机[つくえ]が欲[ほ]しいです
+
+He runs like an athlete.
+Corre come un atleta.
+彼[かれ]は運動[うんどう]選[せん]手[しゅ]のように走[はし]ります
+
+Today is cold like winter.
+Oggi fa freddo come in inverno.
+今日[きょう]は冬[ふゆ]のように寒[さむ]いです
+
+Please speak like a Japanese person.
+Per favore, parla come una persona giapponese.
+日[に]本[ほん]人[じん]のように話[はな]してください
