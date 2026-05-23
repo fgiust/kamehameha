@@ -1,41 +1,41 @@
 と
 と
 
-* I speak Japanese and English.
-Parlo giapponese e inglese.
-{私[わたし]は|}日本語[にほんご]と英語[えいご]を話[はな]します
+I speak Japanese and Korean.
+Parlo giapponese e coreano.
+{私[わたし]は|}日本語[にほんご]と韓国語[かんこくご]を話[はな]します
 
-* I went to Kyoto and Osaka.
-Sono andato a Kyoto e Osaka.
-{私[わたし]は|}京都[きょうと]と大阪[おおさか]{に|へ}行[い]きました
+Yui went to the bookstore and the bank.
+Yui è andata in libreria e in banca.
+ゆいさんは本屋[ほんや]と銀行[ぎんこう]{に|へ}行[い]きました
 
-* I drink coffee and tea.
-Bevo caffè e tè.
-{私[わたし]は|}コーヒーとお茶[ちゃ]を飲[の]みます
+I eat rice and miso soup.
+Mangio riso e zuppa di miso.
+{私[わたし]は|}ご飯[はん]と味噌汁[みそしる]を食[た]べます
 
-* There are dogs and cats here.
-Ci sono cani e gatti qui.
-ここに犬[いぬ]と猫[ねこ]がいます
+There are students and teachers here.
+Ci sono studenti e insegnanti qui.
+ここに学生[がくせい]と先生[せんせい]がいます
 
-* Michiko bought notebooks and pencils.
-Michiko ha comprato quaderni e matite.
-みちこさんはノートと鉛筆[えんぴつ]を買[か]いました
+Pedro bought a dictionary and a map.
+Pedro ha comprato un dizionario e una mappa.
+ペドロさんは辞書[じしょ]と地図[ちず]を買[か]いました
 
-* Mary will go to Korea with Sue.
-Mary andrà in Corea con Sue.
-メアリーさんはスーさんと韓国[かんこく]{に|へ}行[い]きます
+Woody will go to the park with Yasmin.
+Woody andrà al parco con Yasmin.
+ウッディさんはヤスミンさんと公園[こうえん]{に|へ}行[い]きます
 
-* Takeshi will go to the restaurant with Robert.
-Takeshi andrà al ristorante con Robert.
-たけしさんはロバートさんとレストラン{に|へ}行[い]きます
+Michiko will eat lunch with Naomi.
+Michiko pranzerà con Naomi.
+みちこさんはなおみさんと昼[ひる]ご飯[はん]を食[た]べます
 
-* I studied Japanese with Ken.
-Ho studiato giapponese con Ken.
-{私[わたし]は|}けんさんと日本語[にほんご]を勉強[べんきょう]しました
+I played tennis with Carlos.
+Ho giocato a tennis con Carlos.
+{私[わたし]は|}カルロスさんとテニスをしました
 
-* Naomi went shopping with me.
-Naomi è andata a fare shopping con me.
-なおみさんは私[わたし]と買[か]い物[もの]{に|へ}行[い]きました
+Ken studied history with Professor Yamashita.
+Ken ha studiato storia con il professor Yamashita.
+けんさんは山下[やました]先生[せんせい]と歴史[れきし]を勉強[べんきょう]しました
 
 I will eat dinner with my friend tomorrow.
 Mangerò la cena con il mio amico domani.

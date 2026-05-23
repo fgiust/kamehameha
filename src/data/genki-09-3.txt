@@ -1,41 +1,41 @@
 まだ～ていません
 まだ～ていません
 
-* I have not done the homework yet.
-Non ho ancora fatto i compiti.
-{私[わたし]は|}まだ宿題[しゅくだい]をしていません
+I have not read the newspaper yet.
+Non ho ancora letto il giornale.
+{私[わたし]は|}まだ新聞[しんぶん]を読[よ]んでいません
 
-* Takeshi has not woken up yet.
-Takeshi non si è ancora svegliato.
-たけしさんはまだ起[おき]ていません
+John has not come home yet.
+John non è ancora tornato a casa.
+ジョンさんはまだ家[いえ]に帰[かえ]っていません
 
-* I haven't eaten lunch yet.
-Non ho ancora pranzato.
-{私[わたし]は|}まだ昼[ひる]ご飯[はん]を食[た]べていません
+I have not taken a bath yet.
+Non ho ancora fatto il bagno.
+{私[わたし]は|}まだお風呂[ふろ]に入[はい]っていません
 
 Robert hasn't written the essay yet.
 Robert non ha ancora scritto il saggio.
 ロバートさんはまだ作文[さくぶん]を書[か]いていません
 
-* Mary hasn't taken the medicine yet.
-Mary non ha ancora preso la medicina.
-メアリーさんはまだ薬[くすり]を飲[の]んでいません
+Michiko hasn't called yet.
+Michiko non ha ancora chiamato.
+みちこさんはまだ電話[でんわ]していません
 
-* I haven't cleaned my room yet.
-Non ho ancora pulito la mia stanza.
-{私[わたし]は|}まだ部屋[へや]を掃除[そうじ]していません
+I haven't finished the report yet.
+Non ho ancora finito il rapporto.
+{私[わたし]は|}まだレポートを終[お]わらせていません
 
-* Sora has already woken up.
-Sora si è già svegliata.
-ソラさんはもう起[おき]ました
+Yui has already gone to bed.
+Yui è già andata a letto.
+ゆいさんはもう寝[ね]ました
 
-* I have already eaten lunch.
-Ho già pranzato.
-{私[わたし]は|}もう昼[ひる]ご飯[はん]を食[た]べました
+I have already bought the tickets.
+Ho già comprato i biglietti.
+{私[わたし]は|}もう切符[きっぷ]を買[か]いました
 
-* I have already written the essay.
-Ho già scritto il saggio.
-{私[わたし]は|}もう作文[さくぶん]を書[か]きました
+Carlos has already returned the book.
+Carlos ha già restituito il libro.
+カルロスさんはもう本[ほん]を返[かえ]しました
 
 Ken hasn't said anything yet.
 Ken non ha ancora detto nulla.

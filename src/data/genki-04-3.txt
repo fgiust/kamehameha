@@ -1,37 +1,37 @@
 Past Tense of です
 Passato di です
 
-* Robert was a student at Sakura University.
-Robert era uno studente all'Università Sakura.
-ロバートさんはさくら大学[だいがく]の学生[がくせい]でした
+Michiko was an office worker.
+Michiko era un'impiegata.
+みちこさんは会社員[かいしゃいん]でした
 
-* Yesterday was Sunday.
-Ieri era domenica.
-昨日[きのう]は日曜日[にちようび]でした
+Today was Monday.
+Oggi era lunedì.
+今日[きょう]は月曜日[げつようび]でした
 
-* My bicycle was 30,000 yen.
-La mia bicicletta costava 30.000 yen.
-私[わたし]の自転車[じてんしゃ]は三万円[さんまんえん]でした
+That bag was 5,000 yen.
+Quella borsa costava 5.000 yen.
+そのかばんは五千円[ごせんえん]でした
 
-* I was alone.
-Ero solo.
-{私[わたし]は|}一人[ひとり]でした
+Sue was a housewife.
+Sue era casalinga.
+スーさんは主婦[しゅふ]でした
 
-* That was not a Japanese movie.
-Quello non era un film giapponese.
-それは日本[にほん]の映画[えいが]{じゃなかったです|じゃありませんでした}
+That was not an English book.
+Quello non era un libro inglese.
+それは英語[えいご]の本[ほん]{じゃなかったです|じゃありませんでした}
 
-* That was not a Korean book.
-Quello non era un libro coreano.
-それは韓国[かんこく]の本[ほん]{じゃなかったです|じゃありませんでした}
+That was not a Chinese movie.
+Quello non era un film cinese.
+それは中国[ちゅうごく]の映画[えいが]{じゃなかったです|じゃありませんでした}
 
-* Mary was not a University Student.
-Mary non era una studentessa universitaria.
-メアリーさんは大学生[だいがくせい]{じゃなかったです|じゃありませんでした}
+Ken was not a high school student.
+Ken non era un liceale.
+けんさんは高校生[こうこうせい]{じゃなかったです|じゃありませんでした}
 
-* That person was not a doctor.
-Quella persona non era un medico.
-あの人[ひと]は医者[いしゃ]{じゃなかったです|じゃありませんでした}
+Naomi was not a teacher.
+Naomi non era un'insegnante.
+なおみさんは先生[せんせい]{じゃなかったです|じゃありませんでした}
 
 My major was history.
 La mia materia principale era storia.

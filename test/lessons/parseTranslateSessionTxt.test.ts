@@ -45,11 +45,11 @@ describe('parseTranslateSessionTxt', () => {
     for (const lesson of genkiTxtLessons) {
       expect(lesson.id).toMatch(/^genki\d+-\d+$/);
       expect(lesson.title.length).toBeGreaterThan(0);
-      expect(lesson.titleItalian.length).toBeGreaterThan(0);
+      expect(lesson.titleItalian?.length ?? 0).toBeGreaterThan(0);
       expect(lesson.sentenceData.length).toBeGreaterThan(0);
       for (const sentence of lesson.sentenceData) {
         expect(sentence.english.length).toBeGreaterThan(0);
-        expect(sentence.italian.length).toBeGreaterThan(0);
+        expect(sentence.italian?.length ?? 0).toBeGreaterThan(0);
       }
     }
 

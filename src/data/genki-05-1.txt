@@ -1,42 +1,42 @@
 Adjectives
 Aggettivi
 
-* I saw an interesting movie yesterday.
-Ieri ho visto un film interessante.
-{私[わたし]は|}昨日[きのう]面[おも]白[しろ]い映画[えいが]を見[み]ました
+I read a difficult book last week.
+La scorsa settimana ho letto un libro difficile.
+{私[わたし]は|}先週[せんしゅう]難[むずか]しい本[ほん]を読[よ]みました
 
-* This watch is expensive.
-Questo orologio è costoso.
-この時計[とけい]は高[たか]いです
+This bag is cheap.
+Questa borsa è economica.
+このかばんは安[やす]いです
 
-* The weather is good.
-Il tempo è bello.
-天気[てんき]がいいです
+The room is quiet.
+La stanza è tranquilla.
+部屋[へや]は静[しず]かです
 
-* The weather was not good.
-Il tempo non era bello.
-天気[てんき]がよくなかったです
+The test was not difficult.
+Il test non era difficile.
+テストは難[むずか]しくなかったです
 
-* I was busy yesterday.
-Ieri ero occupato.
-{私[わたし]は|}昨日[きのう]忙[いそが]しかったです
+Last night was fun.
+La scorsa notte è stata divertente.
+昨夜[ゆうべ]は楽[たの]しかったです
 
-* The trip was not fun.
-Il viaggio non è stato divertente.
-旅行[りょこう]は楽[たの]しくなかったです
+The homework was not difficult.
+I compiti non erano difficili.
+宿題[しゅくだい]は難[むずか]しくなかったです
 
 It is cold.
 Fa freddo.
 寒[さむ]いです
 
-* She is healthy.
-Lei è in salute.
-彼女[かのじょ]は元気[げんき]です
+My grandfather is well.
+Mio nonno sta bene.
+祖父[そふ]は元気[げんき]です
 
-* The sea was very beautiful in Okinawa.
-Il mare era molto bello a Okinawa.
-沖縄[おきなわ]の海[うみ]はとてもきれいでした
+The mountains in Hokkaido were very beautiful.
+Le montagne in Hokkaido erano molto belle.
+北海道[ほっかいどう]の山[やま]はとてもきれいでした
 
-* Professor Yamashita is a scary teacher.
-Il professor Yamashita è un insegnante spaventoso.
-山下[やました]先生[せんせい]は怖[こわ]い先生[せんせい]です
+Professor Yamashita is a kind teacher.
+Il professor Yamashita è un insegnante gentile.
+山下[やました]先生[せんせい]は親切[しんせつ]な先生[せんせい]です

@@ -1,25 +1,25 @@
 Extra-modest Expressions
 Espressioni extra-modeste
 
-* I will be in Japan next year, too.
-Sarò in Giappone anche l'anno prossimo.
-来[らい]年[ねん]も日[に]本[ほん]でございます
+I will attend the conference next month.
+Parteciperò alla conferenza il prossimo mese.
+来[らい]月[げつ]会議[かいぎ]に参[まい]ります
 
-* I will be in Tokyo next month, too.
-Sarò a Tokyo anche il prossimo mese.
-来[らい]月[げつ]も東[とう]京[きょう]でございます
+I have lived in this city for three years.
+Vivo in questa città da tre anni.
+三[さん]年[ねん]間[かん]この町[まち]に住[す]んでおります
 
-* I graduated from college this June.
-Mi sono laureato quest'anno a giugno.
-今[こん]年[ねん]の六[ろく]月[がつ]に大[だい]学[がく]を卒[そつ]業[ぎょう]いたしました
+I received your letter yesterday.
+Ho ricevuto la sua lettera ieri.
+昨日[きのう]お手紙[てがみ]を拝[はい]見[けん]いたしました
 
-* I have been studying Japanese for a year.
-Studio giapponese da un anno.
-一[いち]年[ねん]間[かん]日[に]本[ほん]語[ご]を勉[べん]強[きょう]しております
+I have been learning calligraphy lately.
+Ultimamente studio calligrafia.
+近[ちか]ごろ書道[しょどう]を勉[べん]強[きょう]しております
 
-* I have been studying English for two years.
-Studio inglese da due anni.
-二[に]年[ねん]間[かん]英[えい]語[ご]を勉[べん]強[きょう]しております
+I have been working at this company since April.
+Lavoro in questa azienda da aprile.
+四[し]月[がつ]からこの会社[かいしゃ]で働[はたら]いております
 
 I am interested in Japanese culture.
 Sono interessato alla cultura giapponese.
@@ -29,13 +29,13 @@ I am interested in Korean culture.
 Sono interessato alla cultura coreana.
 韓[かん]国[こく]文[ぶん]化[か]に興[きょう]味[み]がございます
 
-* A train is pulling in.
-Un treno sta entrando.
-電[でん]車[しゃ]が参[まい]ります
+The next stop is Kyoto Station.
+La prossima fermata è la stazione di Kyoto.
+次[つぎ]は京都[きょうと]駅[えき]でございます
 
-* The bathroom is on the second floor.
-Il bagno è al secondo piano.
-お手[て]洗[あら]いは二[に]階[かい]でございます
+Smoking is prohibited on this floor.
+È vietato fumare a questo piano.
+この階[かい]では禁煙[きんえん]でございます
 
 The café is on the third floor.
 La caffetteria è al terzo piano.

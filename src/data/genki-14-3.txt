@@ -1,42 +1,42 @@
 あげる/くれる/もらう
 あげる/くれる/もらう
 
-* I will give the woman flowers.
-Darò dei fiori alla donna.
-女[おんな]の人[ひと]に花[はな]をあげます
+I will give Takeshi a book.
+Darò un libro a Takeshi.
+たけしさんに本[ほん]をあげます
 
-* The woman gave the man a watch.
-La donna ha dato un orologio all'uomo.
-女[おんな]の人[ひと]は男[おとこ]の人[ひと]に時計[とけい]をあげました
+Mary gave Ken a ticket.
+Mary ha dato un biglietto a Ken.
+メアリーさんはけんさんに切符[きっぷ]をあげました
 
-* My parents may give me a new car.
-I miei genitori potrebbero darmi una macchina nuova.
-両親[りょうしん]は{私[わたし]に|}新[あたら]しい車[くるま]をくれるかもしれません
+My friend might give me a map.
+Un amico potrebbe darmi una mappa.
+友達[ともだち]が{私[わたし]に|}地[ち]図[ず]をくれるかもしれません
 
-* I gave my little brother some ice cream.
-Ho dato del gelato a mio fratello minore.
-弟[おとうと]にアイスクリームをあげました
+I gave my sister some candy.
+Ho dato delle caramelle a mia sorella.
+姉[あね]にキャンディをあげました
 
-* I will give the man chocolate.
-Darò del cioccolato all'uomo.
-男[おとこ]の人[ひと]にチョコレートをあげます
+I will give the teacher flowers.
+Darò dei fiori all'insegnante.
+先生[せんせい]に花[はな]をあげます
 
-* The woman gave me flowers.
-La donna mi ha dato dei fiori.
-女[おんな]の人[ひと]は{私[わたし]に|}花[はな]をくれました
+Pedro gave me a postcard.
+Pedro mi ha dato una cartolina.
+ペドロさんは{私[わたし]に|}はがきをくれました
 
-* My big sister gave me an old dictionary.
-Mia sorella maggiore mi ha dato un vecchio dizionario.
-姉[あね]は{私[わたし]に|}古[ふる]い辞書[じしょ]をくれました
+My father gave me a new bag.
+Mio padre mi ha dato una borsa nuova.
+父[ちち]は{私[わたし]に|}新[あたら]しいかばんをくれました
 
-* My roommate gave me a shirt.
-Il mio coinquilino mi ha dato una camicia.
-ルームメートは{私[わたし]に|}シャツをくれました
+Sora gave me a CD.
+Sora mi ha dato un CD.
+ソラさんは{私[わたし]に|}CDをくれました
 
-* I received an old dictionary from my big sister.
-Ho ricevuto un vecchio dizionario da mia sorella maggiore.
-姉[あね]に古[ふる]い辞書[じしょ]をもらいました
+I received candy from my sister.
+Ho ricevuto delle caramelle da mia sorella.
+姉[あね]にキャンディをもらいました
 
-* I received a bicycle from my parents.
-Ho ricevuto una bicicletta dai miei genitori.
-両親[りょうしん]に自転車[じてんしゃ]をもらいました
+I received a map from my friend.
+Ho ricevuto una mappa dal mio amico.
+友達[ともだち]に地[ち]図[ず]をもらいました

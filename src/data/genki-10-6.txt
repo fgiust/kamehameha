@@ -1,37 +1,37 @@
 どこかに/どこにも
 どこかに/どこにも
 
-* Did you go anywhere?
-Sei andato da qualche parte?
-どこか{に|へ}行[い]きましたか
+Did you travel anywhere during the vacation?
+Sei viaggiato da qualche parte durante le vacanze?
+休み[やすみ]にどこか{に|へ}旅行[りょこう]しましたか
 
-* No, I didn't go anywhere.
-No, non sono andato da nessuna parte.
-いいえ、どこに{も|}行[い]きませんでした
+No, I didn't travel anywhere.
+No, non sono viaggiato da nessuna parte.
+いいえ、どこに{も|}旅行[りょこう]しませんでした
 
-* Did you see anybody?
-Hai visto qualcuno?
-だれかに会[あ]いましたか
+Did you meet anyone new?
+Hai incontrato qualcuno di nuovo?
+新[あたら]しい人[ひと]に会[あ]いましたか
 
-* No, I didn't see anybody.
-No, non ho visto nessuno.
+No, I didn't meet anyone.
+No, non ho incontrato nessuno.
 いいえ、だれに{も|}会[あ]いませんでした
 
-* Did you do anything?
-Hai fatto qualcosa?
-何[なに]かしましたか
+Did you buy anything at the store?
+Hai comprato qualcosa al negozio?
+店[みせ]で何[なに]か買[か]いましたか
 
-* No, I didn't do anything.
-No, non ho fatto nulla.
-いいえ、何[なに]も{しませんでした|しません}
+No, I didn't buy anything.
+No, non ho comprato nulla.
+いいえ、何[なに]も買[か]いませんでした
 
-* Did Takeshi drink anything last night?
-Takeshi ha bevuto qualcosa ieri sera?
-たけしさんは昨日[きのう]の夜[よる]何[なに]か飲[み]ましたか
+Did Woody eat anything for breakfast?
+Woody ha mangiato qualcosa a colazione?
+ウッディさんは朝[あさ]ご飯[はん]に何[なに]か食[た]べましたか
 
-* Did Mary go anywhere yesterday?
-Mary è andata da qualche parte ieri?
-メアリーさんは昨日[きのう]どこか{に|へ}行[い]きましたか
+Did Naomi go anywhere last Sunday?
+Naomi è andata da qualche parte domenica scorsa?
+なおみさんは先週[せんしゅう]の日曜日[にちようび]どこか{に|へ}行[い]きましたか
 
 I didn't eat anything.
 Non ho mangiato nulla.

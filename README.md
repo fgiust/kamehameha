@@ -6,4 +6,4 @@
 
 This app was inspired by the excellent work of Steven Kraft (https://steven-kraft.com/projects/japanese/), with the goal of providing a more up-to-date and interactive set of exercises for learners.
 
-All exercises included in this app are original and do not reproduce any copyrighted material. While the exercises are organized following the structure of the Genki textbooks for convenience, they are independently created and are not derived from or copied from the Genki books or workbooks.
+All exercises in this app are written to be original and do not reproduce text from the Genki textbooks or workbooks. The app was inspired by [Steven Kraft’s Japanese exercises](https://steven-kraft.com/projects/japanese/) in structure only; sentence prompts are independently authored and aligned with Genki lesson topics for supplementary practice. See the in-app Disclaimer for details.

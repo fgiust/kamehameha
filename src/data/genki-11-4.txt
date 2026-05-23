@@ -1,29 +1,29 @@
 NounA や NounB
 SostantivoA や SostantivoB
 
-* I went to Kyoto and Osaka (among other places).
-Sono andato a Kyoto e Osaka (tra gli altri posti).
-京都[きょうと]や大阪[おおさか]{に|へ}行[い]きました
+I visited Nara and Hiroshima (among other places).
+Ho visitato Nara e Hiroshima (tra gli altri posti).
+奈良[なら]や広島[ひろしま]{に|へ}行[い]きました
 
-* I like ice cream and cake (among other desserts).
-Mi piacciono il gelato e la torta (tra gli altri dolci).
-{私[わたし]は|}アイスクリームやケーキが好[す]きです
+I like ramen and udon (among other dishes).
+Mi piacciono ramen e udon (tra gli altri piatti).
+{私[わたし]は|}ラーメンやうどんが好[す]きです
 
-* I drink coffee and green tea (among other drinks).
-Bevo caffè e tè verde (tra le altre bevande).
-{私[わたし]は|}コーヒーやお茶[ちゃ]を飲[の]みます
+I read novels and newspapers (among other things).
+Leggo romanzi e giornali (tra le altre cose).
+{私[わたし]は|}小説[しょうせつ]や新聞[しんぶん]を読[よ]みます
 
-* I bought a watch and a new shirt (among other things).
-Ho comprato un orologio e una camicia nuova (tra le altre cose).
-{私[わたし]は|}時計[とけい]や新[あたら]しいシャツを買[か]いました
+I bought gloves and a scarf (among other things).
+Ho comprato guanti e una sciarpa (tra le altre cose).
+{私[わたし]は|}手袋[てぶくろ]やマフラーを買[か]いました
 
-* I like dogs and cats (among other animals).
-Mi piacciono cani e gatti (tra gli altri animali).
-{私[わたし]は|}犬[いぬ]や猫[ねこ]が好[す]きです
+I like spring and autumn (among other seasons).
+Mi piacciono primavera e autunno (tra le altre stagioni).
+{私[わたし]は|}春[はる]や秋[あき]が好[す]きです
 
-* I will go to a café and a park (among other places).
-Andrò in una caffetteria e in un parco (tra gli altri posti).
-カフェや公園[こうえん]{に|へ}行[い]きます
+I will study math and science (among other subjects).
+Studierò matematica e scienze (tra le altre materie).
+数学[すうがく]や理科[りか]を勉強[べんきょう]します
 
 There are books and magazines on the desk.
 Ci sono libri e riviste sulla scrivania.

@@ -5,13 +5,13 @@ Won't you drink coffee with me?
 Non bevi un caffè con me?
 {一緒[いっしょ]に|}コーヒーを飲[の]みませんか
 
-* Would you like to see a movie on Saturday?
-Ti andrebbe di vedere un film sabato?
-土曜日[どようび]に{一緒[いっしょ]に|}映画[えいが]を見[み]ませんか
+Won't you eat ramen with me on Friday?
+Non mangi un ramen con me venerdì?
+金曜日[きんようび]に{一緒[いっしょ]に|}ラーメンを食[た]べませんか
 
-* Won't you have lunch with me?
-Non pranzi con me?
-{一緒[いっしょ]に|}昼ご飯[ひるごはん]を食[た]べませんか
+Won't you take photos with me?
+Non scatti delle foto con me?
+{一緒[いっしょ]に|}写真[しゃしん]を撮[と]りませんか
 
 Would you like to play tennis tomorrow?
 Ti andrebbe di giocare a tennis domani?
@@ -29,9 +29,9 @@ Won't you go to Kyoto on Sunday?
 Non andiamo a Kyoto domenica?
 日曜日[にちようび]に京都[きょうと]{に|へ}行[い]きませんか
 
-* Won't you have some tea?
-Non bevi un po' di tè?
-お茶[ちゃ]を飲[の]みませんか
+Won't you watch TV with Sora tonight?
+Non guardi la TV con Sora stasera?
+今晩[こんばん]、ソラさんと{一緒[いっしょ]に|}テレビを見[み]ませんか
 
 Would you like to come to my house?
 Ti andrebbe di venire a casa mia?

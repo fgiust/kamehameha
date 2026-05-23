@@ -1,41 +1,41 @@
 ～ている
 ～ている
 
-* Mary is studying right now.
-Mary sta studiando adesso.
-メアリーさんは今[いま]勉強[べんきょう]しています
+Yui is cooking right now.
+Yui sta cucinando adesso.
+ゆいさんは今[いま]料理[りょうり]しています
 
-* Professor Yamashita is married.
-Il professor Yamashita è sposato.
-山下[やました]先生[せんせい]は結婚[けっこん]しています
+Professor Yamashita is wearing glasses.
+Il professor Yamashita porta gli occhielli.
+山下[やました]先生[せんせい]は眼鏡[めがね]をかけています
 
-* Ken has a lot of money.
-Ken ha molti soldi.
-けんさんはお金[かね]をたくさん持[も]っています
+Pedro is wearing a red shirt.
+Pedro indossa una camicia rossa.
+ペドロさんは赤[あか]いシャツを着[き]ています
 
-* Sora knows my mother.
-Sora conosce mia madre.
-ソラさんは私[わたし]のお母[かあ]さんを知[し]っています
+Woody knows that song.
+Woody conosce quella canzone.
+ウッディさんはその歌[うた]を知[し]っています
 
-* My younger brother is very thin.
-Mio fratello minore è molto magro.
-私[わたし]の弟[おとうと]はとてもやせています
+My cat is very fat.
+Il mio gatto è molto grasso.
+私[わたし]の猫[ねこ]はとても太[ふと]っています
 
-* Robert is reading a book in English.
-Robert sta leggendo un libro in inglese.
-ロバートさんは英語[えいご]で本[ほん]を読[よ]んでいます
+Michiko is writing a letter in Japanese.
+Michiko sta scrivendo una lettera in giapponese.
+みちこさんは日本語[にほんご]で手紙[てがみ]を書[か]いています
 
-* My family lives in Tokyo.
-La mia famiglia vive a Tokyo.
-私[わたし]の家族[かぞく]は東京[とうきょう]に住[す]んでいます
+My parents live in Osaka.
+I miei genitori vivono a Osaka.
+私[わたし]の両親[りょうしん]は大阪[おおさか]に住[す]んでいます
 
-* My older sister works for a Japanese company.
-Mia sorella maggiore lavora per un'azienda giapponese.
-私[わたし]のお姉[ねえ]さんは日本[にほん]の会社[かいしゃ]に勤[つと]めています
+My father works at a hospital.
+Mio padre lavora in ospedale.
+私[わたし]のお父[とう]さんは病院[びょういん]に勤[つと]めています
 
-* Takeshi has gone to China.
-Takeshi è andato in Cina.
-たけしさんは中国[ちゅうごく]{に|へ}行[い]っています
+Naomi has gone to the library.
+Naomi è andata in biblioteca.
+なおみさんは図書館[としょかん]{に|へ}行[い]っています
 
 I am teaching English.
 Sto insegnando inglese.

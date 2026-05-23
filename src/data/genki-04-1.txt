@@ -1,42 +1,42 @@
 Xがあります/います
 Xがあります/います
 
-* Do you have time?
-Hai tempo?
-時[じ]間[かん]がありますか
+Do you have a map?
+Hai una mappa?
+地図[ちず]がありますか
 
 There will be a Japanese class tomorrow.
 Ci sarà una lezione di giapponese domani.
 明日[あした]、日本語[にほんご]のクラスがあります
 
-* There is a bookstore over there.
-C'è una libreria laggiù.
-あそこに本屋[ほんや]があります
+There is a bank over there.
+C'è una banca laggiù.
+あそこに銀行[ぎんこう]があります
 
-* There will be no class on Friday.
-Non ci sarà lezione venerdì.
-金曜日[きんようび]にクラスがありません
+There will be no test on Monday.
+Non ci sarà un test lunedì.
+月曜日[げつようび]にテストがありません
 
-* I do not have a dictionary.
-Non ho un dizionario.
-{私[わたし]は|}辞書[じしょ]がありません
+I do not have a pen.
+Non ho una penna.
+{私[わたし]は|}ペンがありません
 
-* There's an international student over there.
-C'è uno studente internazionale laggiù.
-あそこに留学生[りゅうがくせい]がいます
+There is a dog over there.
+C'è un cane laggiù.
+あそこに犬[いぬ]がいます
 
-* There is Takeshi over there.
-C'è Takeshi laggiù.
-あそこにたけしさんがいます
+There is Michiko over there.
+C'è Michiko laggiù.
+あそこにみちこさんがいます
 
-* I have a Japanese friend.
-Ho un amico giapponese.
-{私[わたし]は|}日本人[にほんじん]の友達[ともだち]がいます
+I have an older brother.
+Ho un fratello maggiore.
+{私[わたし]は|}お兄[にい]さんがいます
 
-* I have a younger sister.
-Ho una sorella minore.
-{私[わたし]は|}妹[いもうと]がいます
+I have a cat.
+Ho un gatto.
+{私[わたし]は|}猫[ねこ]がいます
 
-* There is a bus stop over there.
-C''è una fermata dell'autobus laggiù.
-あそこにバス停[てい]があります
+There is a post office over there.
+C'è un ufficio postale laggiù.
+あそこに郵便局[ゆうびんきょく]があります

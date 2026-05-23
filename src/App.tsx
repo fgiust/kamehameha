@@ -11,7 +11,6 @@ import DaysPage from './pages/DaysPage';
 import NumbersPage from './pages/NumbersPage';
 import TimePage from './pages/TimePage';
 import CountingThingsPage from './pages/CountingThingsPage';
-import NaVsNoPage from '../backup/NaVsNoPage';
 import TransitivePage from './pages/TransitivePage';
 import FamilyNamesPage from './pages/FamilyNamesPage';
 import DisclaimerPage from './pages/DisclaimerPage';
@@ -230,7 +229,6 @@ function AppShell() {
         <Route path="/time" element={<TimePage />} />
 
         {/* Other */}
-        <Route path="/na-vs-no" element={<NaVsNoPage />} />
         <Route path="/transitive" element={<TransitivePage />} />
         <Route path="/family-names" element={<FamilyNamesPage />} />
         <Route path="/adjectives-nouns" element={<AdjectivesNounsPage />} />

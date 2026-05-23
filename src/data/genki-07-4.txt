@@ -17,26 +17,26 @@ Sora is going to the library to read a book.
 Sora va in biblioteca a leggere un libro.
 ソラさんは図書館[としょかん]に本[ほん]を読[よ]み{に|へ}行[い]きます
 
-* Ken went to the post office to buy stamps.
-Ken è andato all'ufficio postale a comprare dei francobolli.
-けんさんは郵便局[ゆうびんきょく]に切手[きって]を買[か]い{に|へ}行[い]きました
+Yasmin went to the supermarket to buy milk.
+Yasmin è andata al supermercato a comprare latte.
+ヤスミンさんはスーパーに牛乳[ぎゅうにゅう]を買[か]い{に|へ}行[い]きました
 
-* I am going to the park to take pictures.
-Vado al parco a scattare foto.
-{私[わたし]は|}公園[こうえん]に写真[しゃしん]を撮[と]り{に|へ}行[い]きます
+I am going to the station to meet my friend.
+Vado in stazione a incontrare il mio amico.
+{私[わたし]は|}駅[えき]に友達[ともだち]に会[あ]い{に|へ}行[い]きます
 
-* John is coming to my house to study.
-John viene a casa mia a studiare.
-ジョンさんは私[わたし]の家[いえ]に勉強[べんきょう]し{に|へ}来[き]ます
+Pedro is coming to school to take an exam.
+Pedro viene a scuola per fare un esame.
+ペドロさんは学校[がっこう]に試験[しけん]を受[う]け{に|へ}来[き]ます
 
-* Let's go to the convenience store to buy drinks.
-Andiamo al minimarket a comprare delle bevande.
-コンビニに飲[の]み物[もの]を買[か]い{に|へ}行[い]きましょう
+Let's go to the restaurant to eat sushi.
+Andiamo al ristorante a mangiare sushi.
+レストランに寿司[すし]を食[た]べ{に|へ}行[い]きましょう
 
-* Let's return home to eat dinner.
-Torniamo a casa a cenare.
-うち{に|へ}晩[ばん]ご飯[はん]を食[た]べに帰[かえ]りましょう
+Let's go home to do homework.
+Torniamo a casa a fare i compiti.
+うち{に|へ}宿題[しゅくだい]をし{に|へ}帰[かえ]りましょう
 
-* I am going to the department store to buy shoes.
-Vado al grande magazzino a comprare delle scarpe.
-{私[わたし]は|}デパートに靴[くつ]を買[か]い{に|へ}行[い]きます
+I am going to the bookstore to buy a map.
+Vado in libreria a comprare una mappa.
+{私[わたし]は|}本屋[ほんや]に地図[ちず]を買[か]い{に|へ}行[い]きます

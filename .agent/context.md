@@ -31,41 +31,38 @@ The application includes:
 ### Directory Structure
 ```text
 src/
+├── types.ts                  # Shared types (ConjugationEngine, SentenceItem, HomeConfig, …)
 ├── engines/
-│   ├── types.ts              # Shared types for exercise engines
-│   ├── verbConjugation.ts    # Parametric verb conjugation engines (11 forms)
-│   ├── adjConjugation.ts     # Parametric adjective conjugation engines (5 forms)
-│   ├── sentenceEngine.ts     # Sentence generation + diff engine
-│   ├── japaneseNumber.ts     # Number readings generator (romaji->hiragana answers)
-│   ├── japaneseTime.ts       # Time readings generator (hour/minute counters)
-│   └── multipleChoice.ts     # Reusable multiple-choice quiz engine
+│   ├── verbConjugation.ts    # 11 verb forms + verbEngines map
+│   ├── adjConjugation.ts     # 5 adjective forms + adjEngines map
+│   ├── sentenceEngine.ts     # Sentence diff + correctness
+│   ├── japaneseNumber.ts     # Number → hiragana readings
+│   ├── japaneseTime.ts       # Clock time readings
+│   ├── readingExerciseEngine.ts  # Romaji IME + ReadingExercisePicker
+├── lessons/
+│   ├── parseTranslateSessionTxt.ts  # genki-*.txt / sentence-*.txt parser
+│   ├── parseReadingExerciseTxt.ts   # reading-*.txt parser
+│   ├── genkiTxtLessons.ts / genkiLessons.ts
+│   ├── sentenceTxtLessons.ts
+│   └── readingTxtLessons.ts
 ├── data/
-│   ├── verbs.ts              # Verb dataset (kana/kanji/type/eng)
-│   ├── adjectives.ts         # Adjective dataset (kana/kanji/type/eng)
-│   ├── counters.ts           # Counter dataset (multiple valid readings)
-│   ├── daysOfMonth.ts        # Days-of-month readings (1-31)
-│   ├── genkiLessons.ts       # Genki lesson mapping + sentence datasets
-│   ├── naVsNoData.ts         # Na vs No Adjectives data
-│   └── transitiveData.ts     # Transitive/Intransitive pairs data
-├── components/
-│   ├── ConjugationExercise.tsx # Unified single-answer exercise component
-│   └── SentenceExercise.tsx    # Unified sentence exercise component
-├── pages/
-│   ├── HomePage.tsx
-│   ├── GenkiPage.tsx
-│   ├── GenkiLessonPage.tsx
-│   ├── VerbExercisePage.tsx
-│   ├── AdjExercisePage.tsx
-│   ├── RandomizePage.tsx
-│   ├── AdjRandomizePage.tsx
-│   ├── CountersPage.tsx
-│   ├── DaysPage.tsx
-│   ├── NumbersPage.tsx
-│   ├── TimePage.tsx
-│   ├── NaVsNoPage.tsx        # Na vs No Adjectives quiz page
-│   └── TransitivePage.tsx    # Transitive/Intransitive quiz page
-└── styles/
-    └── index.css             # Design system + Dark Mode
+│   ├── genki-NN-N.txt        # 115 Genki lesson files (build-time via Vite plugin)
+│   ├── sentence-*.txt        # obligation, prohibition, adjectivenouns
+│   ├── reading-*.txt         # days, familynames
+│   ├── dictConjugationVerbs.ts / dictConjugationAdjectives.ts
+│   ├── dictCounters.ts / dictTransitivePairs.ts / dictCountingThings.ts
+│   ├── genki_vocabulary.txt / genki_cast.txt
+│   └── homeSections.ts       # Home navigation config
+├── components/               # ConjugationExercise, SentenceExercise, ReadingExercise, …
+├── pages/                    # Home, GenkiLesson, SentenceTxtLesson, verb/adj/numbers, …
+├── hooks/useSessionProgress.ts
+├── i18n/                     # en.ts, it.ts (UI only; exercise titles from TXT)
+├── utils/
+└── styles/index.css
+api/                          # Vercel: feedback.ts, contact.ts
+backup/                       # Archived NaVsNo exercise (not linked from app)
+scripts/validate-genki-data.mjs  # CI: * markers + 3-line blocks
+test/                         # vitest: sentenceEngine, parseTranslateSessionTxt
 ```
 
 ---
@@ -87,9 +84,8 @@ src/
   - `#name` placeholder replacement,
   - detailed diff feedback for wrong/missing characters.
 - **Genki Sentence Exercises**: All Genki I and Genki II sentence exercises have been implemented with N5-N4 level content.
-- **Other Interactive Exercises**: "Transitive / Intransitive" and "な vs の Adjectives" have been built as dedicated pages replicating the reference tools' exact interaction styles.
-  - "な vs の" leverages `MultipleChoiceEngine` (reusable multiple-choice logic) and imports its data from `src/data/naVsNoData.ts`.
-  - "Transitive / Intransitive" practices verb-pair counters using wanakana auto-conversion, pulling its pairs from `src/data/transitiveData.ts`.
+- **Other Interactive Exercises**: Transitive/Intransitive pairs (`TransitivePage`, `dictTransitivePairs.ts`); counting-things; family names; adjectives+nouns (`sentence-adjectivenouns.txt`); obligation/prohibition sentence lessons on home.
+- **な vs の Adjectives**: implemented under `backup/` only; route and home entry **removed** (was disabled). `MultipleChoiceEngine` remains in repo but is not wired to any live page.
 
 ### Conjugation Exercise Global Options
 Implemented in `src/components/ConjugationExercise.tsx`:
@@ -206,7 +202,24 @@ Exercises should never reuse exactly the same phrase used in original Genki exer
   - `nihongo.conj.showEnglish`
   - Legacy: `nihongo.conj.hideType` is migrated to `nihongo.conj.showType` (inverted) on first load.
 
-### Missing implementation and next steps
-- At the moment the main focus is stabilizing the application for a beta test. Apart from fixing any detected bug, the main issue is the reuse in the test data of same exact senteces from the initial reference steven-kraft.com/projects/japanese - the agent that built the dataset for the genki lessons (genki-**-*-txt files in src/data) incorrectly reused many of the phrases from the reference that could be copyright protected, instead of following the recomendation of only using those as a reference for generating similar original exercises. 
-All the reused exercised are now marked with a "*" in the txt file, we should replace each of them with new phrases either with basic variations (e.g. "I like curry" -> "I like ramen") or with completely different phrases focused on the grammar topic tested in the lesson and using a simple vocabulary, with a preference of using the vocabulary in genki_vocabulary.txt and people names in genki_cast.txt.
-Note that changing only people names in a sentence doesn't qualifies as a meaningful variation.
+### Production & tooling
+- Deployed on Vercel with `@vercel/analytics`, feedback/contact API routes (`api/`), KV storage for submissions.
+- `npm run build` runs vitest, `tsc -b`, then `vite build` (TXT parsed at build time via `genkiTxtPlugin` in `vite.config.ts`).
+- `npm run validate:data` runs `scripts/validate-genki-data.mjs` (starred prompts + 3-line blocks).
+
+### Copyright cleanup status (Genki TXT)
+Phrases copied from the reference app are marked with a leading `*` on the English prompt line. Replace with original EN/IT/JP triplets (same grammar focus, Genki-level vocab, names from `genki_cast.txt`). Renaming people only is **not** sufficient.
+
+| Metric | Value (last validated) |
+|--------|------------------------|
+| `genki-*.txt` files | 115 |
+| Files with `*` prompts | **0** |
+| Starred prompt lines | **0** |
+
+**2025-05 cleanup:** ~587 starred prompts across 76 files were replaced with original EN/IT/JP exercises (chapters 3–20 batches). `npm run validate:data` is part of `npm run build`.
+
+After future data edits: run `npm run validate:data` and `npm run build`, update counts here if needed.
+
+### Missing / next steps
+- Beta stabilization: bugfixes from user testing.
+- Optional post-beta: more `sentence-*.txt` topics; re-enable な vs の from `backup/` if desired.

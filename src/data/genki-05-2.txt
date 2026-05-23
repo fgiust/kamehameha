@@ -1,41 +1,41 @@
 好き/きらい(な)
 好き/きらい(な)
 
-* Robert likes his Japanese classes.
-A Robert piacciono le sue lezioni di giapponese.
-ロバートさんは日本語[にほんご]のクラスが好[す]きです
+Yui likes her history classes.
+A Yui piacciono le sue lezioni di storia.
+ゆいさんは歴史[れきし]のクラスが好[す]きです
 
-* I love dogs.
-Amo i cani.
-{私[わたし]は|}犬[いぬ]が大好[だいす]きです
+I love cats.
+Amo i gatti.
+{私[わたし]は|}猫[ねこ]が大好[だいす]きです
 
-* Mary dislikes her Economics classes.
-A Mary non piacciono le sue lezioni di economia.
-メアリーさんは経済[けいざい]のクラスが嫌[きら]いです
+Pedro dislikes his math classes.
+A Pedro non piacciono le sue lezioni di matematica.
+ペドロさんは数学[すうがく]のクラスが嫌[きら]いです
 
-* Takeshi hates natto.
-Takeshi odia il natto.
-たけしさんは納豆[なっとう]が大嫌[だいきら]いです
+Naomi hates rainy days.
+Naomi odia i giorni di pioggia.
+なおみさんは雨[あめ]の日[ひ]が大嫌[だいきら]いです
 
-* I like surfing.
-Mi piace fare surf.
-{私[わたし]は|}サーフィンが好[す]きです
+I like cooking.
+Mi piace cucinare.
+{私[わたし]は|}料理[りょうり]が好[す]きです
 
-* Professor Yamashita dislikes fish.
-Il professor Yamashita non ama il pesce.
-山下[やました]先生[せんせい]は魚[さかな]が嫌[きら]いです
+Michiko dislikes meat.
+A Michiko non piace la carne.
+みちこさんは肉[にく]が嫌[きら]いです
 
-* This is my favorite book.
-Questo è il mio libro preferito.
-これは私[わたし]の好[す]きな本[ほん]です
+This is my favorite song.
+Questa è la mia canzone preferita.
+これは私[わたし]の好[す]きな歌[うた]です
 
-* That is my favorite restaurant.
-Quello è il mio ristorante preferito.
-あれは私[わたし]の好[す]きなレストランです
+That is my favorite park.
+Quello è il mio parco preferito.
+あれは私[わたし]の好[す]きな公園[こうえん]です
 
-* I hate cold mornings.
-Odio le mattine fredde.
-{私[わたし]は|}寒[さむ]い朝[あさ]が大嫌[だいきら]いです
+I hate hot summers.
+Odio le estati calde.
+{私[わたし]は|}暑[あつ]い夏[なつ]が大嫌[だいきら]いです
 
 I like coffee a lot.
 Mi piace molto il caffè.

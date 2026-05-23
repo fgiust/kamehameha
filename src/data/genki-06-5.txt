@@ -1,33 +1,33 @@
 Describing Two Activities
 Descrivere due attività
 
-* I got up at six and studied.
-Mi sono alzato alle sei e ho studiato.
-{私[わたし]は|}六時[ろくじ]に起[お]きて、勉強[べんきょう]しました
+I came home and watched TV.
+Sono tornato a casa e ho guardato la TV.
+{私[わたし]は|}うち{に|へ}帰[かえ]って、テレビを見[み]ました
 
-* I got up and ate breakfast.
-Mi sono alzato e ho fatto colazione.
-{私[わたし]は|}起[お]きて、朝[あさ]ご飯[はん]を食[た]べました
+I washed my hands and ate lunch.
+Mi sono lavato le mani e ho pranzato.
+{私[わたし]は|}手[て]を洗[あら]って、昼[ひる]ご飯[はん]を食[た]べました
 
-* Let's go to the café and drink coffee.
-Andiamo in caffetteria a bere un caffè.
-カフェ{に|へ}行[い]って、コーヒーを飲[の]みましょう
+Let's go to the supermarket and buy fruit.
+Andiamo al supermercato a comprare frutta.
+スーパー{に|へ}行[い]って、果物[くだもの]を買[か]いましょう
 
-* I will go to the library and return the book.
-Andrò in biblioteca e restituirò il libro.
-{私[わたし]は|}図書館[としょかん]{に|へ}行[い]って、本[ほん]を返[かえ]します
+I will go to the post office and buy stamps.
+Andrò all'ufficio postale a comprare francobolli.
+{私[わたし]は|}郵便局[ゆうびんきょく]{に|へ}行[い]って、切手[きって]を買[か]います
 
-* Mary and Takeshi met and talked for about an hour.
-Mary e Takeshi si sono incontrati e hanno parlato per circa un'ora.
-メアリーさんとたけしさんは会[あ]って、一時間[いちじかん]ぐらい話[はな]しました
+Yasmin and Ken met and studied for about two hours.
+Yasmin e Ken si sono incontrati e hanno studiato per circa due ore.
+ヤスミンさんとけんさんは会[あ]って、二時間[にじかん]ぐらい勉強[べんきょう]しました
 
-* I returned home and took a bath.
-Sono tornato a casa e ho fatto il bagno.
-{私[わたし]は|}うち{に|へ}帰[かえ]って、お風呂[ふろ]に入[はい]りました
+I got up early and went for a walk.
+Mi sono alzato presto e ho fatto una passeggiata.
+{私[わたし]は|}早[はや]く起[お]きて、散歩[さんぽ]しました
 
-* The children went to the park and played.
-I bambini sono andati al parco e hanno giocato.
-子供[こども]は公園[こうえん]{に|へ}行[い]って、遊[あそ]びました
+The students went to the museum and looked at pictures.
+Gli studenti sono andati al museo e hanno guardato i quadri.
+学生[がくせい]は美術館[びじゅつかん]{に|へ}行[い]って、絵[え]を見[み]ました
 
 I turned off the lights and went to sleep.
 Ho spento le luci e sono andato a dormire.

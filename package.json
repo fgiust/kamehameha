@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "vitest run && tsc -b && vite build",
+    "build": "npm run validate:data && vitest run && tsc -b && vite build",
+    "validate:data": "node scripts/validate-genki-data.mjs",
     "test": "vitest run",
     "lint": "eslint .",
     "preview": "vite preview"
