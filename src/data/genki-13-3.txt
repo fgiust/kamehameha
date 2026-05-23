@@ -5,8 +5,8 @@ This ramen looks delicious.
 Questo ramen sembra delizioso.
 このラーメンは美[お]味[い]しそう{です|です。}
 
-The food looks spicy.
-Il cibo sembra piccante.
+This dish looks spicy.
+Questa pietanza sembra piccante.
 この料[りょう]理[り]は辛[から]そう{です|です。}
 
 That bag looks expensive.
@@ -37,6 +37,6 @@ Ken does not look good at tennis.
 Ken non sembra bravo a tennis.
 けんさんはテニスが上手[じょうず]じゃなさそうです
 
-She is wearing a warm-looking sweater.
-Indossa un maglione che sembra caldo.
+I am wearing a sweater that looks warm.
+Indosso un maglione che sembra caldo.
 暖[あたた]かそうなセーターを着[き]ています
