@@ -165,6 +165,7 @@ For content validation, a hidden debug mode can show both EN/IT prompts on sente
 
 - **Enable**: visit any URL with `?debug=42` (persisted in `localStorage` key `nihongo.debugMode`).
 - **Disable**: `?debug=off` clears the flag.
+- **Completion animation preview** (debug must already be on): on an exercise page that shows `SessionProgressBar`, add `?debug=animation` to play the same GIF + MP3 as at 100% progress (same DOM/styles/position); not stored in `localStorage`. Reload with the param to replay.
 - **Indicator**: small bug icon fixed at bottom-left while active (`DebugModeIndicator`, reuses feedback tab SVG).
 - **Sentence exercises** (`SentenceExercise`): when debug is on, the alternate-language prompt appears smaller under the main question (no prefix).
 - **Feedback panel** (always): shows the alternate prompt under the current one with prefix `Inglese:` / `Italiano:` (i18n). Question and correct-answer readonly blocks no longer use the dashed input-style border.

@@ -34,3 +34,8 @@ export function syncDebugModeFromSearch(search: string): boolean {
   }
   return false;
 }
+
+/** One-shot URL trigger; does not persist (requires debug mode already on via `?debug=42`). */
+export function isDebugAnimationRequest(search: string): boolean {
+  return new URLSearchParams(search).get('debug') === 'animation';
+}

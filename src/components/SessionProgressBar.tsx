@@ -1,6 +1,23 @@
 import { useEffect, useState, useRef } from 'react';
-import kamehamehaAudioUrl from '../assets/kamehameha.mp3';
-import kamehamehaGifUrl from '../assets/kamehameha.gif';
+import { useLocation } from 'react-router-dom';
+import { useDebugMode } from '../hooks/useDebugMode';
+import { isDebugAnimationRequest } from '../utils/debugMode';
+import { kamehamehaGifSrc, triggerKamehamehaCelebration } from '../utils/kamehamehaCelebration';
+
+function KamehamehaCelebrationGif({ gifKey }: { gifKey: number }) {
+  return (
+    <img
+      src={kamehamehaGifSrc(gifKey)}
+      alt=""
+      className="kamehameha-celebration-gif"
+    />
+  );
+}
+
+function playCelebration(setGifKey: (k: number) => void, setShow: (v: boolean) => void) {
+  setGifKey(triggerKamehamehaCelebration());
+  setShow(true);
+}
 
 export default function SessionProgressBar({
   segments,
@@ -15,47 +32,31 @@ export default function SessionProgressBar({
   incorrect?: number;
   pct?: number;
 }) {
+  const debugMode = useDebugMode();
+  const { search } = useLocation();
   const [showKamehameha, setShowKamehameha] = useState(false);
   const [kamehamehaKey, setKamehamehaKey] = useState(0);
   const hasTriggeredRef = useRef(false);
 
   useEffect(() => {
-    // Check if we reached 100% correct
+    if (!debugMode || !isDebugAnimationRequest(search)) return;
+    playCelebration(setKamehamehaKey, setShowKamehameha);
+  }, [debugMode, search]);
+
+  useEffect(() => {
     if (segments.length > 0 && segments.every(s => s === 1)) {
       if (!hasTriggeredRef.current) {
         hasTriggeredRef.current = true;
-
-        // Play sound
-        const audio = new Audio(kamehamehaAudioUrl);
-        audio.play().catch(e => console.error('Audio play failed:', e));
-
-        setKamehamehaKey(Date.now());
-        setShowKamehameha(true);
+        playCelebration(setKamehamehaKey, setShowKamehameha);
       }
-    } else {
-      if (segments.some(s => s !== 1)) {
-        hasTriggeredRef.current = false;
-      }
+    } else if (segments.some(s => s !== 1)) {
+      hasTriggeredRef.current = false;
     }
   }, [segments]);
 
   return (
     <div className="session-progress-row" aria-hidden="true" style={{ position: 'relative' }}>
-      {(showKamehameha) && (
-        <img
-          src={`${kamehamehaGifUrl}?v=${kamehamehaKey}`}
-          alt=""
-          style={{
-            position: 'absolute',
-            left: -100,
-            top: '-30px',
-            transform: 'translateY(-50%)',
-            height: '250px',
-            zIndex: 10,
-            pointerEvents: 'none'
-          }}
-        />
-      )}
+      {showKamehameha && <KamehamehaCelebrationGif gifKey={kamehamehaKey} />}
       <div className="session-progress-left">
         {typeof correct === 'number' && typeof incorrect === 'number' && (
           <>

@@ -1,5 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { DEBUG_MODE_STORAGE_KEY, isDebugModeEnabled, syncDebugModeFromSearch } from '../../src/utils/debugMode';
+import {
+  DEBUG_MODE_STORAGE_KEY,
+  isDebugAnimationRequest,
+  isDebugModeEnabled,
+  syncDebugModeFromSearch,
+} from '../../src/utils/debugMode';
 
 describe('debugMode', () => {
   const store = new Map<string, string>();
@@ -34,5 +39,11 @@ describe('debugMode', () => {
     localStorage.setItem(DEBUG_MODE_STORAGE_KEY, '1');
     syncDebugModeFromSearch('?debug=yes');
     expect(isDebugModeEnabled()).toBe(true);
+  });
+
+  it('detects animation preview param without persisting', () => {
+    syncDebugModeFromSearch('?debug=animation');
+    expect(isDebugModeEnabled()).toBe(false);
+    expect(isDebugAnimationRequest('?debug=animation')).toBe(true);
   });
 });
