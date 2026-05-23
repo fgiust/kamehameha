@@ -27,7 +27,7 @@ const verbs: ConjugationWord[] = [
   { japanese: "住[す]む", en: "live, reside", it: "vivere, risiedere", type: "u" },
   { japanese: "編[あ]む", en: "knit", it: "lavorare a maglia", type: "u" },
   { japanese: "落[お]ち込[こ]む", en: "fall into depression", it: "cadere in depressione", type: "u" },
-  { japanese: "頼[たの]む", en: "order, ask for", it: "ordinare, chiedere", type: "u" },
+  { japanese: "頼[たの]む", en: "order, ask for", it: "richiedere", type: "u" },
   { japanese: "包[つつ]む", en: "wrap, pack", it: "avvolgere, impacchettare", type: "u" },
   { japanese: "盗[ぬす]む", en: "steal, rob", it: "rubare", type: "u" },
   { japanese: "踏[ふ]む", en: "step on, tread on", it: "calpestare", type: "u" },
