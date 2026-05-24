@@ -474,7 +474,7 @@ export default function RandomizePage() {
               onChange={val => updateSetting('showFurigana', val)}
             />
             <OptionToggle
-              label="English"
+              label={t('common.translation')}
               checked={settings.showEnglish}
               onChange={val => updateSetting('showEnglish', val)}
             />

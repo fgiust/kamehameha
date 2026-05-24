@@ -555,11 +555,46 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-secondary);
 }
 
+.switches-forms {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-basis: 100%;
+}
+
+.switches-forms-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px 12px;
+  max-width: 100%;
+}
+
+.switches-forms-variable {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  justify-content: center;
+  align-items: center;
+  min-height: 28px;
+  min-width: 12.5rem;
+  flex: 0 1 auto;
+}
+
+.switches-forms-randomize-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  padding: 2px 0 4px;
+  user-select: none;
+  text-align: center;
+}
+
 .switches-forms-separator {
   width: 1px;
   align-self: stretch;
   min-height: 18px;
-  margin: 2px 4px;
+  margin: 2px 0;
   background: var(--border);
   opacity: 0.9;
   flex-shrink: 0;

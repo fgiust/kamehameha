@@ -13,6 +13,7 @@ const it = {
     language: 'Lingua',
     english: 'Inglese',
     italian: 'Italiano',
+    translation: 'Traduzione',
     switchLanguage: 'Cambia lingua',
     debugModeActive: 'Debug',
     debugModeHint: 'Modalità debug attiva (?debug=42). Prompt alternativi visibili negli esercizi sentence.',
@@ -163,6 +164,7 @@ const it = {
   conjugation: {
     randomizeAriaLabel: 'Forme casuali a ogni domanda',
     randomizeTitle: 'Forme casuali a ogni domanda',
+    randomizeActiveLabel: 'casuale ad ogni domanda',
   },
   counters: {
     selectAll: 'Seleziona tutto',

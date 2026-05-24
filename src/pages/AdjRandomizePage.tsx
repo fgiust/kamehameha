@@ -467,7 +467,7 @@ export default function AdjRandomizePage() {
               onChange={val => updateSetting('showFurigana', val)}
             />
             <OptionToggle
-              label={t('common.english')}
+              label={t('common.translation')}
               checked={settings.showEnglish}
               onChange={val => updateSetting('showEnglish', val)}
             />

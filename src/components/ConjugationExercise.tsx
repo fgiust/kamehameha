@@ -543,7 +543,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
               onChange={val => updateSetting('showFurigana', val)}
             />
             <OptionToggle
-              label={t('common.english')}
+              label={t('common.translation')}
               checked={settings.showEnglish}
               onChange={val => updateSetting('showEnglish', val)}
             />
@@ -558,27 +558,34 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
           <div className="options-section-label">{t('common.forms')}</div>
 
           <div className="switches switches-forms">
-            {engine.opts.map(o => (
+            <div className="switches-forms-cluster">
+              <div className="switches-forms-variable">
+                {settings.randomizeForm ? (
+                  <span className="switches-forms-randomize-label">{t('conjugation.randomizeActiveLabel')}</span>
+                ) : (
+                  engine.opts.map(o => (
+                    <OptionToggle
+                      key={o.id}
+                      label={getOptionLabel(o.id, o.label)}
+                      checked={!!effectiveFlags[o.id]}
+                      onChange={() => toggleFlag(o.id)}
+                    />
+                  ))
+                )}
+              </div>
+              <span className="switches-forms-separator" aria-hidden="true" />
               <OptionToggle
-                key={o.id}
-                label={getOptionLabel(o.id, o.label)}
-                checked={!!effectiveFlags[o.id]}
-                disabled={settings.randomizeForm}
-                onChange={() => toggleFlag(o.id)}
+                className="switch-item--randomize"
+                label={<DiceIcon className="randomize-dice-icon" />}
+                ariaLabel={t('conjugation.randomizeAriaLabel')}
+                title={t('conjugation.randomizeTitle')}
+                checked={settings.randomizeForm}
+                onChange={next => {
+                  updateSetting('randomizeForm', next);
+                  if (next) setRandomFlags(buildRandomFlags(engine));
+                }}
               />
-            ))}
-            <span className="switches-forms-separator" aria-hidden="true" />
-            <OptionToggle
-              className="switch-item--randomize"
-              label={<DiceIcon className="randomize-dice-icon" />}
-              ariaLabel={t('conjugation.randomizeAriaLabel')}
-              title={t('conjugation.randomizeTitle')}
-              checked={settings.randomizeForm}
-              onChange={next => {
-                updateSetting('randomizeForm', next);
-                if (next) setRandomFlags(buildRandomFlags(engine));
-              }}
-            />
+            </div>
           </div>
         </div>
       </div>

@@ -13,6 +13,7 @@ const en = {
     language: 'Language',
     english: 'English',
     italian: 'Italian',
+    translation: 'Translation',
     switchLanguage: 'Switch language',
     debugModeActive: 'Debug',
     debugModeHint: 'Debug mode is on (?debug=42). Alternate prompts visible on sentence exercises.',
@@ -163,6 +164,7 @@ const en = {
   conjugation: {
     randomizeAriaLabel: 'Randomize forms each question',
     randomizeTitle: 'Randomize forms each question',
+    randomizeActiveLabel: 'random each question',
   },
   counters: {
     selectAll: 'Select All',
