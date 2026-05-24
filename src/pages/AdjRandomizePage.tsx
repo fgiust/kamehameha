@@ -3,6 +3,7 @@ import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { matchesConjugationAnswer } from '../utils/conjugationAnswer';
 import adjectives from '../data/dictConjugationAdjectives';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -280,7 +281,7 @@ export default function AdjRandomizePage() {
     const dictKana = toKanaReading(currentWord.japanese);
     const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
     const answers = Array.isArray(answer) ? answer : [answer];
-    const isCorrect = answers.some(a => a === normalized);
+    const isCorrect = matchesConjugationAnswer(normalized, currentWord.japanese, answers);
 
     if (isCorrect) { setCorrect(c => c + 1); setInputState('correct'); }
     else { setIncorrect(c => c + 1); setInputState('incorrect'); }

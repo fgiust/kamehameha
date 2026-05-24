@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { matchesConjugationAnswer } from '../utils/conjugationAnswer';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
@@ -321,7 +322,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     const answers = Array.isArray(answer) ? answer : [answer];
     if (answers.length === 1 && answers[0] === '') { pickWord(); return; }
 
-    const isCorrect = answers.some(a => a === normalized);
+    const isCorrect = matchesConjugationAnswer(normalized, currentWord.japanese, answers);
 
     if (isCorrect) {
       setCorrect(c => c + 1);
