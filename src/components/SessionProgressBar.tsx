@@ -36,7 +36,8 @@ export default function SessionProgressBar({
   const { search } = useLocation();
   const [showKamehameha, setShowKamehameha] = useState(false);
   const [kamehamehaKey, setKamehamehaKey] = useState(0);
-  const hasTriggeredRef = useRef(false);
+  const isInitialMountRef = useRef(true);
+  const wasAllGreenRef = useRef(false);
 
   useEffect(() => {
     if (!debugMode || !isDebugAnimationRequest(search)) return;
@@ -44,14 +45,18 @@ export default function SessionProgressBar({
   }, [debugMode, search]);
 
   useEffect(() => {
-    if (segments.length > 0 && segments.every(s => s === 1)) {
-      if (!hasTriggeredRef.current) {
-        hasTriggeredRef.current = true;
-        playCelebration(setKamehamehaKey, setShowKamehameha);
-      }
-    } else if (segments.some(s => s !== 1)) {
-      hasTriggeredRef.current = false;
+    const allGreen = segments.length > 0 && segments.every(s => s === 1);
+
+    if (isInitialMountRef.current) {
+      isInitialMountRef.current = false;
+      wasAllGreenRef.current = allGreen;
+      return;
     }
+
+    if (allGreen && !wasAllGreenRef.current) {
+      playCelebration(setKamehamehaKey, setShowKamehameha);
+    }
+    wasAllGreenRef.current = allGreen;
   }, [segments]);
 
   return (
