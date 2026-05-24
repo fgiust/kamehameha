@@ -17,17 +17,17 @@ My friend is Japanese.
 Il mio amico è giapponese.
 {私[わたし]の}友達[ともだち]{は|}日本人[にほんじん]{です|だ}
 
-I am 20 years old.
-Ho 20 anni.
-{私[わたし]は|}20歳[さい]{です|だ}
+She is my younger sister.
+Lei è mia sorella minore.
+{彼女[かのじょ]}は妹[いもうと]{です|だ}
 
 Her older brother is a doctor.
 Suo fratello maggiore è un dottore.
-{彼女[かのじょ]の}兄[あに]{は|}医者[いしゃ]{です|だ}
+{彼女[かのじょ]|彼[かれ]}のお兄[にい]さん{は|}医者[いしゃ]{です|だ}
 
 That person is an office worker.
 Quella persona è un impiegato.
-{あの人[ひと]は|}会社員[かいしゃいん]{です|だ}
+{あの|その}人[ひと]は会社員[かいしゃいん]{です|だ}
 
 My younger sister is Australian.
 Mia sorella minore è australiana.
@@ -35,7 +35,7 @@ Mia sorella minore è australiana.
 
 This is my name card.
 Questo è il mio biglietto da visita.
-{これ[は]|}私[わたし]の名刺[めいし]{です|だ}
+これは私[わたし]の名刺[めいし]{です|だ}
 
 My pet is a cat.
 Il mio animale domestico è un gatto.
