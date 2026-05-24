@@ -66,6 +66,29 @@ describe('sentenceEngine', () => {
         { kind: 'unit', unit: { kind: 'plain', surface: 'だ', reading: 'だ' }, status: 'missing' },
       ]);
     });
+
+    it('prefers the primary optional segment on partial overlap (私の vs あなたの)', () => {
+      const template = 'それは{あなたの|}新聞[しんぶん]ですか';
+      const alternatives = generateAnswers(parseAnswerTemplate(template));
+      const user = 'それは私の新聞ですか';
+      const primaryOps = diffSentenceAnswer(user, alternatives[0]!);
+      const { bestAnswer, ops } = pickBestDiff(user, alternatives);
+
+      expect(stripRuby(bestAnswer)).toBe('それはあなたの新聞ですか');
+      expect(ops).toEqual(primaryOps);
+    });
+
+    it('uses the primary optional segment when optional input has no overlap (さ vs あなたの)', () => {
+      const template = 'それは{あなたの|}新聞[しんぶん]ですか';
+      const alternatives = generateAnswers(parseAnswerTemplate(template));
+      const user = 'それはさ新聞ですか';
+      const { bestAnswer, ops } = pickBestDiff(user, alternatives);
+
+      expect(stripRuby(bestAnswer)).toBe('それはあなたの新聞ですか');
+      expect(ops.some(op => op.kind === 'extra' && op.text === 'さ')).toBe(true);
+      expect(ops.some(op => op.kind === 'unit' && op.unit.surface === 'あ' && op.status === 'missing')).toBe(true);
+      expect(ops.some(op => op.kind === 'unit' && op.unit.surface === 'の' && op.status === 'missing')).toBe(true);
+    });
   });
 
   describe('diffSentenceAnswer', () => {

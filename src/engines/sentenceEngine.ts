@@ -365,6 +365,68 @@ export function diffSentenceAnswerCost(ops: DiffUnitOp[]): number {
   }, 0);
 }
 
+function optionalSegmentBetween(longer: string, shorter: string): string | null {
+  const p = stripRuby(longer);
+  const e = stripRuby(shorter);
+  if (p.length <= e.length) return null;
+
+  for (let start = 0; start < p.length; start++) {
+    for (let end = start + 1; end <= p.length; end++) {
+      if (p.slice(0, start) + p.slice(end) === e) {
+        return p.slice(start, end);
+      }
+    }
+  }
+  return null;
+}
+
+function hasOptionalRegionExtras(user: string, longer: string, shorter: string): boolean {
+  const seg = optionalSegmentBetween(longer, shorter);
+  if (!seg) return false;
+  const segStart = stripRuby(longer).indexOf(seg);
+  if (segStart < 0) return false;
+
+  const ops = diffSentenceAnswer(user, shorter);
+  let shorterPlainPos = 0;
+
+  for (const op of ops) {
+    if (op.kind === 'extra') {
+      return shorterPlainPos === segStart;
+    }
+    if (op.kind === 'unit') {
+      shorterPlainPos += op.unit.surface.length;
+    }
+  }
+  return false;
+}
+
+/**
+ * When the user typed in a slot covered by `{primary|}` (empty second option),
+ * diff against the shorter empty variant shows extras at that position — use primary.
+ */
+function findPrimaryForFilledOptional(alternatives: string[], user: string): string | null {
+  let best: string | null = null;
+  let bestCost = Infinity;
+  let bestIndex = Infinity;
+
+  for (const longer of alternatives) {
+    const longerIndex = alternatives.indexOf(longer);
+    for (const shorter of alternatives) {
+      if (longer === shorter) continue;
+      if (!optionalSegmentBetween(longer, shorter)) continue;
+      if (!hasOptionalRegionExtras(user, longer, shorter)) continue;
+      const ops = diffSentenceAnswer(user, longer);
+      const cost = diffSentenceAnswerCost(ops);
+      if (cost < bestCost || (cost === bestCost && longerIndex < bestIndex)) {
+        bestCost = cost;
+        bestIndex = longerIndex;
+        best = longer;
+      }
+    }
+  }
+  return best;
+}
+
 export function pickBestDiff(user: string, parsedAlternatives: string[]): { bestAnswer: string; ops: DiffUnitOp[] } {
   const alternatives = parsedAlternatives.filter(Boolean);
   if (alternatives.length === 0) return { bestAnswer: '', ops: [] };
@@ -372,6 +434,11 @@ export function pickBestDiff(user: string, parsedAlternatives: string[]): { best
   const exact = alternatives.find(answer => matchesByRubyUnits(user, answer));
   if (exact) {
     return { bestAnswer: exact, ops: diffSentenceAnswer(user, exact) };
+  }
+
+  const forcedPrimary = findPrimaryForFilledOptional(alternatives, user);
+  if (forcedPrimary) {
+    return { bestAnswer: forcedPrimary, ops: diffSentenceAnswer(user, forcedPrimary) };
   }
 
   const scored = alternatives.map((answer, index) => {

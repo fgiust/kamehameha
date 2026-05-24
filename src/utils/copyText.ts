@@ -19,7 +19,7 @@ export function plainCopyFromDiffOps(ops: DiffUnitOp[]): string {
   let out = '';
   for (const op of ops) {
     if (op.kind === 'extra') {
-      out += `__${op.text}__`;
+      out += `_${op.text}_`;
       continue;
     }
     const { unit } = op;

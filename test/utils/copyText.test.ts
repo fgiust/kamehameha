@@ -21,6 +21,6 @@ describe('copyText', () => {
       { kind: 'extra', text: 'あ' },
       { kind: 'unit', unit: { kind: 'ruby', surface: 'アニメ', reading: 'あにめ' }, status: 'missing' },
     ];
-    expect(plainCopyFromDiffOps(ops)).toBe('た__あ__アニメ[あにめ]');
+    expect(plainCopyFromDiffOps(ops)).toBe('た_あ_アニメ[あにめ]');
   });
 });
