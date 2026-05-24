@@ -27,14 +27,14 @@ Un amico di Mary.
 
 My older brother’s room.
 La stanza di mio fratello maggiore.
-{私[わたし]の|}兄[あに]の部屋[へや]
+{私[わたし]の|}{兄[あに]|お兄[にい]さん}の部屋[へや]
 
 Japan’s weather.
 Il clima del Giappone.
 日本[にほん]の天気[てんき]
 
 English language textbook.
-Manuale di lingua inglese.
+Libro di testo di lingua inglese.
 英語[えいご]の教科書[きょうかしょ]
 
 A friend from Korea.

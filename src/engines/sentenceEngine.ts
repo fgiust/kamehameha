@@ -346,14 +346,23 @@ export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUn
   return dfs(0, 0).ops;
 }
 
-function isPartialRubyMatch(user: string, answerWithRuby: string): boolean {
+function isPartialRubyMatch(user: string, answerWithRuby: string, ops?: DiffUnitOp[]): boolean {
   if (!user.trim()) return false;
   if (matchesByRubyUnits(user, answerWithRuby)) return false;
 
-  const ops = diffSentenceAnswer(user, answerWithRuby);
-  return ops.some(
+  const diffOps = ops ?? diffSentenceAnswer(user, answerWithRuby);
+  return diffOps.some(
     op => op.kind === 'unit' && (op.status === 'correct_kanji' || op.status === 'correct_kana'),
   );
+}
+
+/** Lower is better; used to pick among template alternatives for feedback. */
+export function diffSentenceAnswerCost(ops: DiffUnitOp[]): number {
+  return ops.reduce((sum, op) => {
+    if (op.kind === 'extra') return sum + 1;
+    if (op.kind === 'unit' && op.status === 'missing') return sum + 1;
+    return sum;
+  }, 0);
 }
 
 export function pickBestDiff(user: string, parsedAlternatives: string[]): { bestAnswer: string; ops: DiffUnitOp[] } {
@@ -365,9 +374,25 @@ export function pickBestDiff(user: string, parsedAlternatives: string[]): { best
     return { bestAnswer: exact, ops: diffSentenceAnswer(user, exact) };
   }
 
-  const partial = alternatives.find(answer => isPartialRubyMatch(user, answer));
-  const displayAnswer = partial ?? alternatives[0]!;
-  return { bestAnswer: displayAnswer, ops: diffSentenceAnswer(user, displayAnswer) };
+  const scored = alternatives.map((answer, index) => {
+    const ops = diffSentenceAnswer(user, answer);
+    return { answer, ops, cost: diffSentenceAnswerCost(ops), index };
+  });
+
+  const partialMatches = scored.filter(({ answer, ops }) => isPartialRubyMatch(user, answer, ops));
+  const candidates = partialMatches.length > 0 ? partialMatches : scored;
+
+  let best = candidates[0]!;
+  for (const candidate of candidates.slice(1)) {
+    if (
+      candidate.cost < best.cost
+      || (candidate.cost === best.cost && candidate.index < best.index)
+    ) {
+      best = candidate;
+    }
+  }
+
+  return { bestAnswer: best.answer, ops: best.ops };
 }
 
 export type CharDiffOp =

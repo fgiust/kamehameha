@@ -3,25 +3,25 @@
 
 # (reason 1)し, (reason2)し, situation
 
-This restaurant is cheap, is delicious, so it's very famous.
-Questo ristorante è economico, è delizioso, quindi è molto famoso.
-このレストランは安[やす]いし{、|}美[お]味[い]しいし{、|.}とても有[ゆう]名[めい]です{|。}
+This restaurant is cheap, the food is delicious, so it's very famous.
+Questo ristorante è economico, il cibo è delizioso, quindi è molto famoso.
+このレストランは安[やす]いし{、|}{|食[た]べ物[もの]が}美[お]味[い]しいし{、|.}とても有[ゆう]名[めい]です{|。}
 
-She is beautiful, intelligent, fashionable. I like her a lot.
-È bella, intelligente, alla moda. Mi piace molto.
-彼[かの]女[じょ]は綺[き]麗[れい]だし、かしこいし、おしゃれだし、大[だい]好[す]き{です|だ}{|。}
+She is beautiful, is smart. I like her a lot.
+È bella, è intelligente. Mi piace molto.
+彼[かの]女[じょ]は綺[き]麗[れい]だし、{かしこい|頭[あたま]がいい}し、大[だい]好[す]き{です|だ}{|。}
 
 It's cold today and the wind is strong, I don't feel like going out.
 Fa freddo oggi e il vento è forte, non ho voglia di uscire.
 今日[きょう]は寒[さむ]いし、風[かぜ]が強[つよ]いし、出[で]かけたくない{|な}{|。}
 
 Pedro is cool and sexy. He's perfect.
-Pedro è simpatico e sexy. E' perfetto.
+Pedro è figo e sexy. E' perfetto.
 ペドロさんはかっこいいし、セクシーだし{、|.}完[かん]璧[ぺき]{です|だ}{|。}
 
 Professor Shota is good at teaching and he is kind. He is an amazing teacher.
 Il professor Shota è bravo a insegnare ed è gentile. È un insegnante straordinario.
-翔[しょう]太[た]先[せん]生[せい]は教[おし]えるのが上[じょう]手[ず]だし、親[しん]切[せつ]だし{、|.}素晴[すばら]しい先[せん]生[せい]{です|だ}{|。}
+翔[しょう]太[た]先[せん]生[せい]は教[おし]えるのが上[じょう]手[ず]だし、親[しん]切[せつ]だし{、|.}{素晴[すばら]しい|素晴[すば]らしい}先[せん]生[せい]{です|だ}{|よ}{|。}
 
 Mary is a popular person, she is smart and can play the guitar.
 Mary è una persona popolare, è intelligente e sa suonare la chitarra.
@@ -33,12 +33,12 @@ Ero stanco, era tardi, e sono rimasto a casa.
 
 I studied a lot, watched a lot of anime, and my Japanese improved.
 Ho studiato molto, ho guardato molti anime, e il mio giapponese è migliorato.
-たくさん勉強[べんきょう]したし、アニメをたくさん見[み]たし、日本語[にほんご]が上手[じょうず]になりました
+{私[わたし]は|}たくさん勉強[べんきょう]したし、アニメをたくさん見[み]たし、日本語[にほんご]が上手[じょうず]になりました
 
 The food was spicy, it was hot, and I drank a lot of water.
 Il cibo era piccante, faceva caldo, ho bevuto molta acqua.
-食[た]べ物[もの]が辛[から]かったし、暑[あつ]かったし、水[みず]をたくさん飲[の]みました
+食[た]べ物[もの]{は|が}辛[から]かったし、暑[あつ]かったし、水[みず]をたくさん飲[の]みました
 
 That shop is near, has nice things, and we often go there.
 Quel negozio è vicino, ha cose belle, ci andiamo spesso.
-あの店[みせ]は近[ちか]いし、いいものがあるし、よく行[い]きます
+[あの|その]店[みせ]は近[ちか]いし、いい物[もの]があるし、よく行[い]きます

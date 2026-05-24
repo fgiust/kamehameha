@@ -23,17 +23,32 @@ describe('sentenceEngine', () => {
       expect(stripRuby(bestAnswer)).toBe('だ');
     });
 
-    it('uses the first alternative on partial input shared by multiple variants', () => {
+    it('picks the lowest-cost alternative on partial input', () => {
       const template = '{武[たけ]志[し]さんは|}先生[せんせい]{です|だ}';
       const alternatives = generateAnswers(parseAnswerTemplate(template));
       const { bestAnswer } = pickBestDiff('たけしさん', alternatives);
-      expect(stripRuby(bestAnswer)).toBe('武志さんは先生です');
+      expect(stripRuby(bestAnswer)).toBe('武志さんは先生だ');
     });
 
-    it('uses the first alternative when there is no match', () => {
+    it('picks the lowest-cost alternative when there is no match', () => {
       const alternatives = generateAnswers(parseAnswerTemplate('{です|だ}'));
       const { bestAnswer } = pickBestDiff('まったく違う', alternatives);
-      expect(stripRuby(bestAnswer)).toBe('です');
+      expect(stripRuby(bestAnswer)).toBe('だ');
+    });
+
+    it('prefers the empty optional prefix when the answer aligns without it', () => {
+      const template =
+        '{私[わたし]は|}たくさん勉強[べんきょう]したし、アニメをたくさん見[み]たし、日本語[にほんご]が上手[じょうず]になりました';
+      const alternatives = generateAnswers(parseAnswerTemplate(template));
+      const user = 'たくさん勉強したし、あにめをたくさん見たし、日本語が上手になりました';
+      const { bestAnswer, ops } = pickBestDiff(user, alternatives);
+
+      expect(stripRuby(bestAnswer)).toBe(
+        'たくさん勉強したし、アニメをたくさん見たし、日本語が上手になりました',
+      );
+      expect(ops.some(op => op.kind === 'unit' && op.unit.surface === '私' && op.status === 'missing')).toBe(
+        false,
+      );
     });
 
     it('still diffs against the chosen alternative', () => {
@@ -48,8 +63,7 @@ describe('sentenceEngine', () => {
         { kind: 'unit', unit: { kind: 'plain', surface: 'ん', reading: 'ん' }, status: 'correct_kanji' },
         { kind: 'unit', unit: { kind: 'plain', surface: 'は', reading: 'は' }, status: 'missing' },
         { kind: 'unit', unit: { kind: 'ruby', surface: '先生', reading: 'せんせい' }, status: 'missing' },
-        { kind: 'unit', unit: { kind: 'plain', surface: 'で', reading: 'で' }, status: 'missing' },
-        { kind: 'unit', unit: { kind: 'plain', surface: 'す', reading: 'す' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'だ', reading: 'だ' }, status: 'missing' },
       ]);
     });
   });
