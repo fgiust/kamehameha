@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+} from '../utils/exerciseSessionDraft';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
 import KeyboardTip from '../components/KeyboardTip';
@@ -356,13 +362,27 @@ function localizedLabel(n: number, labels: [string, string]) {
   return `${n} ${n === 1 ? labels[0] : labels[1]}`;
 }
 
+const PERSIST_KEY = '/counting-things';
+
 export default function CountingThingsPage() {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.countingThings.title');
-  const [currentIdx, setCurrentIdx] = useState(0);
-  const [question, setQuestion] = useState('');
-  const [accepted, setAccepted] = useState<string[]>([]);
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(PERSIST_KEY, ITEMS.length),
+    [],
+  );
+  const restoredDraft = useExerciseSessionDraft(PERSIST_KEY, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+  const restoredExtras = restoredDraft?.extras;
+  const [currentIdx, setCurrentIdx] = useState(restoredDraft?.currentIdx ?? 0);
+  const [question, setQuestion] = useState(
+    () => (typeof restoredExtras?.question === 'string' ? restoredExtras.question : ''),
+  );
+  const [accepted, setAccepted] = useState<string[]>(() =>
+    (Array.isArray(restoredExtras?.accepted) ? restoredExtras.accepted as string[] : []),
+  );
 
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
@@ -370,26 +390,61 @@ export default function CountingThingsPage() {
   const [isComposing, setIsComposing] = useState(false);
   const [awaitingNext, setAwaitingNext] = useState(false);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
-  const [isFinished, setIsFinished] = useState(false);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
   const [answerFeedback, setAnswerFeedback] = useState<null | {
     isCorrect: boolean;
     userAnswer: string;
     displayAnswer: string;
     ops: ReturnType<typeof diffSentenceAnswer>;
   }>(null);
-  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
-  const remainingIdxRef = useRef<number[]>([]);
-  const lastIdxRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
-  const lastNumberRef = useRef<number | null>(null);
+  const remainingIdxRef = useRef<number[]>(restoredDraft?.picker.remainingIdx ?? []);
+  const lastIdxRef = useRef<number | null>(restoredDraft?.picker.lastIdx ?? null);
+  const phaseRef = useRef<0 | 2 | null>(restoredDraft?.picker.phase ?? null);
+  const lastNumberRef = useRef<number | null>(
+    typeof restoredExtras?.lastNumber === 'number' ? restoredExtras.lastNumber : null,
+  );
 
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(ITEMS.length, { persistKey: '/counting-things' });
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    record: recordProgress,
+    getState: getProgressState,
+    getProgressSnapshot,
+  } = useSessionProgress(ITEMS.length, {
+    persistKey: PERSIST_KEY,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  usePersistExerciseDraft(
+    PERSIST_KEY,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: {
+        remainingIdx: [...remainingIdxRef.current],
+        phase: phaseRef.current,
+        lastIdx: lastIdxRef.current,
+      },
+      currentIdx,
+      correct,
+      incorrect,
+      prevAnswers,
+      isFinished,
+      extras: {
+        question,
+        accepted,
+        lastNumber: lastNumberRef.current,
+      },
+    }),
+    [accepted, correct, currentIdx, incorrect, isFinished, prevAnswers, progressSegments, question, getProgressSnapshot],
+  );
 
   const buildQuestion = useCallback((idx: number, n: number) => {
     const item = ITEMS[idx]!;
@@ -474,13 +529,26 @@ export default function CountingThingsPage() {
   }, [buildAccepted, buildQuestion, getProgressState]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      return;
+    }
     remainingIdxRef.current = [];
     phaseRef.current = null;
     lastIdxRef.current = null;
     lastNumberRef.current = null;
     setIsFinished(false);
     pickNext();
-  }, [pickNext]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
+  }, [isFinished]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + pageTitle;

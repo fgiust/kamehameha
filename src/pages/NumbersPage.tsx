@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+} from '../utils/exerciseSessionDraft';
 import { toHiragana } from 'wanakana';
 import { getJapaneseNumberReadings } from '../engines/japaneseNumber';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -29,30 +35,91 @@ function pickOne(items: string[]) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
+const PERSIST_KEY = '/numbers';
+
 export default function NumbersPage() {
   const { t, i18n } = useTranslation();
   const pageTitle = t('pages.numbers.title');
   const [digits, setDigits] = useState(5);
   const [reverse, setReverse] = useState(false);
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(PERSIST_KEY, digits, reverse ? 1 : 0, DEFAULT_MASTERY_RANDOM_TOTAL),
+    [digits, reverse],
+  );
+  const restoredDraft = useExerciseSessionDraft(PERSIST_KEY, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+  const settingsReadyRef = useRef(false);
+  const settingsChangedRef = useRef(false);
+  const restoredExtras = restoredDraft?.extras;
+  const restoredSlotNumbers = Array.isArray(restoredExtras?.slotNumbers)
+    && restoredExtras.slotNumbers.length === DEFAULT_MASTERY_RANDOM_TOTAL
+    ? restoredExtras.slotNumbers as Array<string | null>
+    : null;
 
-  const [currentSlot, setCurrentSlot] = useState<number>(0);
-  const [isFinished, setIsFinished] = useState(false);
-  const [currentNumber, setCurrentNumber] = useState('');
-  const [question, setQuestion] = useState('');
-  const [accepted, setAccepted] = useState<string[] | string>('');
+  const [currentSlot, setCurrentSlot] = useState<number>(restoredDraft?.currentIdx ?? 0);
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
+  const [currentNumber, setCurrentNumber] = useState(
+    () => (typeof restoredExtras?.currentNumber === 'string' ? restoredExtras.currentNumber : ''),
+  );
+  const [question, setQuestion] = useState(
+    () => (typeof restoredExtras?.question === 'string' ? restoredExtras.question : ''),
+  );
+  const [accepted, setAccepted] = useState<string[] | string>(() => {
+    const saved = restoredExtras?.accepted;
+    if (typeof saved === 'string') return saved;
+    if (Array.isArray(saved)) return saved as string[];
+    return '';
+  });
 
   const [userInput, setUserInput] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [answerDisplay, setAnswerDisplay] = useState('');
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
-  const lastNumberRef = useRef<string>('');
-  const slotNumberRef = useRef<Array<string | null>>(Array(DEFAULT_MASTERY_RANDOM_TOTAL).fill(null));
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, { persistKey: '/numbers' });
+  const lastNumberRef = useRef<string>(
+    typeof restoredExtras?.lastNumber === 'string' ? restoredExtras.lastNumber : '',
+  );
+  const slotNumberRef = useRef<Array<string | null>>(
+    restoredSlotNumbers ? [...restoredSlotNumbers] : Array(DEFAULT_MASTERY_RANDOM_TOTAL).fill(null),
+  );
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    recordAt: recordProgressAt,
+    getProgressSnapshot,
+  } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, {
+    persistKey: PERSIST_KEY,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  usePersistExerciseDraft(
+    PERSIST_KEY,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: { remainingIdx: [], phase: null, lastIdx: null },
+      currentIdx: currentSlot,
+      correct,
+      incorrect,
+      prevAnswers: [],
+      isFinished,
+      extras: {
+        digits,
+        reverse,
+        slotNumbers: [...slotNumberRef.current],
+        lastNumber: lastNumberRef.current,
+        currentNumber,
+        question,
+        accepted,
+      },
+    }),
+    [accepted, correct, currentNumber, currentSlot, digits, incorrect, isFinished, progressSegments, question, reverse, getProgressSnapshot],
+  );
   const progressSegmentsRef = useRef(progressSegments);
 
   useEffect(() => {
@@ -118,9 +185,35 @@ export default function NumbersPage() {
   }, [digits, reverse]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      settingsReadyRef.current = true;
+      return;
+    }
     setIsFinished(false);
     pickNext();
-  }, [pickNext]);
+    settingsReadyRef.current = true;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!settingsReadyRef.current) return;
+    if (!settingsChangedRef.current) {
+      settingsChangedRef.current = true;
+      return;
+    }
+    shouldRestoreSessionRef.current = false;
+    setIsFinished(false);
+    pickNext();
+  }, [digits, reverse, pickNext]);
+
+  useEffect(() => {
+    if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
+  }, [isFinished]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + pageTitle;

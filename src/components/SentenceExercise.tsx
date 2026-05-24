@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, parseAnswerTemplate, matchesByRubyUnits, stripRuby, pickBestDiff } from '../engines/sentenceEngine';
@@ -6,6 +6,12 @@ import DiffDisplay from './DiffDisplay';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+} from '../utils/exerciseSessionDraft';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
 import PageLayout from './PageLayout';
@@ -51,15 +57,23 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
   const { t, i18n } = useTranslation();
   const lang = resolveUiLang(i18n.resolvedLanguage ?? i18n.language);
   const debugMode = useDebugMode();
-  const [currentIdx, setCurrentIdx] = useState(0);
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(persistKey ?? title, sentenceData.length),
+    [persistKey, title, sentenceData.length],
+  );
+  const restoredDraft = useExerciseSessionDraft(persistKey, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+
+  const [currentIdx, setCurrentIdx] = useState(restoredDraft?.currentIdx ?? 0);
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
   const [didConvert, setDidConvert] = useState(false);
   const [isComposing, setIsComposing] = useState(false);
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
-  const [isFinished, setIsFinished] = useState(false);
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
   const [answerFeedback, setAnswerFeedback] = useState<null | {
     isCorrect: boolean;
     userAnswer: string;
@@ -67,15 +81,43 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
     ops: ReturnType<typeof diffSentenceAnswer>;
   }>(null);
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
   const lastRawValueRef = useRef('');
-  const remainingIdxRef = useRef<number[]>([]);
-  const lastIdxRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(sentenceData.length, { persistKey });
+  const remainingIdxRef = useRef<number[]>(restoredDraft?.picker.remainingIdx ?? []);
+  const lastIdxRef = useRef<number | null>(restoredDraft?.picker.lastIdx ?? null);
+  const phaseRef = useRef<0 | 2 | null>(restoredDraft?.picker.phase ?? null);
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    record: recordProgress,
+    getState: getProgressState,
+    getProgressSnapshot,
+  } = useSessionProgress(sentenceData.length, {
+    persistKey,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  const { persistNow } = usePersistExerciseDraft(
+    persistKey,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: {
+        remainingIdx: [...remainingIdxRef.current],
+        phase: phaseRef.current,
+        lastIdx: lastIdxRef.current,
+      },
+      currentIdx,
+      correct,
+      incorrect,
+      prevAnswers,
+      isFinished,
+    }),
+    [currentIdx, correct, incorrect, isFinished, prevAnswers, progressSegments, getProgressSnapshot],
+  );
 
   const currentItem = sentenceData[currentIdx];
   const { primary: promptText, alternate: alternatePromptText } = getSentencePrompts(currentItem, lang);
@@ -130,12 +172,27 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
   }, [sentenceData.length, getProgressState]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      return;
+    }
     remainingIdxRef.current = [];
     phaseRef.current = null;
     lastIdxRef.current = null;
     setIsFinished(false);
     pickNext();
-  }, [pickNext, sentenceData.length]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (isFinished && persistKey) {
+      clearExerciseSessionDraft(persistKey);
+    }
+  }, [isFinished, persistKey]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + title;
@@ -212,7 +269,8 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
 
     recordProgress(String(currentIdx), isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, currentItem, userInput, promptText, recordProgress, currentIdx, isFinished]);
+    persistNow();
+  }, [awaitingNext, currentItem, userInput, promptText, recordProgress, currentIdx, isFinished, persistNow]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;

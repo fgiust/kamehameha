@@ -1,4 +1,10 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+} from '../utils/exerciseSessionDraft';
 import { stripRuby } from '../engines/sentenceEngine';
 import { toHiragana } from 'wanakana';
 import { transitiveData, VerbPair } from '../data/dictTransitivePairs';
@@ -27,21 +33,35 @@ function finalizeIME(input: string) {
   return input;
 }
 
+const PERSIST_KEY = '/transitive';
+
 export default function TransitivePage() {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.transitive.title');
-  const [currentIdx, setCurrentIdx] = useState<number>(0);
-  const [currentPair, setCurrentPair] = useState<VerbPair | null>(null);
-  const [askTransitive, setAskTransitive] = useState(true);
-  const [isFinished, setIsFinished] = useState(false);
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(PERSIST_KEY, transitiveData.length),
+    [],
+  );
+  const restoredDraft = useExerciseSessionDraft(PERSIST_KEY, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+  const restoredIdx = restoredDraft?.currentIdx ?? 0;
+  const [currentIdx, setCurrentIdx] = useState<number>(restoredIdx);
+  const [currentPair, setCurrentPair] = useState<VerbPair | null>(
+    () => transitiveData[restoredIdx] ?? null,
+  );
+  const [askTransitive, setAskTransitive] = useState(
+    () => restoredDraft?.extras?.askTransitive === false ? false : true,
+  );
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
   const [userInput, setUserInput] = useState('');
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [diffDisplay, setDiffDisplay] = useState<string>('');
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
   const [showFurigana, setShowFurigana] = useState(
     () => readStoredConjugationDisplaySettings().showFurigana,
   );
@@ -62,12 +82,41 @@ export default function TransitivePage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
-  const remainingIdxRef = useRef<number[]>([]);
-  const lastIdxRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
+  const remainingIdxRef = useRef<number[]>(restoredDraft?.picker.remainingIdx ?? []);
+  const lastIdxRef = useRef<number | null>(restoredDraft?.picker.lastIdx ?? null);
+  const phaseRef = useRef<0 | 2 | null>(restoredDraft?.picker.phase ?? null);
 
   const totalPairs = transitiveData.length;
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalPairs, { persistKey: '/transitive' });
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    record: recordProgress,
+    getState: getProgressState,
+    getProgressSnapshot,
+  } = useSessionProgress(totalPairs, {
+    persistKey: PERSIST_KEY,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  usePersistExerciseDraft(
+    PERSIST_KEY,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: {
+        remainingIdx: [...remainingIdxRef.current],
+        phase: phaseRef.current,
+        lastIdx: lastIdxRef.current,
+      },
+      currentIdx,
+      correct,
+      incorrect,
+      prevAnswers,
+      isFinished,
+      extras: { askTransitive },
+    }),
+    [askTransitive, correct, currentIdx, incorrect, isFinished, prevAnswers, progressSegments, getProgressSnapshot],
+  );
 
   const pickPair = useCallback(() => {
     if (transitiveData.length === 0) return;
@@ -118,12 +167,25 @@ export default function TransitivePage() {
   }, [getProgressState]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      return;
+    }
     remainingIdxRef.current = [];
     phaseRef.current = null;
     lastIdxRef.current = null;
     setIsFinished(false);
     pickPair();
-  }, []); // eslint-disable-line
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
+  }, [isFinished]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + pageTitle;

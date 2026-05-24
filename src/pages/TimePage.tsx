@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+} from '../utils/exerciseSessionDraft';
 import { toHiragana } from 'wanakana';
 import { getJapaneseTimeReadings } from '../engines/japaneseTime';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -29,28 +35,91 @@ function pickOne(items: string[]) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
+type SlotTime = { hour: number; minute: number; amPm: 0 | 1 | 2 };
+
+const PERSIST_KEY = '/time';
+
 export default function TimePage() {
   const { t, i18n } = useTranslation();
   const pageTitle = t('pages.time.title');
   const [reverse, setReverse] = useState(false);
-  const [currentSlot, setCurrentSlot] = useState<number>(0);
-  const [currentTime, setCurrentTime] = useState('');
-  const [question, setQuestion] = useState('');
-  const [accepted, setAccepted] = useState<string[] | string>('');
-  const [isFinished, setIsFinished] = useState(false);
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(PERSIST_KEY, reverse ? 1 : 0, DEFAULT_MASTERY_RANDOM_TOTAL),
+    [reverse],
+  );
+  const restoredDraft = useExerciseSessionDraft(PERSIST_KEY, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+  const settingsReadyRef = useRef(false);
+  const settingsChangedRef = useRef(false);
+  const restoredExtras = restoredDraft?.extras;
+  const restoredSlotTimes = Array.isArray(restoredExtras?.slotTimes)
+    && restoredExtras.slotTimes.length === DEFAULT_MASTERY_RANDOM_TOTAL
+    ? restoredExtras.slotTimes as Array<SlotTime | null>
+    : null;
+
+  const [currentSlot, setCurrentSlot] = useState<number>(restoredDraft?.currentIdx ?? 0);
+  const [currentTime, setCurrentTime] = useState(
+    () => (typeof restoredExtras?.currentTime === 'string' ? restoredExtras.currentTime : ''),
+  );
+  const [question, setQuestion] = useState(
+    () => (typeof restoredExtras?.question === 'string' ? restoredExtras.question : ''),
+  );
+  const [accepted, setAccepted] = useState<string[] | string>(() => {
+    const saved = restoredExtras?.accepted;
+    if (typeof saved === 'string') return saved;
+    if (Array.isArray(saved)) return saved as string[];
+    return '';
+  });
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
 
   const [userInput, setUserInput] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [answerDisplay, setAnswerDisplay] = useState('');
 
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
-  const lastMinuteRef = useRef<number>(-1);
-  const slotTimeRef = useRef<Array<{ hour: number; minute: number; amPm: 0 | 1 | 2 } | null>>(Array(DEFAULT_MASTERY_RANDOM_TOTAL).fill(null));
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, { persistKey: '/time' });
+  const lastMinuteRef = useRef<number>(
+    typeof restoredExtras?.lastMinute === 'number' ? restoredExtras.lastMinute : -1,
+  );
+  const slotTimeRef = useRef<Array<SlotTime | null>>(
+    restoredSlotTimes ? [...restoredSlotTimes] : Array(DEFAULT_MASTERY_RANDOM_TOTAL).fill(null),
+  );
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    recordAt: recordProgressAt,
+    getProgressSnapshot,
+  } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, {
+    persistKey: PERSIST_KEY,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  usePersistExerciseDraft(
+    PERSIST_KEY,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: { remainingIdx: [], phase: null, lastIdx: null },
+      currentIdx: currentSlot,
+      correct,
+      incorrect,
+      prevAnswers: [],
+      isFinished,
+      extras: {
+        reverse,
+        slotTimes: [...slotTimeRef.current],
+        lastMinute: lastMinuteRef.current,
+        currentTime,
+        question,
+        accepted,
+      },
+    }),
+    [accepted, correct, currentTime, currentSlot, incorrect, isFinished, progressSegments, question, reverse, getProgressSnapshot],
+  );
   const progressSegmentsRef = useRef(progressSegments);
 
   useEffect(() => {
@@ -124,9 +193,35 @@ export default function TimePage() {
   }, [reverse]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      settingsReadyRef.current = true;
+      return;
+    }
     setIsFinished(false);
     pickNext();
-  }, [pickNext]);
+    settingsReadyRef.current = true;
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!settingsReadyRef.current) return;
+    if (!settingsChangedRef.current) {
+      settingsChangedRef.current = true;
+      return;
+    }
+    shouldRestoreSessionRef.current = false;
+    setIsFinished(false);
+    pickNext();
+  }, [reverse, pickNext]);
+
+  useEffect(() => {
+    if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
+  }, [isFinished]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + pageTitle;

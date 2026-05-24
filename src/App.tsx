@@ -24,6 +24,7 @@ import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useTranslation } from 'react-i18next';
 import { setAppLanguage } from './i18n/index';
 import { syncDebugModeFromSearch } from './utils/debugMode';
+import { clearAllExerciseSessionDrafts } from './utils/exerciseSessionDraft';
 
 function DarkModeToggle() {
   const { t } = useTranslation();
@@ -142,6 +143,12 @@ function AppShell() {
   useEffect(() => {
     syncDebugModeFromSearch(location.search);
   }, [location.search]);
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      clearAllExerciseSessionDrafts();
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     try {

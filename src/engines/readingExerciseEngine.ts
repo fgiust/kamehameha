@@ -30,6 +30,20 @@ export class ReadingExercisePicker {
     this.phase = null;
   }
 
+  restore(state: { remainingIdx: number[]; phase: 0 | 2 | null; lastIdx: number | null }) {
+    this.remainingIdx = [...state.remainingIdx];
+    this.phase = state.phase;
+    this.lastIdx = state.lastIdx;
+  }
+
+  getState() {
+    return {
+      remainingIdx: [...this.remainingIdx],
+      phase: this.phase,
+      lastIdx: this.lastIdx,
+    };
+  }
+
   pickNextIndex(totalItems: number, getProgressState: (key: string) => ProgressSegmentState): number | null {
     const max = Math.max(0, Math.floor(totalItems));
     if (max === 0) return null;

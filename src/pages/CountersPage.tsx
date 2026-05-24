@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+} from '../utils/exerciseSessionDraft';
 import { toHiragana } from 'wanakana';
 import counters, { JapaneseCounter } from '../data/dictCounters';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -123,20 +129,45 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     return next;
   });
 
-  const [currentCounter, setCurrentCounter] = useState<JapaneseCounter | null>(null);
-  const [currentQuestionIdx, setCurrentQuestionIdx] = useState<number>(0);
-  const [isFinished, setIsFinished] = useState(false);
-  const [question, setQuestion] = useState('');
-  const [acceptedKana, setAcceptedKana] = useState<string[]>([]);
-  const [acceptedAll, setAcceptedAll] = useState<string[]>([]);
-  const [kanjiAnswer, setKanjiAnswer] = useState('');
-  const [answerKanji, setAnswerKanji] = useState<number>(0);
+  const totalQuestions = CONJUGATION_SESSION_TARGET_TOTAL;
+  const persistKey = peopleOnly ? '/counters-people' : '/counters';
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(persistKey, peopleOnly ? 1 : 0, totalQuestions),
+    [persistKey, peopleOnly, totalQuestions],
+  );
+  const restoredDraft = useExerciseSessionDraft(persistKey, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+  const restoredExtras = restoredDraft?.extras;
+
+  const [currentCounter, setCurrentCounter] = useState<JapaneseCounter | null>(() => {
+    const key = restoredExtras?.counterEnKey;
+    if (typeof key === 'string') return counters.find(c => c.en[1] === key) ?? null;
+    return null;
+  });
+  const [currentQuestionIdx, setCurrentQuestionIdx] = useState<number>(restoredDraft?.currentIdx ?? 0);
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
+  const [question, setQuestion] = useState(
+    () => (typeof restoredExtras?.question === 'string' ? restoredExtras.question : ''),
+  );
+  const [acceptedKana, setAcceptedKana] = useState<string[]>(() =>
+    (Array.isArray(restoredExtras?.acceptedKana) ? restoredExtras.acceptedKana as string[] : []),
+  );
+  const [acceptedAll, setAcceptedAll] = useState<string[]>(() =>
+    (Array.isArray(restoredExtras?.acceptedAll) ? restoredExtras.acceptedAll as string[] : []),
+  );
+  const [kanjiAnswer, setKanjiAnswer] = useState(
+    () => (typeof restoredExtras?.kanjiAnswer === 'string' ? restoredExtras.kanjiAnswer : ''),
+  );
+  const [answerKanji, setAnswerKanji] = useState(
+    () => (typeof restoredExtras?.answerKanji === 'number' ? restoredExtras.answerKanji : 0),
+  );
 
   const [userInput, setUserInput] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [answerDisplay, setAnswerDisplay] = useState<ReactNode | null>(null);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -159,9 +190,15 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     }
     return out;
   }, [peopleOnly, peopleCounter]);
-  const totalQuestions = CONJUGATION_SESSION_TARGET_TOTAL;
-  const persistKey = peopleOnly ? '/counters-people' : '/counters';
-  const { segments: progressSegments, pulses: progressPulses, recordAt: recordProgressAt } = useSessionProgress(totalQuestions, { persistKey });
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    recordAt: recordProgressAt,
+    getProgressSnapshot,
+  } = useSessionProgress(totalQuestions, {
+    persistKey,
+    initialProgress: restoredDraft?.progress,
+  });
 
   useEffect(() => {
     progressSegmentsRef.current = progressSegments;
@@ -182,14 +219,44 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     return allQuestions.filter(q => enabledSet.has(q.counter.en[1]));
   }, [activeCounters, allQuestions]);
 
-  const [sessionSlots, setSessionSlots] = useState<Array<CounterQuestion | null>>(
-    () => Array(CONJUGATION_SESSION_TARGET_TOTAL).fill(null)
-  );
+  const [sessionSlots, setSessionSlots] = useState<Array<CounterQuestion | null>>(() => {
+    const ids = restoredDraft?.extras?.sessionSlotIds;
+    if (!Array.isArray(ids) || ids.length !== CONJUGATION_SESSION_TARGET_TOTAL) {
+      return Array(CONJUGATION_SESSION_TARGET_TOTAL).fill(null);
+    }
+    return ids.map(id =>
+      (typeof id === 'string' ? allQuestions.find(q => q.id === id) ?? null : null),
+    );
+  });
   const sessionSlotsRef = useRef<Array<CounterQuestion | null>>(sessionSlots);
 
   useEffect(() => {
     sessionSlotsRef.current = sessionSlots;
   }, [sessionSlots]);
+
+  usePersistExerciseDraft(
+    persistKey,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: { remainingIdx: [], phase: null, lastIdx: null },
+      currentIdx: currentQuestionIdx,
+      correct,
+      incorrect,
+      prevAnswers: [],
+      isFinished,
+      extras: {
+        sessionSlotIds: sessionSlots.map(s => s?.id ?? null),
+        counterEnKey: currentCounter?.en[1] ?? null,
+        question,
+        acceptedKana,
+        acceptedAll,
+        kanjiAnswer,
+        answerKanji,
+      },
+    }),
+    [acceptedAll, acceptedKana, answerKanji, correct, currentCounter, currentQuestionIdx, incorrect, isFinished, kanjiAnswer, progressSegments, question, sessionSlots, getProgressSnapshot],
+  );
 
   const getRandomCandidate = useCallback((excludeIds: Set<string>) => {
     if (activeQuestions.length === 0) return null;
@@ -303,11 +370,30 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   }, [activeQuestions.length, ensureSlotQuestion, lang]);
 
   useEffect(() => {
-    setIsFinished(false);
-  }, [peopleOnly]);
-  useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      return;
+    }
     pickNext();
-  }, [pickNext, peopleOnly]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const prevPeopleOnlyForPickRef = useRef(peopleOnly);
+  useEffect(() => {
+    if (prevPeopleOnlyForPickRef.current === peopleOnly) return;
+    prevPeopleOnlyForPickRef.current = peopleOnly;
+    shouldRestoreSessionRef.current = false;
+    setIsFinished(false);
+    pickNext();
+  }, [peopleOnly, pickNext]);
+
+  useEffect(() => {
+    if (isFinished) clearExerciseSessionDraft(persistKey);
+  }, [isFinished, persistKey]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + pageTitle;

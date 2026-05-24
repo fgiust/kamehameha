@@ -1,4 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+  restoreSessionWordsFromDraft,
+  sessionWordKeysFromWords,
+} from '../utils/exerciseSessionDraft';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
@@ -74,7 +82,19 @@ function finalizeIME(input: string) {
 export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, persistKey, forceReverseQA }: Props) {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
-  const [sessionWords] = useState<ConjugationWord[]>(() => pickRandomSubset(wordData, CONJUGATION_SESSION_TARGET_TOTAL));
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(persistKey ?? title, wordData.length),
+    [persistKey, title, wordData.length],
+  );
+  const restoredDraft = useExerciseSessionDraft(persistKey, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+
+  const [sessionWords] = useState<ConjugationWord[]>(() =>
+    restoreSessionWordsFromDraft(wordData, restoredDraft, () =>
+      pickRandomSubset(wordData, CONJUGATION_SESSION_TARGET_TOTAL),
+    ),
+  );
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [randomFlags, setRandomFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [settings, setSettings] = useState<GlobalSettings>(() => ({
@@ -82,27 +102,59 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     ...readStoredConjugationDisplaySettings(),
   }));
   const reverseQA = !!forceReverseQA;
-  const [currentWordIdx, setCurrentWordIdx] = useState<number>(0);
-  const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);
-  const [isFinished, setIsFinished] = useState(false);
+  const restoredIdx = restoredDraft?.currentIdx ?? 0;
+  const [currentWordIdx, setCurrentWordIdx] = useState<number>(restoredIdx);
+  const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(
+    () => sessionWords[restoredIdx] ?? null,
+  );
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
   const [didConvert, setDidConvert] = useState(false);
   const [isComposing, setIsComposing] = useState(false);
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [diffDisplay, setDiffDisplay] = useState<string>('');
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
-  const remainingIdxRef = useRef<number[]>([]);
-  const lastIdxRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
+  const remainingIdxRef = useRef<number[]>(restoredDraft?.picker.remainingIdx ?? []);
+  const lastIdxRef = useRef<number | null>(restoredDraft?.picker.lastIdx ?? null);
+  const phaseRef = useRef<0 | 2 | null>(restoredDraft?.picker.phase ?? null);
   const totalWords = sessionWords.length;
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(totalWords, { persistKey });
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    record: recordProgress,
+    getState: getProgressState,
+    getProgressSnapshot,
+  } = useSessionProgress(totalWords, {
+    persistKey,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  const { persistNow } = usePersistExerciseDraft(
+    persistKey,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: {
+        remainingIdx: [...remainingIdxRef.current],
+        phase: phaseRef.current,
+        lastIdx: lastIdxRef.current,
+      },
+      currentIdx: currentWordIdx,
+      correct,
+      incorrect,
+      prevAnswers,
+      isFinished,
+      extras: { sessionWordKeys: sessionWordKeysFromWords(sessionWords) },
+    }),
+    [currentWordIdx, correct, incorrect, isFinished, prevAnswers, progressSegments, sessionWords, getProgressSnapshot],
+  );
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
     setSettings(s => {
@@ -186,12 +238,27 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   }, [engine, settings.randomizeForm, sessionWords, getProgressState]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      return;
+    }
     remainingIdxRef.current = [];
     phaseRef.current = null;
     lastIdxRef.current = null;
     setIsFinished(false);
     pickWord();
-  }, []); // eslint-disable-line
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (isFinished && persistKey) {
+      clearExerciseSessionDraft(persistKey);
+    }
+  }, [isFinished, persistKey]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + title;
@@ -314,6 +381,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
       recordProgress(String(currentWordIdx), isCorrect);
       setAwaitingNext(true);
+      persistNow();
       return;
     }
 
@@ -345,7 +413,8 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
 
     recordProgress(String(currentWordIdx), isCorrect);
     setAwaitingNext(true);
-  }, [awaitingNext, isFinished, currentWord, userInput, engine, flags, randomFlags, pickWord, settings.randomizeForm, reverseQA, settings.showKanji, settings.showFurigana, recordProgress, currentWordIdx]);
+    persistNow();
+  }, [awaitingNext, isFinished, currentWord, userInput, engine, flags, randomFlags, pickWord, settings.randomizeForm, reverseQA, settings.showKanji, settings.showFurigana, recordProgress, currentWordIdx, persistNow]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;

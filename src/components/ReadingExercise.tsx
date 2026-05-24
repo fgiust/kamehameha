@@ -5,6 +5,12 @@ import KeyboardTip from './KeyboardTip';
 import JapaneseText from './JapaneseText';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+} from '../utils/exerciseSessionDraft';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { didConvertFromLatin, finalizeIME, ReadingExercisePicker, toHiraganaIME } from '../engines/readingExerciseEngine';
 import ExerciseCompletedMessage from './ExerciseCompletedMessage';
@@ -31,30 +37,67 @@ export default function ReadingExercise({
   const items = session.items;
   const totalItems = items.length;
 
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(persistKey, session.id, totalItems),
+    [persistKey, session.id, totalItems],
+  );
+  const restoredDraft = useExerciseSessionDraft(persistKey, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+
   const pickerRef = useRef<ReadingExercisePicker>(new ReadingExercisePicker());
+  const didRestorePickerRef = useRef(false);
+  if (restoredDraft?.picker && !didRestorePickerRef.current) {
+    pickerRef.current.restore(restoredDraft.picker);
+    didRestorePickerRef.current = true;
+  }
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
 
-  const [currentIdx, setCurrentIdx] = useState<number>(0);
-  const [currentItem, setCurrentItem] = useState<ReadingExerciseItem | null>(null);
-  const [isFinished, setIsFinished] = useState(false);
+  const restoredIdx = restoredDraft?.currentIdx ?? 0;
+  const [currentIdx, setCurrentIdx] = useState<number>(restoredIdx);
+  const [currentItem, setCurrentItem] = useState<ReadingExerciseItem | null>(
+    () => items[restoredIdx] ?? null,
+  );
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
 
   const [rawInput, setRawInput] = useState('');
   const [userInput, setUserInput] = useState('');
   const [isComposing, setIsComposing] = useState(false);
   const [didConvert, setDidConvert] = useState(false);
 
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [revealAnswer, setRevealAnswer] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
 
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(
-    totalItems,
-    { persistKey }
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    record: recordProgress,
+    getState: getProgressState,
+    getProgressSnapshot,
+  } = useSessionProgress(totalItems, {
+    persistKey,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  const { persistNow } = usePersistExerciseDraft(
+    persistKey,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: pickerRef.current.getState(),
+      currentIdx,
+      correct,
+      incorrect,
+      prevAnswers,
+      isFinished,
+    }),
+    [currentIdx, correct, incorrect, isFinished, prevAnswers, progressSegments, getProgressSnapshot],
   );
 
   const pickNext = useCallback(() => {
@@ -86,13 +129,41 @@ export default function ReadingExercise({
   }, [getProgressState, items, totalItems]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      return;
+    }
     pickerRef.current.reset();
     setIsFinished(false);
     setCorrect(0);
     setIncorrect(0);
     setPrevAnswers([]);
     pickNext();
-  }, [pickNext, session.id]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const prevSessionIdRef = useRef(session.id);
+  useEffect(() => {
+    if (prevSessionIdRef.current === session.id) return;
+    prevSessionIdRef.current = session.id;
+    shouldRestoreSessionRef.current = false;
+    pickerRef.current.reset();
+    setIsFinished(false);
+    setCorrect(0);
+    setIncorrect(0);
+    setPrevAnswers([]);
+    pickNext();
+  }, [session.id, pickNext]);
+
+  useEffect(() => {
+    if (isFinished) {
+      clearExerciseSessionDraft(persistKey);
+    }
+  }, [isFinished, persistKey]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -155,7 +226,8 @@ export default function ReadingExercise({
 
     recordProgress(String(currentIdx), ok);
     setAwaitingNext(true);
-  }, [acceptQuestionAsCorrect, currentIdx, currentItem, isFinished, recordProgress, userInput]);
+    persistNow();
+  }, [acceptQuestionAsCorrect, currentIdx, currentItem, isFinished, recordProgress, userInput, persistNow]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (isFinished) return;

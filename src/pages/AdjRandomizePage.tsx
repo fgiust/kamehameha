@@ -1,4 +1,12 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
+import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
+import {
+  buildExerciseFingerprint,
+  clearExerciseSessionDraft,
+  restoreSessionWordsFromDraft,
+  sessionWordKeysFromWords,
+} from '../utils/exerciseSessionDraft';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
@@ -42,44 +50,109 @@ function finalizeIME(input: string) {
   return input;
 }
 
+const PERSIST_KEY = '/adj-randomize';
+
 export default function AdjRandomizePage() {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.randomizeAdj.title');
-  const [sessionWords] = useState<ConjugationWord[]>(() => pickRandomSubset(adjectives, CONJUGATION_SESSION_TARGET_TOTAL));
+  const fingerprint = useMemo(
+    () => buildExerciseFingerprint(PERSIST_KEY, adjectives.length),
+    [],
+  );
+  const restoredDraft = useExerciseSessionDraft(PERSIST_KEY, fingerprint);
+  const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
+  const didInitPickRef = useRef(false);
+  const restoredExtras = restoredDraft?.extras;
+
+  const [sessionWords] = useState<ConjugationWord[]>(() =>
+    restoreSessionWordsFromDraft(adjectives, restoredDraft, () =>
+      pickRandomSubset(adjectives, CONJUGATION_SESSION_TARGET_TOTAL),
+    ),
+  );
   const [settings, setSettings] = useState<GlobalSettings>(() => ({
     reverseQA: readStoredBool(SETTINGS_KEYS.reverseQA, false),
     ...readStoredConjugationDisplaySettings(),
   }));
 
   const [activeForms, setActiveForms] = useState<Record<string, boolean>>(() => {
+    const saved = restoredExtras?.activeForms;
+    if (saved && typeof saved === 'object' && !Array.isArray(saved)) {
+      return saved as Record<string, boolean>;
+    }
     const f: Record<string, boolean> = {};
     formIds.forEach(id => { f[id] = true; });
     return f;
   });
-  const [currentWordIdx, setCurrentWordIdx] = useState<number>(0);
-  const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);
-  const [isFinished, setIsFinished] = useState(false);
-  const [currentFormLabel, setCurrentFormLabel] = useState('');
-  const [currentFlags, setCurrentFlags] = useState<OptionFlags>({});
-  const [currentFormKey, setCurrentFormKey] = useState('');
+  const restoredIdx = restoredDraft?.currentIdx ?? 0;
+  const [currentWordIdx, setCurrentWordIdx] = useState<number>(restoredIdx);
+  const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(
+    () => sessionWords[restoredIdx] ?? null,
+  );
+  const [isFinished, setIsFinished] = useState(restoredDraft?.isFinished ?? false);
+  const [currentFormLabel, setCurrentFormLabel] = useState(
+    () => (typeof restoredExtras?.currentFormLabel === 'string' ? restoredExtras.currentFormLabel : ''),
+  );
+  const [currentFlags, setCurrentFlags] = useState<OptionFlags>(
+    () => (restoredExtras?.currentFlags && typeof restoredExtras.currentFlags === 'object'
+      ? restoredExtras.currentFlags as OptionFlags
+      : {}),
+  );
+  const [currentFormKey, setCurrentFormKey] = useState(
+    () => (typeof restoredExtras?.currentFormKey === 'string' ? restoredExtras.currentFormKey : ''),
+  );
   const [userInput, setUserInput] = useState('');
   const [rawInput, setRawInput] = useState('');
   const [didConvert, setDidConvert] = useState(false);
   const [isComposing, setIsComposing] = useState(false);
-  const [correct, setCorrect] = useState(0);
-  const [incorrect, setIncorrect] = useState(0);
+  const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
+  const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [diffDisplay, setDiffDisplay] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
-  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
+  const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
-  const remainingIdxRef = useRef<number[]>([]);
-  const lastIdxRef = useRef<number | null>(null);
-  const phaseRef = useRef<0 | 2 | null>(null);
-  const { segments: progressSegments, pulses: progressPulses, record: recordProgress, getState: getProgressState } = useSessionProgress(sessionWords.length, { persistKey: '/adj-randomize' });
+  const remainingIdxRef = useRef<number[]>(restoredDraft?.picker.remainingIdx ?? []);
+  const lastIdxRef = useRef<number | null>(restoredDraft?.picker.lastIdx ?? null);
+  const phaseRef = useRef<0 | 2 | null>(restoredDraft?.picker.phase ?? null);
+  const {
+    segments: progressSegments,
+    pulses: progressPulses,
+    record: recordProgress,
+    getState: getProgressState,
+    getProgressSnapshot,
+  } = useSessionProgress(sessionWords.length, {
+    persistKey: PERSIST_KEY,
+    initialProgress: restoredDraft?.progress,
+  });
+
+  usePersistExerciseDraft(
+    PERSIST_KEY,
+    fingerprint,
+    () => ({
+      progress: getProgressSnapshot(),
+      picker: {
+        remainingIdx: [...remainingIdxRef.current],
+        phase: phaseRef.current,
+        lastIdx: lastIdxRef.current,
+      },
+      currentIdx: currentWordIdx,
+      correct,
+      incorrect,
+      prevAnswers,
+      isFinished,
+      extras: {
+        sessionWordKeys: sessionWordKeysFromWords(sessionWords),
+        activeForms,
+        currentFormKey,
+        currentFormLabel,
+        currentFlags,
+      },
+    }),
+    [activeForms, correct, currentFlags, currentFormKey, currentFormLabel, currentWordIdx, incorrect, isFinished, prevAnswers, progressSegments, sessionWords, getProgressSnapshot],
+  );
 
   const updateSetting = (key: keyof GlobalSettings, value: boolean) => {
     setSettings(s => {
@@ -181,12 +254,25 @@ export default function AdjRandomizePage() {
   }, [activeForms, getProgressState, sessionWords, t]);
 
   useEffect(() => {
+    if (didInitPickRef.current) return;
+    didInitPickRef.current = true;
+
+    if (shouldRestoreSessionRef.current) {
+      if (!isFinished) {
+        setTimeout(() => inputRef.current?.focus(), 50);
+      }
+      return;
+    }
     remainingIdxRef.current = [];
     phaseRef.current = null;
     lastIdxRef.current = null;
     setIsFinished(false);
     pickNext();
-  }, []); // eslint-disable-line
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
+  }, [isFinished]);
 
   useEffect(() => {
     document.title = APP_TITLE_PREFIX + pageTitle;

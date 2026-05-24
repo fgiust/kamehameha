@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 
 export type ProgressSegmentState = 0 | 1 | 2;
 
@@ -86,22 +86,116 @@ function notifySessionProgressUpdated(persistKey: string) {
   }
 }
 
+export type SessionProgressSnapshot = {
+  segments: ProgressSegmentState[];
+  keyToIndex: [string, number][];
+};
+
+export function normalizeSegments(segments: ProgressSegmentState[], totalSegments: number): ProgressSegmentState[] {
+  const n = Math.max(0, totalSegments);
+  if (segments.length === n) return [...segments];
+  if (segments.length > n) return segments.slice(0, n);
+  return [...segments, ...(Array(n - segments.length).fill(0) as ProgressSegmentState[])];
+}
+
+export function hydrateSessionProgressSnapshot(
+  snapshot: SessionProgressSnapshot,
+  totalSegments: number,
+  refs: {
+    segmentsRef: MutableRefObject<ProgressSegmentState[]>;
+    keyToIndexRef: MutableRefObject<Map<string, number>>;
+    indexToKeyRef: MutableRefObject<Array<string | null>>;
+    nextIndexRef: MutableRefObject<number>;
+  },
+): ProgressSegmentState[] {
+  const n = Math.max(0, totalSegments);
+  const segments = normalizeSegments(snapshot.segments, n);
+  refs.segmentsRef.current = segments;
+
+  const map = new Map<string, number>(snapshot.keyToIndex);
+  refs.keyToIndexRef.current = map;
+
+  const indexToKey = Array(n).fill(null) as Array<string | null>;
+  for (const [key, idx] of map) {
+    if (idx >= 0 && idx < n) indexToKey[idx] = key;
+  }
+  refs.indexToKeyRef.current = indexToKey;
+
+  let nextIndex = 0;
+  for (const idx of map.values()) {
+    if (idx + 1 > nextIndex) nextIndex = idx + 1;
+  }
+  refs.nextIndexRef.current = n > 0 ? nextIndex % n : 0;
+  return segments;
+}
+
+export function clearPersistedSessionProgress(persistKey: string): void {
+  try {
+    localStorage.removeItem(buildSessionProgressStorageKey(persistKey));
+  } catch {
+    return;
+  }
+}
+
 export function useSessionProgress(
   totalSegments: number,
   options?: {
     persistKey?: string;
+    initialProgress?: SessionProgressSnapshot | null;
   }
 ) {
-  const [segments, setSegments] = useState<ProgressSegmentState[]>(() => Array(Math.max(0, totalSegments)).fill(0));
+  const initialProgress = options?.initialProgress ?? null;
+  const pendingRestoreRef = useRef(initialProgress);
+  const appliedTotalRef = useRef<number | null>(null);
+
+  const [segments, setSegments] = useState<ProgressSegmentState[]>(() => {
+    if (initialProgress) return normalizeSegments(initialProgress.segments, totalSegments);
+    return Array(Math.max(0, totalSegments)).fill(0);
+  });
   const [pulses, setPulses] = useState<number[]>(() => Array(Math.max(0, totalSegments)).fill(0));
-  const segmentsRef = useRef<ProgressSegmentState[]>(Array(Math.max(0, totalSegments)).fill(0));
-  const keyToIndexRef = useRef<Map<string, number>>(new Map());
+  const segmentsRef = useRef<ProgressSegmentState[]>(
+    initialProgress
+      ? normalizeSegments(initialProgress.segments, totalSegments)
+      : (Array(Math.max(0, totalSegments)).fill(0) as ProgressSegmentState[]),
+  );
+  const keyToIndexRef = useRef<Map<string, number>>(
+    initialProgress ? new Map(initialProgress.keyToIndex) : new Map(),
+  );
   const indexToKeyRef = useRef<Array<string | null>>(Array(Math.max(0, totalSegments)).fill(null));
   const nextIndexRef = useRef(0);
   const audioCtxRef = useRef<AudioContext | null>(null);
 
+  if (initialProgress) {
+    hydrateSessionProgressSnapshot(initialProgress, totalSegments, {
+      segmentsRef,
+      keyToIndexRef,
+      indexToKeyRef,
+      nextIndexRef,
+    });
+  }
+
   useEffect(() => {
     const n = Math.max(0, totalSegments);
+    const restore = pendingRestoreRef.current;
+    if (restore && n > 0) {
+      const nextSegments = hydrateSessionProgressSnapshot(restore, n, {
+        segmentsRef,
+        keyToIndexRef,
+        indexToKeyRef,
+        nextIndexRef,
+      });
+      setSegments(nextSegments);
+      setPulses(Array(n).fill(0));
+      pendingRestoreRef.current = null;
+      appliedTotalRef.current = n;
+      return;
+    }
+    if (restore && n === 0) return;
+
+    // React Strict Mode re-runs this effect with the same totalSegments; keep hydrated state.
+    if (appliedTotalRef.current === n) return;
+
+    appliedTotalRef.current = n;
     segmentsRef.current = Array(n).fill(0);
     setSegments(Array(n).fill(0));
     setPulses(Array(n).fill(0));
@@ -109,6 +203,13 @@ export function useSessionProgress(
     indexToKeyRef.current = Array(n).fill(null);
     nextIndexRef.current = 0;
   }, [totalSegments]);
+
+  const getProgressSnapshot = useCallback((): SessionProgressSnapshot => {
+    return {
+      segments: [...segmentsRef.current],
+      keyToIndex: [...keyToIndexRef.current.entries()],
+    };
+  }, []);
 
   const record = useCallback((key: string, isCorrect: boolean) => {
     if (totalSegments <= 0) return;
@@ -222,5 +323,8 @@ export function useSessionProgress(
     }
   }, [options?.persistKey, totalSegments]);
 
-  return useMemo(() => ({ segments, pulses, record, getState, recordAt }), [segments, pulses, record, getState, recordAt]);
+  return useMemo(
+    () => ({ segments, pulses, record, getState, recordAt, getProgressSnapshot }),
+    [segments, pulses, record, getState, recordAt, getProgressSnapshot],
+  );
 }
