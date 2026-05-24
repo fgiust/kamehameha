@@ -22,7 +22,7 @@ const en = {
     furigana: 'Furigana ⇧',
     type: 'Type',
     reverseQA: 'Reverse Q-A',
-    randomize: '⤭ Randomize',
+    randomize: 'randomize',
   },
   sentenceExercise: {
     promptTranslate: 'Translate into Japanese:',

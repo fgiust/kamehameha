@@ -22,7 +22,7 @@ const it = {
     furigana: 'Furigana ⇧',
     type: 'Tipo',
     reverseQA: 'Inverte D/R',
-    randomize: '⤭ Casuale',
+    randomize: 'casuale',
   },
   sentenceExercise: {
     promptTranslate: 'Traduci in giapponese:',
@@ -190,7 +190,7 @@ const it = {
     altLangEnglish: 'Inglese:',
     altLangItalian: 'Italiano:',
     questionPlaceholder: 'Il prompt/kanji attivo',
-    correctAnswer: 'Risposta/e corretta/e',
+    correctAnswer: 'Risposta corretta',
     correctAnswerPlaceholder: 'La risposta corretta attesa',
     yourAnswer: 'La tua risposta (opzionale)',
     yourAnswerPlaceholder: 'Cosa hai inserito',

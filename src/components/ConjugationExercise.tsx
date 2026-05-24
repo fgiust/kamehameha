@@ -389,6 +389,12 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const effectiveFlags = settings.randomizeForm ? randomFlags : flags;
   const displayedType = currentWord ? typeLabels[currentWord.type] : '';
   const formHint = getConjugationFormHintLocalized(t, engine, effectiveFlags);
+  const getOptionLabel = (id: string, fallback: string) => {
+    if (id === 'neg') return t('conjugationHint.negative');
+    if (id === 'polite') return t('conjugationHint.polite');
+    const localized = t(`conjugationHint.opts.${id}`);
+    return localized === `conjugationHint.opts.${id}` ? fallback : localized;
+  };
 
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
@@ -543,7 +549,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
             {engine.opts.map(o => (
               <OptionToggle
                 key={o.id}
-                label={o.label}
+                label={getOptionLabel(o.id, o.label)}
                 checked={!!effectiveFlags[o.id]}
                 disabled={settings.randomizeForm}
                 onChange={() => toggleFlag(o.id)}
