@@ -1,42 +1,47 @@
 ～時
 ～時
 
-When I catch a cold, I drink hot tea.
-Quando mi viene il raffreddore, bevo tè caldo.
-風邪[かぜ]をひくとき、熱[あつ]いお茶[ちゃ]を飲[の]みます
+# We use the word 時 to describe when something happens or happened.
+# sentence A 時 + sentence B = When A, B.
+# If, at the time the main event B takes place, A is current or is still "in the future," use the present tense in A.
+# If, at the time of main event B, A is already "in the past," use the past tense in A.
 
-When I was learning to drive, I was very nervous.
-Quando stavo imparando a guidare, ero molto nervoso.
-運転[うんてん]を習[なら]っていたとき、とても緊張[きんちょう]しました
+When I go to America, I will get a visa.
+Quando vado in America, prendo il visto.
+アメリカに行[い]く時[とき]、ビザを取[と]ります
 
-When I go abroad, I always buy postcards.
-Quando vado all'estero, compro sempre cartoline.
-海外[かいがい]に行[い]くとき、いつもはがきを買[か]います
-
-When I leave the house, I turn off the lights.
-Quando esco di casa, spengo le luci.
-家[いえ]を出[で]るとき、電気[でんき]を消[け]します
+When I have gotten tired, I take a bath.
+Quando sono stanco, faccio il bagno.
+疲[つか]れた時[とき]、お風呂[ふろ]に入[はい]ります
 
 When it rains, I take an umbrella.
 Quando piove, porto un ombrello.
-雨[あめ]のとき、傘[かさ]を持[も]って行[い]きます
+雨[あめ]が降[ふ]る時[とき]、傘[かさ]を持[も]って行[い]きます
 
-When I have free time, I listen to podcasts.
-Quando ho tempo libero, ascolto podcast.
-時間[じかん]があるとき、ポッドキャストを聞[き]きます
+When I was a child, I often went to the park.
+Da bambino andavo spesso al parco.
+子供[こども]の時[とき]、よく公園[こうえん]に行[い]きました
 
-When the cat was young, it slept a lot.
-Quando il gatto era piccolo, dormiva molto.
-猫[ねこ]が小[ちい]さいとき、よく寝[ね]ていました
+When I leave the house, I lock the door.
+Quando esco di casa, chiudo la porta a chiave.
+家[いえ]を出[で]る時[とき]、ドアに鍵[かぎ]をかけます
 
-When I go to Kyoto, I always visit temples.
-Quando vado a Kyoto, visito sempre dei templi.
-京都[きょうと]に行[い]くとき、いつもお寺[てら]に行[い]きます
+When I woke up this morning, I checked my phone.
+Quando mi sono svegliato stamattina, ho controllato il telefono.
+今朝[けさ]起[お]きた時[とき]、携帯[けいたい]を見[み]ました
 
-When I stayed in a homestay, I ate breakfast early.
-Quando facevo l'omestay, facevo colazione presto.
-ホームステイをしたとき、朝[あさ]ご飯[はん]を早[はや]く食[た]べました
+When Ken has free time, he reads books.
+Quando Ken ha tempo libero, legge libri.
+けんさんが暇[ひま]な時[とき]、本[ほん]を読[よ]みます
 
-Before going out, I always check my wallet.
-Prima di uscire, controllo sempre il portafoglio.
-出[で]かけるとき、いつも財布[さいふ]を確[たし]かめます
+When I lived in Osaka, I often ate takoyaki.
+Quando vivevo a Osaka, mangiavo spesso takoyaki.
+大阪[おおさか]に住[す]んでいた時[とき]、たこ焼[や]きをよく食[た]べました
+
+When Michiko goes to the beach, she swims.
+Quando Michiko va in spiaggia, nuota.
+みちこさんが海[うみ]に行[い]く時[とき]、泳[およ]ぎます
+
+When I did not understand, I asked the teacher.
+Quando non capivo, chiedevo al professore.
+分[わ]からなかった時[とき]、先生[せんせい]に聞[き]きました
