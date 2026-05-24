@@ -41,4 +41,4 @@ Il cibo era piccante, faceva caldo, ho bevuto molta acqua.
 
 That shop is near, has nice things, and we often go there.
 Quel negozio è vicino, ha cose belle, ci andiamo spesso.
-[あの|その]店[みせ]は近[ちか]いし、いい物[もの]があるし、よく行[い]きます
+{あの|その}店[みせ]は近[ちか]いし、良[い]い物[もの]があるし、よく行[い]きます
