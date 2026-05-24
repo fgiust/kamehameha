@@ -20,6 +20,7 @@ import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
 import DebugModeIndicator from './components/DebugModeIndicator';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/react"
 import { useTranslation } from 'react-i18next';
 import { setAppLanguage } from './i18n/index';
 import { syncDebugModeFromSearch } from './utils/debugMode';
@@ -249,6 +250,7 @@ function AppShell() {
           </div>
         } />
       </Routes><Analytics />
+      <SpeedInsights />
     </>
   );
 }
