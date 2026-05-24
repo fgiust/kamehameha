@@ -11,7 +11,7 @@ Guardo la TV tutti i giorni.
 
 What will you do on the weekend?
 Cosa farai nel fine settimana?
-{あなた[あなた]は|}週末[しゅうまつ]{に|}何[なに]をしますか
+{あなたは|}週末[しゅうまつ]{に|}何[なに]をしますか
 
 I wash my face every morning.
 Mi lavo la faccia ogni mattina.

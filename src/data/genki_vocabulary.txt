@@ -74,7 +74,7 @@ Genki Lesson 2 Vocab
 だれ	who
 おいしい	delicious
 魚[さかな]	fish
-豚[とん]カ[か]ツ[つ]	pork cutlet
+豚[とん]カツ	pork cutlet
 肉[にく]	meat
 メニュー	menu
 野[や]菜[さい]	vegetable
@@ -736,7 +736,7 @@ Genki Lesson 14 Vocab
 おばさん	aunt, middle-aged woman
 コップ	tumbler, glass
 クリスマス	Christmas
-ご[ご]主[しゅ]人[じん]	(your/her/his) husband
+ご主[しゅ]人[じん]	(your/her/his) husband
 皿[さら]	plate, dish
 時[じ]間[かん]	time
 チケット	ticket

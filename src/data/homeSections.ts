@@ -147,7 +147,7 @@ export const homeConfig: HomeConfig = {
       titleLevel: 3,
       items: [
         { id: 'genki1-1' },
-        { id: 'genki1-2', beta: true },
+        { id: 'genki1-2' },
         { id: 'genki1-3', beta: true },
         { id: 'numbers', title: { key: 'pages.numbers.title' } },
         { id: 'time', title: { key: 'pages.time.title' } },
