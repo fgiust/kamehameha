@@ -11,7 +11,7 @@ Potrebbe ripetere quello ancora una volta?
 
 Could you pick that thing up and pass it to me?
 Potresti raccogliere quella cosa e passarmela?
-それを拾[ひろ]って、私[わたし]に渡[わた]してくださいませんか
+それを拾[ひろ]って、私[わたし]に渡[わた]していただけませんか
 
 Could you write it in hiragana for me?
 Potrebbe scriverlo in hiragana per me?
@@ -23,20 +23,20 @@ Potrebbe dirmi quando apre il negozio?
 
 Please speak Japanese, will you?
 Per favore parli giapponese, va bene?
-日本語[にほんご]を話[はな]してくださいませんか
+日本語[にほんご]を話[はな]していただけませんか
 
 Please open the window, will you?
 Per favore apra la finestra, va bene?
-窓[まど]を開[あ]けてくださいませんか
+窓[まど]を開[あ]けていただけませんか
 
 Please help me with the luggage.
 Per favore mi aiuti con i bagagli.
-荷物[にもつ]を手伝[てつだ]ってくださいませんか
+荷物[にもつ]を手伝[てつだ]っていただけませんか
 
 Please explain this sentence.
 Per favore spieghi questa frase.
-この文[ぶん]を説明[せつめい]してくださいませんか
+この文[ぶん]を説明[せつめい]していただけませんか
 
 Please give me a little time.
 Per favore mi dia un po' di tempo.
-少[すこ]し時間[じかん]をくださいませんか
+少[すこ]し時間[じかん]をいただけませんか

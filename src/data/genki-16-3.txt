@@ -1,42 +1,45 @@
 ～といい
 ～といい
 
-I hope the interview goes well.
-Spero che il colloquio vada bene.
-面接[めんせつ]がうまくいってほしいです
+# (short, present) + いいですね/いいね = I hope... (for you/them)
+# (short, present) + いいんですが／いいんだけど = I hope... (for myself)
 
-I hope the typhoon doesn't come near us.
-Spero che il tifone non si avvicini.
-台風[たいふう]が来[こ]ないでほしいです
+I hope it doesn't rain.
+Spero che non piova.
+雨[あめ]が降[ふ]らないといい{ね|ですね}
 
-I hope the road isn't icy tomorrow.
-Spero che domani la strada non sia ghiacciata.
-明日[あした]道[みち]が滑[すべ]らないでほしいです
+I am hoping that the exam is easy.
+Spero che l'esame sia facile.
+試験[しけん]が{やさしい|易[やさ]しい}といいん{ですが|だけど}
 
-I am hoping that the exam is easy for my own good.
-Spero che l'esame sia facile per il mio bene.
-試験[しけん]がやさしくてほしいです
+I hope Mary passes the test.
+Spero che Mary passi l'esame.
+メアリーさんが試験[しけん]に受[う]かるといい{ですね|ね}
 
-I hope I can catch the 8 o'clock train for my own good.
+I hope I can catch the eight o'clock train.
 Spero di prendere il treno delle otto.
-八時[はちじ]の電車[でんしゃ]に間[ま]に合[あ]ってほしいです
-
-I hope my younger brother passes the test.
-Spero che mio fratello passi l'esame.
-弟[おとうと]が試験[しけん]に受[う]かってほしいです
+八[はち]時[じ]の電車[でんしゃ]に間[ま]に合[あ]うといいん{ですが|だけど}
 
 I hope you feel better soon.
-Spero che tu ti senta meglio presto.
-早[はや]く良[よ]くなってほしいです
+Spero che tu stia meglio presto.
+早[はや]く良[よ]くなるといい{ですね|ね}
 
-I hope the cherry blossoms bloom early this year.
-Spero che i ciliegi in fiore sbocciino presto quest'anno.
-今年[ことし]は桜[さくら]が早[はや]く咲[さ]いてほしいです
+I hope the weather is nice tomorrow.
+Spero che domani il tempo sia bello.
+明日[あした]は天気[てんき]が{いい|よい}といいん{ですが|だけど}
 
-I hope you find a nice apartment.
-Spero che tu trovi un bel appartamento.
-いいアパートが見[み]つかってほしいです
+I hope the typhoon doesn't come.
+Spero che il tifone non arrivi.
+台風[たいふう]が来[こ]ないといい{ですね|ね}
 
-I hope Mary comes to the party.
-Spero che Mary venga alla festa.
-メアリーさんにパーティーに来[き]てほしいです
+I hope I don't catch a cold.
+Spero di non prendere un raffreddore.
+風邪[かぜ]を{ひ|引[ひ]}かないといいん{ですが|だけど}
+
+I hope Pedro comes to the party.
+Spero che Pedro venga alla festa.
+ペドロさんがパーティーに来[き]るといい{ね|ですね}
+
+I hope I can find a cheap apartment.
+Spero di trovare un appartamento economico.
+安[やす]いアパートが見[み]つかるといいん{ですが|だけど}
