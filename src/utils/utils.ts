@@ -1,4 +1,5 @@
-import type { ConjugationEngine, OptionFlags } from '../types';
+import type { ConjugationEngine, OptionFlags, ConjugationDisplaySettings } from '../types';
+import { CONJUGATION_DISPLAY_DEFAULTS, SETTINGS_KEYS } from '../types';
 import type { TFunction } from 'i18next';
 
 export function readStoredBool(key: string, fallback: boolean) {
@@ -17,6 +18,35 @@ export function writeStoredBool(key: string, value: boolean) {
   } catch {
     return;
   }
+}
+
+function readStoredShowType(fallback: boolean) {
+  try {
+    const existing = localStorage.getItem(SETTINGS_KEYS.showType);
+    if (existing !== null) return existing === 'true';
+
+    const legacyHideType = localStorage.getItem('nihongo.conj.hideType');
+    if (legacyHideType === null) return fallback;
+
+    const showType = legacyHideType !== 'true';
+    localStorage.setItem(SETTINGS_KEYS.showType, showType ? 'true' : 'false');
+    localStorage.removeItem('nihongo.conj.hideType');
+    return showType;
+  } catch {
+    return fallback;
+  }
+}
+
+export function readStoredConjugationDisplaySettings(): ConjugationDisplaySettings {
+  const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, CONJUGATION_DISPLAY_DEFAULTS.showKanji);
+  return {
+    showKanji,
+    showFurigana: showKanji
+      ? readStoredBool(SETTINGS_KEYS.showFurigana, CONJUGATION_DISPLAY_DEFAULTS.showFurigana)
+      : false,
+    showType: readStoredShowType(CONJUGATION_DISPLAY_DEFAULTS.showType),
+    showEnglish: readStoredBool(SETTINGS_KEYS.showEnglish, CONJUGATION_DISPLAY_DEFAULTS.showEnglish),
+  };
 }
 
 export function stripRubyTags(input: string) {

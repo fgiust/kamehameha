@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import adjectives from '../data/dictConjugationAdjectives';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -45,16 +45,10 @@ export default function AdjRandomizePage() {
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const pageTitle = t('pages.randomizeAdj.title');
   const [sessionWords] = useState<ConjugationWord[]>(() => pickRandomSubset(adjectives, CONJUGATION_SESSION_TARGET_TOTAL));
-  const [settings, setSettings] = useState<GlobalSettings>(() => {
-    const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
-    return {
-      reverseQA: readStoredBool(SETTINGS_KEYS.reverseQA, false),
-      showKanji,
-      showFurigana: showKanji ? readStoredBool(SETTINGS_KEYS.showFurigana, false) : false,
-      showType: readStoredBool(SETTINGS_KEYS.showType, true),
-      showEnglish: readStoredBool(SETTINGS_KEYS.showEnglish, false),
-    };
-  });
+  const [settings, setSettings] = useState<GlobalSettings>(() => ({
+    reverseQA: readStoredBool(SETTINGS_KEYS.reverseQA, false),
+    ...readStoredConjugationDisplaySettings(),
+  }));
 
   const [activeForms, setActiveForms] = useState<Record<string, boolean>>(() => {
     const f: Record<string, boolean> = {};

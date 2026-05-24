@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
-import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
+import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
@@ -42,22 +42,6 @@ type GlobalSettings = {
   showEnglish: boolean;
 };
 
-function readStoredShowType(fallback: boolean) {
-  try {
-    const existing = localStorage.getItem(SETTINGS_KEYS.showType);
-    if (existing !== null) return existing === 'true';
-
-    const legacyHideType = localStorage.getItem('nihongo.conj.hideType');
-    if (legacyHideType === null) return fallback;
-
-    const showType = legacyHideType !== 'true';
-    localStorage.setItem(SETTINGS_KEYS.showType, showType ? 'true' : 'false');
-    localStorage.removeItem('nihongo.conj.hideType');
-    return showType;
-  } catch {
-    return fallback;
-  }
-}
 
 function buildDefaultFlags(engine: ConjugationEngine) {
   const f: OptionFlags = {};
@@ -91,16 +75,10 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const [sessionWords] = useState<ConjugationWord[]>(() => pickRandomSubset(wordData, CONJUGATION_SESSION_TARGET_TOTAL));
   const [flags, setFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
   const [randomFlags, setRandomFlags] = useState<OptionFlags>(() => buildDefaultFlags(engine));
-  const [settings, setSettings] = useState<GlobalSettings>(() => {
-    const showKanji = readStoredBool(SETTINGS_KEYS.showKanji, false);
-    return {
-      randomizeForm: readStoredBool(SETTINGS_KEYS.randomizeForm, false),
-      showKanji,
-      showFurigana: showKanji ? readStoredBool(SETTINGS_KEYS.showFurigana, false) : false,
-      showType: readStoredShowType(true),
-      showEnglish: readStoredBool(SETTINGS_KEYS.showEnglish, false),
-    };
-  });
+  const [settings, setSettings] = useState<GlobalSettings>(() => ({
+    randomizeForm: readStoredBool(SETTINGS_KEYS.randomizeForm, false),
+    ...readStoredConjugationDisplaySettings(),
+  }));
   const reverseQA = !!forceReverseQA;
   const [currentWordIdx, setCurrentWordIdx] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<ConjugationWord | null>(null);

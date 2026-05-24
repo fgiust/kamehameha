@@ -6,6 +6,7 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { readStoredConjugationDisplaySettings, writeStoredBool } from '../utils/utils';
 import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
 import { useTranslation } from 'react-i18next';
@@ -41,22 +42,19 @@ export default function TransitivePage() {
   const [diffDisplay, setDiffDisplay] = useState<string>('');
   const [awaitingNext, setAwaitingNext] = useState(false);
   const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>([]);
-  const [showFurigana, setShowFurigana] = useState(() => {
-    try {
-      return localStorage.getItem(SETTINGS_KEYS.showFurigana) !== 'false';
-    } catch {
-      return true;
-    }
-  });
+  const [showFurigana, setShowFurigana] = useState(
+    () => readStoredConjugationDisplaySettings().showFurigana,
+  );
+
+  const updateShowFurigana = useCallback((value: boolean) => {
+    setShowFurigana(value);
+    writeStoredBool(SETTINGS_KEYS.showFurigana, value);
+  }, []);
 
   const toggleFurigana = useCallback(() => {
     setShowFurigana(prev => {
       const next = !prev;
-      try {
-        localStorage.setItem(SETTINGS_KEYS.showFurigana, String(next));
-      } catch {
-        // noop
-      }
+      writeStoredBool(SETTINGS_KEYS.showFurigana, next);
       return next;
     });
   }, []);
@@ -332,7 +330,7 @@ export default function TransitivePage() {
             <OptionToggle
               label={t('common.furigana')}
               checked={showFurigana}
-              onChange={toggleFurigana}
+              onChange={updateShowFurigana}
             />
           </div>
         </div>

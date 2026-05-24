@@ -105,6 +105,21 @@ export const SETTINGS_KEYS = {
   showEnglish: 'nihongo.showEnglish',
 } as const;
 
+/** Default display toggles for conjugation exercises (first visit, no localStorage). */
+export type ConjugationDisplaySettings = {
+  showKanji: boolean;
+  showFurigana: boolean;
+  showType: boolean;
+  showEnglish: boolean;
+};
+
+export const CONJUGATION_DISPLAY_DEFAULTS: ConjugationDisplaySettings = {
+  showKanji: true,
+  showFurigana: true,
+  showType: false,
+  showEnglish: true,
+};
+
 
 // Genki lesson index structure for navigation
 export interface GenkiLessonLink {
