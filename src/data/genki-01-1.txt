@@ -19,7 +19,7 @@ Il mio amico è giapponese.
 
 She is my younger sister.
 Lei è mia sorella minore.
-{彼女[かのじょ]}は{私[わたし]の}妹[いもうと]{です|だ}
+{彼女[かのじょ]}は{私[わたし]の|}妹[いもうと]{です|だ}
 
 Her older brother is a doctor.
 Suo fratello maggiore è un dottore.
