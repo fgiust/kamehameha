@@ -9,6 +9,7 @@ import {
   saveExerciseSessionDraft,
   type ExerciseSessionDraft,
 } from '../../src/utils/exerciseSessionDraft';
+import { buildSessionProgressStorageKey } from '../../src/hooks/useSessionProgress';
 
 const sampleDraft = (overrides: Partial<ExerciseSessionDraft> = {}): ExerciseSessionDraft => ({
   version: 1,
@@ -88,6 +89,28 @@ describe('exerciseSessionDraft', () => {
     saveExerciseSessionDraft(sampleDraft({ persistKey: '/b' }));
     clearAllExerciseSessionDrafts();
     expect(sessionStorage.length).toBe(0);
+  });
+
+  it('clearAllExerciseSessionDrafts does not remove localStorage HP progress', () => {
+    const localStore = new Map<string, string>();
+    vi.stubGlobal('localStorage', {
+      getItem: (key: string) => localStore.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        localStore.set(key, value);
+      },
+      removeItem: (key: string) => {
+        localStore.delete(key);
+      },
+    });
+
+    const progressKey = buildSessionProgressStorageKey('/a');
+    localStore.set(progressKey, JSON.stringify({ segments: '🟩', total: 1 }));
+
+    saveExerciseSessionDraft(sampleDraft({ persistKey: '/a' }));
+    clearAllExerciseSessionDrafts();
+
+    expect(sessionStorage.length).toBe(0);
+    expect(localStore.has(progressKey)).toBe(true);
   });
 
   it('buildExerciseFingerprint joins parts', () => {

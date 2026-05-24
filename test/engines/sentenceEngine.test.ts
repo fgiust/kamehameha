@@ -23,17 +23,23 @@ describe('sentenceEngine', () => {
       expect(stripRuby(bestAnswer)).toBe('だ');
     });
 
-    it('picks the lowest-cost alternative on partial input', () => {
+    it('picks the first-configured alternative on partial input when match count ties', () => {
       const template = '{武[たけ]志[し]さんは|}先生[せんせい]{です|だ}';
       const alternatives = generateAnswers(parseAnswerTemplate(template));
       const { bestAnswer } = pickBestDiff('たけしさん', alternatives);
-      expect(stripRuby(bestAnswer)).toBe('武志さんは先生だ');
+      expect(stripRuby(bestAnswer)).toBe('武志さんは先生です');
     });
 
-    it('picks the lowest-cost alternative when there is no match', () => {
+    it('uses the first-configured alternative when there is no alignment', () => {
       const alternatives = generateAnswers(parseAnswerTemplate('{です|だ}'));
-      const { bestAnswer } = pickBestDiff('まったく違う', alternatives);
-      expect(stripRuby(bestAnswer)).toBe('だ');
+      expect(stripRuby(pickBestDiff('', alternatives).bestAnswer)).toBe('です');
+      expect(stripRuby(pickBestDiff('まったく違う', alternatives).bestAnswer)).toBe('です');
+    });
+
+    it('uses the first ending option when the user omits です|だ (好き)', () => {
+      const alternatives = generateAnswers(parseAnswerTemplate('好[す]き{です|だ}'));
+      const { bestAnswer } = pickBestDiff('好き', alternatives);
+      expect(stripRuby(bestAnswer)).toBe('好きです');
     });
 
     it('prefers the empty optional prefix when the answer aligns without it', () => {
@@ -63,8 +69,18 @@ describe('sentenceEngine', () => {
         { kind: 'unit', unit: { kind: 'plain', surface: 'ん', reading: 'ん' }, status: 'correct_kanji' },
         { kind: 'unit', unit: { kind: 'plain', surface: 'は', reading: 'は' }, status: 'missing' },
         { kind: 'unit', unit: { kind: 'ruby', surface: '先生', reading: 'せんせい' }, status: 'missing' },
-        { kind: 'unit', unit: { kind: 'plain', surface: 'だ', reading: 'だ' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'で', reading: 'で' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'す', reading: 'す' }, status: 'missing' },
       ]);
+    });
+
+    it('uses the first ending when the user stops before です|だ (genki-style sentence)', () => {
+      const template =
+        '彼[かの]女[じょ]は綺[き]麗[れい]だし、{賢[かしこ]い|頭[あたま]がいい}し、大[だい]好[す]き{です|だ}{|。}';
+      const alternatives = generateAnswers(parseAnswerTemplate(template));
+      const user = '彼女は綺麗だし、賢いし、大好き';
+      const { bestAnswer } = pickBestDiff(user, alternatives);
+      expect(stripRuby(bestAnswer)).toBe('彼女は綺麗だし、賢いし、大好きです');
     });
 
     it('prefers the primary optional segment on partial overlap (私の vs あなたの)', () => {

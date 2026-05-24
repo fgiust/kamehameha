@@ -346,21 +346,12 @@ export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUn
   return dfs(0, 0).ops;
 }
 
-function isPartialRubyMatch(user: string, answerWithRuby: string, ops?: DiffUnitOp[]): boolean {
-  if (!user.trim()) return false;
-  if (matchesByRubyUnits(user, answerWithRuby)) return false;
-
-  const diffOps = ops ?? diffSentenceAnswer(user, answerWithRuby);
-  return diffOps.some(
-    op => op.kind === 'unit' && (op.status === 'correct_kanji' || op.status === 'correct_kana'),
-  );
-}
-
-/** Lower is better; used to pick among template alternatives for feedback. */
-export function diffSentenceAnswerCost(ops: DiffUnitOp[]): number {
+/** Sum of matched surface lengths in a diff (higher = better alignment). */
+export function countMatchedChars(ops: DiffUnitOp[]): number {
   return ops.reduce((sum, op) => {
-    if (op.kind === 'extra') return sum + 1;
-    if (op.kind === 'unit' && op.status === 'missing') return sum + 1;
+    if (op.kind === 'unit' && (op.status === 'correct_kanji' || op.status === 'correct_kana')) {
+      return sum + op.unit.surface.length;
+    }
     return sum;
   }, 0);
 }
@@ -380,24 +371,44 @@ function optionalSegmentBetween(longer: string, shorter: string): string | null 
   return null;
 }
 
-function hasOptionalRegionExtras(user: string, longer: string, shorter: string): boolean {
+/** User substituted different text inside `{primary|}` — not merely typing primary via kana. */
+function hasSubstitutiveOptionalFill(user: string, longer: string, shorter: string): boolean {
   const seg = optionalSegmentBetween(longer, shorter);
   if (!seg) return false;
   const segStart = stripRuby(longer).indexOf(seg);
   if (segStart < 0) return false;
+  const segEnd = segStart + seg.length;
 
-  const ops = diffSentenceAnswer(user, shorter);
-  let shorterPlainPos = 0;
+  const ops = diffSentenceAnswer(user, longer);
+  let plainPos = 0;
 
   for (const op of ops) {
     if (op.kind === 'extra') {
-      return shorterPlainPos === segStart;
-    }
-    if (op.kind === 'unit') {
-      shorterPlainPos += op.unit.surface.length;
+      if (plainPos >= segStart && plainPos < segEnd) return true;
+    } else if (op.kind === 'unit') {
+      plainPos += op.unit.surface.length;
     }
   }
   return false;
+}
+
+function findShorterForSkippedOptional(
+  alternatives: string[],
+  user: string,
+  tied: { answer: string; matched: number }[],
+): string | null {
+  for (const { answer: longer, matched: longerMatched } of tied) {
+    for (const shorter of alternatives) {
+      if (longer === shorter) continue;
+      const seg = optionalSegmentBetween(longer, shorter);
+      if (!seg) continue;
+      if (hasSubstitutiveOptionalFill(user, longer, shorter)) continue;
+      const shorterEntry = tied.find(t => t.answer === shorter);
+      if (!shorterEntry) continue;
+      if (shorterEntry.matched >= longerMatched) return shorter;
+    }
+  }
+  return null;
 }
 
 /**
@@ -406,7 +417,7 @@ function hasOptionalRegionExtras(user: string, longer: string, shorter: string):
  */
 function findPrimaryForFilledOptional(alternatives: string[], user: string): string | null {
   let best: string | null = null;
-  let bestCost = Infinity;
+  let bestMatched = -1;
   let bestIndex = Infinity;
 
   for (const longer of alternatives) {
@@ -414,11 +425,11 @@ function findPrimaryForFilledOptional(alternatives: string[], user: string): str
     for (const shorter of alternatives) {
       if (longer === shorter) continue;
       if (!optionalSegmentBetween(longer, shorter)) continue;
-      if (!hasOptionalRegionExtras(user, longer, shorter)) continue;
+      if (!hasSubstitutiveOptionalFill(user, longer, shorter)) continue;
       const ops = diffSentenceAnswer(user, longer);
-      const cost = diffSentenceAnswerCost(ops);
-      if (cost < bestCost || (cost === bestCost && longerIndex < bestIndex)) {
-        bestCost = cost;
+      const matched = countMatchedChars(ops);
+      if (matched > bestMatched || (matched === bestMatched && longerIndex < bestIndex)) {
+        bestMatched = matched;
         bestIndex = longerIndex;
         best = longer;
       }
@@ -443,18 +454,24 @@ export function pickBestDiff(user: string, parsedAlternatives: string[]): { best
 
   const scored = alternatives.map((answer, index) => {
     const ops = diffSentenceAnswer(user, answer);
-    return { answer, ops, cost: diffSentenceAnswerCost(ops), index };
+    return { answer, ops, matched: countMatchedChars(ops), index };
   });
 
-  const partialMatches = scored.filter(({ answer, ops }) => isPartialRubyMatch(user, answer, ops));
-  const candidates = partialMatches.length > 0 ? partialMatches : scored;
+  const maxMatched = scored.reduce((max, s) => Math.max(max, s.matched), 0);
+  if (maxMatched === 0) {
+    const answer = alternatives[0]!;
+    return { bestAnswer: answer, ops: diffSentenceAnswer(user, answer) };
+  }
+
+  const tied = scored.filter(s => s.matched === maxMatched);
+  const skippedShorter = findShorterForSkippedOptional(alternatives, user, tied);
+  const candidates = skippedShorter
+    ? tied.filter(s => s.answer === skippedShorter)
+    : tied;
 
   let best = candidates[0]!;
   for (const candidate of candidates.slice(1)) {
-    if (
-      candidate.cost < best.cost
-      || (candidate.cost === best.cost && candidate.index < best.index)
-    ) {
+    if (candidate.index < best.index) {
       best = candidate;
     }
   }

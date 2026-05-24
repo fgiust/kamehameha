@@ -97,26 +97,17 @@ export function clearPersistedSessionProgressForKey(persistKey: string): void {
   clearPersistedSessionProgress(persistKey);
 }
 
+/** Clears in-progress session drafts only (sessionStorage). HP mini-bars use localStorage and are kept. */
 export function clearAllExerciseSessionDrafts(): void {
   try {
     const keysToRemove: string[] = [];
-    const persistKeysToClear: string[] = [];
     for (let i = 0; i < sessionStorage.length; i++) {
       const key = sessionStorage.key(i);
       if (!key?.startsWith(EXERCISE_DRAFT_STORAGE_PREFIX)) continue;
       keysToRemove.push(key);
-      const encoded = key.slice(EXERCISE_DRAFT_STORAGE_PREFIX.length);
-      try {
-        persistKeysToClear.push(decodeURIComponent(encoded));
-      } catch {
-        // ignore
-      }
     }
     for (const key of keysToRemove) {
       sessionStorage.removeItem(key);
-    }
-    for (const persistKey of persistKeysToClear) {
-      clearPersistedSessionProgressForKey(persistKey);
     }
   } catch {
     return;
