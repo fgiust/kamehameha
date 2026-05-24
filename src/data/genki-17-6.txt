@@ -1,6 +1,9 @@
 ～前に/～てから
 ～前に/～てから
 
+# verb A (short, present) + 前 verb B = B before A. -> To describe the event before which something happens.
+# verb A + てから verb B = A, and then B. / B after A. -> To describe an event after which another thing happens
+
 I will buy souvenirs before I leave Japan.
 Comprerò souvenir prima di lasciare il Giappone.
 日本[にほん]を出[で]る前[まえ]に、お土産[みやげ]を買[か]います

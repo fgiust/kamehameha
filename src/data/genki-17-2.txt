@@ -1,6 +1,9 @@
 ～って
 ～って
 
+# In informal speech, you can add って at the end of a sentence, instead of そうです to quote what you have heard.
+# って is the informal variant of the quotation particle と and follows the short forms
+
 What did the teacher say?
 Che cosa ha detto l'insegnante?
 先生[せんせい]は何[なん]と言[い]っていましたか

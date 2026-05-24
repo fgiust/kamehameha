@@ -1,6 +1,8 @@
 ～たら
 ～たら
 
+# A たら B = the event, action, or situation in B is realized if and when the condition in A is met
+
 If it rains tomorrow, I will stay home.
 Se domani piove, resterò a casa.
 明日[あした]雨[あめ]が降[ふ]ったら、家[いえ]にいます

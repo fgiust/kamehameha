@@ -1,6 +1,9 @@
 ～なくてもいいです
 ～なくてもいいです
 
+# To describe what you do not need to do, take a negative sentence in the short form, drop the final い of ない、and add くてもいいです
+# なくてis the negative te-form
+
 You don't need to wear a tie.
 Non è necessario indossare una cravatta.
 ネクタイをしなくてもいいです

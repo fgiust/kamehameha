@@ -1,6 +1,8 @@
 ～ながら
 ～ながら
 
+# V1（stem）+ ながら、V2 =  while V1-ing, V2
+
 I listen to podcasts while cooking dinner.
 Ascolto podcast mentre cucino la cena.
 晩[ばん]御[ご]飯[はん]を作[つく]りながら、ポッドキャストを聞[き]きます

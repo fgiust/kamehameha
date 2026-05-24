@@ -1,6 +1,8 @@
 ～と
 ～と
 
+# clause A (short, present) と clause B = Whenever A happens, B happens, too
+
 When spring comes, the weather gets warm.
 Quando arriva la primavera, il tempo diventa caldo.
 春[はる]になると、暖[あたた]かくなります
