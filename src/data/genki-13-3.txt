@@ -3,15 +3,15 @@
 
 This ramen looks delicious.
 Questo ramen sembra delizioso.
-このラーメンは美[お]味[い]しそう{です|です。}
+このラーメンは美[お]味[い]しそうです{|。}
 
 This dish looks spicy.
 Questa pietanza sembra piccante.
-この料[りょう]理[り]は辛[から]そう{です|です。}
+この料[りょう]理[り]は辛[から]そうです{|。}
 
 That bag looks expensive.
 Quella borsa sembra costosa.
-{あの|その}かばんは高[たか]そう{です|です。}
+{あの|その}かばんは高[たか]そうです{|。}
 
 This watch looks new.
 Questo orologio sembra nuovo.

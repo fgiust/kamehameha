@@ -3,11 +3,11 @@ Nome₁ の Nome₂
 
 My friend’s book.
 Il libro del mio amico.
-{私[わたし]の}友達[ともだち]の本[ほん]
+{私[わたし]の|}友達[ともだち]の本[ほん]
 
 My mother’s name.
 Il nome di mia madre.
-{私[わたし]の}母[はは]の名[な]前[まえ]
+{私[わたし]の|}母[はは]の名[な]前[まえ]
 
 A Japanese teacher.
 Un insegnante di giapponese.
@@ -19,15 +19,15 @@ La macchina di Tanaka.
 
 My college’s library.
 La biblioteca della mia università.
-{私[わたし]の}大学[だいがく]の図書館[としょかん]
+{私[わたし]の|}大学[だいがく]の図書館[としょかん]
 
 A friend of Mary.
 Un amico di Mary.
-{メアリーさんの}友達[ともだち]
+メアリーさんの友達[ともだち]
 
 My older brother’s room.
 La stanza di mio fratello maggiore.
-{私[わたし]の}兄[あに]の部屋[へや]
+{私[わたし]の|}兄[あに]の部屋[へや]
 
 Japan’s weather.
 Il clima del Giappone.

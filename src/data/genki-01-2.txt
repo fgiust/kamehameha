@@ -27,7 +27,7 @@ Quella persona è un insegnante?
 
 Is your older sister a doctor?
 Tua sorella maggiore è una dottoressa?
-{お姉[ねえ]さんは|}医者[いしゃ]ですか{|。}
+{あなたの|}{お姉[ねえ]さんは|}医者[いしゃ]ですか{|。}
 
 What is this?
 Cos'è questo?

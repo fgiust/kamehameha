@@ -7,7 +7,7 @@ Sono uno studente universitario.
 
 My major is economics.
 La mia facoltà è economia.
-{私[わたし]の}専攻[せんこう]{は|が}経済[けいざい]{です|だ}
+{私[わたし]の|}専攻[せんこう]{は|が}経済[けいざい]{です|だ}
 
 Takeshi is a teacher.
 Takeshi è un insegnante.
@@ -19,7 +19,7 @@ Il mio amico è giapponese.
 
 She is my younger sister.
 Lei è mia sorella minore.
-{彼女[かのじょ]}は{私[わたし]の|}妹[いもうと]{です|だ}
+{私[わたし]の|}彼女[かのじょ]は{私[わたし]の|}妹[いもうと]{です|だ}
 
 Her older brother is a doctor.
 Suo fratello maggiore è un dottore.
@@ -31,7 +31,7 @@ Quella persona è un impiegato.
 
 My younger sister is Australian.
 Mia sorella minore è australiana.
-{私[わたし]の}妹[いもうと]{は|}オーストラリア人[じん]{です|だ}
+{私[わたし]の|}妹[いもうと]{は|}オーストラリア人[じん]{です|だ}
 
 This is my name card.
 Questo è il mio biglietto da visita.
@@ -39,4 +39,4 @@ Questo è il mio biglietto da visita.
 
 My pet is a cat.
 Il mio animale domestico è un gatto.
-{私[わたし]の}ペットは猫[ねこ]{です|だ}
+{私[わたし]の|}ペットは猫[ねこ]{です|だ}
