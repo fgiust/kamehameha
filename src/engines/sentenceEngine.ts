@@ -346,28 +346,28 @@ export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUn
   return dfs(0, 0).ops;
 }
 
-export function pickBestDiff(user: string, parsedAlternatives: string[]): { bestAnswer: string, ops: DiffUnitOp[] } {
-  let bestAnswer = parsedAlternatives[0] ?? '';
-  let bestOps: DiffUnitOp[] = [];
-  let bestCost = Infinity;
+function isPartialRubyMatch(user: string, answerWithRuby: string): boolean {
+  if (!user.trim()) return false;
+  if (matchesByRubyUnits(user, answerWithRuby)) return false;
 
-  for (const answer of parsedAlternatives) {
-    const ops = diffSentenceAnswer(user, answer);
-    const cost = ops.reduce((acc, op) => {
-      if (op.kind === 'extra') return acc + op.text.length;
-      if (op.status === 'missing') return acc + 1;
-      if (op.status === 'correct_kana') return acc + 0.01;
-      return acc;
-    }, 0);
+  const ops = diffSentenceAnswer(user, answerWithRuby);
+  return ops.some(
+    op => op.kind === 'unit' && (op.status === 'correct_kanji' || op.status === 'correct_kana'),
+  );
+}
 
-    if (cost < bestCost) {
-      bestCost = cost;
-      bestOps = ops;
-      bestAnswer = answer;
-    }
+export function pickBestDiff(user: string, parsedAlternatives: string[]): { bestAnswer: string; ops: DiffUnitOp[] } {
+  const alternatives = parsedAlternatives.filter(Boolean);
+  if (alternatives.length === 0) return { bestAnswer: '', ops: [] };
+
+  const exact = alternatives.find(answer => matchesByRubyUnits(user, answer));
+  if (exact) {
+    return { bestAnswer: exact, ops: diffSentenceAnswer(user, exact) };
   }
 
-  return { bestAnswer, ops: bestOps };
+  const partial = alternatives.find(answer => isPartialRubyMatch(user, answer));
+  const displayAnswer = partial ?? alternatives[0]!;
+  return { bestAnswer: displayAnswer, ops: diffSentenceAnswer(user, displayAnswer) };
 }
 
 export type CharDiffOp =

@@ -1,11 +1,56 @@
 import { describe, it, expect } from 'vitest';
-import { diffSentenceAnswer, primarySurfaceFromTemplate } from '../../src/engines/sentenceEngine';
+import {
+  diffSentenceAnswer,
+  generateAnswers,
+  parseAnswerTemplate,
+  pickBestDiff,
+  primarySurfaceFromTemplate,
+  stripRuby,
+} from '../../src/engines/sentenceEngine';
 
 describe('sentenceEngine', () => {
   describe('primarySurfaceFromTemplate', () => {
     it('picks first alternatives and strips ruby readings', () => {
       const template = '{私[わたし]は|}図[と]書[しょ]館[かん]で{本[ほん]|教科書[きょうかしょ]}を読[よ]みます';
       expect(primarySurfaceFromTemplate(template)).toBe('私は図書館で本を読みます');
+    });
+  });
+
+  describe('pickBestDiff', () => {
+    it('uses the alternative that matches exactly', () => {
+      const alternatives = generateAnswers(parseAnswerTemplate('{です|だ}'));
+      const { bestAnswer } = pickBestDiff('だ', alternatives);
+      expect(stripRuby(bestAnswer)).toBe('だ');
+    });
+
+    it('uses the first alternative on partial input shared by multiple variants', () => {
+      const template = '{武[たけ]志[し]さんは|}先生[せんせい]{です|だ}';
+      const alternatives = generateAnswers(parseAnswerTemplate(template));
+      const { bestAnswer } = pickBestDiff('たけしさん', alternatives);
+      expect(stripRuby(bestAnswer)).toBe('武志さんは先生です');
+    });
+
+    it('uses the first alternative when there is no match', () => {
+      const alternatives = generateAnswers(parseAnswerTemplate('{です|だ}'));
+      const { bestAnswer } = pickBestDiff('まったく違う', alternatives);
+      expect(stripRuby(bestAnswer)).toBe('です');
+    });
+
+    it('still diffs against the chosen alternative', () => {
+      const template = '{武[たけ]志[し]さんは|}先生[せんせい]{です|だ}';
+      const alternatives = generateAnswers(parseAnswerTemplate(template));
+      const { ops } = pickBestDiff('たけしさん', alternatives);
+
+      expect(ops).toEqual([
+        { kind: 'unit', unit: { kind: 'ruby', surface: '武', reading: 'たけ' }, status: 'correct_kana' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '志', reading: 'し' }, status: 'correct_kana' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'さ', reading: 'さ' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'ん', reading: 'ん' }, status: 'correct_kanji' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'は', reading: 'は' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'ruby', surface: '先生', reading: 'せんせい' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'で', reading: 'で' }, status: 'missing' },
+        { kind: 'unit', unit: { kind: 'plain', surface: 'す', reading: 'す' }, status: 'missing' },
+      ]);
     });
   });
 
