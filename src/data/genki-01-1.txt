@@ -15,7 +15,7 @@ Takeshi è un insegnante.
 
 My friend is Japanese.
 Il mio amico è giapponese.
-{私[わたし]の}友達[ともだち]{は|}日本人[にほんじん]{です|だ}
+{私[わたし]の|}友達[ともだち]{は|}日本人[にほんじん]{です|だ}
 
 She is my younger sister.
 Lei è mia sorella minore.
