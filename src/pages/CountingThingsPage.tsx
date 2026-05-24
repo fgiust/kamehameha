@@ -5,7 +5,7 @@ import KeyboardTip from '../components/KeyboardTip';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
-import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
+import { diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
 import DiffDisplay from '../components/DiffDisplay';
 import { useTranslation } from 'react-i18next';
 import countingThings, { type CountingThingCounter } from '../data/dictCountingThings';
