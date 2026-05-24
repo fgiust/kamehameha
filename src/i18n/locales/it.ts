@@ -160,6 +160,10 @@ const it = {
       passive: 'passiva',
     },
   },
+  conjugation: {
+    randomizeAriaLabel: 'Forme casuali a ogni domanda',
+    randomizeTitle: 'Forme casuali a ogni domanda',
+  },
   counters: {
     selectAll: 'Seleziona tutto',
     selectNone: 'Deseleziona tutto',

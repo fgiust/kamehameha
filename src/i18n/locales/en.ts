@@ -160,6 +160,10 @@ const en = {
       passive: 'passive',
     },
   },
+  conjugation: {
+    randomizeAriaLabel: 'Randomize forms each question',
+    randomizeTitle: 'Randomize forms each question',
+  },
   counters: {
     selectAll: 'Select All',
     selectNone: 'Select None',

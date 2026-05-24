@@ -555,6 +555,44 @@ a:hover { color: var(--accent-hover); }
   color: var(--text-secondary);
 }
 
+.switches-forms-separator {
+  width: 1px;
+  align-self: stretch;
+  min-height: 18px;
+  margin: 2px 4px;
+  background: var(--border);
+  opacity: 0.9;
+  flex-shrink: 0;
+}
+
+.switch-item--randomize .switch-text {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.switch-item--randomize .slider {
+  background: color-mix(in srgb, var(--accent) 28%, var(--border));
+}
+
+.switch-item--randomize .switch input:checked + .slider,
+.switch-item--randomize.is-on .slider {
+  background: var(--accent-hover);
+}
+
+.randomize-dice-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  color: var(--text-secondary);
+  opacity: 0.75;
+}
+
+.switch-item--randomize.is-on .randomize-dice-icon {
+  color: var(--text);
+  opacity: 1;
+}
+
 .option-toggle {
   display: flex;
   align-items: center;

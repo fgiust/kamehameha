@@ -11,6 +11,19 @@ import { useTranslation } from 'react-i18next';
 import PageLayout from './PageLayout';
 import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 
+function DiceIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <rect x="4" y="4" width="16" height="16" rx="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="8.5" cy="8.5" r="1.25" />
+      <circle cx="15.5" cy="8.5" r="1.25" />
+      <circle cx="12" cy="12" r="1.25" />
+      <circle cx="8.5" cy="15.5" r="1.25" />
+      <circle cx="15.5" cy="15.5" r="1.25" />
+    </svg>
+  );
+}
+
 interface Props {
   title: string;
   wordData: ConjugationWord[];
@@ -544,8 +557,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
           <div className="options-divider" />
           <div className="options-section-label">{t('common.forms')}</div>
 
-          <div className="switches">
-
+          <div className="switches switches-forms">
             {engine.opts.map(o => (
               <OptionToggle
                 key={o.id}
@@ -555,9 +567,12 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
                 onChange={() => toggleFlag(o.id)}
               />
             ))}
-
+            <span className="switches-forms-separator" aria-hidden="true" />
             <OptionToggle
-              label={t('common.randomize')}
+              className="switch-item--randomize"
+              label={<DiceIcon className="randomize-dice-icon" />}
+              ariaLabel={t('conjugation.randomizeAriaLabel')}
+              title={t('conjugation.randomizeTitle')}
               checked={settings.randomizeForm}
               onChange={next => {
                 updateSetting('randomizeForm', next);
