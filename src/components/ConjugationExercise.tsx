@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
@@ -11,6 +11,7 @@ import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
 import PageLayout from './PageLayout';
 import ExerciseCompletedMessage from './ExerciseCompletedMessage';
+import CopyablePlainText from './CopyablePlainText';
 
 function DiceIcon({ className }: { className?: string }) {
   return (
@@ -388,6 +389,20 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     return localized === `conjugationHint.opts.${id}` ? fallback : localized;
   };
 
+  const questionPlainCopy = useMemo(() => {
+    if (!currentWord) return '';
+    if (reverseQA) {
+      const dictKana = toKanaReading(currentWord.japanese);
+      const promptAnswer = engine.getAnswer(dictKana, currentWord.type, effectiveFlags);
+      const promptAnswers = Array.isArray(promptAnswer) ? promptAnswer : [promptAnswer];
+      return promptAnswers.find(a => a !== '') || dictKana;
+    }
+    if (!settings.showKanji) {
+      return toKanaReading(currentWord.japanese);
+    }
+    return stripRubyTags(currentWord.japanese);
+  }, [currentWord, reverseQA, settings.showKanji, engine, effectiveFlags]);
+
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
 
@@ -435,9 +450,12 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
           {isFinished && <ExerciseCompletedMessage />}
           {!isFinished && (
             <>
-              <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
+              <CopyablePlainText
+                plainText={questionPlainCopy}
+                className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}
+              >
                 {questionNode}
-              </div>
+              </CopyablePlainText>
               <div className="form-hint">{formHint}</div>
               {(() => {
                 const showEnglish = !!currentWord && settings.showEnglish;

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
@@ -13,6 +13,7 @@ import KeyboardTip from '../components/KeyboardTip';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
+import CopyablePlainText from '../components/CopyablePlainText';
 
 const formIds = ['adj-conditionalform', 'adj-naruform', 'adj-negativeform', 'adj-pastform', 'adj-volitionalform'];
 function formIdToShortKeyPart(formId: string) {
@@ -329,6 +330,20 @@ export default function AdjRandomizePage() {
     ? (currentWord.type === 'i' ? t('adjective.typeLabels.i') : t('adjective.typeLabels.na'))
     : '';
 
+  const questionPlainCopy = useMemo(() => {
+    if (!currentWord) return '';
+    if (settings.reverseQA && engine) {
+      const dictKana = toKanaReading(currentWord.japanese);
+      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
+      const answers = Array.isArray(answer) ? answer : [answer];
+      return answers.find(a => a !== '') || dictKana;
+    }
+    if (!settings.showKanji) {
+      return toKanaReading(currentWord.japanese);
+    }
+    return stripRubyTags(currentWord.japanese);
+  }, [currentWord, settings.reverseQA, settings.showKanji, engine, currentFlags]);
+
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
     if (settings.reverseQA && engine) {
@@ -374,9 +389,12 @@ export default function AdjRandomizePage() {
           {isFinished && <ExerciseCompletedMessage />}
           {!isFinished && (
             <>
-              <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
+              <CopyablePlainText
+                plainText={questionPlainCopy}
+                className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}
+              >
                 {questionNode}
-              </div>
+              </CopyablePlainText>
               <div className="form-hint">{formHint}</div>
               {(() => {
                 const showEnglish = !!currentWord && settings.showEnglish;

@@ -6,6 +6,7 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from '../engines/sentenceEngine';
+import DiffDisplay from '../components/DiffDisplay';
 import { useTranslation } from 'react-i18next';
 import countingThings, { type CountingThingCounter } from '../data/dictCountingThings';
 import PageLayout from '../components/PageLayout';
@@ -581,41 +582,6 @@ export default function CountingThingsPage() {
   const total = correct + incorrect;
   const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
 
-  const renderDiff = useCallback((ops: DiffUnitOp[]) => {
-    const nodes: JSX.Element[] = [];
-    for (const op of ops) {
-      if (op.kind === 'extra') {
-        nodes.push(<span key={`ext-${nodes.length}`} className="diff-char diff-deleted">{op.text}</span>);
-        continue;
-      }
-
-      const { unit, status } = op;
-
-      if (unit.kind === 'plain') {
-        nodes.push(
-          <span key={`p-${nodes.length}`} className={`diff-char ${status === 'missing' ? 'diff-missing' : 'diff-correct'}`}>
-            {unit.surface}
-          </span>
-        );
-        continue;
-      }
-
-      const kanjiClass =
-        status === 'correct_kanji' ? 'diff-correct'
-          : status === 'correct_kana' ? 'diff-kanji-kana'
-            : 'diff-missing';
-      const rtClass = status === 'missing' ? 'diff-missing' : 'diff-correct';
-
-      nodes.push(
-        <ruby key={`r-${nodes.length}`}>
-          <span className={`diff-char ${kanjiClass}`}>{unit.surface}</span>
-          <rt className={rtClass}>{unit.reading}</rt>
-        </ruby>
-      );
-    }
-    return nodes;
-  }, []);
-
   return (
     <PageLayout pageTitle={pageTitle}>
       <div className="card">
@@ -673,7 +639,7 @@ export default function CountingThingsPage() {
 
               <div className={`answer-banner ${answerFeedback ? (answerFeedback.isCorrect ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
                 {answerFeedback ? (
-                  <span className="diff-answer">{renderDiff(answerFeedback.ops)}</span>
+                  <DiffDisplay ops={answerFeedback.ops} className="diff-answer" />
                 ) : (
                   '\u00A0'
                 )}

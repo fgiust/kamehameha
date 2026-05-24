@@ -1,5 +1,7 @@
 import React from 'react';
 import { parseRubyUnits } from '../engines/sentenceEngine';
+import { plainCopyFromRubyHtml, plainCopyFromRubyNotation } from '../utils/copyText';
+import CopyablePlainText from './CopyablePlainText';
 
 interface JapaneseTextProps {
   text: string;
@@ -11,21 +13,26 @@ interface JapaneseTextProps {
 export default function JapaneseText({ text, showFurigana, className = '', style }: JapaneseTextProps) {
   if (!text) return null;
 
+  const plainCopy =
+    text.includes('<ruby>') || text.includes('<rt>')
+      ? plainCopyFromRubyHtml(text)
+      : plainCopyFromRubyNotation(text);
+  const japaneseClass = `is-japanese ${!showFurigana ? 'is-furigana-hidden' : ''} ${className}`.trim();
+
   if (text.includes('<ruby>') || text.includes('<rt>')) {
     return (
-      <span 
-        className={`is-japanese ${!showFurigana ? 'is-furigana-hidden' : ''} ${className}`} 
-        style={style}
-        dangerouslySetInnerHTML={{ __html: text }} 
-      />
+      <CopyablePlainText plainText={plainCopy} className={japaneseClass} style={style}>
+        <span dangerouslySetInnerHTML={{ __html: text }} />
+      </CopyablePlainText>
     );
   }
 
   const units = parseRubyUnits(text);
 
   return (
-    <span 
-      className={`is-japanese ${!showFurigana ? 'is-furigana-hidden' : ''} ${className}`}
+    <CopyablePlainText
+      plainText={plainCopy}
+      className={japaneseClass}
       style={{ display: 'inline-flex', flexWrap: 'wrap', justifyContent: 'center', ...style }}
     >
       {units.map((unit, i) => {
@@ -44,6 +51,6 @@ export default function JapaneseText({ text, showFurigana, className = '', style
           </ruby>
         );
       })}
-    </span>
+    </CopyablePlainText>
   );
 }

@@ -9,6 +9,7 @@ import {
 import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
 import KeyboardTip from './KeyboardTip';
+import DiffDisplay from './DiffDisplay';
 
 export default function DiffTestModal({
   isOpen,
@@ -70,35 +71,11 @@ export default function DiffTestModal({
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(user.trim(), a));
 
   const diffNode = (
-    <div className="diff-display diff-answer" style={{ padding: 20, background: '#2a2d3d', borderRadius: 8, marginTop: 20 }}>
-      {ops.map((op, idx) => {
-        if (op.kind === 'extra') {
-          return <span key={idx} className="diff-char diff-deleted">{op.text}</span>;
-        }
-
-        const { unit, status } = op;
-        if (unit.kind === 'plain') {
-          return (
-            <span key={idx} className={`diff-char ${status === 'missing' ? 'diff-missing' : 'diff-correct'}`}>
-              {unit.surface}
-            </span>
-          );
-        }
-
-        const kanjiClass =
-          status === 'correct_kanji' ? 'diff-correct'
-            : status === 'correct_kana' ? 'diff-kanji-kana'
-              : 'diff-missing';
-        const rtClass = status === 'missing' ? 'diff-missing' : 'diff-correct';
-
-        return (
-          <ruby key={idx} className={kanjiClass}>
-            {unit.surface}
-            <rt className={rtClass}>{unit.reading}</rt>
-          </ruby>
-        );
-      })}
-    </div>
+    <DiffDisplay
+      ops={ops}
+      className="diff-answer"
+      style={{ padding: 20, background: '#2a2d3d', borderRadius: 8, marginTop: 20 }}
+    />
   );
 
   return (

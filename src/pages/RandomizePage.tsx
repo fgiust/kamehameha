@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
@@ -12,6 +12,7 @@ import KeyboardTip from '../components/KeyboardTip';
 import OptionToggle from '../components/OptionToggle';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
+import CopyablePlainText from '../components/CopyablePlainText';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
 
 const formIds = [
@@ -336,6 +337,20 @@ export default function RandomizePage() {
     ? (currentWord.type === 'u' ? t('verb.typeLabels.u') : currentWord.type === 'ru' ? t('verb.typeLabels.ru') : t('verb.typeLabels.irr'))
     : '';
 
+  const questionPlainCopy = useMemo(() => {
+    if (!currentWord) return '';
+    if (settings.reverseQA && engine) {
+      const dictKana = toKanaReading(currentWord.japanese);
+      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
+      const answers = Array.isArray(answer) ? answer : [answer];
+      return answers.find(a => a !== '') || dictKana;
+    }
+    if (!settings.showKanji) {
+      return toKanaReading(currentWord.japanese);
+    }
+    return stripRubyTags(currentWord.japanese);
+  }, [currentWord, settings.reverseQA, settings.showKanji, engine, currentFlags]);
+
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
     if (settings.reverseQA && engine) {
@@ -381,9 +396,12 @@ export default function RandomizePage() {
           {isFinished && <ExerciseCompletedMessage />}
           {!isFinished && (
             <>
-              <div className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}>
+              <CopyablePlainText
+                plainText={questionPlainCopy}
+                className={`exercise-question is-japanese ${!settings.showFurigana ? 'is-furigana-hidden' : ''}`}
+              >
                 {questionNode}
-              </div>
+              </CopyablePlainText>
               <div className="form-hint">{formHint}</div>
               {(() => {
                 const showEnglish = !!currentWord && settings.showEnglish;

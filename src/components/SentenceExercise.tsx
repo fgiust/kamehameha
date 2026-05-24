@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer } from '../types';
 import { DiffUnitOp, diffSentenceAnswer, generateAnswers, parseAnswerTemplate, matchesByRubyUnits, stripRuby, pickBestDiff } from '../engines/sentenceEngine';
+import DiffDisplay from './DiffDisplay';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
@@ -241,47 +242,9 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
   const total = correct + incorrect;
   const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
 
-  const renderDiff = useCallback((ops: DiffUnitOp[]) => {
-    const nodes: React.ReactNode[] = [];
-    for (const op of ops) {
-      if (op.kind === 'extra') {
-        nodes.push(<span key={`ext-${nodes.length}`} className="diff-char diff-deleted">{op.text}</span>);
-        continue;
-      }
-
-      // op.kind === 'unit'
-      const { unit, status } = op;
-
-      if (unit.kind === 'plain') {
-        nodes.push(
-          <span key={`p-${nodes.length}`} className={`diff-char ${status === 'missing' ? 'diff-missing' : 'diff-correct'}`}>
-            {unit.surface}
-          </span>
-        );
-        continue;
-      }
-
-      // Ruby unit
-      const kanjiClass =
-        status === 'correct_kanji' ? 'diff-correct'
-          : status === 'correct_kana' ? 'diff-kanji-kana'
-            : 'diff-missing';
-      const rtClass = status === 'missing' ? 'diff-missing' : 'diff-correct';
-
-      nodes.push(
-        <ruby key={`r-${nodes.length}`} className={kanjiClass}>
-          {unit.surface}
-          <rt className={rtClass}>{unit.reading}</rt>
-        </ruby>
-      );
-    }
-
-    return nodes;
-  }, []);
-
   const diffNode = (() => {
     if (!answerFeedback) return null;
-    return <div className="diff-display diff-answer">{renderDiff(answerFeedback.ops)}</div>;
+    return <DiffDisplay ops={answerFeedback.ops} className="diff-answer" />;
   })();
 
   return (
@@ -402,7 +365,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
               <div className="prev-answer-body">
                 <div className="prev-answer-q">{a.question}</div>
                 {Array.isArray(a.diffOps) && (
-                  <div className="diff-display diff-history">{renderDiff(a.diffOps as DiffUnitOp[])}</div>
+                  <DiffDisplay ops={a.diffOps as DiffUnitOp[]} className="diff-history" />
                 )}
               </div>
             </div>
