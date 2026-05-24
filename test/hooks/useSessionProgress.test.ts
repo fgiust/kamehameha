@@ -34,6 +34,42 @@ describe('useSessionProgress hydration', () => {
     expect(nextIndexRef.current).toBe(0);
   });
 
+  it('allocates the next empty slot after hydrate when recording a new key', () => {
+    const segmentsRef = { current: [0, 0, 0, 0, 0] as ProgressSegmentState[] };
+    const keyToIndexRef = { current: new Map<string, number>() };
+    const indexToKeyRef = { current: Array<string | null>(5).fill(null) };
+    const nextIndexRef = { current: 0 };
+
+    hydrateSessionProgressSnapshot(
+      {
+        segments: [1, 2, 0, 0, 0],
+        keyToIndex: [
+          ['0', 0],
+          ['1', 1],
+          ['2', 2],
+        ],
+      },
+      5,
+      { segmentsRef, keyToIndexRef, indexToKeyRef, nextIndexRef },
+    );
+
+    const map = keyToIndexRef.current;
+    const key = '3';
+    let idx = map.get(key);
+    if (idx === undefined) {
+      const empty = indexToKeyRef.current.indexOf(null);
+      idx = empty !== -1 ? empty : nextIndexRef.current;
+      map.set(key, idx);
+      indexToKeyRef.current[idx] = key;
+    }
+    segmentsRef.current = [...segmentsRef.current] as ProgressSegmentState[];
+    segmentsRef.current[idx] = 1;
+
+    expect(idx).toBe(3);
+    expect(segmentsRef.current).toEqual([1, 2, 0, 1, 0]);
+    expect(nextIndexRef.current).toBe(3);
+  });
+
   it('does not treat a repeated hydrate as a total change', () => {
     const segmentsRef = { current: [] as ProgressSegmentState[] };
     const keyToIndexRef = { current: new Map<string, number>() };

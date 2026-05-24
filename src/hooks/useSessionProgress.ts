@@ -165,15 +165,6 @@ export function useSessionProgress(
   const nextIndexRef = useRef(0);
   const audioCtxRef = useRef<AudioContext | null>(null);
 
-  if (initialProgress) {
-    hydrateSessionProgressSnapshot(initialProgress, totalSegments, {
-      segmentsRef,
-      keyToIndexRef,
-      indexToKeyRef,
-      nextIndexRef,
-    });
-  }
-
   useEffect(() => {
     const n = Math.max(0, totalSegments);
     const restore = pendingRestoreRef.current;

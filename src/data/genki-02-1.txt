@@ -15,7 +15,7 @@ Quella (laggiù) è una banca.
 
 Which one is my bag?
 Qual è la mia borsa?
-私[わたし]のかばんはどれですか
+私[わたし]の{カバン|かばん}はどれですか
 
 Is this a dictionary?
 Questo è un dizionario?
