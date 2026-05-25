@@ -23,7 +23,7 @@ Piange come un bambino.
 
 That town is like my hometown.
 Quella città è come la mia città natale.
-あの町[まち]は私[わたし]の故郷[ふるさと]のようです
+{あの|その}町[まち]は私[わたし]の故郷[ふるさと]のようです
 
 The exam was like a game.
 L'esame era come un gioco.

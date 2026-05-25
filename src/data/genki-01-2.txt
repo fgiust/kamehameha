@@ -23,7 +23,7 @@ Il tuo amico è giapponese?
 
 Is that person a teacher?
 Quella persona è un insegnante?
-{あの人[ひと]は|}先生[せんせい]ですか{|。}
+{あの|その}人[ひと]は先生[せんせい]ですか{|。}
 
 Is your older sister a doctor?
 Tua sorella maggiore è una dottoressa?

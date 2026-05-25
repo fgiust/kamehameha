@@ -19,7 +19,7 @@ Questo orologio sembra nuovo.
 
 That man over there looks lonely.
 Quell'uomo laggiù sembra solo.
-あの{男[おとこ]の|}人[ひと]は寂[さび]しそうです
+{あの|その}{男[おとこ]の|}人[ひと]は寂[さび]しそうです
 
 Mary looked fine.
 Mary sembrava stare bene.

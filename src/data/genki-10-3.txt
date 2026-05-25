@@ -31,7 +31,7 @@ Prenderò in prestito quello vecchio.
 
 This blue pen is cheaper than that black one.
 Questa penna blu è più economica di quella nera.
-この青[あお]いペンはあの黒[くろ]いのより安[やす]いです
+この青[あお]いペンは{あの|その}黒[くろ]いのより安[やす]いです
 
 Is this Mary's bag?
 Questa è la borsa di Mary?

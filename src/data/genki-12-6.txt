@@ -23,7 +23,7 @@ Sora probabilmente parla bene giapponese.
 
 That restaurant is probably expensive.
 Quel ristorante probabilmente è costoso.
-あのレストランは高[たか]いでしょう
+{あの|その}レストランは高[たか]いでしょう
 
 Ken probably went home already.
 Ken probabilmente è già tornato a casa.

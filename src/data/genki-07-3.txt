@@ -19,7 +19,7 @@ Ken ha i capelli corti e gli occhi carini.
 
 That cat was small and quiet.
 Quel gatto era piccolo e tranquillo.
-あの猫[ねこ]は小[ちい]さくて、静[しず]かでした
+{あの|その}猫[ねこ]は小[ちい]さくて、静[しず]かでした
 
 The party was lively and short.
 La festa era vivace e breve.
