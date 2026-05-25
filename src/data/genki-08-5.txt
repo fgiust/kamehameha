@@ -15,7 +15,7 @@ Mi piace camminare nel parco.
 
 I don't like waking up early.
 Non mi piace svegliarmi presto.
-{私[わたし]は|}早[はや]く起[お]きるのが好[す]き{じゃないです|じゃありません}
+{私[わたし]は|}早[はや]く起[お]きるのが好[す]き{じゃないです|じゃありません|ではありません}
 
 Yui is good at singing songs.
 Yui è brava a cantare canzoni.
@@ -35,7 +35,7 @@ Woody è bravo a riparare computer.
 
 I don't like studying on Sundays.
 Non mi piace studiare la domenica.
-{私[わたし]は|}日曜日[にちようび]に勉強[べんきょう]するのが好[す]き{じゃないです|じゃありません}
+{私[わたし]は|}日曜日[にちようび]に勉強[べんきょう]するのが好[す]き{じゃないです|じゃありません|ではありません}
 
 Michiko is good at writing letters.
 Michiko è brava a scrivere lettere.

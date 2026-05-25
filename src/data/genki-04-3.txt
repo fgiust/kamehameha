@@ -39,4 +39,4 @@ La mia materia principale era storia.
 
 This is not a hospital.
 Questo non è un ospedale.
-これは病院[びょういん]{じゃないです|じゃありません}
+これは病院[びょういん]{じゃないです|じゃありません|ではありません}

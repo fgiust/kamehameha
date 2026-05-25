@@ -11,7 +11,7 @@ Camminiamo, perché il tempo è bello.
 
 I am not free today, because I have a test tomorrow.
 Non sono libero oggi, perché ho un test domani.
-明日[あした]テストがありますから、{私[わたし]は|}今日[きょう]暇[ひま]{じゃないです|じゃありません}
+明日[あした]テストがありますから、{私[わたし]は|}今日[きょう]暇[ひま]{じゃないです|じゃありません|ではありません}
 
 The test was not difficult, because I had studied a lot.
 Il test non è stato difficile, perché avevo studiato molto.
@@ -35,7 +35,7 @@ Ho aiutato mia madre, perché era occupata.
 
 I will not smoke cigarettes, because it is not healthy.
 Non fumerò sigarette, perché non è salutare.
-元気[げんき]{じゃないです|じゃありません}から、たばこを吸[す]いません
+元気[げんき]{じゃないです|じゃありません|ではありません}から、たばこを吸[す]いません
 
 Robert went to bed early, because he was tired.
 Robert è andato a letto presto, perché era stanco.

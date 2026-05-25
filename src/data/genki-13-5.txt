@@ -3,15 +3,15 @@
 
 If you are going to study, study at the library.
 Se hai intenzione di studiare, studia in biblioteca.
-勉[べん]強[きょう]するなら図[と]書[しょ]館[かん]で勉[べん]強[きょう]します{。|}
+勉[べん]強[きょう]するなら{、|}図[と]書[しょ]館[かん]で勉[べん]強[きょう]します{。|}
 
 We don't have lemons. But we do have limes.
 Non abbiamo limoni. Ma abbiamo i lime.
-レモンはありません{。|}でも、ライムならありますよ{|。}
+レモンはありません{が|。でも|、でも}{、|}ライムならあります{よ|}{|。}
 
 Regarding sashimi, I like salmon.
 Per quanto riguarda il sashimi, mi piace il salmone.
-お刺[さ]身[しみ]は、サーモンなら好[す]き{です|だ}{|。}
+お刺[さ]身[しみ]は{、|}サーモンなら好[す]き{です|だ}{|。}
 
 If you're going to Japan, May or November are the best times!
 Se vai in Giappone, maggio o novembre sono i periodi migliori!
@@ -23,19 +23,19 @@ Sono andato in Giappone, ma non in Corea del Sud.
 
 I like apples, but not oranges.
 Mi piacciono le mele, ma non le arance.
-りんごなら好[す]き{です|だ}{|。}が{、|}オレンジは好[す]きじゃありません{。|}
+りんごなら好[す]き{です|だ}{|。}が{、|}オレンジが好[す]き{じゃないです|じゃありません|ではありません}{。|}
 
 I have a black shirt, but not a red one.
-Ho una maglietta nera, ma non rossa.
-黒[くろ]いシャツならあります{。|}が{、|}赤[あか]いのはありません{。|}
+Ho una camicia nera, ma non rossa.
+黒[くろ]いシャツならあります{|。}が{、|}赤[あか]いのはありません{。|}
 
 I like dogs, but not cats.
 Mi piacciono i cani, ma non i gatti.
-犬[いぬ]なら好[す]き{です|だ}{|。}が{、|}猫[ねこ]は好[す]きじゃありません{。|}
+犬[いぬ]なら好[す]き{です|だ}{|。}が{、|}猫[ねこ]が好[す]き{じゃないです|じゃありません|ではありません}{。|}
 
 I drive a bicycle, but not a car.
 Guido una bicicletta, ma non un'auto.
-自[じ]転[てん]車[しゃ]なら乗[の]ります{。|}が{、|}車[くるま]は運[うん]転[てん]しません{。|}
+自[じ]転[てん]車[しゃ]なら乗[の]ります{。|}が{、|}車[くるま]は{運[うん]転[てん]しません|乗[の]りません}{。|}
 
 I drink tea, but not coffee.
 Bevo tè, ma non caffè.

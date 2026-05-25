@@ -3,40 +3,40 @@ Sostantivo じゃないです
 
 Mr. Yamada is not a student.
 Il signor Yamada non è uno studente.
-山田[やまだ]さんは学生[がくせい]{じゃないです|じゃありません}
+山田[やまだ]さんは学生[がくせい]{じゃないです|じゃありません|ではありません}
 
 My major is not history.
 La mia materia principale non è storia.
-私[わたし]の専攻[せんこう]は歴史[れきし]{じゃないです|じゃありません}
+私[わたし]の専攻[せんこう]は歴史[れきし]{じゃないです|じゃありません|ではありません}
 
 I am not Chinese.
 Non sono cinese.
-{私[わたし]は|}中国人[ちゅうごくじん]{じゃないです|じゃありません}
+{私[わたし]は|}中国人[ちゅうごくじん]{じゃないです|じゃありません|ではありません}
 
 This is not meat.
 Questa non è carne.
-これは肉[にく]{じゃないです|じゃありません}
+これは肉[にく]{じゃないです|じゃありません|ではありません}
 
 That is not my dictionary.
 Quello non è il mio dizionario.
-それは私[わたし]の辞書[じしょ]{じゃないです|じゃありません}
+それは私[わたし]の辞書[じしょ]{じゃないです|じゃありません|ではありません}
 
 Ms. Suzuki's mother is not an office worker.
 La madre della signora Suzuki non è un'impiegata.
-鈴木[すずき]さんの{お|}母[かあ]さんは会社員[かいしゃいん]{じゃないです|じゃありません}
+鈴木[すずき]さんの{お|}母[かあ]さんは会社員[かいしゃいん]{じゃないです|じゃありません|ではありません}
 
 That (over there) is not a post office.
 Quello (laggiù) non è un ufficio postale.
-あれは郵便局[ゆうびんきょく]{じゃないです|じゃありません}
+あれは郵便局[ゆうびんきょく]{じゃないです|じゃありません|ではありません}
 
 I am not a high school student.
 Non sono uno studente di scuola superiore.
-{私[わたし]は|}高校生[こうこうせい]{じゃないです|じゃありません}
+{私[わたし]は|}高校生[こうこうせい]{じゃないです|じゃありません|ではありません}
 
 Mr. Honda's major is not English.
 La materia principale del signor Honda non è l'inglese.
-本田[ほんだ]さんの専攻[せんこう]は英語[えいご]{じゃないです|じゃありません}
+本田[ほんだ]さんの専攻[せんこう]は英語[えいご]{じゃないです|じゃありません|ではありません}
 
 This is not my bag.
 Questa non è la mia borsa.
-これは私[わたし]の{カバン|鞄[かばん]}{じゃないです|じゃありません}
+これは私[わたし]の{カバン|鞄[かばん]}{じゃないです|じゃありません|ではありません}

@@ -19,11 +19,11 @@ La materia principale del signor Yamada è economia aziendale, vero?
 
 That is not a vegetable, is it?
 Quella non è una verdura, vero?
-それは野菜[やさい]{じゃないです|じゃありません}ね
+それは野菜[やさい]{じゃないです|じゃありません|ではありません}ね
 
 Let me assure you, that is not my bag.
 Ti assicuro che quella non è la mia borsa.
-それは私[わたし]の{カバン|鞄[かばん]}{じゃないです|じゃありません}よ
+それは私[わたし]の{カバン|鞄[かばん]}{じゃないです|じゃありません|ではありません}よ
 
 Mary is an international student, isn't she?
 Mary è una studentessa internazionale, vero?
