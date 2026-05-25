@@ -15,7 +15,7 @@ Dov'è il mio ombrello?
 
 Your bag is there.
 La tua borsa è lì.
-{あなたの|}かばんはそこです
+{あなたの|}{カバン|鞄[かばん]}はそこです
 
 Where is Ms. Suzuki?
 Dov'è la signora Suzuki?

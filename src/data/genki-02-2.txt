@@ -3,7 +3,7 @@
 
 How much is this bag?
 Quanto costa questa borsa?
-このかばんはいくらですか
+この{カバン|鞄[かばん]}はいくらですか
 
 That book is 1,000 yen.
 Quel libro costa 1.000 yen.

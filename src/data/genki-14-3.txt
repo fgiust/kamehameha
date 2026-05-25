@@ -27,7 +27,7 @@ Pedro mi ha dato una cartolina.
 
 My father gave me a new bag.
 Mio padre mi ha dato una borsa nuova.
-父[ちち]は{私[わたし]に|}新[あたら]しいかばんをくれました
+父[ちち]は{私[わたし]に|}新[あたら]しい{カバン|鞄[かばん]}をくれました
 
 Sora gave me a CD.
 Sora mi ha dato un CD.

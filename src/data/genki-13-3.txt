@@ -11,7 +11,7 @@ Questa pietanza sembra piccante.
 
 That bag looks expensive.
 Quella borsa sembra costosa.
-{あの|その}{カバン|かばん}は高[たか]そうです{|。}
+{あの|その}{カバン|鞄[かばん]}は高[たか]そうです{|。}
 
 This watch looks new.
 Questo orologio sembra nuovo.

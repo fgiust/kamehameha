@@ -23,7 +23,7 @@ Ho chiesto a mia sorella maggiore di prepararmi la cena.
 
 My friend carried my bag for me.
 Il mio amico mi ha portato la borsa.
-友達[ともだち]が{私[わたし]に|}かばんを持[も]ってくれました
+友達[ともだち]が{私[わたし]に|}{カバン|鞄[かばん]}を持[も]ってくれました
 
 I helped my mother clean the room.
 Ho aiutato mia madre a pulire la stanza.

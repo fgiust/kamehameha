@@ -7,7 +7,7 @@ La scorsa settimana ho letto un libro difficile.
 
 This bag is cheap.
 Questa borsa è economica.
-このかばんは安[やす]いです
+この{カバン|鞄[かばん]}は安[やす]いです
 
 The room is quiet.
 La stanza è tranquilla.

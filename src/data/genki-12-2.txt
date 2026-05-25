@@ -3,7 +3,7 @@
 
 This bag is too heavy.
 Questa borsa è troppo pesante.
-このかばんは重[おも]すぎます
+この{カバン|鞄[かばん]}は重[おも]すぎます
 
 The music is too loud.
 La musica è troppo alta.

@@ -19,7 +19,7 @@ Dammi quello grande.
 
 My bag is heavier than yours.
 La mia borsa è più pesante della tua.
-私[わたし]のかばんはあなたのより重[おも]いです
+私[わたし]の{カバン|鞄[かばん]}はあなたのより重[おも]いです
 
 I like sweet ones.
 Mi piacciono quelli dolci.
@@ -35,7 +35,7 @@ Questa penna blu è più economica di quella nera.
 
 Is this Mary's bag?
 Questa è la borsa di Mary?
-これはメアリーさんのかばんですか
+これはメアリーさんの{カバン|鞄[かばん]}ですか
 
 No, it is Robert's.
 No, è di Robert.

@@ -3,7 +3,7 @@
 
 Whose bag is this?
 Di chi è questa borsa?
-これはだれのかばんですか
+これはだれの{カバン|鞄[かばん]}ですか
 
 Whose umbrella is that?
 Di chi è quell'ombrello?

@@ -11,7 +11,7 @@ Takeshi probabilmente è in biblioteca.
 
 This bag is probably Mary's.
 Questa borsa probabilmente è di Mary.
-このかばんはメアリーさんのでしょう
+この{カバン|鞄[かばん]}はメアリーさんのでしょう
 
 The meeting will probably start at ten.
 La riunione probabilmente inizierà alle dieci.

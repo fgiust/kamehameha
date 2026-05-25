@@ -31,7 +31,7 @@ La macchina è davanti alla casa.
 
 The key is inside my bag.
 La chiave è dentro la mia borsa.
-鍵[かぎ]は私[わたし]のかばんの中[なか]です
+鍵[かぎ]は私[わたし]の{カバン|鞄[かばん]}の中[なか]です
 
 The book is on the table.
 Il libro è sul tavolo.

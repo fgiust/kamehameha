@@ -11,7 +11,7 @@ Oggi era lunedì.
 
 That bag was 5,000 yen.
 Quella borsa costava 5.000 yen.
-そのかばんは五千円[ごせんえん]でした
+その{カバン|鞄[かばん]}は五千円[ごせんえん]でした
 
 Sue was a housewife.
 Sue era casalinga.

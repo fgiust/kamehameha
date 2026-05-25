@@ -18,7 +18,7 @@ Ha detto che visiterà i suoi genitori.
 
 Mary said she bought a new bag.
 Mary ha detto che ha comprato una nuova borsa.
-メアリーさんは新[あたら]しいかばんを買[か]ったと言[い]っていました
+メアリーさんは新[あたら]しい{カバン|鞄[かばん]}を買[か]ったと言[い]っていました
 
 Ken said he got married.
 Ken ha detto che si è sposato.

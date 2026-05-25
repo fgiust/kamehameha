@@ -3,11 +3,11 @@
 
 Who bought a new bag?
 Chi ha comprato una borsa nuova?
-だれが新[あたら]しいかばんを買[か]いましたか
+だれが新[あたら]しい{カバン|鞄[かばん]}を買[か]いましたか
 
 John bought a new bag.
 John ha comprato una borsa nuova.
-ジョンさんが新[あたら]しいかばんを買[か]いました
+ジョンさんが新[あたら]しい{カバン|鞄[かばん]}を買[か]いました
 
 Who lost the key?
 Chi ha perso la chiave?
