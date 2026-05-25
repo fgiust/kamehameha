@@ -342,7 +342,7 @@ export const homeConfig: HomeConfig = {
       items: [
         { id: 'volitionalform' },
         { id: 'genki15-2' },
-        { id: 'genki15-3', beta: true },
+        { id: 'genki15-3' },
         { id: 'genki15-4', beta: true },
       ],
     },
