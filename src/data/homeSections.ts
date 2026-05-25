@@ -318,7 +318,7 @@ export const homeConfig: HomeConfig = {
         { id: 'genki13-3' },
         { id: 'genki13-4' },
         { id: 'genki13-5' },
-        { id: 'genki13-6', beta: true },
+        { id: 'genki13-6' },
       ],
     },
     {
