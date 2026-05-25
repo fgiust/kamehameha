@@ -2,8 +2,8 @@
 ～かもしれません
 
 It might be windy tomorrow.
-Domani potrebbe tirare vento.
-明日[あした]風[かぜ]が強[つよ]いかもしれません
+Domani potrebbe tirare forte vento.
+明日[あした]{|、}風[かぜ]が強[つよ]いかもしれません
 
 Ken might be at home now.
 Ken potrebbe essere a casa adesso.
@@ -31,11 +31,11 @@ Sora potrebbe non conoscere la risposta.
 
 That person might be a student.
 Quella persona potrebbe essere uno studente.
-あの人[ひと]は学生[がくせい]かもしれません
+{あの|その}人[ひと]は学生[がくせい]かもしれません
 
 That shop might not be open on Sunday.
-Quel negozio potrebbe non essere aperto la domenica.
-あの店[みせ]は日曜日[にちようび]休[やす]みかもしれません
+Quel negozio potrebbe non essere aperto di domenica.
+{あの|その}店[みせ]は日曜日[にちようび]休[やす]みかもしれません
 
 Yui might be good at piano.
 Yui potrebbe essere brava al piano.
