@@ -14,7 +14,7 @@ Abbiamo mangiato addirittura due torte.
 ケーキを{2つ[ふたつ]|二つ[ふたつ]}も食[た]べました
 
 There are as many as ten books on the desk.
-Sul tavolo ci sono addirittura dieci libri.
+Sulla scrivania ci sono addirittura dieci libri.
 机[つくえ]の上[うえ]に本[ほん]が{10冊[じゅっさつ]|十冊[じゅっさつ]}もあります
 
 Mary drank as many as three cups of tea.
@@ -35,7 +35,7 @@ In questa azienda ci sono solo due computer.
 
 Ken only brought one notebook.
 Ken ha portato solo un quaderno.
-けんさんはノートを{1冊[いっさつ]|一冊[いっさつ]}しか持[も]ってきませんでした
+けんさんはノートを{1冊[いっさつ]|一冊[いっさつ]}しか持[も]って来[き]ませんでした
 
 Takeshi only has five hundred yen.
 Takeshi ha solo cinquecento yen.
