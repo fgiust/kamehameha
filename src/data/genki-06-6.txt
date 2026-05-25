@@ -19,7 +19,7 @@ Il test non è stato difficile, perché avevo studiato molto.
 
 Let's go out tonight, because tomorrow is a holiday.
 Usciamo stasera, perché domani è vacanza.
-明日[あした]は休[やす]みですから、今晩[こんばん]出[で]かけましょう
+明日[あした]は休[やす]みですから、{今晩[こんばん]|今夜[こんや]}出[で]かけましょう
 
 I will not drink coffee, because I drank coffee in the morning.
 Non berrò caffè, perché ho bevuto caffè al mattino.

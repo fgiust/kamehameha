@@ -3,7 +3,7 @@
 
 We eat breakfast with chopsticks.
 Mangiamo la colazione con le bacchette.
-{私[わたし]たちは|}箸[はし]で朝[あさ]ご飯[はん]を食[た]べます
+{私[わたし]たちは|}箸[はし]で{朝[あさ]ご飯[はん]|朝飯[ちょうしょく]}を食[た]べます
 
 I drink soup with a spoon.
 Bevo la zuppa con il cucchiaio.

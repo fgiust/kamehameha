@@ -11,7 +11,7 @@ Sai quando apre il negozio?
 
 Let's decide where we will eat tonight.
 Decidiamo dove mangiare stasera.
-今夜[こんや]どこで食[た]べるか決[き]めましょう
+{今晩[こんばん]|今夜[こんや]}どこで食[た]べるか決[き]めましょう
 
 I don't know which book is better.
 Non so quale libro è migliore.

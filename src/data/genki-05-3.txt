@@ -11,7 +11,7 @@ Ascoltiamo musica qui.
 
 Let's read this book tonight.
 Leggiamo questo libro stasera.
-今晩[こんばん]この本[ほん]を読[よ]みましょう
+{今晩[こんばん]|今夜[こんや]}この本[ほん]を読[よ]みましょう
 
 Let's write an email to our friend.
 Scriviamo un'email al nostro amico.

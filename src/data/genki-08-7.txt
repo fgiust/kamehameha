@@ -39,4 +39,4 @@ Non c'è niente nel frigorifero.
 
 Shall we watch something on TV tonight?
 Guardiamo qualcosa in TV stasera?
-今晩[こんばん]、何[なに]かテレビを見[み]ましょうか
+{今晩[こんばん]|今夜[こんや]}、何[なに]かテレビを見[み]ましょうか

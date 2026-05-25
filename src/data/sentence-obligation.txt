@@ -3,7 +3,7 @@ Forma di dovere
 
 I must study tonight
 Devo studiare stasera
-{今晩[こんばん]|今夜[こにゃ]}勉強[べんきょう]しな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
+{今晩[こんばん]|今夜[こんや]}勉強[べんきょう]しな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
 
 You have to go to school tomorrow
 Devi andare a scuola domani

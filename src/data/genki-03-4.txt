@@ -35,7 +35,7 @@ Mi alzo alle 7:00 tutti i giorni.
 
 I will study Japanese tonight.
 Studierò giapponese stasera.
-{私[わたし]は|}今晩[こんばん]、日本語[にほんご]を勉強[べんきょう]します
+{私[わたし]は|}{今晩[こんばん]|今夜[こんや]}、日本語[にほんご]を勉強[べんきょう]します
 
 Ken will work on Saturday.
 Ken lavorerà sabato.

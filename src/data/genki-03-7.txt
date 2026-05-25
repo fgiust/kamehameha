@@ -27,7 +27,7 @@ La signora Suzuki va spesso in biblioteca.
 
 I sometimes eat breakfast at a café.
 A volte faccio colazione in una caffetteria.
-{私[わたし]は|}時々[ときどき]カフェで朝ご飯[あさごはん]を食[た]べます
+{私[わたし]は|}時々[ときどき]カフェで{朝[あさ]ご飯[はん]|朝飯[ちょうしょく]}を食[た]べます
 
 I do not watch TV much.
 Non guardo molto la TV.

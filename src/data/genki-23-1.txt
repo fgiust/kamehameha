@@ -27,7 +27,7 @@ Anche se l'insegnante dice di no, chiederò.
 
 Even if there is a test tomorrow, I will go out tonight.
 Anche se c'è un test domani, uscirò stasera.
-明日[あした]テストがあっても、今晩[こんばん]出[で]かけます
+明日[あした]テストがあっても、{今晩[こんばん]|今夜[こんや]}出[で]かけます
 
 Even if I work, I will call you.
 Anche se lavoro, ti chiamerò.

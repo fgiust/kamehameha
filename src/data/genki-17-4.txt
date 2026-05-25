@@ -30,7 +30,7 @@ I bambini non devono pagare qui.
 
 I don't have to cook tonight.
 Non devo cucinare stasera.
-今晩[こんばん]料理[りょうり]しなくてもいいです
+{今晩[こんばん]|今夜[こんや]}料理[りょうり]しなくてもいいです
 
 You do not need to come tomorrow.
 Non è necessario venire domani.

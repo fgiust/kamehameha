@@ -31,7 +31,7 @@ Per favore, aspetta un momento.
 
 I want my mother to cook tonight.
 Voglio che mia madre cucini stasera.
-{私[わたし]は|}母[はは]に今晩[こんばん]料理[りょうり]してほしいです
+{私[わたし]は|}母[はは]に{今晩[こんばん]|今夜[こんや]}料理[りょうり]してほしいです
 
 I don't want him to forget the appointment.
 Non voglio che dimentichi l'appuntamento.

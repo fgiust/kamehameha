@@ -15,7 +15,7 @@ Avevamo intenzione di andare al museo, ma non ci siamo andati.
 
 I intend to practice kanji tonight.
 Ho intenzione di esercitarmi con i kanji stasera.
-{私[わたし]は|}今晩[こんばん]漢字[かんじ]を練習[れんしゅう]するつもりです
+{私[わたし]は|}{今晩[こんばん]|今夜[こんや]}漢字[かんじ]を練習[れんしゅう]するつもりです
 
 I intend to not drink coffee on Monday.
 Ho intenzione di non bere caffè lunedì.
@@ -35,7 +35,7 @@ Ho intenzione di pulire la mia stanza questa settimana.
 
 I intend to cook pasta tonight.
 Ho intenzione di cucinare la pasta stasera.
-{私[わたし]は|}今晩[こんばん]パスタを作[つく]るつもりです
+{私[わたし]は|}{今晩[こんばん]|今夜[こんや]}パスタを作[つく]るつもりです
 
 Ken intends to meet a friend at the station.
 Ken ha intenzione di incontrare un amico alla stazione.

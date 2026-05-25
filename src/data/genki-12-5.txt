@@ -19,7 +19,7 @@ Devo prendere la medicina dopo cena.
 
 I have to finish this work by tonight.
 Devo finire questo lavoro entro stasera.
-今晩[こんばん]までにこの仕事[しごと]を終[お]わらなければいけません
+{今晩[こんばん]|今夜[こんや]}までにこの仕事[しごと]を終[お]わらなければいけません
 
 You must not forget your passport.
 Non devi dimenticare il passaporto.

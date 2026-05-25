@@ -27,7 +27,7 @@ Ho deciso di esercitarmi con il pianoforte.
 
 I decided not to go out tonight.
 Ho deciso di non uscire stasera.
-今晩[こんばん]は出[で]かけないことにしました
+{今晩[こんばん]|今夜[こんや]}は出[で]かけないことにしました
 
 I decided to help my mother.
 Ho deciso di aiutare mia madre.

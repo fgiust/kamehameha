@@ -11,7 +11,7 @@ Dovresti chiamare tua madre.
 
 It is better not to go out tonight.
 È meglio non uscire stasera.
-今晩[こんばん]出[で]かけないほうがいいです
+{今晩[こんばん]|今夜[こんや]}出[で]かけないほうがいいです
 
 You should wear a warm coat.
 Dovresti indossare un cappotto caldo.

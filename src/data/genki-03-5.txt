@@ -31,7 +31,7 @@ Non andiamo a Kyoto domenica?
 
 Won't you watch TV with Sora tonight?
 Non guardi la TV con Sora stasera?
-今晩[こんばん]、ソラさんと{一緒[いっしょ]に|}テレビを見[み]ませんか
+{今晩[こんばん]|今夜[こんや]}、ソラさんと{一緒[いっしょ]に|}テレビを見[み]ませんか
 
 Would you like to come to my house?
 Ti andrebbe di venire a casa mia?
