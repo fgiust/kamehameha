@@ -127,7 +127,7 @@ export const homeConfig: HomeConfig = {
         { id: 'transitive' },
         { id: 'family-names' },
         { id: 'adjectives-nouns' },
-        { id: 'sentence-obligation', beta: true },
+        { id: 'sentence-obligation' },
         { id: 'sentence-prohibition' },
       ],
     },
