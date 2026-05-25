@@ -11,11 +11,11 @@ Perché non provi questa zuppa?
 
 How about asking the station staff?
 Che ne dici di chiedere al personale della stazione?
-駅[えき]の人[ひと]に聞[き]いたらどうですか
+{駅人[えきじん]|駅[えき]の人[ひと]}に聞[き]いたらどうですか
 
 How about walking to the park?
 Che ne dici di andare al parco a piedi?
-公園[こうえん]まで歩[ある]いたらどうですか
+公園[こうえん]{まで|に}歩[ある]いたらどうですか
 
 Why don't you write it in kanji?
 Perché non lo scrivi in kanji?
@@ -23,7 +23,7 @@ Perché non lo scrivi in kanji?
 
 How about buying a train pass?
 Che ne dici di comprare un abbonamento per il treno?
-定期券[ていきけん]を買[か]ったらどうですか
+{電車[でんしゃ]の}定期券[ていきけん]を買[か]ったらどうですか
 
 Why don't you visit Kyoto in spring?
 Perché non visiti Kyoto in primavera?
@@ -31,11 +31,11 @@ Perché non visiti Kyoto in primavera?
 
 How about learning three new words a day?
 Che ne dici di imparare tre parole nuove al giorno?
-一日[いちにち]に{3つ[みっつ]|三つ[みっつ]}の新[あたら]しい言葉[ことば]を覚[おぼ]えたらどうですか
+{１日[いちにち]|1日[いちにち]|一日[いちにち]}に{3つ[みっつ]|三つ[みっつ]}の新[あたら]しい言葉[ことば]を覚[おぼ]えたらどうですか
 
 Why don't you call him tonight?
 Perché non lo chiami stasera?
-今晩[こんばん]電話[でんわ]したらどうですか
+{今晩[こんばん]|今夜[こんや]}{彼[かれ]に|}電話[でんわ]したらどうですか
 
 How about meeting at the cafe first?
 Che ne dici di incontrarci prima al bar?
