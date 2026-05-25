@@ -341,7 +341,7 @@ export const homeConfig: HomeConfig = {
       titleLevel: 3,
       items: [
         { id: 'volitionalform' },
-        { id: 'genki15-2', beta: true },
+        { id: 'genki15-2' },
         { id: 'genki15-3', beta: true },
         { id: 'genki15-4', beta: true },
       ],
