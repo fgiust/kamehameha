@@ -315,7 +315,7 @@ export const homeConfig: HomeConfig = {
       items: [
         { id: 'potentialform', title: { key: 'home.genkiOverrides.potentialVerbs' } },
         { id: 'genki13-2' },
-        { id: 'genki13-3', beta: true },
+        { id: 'genki13-3' },
         { id: 'genki13-4', beta: true },
         { id: 'genki13-5', beta: true },
         { id: 'genki13-6', beta: true },
