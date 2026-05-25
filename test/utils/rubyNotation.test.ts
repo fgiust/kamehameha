@@ -64,6 +64,12 @@ describe('rubyNotation', () => {
       expect(findInvalidRubyNotations('{です|だ}')).toEqual([]);
       expect(findInvalidRubyNotations('〜枚[まい]')).toEqual([]);
     });
+
+    it('accepts number + counter ruby (digit or kanji numeral + kana)', () => {
+      expect(findInvalidRubyNotations('{3つ[みっつ]|三つ[みっつ]}')).toEqual([]);
+      expect(findInvalidRubyNotations('{2つ[ふたつ]|二つ[ふたつ]}')).toEqual([]);
+      expect(findInvalidRubyNotations('{6回[ろっかい]|六回[ろっかい]}')).toEqual([]);
+    });
   });
 
   describe('lesson data files', () => {

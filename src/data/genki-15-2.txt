@@ -23,7 +23,7 @@ Penso di risparmiare per una chitarra nuova.
 
 I'm thinking of waking up at five tomorrow.
 Penso di svegliarmi alle cinque domani.
-明日[あした]五[ご]時[じ]に起[お]きようと思[おも]っています
+明日[あした]{5時[ごじ]|五時[ごじ]}に起[お]きようと思[おも]っています
 
 I think I will read this novel during the break.
 Penso leggerò questo romanzo durante le vacanze.

@@ -35,7 +35,7 @@ Per favore firmi qui.
 
 Please take one brochure each.
 Per favore prenda un opuscolo ciascuno.
-パンフレットをお一人[ひとり]一枚[いちまい]ください
+パンフレットをお一人[ひとり]{1枚[いちまい]|一枚[いちまい]}ください
 
 Please speak a little more slowly.
 Per favore parli un po' più lentamente.

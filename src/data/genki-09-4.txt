@@ -15,7 +15,7 @@ Non andrò a nuotare oggi, perché la piscina è chiusa.
 
 Yasmin is popular, because she speaks three languages.
 Yasmin è molto popolare, perché parla tre lingue.
-ヤスミンさんは三[さん]つの言語[げんご]を話[はな]すから、人気[にんき]があります
+ヤスミンさんは{3つ[みっつ]|三つ[みっつ]}の言語[げんご]を話[はな]すから、人気[にんき]があります
 
 I was happy, because my friend visited me.
 Ero felice, perché un amico mi ha fatto visita.
