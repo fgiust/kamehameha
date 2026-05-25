@@ -327,7 +327,7 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'genki14-1', beta: true },
+        { id: 'genki14-1' },
         { id: 'genki14-2', beta: true },
         { id: 'genki14-3', beta: true },
         { id: 'genki14-4', beta: true },
