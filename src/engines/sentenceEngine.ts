@@ -178,6 +178,11 @@ function isKanji(ch: string) {
   return /[\u4e00-\u9faf\u3400-\u4dbf々]/.test(ch);
 }
 
+/** ASCII / fullwidth digits that prefix counters (e.g. 1年, １週間, 5000円). */
+function isNumberChar(ch: string) {
+  return /[0-9０-９]/.test(ch);
+}
+
 export function parseRubyUnits(text: string): RubyUnit[] {
   const units: RubyUnit[] = [];
   let buffer = '';
@@ -206,12 +211,15 @@ export function parseRubyUnits(text: string): RubyUnit[] {
     const readingRaw = text.slice(i + 1, close);
     const reading = readingRaw.length > 0 ? readingRaw : buffer;
 
-    // Find the kanji sequence at the end of the buffer
+    // Trailing kanji run, then any digits immediately before it (counters / 1年 / 5000円).
     let kStart = buffer.length;
     while (kStart > 0 && isKanji(buffer[kStart - 1]!)) {
       kStart--;
     }
-    
+    while (kStart > 0 && isNumberChar(buffer[kStart - 1]!)) {
+      kStart--;
+    }
+
     // If no kanji found, just take the last character as the ruby base
     if (kStart === buffer.length && buffer.length > 0) {
       kStart = buffer.length - 1;

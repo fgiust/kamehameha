@@ -3,6 +3,7 @@ import {
   diffSentenceAnswer,
   generateAnswers,
   parseAnswerTemplate,
+  parseRubyUnits,
   pickBestDiff,
   primarySurfaceFromTemplate,
   stripRuby,
@@ -209,6 +210,30 @@ describe('sentenceEngine', () => {
 
       const returnedUnits = ops.filter(o => o.kind === 'unit').map(o => (o.kind === 'unit' ? o.unit : null));
       expect(returnedUnits).toEqual(correctUnits);
+    });
+  });
+
+  describe('parseRubyUnits', () => {
+    it('groups furigana over digit + kanji counters', () => {
+      expect(parseRubyUnits('１年[いちねん]')).toEqual([
+        { kind: 'ruby', surface: '１年', reading: 'いちねん' },
+      ]);
+      expect(parseRubyUnits('1年[いちねん]')).toEqual([
+        { kind: 'ruby', surface: '1年', reading: 'いちねん' },
+      ]);
+      expect(parseRubyUnits('１週間[いっしゅうかん]')).toEqual([
+        { kind: 'ruby', surface: '１週間', reading: 'いっしゅうかん' },
+      ]);
+      expect(parseRubyUnits('5000円[えん]')).toEqual([
+        { kind: 'ruby', surface: '5000円', reading: 'えん' },
+      ]);
+    });
+
+    it('still attaches furigana only to trailing kanji when no leading digits', () => {
+      expect(parseRubyUnits('私[わたし]は')).toEqual([
+        { kind: 'ruby', surface: '私', reading: 'わたし' },
+        { kind: 'plain', surface: 'は', reading: 'は' },
+      ]);
     });
   });
 });

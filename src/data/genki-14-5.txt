@@ -39,4 +39,4 @@ Ken ha portato solo un quaderno.
 
 Takeshi only has five hundred yen.
 Takeshi ha solo cinquecento yen.
-たけしさんは五百円[ごひゃくえん]しか持[も]っていません
+たけしさんは{五百円[ごひゃくえん]|500円[ごひゃくえん]}しか持[も]っていません
