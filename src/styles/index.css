@@ -18,6 +18,7 @@
   --radius-xs: 4px;
   --transition: 0.2s ease;
   --keyboard-tip: #b45309;
+  --answer-alt: #9a7500;
 }
 
 body.dark {
@@ -31,6 +32,7 @@ body.dark {
   --shadow: 0 2px 12px rgba(0,0,0,0.3);
   --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
   --keyboard-tip: #fbbf24;
+  --answer-alt: #e6c200;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1375,6 +1377,192 @@ body.dark .home-mini-progress-cell.is-incorrect {
   flex-shrink: 0;
   padding: 24px;
   animation: modal-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.sentence-edit-link {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+
+.sentence-edit-link:hover {
+  color: var(--text);
+}
+
+.sentence-edit-link--toolbar {
+  margin: 0 0 12px;
+  display: block;
+}
+
+.sentence-edit-modal .sentence-edit-file-hint {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.sentence-edit-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sentence-edit-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.sentence-edit-label > span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sentence-edit-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 2.5em;
+  font-family: inherit;
+}
+
+.sentence-edit-answer {
+  font-family: ui-monospace, 'Cascadia Code', monospace;
+  font-size: 15px;
+}
+
+.answer-template-validation {
+  margin: 6px 0 0;
+  padding-left: 1.2em;
+  font-size: 13px;
+  color: var(--incorrect);
+}
+
+.answer-template-validation li {
+  margin: 2px 0;
+}
+
+.answer-template-preview {
+  margin-top: 8px;
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--border) 40%, var(--bg-card));
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+  line-height: 2;
+  font-size: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0;
+}
+
+.answer-template-preview.is-invalid {
+  text-align: left;
+  line-height: 1.5;
+  font-size: 13px;
+}
+
+.answer-template-preview-errors {
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--incorrect);
+  list-style: disc;
+}
+
+.answer-template-preview-errors li {
+  margin: 4px 0;
+}
+
+.answer-template-alt-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.2em 0.35em;
+  margin: 0 0.35em;
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--answer-alt) 24%, transparent);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.answer-template-alt-option {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.2em;
+}
+
+.answer-template-alt-sep {
+  color: var(--answer-alt);
+  opacity: 0.85;
+  font-weight: 700;
+  user-select: none;
+}
+
+.answer-template-alt-group,
+.answer-template-alt-group ruby,
+.answer-template-alt-group .answer-template-alt-sep {
+  color: var(--answer-alt);
+}
+
+.answer-template-preview ruby rt {
+  font-size: 0.55em;
+  color: var(--text-secondary);
+}
+
+.answer-template-alt-group ruby rt {
+  color: color-mix(in srgb, var(--answer-alt) 70%, var(--text-secondary));
+}
+
+.sentence-edit-diff-result {
+  display: flex;
+  justify-content: center;
+  font-size: 28px;
+  margin-top: 8px;
+}
+
+.sentence-edit-error {
+  color: var(--incorrect);
+  font-size: 14px;
+  margin: 12px 0 0;
+}
+
+.sentence-edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.sentence-edit-actions button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.sentence-edit-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sentence-edit-actions .sentence-edit-save {
+  background: var(--accent, #4a7cff);
+  border-color: transparent;
+  color: #fff;
 }
 
 @keyframes modal-slide-up {

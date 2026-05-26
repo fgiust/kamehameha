@@ -6,6 +6,8 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { parseTranslateSessionTxt } from './src/lessons/parseTranslateSessionTxt'
 import { parseReadingExerciseTxt } from './src/lessons/parseReadingExerciseTxt'
+import { updateTranslateBlockInFile } from './src/lessons/updateTranslateBlockInFile'
+import { isEditableSentenceDataFile } from './src/lessons/lessonDataFile'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -163,6 +165,62 @@ export default defineConfig({
         buildMode: true,
       },
     }),
+    {
+      name: 'dev-sentence-edit-api',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url !== '/api/dev/sentence-block' || req.method !== 'POST') {
+            next();
+            return;
+          }
+          let body = '';
+          req.on('data', chunk => {
+            body += chunk;
+          });
+          req.on('end', () => {
+            try {
+              const data = JSON.parse(body) as {
+                fileName?: string;
+                blockIndex?: number;
+                english?: string;
+                italian?: string;
+                answer?: string;
+              };
+              const fileName = data.fileName ?? '';
+              if (!isEditableSentenceDataFile(fileName)) {
+                res.statusCode = 400;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ ok: false, error: 'Invalid file name' }));
+                return;
+              }
+              const blockIndex = data.blockIndex;
+              if (typeof blockIndex !== 'number' || blockIndex < 0) {
+                res.statusCode = 400;
+                res.setHeader('Content-Type', 'application/json');
+                res.end(JSON.stringify({ ok: false, error: 'Invalid block index' }));
+                return;
+              }
+              updateTranslateBlockInFile({
+                dataDir: path.resolve(__dirname, 'src/data'),
+                fileName,
+                blockIndex,
+                english: data.english ?? '',
+                italian: data.italian ?? '',
+                answer: data.answer ?? '',
+              });
+              res.statusCode = 200;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ ok: true }));
+            } catch (err: unknown) {
+              const message = err instanceof Error ? err.message : 'Unknown error';
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ ok: false, error: message }));
+            }
+          });
+        });
+      },
+    },
     {
       name: 'feedback-api',
       configureServer(server) {

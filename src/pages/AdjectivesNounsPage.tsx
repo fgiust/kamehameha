@@ -12,5 +12,12 @@ export default function AdjectivesNounsPage() {
   }
 
   const title = lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title;
-  return <SentenceExercise title={title} sentenceData={lesson.sentenceData} persistKey="/adjectives-nouns" />;
+  return (
+    <SentenceExercise
+      title={title}
+      sentenceData={lesson.sentenceData}
+      persistKey="/adjectives-nouns"
+      dataLessonId={lesson.id}
+    />
+  );
 }

@@ -27,6 +27,26 @@ const it = {
   },
   sentenceExercise: {
     promptTranslate: 'Traduci in giapponese:',
+    editData: 'Modifica',
+  },
+  sentenceEdit: {
+    title: 'Modifica dati esercizio',
+    answer: 'Risposta (template)',
+    fileHint: '{{file}} — esercizio {{index}}',
+    save: 'Salva nel file',
+    saving: 'Salvataggio…',
+    cancel: 'Annulla',
+    saveError: 'Impossibile salvare le modifiche',
+    validation: {
+      'unclosed-brace': 'Parentesi graffa { non chiusa',
+      'unclosed-bracket': 'Parentesi quadra [ non chiusa',
+      'nested-brace': 'Parentesi graffe { annidate non consentite',
+      'nested-bracket': 'Parentesi quadre [ annidate non consentite',
+      'brace-inside-bracket': 'Parentesi graffe dentro [ ] non consentite',
+      'single-alternative': 'Ogni gruppo {…} deve contenere almeno un separatore |',
+      'missing-furigana': '{{message}}',
+      'invalid-ruby': '{{message}}',
+    },
   },
   readingExercise: {
     prompt: 'Scrivi la lettura in hiragana',
@@ -83,6 +103,9 @@ const it = {
     p1b: '), con l’obiettivo di offrire una serie di esercizi più aggiornata e interattiva per chi studia.',
     p2: 'Tutti gli esercizi inclusi in questa app sono originali e non riproducono materiale protetto da copyright. Anche se gli esercizi sono organizzati seguendo la struttura dei libri Genki per comodità, sono creati in modo indipendente e non derivano né sono copiati dai libri o dai workbook Genki.',
     p3: 'Nota: essendo un progetto indipendente creato da un altro studente, i contenuti possono contenere occasionalmente errori o imprecisioni. Il feedback è molto apprezzato: puoi segnalare errori o suggerire miglioramenti usando gli strumenti di feedback disponibili nelle pagine degli esercizi.',
+  },
+  answerTemplatePreview: {
+    label: 'Anteprima risposta',
   },
   diffTest: {
     title: 'TenshinDiff test',

@@ -24,6 +24,7 @@ export default function GenkiLessonPage() {
       title={lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title}
       sentenceData={lesson.sentenceData}
       persistKey={`/genki/${lesson.id}`}
+      dataLessonId={lesson.id}
     />
   );
 }

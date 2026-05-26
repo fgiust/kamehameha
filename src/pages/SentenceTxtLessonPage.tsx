@@ -17,5 +17,12 @@ export default function SentenceTxtLessonPage() {
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const title = lang === 'it' ? (lesson.titleItalian ?? lesson.title) : lesson.title;
 
-  return <SentenceExercise title={title} sentenceData={lesson.sentenceData} persistKey={location.pathname} />;
+  return (
+    <SentenceExercise
+      title={title}
+      sentenceData={lesson.sentenceData}
+      persistKey={location.pathname}
+      dataLessonId={lesson.id}
+    />
+  );
 }

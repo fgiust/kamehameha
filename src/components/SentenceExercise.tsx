@@ -19,11 +19,15 @@ import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 import AlternateLanguageLine from './AlternateLanguageLine';
 import { useDebugMode } from '../hooks/useDebugMode';
 import { getSentencePrompts, resolveUiLang } from '../utils/bilingualPrompt';
+import { isEditableSentenceLesson } from '../lessons/lessonDataFile';
+import SentenceDataEditModal from './SentenceDataEditModal';
 
 interface Props {
   title: string;
   sentenceData: SentenceItem[];
   persistKey?: string;
+  /** Session id for genki/sentence txt lessons (enables dev data editor). */
+  dataLessonId?: string;
 }
 
 function toHiraganaIME(raw: string) {
@@ -53,13 +57,21 @@ function isLatinImeChar(ch: string) {
   return /[A-Za-z'-]/.test(ch);
 }
 
-export default function SentenceExercise({ title, sentenceData, persistKey }: Props) {
+export default function SentenceExercise({ title, sentenceData, persistKey, dataLessonId }: Props) {
   const { t, i18n } = useTranslation();
   const lang = resolveUiLang(i18n.resolvedLanguage ?? i18n.language);
   const debugMode = useDebugMode();
+  const [sentenceItems, setSentenceItems] = useState(sentenceData);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const canEditSentenceData =
+    import.meta.env.DEV && debugMode && isEditableSentenceLesson(dataLessonId);
+
+  useEffect(() => {
+    setSentenceItems(sentenceData);
+  }, [sentenceData]);
   const fingerprint = useMemo(
-    () => buildExerciseFingerprint(persistKey ?? title, sentenceData.length),
-    [persistKey, title, sentenceData.length],
+    () => buildExerciseFingerprint(persistKey ?? title, sentenceItems.length),
+    [persistKey, title, sentenceItems.length],
   );
   const restoredDraft = useExerciseSessionDraft(persistKey, fingerprint);
   const shouldRestoreSessionRef = useRef(Boolean(restoredDraft && !restoredDraft.isFinished));
@@ -95,7 +107,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
     record: recordProgress,
     getState: getProgressState,
     getProgressSnapshot,
-  } = useSessionProgress(sentenceData.length, {
+  } = useSessionProgress(sentenceItems.length, {
     persistKey,
     initialProgress: restoredDraft?.progress,
   });
@@ -119,15 +131,15 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
     [currentIdx, correct, incorrect, isFinished, prevAnswers, progressSegments, getProgressSnapshot],
   );
 
-  const currentItem = sentenceData[currentIdx];
+  const currentItem = sentenceItems[currentIdx];
   const { primary: promptText, alternate: alternatePromptText } = getSentencePrompts(currentItem, lang);
 
   const pickNext = useCallback(() => {
-    if (sentenceData.length === 0) return;
+    if (sentenceItems.length === 0) return;
 
     const unanswered: number[] = [];
     const incorrect: number[] = [];
-    for (let i = 0; i < sentenceData.length; i++) {
+    for (let i = 0; i < sentenceItems.length; i++) {
       const s = getProgressState(String(i));
       if (s === 0) unanswered.push(i);
       else if (s === 2) incorrect.push(i);
@@ -169,7 +181,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
     setAnswerFeedback(null);
     setAwaitingNext(false);
     setTimeout(() => inputRef.current?.focus(), 50);
-  }, [sentenceData.length, getProgressState]);
+  }, [sentenceItems.length, getProgressState]);
 
   useEffect(() => {
     if (didInitPickRef.current) return;
@@ -310,6 +322,15 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}
+          {canEditSentenceData && dataLessonId && currentItem && (
+            <button
+              type="button"
+              className="sentence-edit-link sentence-edit-link--toolbar"
+              onClick={() => setEditModalOpen(true)}
+            >
+              {t('sentenceExercise.editData')}
+            </button>
+          )}
           {!isFinished && (
             <>
               <div className="exercise-prompt">{t('sentenceExercise.promptTranslate')}</div>
@@ -413,6 +434,22 @@ export default function SentenceExercise({ title, sentenceData, persistKey }: Pr
         incorrect={incorrect}
         pct={pct}
       />
+
+      {canEditSentenceData && dataLessonId && currentItem && (
+        <SentenceDataEditModal
+          isOpen={editModalOpen}
+          onClose={() => setEditModalOpen(false)}
+          dataLessonId={dataLessonId}
+          blockIndex={currentIdx}
+          item={currentItem}
+          userInput={userInput}
+          onSaved={updated => {
+            setSentenceItems(prev =>
+              prev.map((row, i) => (i === currentIdx ? { ...row, ...updated } : row)),
+            );
+          }}
+        />
+      )}
 
       {prevAnswers.length > 0 && (
         <div className="card prev-answers prev-answers-diff">

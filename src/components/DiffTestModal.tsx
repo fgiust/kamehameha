@@ -10,6 +10,7 @@ import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEn
 import { useTranslation } from 'react-i18next';
 import KeyboardTip from './KeyboardTip';
 import DiffDisplay from './DiffDisplay';
+import AnswerTemplatePreview from './AnswerTemplatePreview';
 
 export default function DiffTestModal({
   isOpen,
@@ -95,7 +96,9 @@ export default function DiffTestModal({
               value={correct}
               onChange={e => setCorrect(e.target.value)}
               style={{ width: '100%', textAlign: 'center', boxSizing: 'border-box' }}
+              spellCheck={false}
             />
+            <AnswerTemplatePreview template={correct} />
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: '100%' }}>
             <div style={{ fontSize: 16, fontWeight: 'bold' }}>{t('diffTest.userInput')}</div>
