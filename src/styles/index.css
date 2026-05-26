@@ -1428,10 +1428,52 @@ body.dark .home-mini-progress-cell.is-incorrect {
   max-width: 720px;
 }
 
+/* Modal/panel close: plain ×, no button chrome, large hit target, pointer cursor. */
+.modal-close-btn,
+.modal-content > .close-btn,
+.modal-content .feedback-panel-header .close-btn,
+.feedback-panel-header .close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: 28px;
+  font-family: inherit;
+  line-height: 1;
+  color: var(--text-secondary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: color var(--transition);
+}
+
+.modal-close-btn:hover,
+.modal-content > .close-btn:hover,
+.modal-content .feedback-panel-header .close-btn:hover,
+.feedback-panel-header .close-btn:hover {
+  color: var(--text);
+  background: transparent;
+}
+
+.modal-close-btn:focus-visible,
+.modal-content > .close-btn:focus-visible,
+.modal-content .feedback-panel-header .close-btn:focus-visible,
+.feedback-panel-header .close-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 .sentence-edit-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 8px;
+  right: 8px;
 }
 
 .sentence-edit-title {
@@ -1639,9 +1681,17 @@ body.dark .home-mini-progress-cell.is-incorrect {
 }
 
 .sentence-edit-actions .sentence-edit-save {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   background: var(--accent, #4a7cff);
   border-color: transparent;
   color: #fff;
+}
+
+.sentence-edit-actions .sentence-edit-save svg {
+  flex-shrink: 0;
 }
 
 @keyframes modal-slide-up {
@@ -1665,19 +1715,6 @@ body.dark .home-mini-progress-cell.is-incorrect {
   color: var(--text);
 }
 
-.feedback-panel-header .close-btn {
-  background: transparent;
-  border: none;
-  font-size: 28px;
-  color: var(--text-secondary);
-  cursor: pointer;
-  line-height: 1;
-  transition: color var(--transition);
-}
-
-.feedback-panel-header .close-btn:hover {
-  color: var(--text);
-}
 
 .feedback-panel-form {
   display: flex;

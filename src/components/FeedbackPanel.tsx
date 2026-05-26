@@ -133,7 +133,7 @@ export default function FeedbackPanel() {
         >
           <div className="feedback-panel-header">
             <h3>{t('feedbackPanel.heading')}</h3>
-            <button className="close-btn" onClick={() => setIsOpen(false)}>×</button>
+            <button type="button" className="modal-close-btn" onClick={() => setIsOpen(false)}>×</button>
           </div>
 
           <form onSubmit={handleSubmit} className="feedback-panel-form">

@@ -84,7 +84,9 @@ export default function DiffTestModal({
       <div className="modal-content" onClick={e => e.stopPropagation()}>
         <div className="feedback-panel-header">
           <h3 style={{ margin: 0 }}>{t('diffTest.title')}</h3>
-          <button className="close-btn" onClick={onClose}>×</button>
+          <button type="button" className="modal-close-btn" onClick={onClose} aria-label={t('sentenceEdit.cancel')}>
+            ×
+          </button>
         </div>
 
         <div className="card" style={{ boxShadow: 'none', padding: 10 }}>

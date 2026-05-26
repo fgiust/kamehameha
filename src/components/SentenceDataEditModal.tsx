@@ -134,7 +134,7 @@ export default function SentenceDataEditModal({
       <div className="modal-content sentence-edit-modal" onClick={e => e.stopPropagation()}>
         <button
           type="button"
-          className="close-btn sentence-edit-close"
+          className="modal-close-btn sentence-edit-close"
           onClick={onClose}
           aria-label={t('sentenceEdit.cancel')}
         >
@@ -227,11 +227,14 @@ export default function SentenceDataEditModal({
           {saveError && <p className="sentence-edit-error">{saveError}</p>}
 
           <div className="sentence-edit-actions">
-            <button type="button" onClick={onClose} disabled={saving}>
-              {t('sentenceEdit.cancel')}
-            </button>
-            <button type="button" className="sentence-edit-save" onClick={handleSave} disabled={!canSave}>
-              {saving ? t('sentenceEdit.saving') : t('sentenceEdit.save')}
+            <button type="button" className="sentence-edit-save" onClick={handleSave} disabled={!canSave || saving}>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
+                />
+              </svg>
+              <span>{saving ? t('sentenceEdit.saving') : t('sentenceEdit.save')}</span>
             </button>
           </div>
         </div>
