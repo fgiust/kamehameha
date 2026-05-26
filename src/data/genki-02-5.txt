@@ -31,7 +31,7 @@ Anche quel libro è mio.
 
 Those sunglasses are nice, too.
 Anche quegli occhiali da sole sono belli.
-そのサングラスもいい{です|だ}
+そのサングラスも{いい|綺麗[きれい]}{です|だ}
 
 I like cats as well
 A me piacciono anche i gatti
