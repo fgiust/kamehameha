@@ -887,6 +887,11 @@ a:hover { color: var(--accent-hover); }
   transform: translateY(-1px);
 }
 
+.exercise-completed-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 @keyframes exercise-completed-glow {
   0% {
     transform: translateY(0) scale(1);

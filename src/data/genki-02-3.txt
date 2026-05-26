@@ -3,7 +3,7 @@
 
 Excuse me, where is the restroom?
 Mi scusi, dov'è il bagno?
-{すみません、|}トイレはどこですか
+すみません{、|}トイレはどこですか
 
 The university is here.
 L'università è qui.
