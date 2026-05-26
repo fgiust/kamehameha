@@ -15,11 +15,11 @@ Quella bicicletta (laggiù) è costosa.
 
 Which wallet is 5,000 yen?
 Quale portafoglio costa 5.000 yen?
-どの財布[さいふ]が{五千円[ごせんえん]|5000円[ごせんえん]}ですか
+どの{財布[さいふ]|サイフ}が{五千円[ごせんえん]|5000円[ごせんえん]}ですか
 
 This fish is delicious.
 Questo pesce è delizioso.
-この魚[さかな]はおいしいです
+この魚[さかな]は美味[おい]しいです
 
 That dictionary is 4,000 yen.
 Quel dizionario costa 4.000 yen.

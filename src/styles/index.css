@@ -252,6 +252,49 @@ a:hover { color: var(--accent-hover); }
   gap: 6px;
 }
 
+.exercise-input-row {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.exercise-input-row .exercise-input {
+  width: 100%;
+  max-width: none;
+  display: block;
+}
+
+.sentence-edit-pen-btn {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.sentence-edit-pen-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-card));
+}
+
+.sentence-edit-pen-btn--finished {
+  position: static;
+  transform: none;
+  margin: 0 auto 12px;
+}
+
 .keyboard-tip {
   width: 100%;
   max-width: 500px;
@@ -1379,63 +1422,77 @@ body.dark .home-mini-progress-cell.is-incorrect {
   animation: modal-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.sentence-edit-link {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: 13px;
-  color: var(--text-secondary);
-  text-decoration: underline;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  font-family: inherit;
+.sentence-edit-modal {
+  position: relative;
+  text-align: center;
+  max-width: 720px;
 }
 
-.sentence-edit-link:hover {
-  color: var(--text);
+.sentence-edit-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
 }
 
-.sentence-edit-link--toolbar {
-  margin: 0 0 12px;
-  display: block;
+.sentence-edit-title {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
 }
 
 .sentence-edit-modal .sentence-edit-file-hint {
-  margin: 0 0 12px;
+  margin: 0 0 20px;
   font-size: 13px;
   color: var(--text-secondary);
+}
+
+.sentence-edit-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .sentence-edit-fields {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 14px;
-}
-
-.sentence-edit-label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
   width: 100%;
 }
 
-.sentence-edit-label > span {
-  font-size: 14px;
-  font-weight: 600;
+.sentence-edit-answer-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sentence-edit-test-block {
+  width: 100%;
+}
+
+.sentence-edit-test-block .exercise-input {
+  max-width: none;
+  width: 100%;
 }
 
 .sentence-edit-textarea {
   width: 100%;
+  max-width: none;
   box-sizing: border-box;
   resize: vertical;
   min-height: 2.5em;
-  font-family: inherit;
+  text-align: center;
 }
 
 .sentence-edit-answer {
-  font-family: ui-monospace, 'Cascadia Code', monospace;
-  font-size: 15px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 22px;
+}
+
+.sentence-edit-diff {
+  width: 100%;
+  margin-top: 16px;
 }
 
 .answer-template-validation {
@@ -1449,9 +1506,17 @@ body.dark .home-mini-progress-cell.is-incorrect {
   margin: 2px 0;
 }
 
+.sentence-edit-answer-block .answer-template-preview {
+  width: 100%;
+}
+
+/* Answer preview slot: fixed height — avoid layout shift when toggling valid/errors/empty (no CLS). */
 .answer-template-preview {
+  --answer-preview-slot-min-h: 4.5rem;
   margin-top: 8px;
   padding: 14px 16px;
+  min-height: var(--answer-preview-slot-min-h);
+  box-sizing: border-box;
   background: color-mix(in srgb, var(--border) 40%, var(--bg-card));
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -1461,25 +1526,36 @@ body.dark .home-mini-progress-cell.is-incorrect {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
+  align-content: center;
   gap: 0;
+  overflow: hidden;
 }
 
 .answer-template-preview.is-invalid {
-  text-align: left;
-  line-height: 1.5;
-  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 12px;
 }
 
 .answer-template-preview-errors {
   margin: 0;
-  padding-left: 1.2em;
+  padding: 0;
   color: var(--incorrect);
-  list-style: disc;
+  list-style: none;
+  line-height: 1.2;
+  max-height: calc(1.2em * 2);
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
 }
 
 .answer-template-preview-errors li {
-  margin: 4px 0;
+  margin: 0;
+  padding: 0;
 }
 
 .answer-template-alt-group {
@@ -1535,13 +1611,16 @@ body.dark .home-mini-progress-cell.is-incorrect {
   color: var(--incorrect);
   font-size: 14px;
   margin: 12px 0 0;
+  text-align: center;
+  width: 100%;
 }
 
 .sentence-edit-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
   margin-top: 16px;
+  width: 100%;
 }
 
 .sentence-edit-actions button {

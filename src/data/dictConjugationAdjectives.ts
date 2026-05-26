@@ -48,7 +48,7 @@ const adjectives: ConjugationWord[] = [
   { japanese: "優[やさ]しい", en: "gentle, kind", it: "gentile, premuroso", type: "i" },
   { japanese: "酸[す]っぱい", en: "sour", it: "aspro", type: "i" },
   { japanese: "小[ちい]さい", en: "small", it: "piccolo", type: "i" },
-  { japanese: "おいしい", en: "tasty", it: "buono, gustoso", type: "i" },
+  { japanese: "美味[おい]しい", en: "tasty", it: "buono, gustoso", type: "i" },
   { japanese: "低[ひく]い", en: "low, short", it: "basso", type: "i" },
   { japanese: "悲[かな]しい", en: "sad", it: "triste", type: "i" },
   { japanese: "美[うつく]しい", en: "beautiful", it: "bello", type: "i" },

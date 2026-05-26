@@ -322,13 +322,20 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}
-          {canEditSentenceData && dataLessonId && currentItem && (
+          {isFinished && canEditSentenceData && dataLessonId && (
             <button
               type="button"
-              className="sentence-edit-link sentence-edit-link--toolbar"
+              className="sentence-edit-pen-btn sentence-edit-pen-btn--finished"
               onClick={() => setEditModalOpen(true)}
+              aria-label={t('sentenceExercise.editData')}
+              title={t('sentenceExercise.editData')}
             >
-              {t('sentenceExercise.editData')}
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92 2.83H5v-.92l9.06-9.06.92.92L5.92 20.08zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"
+                />
+              </svg>
             </button>
           )}
           {!isFinished && (
@@ -344,10 +351,11 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
                 )}
               </div>
               <div className="exercise-input-block">
-                <input
-                  ref={inputRef}
-                  className={`exercise-input ${inputState}`}
-                  value={userInput}
+                <div className="exercise-input-row">
+                  <input
+                    ref={inputRef}
+                    className={`exercise-input ${inputState}`}
+                    value={userInput}
                   onChange={e => {
                     if (awaitingNext) return;
                     const raw = e.target.value;
@@ -419,7 +427,24 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
                   autoCapitalize="none"
                   autoComplete="off"
                   spellCheck={false}
-                />
+                  />
+                  {canEditSentenceData && dataLessonId && (
+                    <button
+                      type="button"
+                      className="sentence-edit-pen-btn"
+                      onClick={() => setEditModalOpen(true)}
+                      aria-label={t('sentenceExercise.editData')}
+                      title={t('sentenceExercise.editData')}
+                    >
+                      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path
+                          fill="currentColor"
+                          d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zm2.92 2.83H5v-.92l9.06-9.06.92.92L5.92 20.08zM20.71 7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                </div>
                 <KeyboardTip preferred="japanese" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>
               {diffNode}

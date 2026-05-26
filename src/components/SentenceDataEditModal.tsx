@@ -132,39 +132,35 @@ export default function SentenceDataEditModal({
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content sentence-edit-modal" onClick={e => e.stopPropagation()}>
-        <div className="feedback-panel-header">
-          <h3 style={{ margin: 0 }}>{t('sentenceEdit.title')}</h3>
-          <button type="button" className="close-btn" onClick={onClose} aria-label={t('sentenceEdit.cancel')}>
-            ×
-          </button>
-        </div>
+        <button
+          type="button"
+          className="close-btn sentence-edit-close"
+          onClick={onClose}
+          aria-label={t('sentenceEdit.cancel')}
+        >
+          ×
+        </button>
 
-        <div className="card" style={{ boxShadow: 'none', padding: 10 }}>
-          <p className="sentence-edit-file-hint">
-            {t('sentenceEdit.fileHint', { file: fileName ?? '', index: blockIndex + 1 })}
-          </p>
+        <h3 className="sentence-edit-title">{t('sentenceEdit.title')}</h3>
+        <p className="sentence-edit-file-hint">
+          {t('sentenceEdit.fileHint', { file: fileName ?? '', index: blockIndex + 1 })}
+        </p>
 
+        <div className="sentence-edit-body">
           <div className="sentence-edit-fields">
-            <label className="sentence-edit-label">
-              <span>{t('common.english')}</span>
-              <textarea
-                className="exercise-input sentence-edit-textarea"
-                value={english}
-                onChange={e => setEnglish(e.target.value)}
-                rows={2}
-              />
-            </label>
-            <label className="sentence-edit-label">
-              <span>{t('common.italian')}</span>
-              <textarea
-                className="exercise-input sentence-edit-textarea"
-                value={italian}
-                onChange={e => setItalian(e.target.value)}
-                rows={2}
-              />
-            </label>
-            <label className="sentence-edit-label">
-              <span>{t('sentenceEdit.answer')}</span>
+            <textarea
+              className="exercise-input sentence-edit-textarea"
+              value={english}
+              onChange={e => setEnglish(e.target.value)}
+              rows={2}
+            />
+            <textarea
+              className="exercise-input sentence-edit-textarea"
+              value={italian}
+              onChange={e => setItalian(e.target.value)}
+              rows={2}
+            />
+            <div className="sentence-edit-answer-block">
               <textarea
                 className="exercise-input sentence-edit-textarea sentence-edit-answer"
                 value={answer}
@@ -173,56 +169,52 @@ export default function SentenceDataEditModal({
                 spellCheck={false}
               />
               <AnswerTemplatePreview template={answer} />
-            </label>
-            <label className="sentence-edit-label">
-              <span>{t('diffTest.userInput')}</span>
-              <div className="exercise-input-block" style={{ width: '100%' }}>
-                <input
-                  ref={userInputRef}
-                  className="exercise-input"
-                  value={testUser}
-                  onChange={e => {
-                    const raw = e.target.value;
-                    setRawUser(raw);
-                    const composing =
-                      isComposingRef.current ||
-                      (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
-                    if (composing) {
-                      setDidConvert(false);
-                      setIsComposing(true);
-                      setTestUser(raw);
-                      return;
-                    }
-                    setIsComposing(false);
-                    const didConvertNow = didConvertFromLatin(raw);
-                    setDidConvert(didConvertNow);
-                    const caret = e.target.selectionStart;
-                    const converted = toHiraganaIME(raw);
-                    if (caret !== null) {
-                      pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
-                    }
-                    setTestUser(converted);
-                  }}
-                  onCompositionStart={() => {
-                    isComposingRef.current = true;
+            </div>
+            <div className="exercise-input-block sentence-edit-test-block">
+              <input
+                ref={userInputRef}
+                className="exercise-input"
+                value={testUser}
+                onChange={e => {
+                  const raw = e.target.value;
+                  setRawUser(raw);
+                  const composing =
+                    isComposingRef.current ||
+                    (e.nativeEvent as unknown as { isComposing?: boolean }).isComposing;
+                  if (composing) {
+                    setDidConvert(false);
                     setIsComposing(true);
-                  }}
-                  onCompositionEnd={() => {
-                    isComposingRef.current = false;
-                    setIsComposing(false);
-                  }}
-                  style={{ width: '100%', boxSizing: 'border-box' }}
-                  autoCorrect="off"
-                  autoCapitalize="none"
-                  autoComplete="off"
-                  spellCheck={false}
-                />
-                <KeyboardTip preferred="japanese" rawValue={rawUser} isComposing={isComposing} didConvert={didConvert} />
-              </div>
-            </label>
+                    setTestUser(raw);
+                    return;
+                  }
+                  setIsComposing(false);
+                  const didConvertNow = didConvertFromLatin(raw);
+                  setDidConvert(didConvertNow);
+                  const caret = e.target.selectionStart;
+                  const converted = toHiraganaIME(raw);
+                  if (caret !== null) {
+                    pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
+                  }
+                  setTestUser(converted);
+                }}
+                onCompositionStart={() => {
+                  isComposingRef.current = true;
+                  setIsComposing(true);
+                }}
+                onCompositionEnd={() => {
+                  isComposingRef.current = false;
+                  setIsComposing(false);
+                }}
+                autoCorrect="off"
+                autoCapitalize="none"
+                autoComplete="off"
+                spellCheck={false}
+              />
+              <KeyboardTip preferred="japanese" rawValue={rawUser} isComposing={isComposing} didConvert={didConvert} />
+            </div>
           </div>
 
-          <DiffDisplay ops={ops} className="diff-answer" style={{ marginTop: 16 }} />
+          <DiffDisplay ops={ops} className="diff-answer sentence-edit-diff" />
 
           <div
             className="sentence-edit-diff-result"
