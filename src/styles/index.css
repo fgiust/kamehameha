@@ -289,12 +289,6 @@ a:hover { color: var(--accent-hover); }
   background: color-mix(in srgb, var(--accent) 8%, var(--bg-card));
 }
 
-.sentence-edit-pen-btn--finished {
-  position: static;
-  transform: none;
-  margin: 0 auto 12px;
-}
-
 .keyboard-tip {
   width: 100%;
   max-width: 500px;
