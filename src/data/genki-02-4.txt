@@ -3,39 +3,39 @@
 
 Whose bag is this?
 Di chi è questa borsa?
-これは誰[だれ]の{カバン|鞄[かばん]}ですか
+{これは誰[だれ]のカバン|これは誰[だれ]の鞄[かばん]|このカバンは誰[だれ]の|この鞄[かばん]は誰[だれ]の}ですか
 
 Whose umbrella is that?
 Di chi è quell'ombrello?
-それは誰[だれ]の傘[かさ]ですか
+{それは誰[だれ]の傘[かさ]|その傘[かさ]は誰[だれ]の}ですか
 
 Whose bicycle is that (over there)?
 Di chi è quella bicicletta (laggiù)?
-あれは誰[だれ]の自転車[じてんしゃ]ですか
+{あれは誰[だれ]の自転車[じてんしゃ]|あの自転車[じてんしゃ]は誰[だれ]の}ですか
 
 Whose wallet is this?
 Di chi è questo portafoglio?
-これは誰[だれ]の財布[さいふ]ですか
+{これは誰[だれ]の財布[さいふ]|この財布[さいふ]は誰[だれ]の}ですか
 
 Whose shoes are these?
 Di chi sono queste scarpe?
-これは誰[だれ]の靴[くつ]ですか
+{これは誰[だれ]の靴[くつ]|この靴[くつ]は誰[だれ]の}ですか
 
 Whose dictionary is that?
 Di chi è quel dizionario?
-それは誰[だれ]の辞書[じしょ]ですか
+{それは誰[だれ]の辞書[じしょ]|その辞書[じしょ]は誰[だれ]の}ですか
 
 Whose hat is that (over there)?
 Di chi è quel cappello (laggiù)?
-あれは誰[だれ]の帽子[ぼうし]ですか
+{あれは誰[だれ]の帽子[ぼうし]|あの帽子[ぼうし]は誰[だれ]の}ですか
 
 Whose watch is this?
 Di chi è questo orologio?
-これは誰[だれ]の時計[とけい]ですか
+{これは誰[だれ]の時計[とけい]|この時計[とけい]は誰[だれ]の}ですか
 
 Whose notebook is that?
 Di chi è quel quaderno?
-それは誰[だれ]のノートですか
+{それは誰[だれ]のノート|そのノートは誰[だれ]の}ですか
 
 Whose book is this?
 Di chi è questo libro?

@@ -161,8 +161,8 @@ export const homeConfig: HomeConfig = {
       items: [
         { id: 'genki2-1' },
         { id: 'genki2-2' },
-        { id: 'genki2-3', beta: true },
-        { id: 'genki2-4', beta: true },
+        { id: 'genki2-3' },
+        { id: 'genki2-4' },
         { id: 'genki2-5', beta: true },
         { id: 'genki2-6', beta: true },
         { id: 'genki2-7', beta: true },
