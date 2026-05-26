@@ -60,7 +60,7 @@ const en = {
       teForm: 'Te-form',
       pastShortFormsVerbs: 'Past Tense Short Forms (Verbs)',
       pastShortFormsAdjectives: 'Past Tense Short Forms (Adjectives)',
-      adjectiveNaru: 'Adjective + なる',
+      adjectiveNaru: 'なる Form (adjectives)',
       potentialVerbs: 'Potential Verbs',
     },
   },
