@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import {
   validateAnswerTemplate,
   type AnswerTemplateIssue,
-} from '../utils/answerTemplateValidation';
+} from 'tenshindiff/validate';
 
 interface Props {
   value: string;

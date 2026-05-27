@@ -5,7 +5,7 @@ import {
   buildExerciseFingerprint,
   clearExerciseSessionDraft,
 } from '../utils/exerciseSessionDraft';
-import { stripRuby } from '../engines/sentenceEngine';
+import { stripRuby } from 'tenshindiff';
 import { toHiragana } from 'wanakana';
 import { transitiveData, VerbPair } from '../data/dictTransitivePairs';
 import SessionProgressBar from '../components/SessionProgressBar';

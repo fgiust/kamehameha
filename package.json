@@ -3,16 +3,20 @@
   "private": true,
   "version": "1.3.0",
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "npm run validate:data && vitest run && tsc -b && vite build",
+    "build": "npm run build -w tenshindiff && npm run validate:data && vitest run && tsc -b && vite build",
     "validate:data": "node scripts/validate-genki-data.mjs",
     "test": "vitest run",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "tenshindiff": "workspace:*",
     "@vercel/analytics": "2.0.1",
     "@vercel/kv": "3.0.0",
     "@vercel/speed-insights": "2.0.0",

@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
   hasAnswerTemplateIssues,
   validateAnswerTemplate,
-} from '../../src/utils/answerTemplateValidation';
+} from 'tenshindiff/validate';
 import { parseTranslateSessionTxt } from '../../src/lessons/parseTranslateSessionTxt';
 
 const dataDir = join(import.meta.dirname, '../../src/data');

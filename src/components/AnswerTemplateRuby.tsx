@@ -1,4 +1,4 @@
-import { parseRubyUnits } from '../engines/sentenceEngine';
+import { parseRubyUnits } from 'tenshindiff';
 
 /** Renders bracket ruby notation (surface[reading]) with furigana above kanji. */
 export default function AnswerTemplateRuby({ text }: { text: string }) {

@@ -20,7 +20,12 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "paths": {
+      "tenshindiff": ["./packages/tenshindiff/src/index.ts"],
+      "tenshindiff/validate": ["./packages/tenshindiff/src/validate/index.ts"],
+      "tenshindiff/react": ["./packages/tenshindiff/src/react/index.ts"]
+    }
   },
   "include": ["src", "test"]
 }

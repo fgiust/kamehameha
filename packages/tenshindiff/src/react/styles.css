@@ -1,0 +1,56 @@
+/* tenshindiff — diff display (import tenshindiff/styles.css or tenshindiff/react/styles.css) */
+.diff-display {
+  font-size: 22px;
+  font-family: 'Noto Sans JP', sans-serif;
+  min-height: 32px;
+  display: block;
+  text-align: center;
+}
+
+.diff-char {
+  padding: 2px 1px;
+  border-radius: 3px;
+}
+
+.diff-correct {
+  color: var(--correct, #4ade80);
+  background: transparent;
+}
+
+.diff-wrong {
+  color: var(--incorrect, #f87171);
+  background: transparent;
+  text-decoration: underline;
+}
+
+.diff-missing {
+  color: var(--text, #e2e8f0);
+  background: transparent;
+}
+
+.diff-deleted {
+  color: var(--incorrect, #f87171);
+  background: transparent;
+  text-decoration: line-through;
+}
+
+.diff-kanji-kana {
+  color: var(--tenshin-kanji-kana, #d1a900);
+}
+
+.diff-answer ruby {
+  margin: 0 1px;
+}
+
+.diff-ruby {
+  margin: 0 1px;
+}
+
+.diff-answer ruby rt {
+  font-size: 0.6em;
+  line-height: 1;
+}
+
+.diff-rt {
+  padding: 0 0.5px;
+}

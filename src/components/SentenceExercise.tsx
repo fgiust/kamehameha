@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer } from '../types';
-import { DiffUnitOp, diffSentenceAnswer, generateAnswers, parseAnswerTemplate, matchesByRubyUnits, stripRuby, pickBestDiff } from '../engines/sentenceEngine';
+import type { DiffUnitOp } from 'tenshindiff';
+import { diffSentenceAnswer, generateAnswers, parseAnswerTemplate, matchesByRubyUnits, stripRuby, pickBestDiff } from 'tenshindiff';
 import DiffDisplay from './DiffDisplay';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';

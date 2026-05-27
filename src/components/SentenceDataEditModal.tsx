@@ -5,7 +5,7 @@ import {
   parseAnswerTemplate,
   pickBestDiff,
   primarySurfaceFromTemplate,
-} from '../engines/sentenceEngine';
+} from 'tenshindiff';
 import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
 import type { SentenceItem } from '../types';

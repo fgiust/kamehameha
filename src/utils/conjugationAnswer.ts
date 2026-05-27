@@ -1,4 +1,4 @@
-import { matchesByRubyUnits, parseRubyUnits, type RubyUnit } from '../engines/sentenceEngine';
+import { matchesByRubyUnits, parseRubyUnits, type RubyUnit } from 'tenshindiff';
 
 function isPlausibleConjugationStem(kanaStem: string, dictKana: string): boolean {
   if (kanaStem.length === 0) return false;

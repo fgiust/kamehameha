@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { parseAnswerTemplate } from '../engines/sentenceEngine';
-import { validateAnswerTemplate } from '../utils/answerTemplateValidation';
+import { parseAnswerTemplate } from 'tenshindiff';
+import { validateAnswerTemplate } from 'tenshindiff/validate';
 import AnswerTemplateRuby from './AnswerTemplateRuby';
 
 interface Props {

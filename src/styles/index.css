@@ -360,46 +360,6 @@ a:hover { color: var(--accent-hover); }
   color: var(--incorrect);
 }
 
-/* Diff display */
-.diff-display {
-  font-size: 22px;
-  font-family: 'Noto Sans JP', sans-serif;
-  min-height: 32px;
-  display: block;
-  text-align: center;
-}
-.diff-char { padding: 2px 1px; border-radius: 3px; }
-.diff-correct { color: var(--correct); background: transparent; }
-.diff-wrong { color: var(--incorrect); background: transparent; text-decoration: underline; }
-.diff-missing { color: var(--text); background: transparent; }
-
-.diff-deleted {
-  color: var(--incorrect);
-  background: transparent;
-  text-decoration: line-through;
-}
-
-.diff-kanji-kana {
-  color: #d1a900;
-}
-
-.diff-answer ruby {
-  margin: 0 1px;
-}
-
-.diff-ruby {
-  margin: 0 1px;
-}
-
-.diff-answer ruby rt {
-  font-size: 0.6em;
-  line-height: 1;
-}
-
-.diff-rt {
-  padding: 0 0.5px;
-}
-
 .page-header {
   display: flex;
   align-items: center;

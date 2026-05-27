@@ -130,10 +130,20 @@ function genkiTxtPlugin(): Plugin {
   }
 }
 
+const tenshinRoot = path.resolve(__dirname, 'packages/tenshindiff');
+
 // https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: [
+      { find: 'tenshindiff/validate', replacement: path.resolve(tenshinRoot, 'src/validate/index.ts') },
+      { find: 'tenshindiff/react', replacement: path.resolve(tenshinRoot, 'src/react/index.ts') },
+      { find: 'tenshindiff/styles.css', replacement: path.resolve(tenshinRoot, 'src/react/styles.css') },
+      { find: 'tenshindiff', replacement: path.resolve(tenshinRoot, 'src/index.ts') },
+    ],
+  },
   test: {
-    include: ['test/**/*.test.ts'],
+    include: ['test/**/*.test.ts', 'packages/tenshindiff/test/**/*.test.ts'],
   },
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { parseRubyUnits } from '../engines/sentenceEngine';
+import { parseRubyUnits } from 'tenshindiff';
 import { plainCopyFromRubyHtml, plainCopyFromRubyNotation } from '../utils/copyText';
 import CopyablePlainText from './CopyablePlainText';
 

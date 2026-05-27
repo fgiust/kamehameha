@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
   findInvalidRubyNotations,
   formatInvalidRubyNotation,
-} from '../../src/utils/rubyNotation';
+} from 'tenshindiff/validate';
 
 const dataDir = join(import.meta.dirname, '../../src/data');
 

@@ -1,8 +1,8 @@
 // @vitest-environment happy-dom
 import { describe, expect, it } from 'vitest';
-import type { DiffUnitOp } from '../../src/engines/sentenceEngine';
+import type { DiffUnitOp } from 'tenshindiff';
+import { formatDiffPlainText } from 'tenshindiff';
 import {
-  plainCopyFromDiffOps,
   plainCopyFromDomRange,
   plainCopyFromRubyHtml,
   plainCopyFromRubyNotation,
@@ -33,7 +33,7 @@ describe('copyText', () => {
       { kind: 'extra', text: 'あ' },
       { kind: 'unit', unit: { kind: 'ruby', surface: 'アニメ', reading: 'あにめ' }, status: 'missing' },
     ];
-    expect(plainCopyFromDiffOps(ops)).toBe('た_あ_アニメ[あにめ]');
+    expect(formatDiffPlainText(ops)).toBe('た_あ_アニメ[あにめ]');
   });
 
   it('copies full plain text when the whole container is selected', () => {
