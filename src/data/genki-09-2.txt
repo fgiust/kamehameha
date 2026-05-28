@@ -39,4 +39,4 @@ Questa è la torta che Woody ha preparato.
 
 That is the postcard I sent.
 Quella è la cartolina che ho spedito.
-あれは{私[わたし]が|}送[おく]ったはがきです
+あれは{私[わたし]が|}送[おく]った{はがき|ポストカード}です

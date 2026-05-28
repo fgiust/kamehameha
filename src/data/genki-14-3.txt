@@ -3,7 +3,7 @@
 
 I will give Takeshi a book.
 Darò un libro a Takeshi.
-たけしさんに本[ほん]をあげます
+{|私[わたし]は}たけしさんに本[ほん]をあげます
 
 Mary gave Ken a ticket.
 Mary ha dato un biglietto a Ken.
@@ -15,15 +15,15 @@ Un amico potrebbe darmi una mappa.
 
 I gave my older sister some candy.
 Ho dato delle caramelle a mia sorella maggiore.
-{姉[あね]|お姉[ねえ]さん}に{キャンディ|飴[あめ]}をあげました
+{|私[わたし]は}{姉[あね]|お姉[ねえ]さん}に{飴[あめ]|キャンディ|菓子[かし]|お菓子[かし]}をあげました
 
 I will give the teacher flowers.
 Darò dei fiori all'insegnante.
-先生[せんせい]に花[はな]をあげます
+{|私[わたし]は}先生[せんせい]に花[はな]をあげます
 
 Pedro gave me a postcard.
 Pedro mi ha dato una cartolina.
-ペドロさんは{私[わたし]に|}はがきをくれました
+ペドロさんは{私[わたし]に|}{はがき|ポストカード}をくれました
 
 My father gave me a new bag.
 Mio padre mi ha dato una borsa nuova.
@@ -31,11 +31,11 @@ Mio padre mi ha dato una borsa nuova.
 
 Sora gave me a CD.
 Sora mi ha dato un CD.
-ソラさんは{私[わたし]に|}CDをくれました
+ソラさんは{私[わたし]に|}{CD|cd}をくれました
 
 I received candy from my older sister.
 Ho ricevuto delle caramelle da mia sorella maggiore.
-{姉[あね]|お姉[ねえ]さん}に{キャンディ|飴[あめ]}をもらいました
+{|私[わたし]は}{姉[あね]|お姉[ねえ]さん}に{キャンディ|飴[あめ]}をもらいました
 
 I received a map from my friend.
 Ho ricevuto una mappa dal mio amico.
