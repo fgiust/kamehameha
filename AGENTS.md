@@ -1,0 +1,28 @@
+# AGENTS.md
+
+## Cursor Cloud specific instructions
+
+### Overview
+kamehameha! is a Japanese language learning SPA (React + Vite + TypeScript). No external services are needed for local development — the feedback API is mocked locally by writing to a file.
+
+### Commands
+Standard commands are in `package.json`:
+- `npm run dev` — Vite dev server on port 5173 (includes TypeScript checker overlay)
+- `npm run test` — Vitest (70 tests, all pass)
+- `npm run lint` — ESLint (flat config, has pre-existing warnings)
+- `npm run build` — validates data + tests + type-check + production build
+- `npm run validate:data` — checks Genki `.txt` exercise files for structure errors
+
+### Dev server notes
+- The Vite dev server runs with `vite-plugin-checker` which shows TypeScript errors in both the terminal and browser overlay.
+- Romaji-to-hiragana conversion in the browser requires no OS-level IME; it's handled by `wanakana` in-app.
+- The feedback endpoint is mocked locally (appends to `feedback.txt` in the project root) — no Vercel KV credentials needed.
+
+### Environment variables
+No environment variables are required for local dev. Production-only vars (`KV_REST_API_URL`, `KV_REST_API_TOKEN`, `RESEND_API_KEY`, etc.) are only needed for deployed API routes.
+
+### Lint
+ESLint exits with code 1 due to pre-existing issues (13 react-hooks warnings + 1 `no-useless-escape` error in `src/utils/rubyNotation.ts`). These are not blockers for development.
+
+### Data files
+Exercise data lives in `src/data/` as `.txt` files. After editing any `genki-*.txt` or `sentence-*.txt` file, run `npm run validate:data` to verify structure (3-line blocks, no starred prompts, 10 exercises per Genki file).
