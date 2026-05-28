@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import {
+  type DiffUnitOp,
   generateAnswers,
   matchesByRubyUnits,
   parseAnswerTemplate,
@@ -8,9 +9,38 @@ import {
 } from 'tenshindiff';
 import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
+import { useDebugMode } from '../hooks/useDebugMode';
 import KeyboardTip from './KeyboardTip';
 import DiffDisplay from './DiffDisplay';
 import AnswerTemplatePreview from './AnswerTemplatePreview';
+
+function shownOutputFromOps(ops: DiffUnitOp[]): string {
+  return ops
+    .map(op => {
+      if (op.kind === 'extra') return op.text;
+      if (op.unit.kind === 'plain') return op.unit.surface;
+      return `${op.unit.surface}[${op.unit.reading}]`;
+    })
+    .join('');
+}
+
+function validationRowFromOps(ops: DiffUnitOp[], isCorrect: boolean): string {
+  const chunks = ops.map(op => {
+    if (op.kind === 'extra') {
+      return '＋'.repeat(Array.from(op.text).length);
+    }
+
+    const marker = op.status === 'correct_kanji' ? '・' : op.status === 'correct_kana' ? '＝' : 'ー';
+    const surface = marker.repeat(Array.from(op.unit.surface).length);
+    if (op.unit.kind === 'plain') return surface;
+
+    const readingMarker = op.status === 'missing' ? 'ー' : '・';
+    const reading = readingMarker.repeat(Array.from(op.unit.reading).length);
+    return `${surface}[${reading}]`;
+  });
+
+  return `${chunks.join('')}${isCorrect ? '✅' : '❌'}`;
+}
 
 export default function DiffTestModal({
   isOpen,
@@ -24,11 +54,13 @@ export default function DiffTestModal({
   initialUser?: string;
 }) {
   const { t } = useTranslation();
+  const debugMode = useDebugMode();
   const [correct, setCorrect] = useState(initialCorrect);
   const [user, setUser] = useState(initialUser);
   const [rawUser, setRawUser] = useState(initialUser);
   const [isComposing, setIsComposing] = useState(false);
   const [didConvert, setDidConvert] = useState(false);
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
 
   const userInputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
@@ -42,6 +74,7 @@ export default function DiffTestModal({
       setRawUser(preloaded);
       setIsComposing(false);
       setDidConvert(false);
+      setCopyState('idle');
       isComposingRef.current = false;
       pendingCaretRef.current = null;
     }
@@ -67,8 +100,35 @@ export default function DiffTestModal({
   if (!isOpen) return null;
 
   const parsedAlternatives = generateAnswers(parseAnswerTemplate(correct));
-  const { ops } = pickBestDiff(user, parsedAlternatives);
+  const { bestAnswer, ops } = pickBestDiff(user, parsedAlternatives);
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(user.trim(), a));
+  const shownOutput = shownOutputFromOps(ops);
+  const validationRow = validationRowFromOps(ops, isCorrect);
+
+  const testCaseText = ['#', bestAnswer, user, shownOutput, validationRow].join('\n');
+
+  const copyAsTestcase = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(testCaseText);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = testCaseText;
+        ta.setAttribute('readonly', 'true');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      setCopyState('copied');
+      window.setTimeout(() => setCopyState('idle'), 1500);
+    } catch {
+      setCopyState('error');
+      window.setTimeout(() => setCopyState('idle'), 2000);
+    }
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -148,6 +208,30 @@ export default function DiffTestModal({
             className="diff-answer"
             style={{ padding: 20, background: '#2a2d3d', borderRadius: 8, marginTop: 20 }}
           />
+          {debugMode && (
+            <div style={{ marginTop: 6, textAlign: 'right' }}>
+              <button
+                type="button"
+                onClick={copyAsTestcase}
+                className="diff-test-link"
+                style={{ fontSize: 11, padding: 0, minHeight: 0 }}
+                title="Copy current diff as fulltests testcase"
+              >
+                copy as testcase
+              </button>
+              {copyState !== 'idle' && (
+                <span
+                  style={{
+                    marginLeft: 8,
+                    fontSize: 11,
+                    color: copyState === 'copied' ? 'var(--correct)' : 'var(--incorrect)',
+                  }}
+                >
+                  {copyState === 'copied' ? 'copied' : 'copy failed'}
+                </span>
+              )}
+            </div>
+          )}
 
           <div
             style={{
