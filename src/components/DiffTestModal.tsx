@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   type DiffUnitOp,
-  generateAnswers,
+  generateAnswersFromTemplate,
   matchesByRubyUnits,
-  parseAnswerTemplate,
   pickBestDiff,
   primarySurfaceFromTemplate,
 } from 'tenshindiff';
+import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
 import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
 import { useDebugMode } from '../hooks/useDebugMode';
@@ -69,7 +69,7 @@ export default function DiffTestModal({
   useEffect(() => {
     if (isOpen) {
       setCorrect(initialCorrect);
-      const preloaded = initialUser.trim() || primarySurfaceFromTemplate(initialCorrect);
+      const preloaded = initialUser.trim() || primarySurfaceFromTemplate(initialCorrect, SENTENCE_DIFF_OPTIONS);
       setUser(preloaded);
       setRawUser(preloaded);
       setIsComposing(false);
@@ -99,7 +99,7 @@ export default function DiffTestModal({
 
   if (!isOpen) return null;
 
-  const parsedAlternatives = generateAnswers(parseAnswerTemplate(correct));
+  const parsedAlternatives = generateAnswersFromTemplate(correct, SENTENCE_DIFF_OPTIONS);
   const { bestAnswer, ops } = pickBestDiff(user, parsedAlternatives);
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(user.trim(), a));
   const shownOutput = shownOutputFromOps(ops);

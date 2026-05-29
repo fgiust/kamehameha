@@ -1,7 +1,9 @@
 import { pickBestDiff } from './diff';
+import { generateAnswersFromTemplate } from './answers';
 import { renderDiffHtml } from './render';
 import { matchesByRubyUnits } from './ruby';
-import { generateAnswers, parseAnswerTemplate } from './template';
+import type { DiffOptions } from './options';
+import { DEFAULT_DIFF_OPTIONS } from './options';
 import type { DiffUnitOp } from './types';
 
 export type GradeAnswerResult = {
@@ -11,8 +13,12 @@ export type GradeAnswerResult = {
   html: string;
 };
 
-export function gradeAnswer(user: string, answerTemplate: string): GradeAnswerResult {
-  const alternatives = generateAnswers(parseAnswerTemplate(answerTemplate));
+export function gradeAnswer(
+  user: string,
+  answerTemplate: string,
+  options: DiffOptions = DEFAULT_DIFF_OPTIONS,
+): GradeAnswerResult {
+  const alternatives = generateAnswersFromTemplate(answerTemplate, options);
   const trimmed = user.trim();
   const isCorrect = alternatives.some(a => matchesByRubyUnits(trimmed, a));
   const { bestAnswer, ops } = pickBestDiff(trimmed, alternatives);

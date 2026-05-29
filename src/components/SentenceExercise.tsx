@@ -2,7 +2,8 @@ import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer } from '../types';
 import type { DiffUnitOp } from 'tenshindiff';
-import { diffSentenceAnswer, generateAnswers, parseAnswerTemplate, matchesByRubyUnits, stripRuby, pickBestDiff } from 'tenshindiff';
+import { diffSentenceAnswer, generateAnswersFromTemplate, matchesByRubyUnits, pickBestDiff, stripRuby } from 'tenshindiff';
+import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
 import DiffDisplay from './DiffDisplay';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
@@ -258,7 +259,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
     if (isFinished) return;
     if (!currentItem || !userInput.trim()) return;
     const normalized = finalizeIME(userInput.trim());
-    const rawAnswers = generateAnswers(parseAnswerTemplate(currentItem.answer));
+    const rawAnswers = generateAnswersFromTemplate(currentItem.answer, SENTENCE_DIFF_OPTIONS);
     const isCorrect = rawAnswers.some(a => matchesByRubyUnits(normalized, a));
     const { bestAnswer: displayAnswer, ops } = pickBestDiff(normalized, rawAnswers);
 

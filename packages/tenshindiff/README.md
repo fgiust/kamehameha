@@ -26,6 +26,29 @@ document.getElementById('feedback')!.innerHTML = html;
 - **Alternatives:** `{です|だ}` — user may match any option.
 - **Optional segment:** `{私[わたし]は|}` — empty second option; primary shown when user fills the slot.
 
+## Diff options (`DiffOptions`)
+
+Pass an optional `options` object to `gradeAnswer`, `generateAnswersFromTemplate`, or `primarySurfaceFromTemplate`. **No flags are enabled by default.**
+
+```ts
+import { gradeAnswer, type DiffOptions } from 'tenshindiff';
+
+const options: DiffOptions = {
+  ignoreTrailingPunctuation: true,
+  commasAsOptional: true,
+};
+
+gradeAnswer(user, template, options);
+generateAnswersFromTemplate(template, options);
+```
+
+| Flag | Effect |
+|------|--------|
+| `ignoreTrailingPunctuation` | Equivalent to appending `{|。}`: the shorter answer (no `。`) is the default display target, but a user-added trailing `。` is accepted and shown as correct. |
+| `commasAsOptional` | Equivalent to wrapping every literal `、` as `{、|}`: commas in the template may be omitted or included. Existing `{、|}` groups are left unchanged. |
+
+Low-level helpers: `applyTemplateDiffOptions`, `applyIgnoreTrailingPunctuation`, `applyCommasAsOptional`.
+
 Validate templates in CI:
 
 ```ts
@@ -47,7 +70,8 @@ import 'tenshindiff/styles.css';
 
 | Export | Description |
 |--------|-------------|
-| `gradeAnswer(user, template)` | `{ isCorrect, bestAnswer, ops, html }` |
+| `gradeAnswer(user, template, options?)` | `{ isCorrect, bestAnswer, ops, html }` |
+| `generateAnswersFromTemplate(template, options?)` | All expanded answer strings |
 | `pickBestDiff`, `diffSentenceAnswer` | Low-level diff |
 | `matchesByRubyUnits` | Correctness check |
 | `renderDiffHtml(ops)` | HTML without React |

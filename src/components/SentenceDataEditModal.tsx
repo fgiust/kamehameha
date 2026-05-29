@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  generateAnswers,
+  generateAnswersFromTemplate,
   matchesByRubyUnits,
-  parseAnswerTemplate,
   pickBestDiff,
   primarySurfaceFromTemplate,
 } from 'tenshindiff';
+import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
 import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
 import type { SentenceItem } from '../types';
@@ -102,7 +102,7 @@ export default function SentenceDataEditModal({
 
   if (!isOpen) return null;
 
-  const parsedAlternatives = generateAnswers(parseAnswerTemplate(answer));
+  const parsedAlternatives = generateAnswersFromTemplate(answer, SENTENCE_DIFF_OPTIONS);
   const { ops } = pickBestDiff(testUser, parsedAlternatives);
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(testUser.trim(), a));
 

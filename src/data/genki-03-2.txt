@@ -11,7 +11,7 @@ Non bevo caffè.
 
 I will go to school tomorrow.
 Andrò a scuola domani.
-{私[わたし]は|}明日[あした]{、|}学校[がっこう]{に|へ}行[い]きます
+{私[わたし]は|}明日[あした]、学校[がっこう]{に|へ}行[い]きます
 
 Mr. Yamada doesn't watch TV.
 Il signor Yamada non guarda la TV.
@@ -23,7 +23,7 @@ Leggerò un libro di giapponese.
 
 Mary will not return home today.
 Mary non tornerà a casa oggi.
-{今日[きょう]|}メアリーさんは{|今日[きょう]}{、|}{|家[いえ]に|家[いえ]へ|うちに|うちへ|うちに|うちへ}帰[かえ]りません
+{今日[きょう]|}メアリーさんは{|今日[きょう]}、{|家[いえ]に|家[いえ]へ|うちに|うちへ|うちに|うちへ}帰[かえ]りません
 
 I get up at seven.
 Mi alzo alle sette.

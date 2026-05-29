@@ -7,7 +7,7 @@ Voglio un dizionario giapponese-inglese.
 
 When I was a child, I wanted a bicycle.
 Quando ero bambino, volevo una bicicletta.
-子供[こども]の時[とき]{は|}{、|}自転車[じてんしゃ]が{ほしかった|欲[ほ]しかった}です
+子供[こども]の時[とき]{は|}、自転車[じてんしゃ]が{ほしかった|欲[ほ]しかった}です
 
 I want expensive things.
 Voglio cose costose.

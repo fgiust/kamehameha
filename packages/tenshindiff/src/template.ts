@@ -1,4 +1,5 @@
 import { stripRuby } from './ruby';
+import { applyTemplateDiffOptions, type DiffOptions, DEFAULT_DIFF_OPTIONS } from './options';
 
 /** Parse answer template with {option1|option2} syntax into internal array format */
 export function parseAnswerTemplate(template: string): (string | string[])[] {
@@ -51,8 +52,12 @@ export function generateAnswers(parts: (string | string[])[]): string[] {
 }
 
 /** First-surface answer from a template (first {a|b} option, ruby readings stripped). */
-export function primarySurfaceFromTemplate(template: string): string {
-  const answers = generateAnswers(parseAnswerTemplate(template));
+export function primarySurfaceFromTemplate(
+  template: string,
+  options: DiffOptions = DEFAULT_DIFF_OPTIONS,
+): string {
+  const prepared = applyTemplateDiffOptions(template, options);
+  const answers = generateAnswers(parseAnswerTemplate(prepared));
   return stripRuby(answers[0] ?? template);
 }
 
