@@ -3,7 +3,7 @@
 
 Let's eat lunch at the cafeteria together.
 Pranziamo insieme alla mensa.
-一緒[いっしょ]に食堂[しょくどう]で昼[ひる]ご飯[はん]を食[た]べましょう
+一緒[いっしょ]に食堂[しょくどう]で{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べましょう
 
 Let's listen to music here.
 Ascoltiamo musica qui.

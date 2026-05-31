@@ -27,7 +27,7 @@ Perché sei arrivato in ritardo a lezione?
 
 Why didn't you eat lunch?
 Perché non hai pranzato?
-どうして昼[ひる]ご飯[はん]を食[た]べなかったんですか
+どうして{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べなかったんですか
 
 What happened?
 Che cosa è successo?

@@ -10,7 +10,7 @@ Non è necessario indossare una cravatta.
 
 Lunch doesn't have to be expensive.
 Il pranzo non deve essere costoso.
-昼[ひる]御[ご]飯[はん]は高[たか]くなくてもいいです
+{昼[ひる]御[ご]飯[はん]|昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}は高[たか]くなくてもいいです
 
 I don't have to wake up early on Saturday.
 Non devo svegliarmi presto il sabato.

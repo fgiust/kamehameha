@@ -14,7 +14,7 @@ Ho praticato kanji ogni giorno prima del test.
 
 I took a shower and then ate breakfast.
 Ho fatto la doccia e poi ho fatto colazione.
-シャワーを浴[あ]びてから、朝[あさ]御[ご]飯[はん]を食[た]べました
+シャワーを浴[あ]びてから、{朝[あさ]御[ご]飯[はん]|朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べました
 
 Let's start the meeting after the boss arrives.
 Iniziamo la riunione dopo che arriva il capo.
@@ -34,7 +34,7 @@ Sono stato occupato da quando sono iniziate le lezioni.
 
 After eating lunch, I took a short nap.
 Dopo pranzo ho fatto un breve sonnellino.
-昼[ひる]御[ご]飯[はん]を食[た]べてから、少[すこ]し昼寝[ひるね]をしました
+{昼[ひる]御[ご]飯[はん]|昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べてから、少[すこ]し昼寝[ひるね]をしました
 
 After locking the door, I went to bed.
 Dopo aver chiuso a chiave la porta, sono andato a dormire.

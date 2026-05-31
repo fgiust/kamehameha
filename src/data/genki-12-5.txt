@@ -15,7 +15,7 @@ Devo comprare un biglietto prima del viaggio.
 
 I have to take medicine after dinner.
 Devo prendere la medicina dopo cena.
-晩[ばん]ご飯[はん]の後[あと]で薬[くすり]を飲[の]まなければいけません
+{晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}の後[あと]で薬[くすり]を飲[の]まなければいけません
 
 I have to finish this work by tonight.
 Devo finire questo lavoro entro stasera.

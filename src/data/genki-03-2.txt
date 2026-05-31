@@ -3,7 +3,7 @@ Tipi di verbi e il "tempo presente"
 
 I eat breakfast.
 Faccio colazione.
-{私[わたし]は|}{朝[あさ]ご飯[はん]|朝飯[ちょうしょく]}を食[た]べます
+{私[わたし]は|}{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べます
 
 I don't drink coffee.
 Non bevo caffè.

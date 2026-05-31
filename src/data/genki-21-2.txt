@@ -19,7 +19,7 @@ Mia madre mi ha comprato una macchina fotografica.
 
 I asked my older sister to make dinner for me.
 Ho chiesto a mia sorella maggiore di prepararmi la cena.
-姉[あね]に晩[ばん]御[ご]飯[はん]を作[つく]ってもらいました
+姉[あね]に{晩[ばん]御[ご]飯[はん]|晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を作[つく]ってもらいました
 
 My friend carried my bag for me.
 Il mio amico mi ha portato la borsa.

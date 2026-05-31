@@ -37,7 +37,7 @@ Ogni volta che uso un computer, mi fanno male gli occhi.
 
 When I skip breakfast, I get hungry before noon.
 Quando salto la colazione, ho fame prima di mezzogiorno.
-朝[あさ]御[ご]飯[はん]を食[た]べないと、午前中[ごぜんちゅう]にお腹[なか]がすきます
+{朝[あさ]御[ご]飯[はん]|朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べないと、午前中[ごぜんちゅう]にお腹[なか]がすきます
 
 When I run too fast, I get out of breath.
 Quando corro troppo veloce, resto senza fiato.

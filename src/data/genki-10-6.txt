@@ -27,7 +27,7 @@ No, non ho comprato nulla.
 
 Did Woody eat anything for breakfast?
 Woody ha mangiato qualcosa a colazione?
-ウッディさんは{朝[あさ]ご飯[はん]|朝飯[ちょうしょく]}に何[なに]か食[た]べましたか
+ウッディさんは{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}に何[なに]か食[た]べましたか
 
 Did Naomi go anywhere last Sunday?
 Naomi è andata da qualche parte domenica scorsa?

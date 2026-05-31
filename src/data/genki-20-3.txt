@@ -11,7 +11,7 @@ Ho letto un giornale senza usare dizionari.
 
 I went to school without eating breakfast.
 Sono andato a scuola senza fare colazione.
-朝[あさ]御[ご]飯[はん]を食[た]べないで学校[がっこう]に行[い]きました
+{朝[あさ]御[ご]飯[はん]|朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べないで学校[がっこう]に行[い]きました
 
 I left home without locking the window.
 Sono uscito di casa senza chiudere la finestra.
@@ -27,7 +27,7 @@ Ho risposto all'email senza controllare l'allegato.
 
 I went to sleep without eating dinner.
 Sono andato a dormire senza cenare.
-晩[ばん]御[ご]飯[はん]を食[た]べないで寝[ね]ました
+{晩[ばん]御[ご]飯[はん]|晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を食[た]べないで寝[ね]ました
 
 I watched TV without doing the dishes.
 Ho guardato la TV senza lavare i piatti.

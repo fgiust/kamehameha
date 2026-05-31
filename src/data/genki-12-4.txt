@@ -23,7 +23,7 @@ Takeshi è gentile, quindi piace a tutti.
 
 I lost my wallet, so I can't buy lunch.
 Ho perso il portafoglio, quindi non posso comprare il pranzo.
-財布[さいふ]をなくしたので、昼[ひる]ご飯[はん]を買[か]えません
+財布[さいふ]をなくしたので、{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を買[か]えません
 
 The train was late, so I was late for school.
 Il treno era in ritardo, quindi sono arrivato tardi a scuola.

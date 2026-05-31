@@ -15,7 +15,7 @@ Andrò in banca sabato.
 
 I will eat lunch at a café.
 Pranzerò in una caffetteria.
-{|私[わたし]は}{喫茶店[きっさてん]|カフェ}で昼ご飯[ひるごはん]を食[た]べます
+{|私[わたし]は}{喫茶店[きっさてん]|カフェ}で{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べます
 
 I go to bed at eleven.
 Vado a letto alle undici.

@@ -7,7 +7,7 @@ Sono tornato a casa e ho guardato la TV.
 
 I washed my hands and ate lunch.
 Mi sono lavato le mani e ho pranzato.
-{私[わたし]は|}手[て]を洗[あら]って、昼[ひる]ご飯[はん]を食[た]べました
+{私[わたし]は|}手[て]を洗[あら]って、{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べました
 
 Let's go to the supermarket and buy fruit.
 Andiamo al supermercato a comprare frutta.
@@ -39,4 +39,4 @@ Andiamo al mare a nuotare.
 
 I went to the restaurant and ate lunch.
 Sono andato al ristorante e ho pranzato.
-{私[わたし]は|}レストラン{に|へ}行[い]って、昼[ひる]ご飯[はん]を食[た]べました
+{私[わたし]は|}レストラン{に|へ}行[い]って、{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べました

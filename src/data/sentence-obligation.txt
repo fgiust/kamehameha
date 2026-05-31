@@ -23,7 +23,7 @@ Devi entrare lì
 
 You have to eat breakfast every day
 Devi fare colazione ogni giorno
-毎日[まいにち]{朝[あさ]ご飯[はん]|朝飯[ちょうしょく]}を食[た]べな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
+毎日[まいにち]{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
 
 You have to wash the dishes
 Devi lavare i piatti

@@ -27,7 +27,7 @@ Woody andrà al parco con Yasmin.
 
 Michiko will eat lunch with Naomi.
 Michiko pranzerà con Naomi.
-みちこさんはなおみさんと昼[ひる]ご飯[はん]を食[た]べます
+みちこさんはなおみさんと{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べます
 
 I played tennis with Carlos.
 Ho giocato a tennis con Carlos.
@@ -39,4 +39,4 @@ Ken ha studiato storia con il professor Yamashita.
 
 I will eat dinner with my friend tomorrow.
 Mangerò la cena con il mio amico domani.
-{私[わたし]は|}明日[あした]友達[ともだち]と晩[ばん]ご飯[はん]を食[た]べます
+{私[わたし]は|}明日[あした]友達[ともだち]と{晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を食[た]べます

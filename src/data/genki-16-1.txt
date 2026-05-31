@@ -19,11 +19,11 @@ Ken mi ha riparato la bicicletta.
 
 I bought lunch for my younger brother.
 Ho comprato il pranzo per mio fratello minore.
-弟[おとうと]に昼[ひる]ご飯[はん]を買[か]ってあげました
+弟[おとうと]に{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を買[か]ってあげました
 
 My roommate cooks dinner for me sometimes.
 Il mio coinquilino a volte mi cucina la cena.
-ルームメートが時々[ときどき]{私[わたし]に|}晩[ばん]ご飯[はん]を作[つく]ってくれます
+ルームメートが時々[ときどき]{私[わたし]に|}{晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を作[つく]ってくれます
 
 The teacher explained the grammar to us.
 L'insegnante ci ha spiegato la grammatica.

@@ -25,7 +25,7 @@ Quando finisco il lavoro, ti chiamerò.
 
 Let's watch a movie when dinner is ready.
 Guardiamo un film quando la cena è pronta.
-晩[ばん]御[ご]飯[はん]ができたら、映画[えいが]を見[み]ましょう
+{晩[ばん]御[ご]飯[はん]|晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}ができたら、映画[えいが]を見[み]ましょう
 
 If I were rich, I would travel the world.
 Se fossi ricco, viaggerei per il mondo.
