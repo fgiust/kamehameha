@@ -126,3 +126,31 @@ export function matchesByRubyUnits(user: string, answerWithRuby: string): boolea
 
   return dfs(0, 0);
 }
+
+/** How many user chars align with the start of a ruby segment (unit-by-unit, left to right). */
+export function greedyConsumeRubyPrefix(userRest: string, segmentWithRuby: string): number {
+  const units = parseRubyUnits(segmentWithRuby);
+  let pos = 0;
+
+  for (const unit of units) {
+    if (unit.kind === 'plain') {
+      if (!userRest.startsWith(unit.surface, pos)) return pos;
+      pos += unit.surface.length;
+      continue;
+    }
+
+    if (unit.surface.length > 0 && userRest.startsWith(unit.surface, pos)) {
+      pos += unit.surface.length;
+      continue;
+    }
+
+    if (unit.reading.length > 0 && userRest.startsWith(unit.reading, pos)) {
+      pos += unit.reading.length;
+      continue;
+    }
+
+    return pos;
+  }
+
+  return pos;
+}

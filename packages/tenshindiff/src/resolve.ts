@@ -1,8 +1,22 @@
 import { diffSentenceAnswer } from './diff';
 import { applyTemplateDiffOptions, type DiffOptions, DEFAULT_DIFF_OPTIONS } from './options';
 import { parseAnswerTemplate } from './template';
-import { stripRuby } from './ruby';
+import { greedyConsumeRubyPrefix, stripRuby } from './ruby';
 import type { DiffUnitOp } from './types';
+
+function diffPartialUserConsumed(rest: string, segment: string): number {
+  const ops = diffSentenceAnswer(rest, segment);
+  let consumed = 0;
+
+  for (const op of ops) {
+    if (op.kind === 'unit' && op.status === 'missing') break;
+    if (op.kind === 'unit' && op.status === 'correct_kanji') consumed += op.unit.surface.length;
+    else if (op.kind === 'unit' && op.status === 'correct_kana') consumed += op.unit.reading.length;
+    else if (op.kind === 'extra') consumed += op.text.length;
+  }
+
+  return consumed;
+}
 
 type SegmentScore = {
   exact: boolean;
@@ -16,27 +30,15 @@ export function scoreSegmentAt(user: string, cursor: number, segment: string): S
   }
 
   const rest = user.slice(cursor);
-  const ops = diffSentenceAnswer(rest, segment);
-  const hasExtra = ops.some(op => op.kind === 'extra');
-  const hasMissing = ops.some(op => op.kind === 'unit' && op.status === 'missing');
+  const greedy = greedyConsumeRubyPrefix(rest, segment);
+  const segmentLen = stripRuby(segment).length;
 
-  if (!hasExtra && !hasMissing) {
-    return { exact: true, matched: stripRuby(segment).length };
+  if (greedy === segmentLen) {
+    return { exact: true, matched: greedy };
   }
 
-  let matched = 0;
-  for (const op of ops) {
-    if (op.kind === 'extra') break;
-    if (op.kind === 'unit') {
-      if (op.status === 'correct_kanji' || op.status === 'correct_kana') {
-        matched += op.unit.surface.length;
-      } else {
-        break;
-      }
-    }
-  }
-
-  return { exact: false, matched };
+  // Segment choice uses greedy alignment only (ignore diff "extras" before missing).
+  return { exact: false, matched: greedy };
 }
 
 /** Pick one alternative from a {a|b} group (first configured wins ties). */
@@ -72,26 +74,11 @@ export function pickSegmentAlternative(user: string, cursor: number, alternative
 export function userCharsConsumedForSegment(user: string, cursor: number, segment: string): number {
   if (segment === '') return 0;
 
-  const ops = diffSentenceAnswer(user.slice(cursor), segment);
-  let lastUnitIndex = -1;
-  for (let i = 0; i < ops.length; i++) {
-    if (ops[i]!.kind === 'unit') lastUnitIndex = i;
-  }
+  const rest = user.slice(cursor);
+  const greedy = greedyConsumeRubyPrefix(rest, segment);
+  if (greedy === stripRuby(segment).length) return greedy;
 
-  let consumed = 0;
-  for (let i = 0; i < ops.length; i++) {
-    const op = ops[i]!;
-    if (op.kind === 'extra') {
-      // Trailing extras after the last expected unit belong to the next template segment.
-      if (i > lastUnitIndex) continue;
-      consumed += op.text.length;
-    } else if (op.kind === 'unit') {
-      if (op.status === 'correct_kanji') consumed += op.unit.surface.length;
-      else if (op.status === 'correct_kana') consumed += op.unit.reading.length;
-    }
-  }
-
-  return consumed;
+  return diffPartialUserConsumed(rest, segment);
 }
 
 /** Resolve a template into the best concrete answer for diff display. */

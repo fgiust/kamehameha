@@ -2,15 +2,15 @@
 ～ませんか
 
 Won't you drink coffee with me?
-Non bevi un caffè con me?
+Beviamo un caffè insieme?
 {一緒[いっしょ]に|}コーヒーを飲[の]みませんか
 
 Won't you eat ramen with me on Friday?
-Non mangi un ramen con me venerdì?
+Mangiamo un ramen insieme venerdì?
 金曜日[きんようび]に{一緒[いっしょ]に|}ラーメンを食[た]べませんか
 
 Won't you take photos with me?
-Non scatti delle foto con me?
+Non scattiamo delle foto insieme?
 {一緒[いっしょ]に|}写真[しゃしん]を撮[と]りませんか
 
 Would you like to play tennis tomorrow?
@@ -22,7 +22,7 @@ Non andiamo in biblioteca?
 {一緒[いっしょ]に|}図書館[としょかん]{に|へ}行[い]きませんか
 
 Would you like to study Japanese with me?
-Ti andrebbe di studiare giapponese con me?
+Ti andrebbe di studiare giapponese insieme?
 {一緒[いっしょ]に|}日本語[にほんご]を勉強[べんきょう]しませんか
 
 Won't you go to Kyoto on Sunday?

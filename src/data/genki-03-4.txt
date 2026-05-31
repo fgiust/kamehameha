@@ -3,7 +3,7 @@ Riferimenti temporali
 
 Mary will go to the library on Tuesday.
 Mary andrà in biblioteca martedì.
-メアリーさんは火曜日[かようび]に図書館[としょかん]{に|へ}行[い]きます
+{メアリーさんは火曜日[かようび]に|火曜日[かようび]にメアリーさんは}図書館[としょかん]{に|へ}行[い]きます
 
 I watch TV every day.
 Guardo la TV tutti i giorni.
@@ -19,7 +19,7 @@ Mi lavo la faccia ogni mattina.
 
 I will go to bed at 10:30.
 Andrò a letto alle 10:30.
-{|私[わたし]は}十時半[じゅうじはん]に寝[ね]ます
+{|私[わたし]は}{十時半[じゅうじはん]|十三十[じゅうさんじゅう]}時に寝[ね]ます
 
 I will return home tomorrow.
 Tornerò a casa domani.

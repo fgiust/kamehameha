@@ -52,3 +52,16 @@ describe('empty optional segment', () => {
     ).toBe(true);
   });
 });
+
+describe('optional 一緒に segment', () => {
+  const template = '金曜日[きんようび]に{一緒[いっしょ]に|}ラーメンを食[た]べませんか';
+
+  it('keeps 一緒に when typed and does not mark it as extra', () => {
+    const user = '金曜日に一緒にラーメンを食べませんか';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer).toBe('金曜日[きんようび]に一緒[いっしょ]にラーメンを食[た]べませんか');
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    expect(ops.some(op => op.kind === 'extra')).toBe(false);
+  });
+});
