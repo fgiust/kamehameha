@@ -3,12 +3,12 @@ import type { DiffUnitOp } from 'tenshindiff';
 import { buildFulltestCaseText } from '../utils/fulltestCase';
 
 export default function CopyAsTestcaseLink({
-  bestAnswer,
+  template,
   user,
   ops,
   isCorrect,
 }: {
-  bestAnswer: string;
+  template: string;
   user: string;
   ops: DiffUnitOp[];
   isCorrect: boolean;
@@ -16,7 +16,7 @@ export default function CopyAsTestcaseLink({
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'error'>('idle');
 
   const copyAsTestcase = async () => {
-    const testCaseText = buildFulltestCaseText(bestAnswer, user, ops, isCorrect);
+    const testCaseText = buildFulltestCaseText(template, user, ops, isCorrect);
     try {
       if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(testCaseText);

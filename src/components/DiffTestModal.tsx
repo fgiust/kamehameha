@@ -71,7 +71,7 @@ export default function DiffTestModal({
   if (!isOpen) return null;
 
   const parsedAlternatives = generateAnswersFromTemplate(correct, SENTENCE_DIFF_OPTIONS);
-  const { bestAnswer, ops } = pickBestDiff(user, parsedAlternatives);
+  const { ops } = pickBestDiff(user, parsedAlternatives);
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(user.trim(), a));
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -153,7 +153,7 @@ export default function DiffTestModal({
               style={{ padding: 20, background: '#2a2d3d', borderRadius: 8, marginTop: 20 }}
             />
             {showCopyTestcase && (
-              <CopyAsTestcaseLink bestAnswer={bestAnswer} user={user} ops={ops} isCorrect={isCorrect} />
+              <CopyAsTestcaseLink template={correct} user={user} ops={ops} isCorrect={isCorrect} />
             )}
           </div>
 

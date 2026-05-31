@@ -104,7 +104,7 @@ export default function SentenceDataEditModal({
   if (!isOpen) return null;
 
   const parsedAlternatives = generateAnswersFromTemplate(answer, SENTENCE_DIFF_OPTIONS);
-  const { bestAnswer, ops } = pickBestDiff(testUser, parsedAlternatives);
+  const { ops } = pickBestDiff(testUser, parsedAlternatives);
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(testUser.trim(), a));
 
   const fileName = lessonIdToDataFile(dataLessonId);
@@ -217,7 +217,7 @@ export default function SentenceDataEditModal({
 
           <div className="diff-test-output">
             <DiffDisplay ops={ops} className="diff-answer sentence-edit-diff" />
-            <CopyAsTestcaseLink bestAnswer={bestAnswer} user={testUser} ops={ops} isCorrect={isCorrect} />
+            <CopyAsTestcaseLink template={answer} user={testUser} ops={ops} isCorrect={isCorrect} />
           </div>
 
           <div

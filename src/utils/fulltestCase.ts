@@ -29,10 +29,10 @@ export function validationRowFromOps(ops: DiffUnitOp[], isCorrect: boolean): str
 }
 
 export function buildFulltestCaseText(
-  bestAnswer: string,
+  template: string,
   user: string,
   ops: DiffUnitOp[],
   isCorrect: boolean,
 ): string {
-  return ['#', bestAnswer, user, shownOutputFromOps(ops), validationRowFromOps(ops, isCorrect)].join('\n');
+  return ['#', template, user, shownOutputFromOps(ops), validationRowFromOps(ops, isCorrect)].join('\n');
 }
