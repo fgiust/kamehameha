@@ -1,5 +1,5 @@
-import { pickBestDiff } from './diff';
 import { generateAnswersFromTemplate } from './answers';
+import { pickBestDiffFromTemplate } from './resolve';
 import { renderDiffHtml } from './render';
 import { matchesByRubyUnits } from './ruby';
 import type { DiffOptions } from './options';
@@ -21,7 +21,7 @@ export function gradeAnswer(
   const alternatives = generateAnswersFromTemplate(answerTemplate, options);
   const trimmed = user.trim();
   const isCorrect = alternatives.some(a => matchesByRubyUnits(trimmed, a));
-  const { bestAnswer, ops } = pickBestDiff(trimmed, alternatives);
+  const { bestAnswer, ops } = pickBestDiffFromTemplate(trimmed, answerTemplate, options);
   return {
     isCorrect,
     bestAnswer,

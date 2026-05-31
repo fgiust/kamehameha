@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildFulltestCaseText } from '../../src/utils/fulltestCase';
-import { pickBestDiff, generateAnswersFromTemplate } from 'tenshindiff';
+import { pickBestDiffFromTemplate, generateAnswersFromTemplate } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../../src/utils/sentenceDiffOptions';
 
 describe('buildFulltestCaseText', () => {
@@ -8,7 +8,7 @@ describe('buildFulltestCaseText', () => {
     const template = '{|私[わたし]は}{喫茶店[きっさてん]|カフェ}で昼ご飯[ひるごはん]を食[た]べます';
     const user = '私は喫茶店で昼ご飯を食べます';
     const alternatives = generateAnswersFromTemplate(template, SENTENCE_DIFF_OPTIONS);
-    const { ops } = pickBestDiff(user, alternatives);
+    const { ops } = pickBestDiffFromTemplate(user, template, SENTENCE_DIFF_OPTIONS);
     const isCorrect = alternatives.some(a => a === user);
 
     const text = buildFulltestCaseText(template, user, ops, isCorrect);

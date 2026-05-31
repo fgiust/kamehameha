@@ -2,6 +2,8 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { diffSentenceAnswer } from '../src/diff';
+import { generateAnswersFromTemplate } from '../src/answers';
+import { pickBestDiffFromTemplate } from '../src/resolve';
 import { matchesByRubyUnits } from '../src/ruby';
 
 type FullDiffCase = {
@@ -85,8 +87,9 @@ describe('fulltests data format', () => {
 
   for (const testCase of cases) {
     it(testCase.name.replace(/^#\s*/, ''), () => {
-      const ops = diffSentenceAnswer(testCase.userAnswer, testCase.expectedExpression);
-      const isCorrect = matchesByRubyUnits(testCase.userAnswer, testCase.expectedExpression);
+      const alternatives = generateAnswersFromTemplate(testCase.expectedExpression);
+      const isCorrect = alternatives.some(a => matchesByRubyUnits(testCase.userAnswer, a));
+      const { ops } = pickBestDiffFromTemplate(testCase.userAnswer, testCase.expectedExpression);
 
       expect(shownOutputFromOps(ops)).toBe(testCase.expectedShownOutput);
       assertValidationRowFormat(testCase.expectedShownOutput, testCase.expectedValidationRow);

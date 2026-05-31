@@ -2,7 +2,7 @@ Verb Types and the "Present Tense"
 Tipi di verbi e il "tempo presente"
 
 I eat breakfast.
-Faccio colazione (mangio la colazione).
+Faccio colazione.
 {私[わたし]は|}{朝[あさ]ご飯[はん]|朝飯[ちょうしょく]}を食[た]べます
 
 I don't drink coffee.

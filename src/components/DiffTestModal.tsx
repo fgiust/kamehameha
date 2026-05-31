@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import {
   generateAnswersFromTemplate,
   matchesByRubyUnits,
-  pickBestDiff,
+  pickBestDiffFromTemplate,
   primarySurfaceFromTemplate,
 } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
@@ -71,7 +71,7 @@ export default function DiffTestModal({
   if (!isOpen) return null;
 
   const parsedAlternatives = generateAnswersFromTemplate(correct, SENTENCE_DIFF_OPTIONS);
-  const { ops } = pickBestDiff(user, parsedAlternatives);
+  const { ops } = pickBestDiffFromTemplate(user, correct, SENTENCE_DIFF_OPTIONS);
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(user.trim(), a));
   return (
     <div className="modal-backdrop" onClick={onClose}>

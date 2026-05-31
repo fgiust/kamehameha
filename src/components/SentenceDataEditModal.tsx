@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   generateAnswersFromTemplate,
   matchesByRubyUnits,
-  pickBestDiff,
+  pickBestDiffFromTemplate,
   primarySurfaceFromTemplate,
 } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
@@ -104,7 +104,7 @@ export default function SentenceDataEditModal({
   if (!isOpen) return null;
 
   const parsedAlternatives = generateAnswersFromTemplate(answer, SENTENCE_DIFF_OPTIONS);
-  const { ops } = pickBestDiff(testUser, parsedAlternatives);
+  const { ops } = pickBestDiffFromTemplate(testUser, answer, SENTENCE_DIFF_OPTIONS);
   const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(testUser.trim(), a));
 
   const fileName = lessonIdToDataFile(dataLessonId);

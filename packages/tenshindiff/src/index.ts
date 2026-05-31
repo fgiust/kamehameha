@@ -13,6 +13,13 @@ export {
   pickBestAnswerForDisplay,
 } from './template';
 export { diffSentenceAnswer, pickBestDiff, countMatchedChars } from './diff';
+export {
+  pickBestDiffFromTemplate,
+  resolveAnswerFromTemplate,
+  resolveAnswerFromParts,
+  pickSegmentAlternative,
+  scoreSegmentAt,
+} from './resolve';
 export { formatDiffPlainText } from './plain';
 export { renderDiffHtml } from './render';
 export { gradeAnswer } from './grade';
