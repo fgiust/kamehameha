@@ -29,3 +29,26 @@ describe('resolveAnswerFromTemplate', () => {
     expect(shown).toBe('カフィェで昼ご飯[ひるごはん]を食[た]べます');
   });
 });
+
+describe('empty optional segment', () => {
+  const template =
+    '{私[わたし]は|}中国人[ちゅうごくじん]{じゃないです|じゃありません|ではありません}';
+
+  it('skips 私[わたし]は when the answer starts without it', () => {
+    const user = '中国人じゃないです';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer).toBe('中国人[ちゅうごくじん]じゃないです');
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    expect(ops.every(op => !(op.kind === 'unit' && op.unit.surface === '私'))).toBe(true);
+  });
+
+  it('uses 私[わたし]は when the user partially matches that prefix', () => {
+    const user = '私中国人じゃないです';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer.startsWith('私[わたし]は')).toBe(true);
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    expect(
+      ops.some(op => op.kind === 'unit' && op.unit.surface === 'は' && op.status === 'missing'),
+    ).toBe(true);
+  });
+});

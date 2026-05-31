@@ -61,6 +61,10 @@ export function pickSegmentAlternative(user: string, cursor: number, alternative
     return tied.reduce((best, s) => (s.index < best.index ? s : best)).alt;
   }
 
+  // Optional empty alt: no alignment at cursor → prefer "" over first non-empty option.
+  const hasEmpty = alternatives.some(alt => alt === '');
+  if (hasEmpty) return '';
+
   return alternatives[0]!;
 }
 
