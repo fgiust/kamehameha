@@ -7,10 +7,10 @@ Questo orologio è costoso, vero?
 
 Let me assure you, this tonkatsu is delicious.
 Ti assicuro che questo tonkatsu è delizioso.
-このとんかつは美味[おい]しいですよ
+この{トンカツ|とんかつ}は美味[おい]しいですよ
 
 Mr. Yamada's major is business, right?
-La materia principale del signor Yamada è economia aziendale, vero?
+La materia principale del signor Yamada è business, vero?
 山田[やまだ]さんの専攻[せんこう]はビジネスですね
 
 (In case you were wondering,) my teacher is Japanese.
