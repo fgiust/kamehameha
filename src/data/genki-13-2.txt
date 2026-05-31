@@ -29,7 +29,7 @@ Mary è una persona popolare, è intelligente e sa suonare la chitarra.
 
 I was tired, it was late, and I stayed home.
 Ero stanco, era tardi, e sono rimasto a casa.
-疲[つか]れていたし、遅[おそ]かったし、家[いえ]にいました
+疲[つか]れていたし、遅[おそ]かったし、{家[いえ]|うち}にいました
 
 I studied a lot, watched a lot of anime, and my Japanese improved.
 Ho studiato molto, ho guardato molti anime, e il mio giapponese è migliorato.

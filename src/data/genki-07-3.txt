@@ -3,7 +3,7 @@ Forma て per unire le frasi
 
 The coffee at this café is hot and delicious.
 Il caffè in questo bar è caldo e buono.
-このカフェのコーヒーは熱[あつ]くて、美味[おい]しいです
+この{喫茶店[きっさてん]|カフェ}のコーヒーは熱[あつ]くて、美味[おい]しいです
 
 The trip was fun, and I was tired.
 Il viaggio è stato divertente, ed ero stanco.

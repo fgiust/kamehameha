@@ -23,7 +23,7 @@ Robert ha vissuto in un dormitorio.
 
 Ken has forgotten his homework at home.
 Ken ha dimenticato i compiti a casa.
-けんさんは宿題[しゅくだい]を家[いえ]に忘[わす]れたことがあります
+けんさんは宿題[しゅくだい]を{家[いえ]|うち}に忘[わす]れたことがあります
 
 Sora has never sung on stage.
 Sora non ha mai cantato sul palco.

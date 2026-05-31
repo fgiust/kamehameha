@@ -15,7 +15,7 @@ Sono andato a scuola senza fare colazione.
 
 I left home without locking the window.
 Sono uscito di casa senza chiudere la finestra.
-窓[まど]を閉[し]めないで家[いえ]を出[で]ました
+窓[まど]を閉[し]めないで{家[いえ]|うち}を出[で]ました
 
 I went jogging without warming up.
 Sono uscito a correre senza riscaldarmi.

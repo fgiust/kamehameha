@@ -1856,6 +1856,36 @@ body.dark .home-mini-progress-cell.is-incorrect {
   color: var(--accent);
 }
 
+.diff-test-output {
+  width: 100%;
+}
+
+.copy-as-testcase-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.copy-as-testcase-row .diff-test-link {
+  font-size: 11px;
+  padding: 0;
+  min-height: 0;
+}
+
+.copy-as-testcase-feedback {
+  font-size: 11px;
+}
+
+.copy-as-testcase-feedback.is-copied {
+  color: var(--correct);
+}
+
+.copy-as-testcase-feedback.is-error {
+  color: var(--incorrect);
+}
+
 .feedback-readonly-text {
   font-size: 14px;
   line-height: 1.4;

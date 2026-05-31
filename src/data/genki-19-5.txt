@@ -39,4 +39,4 @@ Il pacco dovrebbe essere arrivato.
 
 Ken should be home now.
 Ken dovrebbe essere a casa adesso.
-けんさんは今[いま]家[いえ]にいるはずです
+けんさんは今[いま]{家[いえ]|うち}にいるはずです

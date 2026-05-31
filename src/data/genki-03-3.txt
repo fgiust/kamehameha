@@ -3,35 +3,35 @@ Particelle
 
 I will read a magazine at the library.
 Leggerò una rivista in biblioteca.
-{私[わたし]は|}図書館[としょかん]で雑誌[ざっし]を読[よ]みます
+{|私[わたし]は}図書館[としょかん]で雑誌[ざっし]を読[よ]みます
 
 I drink green tea at home.
 Bevo tè verde a casa.
-{私[わたし]は|}うちでお茶[ちゃ]を飲[の]みます
+{|私[わたし]は}{家[いえ]|うち}でお茶[ちゃ]を飲[の]みます
 
 I will go to the bank on Saturday.
 Andrò in banca sabato.
-{私[わたし]は|}土曜日[どようび]に銀行[ぎんこう]{に|へ}行[い]きます
+{|私[わたし]は}土曜日[どようび]に銀行[ぎんこう]{に|へ}行[い]きます
 
 I will eat lunch at a café.
-Pranzerò (mangierò il pranzo) in una caffetteria.
-{私[わたし]は|}カフェで昼ご飯[ひるごはん]を食[た]べます
+Pranzerò in una caffetteria.
+{|私[わたし]は}{喫茶店[きっさてん]|カフェ}で昼ご飯[ひるごはん]を食[た]べます
 
 I go to bed at eleven.
 Vado a letto alle undici.
-{私[わたし]は|}十一時[じゅういちじ]に寝[ね]ます
+{|私[わたし]は}十一時[じゅういちじ]に寝[ね]ます
 
 I listen to music at school.
 Ascolto la musica a scuola.
-{私[わたし]は|}学校[がっこう]で音楽[おんがく]を聞[き]きます
+{|私[わたし]は}学校[がっこう]で音楽[おんがく]を{聞[き]|聴[き]}きます
 
 I will return home at around eight.
 Tornerò a casa verso le otto.
-{私[わたし]は|}八時[はちじ]ごろ{に|}うち{に|へ}帰[かえ]ります
+{|私[わたし]は}八時[はちじ]ごろ{に|}{家[いえ]|うち}{に|へ}帰[かえ]ります
 
 I watch movies at home.
 Guardo i film a casa.
-{私[わたし]は|}うちで映画[えいが]を見[み]ます
+{|私[わたし]は}{家[いえ]|うち}で映画[えいが]を見[み]ます
 
 Mr. Honda will not go to the post office today.
 Il signor Honda non andrà all'ufficio postale oggi.
@@ -39,4 +39,4 @@ Il signor Honda non andrà all'ufficio postale oggi.
 
 I study Japanese at school.
 Studio giapponese a scuola.
-{私[わたし]は|}学校[がっこう]で日本語[にほんご]を勉強[べんきょう]します
+{|私[わたし]は}学校[がっこう]で日本語[にほんご]を勉強[べんきょう]します

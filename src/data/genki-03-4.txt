@@ -7,7 +7,7 @@ Mary andrà in biblioteca martedì.
 
 I watch TV every day.
 Guardo la TV tutti i giorni.
-{私[わたし]は|}毎日[まいにち]テレビを見[み]ます
+{|私[わたし]は}毎日[まいにち]テレビを見[み]ます
 
 What will you do on the weekend?
 Cosa farai nel fine settimana?
@@ -15,15 +15,15 @@ Cosa farai nel fine settimana?
 
 I wash my face every morning.
 Mi lavo la faccia ogni mattina.
-{私[わたし]は|}毎朝[まいあさ]、{顔[かお]を|}洗[あら]います
+{|私[わたし]は}毎朝[まいあさ]、{顔[かお]を|}洗[あら]います
 
 I will go to bed at 10:30.
 Andrò a letto alle 10:30.
-{私[わたし]は|}十時半[じゅうじはん]に寝[ね]ます
+{|私[わたし]は}十時半[じゅうじはん]に寝[ね]ます
 
 I will return home tomorrow.
 Tornerò a casa domani.
-{私[わたし]は|}明日[あした]、うち{に|へ}帰[かえ]ります
+{|私[わたし]は}明日[あした]、{家[いえ]|うち}{に|へ}帰[かえ]ります
 
 When will you come to Japan?
 Quando verrai in Giappone?
@@ -31,11 +31,11 @@ Quando verrai in Giappone?
 
 I get up at 7:00 every day.
 Mi alzo alle 7:00 tutti i giorni.
-{私[わたし]は|}毎日[まいにち]七時[しちじ]に起[お]きます
+{|私[わたし]は}毎日[まいにち]七時[しちじ]に起[お]きます
 
 I will study Japanese tonight.
 Studierò giapponese stasera.
-{私[わたし]は|}{今晩[こんばん]|今夜[こんや]}、日本語[にほんご]を勉強[べんきょう]します
+{|私[わたし]は}{今晩[こんばん]|今夜[こんや]}、日本語[にほんご]を勉強[べんきょう]します
 
 Ken will work on Saturday.
 Ken lavorerà sabato.

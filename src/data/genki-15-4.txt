@@ -35,7 +35,7 @@ Una borsa che uso ogni giorno.
 
 A coffee shop I sometimes go to.
 Una caffetteria in cui vado a volte.
-時々[ときどき]行[い]く喫茶店[きっさてん]
+時々[ときどき]行[い]く{喫茶店[きっさてん]|カフェ}
 
 A temple I saw last week.
 Un tempio che ho visto la settimana scorsa.

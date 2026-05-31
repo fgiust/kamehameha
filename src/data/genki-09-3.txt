@@ -3,15 +3,15 @@
 
 I have not read the newspaper yet.
 Non ho ancora letto il giornale.
-{私[わたし]は|}まだ新聞[しんぶん]を読[よ]んでいません
+{|私[わたし]は}まだ新聞[しんぶん]を読[よ]んでいません
 
 John has not come home yet.
 John non è ancora tornato a casa.
-ジョンさんはまだ家[いえ]に帰[かえ]っていません
+ジョンさんはまだ{家[いえ]|うち}に帰[かえ]っていません
 
 I have not taken a bath yet.
 Non ho ancora fatto il bagno.
-{私[わたし]は|}まだお風呂[ふろ]に入[はい]っていません
+{|私[わたし]は}まだお風呂[ふろ]に入[はい]っていません
 
 Robert hasn't written the essay yet.
 Robert non ha ancora scritto il saggio.
@@ -23,7 +23,7 @@ Michiko non ha ancora chiamato.
 
 I haven't finished the report yet.
 Non ho ancora finito il rapporto.
-{私[わたし]は|}まだレポートを終[お]わらせていません
+{|私[わたし]は}まだレポートを終[お]わらせていません
 
 Yui has already gone to bed.
 Yui è già andata a letto.
@@ -31,7 +31,7 @@ Yui è già andata a letto.
 
 I have already bought the tickets.
 Ho già comprato i biglietti.
-{私[わたし]は|}もう切符[きっぷ]を買[か]いました
+{|私[わたし]は}もう切符[きっぷ]を買[か]いました
 
 Carlos has already returned the book.
 Carlos ha già restituito il libro.

@@ -15,7 +15,7 @@ L'ospedale è a destra del parco.
 
 The café is next to the station.
 Il caffè è accanto alla stazione.
-カフェは駅[えき]の隣[となり]です
+{喫茶店[きっさてん]|カフェ}は駅[えき]の隣[となり]です
 
 The shoes are under the chair.
 Le scarpe sono sotto la sedia.
@@ -27,7 +27,7 @@ Il minimarket è accanto alla banca.
 
 The car is in front of the house.
 La macchina è davanti alla casa.
-車[くるま]は家[いえ]の前[まえ]です
+車[くるま]は{家[いえ]|うち}の前[まえ]です
 
 The key is inside my bag.
 La chiave è dentro la mia borsa.

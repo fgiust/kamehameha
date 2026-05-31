@@ -11,7 +11,7 @@ Takeshi è venuto in Giappone per studiare giapponese.
 
 Robert is going to the café to drink coffee.
 Robert va in caffetteria a bere un caffè.
-ロバートさんはカフェにコーヒーを飲[の]み{に|へ}行[い]きます
+ロバートさんは{喫茶店[きっさてん]|カフェ}にコーヒーを飲[の]み{に|へ}行[い]きます
 
 Sora is going to the library to read a book.
 Sora va in biblioteca a leggere un libro.
@@ -35,7 +35,7 @@ Andiamo al ristorante a mangiare sushi.
 
 Let's go home to do homework.
 Torniamo a casa a fare i compiti.
-うち{に|へ}宿題[しゅくだい]をし{に|へ}帰[かえ]りましょう
+{家[いえ]|うち}{に|へ}宿題[しゅくだい]をし{に|へ}帰[かえ]りましょう
 
 I am going to the bookstore to buy a map.
 Vado in libreria a comprare una mappa.

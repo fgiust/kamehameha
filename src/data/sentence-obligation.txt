@@ -31,7 +31,7 @@ Devi lavare i piatti
 
 You have to go home early
 Devi tornare a casa presto
-早[はや]く{家[いえ]へ|}帰[かえ]らな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
+早[はや]く{家[いえ]|うち}へ帰[かえ]らな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
 
 You must practice the piano
 Devi esercitarti con il pianoforte

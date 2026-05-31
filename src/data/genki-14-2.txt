@@ -7,7 +7,7 @@ Domani potrebbe tirare forte vento.
 
 Ken might be at home now.
 Ken potrebbe essere a casa adesso.
-けんさんは今[いま]家[いえ]にいるかもしれません
+けんさんは今[いま]{家[いえ]|うち}にいるかもしれません
 
 Mary might be taller than Takeshi.
 Mary potrebbe essere più alta di Takeshi.

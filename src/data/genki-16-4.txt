@@ -24,7 +24,7 @@ Da bambino andavo spesso al parco.
 
 When I leave the house, I lock the door.
 Quando esco di casa, chiudo la porta a chiave.
-家[いえ]を出[で]る時[とき]{は|}、ドアに鍵[かぎ]をかけます
+{家[いえ]|うち}を出[で]る時[とき]{は|}、ドアに鍵[かぎ]をかけます
 
 When I woke up this morning, I checked my phone.
 Quando mi sono svegliato stamattina, ho controllato il telefono.

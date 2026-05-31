@@ -35,7 +35,7 @@ Non guardi la TV con Sora stasera?
 
 Would you like to come to my house?
 Ti andrebbe di venire a casa mia?
-{私[わたし]の|}うち{に|へ}来[き]ませんか
+{私[わたし]の|}{家[いえ]|うち}{に|へ}来[き]ませんか
 
 Would you like to listen to music?
 Ti andrebbe di ascoltare la musica?

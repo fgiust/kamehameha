@@ -7,7 +7,7 @@ A Nagoya, farò cose come visitare un castello e mangiare cibo locale.
 
 At home, I do such things as cooking, and playing games.
 A casa, faccio cose come cucinare e fare giochi.
-家[いえ]で料理[りょうり]を作[つく]ったり、ゲームをしたりします
+{家[いえ]|うち}で料理[りょうり]を作[つく]ったり、ゲームをしたりします
 
 On Saturday I rested and watched a movie, among other things.
 Sabato ho riposato e guardato un film, tra le altre cose.

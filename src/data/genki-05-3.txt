@@ -23,7 +23,7 @@ Giochiamo a tennis insieme?
 
 Shall we eat cake at the café?
 Mangiamo una torta al caffè?
-カフェでケーキを食[た]べましょうか
+{喫茶店[きっさてん]|カフェ}でケーキを食[た]べましょうか
 
 Shall we buy bread at the supermarket?
 Compriamo pane al supermercato?
@@ -31,7 +31,7 @@ Compriamo pane al supermercato?
 
 Let's rest at home.
 Riposiamo a casa.
-家[いえ]で休[やす]みましょう
+{家[いえ]|うち}で休[やす]みましょう
 
 Let's play tennis tomorrow.
 Giochiamo a tennis domani.

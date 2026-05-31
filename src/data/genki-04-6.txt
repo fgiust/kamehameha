@@ -7,7 +7,7 @@ Yasmin ha aspettato John in stazione per un'ora.
 
 Woody waited for Sue at the café for an hour and a half.
 Woody ha aspettato Sue al caffè per un'ora e mezza.
-ウッディさんはカフェでスーさんを一時間半[いちじかんはん]待[ま]ちました
+ウッディさんは{喫茶店[きっさてん]|カフェ}でスーさんを一時間半[いちじかんはん]待[ま]ちました
 
 Michiko studied at the library for two hours yesterday.
 Michiko ha studiato in biblioteca per due ore ieri.
@@ -27,7 +27,7 @@ Pedro ha lavorato in azienda per circa quattro ore ieri.
 
 Yui studies Japanese at home for about thirty minutes every day.
 Yui studia giapponese a casa per circa trenta minuti ogni giorno.
-ゆいさんは毎日[まいにち]家[いえ]で三十分[さんじゅっぷん]ぐらい日本語[にほんご]を勉強[べんきょう]します
+ゆいさんは毎日[まいにち]{家[いえ]|うち}で三十分[さんじゅっぷん]ぐらい日本語[にほんご]を勉強[べんきょう]します
 
 I slept for seven and a half hours last night.
 Ho dormito per sette ore e mezza la scorsa notte.

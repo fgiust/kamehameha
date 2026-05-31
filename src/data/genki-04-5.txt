@@ -19,11 +19,11 @@ Anche Yui è andata in biblioteca.
 
 She studied at home on Tuesday, too.
 Ha studiato anche a casa martedì.
-彼女[かのじょ]は火曜日[かようび]も家[いえ]で勉強[べんきょう]しました
+彼女[かのじょ]は火曜日[かようび]も{家[いえ]|うち}で勉強[べんきょう]しました
 
 Carlos went to the café, too.
 Anche Carlos è andato al caffè.
-カルロスさんもカフェ{に|へ}行[い]きました
+カルロスさんも{喫茶店[きっさてん]|カフェ}{に|へ}行[い]きました
 
 There is a park, too.
 C'è anche un parco.

@@ -23,7 +23,7 @@ Leggerò un libro di giapponese.
 
 Mary will not return home today.
 Mary non tornerà a casa oggi.
-{今日[きょう]|}メアリーさんは{|今日[きょう]}、{|家[いえ]に|家[いえ]へ|うちに|うちへ|うちに|うちへ}帰[かえ]りません
+{今日[きょう]|}メアリーさんは{|今日[きょう]}、{家[いえ]|うち}{に|へ}帰[かえ]りません
 
 I get up at seven.
 Mi alzo alle sette.

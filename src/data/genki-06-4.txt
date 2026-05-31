@@ -31,7 +31,7 @@ Non devi bere caffè qui.
 
 You must not return home today.
 Non devi tornare a casa oggi.
-今日[きょう]うち{に|へ}帰[かえ]ってはいけません
+今日[きょう]{家[いえ]|うち}{に|へ}帰[かえ]ってはいけません
 
 You must not open this window.
 Non devi aprire questa finestra.

@@ -5,7 +5,7 @@
 
 If it rains tomorrow, I will stay home.
 Se domani piove, resterò a casa.
-明日[あした]雨[あめ]が降[ふ]ったら、家[いえ]にいます
+明日[あした]雨[あめ]が降[ふ]ったら、{家[いえ]|うち}にいます
 
 We will go for a walk if the weather is fine.
 Faremo una passeggiata se il tempo è bello.

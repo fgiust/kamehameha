@@ -7,7 +7,7 @@ Domani partirò presto, perché ho un appuntamento dal dottore.
 
 Let's eat at home, because the restaurant is crowded.
 Mangiamo a casa, perché il ristorante è affollato.
-レストランは込[こ]んでいるから、家[いえ]で食[た]べましょう
+レストランは込[こ]んでいるから、{家[いえ]|うち}で食[た]べましょう
 
 I won't go swimming today, because the pool is closed.
 Non andrò a nuotare oggi, perché la piscina è chiusa.
@@ -23,7 +23,7 @@ Ero felice, perché un amico mi ha fatto visita.
 
 We stayed home, because it was windy.
 Siamo rimasti a casa, perché c'era vento.
-風[かぜ]が強[つよ]かったから、{私[わたし]たちは|}家[いえ]にいました
+風[かぜ]が強[つよ]かったから、{私[わたし]たちは|}{家[いえ]|うち}にいました
 
 We canceled the picnic, because it was snowing.
 Abbiamo annullato il picnic, perché stava nevicando.
