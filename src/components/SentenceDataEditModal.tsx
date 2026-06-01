@@ -7,6 +7,7 @@ import {
 } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
 import { applyJapaneseImeInputChange } from '../engines/readingExerciseEngine';
+import { useAnswerTemplateField } from '../hooks/useAnswerTemplateField';
 import { useTranslation } from 'react-i18next';
 import type { SentenceItem } from '../types';
 import { saveSentenceBlock } from '../api/devSentenceBlock';
@@ -53,7 +54,9 @@ export default function SentenceDataEditModal({
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 
+  const answerInputRef = useRef<HTMLTextAreaElement>(null);
   const userInputRef = useRef<HTMLInputElement>(null);
+  const answerField = useAnswerTemplateField(answer, setAnswer, answerInputRef);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
   const lastRawValueRef = useRef('');
@@ -165,9 +168,12 @@ export default function SentenceDataEditModal({
             />
             <div className="sentence-edit-answer-block">
               <textarea
+                ref={answerInputRef}
                 className="exercise-input sentence-edit-textarea sentence-edit-answer"
                 value={answer}
-                onChange={e => setAnswer(e.target.value)}
+                onChange={answerField.onChange}
+                onCompositionStart={answerField.onCompositionStart}
+                onCompositionEnd={answerField.onCompositionEnd}
                 rows={3}
                 spellCheck={false}
               />

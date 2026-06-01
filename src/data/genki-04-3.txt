@@ -37,6 +37,6 @@ My major was history.
 La mia materia principale era storia.
 私[わたし]の専攻[せんこう]は歴史[れきし]でした
 
-This is not a hospital.
-Questo non è un ospedale.
-これは病院[びょういん]{じゃないです|じゃありません|ではありません}
+This was not a hospital.
+Questo non era un ospedale.
+これは病院[びょういん]{じゃなかったです|じゃありませんでした}

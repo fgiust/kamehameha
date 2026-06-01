@@ -7,6 +7,7 @@ import {
 } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
 import { applyJapaneseImeInputChange } from '../engines/readingExerciseEngine';
+import { useAnswerTemplateField } from '../hooks/useAnswerTemplateField';
 import { useTranslation } from 'react-i18next';
 import { useDebugMode } from '../hooks/useDebugMode';
 import KeyboardTip from './KeyboardTip';
@@ -34,7 +35,9 @@ export default function DiffTestModal({
   const [isComposing, setIsComposing] = useState(false);
   const [didConvert, setDidConvert] = useState(false);
 
+  const correctInputRef = useRef<HTMLInputElement>(null);
   const userInputRef = useRef<HTMLInputElement>(null);
+  const correctField = useAnswerTemplateField(correct, setCorrect, correctInputRef);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
   const lastRawValueRef = useRef('');
@@ -90,9 +93,12 @@ export default function DiffTestModal({
             <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, width: '100%' }}>
               <div style={{ fontSize: 16, fontWeight: 'bold' }}>{t('diffTest.correctAnswer')}</div>
               <input
+                ref={correctInputRef}
                 className="exercise-input"
                 value={correct}
-                onChange={e => setCorrect(e.target.value)}
+                onChange={correctField.onChange}
+                onCompositionStart={correctField.onCompositionStart}
+                onCompositionEnd={correctField.onCompositionEnd}
                 style={{ width: '100%', textAlign: 'center', boxSizing: 'border-box' }}
                 spellCheck={false}
               />
