@@ -14,16 +14,16 @@ L'ospedale è a destra del parco.
 病院[びょういん]は公園[こうえん]の右[みぎ]です
 
 The café is next to the station.
-Il caffè è accanto alla stazione.
+Il bar è accanto alla stazione.
 {喫茶店[きっさてん]|カフェ}は駅[えき]の隣[となり]です
 
 The shoes are under the chair.
 Le scarpe sono sotto la sedia.
-靴[くつ]はいすの下[した]です
+靴[くつ]は椅子[いす]の下[した]です
 
 The convenience store is next to the bank.
 Il minimarket è accanto alla banca.
-コンビニは銀行[ぎんこう]の隣[となり]です
+{コンビニ|スパ}は銀行[ぎんこう]の隣[となり]です
 
 The car is in front of the house.
 La macchina è davanti alla casa.
@@ -39,4 +39,4 @@ Il libro è sul tavolo.
 
 The bird is near the tree.
 L'uccello è vicino all'albero.
-鳥[とり]は木[き]の近[ちか]くにいます
+鳥[とり]は木[き]の{近[ちか]|隣[となり]}くです
