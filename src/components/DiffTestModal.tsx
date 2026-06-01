@@ -6,7 +6,7 @@ import {
   primarySurfaceFromTemplate,
 } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
-import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
+import { applyJapaneseImeInputChange } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
 import { useDebugMode } from '../hooks/useDebugMode';
 import KeyboardTip from './KeyboardTip';
@@ -37,6 +37,7 @@ export default function DiffTestModal({
   const userInputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
+  const lastRawValueRef = useRef('');
 
   useEffect(() => {
     if (isOpen) {
@@ -44,6 +45,7 @@ export default function DiffTestModal({
       const preloaded = initialUser.trim() || primarySurfaceFromTemplate(initialCorrect, SENTENCE_DIFF_OPTIONS);
       setUser(preloaded);
       setRawUser(preloaded);
+      lastRawValueRef.current = preloaded;
       setIsComposing(false);
       setDidConvert(false);
       isComposingRef.current = false;
@@ -113,27 +115,30 @@ export default function DiffTestModal({
                       setDidConvert(false);
                       setIsComposing(true);
                       setUser(raw);
+                      lastRawValueRef.current = raw;
                       return;
                     }
                     setIsComposing(false);
 
-                    const didConvertNow = didConvertFromLatin(raw);
-                    setDidConvert(didConvertNow);
-
                     const caret = e.target.selectionStart;
-                    const converted = toHiraganaIME(raw);
-                    if (caret !== null) {
-                      pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
-                    }
-                    setUser(converted);
+                    const { value, caret: nextCaret, didConvert: didConvertNow } = applyJapaneseImeInputChange(
+                      lastRawValueRef.current,
+                      raw,
+                      caret,
+                    );
+                    setDidConvert(didConvertNow);
+                    if (nextCaret !== null) pendingCaretRef.current = nextCaret;
+                    setUser(value);
+                    lastRawValueRef.current = value;
                   }}
                   onCompositionStart={() => {
                     isComposingRef.current = true;
                     setIsComposing(true);
                   }}
-                  onCompositionEnd={() => {
+                  onCompositionEnd={e => {
                     isComposingRef.current = false;
                     setIsComposing(false);
+                    lastRawValueRef.current = e.currentTarget.value;
                   }}
                   style={{ width: '100%', textAlign: 'center', boxSizing: 'border-box' }}
                   autoCorrect="off"

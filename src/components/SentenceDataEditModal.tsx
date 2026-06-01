@@ -6,7 +6,7 @@ import {
   primarySurfaceFromTemplate,
 } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
-import { didConvertFromLatin, toHiraganaIME } from '../engines/readingExerciseEngine';
+import { applyJapaneseImeInputChange } from '../engines/readingExerciseEngine';
 import { useTranslation } from 'react-i18next';
 import type { SentenceItem } from '../types';
 import { saveSentenceBlock } from '../api/devSentenceBlock';
@@ -56,6 +56,7 @@ export default function SentenceDataEditModal({
   const userInputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
   const isComposingRef = useRef(false);
+  const lastRawValueRef = useRef('');
 
   const answerIssues = useAnswerTemplateIssues(answer);
   const canSave = answerIssues.length === 0 && !saving;
@@ -68,6 +69,7 @@ export default function SentenceDataEditModal({
     const preloaded = userInput.trim() || primarySurfaceFromTemplate(item.answer);
     setTestUser(preloaded);
     setRawUser(preloaded);
+    lastRawValueRef.current = preloaded;
     setIsComposing(false);
     setDidConvert(false);
     setSaveError(null);
@@ -186,25 +188,29 @@ export default function SentenceDataEditModal({
                     setDidConvert(false);
                     setIsComposing(true);
                     setTestUser(raw);
+                    lastRawValueRef.current = raw;
                     return;
                   }
                   setIsComposing(false);
-                  const didConvertNow = didConvertFromLatin(raw);
-                  setDidConvert(didConvertNow);
                   const caret = e.target.selectionStart;
-                  const converted = toHiraganaIME(raw);
-                  if (caret !== null) {
-                    pendingCaretRef.current = toHiraganaIME(raw.slice(0, caret)).length;
-                  }
-                  setTestUser(converted);
+                  const { value, caret: nextCaret, didConvert: didConvertNow } = applyJapaneseImeInputChange(
+                    lastRawValueRef.current,
+                    raw,
+                    caret,
+                  );
+                  setDidConvert(didConvertNow);
+                  if (nextCaret !== null) pendingCaretRef.current = nextCaret;
+                  setTestUser(value);
+                  lastRawValueRef.current = value;
                 }}
                 onCompositionStart={() => {
                   isComposingRef.current = true;
                   setIsComposing(true);
                 }}
-                onCompositionEnd={() => {
+                onCompositionEnd={e => {
                   isComposingRef.current = false;
                   setIsComposing(false);
+                  lastRawValueRef.current = e.currentTarget.value;
                 }}
                 autoCorrect="off"
                 autoCapitalize="none"

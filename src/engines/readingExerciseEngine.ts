@@ -19,6 +19,69 @@ export function didConvertFromLatin(raw: string) {
   return /[A-Za-z]/.test(raw);
 }
 
+function hasJapaneseChars(text: string) {
+  return /[\u3040-\u30ff\u3400-\u9fff]/.test(text);
+}
+
+function hasLatinLetters(text: string) {
+  return /[A-Za-z]/.test(text);
+}
+
+function isLatinImeChar(ch: string) {
+  return /[A-Za-z'-]/.test(ch);
+}
+
+export type JapaneseImeInputResult = {
+  value: string;
+  caret: number | null;
+  didConvert: boolean;
+};
+
+/** Romaji→hiragana only on the edited latin segment; leaves katakana/kanji unchanged. */
+export function applyJapaneseImeInputChange(
+  prev: string,
+  raw: string,
+  caret: number | null,
+): JapaneseImeInputResult {
+  let prefixLen = 0;
+  const minLen = Math.min(prev.length, raw.length);
+  while (prefixLen < minLen && prev[prefixLen] === raw[prefixLen]) prefixLen++;
+
+  let suffixLen = 0;
+  while (
+    suffixLen < prev.length - prefixLen &&
+    suffixLen < raw.length - prefixLen &&
+    prev[prev.length - 1 - suffixLen] === raw[raw.length - 1 - suffixLen]
+  ) {
+    suffixLen++;
+  }
+
+  let convertStart = prefixLen;
+  while (
+    convertStart > 0 &&
+    isLatinImeChar(raw[convertStart - 1] ?? '') &&
+    !hasJapaneseChars(raw[convertStart - 1] ?? '')
+  ) {
+    convertStart--;
+  }
+
+  const convertEnd = raw.length - suffixLen;
+  const segment = raw.slice(convertStart, convertEnd);
+
+  if (hasLatinLetters(segment) && !hasJapaneseChars(segment)) {
+    const convertedSegment = toHiraganaIME(segment);
+    const value = raw.slice(0, convertStart) + convertedSegment + raw.slice(convertEnd);
+    let newCaret = caret;
+    if (caret !== null) {
+      const caretSegment = raw.slice(convertStart, caret);
+      newCaret = convertStart + toHiraganaIME(caretSegment).length;
+    }
+    return { value, caret: newCaret, didConvert: true };
+  }
+
+  return { value: raw, caret, didConvert: false };
+}
+
 export class ReadingExercisePicker {
   private remainingIdx: number[] = [];
   private lastIdx: number | null = null;
