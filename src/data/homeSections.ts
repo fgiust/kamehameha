@@ -188,9 +188,9 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'genki4-1', beta: true },
-        { id: 'genki4-2', beta: true },
-        { id: 'genki4-3', beta: true },
+        { id: 'genki4-1' },
+        { id: 'genki4-2' },
+        { id: 'genki4-3' },
         { id: 'pastform', title: { key: 'home.genkiOverrides.pastTenseVerbs' } },
         { id: 'genki4-5', beta: true },
         { id: 'genki4-6', beta: true },

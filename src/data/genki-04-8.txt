@@ -27,7 +27,7 @@ Woody andrà al parco con Yasmin.
 
 Michiko will eat lunch with Naomi.
 Michiko pranzerà con Naomi.
-みちこさんはなおみさんと{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べます
+美智子[みちこ]さんは直美[なおみ]さんと{昼[ひる]ご飯[はん]|昼食[ちゅうしょく]|ランチ}を食[た]べます
 
 I played tennis with Carlos.
 Ho giocato a tennis con Carlos.

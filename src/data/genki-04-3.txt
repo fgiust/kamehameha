@@ -3,7 +3,7 @@ Passato di です
 
 Michiko was an office worker.
 Michiko era un'impiegata.
-みちこさんは会社員[かいしゃいん]でした
+美智子[みちこ]さんは会社員[かいしゃいん]でした
 
 Today was Monday.
 Oggi era lunedì.
@@ -31,7 +31,7 @@ Ken non era un liceale.
 
 Naomi was not a teacher.
 Naomi non era un'insegnante.
-なおみさんは先生[せんせい]{じゃなかったです|じゃありませんでした}
+直美[なおみ]さんは先生[せんせい]{じゃなかったです|じゃありませんでした}
 
 My major was history.
 La mia materia principale era storia.

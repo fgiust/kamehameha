@@ -23,7 +23,7 @@ Il mio gatto è molto grasso.
 
 Michiko is writing a letter in Japanese.
 Michiko sta scrivendo una lettera in giapponese.
-みちこさんは日本語[にほんご]で手紙[てがみ]を書[か]いています
+美智子[みちこ]さんは日本語[にほんご]で手紙[てがみ]を書[か]いています
 
 My parents live in Osaka.
 I miei genitori vivono a Osaka.
@@ -35,7 +35,7 @@ Mio padre lavora in ospedale.
 
 Naomi has gone to the library.
 Naomi è andata in biblioteca.
-なおみさんは図書館[としょかん]{に|へ}行[い]っています
+直美[なおみ]さんは図書館[としょかん]{に|へ}行[い]っています
 
 I am teaching English.
 Sto insegnando inglese.

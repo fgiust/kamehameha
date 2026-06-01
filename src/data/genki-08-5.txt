@@ -27,7 +27,7 @@ Carlos è bravo a giocare a calcio.
 
 Naomi is bad at swimming.
 Naomi è negata a nuotare.
-なおみさんは泳[およ]ぐのが下手[へた]です
+直美[なおみ]さんは泳[およ]ぐのが下手[へた]です
 
 Woody is good at fixing computers.
 Woody è bravo a riparare computer.
@@ -39,4 +39,4 @@ Non mi piace studiare la domenica.
 
 Michiko is good at writing letters.
 Michiko è brava a scrivere lettere.
-みちこさんは手紙[てがみ]を書[か]くのが上手[じょうず]です
+美智子[みちこ]さんは手紙[てがみ]を書[か]くのが上手[じょうず]です

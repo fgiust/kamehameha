@@ -15,7 +15,7 @@ A Pedro non piacciono le sue lezioni di matematica.
 
 Naomi hates rainy days.
 Naomi odia i giorni di pioggia.
-なおみさんは雨[あめ]の日[ひ]が大嫌[だいきら]いです
+直美[なおみ]さんは雨[あめ]の日[ひ]が大嫌[だいきら]いです
 
 I like cooking.
 Mi piace cucinare.
@@ -23,7 +23,7 @@ Mi piace cucinare.
 
 Michiko dislikes meat.
 A Michiko non piace la carne.
-みちこさんは肉[にく]が嫌[きら]いです
+美智子[みちこ]さんは肉[にく]が嫌[きら]いです
 
 This is my favorite song.
 Questa è la mia canzone preferita.

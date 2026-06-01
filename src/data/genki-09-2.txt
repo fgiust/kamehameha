@@ -27,7 +27,7 @@ La persona che beve caffè è Carlos.
 
 The boy talking to Naomi is Pedro.
 Il ragazzo che parla con Naomi è Pedro.
-なおみさんと話[はな]している男[おとこ]の子[こ]はペドロさんです
+直美[なおみ]さんと話[はな]している男[おとこ]の子[こ]はペドロさんです
 
 The student using a computer is Sue.
 Lo studente che usa il computer è Sue.
