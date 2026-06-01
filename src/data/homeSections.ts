@@ -177,9 +177,9 @@ export const homeConfig: HomeConfig = {
         { id: 'politeform', title: { key: 'home.genkiOverrides.verbConjugation' } },
         { id: 'genki3-2' },
         { id: 'genki3-3' },
-        { id: 'genki3-4', beta: true },
-        { id: 'genki3-5', beta: true },
-        { id: 'genki3-7', beta: true },
+        { id: 'genki3-4' },
+        { id: 'genki3-5' },
+        { id: 'genki3-7' },
       ],
     },
     {
