@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { diffSentenceAnswer } from '../src/diff';
 import { generateAnswersFromTemplate } from '../src/answers';
+import { validationRowFromOps } from '../src/fulltestCase';
 import { pickBestDiffFromTemplate } from '../src/resolve';
 import { matchesByRubyUnits } from '../src/ruby';
 
@@ -16,7 +17,9 @@ type FullDiffCase = {
 
 function parseFullDiffCases(input: string): FullDiffCase[] {
   const lines = input.split(/\r?\n/);
-  const cleaned = lines.filter(line => line.trim().length > 0);
+  const cleaned = lines
+    .filter(line => line.trim().length > 0)
+    .filter(line => !line.trim().startsWith('//'));
   const cases: FullDiffCase[] = [];
 
   for (let i = 0; i < cleaned.length; i += 5) {
@@ -92,6 +95,7 @@ describe('fulltests data format', () => {
       const { ops } = pickBestDiffFromTemplate(testCase.userAnswer, testCase.expectedExpression);
 
       expect(shownOutputFromOps(ops)).toBe(testCase.expectedShownOutput);
+      expect(validationRowFromOps(ops, isCorrect)).toBe(testCase.expectedValidationRow);
       assertValidationRowFormat(testCase.expectedShownOutput, testCase.expectedValidationRow);
       expect(testCase.expectedValidationRow.endsWith('✅')).toBe(isCorrect);
     });

@@ -23,3 +23,8 @@ export {
 export { formatDiffPlainText } from './plain';
 export { renderDiffHtml } from './render';
 export { gradeAnswer } from './grade';
+export {
+  shownOutputFromOps,
+  validationRowFromOps,
+  buildFulltestCaseText,
+} from './fulltestCase';

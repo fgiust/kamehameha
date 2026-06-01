@@ -76,7 +76,11 @@ export function userCharsConsumedForSegment(user: string, cursor: number, segmen
 
   const rest = user.slice(cursor);
   const greedy = greedyConsumeRubyPrefix(rest, segment);
-  if (greedy === stripRuby(segment).length) return greedy;
+  const segmentLen = stripRuby(segment).length;
+
+  if (greedy === segmentLen) return greedy;
+  // No alignment at cursor (e.g. fixed 時々 while user typed カフェ…): do not skip ahead.
+  if (greedy === 0) return 0;
 
   return diffPartialUserConsumed(rest, segment);
 }

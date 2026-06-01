@@ -53,6 +53,30 @@ describe('empty optional segment', () => {
   });
 });
 
+describe('fixed segment before alternative', () => {
+  const template =
+    '{私[わたし]は|}時々[ときどき]{喫茶店[きっさてん]|カフェ}で{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べます';
+
+  it('picks exact カフェ after skipping empty 私 and missing 時々', () => {
+    const user = 'カフェで朝ごはんを食べます';
+    const answer = resolveAnswerFromTemplate(user, template);
+
+    expect(answer).toBe('時々[ときどき]カフェで朝[あさ]ご飯[はん]を食[た]べます');
+    expect(answer).not.toContain('喫茶店');
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+    expect(shown).toBe('時々[ときどき]カフェで朝[あさ]ご飯[はん]を食[た]べます');
+    expect(ops.some(op => op.kind === 'extra' && op.text === 'カフェ')).toBe(false);
+  });
+});
+
 describe('optional 一緒に segment', () => {
   const template = '金曜日[きんようび]に{一緒[いっしょ]に|}ラーメンを食[た]べませんか';
 

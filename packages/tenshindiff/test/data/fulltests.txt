@@ -1,8 +1,15 @@
+// Validation row markers (one per shown character; `[` `]` copied literally):
+//   ・  match
+//   ー  wrong / removed (user extra or incorrect surface)
+//   ＋  added (template part missing from user answer)
+//   ＝  kanji mismatch, furigana correct (“yellow”)
+// Row ends with ✅ (correct) or ❌ (incorrect).
+
 # simple test 1
 私[わたし]は犬[いぬ]に噛[か]まれました
 私は犬にかまらま
 私[わたし]は犬[いぬ]に噛[か]まられました
-・[・・・]・・[・・]・・[ー]＋ー＋・＋＋❌
+・[・・・]・・[・・]・＝[・]・ー＋・＋＋❌
 
 # simple test 2
 私[わたし]は犬[いぬ]に噛[か]まれました
@@ -27,3 +34,9 @@
 金曜日に一緒にラーメンを食べませんか
 金曜日[きんようび]に一緒[いっしょ]にラーメンを食[た]べませんか
 ・・・[・・・・・]・・・[・・・・]・・・・・・・[・]・・・・・✅
+
+# select correct token after a previous mismatch
+{私[わたし]は|}時々[ときどき]{喫茶店[きっさてん]|カフェ}で{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べます
+カフェで朝ごはんを食べます
+時々[ときどき]カフェで朝[あさ]ご飯[はん]を食[た]べます
+＋＋[＋＋＋＋]・・・・・[・・]・＝[・・]・・[・]・・・❌

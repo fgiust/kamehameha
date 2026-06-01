@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildFulltestCaseText } from '../../src/utils/fulltestCase';
+import { buildFulltestCaseText, validationRowFromOps } from '../../src/utils/fulltestCase';
 import { pickBestDiffFromTemplate, generateAnswersFromTemplate } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../../src/utils/sentenceDiffOptions';
 
@@ -18,5 +18,6 @@ describe('buildFulltestCaseText', () => {
     expect(lines[0]).toBe('#');
     expect(lines[1]).toBe(template);
     expect(lines[2]).toBe(user);
+    expect(lines[4]).toBe(validationRowFromOps(ops, isCorrect));
   });
 });
