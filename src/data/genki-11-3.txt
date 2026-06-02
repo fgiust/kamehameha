@@ -31,7 +31,7 @@ Sora non ha mai cantato sul palco.
 
 I have never cooked for twenty people.
 Non ho mai cucinato per venti persone.
-{私[わたし]は|}{20人[にじゅうにん]|二十人[にじゅうにん]}の料理[りょうり]を作[つく]ったことがありません
+{私[わたし]は|}二十人[にじゅうにん]の料理[りょうり]を作[つく]ったことがありません
 
 Have you ever worked part-time?
 Hai mai fatto un lavoro part-time?

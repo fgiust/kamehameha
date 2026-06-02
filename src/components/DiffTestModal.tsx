@@ -77,7 +77,11 @@ export default function DiffTestModal({
 
   const parsedAlternatives = generateAnswersFromTemplate(correct, SENTENCE_DIFF_OPTIONS);
   const { ops } = pickBestDiffFromTemplate(user, correct, SENTENCE_DIFF_OPTIONS);
-  const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(user.trim(), a));
+  const isCorrect = parsedAlternatives.some(a =>
+    matchesByRubyUnits(user.trim(), a, {
+      allowNumericalAlternatives: SENTENCE_DIFF_OPTIONS.allowNumericalAlternatives,
+    }),
+  );
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>

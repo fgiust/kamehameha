@@ -110,7 +110,11 @@ export default function SentenceDataEditModal({
 
   const parsedAlternatives = generateAnswersFromTemplate(answer, SENTENCE_DIFF_OPTIONS);
   const { ops } = pickBestDiffFromTemplate(testUser, answer, SENTENCE_DIFF_OPTIONS);
-  const isCorrect = parsedAlternatives.some(a => matchesByRubyUnits(testUser.trim(), a));
+  const isCorrect = parsedAlternatives.some(a =>
+    matchesByRubyUnits(testUser.trim(), a, {
+      allowNumericalAlternatives: SENTENCE_DIFF_OPTIONS.allowNumericalAlternatives,
+    }),
+  );
 
   const fileName = lessonIdToDataFile(dataLessonId);
 

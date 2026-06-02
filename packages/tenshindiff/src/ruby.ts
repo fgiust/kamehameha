@@ -1,4 +1,9 @@
+import { surfacesAlignAt } from './numerals';
 import type { RubyUnit } from './types';
+
+export type RubyMatchOptions = {
+  allowNumericalAlternatives?: boolean;
+};
 
 /** Strip ruby annotations from text: 漢[かん]字[じ] → 漢字 (for display) */
 export function stripRuby(text: string): string {
@@ -88,7 +93,12 @@ export function parseRubyUnits(text: string): RubyUnit[] {
   return units;
 }
 
-export function matchesByRubyUnits(user: string, answerWithRuby: string): boolean {
+export function matchesByRubyUnits(
+  user: string,
+  answerWithRuby: string,
+  options: RubyMatchOptions = {},
+): boolean {
+  const allowNumbers = options.allowNumericalAlternatives === true;
   const units = parseRubyUnits(answerWithRuby);
   const memo = new Map<string, boolean>();
 
@@ -105,13 +115,17 @@ export function matchesByRubyUnits(user: string, answerWithRuby: string): boolea
 
     const unit = units[unitIndex]!;
     if (unit.kind === 'plain') {
-      const ok = user.startsWith(unit.surface, pos) && dfs(unitIndex + 1, pos + unit.surface.length);
+      const ok =
+        surfacesAlignAt(user, pos, unit.surface, allowNumbers) &&
+        dfs(unitIndex + 1, pos + unit.surface.length);
       memo.set(key, ok);
       return ok;
     }
 
     const canMatchSurface =
-      unit.surface.length > 0 && user.startsWith(unit.surface, pos) && dfs(unitIndex + 1, pos + unit.surface.length);
+      unit.surface.length > 0 &&
+      surfacesAlignAt(user, pos, unit.surface, allowNumbers) &&
+      dfs(unitIndex + 1, pos + unit.surface.length);
     if (canMatchSurface) {
       memo.set(key, true);
       return true;
@@ -128,18 +142,23 @@ export function matchesByRubyUnits(user: string, answerWithRuby: string): boolea
 }
 
 /** How many user chars align with the start of a ruby segment (unit-by-unit, left to right). */
-export function greedyConsumeRubyPrefix(userRest: string, segmentWithRuby: string): number {
+export function greedyConsumeRubyPrefix(
+  userRest: string,
+  segmentWithRuby: string,
+  options: RubyMatchOptions = {},
+): number {
+  const allowNumbers = options.allowNumericalAlternatives === true;
   const units = parseRubyUnits(segmentWithRuby);
   let pos = 0;
 
   for (const unit of units) {
     if (unit.kind === 'plain') {
-      if (!userRest.startsWith(unit.surface, pos)) return pos;
+      if (!surfacesAlignAt(userRest, pos, unit.surface, allowNumbers)) return pos;
       pos += unit.surface.length;
       continue;
     }
 
-    if (unit.surface.length > 0 && userRest.startsWith(unit.surface, pos)) {
+    if (unit.surface.length > 0 && surfacesAlignAt(userRest, pos, unit.surface, allowNumbers)) {
       pos += unit.surface.length;
       continue;
     }

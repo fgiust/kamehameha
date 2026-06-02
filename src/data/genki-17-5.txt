@@ -17,7 +17,7 @@ Sembra che abbia dimenticato l'ombrello.
 
 It looks like the meeting starts at three.
 Sembra che la riunione inizi alle tre.
-会議[かいぎ]は{3時[さんじ]|三時[さんじ]}から始[はじ]まるみたいです
+会議[かいぎ]は三時[さんじ]から始[はじ]まるみたいです
 
 She speaks like a native speaker.
 Parla come un madrelingua.
@@ -42,3 +42,4 @@ Sembra che abbia perso l'autobus stamattina.
 It seems she didn't receive the email.
 Sembra che non abbia ricevuto l'email.
 メールが届[とど]かなかったみたいです
+

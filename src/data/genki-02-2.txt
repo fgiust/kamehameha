@@ -7,7 +7,7 @@ Quanto costa questa borsa?
 
 That book is 1,000 yen.
 Quel libro costa 1.000 yen.
-その本[ほん]は{千円[せんえん]|1000円[せんえん]}です
+その本[ほん]は千円[せんえん]です
 
 That bicycle (over there) is expensive.
 Quella bicicletta (laggiù) è costosa.
@@ -15,7 +15,7 @@ Quella bicicletta (laggiù) è costosa.
 
 Which wallet is 5,000 yen?
 Quale portafoglio costa 5.000 yen?
-どの{財布[さいふ]|サイフ}が{五千円[ごせんえん]|5000円[ごせんえん]}ですか
+どの{財布[さいふ]|サイフ}が五千円[ごせんえん]ですか
 
 This fish is delicious.
 Questo pesce è delizioso.
@@ -23,7 +23,7 @@ Questo pesce è delizioso.
 
 That dictionary is 4,000 yen.
 Quel dizionario costa 4.000 yen.
-その辞書[じしょ]は{四千円[よんせんえん]|4000円[よんせんえん]}です
+その辞書[じしょ]は四千円[よんせんえん]です
 
 How much is that hat (over there)?
 Quanto costa quel cappello (laggiù)?
@@ -35,8 +35,8 @@ Quella banca (laggiù) è una banca giapponese?
 
 Which shoes are 3,000 yen?
 Quali scarpe costano 3.000 yen?
-どの靴[くつ]が{三千円[さんぜんえん]|3000円[さんぜんえん]}ですか
+どの靴[くつ]が三千円[さんぜんえん]ですか
 
 This newspaper is 100 yen.
 Questo giornale costa 100 yen.
-この新聞[しんぶん]は{百円[ひゃくえん]|100円[ひゃくえん]}です
+この新聞[しんぶん]は百円[ひゃくえん]です

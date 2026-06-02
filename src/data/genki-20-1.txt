@@ -7,7 +7,7 @@ Parteciperò alla conferenza il prossimo mese.
 
 I have lived in this city for three years.
 Vivo in questa città da tre anni.
-{3年間[さんねんかん]|三年間[さんねんかん]}この町[まち]に住[す]んでおります
+三年間[さんねんかん]この町[まち]に住[す]んでおります
 
 I received your letter yesterday.
 Ho ricevuto la sua lettera ieri.
@@ -19,7 +19,7 @@ Ultimamente studio calligrafia.
 
 I have been working at this company since April.
 Lavoro in questa azienda da aprile.
-{4月[しがつ]|四月[しがつ]}からこの会社[かいしゃ]で働[はたら]いております
+四月[しがつ]からこの会社[かいしゃ]で働[はたら]いております
 
 I am interested in Japanese culture.
 Sono interessato alla cultura giapponese.
@@ -39,4 +39,5 @@ Smoking is prohibited on this floor.
 
 The café is on the third floor.
 La caffetteria è al terzo piano.
-喫[きっ]茶[さ]店[てん]は{3階[さんがい]|三階[さんがい]}でございます
+喫[きっ]茶[さ]店[てん]は三階[さんがい]でございます
+

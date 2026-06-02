@@ -36,6 +36,7 @@ import { gradeAnswer, type DiffOptions } from 'tenshindiff';
 const options: DiffOptions = {
   ignoreTrailingPunctuation: true,
   commasAsOptional: true,
+  allowNumericalAlternatives: true,
 };
 
 gradeAnswer(user, template, options);
@@ -46,8 +47,9 @@ generateAnswersFromTemplate(template, options);
 |------|--------|
 | `ignoreTrailingPunctuation` | Equivalent to appending `{|。}`: the shorter answer (no `。`) is the default display target, but a user-added trailing `。` is accepted and shown as correct. |
 | `commasAsOptional` | Equivalent to wrapping every literal `、` as `{、|}`: commas in the template may be omitted or included. Existing `{、|}` groups are left unchanged. |
+| `allowNumericalAlternatives` | Expands numbers to `{kanji\|ascii\|fullwidth}` (e.g. `三` / `3` / `３`) and treats those forms as equivalent when matching and resolving the diff. Existing `{…\|…}` groups gain any missing numeric variants. |
 
-Low-level helpers: `applyTemplateDiffOptions`, `applyIgnoreTrailingPunctuation`, `applyCommasAsOptional`.
+Low-level helpers: `applyTemplateDiffOptions`, `applyIgnoreTrailingPunctuation`, `applyCommasAsOptional`, `applyNumericalAlternatives`.
 
 Validate templates in CI:
 

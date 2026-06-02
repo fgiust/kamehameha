@@ -20,7 +20,9 @@ export function gradeAnswer(
 ): GradeAnswerResult {
   const alternatives = generateAnswersFromTemplate(answerTemplate, options);
   const trimmed = user.trim();
-  const isCorrect = alternatives.some(a => matchesByRubyUnits(trimmed, a));
+  const isCorrect = alternatives.some(a =>
+    matchesByRubyUnits(trimmed, a, { allowNumericalAlternatives: options.allowNumericalAlternatives }),
+  );
   const { bestAnswer, ops } = pickBestDiffFromTemplate(trimmed, answerTemplate, options);
   return {
     isCorrect,

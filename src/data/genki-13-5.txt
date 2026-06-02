@@ -15,7 +15,7 @@ Per quanto riguarda il sashimi, mi piace il salmone.
 
 If you're going to Japan, May or November are the best times!
 Se vai in Giappone, maggio o novembre sono i periodi migliori!
-日[に]本[ほん]に行[い]くなら、5月[がつ]か11月[がつ]が{1番[いちばん]|一番[いちばん]}いい{です|よ}
+日[に]本[ほん]に行[い]くなら、5月[がつ]か11月[がつ]が一番[いちばん]いい{です|よ}
 
 I went to Japan, but I didn't go to South Korea.
 Sono andato in Giappone, ma non in Corea del Sud.
@@ -40,3 +40,4 @@ Guido una bicicletta, ma non un'auto.
 I drink tea, but not coffee.
 Bevo tè, ma non caffè.
 お茶[ちゃ]なら飲[の]みますが、コーヒーは飲[の]みません
+

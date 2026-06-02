@@ -260,7 +260,11 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
     if (!currentItem || !userInput.trim()) return;
     const normalized = finalizeIME(userInput.trim());
     const rawAnswers = generateAnswersFromTemplate(currentItem.answer, SENTENCE_DIFF_OPTIONS);
-    const isCorrect = rawAnswers.some(a => matchesByRubyUnits(normalized, a));
+    const isCorrect = rawAnswers.some(a =>
+      matchesByRubyUnits(normalized, a, {
+        allowNumericalAlternatives: SENTENCE_DIFF_OPTIONS.allowNumericalAlternatives,
+      }),
+    );
     const { bestAnswer: displayAnswer, ops } = pickBestDiffFromTemplate(normalized, currentItem.answer, SENTENCE_DIFF_OPTIONS);
 
     if (isCorrect) {

@@ -42,13 +42,19 @@ type SegmentScore = {
 };
 
 /** Prefix alignment score for one template segment against user input at cursor. */
-export function scoreSegmentAt(user: string, cursor: number, segment: string): SegmentScore {
+export function scoreSegmentAt(
+  user: string,
+  cursor: number,
+  segment: string,
+  options: DiffOptions = DEFAULT_DIFF_OPTIONS,
+): SegmentScore {
   if (segment === '') {
     return { exact: false, matched: 0 };
   }
 
+  const rubyOpts = { allowNumericalAlternatives: options.allowNumericalAlternatives };
   const rest = user.slice(cursor);
-  const greedy = greedyConsumeRubyPrefix(rest, segment);
+  const greedy = greedyConsumeRubyPrefix(rest, segment, rubyOpts);
   const segmentLen = stripRuby(segment).length;
 
   if (greedy === segmentLen) {
@@ -60,18 +66,26 @@ export function scoreSegmentAt(user: string, cursor: number, segment: string): S
 }
 
 /** Pick one alternative from a {a|b} group (first configured wins ties). */
-export function pickSegmentAlternative(user: string, cursor: number, alternatives: string[]): string {
+export function pickSegmentAlternative(
+  user: string,
+  cursor: number,
+  alternatives: string[],
+  options: DiffOptions = DEFAULT_DIFF_OPTIONS,
+): string {
   if (alternatives.length === 0) return '';
   if (alternatives.length === 1) return alternatives[0]!;
 
   const scored = alternatives.map((alt, index) => ({
     alt,
     index,
-    ...scoreSegmentAt(user, cursor, alt),
+    ...scoreSegmentAt(user, cursor, alt, options),
   }));
 
   const exact = scored.filter(s => s.exact);
   if (exact.length > 0) {
+    const rest = user.slice(cursor);
+    const literal = exact.find(s => rest.startsWith(stripRuby(s.alt)));
+    if (literal) return literal.alt;
     return exact.reduce((best, s) => (s.index < best.index ? s : best)).alt;
   }
 
@@ -93,12 +107,13 @@ export function userCharsConsumedForSegment(
   user: string,
   cursor: number,
   segment: string,
-  options: { fixed?: boolean } = {},
+  options: { fixed?: boolean; diff?: DiffOptions } = {},
 ): number {
   if (segment === '') return 0;
 
+  const rubyOpts = { allowNumericalAlternatives: options.diff?.allowNumericalAlternatives };
   const rest = user.slice(cursor);
-  const greedy = greedyConsumeRubyPrefix(rest, segment);
+  const greedy = greedyConsumeRubyPrefix(rest, segment, rubyOpts);
   const segmentLen = stripRuby(segment).length;
 
   if (greedy === segmentLen) return greedy;
@@ -114,20 +129,24 @@ export function userCharsConsumedForSegment(
 }
 
 /** Resolve a template into the best concrete answer for diff display. */
-export function resolveAnswerFromParts(user: string, parts: (string | string[])[]): string {
+export function resolveAnswerFromParts(
+  user: string,
+  parts: (string | string[])[],
+  options: DiffOptions = DEFAULT_DIFF_OPTIONS,
+): string {
   let cursor = 0;
   const resolved: string[] = [];
 
   for (const part of parts) {
     if (typeof part === 'string') {
       resolved.push(part);
-      cursor += userCharsConsumedForSegment(user, cursor, part, { fixed: true });
+      cursor += userCharsConsumedForSegment(user, cursor, part, { fixed: true, diff: options });
       continue;
     }
 
-    const chosen = pickSegmentAlternative(user, cursor, part);
+    const chosen = pickSegmentAlternative(user, cursor, part, options);
     resolved.push(chosen);
-    cursor += userCharsConsumedForSegment(user, cursor, chosen, { fixed: false });
+    cursor += userCharsConsumedForSegment(user, cursor, chosen, { fixed: false, diff: options });
   }
 
   return resolved.join('');
@@ -139,7 +158,7 @@ export function resolveAnswerFromTemplate(
   options: DiffOptions = DEFAULT_DIFF_OPTIONS,
 ): string {
   const prepared = applyTemplateDiffOptions(template, options);
-  return resolveAnswerFromParts(user, parseAnswerTemplate(prepared));
+  return resolveAnswerFromParts(user, parseAnswerTemplate(prepared), options);
 }
 
 export function pickBestDiffFromTemplate(

@@ -4,4 +4,5 @@ import type { DiffOptions } from 'tenshindiff';
 export const SENTENCE_DIFF_OPTIONS: DiffOptions = {
   ignoreTrailingPunctuation: true,
   commasAsOptional: true,
+  allowNumericalAlternatives: true,
 };

@@ -1,3 +1,5 @@
+import { applyNumericalAlternatives } from './numerals';
+
 /** Grading / diff options applied when expanding answer templates. All flags default to false. */
 export type DiffOptions = {
   /**
@@ -10,6 +12,11 @@ export type DiffOptions = {
    * Equivalent to wrapping every 、 as `{、|}` before parsing alternatives.
    */
   commasAsOptional?: boolean;
+  /**
+   * Wrap each number in the template as `{kanji|ascii|fullwidth}` alternatives
+   * (e.g. 三 / 3 / ３) so any form is accepted in answers and diff.
+   */
+  allowNumericalAlternatives?: boolean;
 };
 
 export const DEFAULT_DIFF_OPTIONS: DiffOptions = {};
@@ -52,6 +59,9 @@ export function applyIgnoreTrailingPunctuation(template: string): string {
 /** Apply diff options to a raw answer template string. */
 export function applyTemplateDiffOptions(template: string, options: DiffOptions = DEFAULT_DIFF_OPTIONS): string {
   let result = template;
+  if (options.allowNumericalAlternatives) {
+    result = applyNumericalAlternatives(result);
+  }
   if (options.commasAsOptional) {
     result = applyCommasAsOptional(result);
   }
@@ -60,3 +70,5 @@ export function applyTemplateDiffOptions(template: string, options: DiffOptions 
   }
   return result;
 }
+
+export { applyNumericalAlternatives } from './numerals';
