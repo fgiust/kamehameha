@@ -3,7 +3,7 @@
 
 I ate a lot of fruit yesterday.
 Ho mangiato molta frutta ieri.
-{私[わたし]は|}昨日[きのう]果物[くだもの]をたくさん食[た]べました
+{私[わたし]は|}昨日[きのう]{果物[くだもの]をたくさん|たくさん果物[くだもの]を}食[た]べました
 
 Naomi wrote a lot of emails at work.
 Naomi ha scritto molte email al lavoro.
