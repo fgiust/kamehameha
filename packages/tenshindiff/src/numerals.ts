@@ -185,15 +185,14 @@ export function expandAlternativeGroupNumbers(content: string): string[] {
   return [...out];
 }
 
-/** Compare surfaces char-by-char, treating equivalent number notations as equal. */
-export function surfacesAlignAt(
+function alignSurfaceAt(
   user: string,
   userPos: number,
   surface: string,
   allowNumericalAlternatives: boolean,
-): boolean {
-  if (user.startsWith(surface, userPos)) return true;
-  if (!allowNumericalAlternatives || surface.length === 0) return false;
+): number | null {
+  if (user.startsWith(surface, userPos)) return surface.length;
+  if (!allowNumericalAlternatives || surface.length === 0) return null;
 
   let si = 0;
   let up = userPos;
@@ -217,10 +216,56 @@ export function surfacesAlignAt(
       }
     }
 
-    return false;
+    return null;
   }
 
-  return true;
+  return up - userPos;
+}
+
+/** Compare surfaces char-by-char, treating equivalent number notations as equal. */
+export function surfacesAlignAt(
+  user: string,
+  userPos: number,
+  surface: string,
+  allowNumericalAlternatives: boolean,
+): boolean {
+  return alignSurfaceAt(user, userPos, surface, allowNumericalAlternatives) !== null;
+}
+
+/** How many user chars match a template surface at `userPos` (for diff cursor advance). */
+export function matchingUserPrefixLength(
+  user: string,
+  userPos: number,
+  surface: string,
+  allowNumericalAlternatives: boolean,
+): number | null {
+  return alignSurfaceAt(user, userPos, surface, allowNumericalAlternatives);
+}
+
+/**
+ * When a number is only the prefix of a ruby surface (e.g. 三十 in 三十分[…]),
+ * wrap the whole surface+reading as `{三十分[…]|30分[…]|…}` instead of splitting.
+ */
+function tryWrapRubySurfaceNumber(
+  template: string,
+  start: number,
+): { wrapped: string; end: number } | null {
+  const bracket = template.indexOf('[', start);
+  if (bracket === -1 || bracket === start) return null;
+
+  const surface = template.slice(start, bracket);
+  const span = readNumberSpanAt(surface, 0);
+  if (!span || span.end >= surface.length) return null;
+
+  const variants = expandNumberPrefixVariants(surface);
+  if (variants.length === 0) return null;
+
+  const close = template.indexOf(']', bracket);
+  if (close === -1) return null;
+
+  const reading = template.slice(bracket, close + 1);
+  const alts = [...new Set([surface, ...variants])].map(s => s + reading);
+  return { wrapped: `{${alts.join('|')}}`, end: close };
 }
 
 /** Wrap bare number runs outside `{…}` as `{kanji|ascii|fullwidth}`. */
@@ -240,6 +285,13 @@ export function applyNumericalAlternatives(template: string): string {
       const expanded = expandAlternativeGroupNumbers(content);
       out += `{${expanded.join('|')}}`;
       i = close;
+      continue;
+    }
+
+    const rubyWrap = tryWrapRubySurfaceNumber(template, i);
+    if (rubyWrap) {
+      out += rubyWrap.wrapped;
+      i = rubyWrap.end;
       continue;
     }
 

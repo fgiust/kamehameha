@@ -101,6 +101,52 @@ describe('fixed segment with internal typo', () => {
   });
 });
 
+describe('single wrong character in fixed segment', () => {
+  const template =
+    'ウッディさんは{喫茶店[きっさてん]|カフェ}でスーさんを一時間半[いちじかんはん]待[ま]ちました';
+  const options = { allowNumericalAlternatives: true };
+
+  it('does not duplicate 一時間半 after a に/を typo', () => {
+    const user = 'ウッディさんはカフェでスーさんにを1時間半待ちました';
+    const { ops, bestAnswer } = pickBestDiffFromTemplate(user, template, options);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+
+    expect(shown).toBe('ウッディさんはカフェでスーさんにを1時間半[いちじかんはん]待[ま]ちました');
+    expect(shown).not.toContain('一時間半一時間半');
+    expect(bestAnswer).toContain('[いちじかんはん]');
+    expect(ops.some(op => op.kind === 'extra' && op.text.includes('一時間半'))).toBe(false);
+  });
+
+  it('does not mark ぐ as wrong when 三分 is the kanji error before ぐらい', () => {
+    const template =
+      'ゆいさんは毎日[まいにち]三十分[さんじゅっぷん]{くらい|ぐらい}日本語[にほんご]を勉強[べんきょう]します';
+    const user = 'ゆいさんは毎日三分ぐらい日本語を勉強します';
+    const options = { allowNumericalAlternatives: true as const };
+
+    const { bestAnswer, ops } = pickBestDiffFromTemplate(user, template, options);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+
+    expect(shown).toBe(
+      'ゆいさんは毎日[まいにち]三分三十分[さんじゅっぷん]ぐらい日本語[にほんご]を勉強[べんきょう]します',
+    );
+    expect(shown).not.toContain('三分ぐ');
+    expect(bestAnswer).toContain('ぐらい');
+    expect(ops.some(op => op.kind === 'extra' && op.text.includes('ぐ'))).toBe(false);
+  });
+});
+
 describe('optional 一緒に segment', () => {
   const template = '金曜日[きんようび]に{一緒[いっしょ]に|}ラーメンを食[た]べませんか';
 

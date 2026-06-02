@@ -90,11 +90,19 @@ describe('fulltests data format', () => {
 
   for (const testCase of cases) {
     it(testCase.name.replace(/^#\s*/, ''), () => {
-      const alternatives = generateAnswersFromTemplate(testCase.expectedExpression);
-      const isCorrect = alternatives.some(a => matchesByRubyUnits(testCase.userAnswer, a));
-      const { ops } = pickBestDiffFromTemplate(testCase.userAnswer, testCase.expectedExpression);
+      const diffOptions = { allowNumericalAlternatives: true };
+      const alternatives = generateAnswersFromTemplate(testCase.expectedExpression, diffOptions);
+      const isCorrect = alternatives.some(a =>
+        matchesByRubyUnits(testCase.userAnswer, a, { allowNumericalAlternatives: true }),
+      );
+      const { ops } = pickBestDiffFromTemplate(
+        testCase.userAnswer,
+        testCase.expectedExpression,
+        diffOptions,
+      );
 
       expect(shownOutputFromOps(ops)).toBe(testCase.expectedShownOutput);
+      expect(testCase.expectedShownOutput).not.toMatch(/(.{3,})\1/u);
       expect(validationRowFromOps(ops, isCorrect)).toBe(testCase.expectedValidationRow);
       assertValidationRowFormat(testCase.expectedShownOutput, testCase.expectedValidationRow);
       expect(testCase.expectedValidationRow.endsWith('✅')).toBe(isCorrect);

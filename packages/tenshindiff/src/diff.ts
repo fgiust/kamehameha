@@ -1,7 +1,13 @@
-import { matchesByRubyUnits, parseRubyUnits, stripRuby } from './ruby';
+import { matchingUserPrefixLength } from './numerals';
+import { matchesByRubyUnits, parseRubyUnits, stripRuby, type RubyMatchOptions } from './ruby';
 import type { DiffUnitOp } from './types';
 
-export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUnitOp[] {
+export function diffSentenceAnswer(
+  user: string,
+  answerWithRuby: string,
+  options: RubyMatchOptions = {},
+): DiffUnitOp[] {
+  const allowNumbers = options.allowNumericalAlternatives === true;
   const units = parseRubyUnits(answerWithRuby);
 
   const memo = new Map<string, { cost: number; ops: DiffUnitOp[] }>();
@@ -30,12 +36,15 @@ export function diffSentenceAnswer(user: string, answerWithRuby: string): DiffUn
     if (u < units.length) {
       const unit = units[u]!;
 
-      if (unit.surface && user.startsWith(unit.surface, c)) {
-        const resSurf = dfs(u + 1, c + unit.surface.length);
-        const costSurf = resSurf.cost;
-        if (costSurf < bestCost) {
-          bestCost = costSurf;
-          bestOps = [{ kind: 'unit', unit, status: 'correct_kanji' }, ...resSurf.ops];
+      if (unit.surface) {
+        const surfLen = matchingUserPrefixLength(user, c, unit.surface, allowNumbers);
+        if (surfLen !== null) {
+          const resSurf = dfs(u + 1, c + surfLen);
+          const costSurf = resSurf.cost;
+          if (costSurf < bestCost) {
+            bestCost = costSurf;
+            bestOps = [{ kind: 'unit', unit, status: 'correct_kanji' }, ...resSurf.ops];
+          }
         }
       }
 

@@ -28,7 +28,12 @@ describe('numerals', () => {
   });
 
   it('wraps bare numbers outside brace groups', () => {
-    expect(applyNumericalAlternatives('一週間[いっしゅうかん]')).toBe('{一|1|１}週間[いっしゅうかん]');
+    expect(applyNumericalAlternatives('一週間[いっしゅうかん]')).toBe(
+      '{一週間[いっしゅうかん]|1週間[いっしゅうかん]|１週間[いっしゅうかん]}',
+    );
+    expect(applyNumericalAlternatives('三十分[さんじゅっぷん]')).toBe(
+      '{三十分[さんじゅっぷん]|30分[さんじゅっぷん]|３０分[さんじゅっぷん]}',
+    );
     expect(applyNumericalAlternatives('{3つ|三つ}[みっつ]')).toBe(
       '{3つ|三つ|３つ}[みっつ]',
     );

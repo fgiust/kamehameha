@@ -19,7 +19,7 @@ Andrò all'ufficio postale a comprare francobolli.
 
 Yasmin and Ken met and studied for about two hours.
 Yasmin e Ken si sono incontrati e hanno studiato per circa due ore.
-ヤスミンさんとけんさんは会[あ]って、二時間[にじかん]ぐらい勉強[べんきょう]しました
+ヤスミンさんとけんさんは会[あ]って、二時間[にじかん]{くらい|ぐらい}勉強[べんきょう]しました
 
 I got up early and went for a walk.
 Mi sono alzato presto e ho fatto una passeggiata.
