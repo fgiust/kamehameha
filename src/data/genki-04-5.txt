@@ -3,7 +3,7 @@
 
 Sue went to the sea last month, too.
 Anche Sue è andata al mare il mese scorso.
-スーさんも先月[せんげつ]海[うみ]{に|へ}行[い]きました
+{スーさんも先月[せんげつ]|先月[せんげつ]スーさんも}海[うみ]{に|へ}行[い]きました
 
 Pedro bought a book, too.
 Anche Pedro ha comprato un libro.
@@ -34,7 +34,7 @@ Mangio anche pane.
 {私[わたし]は|}パンも食[た]べます
 
 He watched a movie on Friday, too.
-Ha guardato un film anche venerdì.
+Lui ha guardato un film anche venerdì.
 彼[かれ]は金曜日[きんようび]も映画[えいが]を見[み]ました
 
 I read a magazine at the station, too.

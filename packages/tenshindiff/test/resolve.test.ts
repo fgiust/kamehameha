@@ -77,6 +77,30 @@ describe('fixed segment before alternative', () => {
   });
 });
 
+describe('fixed segment with internal typo', () => {
+  const template =
+    'カルロスさんも{喫茶店[きっさてん]|カフェ}{に|へ}行[い]きました';
+
+  it('still picks カフェ after カルス typo in the fixed prefix', () => {
+    const user = 'カルスさんもカフェに行きました';
+    const answer = resolveAnswerFromTemplate(user, template);
+
+    expect(answer).toBe('カルロスさんもカフェに行[い]きました');
+    expect(answer).not.toContain('喫茶店');
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    expect(ops.some(op => op.kind === 'extra' && op.text.includes('カフェ'))).toBe(false);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+    expect(shown).toBe('カルロスさんもカフェに行[い]きました');
+  });
+});
+
 describe('optional 一緒に segment', () => {
   const template = '金曜日[きんようび]に{一緒[いっしょ]に|}ラーメンを食[た]べませんか';
 

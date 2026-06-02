@@ -4,6 +4,7 @@ import { parseAnswerTemplate } from './template';
 import { greedyConsumeRubyPrefix, stripRuby } from './ruby';
 import type { DiffUnitOp } from './types';
 
+/** Chars consumed for a chosen {alt|…} segment (stops at first template-only missing). */
 function diffPartialUserConsumed(rest: string, segment: string): number {
   const ops = diffSentenceAnswer(rest, segment);
   let consumed = 0;
@@ -13,6 +14,23 @@ function diffPartialUserConsumed(rest: string, segment: string): number {
     if (op.kind === 'unit' && op.status === 'correct_kanji') consumed += op.unit.surface.length;
     else if (op.kind === 'unit' && op.status === 'correct_kana') consumed += op.unit.reading.length;
     else if (op.kind === 'extra') consumed += op.text.length;
+  }
+
+  return consumed;
+}
+
+/**
+ * Chars consumed for a fixed template segment: walk all template units (including
+ * missing) and stop at the first user extra (text past this segment).
+ */
+function diffFixedSegmentUserConsumed(rest: string, segment: string): number {
+  const ops = diffSentenceAnswer(rest, segment);
+  let consumed = 0;
+
+  for (const op of ops) {
+    if (op.kind === 'extra') break;
+    if (op.kind === 'unit' && op.status === 'correct_kanji') consumed += op.unit.surface.length;
+    else if (op.kind === 'unit' && op.status === 'correct_kana') consumed += op.unit.reading.length;
   }
 
   return consumed;
@@ -71,7 +89,12 @@ export function pickSegmentAlternative(user: string, cursor: number, alternative
 }
 
 /** User input chars consumed when diffing one segment from cursor. */
-export function userCharsConsumedForSegment(user: string, cursor: number, segment: string): number {
+export function userCharsConsumedForSegment(
+  user: string,
+  cursor: number,
+  segment: string,
+  options: { fixed?: boolean } = {},
+): number {
   if (segment === '') return 0;
 
   const rest = user.slice(cursor);
@@ -79,9 +102,14 @@ export function userCharsConsumedForSegment(user: string, cursor: number, segmen
   const segmentLen = stripRuby(segment).length;
 
   if (greedy === segmentLen) return greedy;
-  // No alignment at cursor (e.g. fixed 時々 while user typed カフェ…): do not skip ahead.
-  if (greedy === 0) return 0;
 
+  if (options.fixed) {
+    // No shared prefix (e.g. fixed 時々 while user typed カフェ…): do not skip ahead.
+    if (greedy === 0) return 0;
+    return diffFixedSegmentUserConsumed(rest, segment);
+  }
+
+  if (greedy === 0) return 0;
   return diffPartialUserConsumed(rest, segment);
 }
 
@@ -93,13 +121,13 @@ export function resolveAnswerFromParts(user: string, parts: (string | string[])[
   for (const part of parts) {
     if (typeof part === 'string') {
       resolved.push(part);
-      cursor += userCharsConsumedForSegment(user, cursor, part);
+      cursor += userCharsConsumedForSegment(user, cursor, part, { fixed: true });
       continue;
     }
 
     const chosen = pickSegmentAlternative(user, cursor, part);
     resolved.push(chosen);
-    cursor += userCharsConsumedForSegment(user, cursor, chosen);
+    cursor += userCharsConsumedForSegment(user, cursor, chosen, { fixed: false });
   }
 
   return resolved.join('');
