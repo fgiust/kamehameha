@@ -33,9 +33,9 @@ The student using a computer is Sue.
 Lo studente che usa il computer è Sue.
 パソコンを使[つか]っている学生[がくせい]はスーさんです
 
-This is the cake that Woody baked.
-Questa è la torta che Woody ha preparato.
-これはウッディさんが焼[や]いたケーキです
+This is the cake that Pedro baked.
+Questa è la torta che Pedro ha preparato.
+これはペドロさんが焼[や]いたケーキです
 
 That is the postcard I sent.
 Quella è la cartolina che ho spedito.

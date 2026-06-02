@@ -5,9 +5,9 @@ Yasmin has short hair.
 Yasmin ha i capelli corti.
 ヤスミンさんは髪[かみ]が短[みじか]いです
 
-Woody has a big mouth.
-Woody ha una bocca grande.
-ウッディさんは口[くち]が大[おお]きいです
+Pedro has a big mouth.
+Pedro ha una bocca grande.
+ペドロさんは口[くち]が大[おお]きいです
 
 Michiko has a pretty face.
 Michiko ha un viso carino.

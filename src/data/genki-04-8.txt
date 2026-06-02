@@ -21,9 +21,9 @@ Pedro bought a dictionary and a map.
 Pedro ha comprato un dizionario e una mappa.
 ペドロさんは辞書[じしょ]と地図[ちず]を買[か]いました
 
-Woody will go to the park with Yasmin.
-Woody andrà al parco con Yasmin.
-ウッディさんはヤスミンさんと公園[こうえん]{に|へ}行[い]きます
+Pedro will go to the park with Yasmin.
+Pedro andrà al parco con Yasmin.
+ペドロさんはヤスミンさんと公園[こうえん]{に|へ}行[い]きます
 
 Michiko will eat lunch with Naomi.
 Michiko pranzerà con Naomi.

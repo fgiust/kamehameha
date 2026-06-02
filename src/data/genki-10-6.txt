@@ -25,9 +25,9 @@ No, I didn't buy anything.
 No, non ho comprato nulla.
 いいえ、何[なに]も買[か]いませんでした
 
-Did Woody eat anything for breakfast?
-Woody ha mangiato qualcosa a colazione?
-ウッディさんは{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}に何[なに]か食[た]べましたか
+Did Pedro eat anything for breakfast?
+Pedro ha mangiato qualcosa a colazione?
+ペドロさんは{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}に何[なに]か食[た]べましたか
 
 Did Naomi go anywhere last Sunday?
 Naomi è andata da qualche parte domenica scorsa?

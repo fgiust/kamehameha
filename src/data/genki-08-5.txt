@@ -29,9 +29,9 @@ Naomi is bad at swimming.
 Naomi è negata a nuotare.
 直美[なおみ]さんは泳[およ]ぐのが下手[へた]です
 
-Woody is good at fixing computers.
-Woody è bravo a riparare computer.
-ウッディさんはパソコンを直[なお]すのが上手[じょうず]です
+Pedro is good at fixing computers.
+Pedro è bravo a riparare computer.
+ペドロさんはパソコンを直[なお]すのが上手[じょうず]です
 
 I don't like studying on Sundays.
 Non mi piace studiare la domenica.

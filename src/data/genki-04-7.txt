@@ -13,9 +13,9 @@ Pedro listens to a lot of music.
 Pedro ascolta molta musica.
 ペドロさんは音楽[おんがく]をたくさん聞[き]きます
 
-Woody bought a lot of vegetables at the supermarket.
-Woody ha comprato molte verdure al supermercato.
-ウッディさんはスーパーで野菜[やさい]をたくさん買[か]いました
+Pedro bought a lot of vegetables at the supermarket.
+Pedro ha comprato molte verdure al supermercato.
+ペドロさんはスーパーで野菜[やさい]をたくさん買[か]いました
 
 I use the computer a lot.
 Uso molto il computer.

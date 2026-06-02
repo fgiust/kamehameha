@@ -5,9 +5,9 @@ Yasmin waited for John at the station for an hour.
 Yasmin ha aspettato John in stazione per un'ora.
 ヤスミンさんは駅[えき]でジョンさんを一時間[いちじかん]待[ま]ちました
 
-Woody waited for Sue at the café for an hour and a half.
-Woody ha aspettato Sue al caffè per un'ora e mezza.
-ウッディさんは{喫茶店[きっさてん]|カフェ}でスーさんを一時間半[いちじかんはん]待[ま]ちました
+Pedro waited for Sue at the café for an hour and a half.
+Pedro ha aspettato Sue al caffè per un'ora e mezza.
+ペドロさんは{喫茶店[きっさてん]|カフェ}でスーさんを一時間半[いちじかんはん]待[ま]ちました
 
 Michiko studied at the library for two hours yesterday.
 Michiko ha studiato in biblioteca per due ore ieri.
