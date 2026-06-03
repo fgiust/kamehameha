@@ -30,6 +30,28 @@ describe('resolveAnswerFromTemplate', () => {
   });
 });
 
+describe('partial optional segment match', () => {
+  const template = '{私[わたし]は|}料理[りょうり]{をするの|}が好[す]きです';
+
+  it('picks をするの when user omits を but types するの', () => {
+    const user = '料理するのが好きです';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer).toBe('料理[りょうり]をするのが好[す]きです');
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+
+    expect(shown).toBe('料理[りょうり]をするのが好[す]きです');
+    expect(ops.some(op => op.kind === 'extra' && op.text.includes('するの'))).toBe(false);
+  });
+});
+
 describe('empty optional segment', () => {
   const template =
     '{私[わたし]は|}中国人[ちゅうごくじん]{じゃないです|じゃありません|ではありません}';

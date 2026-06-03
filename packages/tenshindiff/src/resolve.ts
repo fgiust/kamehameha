@@ -151,6 +151,31 @@ type SegmentScore = {
   matched: number;
 };
 
+/**
+ * Matched surface/reading length from diff ops. Leading user extras before the first
+ * correct unit score 0 (avoids spurious hits like は inside ごはん when the user typed カフェ).
+ * Trailing extras after a partial hit are ignored.
+ */
+function segmentAlignmentScore(rest: string, segment: string, rubyOptions: RubyMatchOptions = {}): number {
+  const ops = diffSentenceAnswer(rest, segment, rubyOptions);
+  let matched = 0;
+  let seenCorrect = false;
+
+  for (const op of ops) {
+    if (op.kind === 'extra') {
+      if (!seenCorrect) return 0;
+      break;
+    }
+    if (op.kind === 'unit' && (op.status === 'correct_kanji' || op.status === 'correct_kana')) {
+      seenCorrect = true;
+      matched +=
+        op.status === 'correct_kanji' ? op.unit.surface.length : op.unit.reading.length;
+    }
+  }
+
+  return matched;
+}
+
 /** Prefix alignment score for one template segment against user input at cursor. */
 export function scoreSegmentAt(
   user: string,
@@ -171,8 +196,9 @@ export function scoreSegmentAt(
     return { exact: true, matched: greedy };
   }
 
-  // Segment choice uses greedy alignment only (ignore diff "extras" before missing).
-  return { exact: false, matched: greedy };
+  // Diff alignment (e.g. user するの vs template をするの: を missing, 3 chars still match).
+  const aligned = segmentAlignmentScore(rest, segment, rubyOpts);
+  return { exact: false, matched: Math.max(greedy, aligned) };
 }
 
 /** Pick one alternative from a {a|b} group (first configured wins ties). */

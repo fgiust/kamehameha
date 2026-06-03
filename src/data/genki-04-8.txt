@@ -37,6 +37,6 @@ Ken studied history with Professor Yamashita.
 Ken ha studiato storia con il professor Yamashita.
 けんさんは山下[やました]先生[せんせい]と歴史[れきし]を勉強[べんきょう]しました
 
-I will eat dinner with my friend tomorrow.
-Mangerò la cena con il mio amico domani.
+I will have dinner with my friend tomorrow.
+Domani cenerò con il mio amico.
 {私[わたし]は|}明日[あした]友達[ともだち]と{晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を食[た]べます

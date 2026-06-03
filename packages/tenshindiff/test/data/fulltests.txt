@@ -17,6 +17,12 @@
 私[わたし]は犬[いぬ]に噛[か]まれました
 ・[・・・]・・[・・]・＝[・]・・・・・✅
 
+# partial match should select best option (missing を, not empty alt)
+{私[わたし]は|}料理[りょうり]{をするの|}が好[す]きです
+料理するのが好きです
+料理[りょうり]をするのが好[す]きです
+・・[・・・・]＋・・・・・[・]・・・❌
+
 # select preferred options with none and partial matches
 {|私[わたし]は}{喫茶店[きっさてん]|カフェ}で昼ご飯[ひるごはん]を食[た]べます
 カフィで昼ご飯を食べます

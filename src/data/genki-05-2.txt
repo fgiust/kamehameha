@@ -1,16 +1,16 @@
 好き/きらい(な)
 好き/きらい(な)
 
-Yui likes her history classes.
-A Yui piacciono le sue lezioni di storia.
+Yui likes history classes.
+A Yui piacciono le lezioni di storia.
 ゆいさんは歴史[れきし]のクラスが好[す]きです
 
 I love cats.
 Amo i gatti.
 {私[わたし]は|}猫[ねこ]が大好[だいす]きです
 
-Pedro dislikes his math classes.
-A Pedro non piacciono le sue lezioni di matematica.
+Pedro dislikes math classes.
+A Pedro non piacciono le lezioni di matematica.
 ペドロさんは数学[すうがく]のクラスが嫌[きら]いです
 
 Naomi hates rainy days.
@@ -19,7 +19,7 @@ Naomi odia i giorni di pioggia.
 
 I like cooking.
 Mi piace cucinare.
-{私[わたし]は|}料理[りょうり]が好[す]きです
+{私[わたし]は|}料理[りょうり]{をするの|}が好[す]きです
 
 Michiko dislikes meat.
 A Michiko non piace la carne.
@@ -31,7 +31,7 @@ Questa è la mia canzone preferita.
 
 That is my favorite park.
 Quello è il mio parco preferito.
-あれは私[わたし]の好[す]きな公園[こうえん]です
+{あれ|それ}は{私[わたし]の|}好[す]きな公園[こうえん]です
 
 I hate hot summers.
 Odio le estati calde.

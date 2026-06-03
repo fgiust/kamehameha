@@ -19,7 +19,7 @@ Il test non era difficile.
 
 Last night was fun.
 La scorsa notte è stata divertente.
-昨夜[ゆうべ]は楽[たの]しかったです
+{昨夜[ゆうべ]|昨日[きのう]の夜[よる]}は楽[たの]しかったです
 
 The homework was not difficult.
 I compiti non erano difficili.
@@ -35,8 +35,8 @@ Mio nonno sta bene.
 
 The mountains in Hokkaido were very beautiful.
 Le montagne in Hokkaido erano molto belle.
-北海道[ほっかいどう]の山[やま]はとてもきれいでした
+北海道[ほっかいどう]の山[やま]はとても綺麗[きれい]でした
 
 Professor Yamashita is a kind teacher.
 Il professor Yamashita è un insegnante gentile.
-山下[やました]先生[せんせい]は親切[しんせつ]な先生[せんせい]です
+山下[やました]先生[せんせい]は{親切[しんせつ]な|優[やさ]しい}先生[せんせい]です
