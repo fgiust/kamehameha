@@ -15,14 +15,14 @@ Leggiamo questo libro stasera.
 
 Let's write an email to our friend.
 Scriviamo un'email al nostro amico.
-友達[ともだち]にメールを書[か]きましょう
+{私[わたし]たちの|}友達[ともだち]にメールを書[か]きましょう
 
 Shall we play tennis together?
 Giochiamo a tennis insieme?
 一緒[いっしょ]にテニスをしましょうか
 
 Shall we eat cake at the café?
-Mangiamo una torta al caffè?
+Mangiamo una torta al bar?
 {喫茶店[きっさてん]|カフェ}でケーキを食[た]べましょうか
 
 Shall we buy bread at the supermarket?

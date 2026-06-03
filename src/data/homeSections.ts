@@ -195,7 +195,7 @@ export const homeConfig: HomeConfig = {
         { id: 'genki4-5' },
         { id: 'genki4-6' },
         { id: 'genki4-7' },
-        { id: 'genki4-8', beta: true },
+        { id: 'genki4-8' },
       ],
     },
     {
@@ -204,9 +204,9 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'genki5-1', beta: true },
-        { id: 'genki5-2', beta: true },
-        { id: 'genki5-3', beta: true },
+        { id: 'genki5-1' },
+        { id: 'genki5-2' },
+        { id: 'genki5-3' },
         { id: 'counters', title: { key: 'home.genkiOverrides.counting' } },
       ],
     },
