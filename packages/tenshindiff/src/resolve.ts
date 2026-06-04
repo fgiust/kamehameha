@@ -23,8 +23,8 @@ function consumeFixedRubyUnit(
   if (greedy === segmentLen) return greedy;
 
   if (unit.kind === 'plain') {
-    if (greedy === 0) return 0;
-    return diffFixedSegmentUserConsumed(rest, segment, rubyOptions);
+    if (greedy > 0) return diffFixedSegmentUserConsumed(rest, segment, rubyOptions);
+    return 0;
   }
 
   const surface = unit.surface;
@@ -76,14 +76,17 @@ function consumeFixedPartUserChars(
       step = consumeFixedRubyUnit(rest, unit, rubyOptions);
     }
 
-    if (
-      step === 0 &&
-      unit.kind === 'plain' &&
-      unit.surface.length === 1 &&
-      remainingUnitsArePlain(units, i)
-    ) {
+    if (step === 0 && unit.kind === 'plain' && unit.surface.length === 1) {
       const pos = rest.indexOf(unit.surface);
       if (pos >= 0) step = pos + unit.surface.length;
+    }
+
+    if (step === 0) {
+      const bulk = diffFixedSegmentUserConsumed(rest, segmentFromUnits(units, i), rubyOptions);
+      if (bulk > 0) {
+        consumed += bulk;
+        break;
+      }
     }
 
     if (step === 0 && remainingUnitsArePlain(units, i)) {
@@ -114,10 +117,20 @@ function diffPartialUserConsumed(rest: string, segment: string, rubyOptions: Rub
   return consumed;
 }
 
+function remainingTemplateSurfaceLen(ops: DiffUnitOp[], fromIndex: number): number {
+  let len = 0;
+  for (let j = fromIndex; j < ops.length; j++) {
+    const op = ops[j]!;
+    if (op.kind === 'unit') len += op.unit.surface.length;
+  }
+  return len;
+}
+
 /**
  * Chars consumed for a fixed template segment: walk all template units (including
  * missing). User "extra" ops before the first template unit, or after the last, do not
- * advance the cursor (those belong to other segments). Sandwiched extras (typos) do.
+ * advance the cursor (those belong to other segments). Sandwiched extras (typos) do,
+ * unless they are longer than the template still to come (then the user has moved on).
  */
 function diffFixedSegmentUserConsumed(rest: string, segment: string, rubyOptions: RubyMatchOptions = {}): number {
   const ops = diffSentenceAnswer(rest, segment, rubyOptions);
@@ -134,8 +147,17 @@ function diffFixedSegmentUserConsumed(rest: string, segment: string, rubyOptions
   for (let i = 0; i < ops.length; i++) {
     const op = ops[i]!;
     if (op.kind === 'extra') {
-      if (i < firstUnit) continue;
+      if (i < firstUnit) {
+        const firstOp = ops[firstUnit]!;
+        // Short typo before the first template unit (e.g. ま for で, お before は), not leading junk (e.g. カフェ).
+        if (firstOp.kind === 'unit' && op.text.length <= 1) {
+          consumed += op.text.length;
+        }
+        continue;
+      }
       if (i > lastUnit) break;
+      const remaining = remainingTemplateSurfaceLen(ops, i + 1);
+      if (op.text.length > remaining) break;
       consumed += op.text.length;
       continue;
     }
@@ -228,12 +250,20 @@ export function pickSegmentAlternative(
   const maxMatched = scored.reduce((max, s) => Math.max(max, s.matched), 0);
   if (maxMatched > 0) {
     const tied = scored.filter(s => s.matched === maxMatched);
+    const rest = user.slice(cursor);
+    const literal = tied.find(s => rest.startsWith(stripRuby(s.alt)));
+    if (literal) return literal.alt;
     return tied.reduce((best, s) => (s.index < best.index ? s : best)).alt;
   }
 
-  // Optional empty alt: no alignment at cursor → prefer "" over first non-empty option.
+  // Optional empty alt: prefer "" unless the user literally typed a non-empty option (e.g. optional 、).
   const hasEmpty = alternatives.some(alt => alt === '');
-  if (hasEmpty) return '';
+  if (hasEmpty) {
+    const rest = user.slice(cursor);
+    const literalNonEmpty = alternatives.find(alt => alt !== '' && rest.startsWith(stripRuby(alt)));
+    if (literalNonEmpty) return literalNonEmpty;
+    return '';
+  }
 
   return alternatives[0]!;
 }
@@ -255,9 +285,10 @@ export function userCharsConsumedForSegment(
   if (greedy === segmentLen) return greedy;
 
   if (options.fixed) {
+    const byUnit = consumeFixedPartUserChars(user, cursor, segment, rubyOpts);
     // No shared prefix (e.g. fixed 時々 while user typed カフェ…): do not skip ahead.
-    if (greedy === 0) return 0;
-    return consumeFixedPartUserChars(user, cursor, segment, rubyOpts);
+    if (greedy === 0) return byUnit;
+    return byUnit;
   }
 
   // Chosen {alt}: partial kanji (e.g. 三分 vs 三十分) must not swallow the next word (ぐらい).

@@ -3,19 +3,19 @@
 
 Shall I write your name?
 Scrivo io il tuo nome?
-{私[わたし]が|}名前[なまえ]を書[か]きましょうか
+{私[わたし]が|}{あなたの|}名前[なまえ]を書[か]きましょうか
 
 Shall I bring some tea?
 Porto io del tè?
-{私[わたし]が|}お茶[ちゃ]を持[も]ってきましょうか
+{私[わたし]が|}お茶[ちゃ]を持[も]って{行[い]き|来[き]}ましょうか
 
 Shall I make coffee?
 Preparo io il caffè?
-{私[わたし]が|}コーヒーを入[い]れましょうか
+{私[わたし]が|}コーヒーを{淹[い]|入[い]}れましょうか
 
 Shall I wash the dishes?
 Lavo io i piatti?
-{私[わたし]が|}お皿[さら]を洗[あら]いましょうか
+{私[わたし]が|}{お皿[さら]|食器[しょっき]}を洗[あら]いましょうか
 
 Shall I turn on the air conditioner?
 Accendo io l'aria condizionata?
@@ -25,8 +25,8 @@ Shall I clean the room?
 Pulisco io la stanza?
 {私[わたし]が|}部屋[へや]を掃除[そうじ]しましょうか
 
-Shall I read this book aloud?
-Leggo io questo libro ad alta voce?
+Shall I read this book?
+Leggo io questo libro?
 {私[わたし]が|}この本[ほん]を読[よ]みましょうか
 
 Shall I turn on the lights?

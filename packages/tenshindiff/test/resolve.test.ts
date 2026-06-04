@@ -30,6 +30,54 @@ describe('resolveAnswerFromTemplate', () => {
   });
 });
 
+describe('optional comma with misalignment', () => {
+  const template =
+    '{お母[かあ]さん|母[はは]}は忙[いそが]しかったですから、{私[わたし]は|}手伝[てつだ]いました';
+  const options = { commasAsOptional: true, ignoreTrailingPunctuation: true };
+
+  it('does not mark user comma wrong when extra お follows 母', () => {
+    const user = '母おは忙しかったですから、手伝いました';
+    const { ops } = pickBestDiffFromTemplate(user, template, options);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+
+    expect(shown).toBe('母[はは]おは忙[いそが]しかったですから、手伝[てつだ]いました');
+    expect(ops.some(op => op.kind === 'extra' && op.text.includes('、'))).toBe(false);
+    expect(ops.some(op => op.kind === 'unit' && op.unit.surface === '、' && op.status === 'missing')).toBe(
+      false,
+    );
+  });
+});
+
+describe('alternative after earlier typo', () => {
+  const template =
+    '明日[あした]は休[やす]みですから、{今晩[こんばん]|今夜[こんや]}出[で]かけましょう';
+
+  it('picks 今夜 when user typed it despite ま vs です earlier', () => {
+    const user = '明日は休みますから今夜出かけましょう';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer).toContain('今夜[こんや]');
+    expect(answer).not.toContain('今晩');
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+
+    expect(shown).toContain('今夜[こんや]');
+    expect(shown).not.toMatch(/今夜.*今晩/u);
+  });
+});
+
 describe('partial optional segment match', () => {
   const template = '{私[わたし]は|}料理[りょうり]{をするの|}が好[す]きです';
 

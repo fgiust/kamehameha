@@ -31,11 +31,11 @@ Non mangerò il gelato, perché ho mangiato il gelato ieri.
 
 I helped my mother, because she was busy.
 Ho aiutato mia madre, perché era occupata.
-{お|}母[かあ]さんは忙[いそが]しかったですから、{私[わたし]は|}手伝[てつだ]いました
+{お母[かあ]さん|母[はは]}は忙[いそが]しかったですから、{私[わたし]は|}手伝[てつだ]いました
 
 I will not smoke cigarettes, because it is not healthy.
 Non fumerò sigarette, perché non è salutare.
-元気[げんき]{じゃないです|じゃありません|ではありません}から、たばこを吸[す]いません
+元気[げんき]{じゃないです|じゃありません|ではありません}から、{タバコ|たばこ}を吸[す]いません
 
 Robert went to bed early, because he was tired.
 Robert è andato a letto presto, perché era stanco.
