@@ -27,7 +27,7 @@ Posso andare al parco?
 
 Is it okay if I speak Japanese?
 Va bene se parlo in giapponese?
-日本語[にほんご]を話[はな]してもいいですか
+日本語[にほんご]{を|で}話[はな]してもいいですか
 
 May I borrow a dictionary?
 Posso prendere in prestito un dizionario?
@@ -35,8 +35,8 @@ Posso prendere in prestito un dizionario?
 
 May I borrow your umbrella?
 Posso prendere in prestito il tuo ombrello?
-傘[かさ]を借[か]りてもいいですか
+{私[わたし]の|}傘[かさ]を借[か]りてもいいですか
 
-Is it okay if I bring my sister?
-Va bene se porto mia sorella?
+Is it okay if I bring my younger sister?
+Va bene se porto mia sorella minore?
 妹[いもうと]を連[つ]れてきてもいいですか

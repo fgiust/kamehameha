@@ -217,9 +217,9 @@ export const homeConfig: HomeConfig = {
       titleLevel: 3,
       items: [
         { id: 'teform', title: { key: 'home.genkiOverrides.teForm' } },
-        { id: 'genki6-2', beta: true },
-        { id: 'genki6-3', beta: true },
-        { id: 'genki6-4', beta: true },
+        { id: 'genki6-2' },
+        { id: 'genki6-3' },
+        { id: 'genki6-4' },
         { id: 'genki6-5', beta: true },
         { id: 'genki6-6', beta: true },
         { id: 'genki6-7', beta: true },

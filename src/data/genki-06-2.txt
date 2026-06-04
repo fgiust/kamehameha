@@ -35,7 +35,7 @@ Per favore, mostrami quella foto.
 
 Please wait a little.
 Per favore, aspetta un po'.
-少[すこ]し待[ま]ってください
+{ちょっと|少[すこ]し}待[ま]ってください
 
 Please return this book.
 Per favore, restituisci questo libro.

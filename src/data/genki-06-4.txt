@@ -10,7 +10,7 @@ Non devi correre nel corridoio.
 廊下[ろうか]を走[はし]ってはいけません
 
 You must not eat in the classroom.
-Non devi mangiare in classe.
+Non devi mangiare in aula.
 教室[きょうしつ]で食[た]べてはいけません
 
 You must not write on the desk.
@@ -23,7 +23,7 @@ Non devi arrivare in ritardo a lezione.
 
 You must not sleep in class.
 Non devi dormire in classe.
-クラスで寝[ね]てはいけません
+{教室[教室]|クラス}で寝[ね]てはいけません
 
 You must not drink coffee here.
 Non devi bere caffè qui.
