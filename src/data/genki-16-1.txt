@@ -15,7 +15,7 @@ Ho accompagnato Mary all'aeroporto.
 
 Ken fixed my bicycle for me.
 Ken mi ha riparato la bicicletta.
-けんさんが{私[わたし]の|}自転車[じてんしゃ]を直[なお]してくれました
+けんさん{が|は}{私[わたし]の|}自転車[じてんしゃ]を直[なお]してくれました
 
 I bought lunch for my younger brother.
 Ho comprato il pranzo per mio fratello minore.
@@ -23,20 +23,20 @@ Ho comprato il pranzo per mio fratello minore.
 
 My roommate cooks dinner for me sometimes.
 Il mio coinquilino a volte mi cucina la cena.
-ルームメートが時々[ときどき]{私[わたし]に|}{晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を作[つく]ってくれます
+ルームメート{が|は}時々[ときどき]{私[わたし]に|}{晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を作[つく]ってくれます
 
 The teacher explained the grammar to us.
 L'insegnante ci ha spiegato la grammatica.
-先生[せんせい]が文法[ぶんぽう]を説明[せつめい]してくれました
+先生[せんせい]{が|は}文法[ぶんぽう]を説明[せつめい]してくれました
 
-My sister sent me a letter.
-Mia sorella mi ha mandato una lettera.
-姉[あね]が{私[わたし]に|}手紙[てがみ]を送[おく]ってくれました
+My older sister sent me a letter.
+Mia sorella maggiore mi ha mandato una lettera.
+姉[あね]{が|は}{私[わたし]に|}手紙[てがみ]を送[おく]ってくれました
 
 Takeshi lent me his dictionary.
 Takeshi mi ha prestato il suo dizionario.
-たけしさんが{私[わたし]に|}辞書[じしょ]を貸[か]してくれました
+たけしさん{が|は}{私[わたし]に|}辞書[じしょ]を貸[か]してくれました
 
 I had a classmate check my essay.
 Mi sono fatto controllare il saggio da un compagno di classe.
-クラスメートに作文[さくぶん]を見[み]てもらいました
+クラスメートに作文[さくぶん]を{見[み]て|チェックして|確認[かくにん]して}もらいました
