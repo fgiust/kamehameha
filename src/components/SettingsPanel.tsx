@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { setAppLanguage } from '../i18n/index';
-import { useDebugMode } from '../hooks/useDebugMode';
 import { useSpeechSettings } from '../hooks/useSpeechSettings';
 
 function GearIcon() {
@@ -106,7 +105,6 @@ function SettingsToggleRow({
 
 export default function SettingsPanel() {
   const { t, i18n } = useTranslation();
-  const debugMode = useDebugMode();
   const { speechEnabled, speechUseKanji, setSpeechEnabled, setSpeechUseKanji } = useSpeechSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [dark, setDark] = useState(() => {
@@ -190,24 +188,22 @@ export default function SettingsPanel() {
             </div>
           </div>
 
-          {debugMode && (
-            <div className="settings-section settings-section-debug">
-              <div className="settings-section-title">{t('settings.speechSection')}</div>
-              <SettingsToggleRow
-                label={t('settings.speechEnabled')}
-                hint={t('settings.speechEnabledHint')}
-                checked={speechEnabled}
-                onChange={setSpeechEnabled}
-              />
-              <SettingsToggleRow
-                label={t('settings.speechUseKanji')}
-                hint={t('settings.speechUseKanjiHint')}
-                checked={speechUseKanji}
-                onChange={setSpeechUseKanji}
-                disabled={!speechEnabled}
-              />
-            </div>
-          )}
+          <div className="settings-section settings-section-debug">
+            <div className="settings-section-title">{t('settings.speechSection')}</div>
+            <SettingsToggleRow
+              label={t('settings.speechEnabled')}
+              hint={t('settings.speechEnabledHint')}
+              checked={speechEnabled}
+              onChange={setSpeechEnabled}
+            />
+            <SettingsToggleRow
+              label={t('settings.speechUseKanji')}
+              hint={t('settings.speechUseKanjiHint')}
+              checked={speechUseKanji}
+              onChange={setSpeechUseKanji}
+              disabled={!speechEnabled}
+            />
+          </div>
         </div>
       )}
     </div>

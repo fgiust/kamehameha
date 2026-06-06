@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react';
-import { useDebugMode } from './useDebugMode';
 import { SETTINGS_KEYS } from '../types';
 import { readStoredBool, writeStoredBool } from '../utils/utils';
 
@@ -10,7 +9,6 @@ function dispatchSpeechSettingsChange() {
 }
 
 export function useSpeechSettings() {
-  const debugMode = useDebugMode();
   const [speechEnabled, setSpeechEnabledState] = useState(() =>
     readStoredBool(SETTINGS_KEYS.speechEnabled, false),
   );
@@ -43,7 +41,7 @@ export function useSpeechSettings() {
     dispatchSpeechSettingsChange();
   }, []);
 
-  const isSpeechActive = debugMode && speechEnabled;
+  const isSpeechActive = speechEnabled;
 
   return {
     speechEnabled,
