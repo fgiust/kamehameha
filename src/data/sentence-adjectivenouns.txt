@@ -43,7 +43,7 @@ un test che era difficile
 
 a room that was clean
 una stanza che era pulita
-きれいだった部屋[へ]屋[や]{です|}
+綺麗[きれい]だった部屋[へ]屋[や]{です|}
 
 a coffee that was delicious
 un caffè che era delizioso
@@ -71,7 +71,7 @@ una penna piccola ed economica
 
 a big and beautiful house
 una casa grande e bella
-大[おお]きくてきれいな{家[いえ]|うち}{です|}
+大[おお]きくて綺麗[きれい]な{家[いえ]|うち}{です|}
 
 a cheap and tasty restaurant
 un ristorante economico e buono
@@ -91,7 +91,7 @@ un libro nuovo e interessante
 
 a clean and quiet room
 una stanza pulita e tranquilla
-きれいで静[しず]かな部屋[へ]屋[や]{です|}
+綺麗[きれい]で静[しず]かな部屋[へ]屋[や]{です|}
 
 an umbrella that was new and yellow
 un ombrello che era nuovo e giallo

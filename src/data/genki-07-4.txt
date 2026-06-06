@@ -34,7 +34,7 @@ Andiamo al ristorante a mangiare sushi.
 レストランに寿司[すし]を食[た]べ{に|へ}行[い]きましょう
 
 Let's go home to do homework.
-Torniamo a casa a fare i compiti.
+Torniamo a casa a fare i compiti!
 {家[いえ]|うち}{に|へ}宿題[しゅくだい]をし{に|へ}帰[かえ]りましょう
 
 I am going to the bookstore to buy a map.

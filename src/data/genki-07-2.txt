@@ -10,8 +10,8 @@ Pedro ha una bocca grande.
 ペドロさんは口[くち]が大[おお]きいです
 
 Michiko has a pretty face.
-Michiko ha un viso carino.
-美智子[みちこ]さんは顔[かお]がきれいです
+Michiko ha un bel viso.
+美智子[みちこ]さんは顔[かお]が綺麗[きれい]です
 
 Naomi has a loud voice.
 Naomi ha una voce forte.
@@ -19,7 +19,7 @@ Naomi ha una voce forte.
 
 My mother does not have long hair.
 Mia madre non ha i capelli lunghi.
-私[わたし]のお母[かあ]さんは髪[かみ]が長[なが]くないです
+{私[わたし]の|}{母[はは]|お母[かあ]さん}は髪[かみ]が長[なが]くないです
 
 Professor Yamashita is not tall.
 Il professor Yamashita non è alto.
@@ -27,7 +27,7 @@ Il professor Yamashita non è alto.
 
 My younger sister has a small mouth.
 Mia sorella minore ha una bocca piccola.
-私[わたし]の妹[いもうと]は口[くち]が小[ちい]さいです
+{私[わたし]の|}妹[いもうと]は口[くち]が小[ちい]さいです
 
 Ken has long legs.
 Ken ha le gambe lunghe.

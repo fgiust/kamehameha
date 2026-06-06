@@ -2,7 +2,7 @@
 Forma て per unire le frasi
 
 The coffee at this café is hot and delicious.
-Il caffè in questo bar è caldo e buono.
+Il caffè di questo bar è caldo e buono.
 この{喫茶店[きっさてん]|カフェ}のコーヒーは熱[あつ]くて、美味[おい]しいです
 
 The trip was fun, and I was tired.
@@ -13,9 +13,9 @@ This town is small and quiet.
 Questa città è piccola e tranquilla.
 この町[まち]は小[ちい]さくて、静[しず]かです
 
-Ken has short hair and pretty eyes.
-Ken ha i capelli corti e gli occhi carini.
-けんさんは髪[かみ]が短[みじか]くて、目[め]がきれいです
+Ken has short hair and nice eyes.
+Ken ha i capelli corti e dei bei occhi.
+けんさんは髪[かみ]が短[みじか]くて、目[め]が綺麗[きれい]です
 
 That cat was small and quiet.
 Quel gatto era piccolo e tranquillo.
@@ -23,7 +23,7 @@ Quel gatto era piccolo e tranquillo.
 
 The party was lively and short.
 La festa era vivace e breve.
-パーティーはにぎやかで、短[みじか]かったです
+パーティーは賑[にぎ]やかで、短[みじか]かったです
 
 Michiko is a student and she is nineteen years old.
 Michiko è una studentessa e ha diciannove anni.
@@ -31,12 +31,12 @@ Michiko è una studentessa e ha diciannove anni.
 
 This room is new and very clean.
 Questa stanza è nuova e molto pulita.
-この部屋[へや]は新[あたら]しくて、とてもきれいです
+この部屋[へや]は新[あたら]しくて、とても綺麗[きれい]です
 
 My dog is very big and friendly.
 Il mio cane è molto grande e amichevole.
-私[わたし]の犬[いぬ]はとても大[おお]きくて、人[ひと]好[ず]きです
+私[わたし]の犬[いぬ]はとても大[おお]きくて、{人[ひと]懐[なつ]っこい|フレンドリ}です
 
 Takeshi is a student and he is kind.
 Takeshi è uno studente ed è gentile.
-たけしさんは学生[がくせい]で、親切[しんせつ]です
+たけしさんは学生[がくせい]で、{親切[しんせつ]|優[優]し}です
