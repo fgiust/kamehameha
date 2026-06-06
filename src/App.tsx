@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigationType } from 'react-router-dom';
-import { useLayoutEffect, useMemo, useRef, useState, useEffect } from 'react';
+import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
 import HomePage from './pages/HomePage';
 import GenkiLessonPage from './pages/GenkiLessonPage';
 import VerbExercisePage from './pages/VerbExercisePage';
@@ -19,79 +19,11 @@ import SentenceTxtLessonPage from './pages/SentenceTxtLessonPage';
 import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
 import DebugModeIndicator from './components/DebugModeIndicator';
+import SettingsPanel from './components/SettingsPanel';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/react"
-import { useTranslation } from 'react-i18next';
-import { setAppLanguage } from './i18n/index';
 import { syncDebugModeFromSearch } from './utils/debugMode';
 import { clearAllExerciseSessionDrafts } from './utils/exerciseSessionDraft';
-
-function DarkModeToggle() {
-  const { t } = useTranslation();
-  const [dark, setDark] = useState(() => {
-    try { return localStorage.getItem('theme') !== 'light'; } catch { return true; }
-  });
-
-  useEffect(() => {
-    document.body.classList.toggle('dark', dark);
-    try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch { /* noop */ }
-  }, [dark]);
-
-  return (
-    <button className="darkmode-toggle" onClick={() => setDark(d => !d)} title={t('common.toggleDarkMode')}>
-      {dark ? '☀️' : '🌙'}
-    </button>
-  );
-}
-
-function LanguageToggle() {
-  const { t, i18n } = useTranslation();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
-
-  const langs: { code: 'en' | 'it'; label: string }[] = [
-    { code: 'en', label: 'English' },
-    { code: 'it', label: 'Italiano' }
-  ];
-
-  // Close when clicking outside
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleClose = () => setIsOpen(false);
-    window.addEventListener('click', handleClose);
-    return () => window.removeEventListener('click', handleClose);
-  }, [isOpen]);
-
-  return (
-    <div className="lang-toggle-container" onClick={e => e.stopPropagation()}>
-      <button
-        className="lang-toggle"
-        onClick={() => setIsOpen(!isOpen)}
-        title={t('common.language')}
-        aria-label={t('common.language')}
-      >
-        {lang.toUpperCase()}
-      </button>
-      {isOpen && (
-        <div className="lang-menu">
-          {langs.map(l => (
-            <button
-              key={l.code}
-              className={`lang-menu-item ${lang === l.code ? 'active' : ''}`}
-              onClick={() => {
-                void setAppLanguage(l.code);
-                setIsOpen(false);
-              }}
-            >
-              {l.label}
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 export default function App() {
   return (
@@ -202,8 +134,7 @@ function AppShell() {
 
   return (
     <>
-      <DarkModeToggle />
-      <LanguageToggle />
+      <SettingsPanel />
       <DebugModeIndicator />
       {showFeedback && <FeedbackPanel />}
       <Routes>

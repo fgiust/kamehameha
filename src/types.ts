@@ -103,6 +103,8 @@ export const SETTINGS_KEYS = {
   showFurigana: 'nihongo.showFurigana',
   showType: 'nihongo.showType',
   showEnglish: 'nihongo.showEnglish',
+  speechEnabled: 'nihongo.speech.enabled',
+  speechUseKanji: 'nihongo.speech.useKanji',
 } as const;
 
 /** Default display toggles for conjugation exercises (first visit, no localStorage). */

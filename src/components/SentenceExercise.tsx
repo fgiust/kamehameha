@@ -2,7 +2,7 @@ import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, SentenceItem, PreviousAnswer } from '../types';
 import type { DiffUnitOp } from 'tenshindiff';
-import { diffSentenceAnswer, generateAnswersFromTemplate, matchesByRubyUnits, pickBestDiffFromTemplate, stripRuby } from 'tenshindiff';
+import { diffSentenceAnswer, generateAnswersFromTemplate, matchesByRubyUnits, pickBestDiffFromTemplate, speechTextFromDiffOps, stripRuby } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
 import DiffDisplay from './DiffDisplay';
 import { toHiragana } from 'wanakana';
@@ -20,6 +20,8 @@ import PageLayout from './PageLayout';
 import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 import AlternateLanguageLine from './AlternateLanguageLine';
 import { useDebugMode } from '../hooks/useDebugMode';
+import { useSpeechSettings } from '../hooks/useSpeechSettings';
+import { cancelSpeech, speakText, speakTextWithGestureFallback } from '../utils/systemSpeech';
 import { getSentencePrompts, resolveUiLang } from '../utils/bilingualPrompt';
 import { isEditableSentenceLesson } from '../lessons/lessonDataFile';
 import SentenceDataEditModal from './SentenceDataEditModal';
@@ -59,10 +61,28 @@ function isLatinImeChar(ch: string) {
   return /[A-Za-z'-]/.test(ch);
 }
 
+function isBrowserReload(): boolean {
+  if (typeof performance === 'undefined') return false;
+  const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+  return nav?.type === 'reload';
+}
+
+const pageLoadId = typeof performance !== 'undefined' ? performance.timeOrigin : 0;
+let reloadPromptHandledForPage = -1;
+
+function shouldHandleReloadPrompt(): boolean {
+  return isBrowserReload() && reloadPromptHandledForPage !== pageLoadId;
+}
+
+function markReloadPromptHandled(): void {
+  reloadPromptHandledForPage = pageLoadId;
+}
+
 export default function SentenceExercise({ title, sentenceData, persistKey, dataLessonId }: Props) {
   const { t, i18n } = useTranslation();
   const lang = resolveUiLang(i18n.resolvedLanguage ?? i18n.language);
   const debugMode = useDebugMode();
+  const { isSpeechActive, speechUseKanji } = useSpeechSettings();
   const [sentenceItems, setSentenceItems] = useState(sentenceData);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const canEditSentenceData =
@@ -231,6 +251,34 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
       userAnswer: finalizeIME(userInput.trim()),
     });
   }, [currentItem, title, userInput, isFinished, promptText, alternatePromptText]);
+
+  useEffect(() => {
+    return () => {
+      cancelSpeech();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isSpeechActive || isFinished || !promptText.trim()) return;
+
+    const speechLang = lang === 'it' ? 'it-IT' : 'en-US';
+
+    if (shouldHandleReloadPrompt()) {
+      speakTextWithGestureFallback(promptText, speechLang, markReloadPromptHandled);
+      return;
+    }
+
+    cancelSpeech();
+    speakText(promptText, speechLang);
+  }, [currentItem, promptText, isSpeechActive, isFinished, lang]);
+
+  useEffect(() => {
+    if (!isSpeechActive || !answerFeedback) return;
+    const mode = speechUseKanji ? 'kanji' : 'kana';
+    const text = speechTextFromDiffOps(answerFeedback.ops, mode);
+    cancelSpeech();
+    speakText(text, 'ja-JP');
+  }, [answerFeedback, isSpeechActive, speechUseKanji]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;

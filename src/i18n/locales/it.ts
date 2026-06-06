@@ -25,6 +25,16 @@ const it = {
     reverseQA: 'Inverte D/R',
     randomize: 'casuale',
   },
+  settings: {
+    options: 'Opzioni',
+    language: 'Lingua',
+    theme: 'Tema',
+    themeDark: 'Modalità scura',
+    themeLight: 'Modalità chiara',
+    speechSection: 'Speech (sperimentale)',
+    speechEnabled: 'Leggi le frasi ad alta voce',
+    speechUseKanji: 'Usa kanji per la lettura giapponese',
+  },
   sentenceExercise: {
     promptTranslate: 'Traduci in giapponese:',
     editData: 'Modifica',

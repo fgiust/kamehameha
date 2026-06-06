@@ -25,6 +25,16 @@ const en = {
     reverseQA: 'Reverse Q-A',
     randomize: 'randomize',
   },
+  settings: {
+    options: 'Options',
+    language: 'Language',
+    theme: 'Theme',
+    themeDark: 'Dark mode',
+    themeLight: 'Light mode',
+    speechSection: 'Speech (experimental)',
+    speechEnabled: 'Read sentences aloud',
+    speechUseKanji: 'Use kanji for Japanese speech',
+  },
   sentenceExercise: {
     promptTranslate: 'Translate into Japanese:',
     editData: 'Edit',
