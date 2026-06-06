@@ -33,7 +33,11 @@ const it = {
     themeLight: 'Modalità chiara',
     speechSection: 'Speech (sperimentale)',
     speechEnabled: 'Leggi le frasi ad alta voce',
-    speechUseKanji: 'Usa kanji per la lettura giapponese',
+    speechUseKanji: 'Usa kanji nella lettura',
+    speechEnabledHint:
+      'Legge prompt e risposta con la sintesi vocale del sistema. Qualità e voci disponibili variano in base a browser e dispositivo.',
+    speechUseKanjiHint:
+      'Pronuncia le risposte leggendo la versione in kanji anziché in kana. Può migliorare l’accento tonico ma usare letture diverse da quella mostrata. Se disattivato, usa la traslitterazione in kana, più fedele all’esercizio ma senza contrasto di accenti. Dipende da sistema e browser.',
   },
   sentenceExercise: {
     promptTranslate: 'Traduci in giapponese:',
