@@ -20,6 +20,7 @@ import ContactPage from './pages/ContactPage';
 import FeedbackPanel from './components/FeedbackPanel';
 import DebugModeIndicator from './components/DebugModeIndicator';
 import SettingsPanel from './components/SettingsPanel';
+import UmamiPageviews from './components/UmamiPageviews';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { syncDebugModeFromSearch } from './utils/debugMode';
@@ -134,6 +135,7 @@ function AppShell() {
 
   return (
     <>
+      <UmamiPageviews />
       <SettingsPanel />
       <DebugModeIndicator />
       {showFeedback && <FeedbackPanel />}

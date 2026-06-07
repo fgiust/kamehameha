@@ -1,4 +1,5 @@
 import { track } from '@vercel/analytics';
+import { trackUmamiEvent } from './umami';
 
 export type ProgressSegment = 0 | 1 | 2;
 
@@ -11,9 +12,13 @@ export function shouldTrackKamehamehaCompletion(wasAllGreen: boolean, nextAllGre
 }
 
 export function trackExerciseQuestion(exerciseId: string, correct: boolean): void {
-  track('question', { exercise: exerciseId, correct });
+  const data = { exercise: exerciseId, correct };
+  track('question', data);
+  trackUmamiEvent('question', data);
 }
 
 export function trackExerciseKamehameha(exerciseId: string): void {
-  track('kamehameha', { exercise: exerciseId });
+  const data = { exercise: exerciseId };
+  track('kamehameha', data);
+  trackUmamiEvent('kamehameha', data);
 }
