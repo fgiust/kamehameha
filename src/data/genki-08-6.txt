@@ -3,7 +3,7 @@
 
 Who bought a new bag?
 Chi ha comprato una borsa nuova?
-だれが新[あたら]しい{カバン|鞄[かばん]}を買[か]いましたか
+誰[だれ]が新[あたら]しい{カバン|鞄[かばん]}を買[か]いましたか
 
 John bought a new bag.
 John ha comprato una borsa nuova.
@@ -11,11 +11,11 @@ John ha comprato una borsa nuova.
 
 Who lost the key?
 Chi ha perso la chiave?
-だれが鍵[かぎ]をなくしましたか
+誰[だれ]が鍵[かぎ]を無[な]くしましたか
 
 Yasmin lost the key.
 Yasmin ha perso la chiave.
-ヤスミンさんが鍵[かぎ]をなくしました
+ヤスミンさんが鍵[かぎ]を無[な]くしました
 
 Which class is the most interesting?
 Quale lezione è la più interessante?
@@ -27,15 +27,15 @@ La lezione di musica è divertente.
 
 Who is wearing a red hat?
 Chi indossa un cappello rosso?
-だれが赤[あか]い帽子[ぼうし]をかぶっていますか
+誰[だれ]が赤[あか]い帽子[ぼうし]を被[かぶ]っていますか
 
 Ken is wearing a red hat.
 Ken indossa un cappello rosso.
-けんさんが赤[あか]い帽子[ぼうし]をかぶっています
+けんさんが赤[あか]い帽子[ぼうし]を被[かぶ]っています
 
 Who is a college student?
 Chi è uno studente universitario?
-だれが大学生[だいがくせい]ですか
+誰[だれ]が大学生[だいがくせい]ですか
 
 Robert is a college student.
 Robert è uno studente universitario.

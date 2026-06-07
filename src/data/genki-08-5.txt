@@ -1,5 +1,5 @@
-Verb のが好きです
-Verbo のが好きです
+Verb のが 好きです/上手です
+Verbo のが 好きです/上手です
 
 I like listening to music in the morning.
 Mi piace ascoltare musica al mattino.
@@ -7,11 +7,11 @@ Mi piace ascoltare musica al mattino.
 
 I like talking with friends after class.
 Mi piace parlare con gli amici dopo lezione.
-{私[わたし]は|}授業[じゅぎょう]の後[あと]友達[ともだち]と話[はな]すのが好[す]きです
+{私[わたし]は|}{授業[じゅぎょう]|クラス}の後[あと]友達[ともだち]と話[はな]すのが好[す]きです
 
 I like walking in the park.
 Mi piace camminare nel parco.
-{私[わたし]は|}公園[こうえん]を歩[ある]くのが好[す]きです
+{私[わたし]は|}公園[こうえん]{で|を}歩[ある]くのが好[す]きです
 
 I don't like waking up early.
 Non mi piace svegliarmi presto.

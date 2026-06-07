@@ -6,8 +6,8 @@ Per favore, non correre nel corridoio.
 廊下[ろうか]を走[はし]らないでください
 
 Please don't use your phone in class.
-Per favore, non usare il telefono in classe.
-クラスで携帯[けいたい]を使[つか]わないでください
+Per favore, non usare il telefono cellulare in classe.
+{教室[きょうしつ]|クラス}で{携帯[けいたい]|電話[でんわ]}を使[つか]わないでください
 
 Please don't enter this room.
 Per favore, non entrare in questa stanza.
@@ -31,7 +31,7 @@ Per favore, non scrivere sulla scrivania.
 
 Please don't bring food into the library.
 Per favore, non portare cibo in biblioteca.
-図書館[としょかん]に食[た]べ物[もの]を持[も]ってこないでください
+図書館[としょかん]に食[た]べ物[もの]を持[も]って{来[こ]|行[い]か}ないでください
 
 Please don't park your bicycle here.
 Per favore, non parcheggiare la bicicletta qui.
