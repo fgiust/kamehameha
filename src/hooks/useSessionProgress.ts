@@ -1,4 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
+import {
+  areAllSegmentsGreen,
+  shouldTrackKamehamehaCompletion,
+  trackExerciseKamehameha,
+  trackExerciseQuestion,
+} from '../utils/exerciseAnalytics';
 
 export type ProgressSegmentState = 0 | 1 | 2;
 
@@ -164,6 +170,20 @@ export function useSessionProgress(
   const indexToKeyRef = useRef<Array<string | null>>(Array(Math.max(0, totalSegments)).fill(null));
   const nextIndexRef = useRef(0);
   const audioCtxRef = useRef<AudioContext | null>(null);
+  const wasAllGreenRef = useRef(
+    initialProgress
+      ? areAllSegmentsGreen(normalizeSegments(initialProgress.segments, totalSegments))
+      : false,
+  );
+
+  const trackAnswerAndCompletion = useCallback((nextSegments: ProgressSegmentState[]) => {
+    const nextAllGreen = areAllSegmentsGreen(nextSegments);
+    const exerciseId = options?.persistKey;
+    if (exerciseId && shouldTrackKamehamehaCompletion(wasAllGreenRef.current, nextAllGreen)) {
+      trackExerciseKamehameha(exerciseId);
+    }
+    wasAllGreenRef.current = nextAllGreen;
+  }, [options?.persistKey]);
 
   useEffect(() => {
     const n = Math.max(0, totalSegments);
@@ -179,6 +199,7 @@ export function useSessionProgress(
       setPulses(Array(n).fill(0));
       pendingRestoreRef.current = null;
       appliedTotalRef.current = n;
+      wasAllGreenRef.current = areAllSegmentsGreen(nextSegments);
       return;
     }
     if (restore && n === 0) return;
@@ -193,6 +214,7 @@ export function useSessionProgress(
     keyToIndexRef.current = new Map();
     indexToKeyRef.current = Array(n).fill(null);
     nextIndexRef.current = 0;
+    wasAllGreenRef.current = false;
   }, [totalSegments]);
 
   const getProgressSnapshot = useCallback((): SessionProgressSnapshot => {
@@ -235,9 +257,11 @@ export function useSessionProgress(
     });
 
     if (options?.persistKey) {
+      trackExerciseQuestion(options.persistKey, isCorrect);
       const ok = writePersistedSessionProgress(options.persistKey, nextSegments);
       if (ok) notifySessionProgressUpdated(options.persistKey);
     }
+    trackAnswerAndCompletion(nextSegments);
 
     try {
       const AudioContextCtor = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -259,7 +283,7 @@ export function useSessionProgress(
     } catch {
       return;
     }
-  }, [options?.persistKey, totalSegments]);
+  }, [options?.persistKey, totalSegments, trackAnswerAndCompletion]);
 
   const getState = useCallback((key: string): ProgressSegmentState => {
     const idx = keyToIndexRef.current.get(key);
@@ -288,9 +312,11 @@ export function useSessionProgress(
     });
 
     if (options?.persistKey) {
+      trackExerciseQuestion(options.persistKey, isCorrect);
       const ok = writePersistedSessionProgress(options.persistKey, nextSegments);
       if (ok) notifySessionProgressUpdated(options.persistKey);
     }
+    trackAnswerAndCompletion(nextSegments);
 
     try {
       const AudioContextCtor = window.AudioContext || (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -312,7 +338,7 @@ export function useSessionProgress(
     } catch {
       return;
     }
-  }, [options?.persistKey, totalSegments]);
+  }, [options?.persistKey, totalSegments, trackAnswerAndCompletion]);
 
   return useMemo(
     () => ({ segments, pulses, record, getState, recordAt, getProgressSnapshot }),
