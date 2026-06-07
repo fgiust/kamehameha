@@ -1,4 +1,7 @@
 import { matchesByRubyUnits, parseRubyUnits, type RubyUnit } from 'tenshindiff';
+import { negativeform } from '../engines/verbConjugation';
+import type { ConjugationEngine, OptionFlags } from '../types';
+import { stripRubyTags, toKanaReading } from './utils';
 
 function isPlausibleConjugationStem(kanaStem: string, dictKana: string): boolean {
   if (kanaStem.length === 0) return false;
@@ -55,6 +58,72 @@ export function buildKanjiAnswerTemplate(rubyDict: string, kanaAnswer: string): 
   }
 
   return null;
+}
+
+export type ConjugationPromptDisplay = {
+  plainText: string;
+  displayText: string;
+  mode: 'kana' | 'kanji' | 'ruby';
+};
+
+export function getConjugationPromptDisplay(
+  rubyDict: string,
+  kanaPrompt: string,
+  showKanji: boolean,
+  showFurigana: boolean,
+): ConjugationPromptDisplay {
+  if (!showKanji) {
+    return { plainText: kanaPrompt, displayText: kanaPrompt, mode: 'kana' };
+  }
+
+  const rubyTemplate = buildKanjiAnswerTemplate(rubyDict, kanaPrompt);
+  const kanjiPlain = rubyTemplate ? stripRubyTags(rubyTemplate) : kanaPrompt;
+
+  if (showFurigana && rubyTemplate) {
+    return { plainText: kanjiPlain, displayText: rubyTemplate, mode: 'ruby' };
+  }
+
+  return { plainText: kanjiPlain, displayText: kanjiPlain, mode: 'kanji' };
+}
+
+function normalizeKanaAnswers(raw: string | string[]): string[] {
+  return (Array.isArray(raw) ? raw : [raw]).filter(a => a !== '');
+}
+
+export function getReverseQAResponse(
+  promptEngine: ConjugationEngine,
+  rubyDict: string,
+  wordType: string,
+  flags: OptionFlags,
+  showKanji: boolean,
+  showFurigana: boolean,
+): { kanaAnswers: string[]; display: ConjugationPromptDisplay } {
+  const dictKana = toKanaReading(rubyDict);
+
+  const kanaAnswers = promptEngine.baseFormHint === 'polite' && flags.neg
+    ? normalizeKanaAnswers(negativeform.getAnswer(dictKana, wordType, {}))
+    : [dictKana];
+
+  const displayKana = kanaAnswers[0] ?? dictKana;
+  return {
+    kanaAnswers,
+    display: getConjugationPromptDisplay(rubyDict, displayKana, showKanji, showFurigana),
+  };
+}
+
+export function matchesReverseQAAnswer(
+  user: string,
+  rubyDict: string,
+  kanaAnswers: string[],
+): boolean {
+  const dictKana = toKanaReading(rubyDict);
+  const dictKanji = stripRubyTags(rubyDict);
+
+  if (kanaAnswers.length === 1 && kanaAnswers[0] === dictKana) {
+    return user === dictKana || user === dictKanji;
+  }
+
+  return matchesConjugationAnswer(user, rubyDict, kanaAnswers);
 }
 
 export function matchesConjugationAnswer(user: string, rubyDict: string, kanaAnswers: string[]): boolean {

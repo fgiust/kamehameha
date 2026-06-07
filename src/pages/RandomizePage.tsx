@@ -11,7 +11,7 @@ import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
-import { matchesConjugationAnswer } from '../utils/conjugationAnswer';
+import { getConjugationPromptDisplay, getReverseQAResponse, matchesConjugationAnswer, matchesReverseQAAnswer } from '../utils/conjugationAnswer';
 import verbs from '../data/dictConjugationVerbs';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -299,9 +299,21 @@ export default function RandomizePage() {
     if (settings.reverseQA) {
       const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
-      const prompt = answers.find(a => a !== '') || '';
-      currentQuestion = prompt || dictKana;
-      currentCorrectAnswer = `${dictKana} (${dictKanji})`;
+      const kanaPrompt = answers.find(a => a !== '') || dictKana;
+      currentQuestion = getConjugationPromptDisplay(
+        currentWord.japanese,
+        kanaPrompt,
+        settings.showKanji,
+        settings.showFurigana,
+      ).plainText;
+      currentCorrectAnswer = getReverseQAResponse(
+        engine,
+        currentWord.japanese,
+        currentWord.type,
+        currentFlags,
+        settings.showKanji,
+        settings.showFurigana,
+      ).display.plainText;
     } else {
       currentQuestion = settings.showKanji ? dictKanji : dictKana;
       const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
@@ -315,7 +327,7 @@ export default function RandomizePage() {
       correctAnswer: currentCorrectAnswer,
       userAnswer: finalizeIME(userInput.trim()),
     });
-  }, [currentWord, currentForm, currentFlags, settings.reverseQA, settings.showKanji, userInput, isFinished, t]);
+  }, [currentWord, currentForm, currentFlags, settings.reverseQA, settings.showKanji, settings.showFurigana, userInput, isFinished, t]);
 
   useEffect(() => {
     const pos = pendingCaretRef.current;
@@ -348,13 +360,18 @@ export default function RandomizePage() {
 
     if (settings.reverseQA) {
       const dictKana = toKanaReading(currentWord.japanese);
-      const dictKanji = stripRubyTags(currentWord.japanese);
-      const acceptable = new Set([dictKana, dictKanji]);
-      const isCorrect = acceptable.has(normalized);
-      const correctDisplay = (() => {
-        if (!settings.showKanji) return dictKana;
-        return dictKanji;
-      })();
+      const reverseResponse = getReverseQAResponse(
+        engine,
+        currentWord.japanese,
+        currentWord.type,
+        currentFlags,
+        settings.showKanji,
+        settings.showFurigana,
+      );
+      const isCorrect = matchesReverseQAAnswer(normalized, currentWord.japanese, reverseResponse.kanaAnswers);
+      const correctDisplay = reverseResponse.display.mode === 'ruby' && settings.showFurigana
+        ? toRubyInnerHtml(reverseResponse.display.displayText)
+        : reverseResponse.display.plainText;
 
       if (isCorrect) { setCorrect(c => c + 1); setInputState('correct'); }
       else { setIncorrect(c => c + 1); setInputState('incorrect'); }
@@ -429,13 +446,19 @@ export default function RandomizePage() {
       const dictKana = toKanaReading(currentWord.japanese);
       const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
-      return answers.find(a => a !== '') || dictKana;
+      const kanaPrompt = answers.find(a => a !== '') || dictKana;
+      return getConjugationPromptDisplay(
+        currentWord.japanese,
+        kanaPrompt,
+        settings.showKanji,
+        settings.showFurigana,
+      ).plainText;
     }
     if (!settings.showKanji) {
       return toKanaReading(currentWord.japanese);
     }
     return stripRubyTags(currentWord.japanese);
-  }, [currentWord, settings.reverseQA, settings.showKanji, engine, currentFlags]);
+  }, [currentWord, settings.reverseQA, settings.showKanji, settings.showFurigana, engine, currentFlags]);
 
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
@@ -443,10 +466,21 @@ export default function RandomizePage() {
       const dictKana = toKanaReading(currentWord.japanese);
       const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
       const answers = Array.isArray(answer) ? answer : [answer];
-      const prompt = answers.find(a => a !== '') || '';
+      const kanaPrompt = answers.find(a => a !== '') || dictKana;
+      const promptDisplay = getConjugationPromptDisplay(
+        currentWord.japanese,
+        kanaPrompt,
+        settings.showKanji,
+        settings.showFurigana,
+      );
+
+      if (promptDisplay.mode === 'ruby') {
+        return <ruby dangerouslySetInnerHTML={{ __html: toRubyInnerHtml(promptDisplay.displayText) }} />;
+      }
+
       return (
         <ruby>
-          {prompt || dictKana}
+          {promptDisplay.displayText}
           <rt aria-hidden="true">&nbsp;</rt>
         </ruby>
       );

@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { buildKanjiAnswerTemplate, matchesConjugationAnswer } from '../../src/utils/conjugationAnswer';
+import { buildKanjiAnswerTemplate, getConjugationPromptDisplay, getReverseQAResponse, matchesConjugationAnswer, matchesReverseQAAnswer } from '../../src/utils/conjugationAnswer';
+import { politeform } from '../../src/engines/verbConjugation';
 
 describe('conjugationAnswer', () => {
   it('accepts kana and kanji te-form answers', () => {
@@ -31,5 +32,44 @@ describe('conjugationAnswer', () => {
   it('accepts any listed kana alternative', () => {
     const dict = '並[なら]ぶ';
     expect(matchesConjugationAnswer('ならないで', dict, ['ならなくて', 'ならないで'])).toBe(true);
+  });
+
+  it('builds polite-form kanji prompt display for reverse QA', () => {
+    const dict = '行[い]く';
+    const kana = 'いきます';
+
+    expect(buildKanjiAnswerTemplate(dict, kana)).toBe('行[い]きます');
+    expect(getConjugationPromptDisplay(dict, kana, false, false)).toEqual({
+      plainText: kana,
+      displayText: kana,
+      mode: 'kana',
+    });
+    expect(getConjugationPromptDisplay(dict, kana, true, false)).toEqual({
+      plainText: '行きます',
+      displayText: '行きます',
+      mode: 'kanji',
+    });
+    expect(getConjugationPromptDisplay(dict, kana, true, true)).toEqual({
+      plainText: '行きます',
+      displayText: '行[い]きます',
+      mode: 'ruby',
+    });
+  });
+
+  it('maps polite reverse QA prompts to short dictionary or short negative answers', () => {
+    const dict = '行[い]く';
+
+    const positive = getReverseQAResponse(politeform, dict, 'u', {}, true, false);
+    expect(positive.kanaAnswers).toEqual(['いく']);
+    expect(positive.display.plainText).toBe('行く');
+    expect(matchesReverseQAAnswer('いく', dict, positive.kanaAnswers)).toBe(true);
+    expect(matchesReverseQAAnswer('行く', dict, positive.kanaAnswers)).toBe(true);
+
+    const negative = getReverseQAResponse(politeform, dict, 'u', { neg: true }, true, false);
+    expect(negative.kanaAnswers).toEqual(['いかない']);
+    expect(negative.display.plainText).toBe('行かない');
+    expect(matchesReverseQAAnswer('いかない', dict, negative.kanaAnswers)).toBe(true);
+    expect(matchesReverseQAAnswer('行かない', dict, negative.kanaAnswers)).toBe(true);
+    expect(matchesReverseQAAnswer('いく', dict, negative.kanaAnswers)).toBe(false);
   });
 });
