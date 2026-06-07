@@ -245,11 +245,11 @@ export const homeConfig: HomeConfig = {
       titleLevel: 3,
       items: [
         { id: 'politeform-short' },
-        { id: 'genki8-3', beta: true },
-        { id: 'genki8-4', beta: true },
-        { id: 'genki8-5', beta: true },
-        { id: 'genki8-6', beta: true },
-        { id: 'genki8-7', beta: true },
+        { id: 'genki8-3' },
+        { id: 'genki8-4' },
+        { id: 'genki8-5' },
+        { id: 'genki8-6' },
+        { id: 'genki8-7' },
       ],
     },
     {

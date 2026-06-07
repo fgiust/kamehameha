@@ -11,7 +11,7 @@ Hai fatto qualcosa nel fine settimana?
 
 No, I didn't do anything yesterday.
 No, non ho fatto niente ieri.
-いいえ、きのう何[なに]もしませんでした
+いいえ、昨日[きのう]何[なに]もしませんでした
 
 I didn't eat anything today.
 Non ho mangiato niente oggi.
@@ -35,7 +35,7 @@ Non so niente su quell'argomento.
 
 There is nothing in the refrigerator.
 Non c'è niente nel frigorifero.
-冷蔵庫[れいぞうこ]に何[なに]もありません
+冷蔵庫[れいぞうこ]{|の中[なか]}に何[なに]もありません
 
 Shall we watch something on TV tonight?
 Guardiamo qualcosa in TV stasera?
