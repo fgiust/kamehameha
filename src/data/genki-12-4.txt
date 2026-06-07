@@ -19,7 +19,7 @@ It's Saturday, so the library is closed.
 
 Takeshi is kind, so everyone likes him.
 Takeshi è gentile, quindi piace a tutti.
-たけしさんは親切[しんせつ]なので、みんな好[す]きです
+たけしさんは{親切[しんせつ]な|優[やさ]しい}ので、みんな好[す]きです
 
 I lost my wallet, so I can't buy lunch.
 Ho perso il portafoglio, quindi non posso comprare il pranzo.

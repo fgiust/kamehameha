@@ -39,4 +39,4 @@ Il mio cane è molto grande e amichevole.
 
 Takeshi is a student and he is kind.
 Takeshi è uno studente ed è gentile.
-たけしさんは学生[がくせい]で、{親切[しんせつ]|優[優]し}です
+たけしさんは学生[がくせい]で、{親切[しんせつ]|優[やさ]しい}です

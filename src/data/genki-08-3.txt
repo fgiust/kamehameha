@@ -19,7 +19,7 @@ Non penso che Pedro mangi carne.
 
 I think Sue is kind.
 Penso che Sue sia gentile.
-スーさんはやさしいと思[おも]います
+スーさんは{優[やさ]しい|親切[しんせつ]だ}と思[おも]います
 
 I don't think Pedro is a college student.
 Non penso che Pedro sia uno studente universitario.

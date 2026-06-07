@@ -266,7 +266,8 @@ Genki Lesson 5 Vocab
 つまらない	boring
 古[ふる]い	old (thing - not used for people)
 難[むずか]しい	difficult
-やさしい	easy (problem), kind (person)
+優[やさ]しい	kind (person)
+易[やさ]しい	easy (problem)
 安[やす]い	inexpensive, cheap (thing)
 嫌[きら]い	disgusted with, to dislike
 綺麗[きれい]	beautiful, clean

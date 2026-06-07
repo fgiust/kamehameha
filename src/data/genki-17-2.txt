@@ -34,7 +34,7 @@ L'insegnante ha detto che l'esame sarebbe stato difficile.
 
 Robert said his father is kind.
 Robert ha detto che suo padre è gentile.
-父[ちち]は親切[しんせつ]だと言[い]っていました
+父[ちち]は{親切[しんせつ]だ|優[やさ]しい}と言[い]っていました
 
 The forecast said it would rain tomorrow.
 Le previsioni hanno detto che domani avrebbe piovuto.
