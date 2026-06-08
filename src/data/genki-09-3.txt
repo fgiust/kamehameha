@@ -31,7 +31,7 @@ Yui è già andata a letto.
 
 I have already bought the tickets.
 Ho già comprato i biglietti.
-{|私[わたし]は}もう切符[きっぷ]を買[か]いました
+{|私[わたし]は}もう{切符[きっぷ]|チケット}を買[か]いました
 
 Carlos has already returned the book.
 Carlos ha già restituito il libro.
@@ -39,4 +39,4 @@ Carlos ha già restituito il libro.
 
 Ken hasn't said anything yet.
 Ken non ha ancora detto nulla.
-けんさんはまだ何[なに]も言[い]っていません
+{けん|ケン}さんはまだ何[なに]も言[い]っていません

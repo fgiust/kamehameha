@@ -260,9 +260,9 @@ export const homeConfig: HomeConfig = {
       items: [
         { id: 'pastform', title: { key: 'home.genkiOverrides.pastShortFormsVerbs' } },
         { id: 'adj-pastform', title: { key: 'home.genkiOverrides.pastShortFormsAdjectives' } },
-        { id: 'genki9-2', beta: true },
-        { id: 'genki9-3', beta: true },
-        { id: 'genki9-4', beta: true },
+        { id: 'genki9-2' },
+        { id: 'genki9-3' },
+        { id: 'genki9-4' },
       ],
     },
     {

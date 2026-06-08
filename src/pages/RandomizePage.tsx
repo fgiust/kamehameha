@@ -11,7 +11,7 @@ import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
-import { getConjugationPromptDisplay, getReverseQAResponse, matchesConjugationAnswer, matchesReverseQAAnswer } from '../utils/conjugationAnswer';
+import { getReverseQAPromptDisplay, getReverseQAResponse, matchesConjugationAnswer, matchesReverseQAAnswer } from '../utils/conjugationAnswer';
 import verbs from '../data/dictConjugationVerbs';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -288,7 +288,7 @@ export default function RandomizePage() {
   useEffect(() => {
     if (!currentWord || !currentForm || isFinished) return;
     const engine = verbEngines[currentForm];
-    const hint = getConjugationFormHintLocalized(t, engine, currentFlags);
+    const hint = getConjugationFormHintLocalized(t, engine, currentFlags, settings.reverseQA ? { reverseQA: true } : undefined);
 
     const dictKana = toKanaReading(currentWord.japanese);
     const dictKanji = stripRubyTags(currentWord.japanese);
@@ -297,12 +297,11 @@ export default function RandomizePage() {
     let currentCorrectAnswer = '';
 
     if (settings.reverseQA) {
-      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
-      const answers = Array.isArray(answer) ? answer : [answer];
-      const kanaPrompt = answers.find(a => a !== '') || dictKana;
-      currentQuestion = getConjugationPromptDisplay(
+      currentQuestion = getReverseQAPromptDisplay(
+        engine,
         currentWord.japanese,
-        kanaPrompt,
+        currentWord.type,
+        currentFlags,
         settings.showKanji,
         settings.showFurigana,
       ).plainText;
@@ -311,8 +310,6 @@ export default function RandomizePage() {
         currentWord.japanese,
         currentWord.type,
         currentFlags,
-        settings.showKanji,
-        settings.showFurigana,
       ).display.plainText;
     } else {
       currentQuestion = settings.showKanji ? dictKanji : dictKana;
@@ -365,13 +362,9 @@ export default function RandomizePage() {
         currentWord.japanese,
         currentWord.type,
         currentFlags,
-        settings.showKanji,
-        settings.showFurigana,
       );
       const isCorrect = matchesReverseQAAnswer(normalized, currentWord.japanese, reverseResponse.kanaAnswers);
-      const correctDisplay = reverseResponse.display.mode === 'ruby' && settings.showFurigana
-        ? toRubyInnerHtml(reverseResponse.display.displayText)
-        : reverseResponse.display.plainText;
+      const correctDisplay = reverseResponse.display.plainText;
 
       if (isCorrect) { setCorrect(c => c + 1); setInputState('correct'); }
       else { setIncorrect(c => c + 1); setInputState('incorrect'); }
@@ -435,7 +428,7 @@ export default function RandomizePage() {
   const engine = currentForm ? verbEngines[currentForm] : null;
   const formHint = currentForm
     ? (verbFormLabels[currentForm] ? t(verbFormLabels[currentForm]!) : currentFormLabel)
-    : (engine ? getConjugationFormHintLocalized(t, engine, currentFlags) : '');
+    : (engine ? getConjugationFormHintLocalized(t, engine, currentFlags, settings.reverseQA ? { reverseQA: true } : undefined) : '');
   const displayedType = currentWord
     ? (currentWord.type === 'u' ? t('verb.typeLabels.u') : currentWord.type === 'ru' ? t('verb.typeLabels.ru') : t('verb.typeLabels.irr'))
     : '';
@@ -443,13 +436,11 @@ export default function RandomizePage() {
   const questionPlainCopy = useMemo(() => {
     if (!currentWord) return '';
     if (settings.reverseQA && engine) {
-      const dictKana = toKanaReading(currentWord.japanese);
-      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
-      const answers = Array.isArray(answer) ? answer : [answer];
-      const kanaPrompt = answers.find(a => a !== '') || dictKana;
-      return getConjugationPromptDisplay(
+      return getReverseQAPromptDisplay(
+        engine,
         currentWord.japanese,
-        kanaPrompt,
+        currentWord.type,
+        currentFlags,
         settings.showKanji,
         settings.showFurigana,
       ).plainText;
@@ -463,13 +454,11 @@ export default function RandomizePage() {
   const questionNode = (() => {
     if (!currentWord) return t('common.loading');
     if (settings.reverseQA && engine) {
-      const dictKana = toKanaReading(currentWord.japanese);
-      const answer = engine.getAnswer(dictKana, currentWord.type, currentFlags);
-      const answers = Array.isArray(answer) ? answer : [answer];
-      const kanaPrompt = answers.find(a => a !== '') || dictKana;
-      const promptDisplay = getConjugationPromptDisplay(
+      const promptDisplay = getReverseQAPromptDisplay(
+        engine,
         currentWord.japanese,
-        kanaPrompt,
+        currentWord.type,
+        currentFlags,
         settings.showKanji,
         settings.showFurigana,
       );

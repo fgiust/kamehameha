@@ -1,8 +1,8 @@
 ～から
 ～から
 
-I will leave early tomorrow, because I have a doctor's appointment.
-Domani partirò presto, perché ho un appuntamento dal dottore.
+I will leave early tomorrow, because I have to go to the hospital.
+Domani uscirò presto, perché devo andare in ospedale.
 明日[あした]病院[びょういん]{に|へ}行[い]くから、{私[わたし]は|}早[はや]く出[で]ます
 
 Let's eat at home, because the restaurant is crowded.
@@ -14,12 +14,12 @@ Non andrò a nuotare oggi, perché la piscina è chiusa.
 プールは閉[し]まっているから、{私[わたし]は|}今日[きょう]泳[およ]ぎません
 
 Yasmin is popular, because she speaks three languages.
-Yasmin è molto popolare, perché parla tre lingue.
+Yasmin è popolare, perché parla tre lingue.
 ヤスミンさんは{3つ[みっつ]|三つ[みっつ]}の言語[げんご]を話[はな]すから、人気[にんき]があります
 
 I was happy, because my friend visited me.
 Ero felice, perché un amico mi ha fatto visita.
-友達[ともだち]が来[き]てくれたから、{私[わたし]は|}うれしかったです
+友達[ともだち]が来[き]てくれたから、{私[わたし]は|}嬉[うれ]しかったです
 
 We stayed home, because it was windy.
 Siamo rimasti a casa, perché c'era vento.
@@ -35,7 +35,7 @@ Non giocherò a basket, perché mi fa male la gamba.
 
 I will not eat it, because I don't like meat.
 Non lo mangerò, perché non mi piace la carne.
-肉[にく]が嫌[きら]いだから、{私[わたし]は|}食[た]べません
+肉[にく]が{嫌[きら]いだ|好[す]きじゃない}から、{私[わたし]は|}食[た]べません
 
 I will go to bed early, because I am sleepy.
 Andrò a letto presto, perché ho sonno.

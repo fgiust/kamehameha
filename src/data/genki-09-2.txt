@@ -1,24 +1,24 @@
 Qualifying Nouns with Verb and Adjectives
 Nomi qualificanti con verbo e aggettivi
 
-The person singing over there is Yui.
-La persona che canta laggiù è Yui.
+The person singing a song over there is Yui.
+La persona che canta una canzone laggiù è Yui.
 あそこで歌[うた]を歌[うた]っている人[ひと]はゆいさんです
 
 Who is the student writing a letter over there?
 Chi è lo studente che scrive una lettera laggiù?
-あそこで手紙[てがみ]を書[か]いている学生[がくせい]はだれですか
+あそこで手紙[てがみ]を書[か]いている学生[がくせい]は誰[だれ]ですか
 
 People who study every day get good grades.
 Le persone che studiano ogni giorno prendono buoni voti.
-毎日[まいにち]勉強[べんきょう]する人[ひと]はいい点[てん]を取[と]ります
+毎日[まいにち]勉強[べんきょう]する人[ひと]は良[い]い点[てん]を取[と]ります
 
 I like teachers who explain clearly.
 Mi piacciono gli insegnanti che spiegano chiaramente.
-わかりやすく説明[せつめい]する先生[せんせい]が好[す]きです
+分[わ]かりやすく説明[せつめい]する先生[せんせい]が好[す]きです
 
 I got email from a friend who moved to Tokyo.
-Ho ricevuto un'email da un amico che si è trasferito a Tokyo.
+Mi è arrivata un'email da un amico che si è trasferito a Tokyo.
 東京[とうきょう]に引[ひ]っ越[こ]した友達[ともだち]からメールが来[き]ました
 
 The person drinking coffee is Carlos.
@@ -35,8 +35,8 @@ Lo studente che usa il computer è Sue.
 
 This is the cake that Pedro baked.
 Questa è la torta che Pedro ha preparato.
-これはペドロさんが焼[や]いたケーキです
+これはペドロさんが{作[つく]った|焼[や]いた}ケーキです
 
 That is the postcard I sent.
 Quella è la cartolina che ho spedito.
-あれは{私[わたし]が|}送[おく]った{はがき|ポストカード}です
+{それ|あれ}は{私[わたし]が|}送[おく]った{葉書[はがき]|葉書[はが]き|ポストカード}です

@@ -97,7 +97,19 @@ export function pickRandomSubset<T>(items: T[], maxSize: number) {
   return out.slice(0, n);
 }
 
-export function getConjugationFormHint(engine: ConjugationEngine, flags: OptionFlags) {
+export function getConjugationFormHint(engine: ConjugationEngine, flags: OptionFlags, options?: { reverseQA?: boolean }) {
+  if (options?.reverseQA && engine.baseFormHint === 'polite') {
+    const parts: string[] = [];
+    for (const o of engine.opts) {
+      if (o.id === 'neg' || o.id === 'polite') continue;
+      if (flags[o.id]) parts.push(o.label.toLowerCase());
+    }
+    if (flags.neg) parts.push('negative');
+    parts.push('plain');
+    parts.push('form');
+    return parts.join(' ');
+  }
+
   const base = engine.baseFormHint ?? 'plain';
   const hasNegOpt = engine.opts.some(o => o.id === 'neg');
   const hasPoliteOpt = engine.opts.some(o => o.id === 'polite');
@@ -118,7 +130,19 @@ export function getConjugationFormHint(engine: ConjugationEngine, flags: OptionF
   return parts.join(' ');
 }
 
-export function getConjugationFormHintLocalized(t: TFunction, engine: ConjugationEngine, flags: OptionFlags) {
+export function getConjugationFormHintLocalized(t: TFunction, engine: ConjugationEngine, flags: OptionFlags, options?: { reverseQA?: boolean }) {
+  if (options?.reverseQA && engine.baseFormHint === 'polite') {
+    const parts: string[] = [];
+    for (const o of engine.opts) {
+      if (o.id === 'neg' || o.id === 'polite') continue;
+      if (!flags[o.id]) continue;
+      parts.push(t(`conjugationHint.opts.${o.id}`));
+    }
+    if (flags.neg) parts.push(t('conjugationHint.negative'));
+    parts.push(t('conjugationHint.plain'));
+    return t('conjugationHint.template', { parts: parts.join(' ') });
+  }
+
   const base = engine.baseFormHint ?? 'plain';
   const hasNegOpt = engine.opts.some(o => o.id === 'neg');
   const hasPoliteOpt = engine.opts.some(o => o.id === 'polite');

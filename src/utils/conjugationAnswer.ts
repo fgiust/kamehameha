@@ -90,13 +90,28 @@ function normalizeKanaAnswers(raw: string | string[]): string[] {
   return (Array.isArray(raw) ? raw : [raw]).filter(a => a !== '');
 }
 
-export function getReverseQAResponse(
+export function getReverseQAPromptDisplay(
   promptEngine: ConjugationEngine,
   rubyDict: string,
   wordType: string,
   flags: OptionFlags,
   showKanji: boolean,
   showFurigana: boolean,
+): ConjugationPromptDisplay {
+  const dictKana = toKanaReading(rubyDict);
+  const promptFlags = promptEngine.baseFormHint === 'polite'
+    ? { ...flags, neg: false }
+    : flags;
+  const raw = promptEngine.getAnswer(dictKana, wordType, promptFlags);
+  const kanaPrompt = normalizeKanaAnswers(raw)[0] ?? dictKana;
+  return getConjugationPromptDisplay(rubyDict, kanaPrompt, showKanji, showFurigana);
+}
+
+export function getReverseQAResponse(
+  promptEngine: ConjugationEngine,
+  rubyDict: string,
+  wordType: string,
+  flags: OptionFlags,
 ): { kanaAnswers: string[]; display: ConjugationPromptDisplay } {
   const dictKana = toKanaReading(rubyDict);
 
@@ -107,7 +122,7 @@ export function getReverseQAResponse(
   const displayKana = kanaAnswers[0] ?? dictKana;
   return {
     kanaAnswers,
-    display: getConjugationPromptDisplay(rubyDict, displayKana, showKanji, showFurigana),
+    display: getConjugationPromptDisplay(rubyDict, displayKana, false, false),
   };
 }
 
