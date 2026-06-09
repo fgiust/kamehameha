@@ -11,7 +11,7 @@ Cos'è più economico: l'auto o il treno?
 
 I like Japanese better than English.
 Mi piace il giapponese più dell'inglese.
-{私[わたし]は|}英[えい]語[ご]より日[に]本[ほん]語[ご]のほうが好[す]きです
+{私[わたし]は|}日[に]本[ほん]語[ご]のほうが英[えい]語[ご]より好[す]きです
 
 Which do you like better, dogs or cats?
 Cosa preferisci, i cani o i gatti?
@@ -35,7 +35,7 @@ I treni sono più veloci degli autobus.
 
 I think Japanese food is tastier than American food.
 Penso che il cibo giapponese sia più gustoso di quello americano.
-{私[わたし]は|}アメリカの食[た]べ物[もの]より日[に]本[ほん]の食[た]べ物[もの]のほうが美味[おい]しいと思[おも]います
+{私[わたし]は|}日[に]本[ほん]の食[た]べ物[もの]のほうがアメリカの食[た]べ物[もの]より{上手[うま]い|美味[おい]しい}と思[おも]います
 
 Who is taller, Ken or Takeshi?
 Chi è più alto, Ken o Takeshi?
