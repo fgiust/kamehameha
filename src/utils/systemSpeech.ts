@@ -1,6 +1,76 @@
+import { isDebugModeEnabled } from './debugMode';
 import { pickBestSpeechVoice } from './speechVoicePick';
 
 const SPEECH_RATE = 0.9;
+const SPEAK_START_TIMEOUT_MS = 300;
+const SPEECH_LOG_PREFIX = '[kamehameha speech]';
+
+type SpeakFailureReason =
+  | 'unavailable'
+  | 'utterance_error'
+  | 'timeout'
+  | 'ended_without_start'
+  | 'canceled'
+  | 'superseded';
+
+type SpeakAttemptResult =
+  | { ok: true }
+  | { ok: false; reason: SpeakFailureReason; error?: string; voice?: string | null };
+
+function isSilentFailure(reason: SpeakFailureReason): boolean {
+  return reason === 'canceled' || reason === 'superseded';
+}
+
+function shouldLogSpeechFailures(): boolean {
+  return import.meta.env.DEV || isDebugModeEnabled();
+}
+
+function previewSpeechText(text: string): string {
+  if (text.length <= 80) return text;
+  return `${text.slice(0, 80)}…`;
+}
+
+function logSpeakFailure(
+  reason: SpeakFailureReason,
+  details: {
+    text: string;
+    lang: string;
+    generation: number;
+    voice?: string | null;
+    error?: string;
+    speaking?: boolean;
+    pending?: boolean;
+    note?: string;
+  },
+): void {
+  if (!shouldLogSpeechFailures()) return;
+  console.warn(SPEECH_LOG_PREFIX, reason, {
+    lang: details.lang,
+    generation: details.generation,
+    voice: details.voice ?? null,
+    error: details.error,
+    speaking: details.speaking,
+    pending: details.pending,
+    note: details.note,
+    text: previewSpeechText(details.text),
+    state: getSpeechSynthesisDebugState(),
+  });
+}
+
+function isBenignUtteranceError(error: string): boolean {
+  return error === 'canceled' || error === 'interrupted';
+}
+
+function pickFailureResult(
+  first: SpeakAttemptResult,
+  second?: SpeakAttemptResult,
+): Extract<SpeakAttemptResult, { ok: false }> | null {
+  for (const result of [first, second]) {
+    if (!result || result.ok || isSilentFailure(result.reason)) continue;
+    return result;
+  }
+  return null;
+}
 
 let speakGeneration = 0;
 let gestureCleanup: (() => void) | null = null;
@@ -30,6 +100,31 @@ function clearGestureFallback(): void {
   gestureCleanup = null;
 }
 
+/** Reset Chrome's speech queue when it reports speaking without playing audio. */
+export function recoverStuckSpeechSynthesis(synth: SpeechSynthesis = getSpeechSynthesis()!): void {
+  if (!synth) return;
+  try {
+    synth.cancel();
+    synth.pause();
+    synth.resume();
+  } catch {
+    return;
+  }
+}
+
+function prepareSpeechSynthesis(synth: SpeechSynthesis): void {
+  if (synth.speaking || synth.pending) {
+    recoverStuckSpeechSynthesis(synth);
+    return;
+  }
+  try {
+    if (synth.paused) synth.resume();
+    synth.resume();
+  } catch {
+    return;
+  }
+}
+
 function waitForVoices(timeoutMs = 1500): Promise<void> {
   const synth = getSpeechSynthesis();
   if (!synth) return Promise.resolve();
@@ -51,15 +146,19 @@ function waitForVoices(timeoutMs = 1500): Promise<void> {
   });
 }
 
-function runSpeak(text: string, lang: string, generation: number): Promise<boolean> {
+function runSpeak(text: string, lang: string, generation: number): Promise<SpeakAttemptResult> {
   return new Promise(resolve => {
     const synth = getSpeechSynthesis();
-    if (!synth || generation !== speakGeneration) {
-      resolve(false);
+    if (!synth) {
+      resolve({ ok: false, reason: 'unavailable' });
+      return;
+    }
+    if (generation !== speakGeneration) {
+      resolve({ ok: false, reason: 'superseded' });
       return;
     }
 
-    synth.resume();
+    prepareSpeechSynthesis(synth);
     synth.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
@@ -67,29 +166,77 @@ function runSpeak(text: string, lang: string, generation: number): Promise<boole
     utterance.rate = SPEECH_RATE;
     const voice = pickVoice(lang);
     if (voice) utterance.voice = voice;
+    const voiceName = voice?.name ?? null;
 
     let resolved = false;
-    const done = (ok: boolean) => {
+    let didStart = false;
+    let failure: SpeakAttemptResult = { ok: false, reason: 'timeout', voice: voiceName };
+
+    const finish = (result: SpeakAttemptResult) => {
       if (resolved) return;
       resolved = true;
-      resolve(ok);
+      resolve(result);
     };
 
-    utterance.onstart = () => done(true);
-    utterance.onerror = () => done(false);
+    utterance.onstart = () => {
+      didStart = true;
+      finish({ ok: true });
+    };
+    utterance.onerror = (event) => {
+      if (generation !== speakGeneration) return;
+      const error = event.error || 'unknown';
+      if (isBenignUtteranceError(error)) {
+        finish({ ok: false, reason: 'canceled' });
+        return;
+      }
+      failure = { ok: false, reason: 'utterance_error', error, voice: voiceName };
+      finish(failure);
+    };
+    utterance.onend = () => {
+      if (didStart || generation !== speakGeneration) return;
+      failure = { ok: false, reason: 'ended_without_start', voice: voiceName };
+      finish(failure);
+    };
+
     synth.speak(utterance);
 
     window.setTimeout(() => {
-      if (resolved) return;
-      done(synth.speaking || synth.pending);
-    }, 200);
+      if (resolved || didStart || generation !== speakGeneration) return;
+      if (synth.speaking || synth.pending) {
+        recoverStuckSpeechSynthesis(synth);
+      }
+      failure = {
+        ok: false,
+        reason: 'timeout',
+        voice: voiceName,
+      };
+      finish(failure);
+    }, SPEAK_START_TIMEOUT_MS);
   });
 }
 
-async function speakOnce(text: string, lang: string, generation: number): Promise<boolean> {
+async function speakOnce(text: string, lang: string, generation: number): Promise<SpeakAttemptResult> {
   await waitForVoices();
-  if (generation !== speakGeneration) return false;
+  if (generation !== speakGeneration) return { ok: false, reason: 'superseded' };
   return runSpeak(text, lang, generation);
+}
+
+function logFailedSpeakAttempt(
+  result: SpeakAttemptResult,
+  details: { text: string; lang: string; generation: number; note: string },
+): void {
+  if (result.ok || isSilentFailure(result.reason)) return;
+  const synth = getSpeechSynthesis();
+  logSpeakFailure(result.reason, {
+    text: details.text,
+    lang: details.lang,
+    generation: details.generation,
+    voice: result.voice,
+    error: result.error,
+    speaking: synth?.speaking,
+    pending: synth?.pending,
+    note: details.note,
+  });
 }
 
 function armGestureFallback(
@@ -103,8 +250,17 @@ function armGestureFallback(
   const flush = () => {
     clearGestureFallback();
     if (generation !== speakGeneration) return;
-    void speakOnce(text, lang, generation).then(ok => {
-      if (ok) onComplete?.();
+    void speakOnce(text, lang, generation).then(result => {
+      if (result.ok) {
+        onComplete?.();
+        return;
+      }
+      logFailedSpeakAttempt(result, {
+        text,
+        lang,
+        generation,
+        note: 'gesture retry failed',
+      });
     });
   };
 
@@ -118,20 +274,58 @@ function armGestureFallback(
   };
 }
 
+export function getSpeechSynthesisDebugState() {
+  const synth = getSpeechSynthesis();
+  if (!synth) return { available: false as const };
+  return {
+    available: true as const,
+    speaking: synth.speaking,
+    pending: synth.pending,
+    paused: synth.paused,
+    voiceCount: synth.getVoices().length,
+    speakGeneration,
+    gestureArmed: gestureCleanup !== null,
+  };
+}
+
 export function cancelSpeech(): void {
   speakGeneration += 1;
   clearGestureFallback();
-  getSpeechSynthesis()?.cancel();
+  const synth = getSpeechSynthesis();
+  if (!synth) return;
+  recoverStuckSpeechSynthesis(synth);
 }
 
 export function speakText(text: string, lang: string): void {
   const trimmed = text.trim();
   if (!trimmed) return;
-  if (!getSpeechSynthesis()) return;
+  if (!getSpeechSynthesis()) {
+    logSpeakFailure('unavailable', { text: trimmed, lang, generation: speakGeneration });
+    return;
+  }
 
   clearGestureFallback();
   const generation = ++speakGeneration;
-  void speakOnce(trimmed, lang, generation);
+  void (async () => {
+    const first = await speakOnce(trimmed, lang, generation);
+    if (first.ok) return;
+    if (generation !== speakGeneration) return;
+
+    recoverStuckSpeechSynthesis();
+    const second = await speakOnce(trimmed, lang, generation);
+    if (second.ok) return;
+    if (generation !== speakGeneration) return;
+
+    const failure = pickFailureResult(first, second);
+    if (failure) {
+      logFailedSpeakAttempt(failure, {
+        text: trimmed,
+        lang,
+        generation,
+        note: 'speak failed after retry',
+      });
+    }
+  })();
 }
 
 /** Try once (with one delayed retry); if blocked, speak on first user pointer/key. */
@@ -142,13 +336,17 @@ export function speakTextWithGestureFallback(
 ): void {
   const trimmed = text.trim();
   if (!trimmed) return;
-  if (!getSpeechSynthesis()) return;
+  if (!getSpeechSynthesis()) {
+    logSpeakFailure('unavailable', { text: trimmed, lang, generation: speakGeneration });
+    return;
+  }
 
   clearGestureFallback();
   const generation = ++speakGeneration;
 
   void (async () => {
-    if (await speakOnce(trimmed, lang, generation)) {
+    const first = await speakOnce(trimmed, lang, generation);
+    if (first.ok) {
       onComplete?.();
       return;
     }
@@ -157,7 +355,9 @@ export function speakTextWithGestureFallback(
     await new Promise<void>(resolve => window.setTimeout(resolve, 120));
     if (generation !== speakGeneration) return;
 
-    if (await speakOnce(trimmed, lang, generation)) {
+    recoverStuckSpeechSynthesis();
+    const second = await speakOnce(trimmed, lang, generation);
+    if (second.ok) {
       onComplete?.();
       return;
     }
@@ -165,4 +365,12 @@ export function speakTextWithGestureFallback(
 
     armGestureFallback(trimmed, lang, generation, onComplete);
   })();
+}
+
+if (import.meta.env.DEV && typeof window !== 'undefined') {
+  (window as unknown as { __nihongoSpeech?: Record<string, unknown> }).__nihongoSpeech = {
+    getSpeechSynthesisDebugState,
+    recoverStuckSpeechSynthesis,
+    speakText,
+  };
 }

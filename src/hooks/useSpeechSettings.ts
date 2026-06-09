@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { SETTINGS_KEYS } from '../types';
+import { recoverStuckSpeechSynthesis } from '../utils/systemSpeech';
 import { readStoredBool, writeStoredBool } from '../utils/utils';
 
 export const SPEECH_SETTINGS_CHANGE_EVENT = 'nihongo-speech-settings-change';
@@ -32,6 +33,7 @@ export function useSpeechSettings() {
   const setSpeechEnabled = useCallback((value: boolean) => {
     writeStoredBool(SETTINGS_KEYS.speechEnabled, value);
     setSpeechEnabledState(value);
+    if (value) recoverStuckSpeechSynthesis();
     dispatchSpeechSettingsChange();
   }, []);
 
