@@ -3,11 +3,11 @@ Aggettivi/Sostantivi + の
 
 I have a black sweater. I have a red one, too.
 Ho un maglione nero. Ne ho anche uno rosso.
-黒[くろ]いセーターを持[も]っています。赤[あか]いのも持[も]っています
+黒[くろ]いセーター{があります|を持[も]っています}。赤[あか]いのも{あります|持[も]っています}
 
 I went to buy shoes, but there were no small ones.
 Sono andato a comprare scarpe, ma non ce n'erano di piccole.
-靴[くつ]を買[か]い{に|へ}行[い]きましたが、小[ちい]さいのがありませんでした
+靴[くつ]を買[か]い{に|へ}{行[い]きましたが|行[い]ったけど}、小[ちい]さいのがありませんでした
 
 No, that is Michiko's.
 No, quello è di Michiko.
@@ -19,7 +19,7 @@ Dammi quello grande.
 
 My bag is heavier than yours.
 La mia borsa è più pesante della tua.
-私[わたし]の{カバン|鞄[かばん]}はあなたのより重[おも]いです
+私[わたし]の{カバン|鞄[かばん]}のほうがあなたのより重[おも]いです
 
 I like sweet ones.
 Mi piacciono quelli dolci.
@@ -31,11 +31,11 @@ Prenderò in prestito quello vecchio.
 
 This blue pen is cheaper than that black one.
 Questa penna blu è più economica di quella nera.
-この青[あお]いペンは{あの|その}黒[くろ]いのより安[やす]いです
+この青[あお]いペンのほうが{あの|その}黒[くろ]いのより安[やす]いです
 
-Is this Mary's bag?
-Questa è la borsa di Mary?
-これはメアリーさんの{カバン|鞄[かばん]}ですか
+Is this bag Mary's one?
+Questa borsa è quella di Mary?
+この{カバン|鞄[かばん]}はメアリーさんのですか
 
 No, it is Robert's.
 No, è di Robert.

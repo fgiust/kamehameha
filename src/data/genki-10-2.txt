@@ -3,7 +3,7 @@ Confronto tra tre o più elementi
 
 Among summer, winter, and spring, which season is the hottest?
 Tra estate, inverno e primavera, quale stagione è la più calda?
-夏[なつ]と冬[ふゆ]と春[はる]の中[なか]で、いつが一番[いちばん]暑[あつ]いですか
+夏[なつ]と冬[ふゆ]と春[はる]の中[なか]で、{どれ|どの季節[きせつ]}が一番[いちばん]暑[あつ]いですか
 
 Summer is the hottest, I think.
 Penso che l'estate sia la più calda.
@@ -27,7 +27,7 @@ Le banane sono le più economiche.
 
 Among dogs, birds, and fish, fish are the easiest to care for.
 Tra cani, uccelli e pesci, i pesci sono i più facili da tenere.
-犬[いぬ]と鳥[とり]と魚[さかな]の中[なか]で、魚[さかな]が一番[いちばん]かんたんです
+犬[いぬ]と鳥[とり]と魚[さかな]の中[なか]で、魚[さかな]が一番[いちばん]簡単[かんたん]です
 
 What subject is the hardest?
 Quale materia è la più difficile?
@@ -35,7 +35,7 @@ Quale materia è la più difficile?
 
 Who is the tallest in this class?
 Chi è il più alto in questa classe?
-このクラスの中[なか]で、だれが一番[いちばん]背[せ]が高[たか]いですか
+このクラスの中[なか]で、誰[だれ]が一番[いちばん]背[せ]が高[たか]いですか
 
 Takeshi is the tallest.
 Takeshi è il più alto.

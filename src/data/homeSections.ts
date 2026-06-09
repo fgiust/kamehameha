@@ -271,9 +271,9 @@ export const homeConfig: HomeConfig = {
       titleClassName: 'section-title',
       titleLevel: 3,
       items: [
-        { id: 'genki10-1', beta: true },
-        { id: 'genki10-2', beta: true },
-        { id: 'genki10-3', beta: true },
+        { id: 'genki10-1' },
+        { id: 'genki10-2' },
+        { id: 'genki10-3' },
         { id: 'genki10-4', beta: true },
         { id: 'adj-naruform', title: { key: 'home.genkiOverrides.adjectiveNaru' } },
         { id: 'genki10-5', beta: true },
