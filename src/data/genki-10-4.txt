@@ -3,15 +3,15 @@
 
 I intend to visit my grandmother this weekend.
 Ho intenzione di visitare mia nonna questo fine settimana.
-{私[わたし]は|}今週[こんしゅう]の週末[しゅうまつ]にお祖母[そぼ]さん{に|へ}行[い]くつもりです
+{私[わたし]は|}今週[こんしゅう]の週末[しゅうまつ]に{祖母[そぼ]|お祖母[ばあ]さん|お婆[ばあ]さん}{に|へ}行[い]くつもりです
 
-Sora does not intend to work tomorrow.
-Sora non ha intenzione di lavorare domani.
-ソラさんは明日[あした]働[はたら]かないつもりです
+Tomorrow Sora does not intend to work.
+Domani Sora non ha intenzione di lavorare.
+明日[あした]ソラさんは働[はたら]かないつもりです
 
 We were planning to go to the museum, but we didn't.
 Avevamo intenzione di andare al museo, ma non ci siamo andati.
-美術館[びじゅつかん]{に|へ}行[い]くつもりでしたが、行[い]きませんでした
+{博物館[はくぶつかん]|美術館[びじゅつかん]}{に|へ}行[い]くつもり{だったけど|でしたが}、行[い]きませんでした
 
 I intend to practice kanji tonight.
 Ho intenzione di esercitarmi con i kanji stasera.
