@@ -1,8 +1,8 @@
 Adjective + なる
 Aggettivo + なる
 
-Cooking has become fun for me now.
-Cucinare è diventato divertente per me ora.
+Cooking has become fun for me.
+Cucinare è diventato divertente per me.
 料理[りょうり]が楽[たの]しくなりました
 
 I have become fond of reading novels.
@@ -17,9 +17,9 @@ The park has become quiet.
 Il parco è diventato tranquillo.
 公園[こうえん]は静[しず]かになりました
 
-I have become hungry.
-Ho fame (sono diventato affamato).
-{私[わたし]は|}お腹[なか]が空[す]きました
+I have become sleepy.
+Sono diventato assonnato.
+{私[わたし]は|}眠[ねむ]くなりました
 
 Takeshi has become strong.
 Takeshi è diventato forte.
@@ -33,8 +33,8 @@ I will become a teacher.
 Diventerò un insegnante.
 {私[わたし]は|}先生[せんせい]になります
 
-Robert has become famous on campus.
-Robert è diventato famoso nel campus.
+Robert has become famous on university.
+Robert è diventato famoso in università.
 ロバートさんは大学[だいがく]で有名[ゆうめい]になりました
 
 It has become cold.
