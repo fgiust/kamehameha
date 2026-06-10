@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
-import { ExerciseRouteTree } from './AppRoutes';
+import { exerciseChildRoutes } from './AppRoutes';
 import FeedbackPanel from './components/FeedbackPanel';
 import DebugModeIndicator from './components/DebugModeIndicator';
 import SettingsPanel from './components/SettingsPanel';
@@ -128,12 +128,8 @@ function AppShell() {
       <DebugModeIndicator />
       {showFeedback && <FeedbackPanel />}
       <Routes>
-        <Route path="/it">
-          <ExerciseRouteTree />
-        </Route>
-        <Route path="/">
-          <ExerciseRouteTree />
-        </Route>
+        <Route path="/it">{exerciseChildRoutes()}</Route>
+        <Route path="/">{exerciseChildRoutes()}</Route>
         <Route path="*" element={
           <div className="app-container" style={{ textAlign: 'center', marginTop: 100 }}>
             <h1>404 - Not Found</h1>
