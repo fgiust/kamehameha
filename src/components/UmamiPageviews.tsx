@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { trackGaPageview } from '../utils/googleAnalytics';
 import { trackUmamiPageview } from '../utils/umami';
 
-const UMAMI_READY_MAX_ATTEMPTS = 30;
-const UMAMI_READY_RETRY_MS = 50;
+const TRACKER_READY_MAX_ATTEMPTS = 30;
+const TRACKER_READY_RETRY_MS = 50;
 
 export default function UmamiPageviews() {
   const location = useLocation();
@@ -12,16 +13,24 @@ export default function UmamiPageviews() {
   useEffect(() => {
     let cancelled = false;
     let attempts = 0;
+    let umamiSent = false;
+    let gaSent = false;
 
     const send = () => {
       if (cancelled) return;
-      if (window.umami) {
+
+      if (!umamiSent && window.umami) {
         trackUmamiPageview(pathKey);
-        return;
+        umamiSent = true;
       }
-      if (attempts < UMAMI_READY_MAX_ATTEMPTS) {
+      if (!gaSent && typeof window.gtag === 'function') {
+        trackGaPageview(pathKey);
+        gaSent = true;
+      }
+
+      if ((!umamiSent || !gaSent) && attempts < TRACKER_READY_MAX_ATTEMPTS) {
         attempts += 1;
-        window.setTimeout(send, UMAMI_READY_RETRY_MS);
+        window.setTimeout(send, TRACKER_READY_RETRY_MS);
       }
     };
 
