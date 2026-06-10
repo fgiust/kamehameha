@@ -46,7 +46,7 @@ const en = {
   sentenceEdit: {
     title: 'Edit exercise data',
     answer: 'Answer (template)',
-    fileHint: '{{file}} — exercise {{index}}',
+    fileHint: '{{file}} - exercise {{index}}',
     save: 'Save to file',
     saving: 'Saving…',
     cancel: 'Cancel',
@@ -263,7 +263,7 @@ const en = {
     latin: 'hint: switch to latin keyboard for plain hiragana input without kanji replacement',
   },
   seo: {
-    homeTitle: '亀 kamehameha! — Japanese grammar practice',
+    homeTitle: '亀 kamehameha! - Japanese grammar practice',
     homeDescription:
       'Free Japanese grammar practice: Genki-style sentence exercises, verb and adjective conjugation drills, counters, and more. Original supplementary exercises for Genki learners.',
     genkiExerciseTitle: '亀 kamehameha! · {{topic}} · Genki Lesson {{lesson}} exercise',
@@ -274,7 +274,7 @@ const en = {
       'Practice Japanese sentence translation: {{topic}}. Interactive grammar drills with instant feedback for intermediate learners.',
     conjugationTitle: '亀 kamehameha! · {{form}} · verb conjugation practice',
     conjugationDescription:
-      'Practice Japanese {{form}} verb conjugation online. Drill godan, ichidan, and irregular verbs with instant feedback — free Genki-style grammar training.',
+      'Practice Japanese {{form}} verb conjugation online. Drill godan, ichidan, and irregular verbs with instant feedback - free Genki-style grammar training.',
     adjectiveConjugationTitle: '亀 kamehameha! · {{form}} · adjective conjugation practice',
     adjectiveConjugationDescription:
       'Practice Japanese {{form}} adjective conjugation online. Drill い-adjectives and な-adjectives with instant feedback.',
@@ -283,10 +283,10 @@ const en = {
       'Practice {{name}} in Japanese with interactive drills and instant feedback. Free supplementary grammar training on kamehameha!',
     disclaimerTitle: '亀 kamehameha! · Disclaimer',
     disclaimerDescription:
-      'Disclaimer for kamehameha! — an independent Japanese grammar practice app with original Genki-aligned exercises.',
+      'Disclaimer for kamehameha! - an independent Japanese grammar practice app with original Genki-aligned exercises.',
     contactTitle: '亀 kamehameha! · Contact',
     contactDescription:
-      'Contact the creator of kamehameha! — suggestions, feedback, and questions about this Japanese grammar practice app.',
+      'Contact the creator of kamehameha! - suggestions, feedback, and questions about this Japanese grammar practice app.',
     notFoundTitle: '亀 kamehameha! · Page not found',
     notFoundDescription: 'The requested page was not found on kamehameha! Japanese grammar practice.',
   },

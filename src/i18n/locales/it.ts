@@ -46,7 +46,7 @@ const it = {
   sentenceEdit: {
     title: 'Modifica dati esercizio',
     answer: 'Risposta (template)',
-    fileHint: '{{file}} — esercizio {{index}}',
+    fileHint: '{{file}} - esercizio {{index}}',
     save: 'Salva nel file',
     saving: 'Salvataggio…',
     cancel: 'Annulla',
@@ -263,7 +263,7 @@ const it = {
     latin: 'suggerimento: usa la tastiera latina per l\'inserimento in hiragana senza conversione kanji',
   },
   seo: {
-    homeTitle: '亀 kamehameha! — Esercizi di grammatica giapponese',
+    homeTitle: '亀 kamehameha! - Esercizi di grammatica giapponese',
     homeDescription:
       'Esercizi gratuiti di grammatica giapponese: frasi in stile Genki, coniugazione di verbi e aggettivi, contatori e altro. Esercizi supplementari originali per studenti di Genki.',
     genkiExerciseTitle: '亀 kamehameha! · {{topic}} · Esercizio Genki lezione {{lesson}}',
@@ -274,7 +274,7 @@ const it = {
       'Esercizi di traduzione in giapponese: {{topic}}. Esercizi interattivi con feedback immediato per studenti di livello intermedio.',
     conjugationTitle: '亀 kamehameha! · {{form}} · Esercizio coniugazione verbale',
     conjugationDescription:
-      'Esercizi online di coniugazione verbale giapponese: {{form}}. Verbi godan, ichidan e irregolari con feedback immediato — allenamento gratuito in stile Genki.',
+      'Esercizi online di coniugazione verbale giapponese: {{form}}. Verbi godan, ichidan e irregolari con feedback immediato - allenamento gratuito in stile Genki.',
     adjectiveConjugationTitle: '亀 kamehameha! · {{form}} · Esercizio coniugazione aggettivi',
     adjectiveConjugationDescription:
       'Esercizi online di coniugazione degli aggettivi giapponesi: {{form}}. Aggettivi い e な con feedback immediato.',
@@ -283,10 +283,10 @@ const it = {
       'Esercizi di {{name}} in giapponese con drill interattivi e feedback immediato. Allenamento grammaticale gratuito su kamehameha!',
     disclaimerTitle: '亀 kamehameha! · Disclaimer',
     disclaimerDescription:
-      'Disclaimer di kamehameha! — app indipendente di grammatica giapponese con esercizi originali allineati al Genki.',
+      'Disclaimer di kamehameha! - app indipendente di grammatica giapponese con esercizi originali allineati al Genki.',
     contactTitle: '亀 kamehameha! · Contatti',
     contactDescription:
-      'Contatta il creatore di kamehameha! — suggerimenti, feedback e domande su questa app di grammatica giapponese.',
+      'Contatta il creatore di kamehameha! - suggerimenti, feedback e domande su questa app di grammatica giapponese.',
     notFoundTitle: '亀 kamehameha! · Pagina non trovata',
     notFoundDescription: 'La pagina richiesta non è stata trovata su kamehameha! esercizi di grammatica giapponese.',
   },
