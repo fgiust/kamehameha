@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ReadingExerciseItem, ReadingSessionData, PreviousAnswer } from '../types';
+import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import KeyboardTip from './KeyboardTip';
 import JapaneseText from './JapaneseText';
 import SessionProgressBar from './SessionProgressBar';
@@ -304,10 +305,7 @@ export default function ReadingExercise({
                 setIsComposing(false);
               }}
               onKeyDown={handleKeyDown}
-              autoCorrect="off"
-              autoCapitalize="none"
-              autoComplete="off"
-              spellCheck={false}
+              {...exerciseAnswerInputProps}
             />
             <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
           </div>

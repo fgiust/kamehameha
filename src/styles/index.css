@@ -375,14 +375,10 @@ a:hover { color: var(--accent-hover); }
   width: 100%;
 }
 
-.page-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 0 0 auto;
-  position: fixed;
-  top: 12px;
-  left: 12px;
+.back-nav-container {
+  position: absolute;
+  top: 24px;
+  left: 20px;
   z-index: 101;
 }
 
@@ -1497,6 +1493,7 @@ body.dark .settings-info-btn {
   .exercise-input { font-size: 18px; padding: 12px 16px; }
   .link-grid { grid-template-columns: 1fr; }
   .page-heading { font-size: 22px; margin-bottom: 0; }
+  .back-nav-container { top: 12px; left: 12px; }
   .settings-panel-container { top: 12px; right: 12px; }
   .answer-banner { font-size: 24px; }
 }

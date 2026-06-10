@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next';
 import PageLayout from './PageLayout';
 import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 import CopyablePlainText from './CopyablePlainText';
+import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 
 function DiceIcon({ className }: { className?: string }) {
   return (
@@ -594,10 +595,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
                   }}
                   onKeyDown={handleKeyDown}
                   placeholder=""
-                  autoCorrect="off"
-                  autoCapitalize="none"
-                  autoComplete="off"
-                  spellCheck={false}
+                  {...exerciseAnswerInputProps}
                 />
                 <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>

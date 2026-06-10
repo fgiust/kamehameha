@@ -3,6 +3,7 @@ import ConjugationExercise from '../components/ConjugationExercise';
 import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import verbs from '../data/dictConjugationVerbs';
 import { useTranslation } from 'react-i18next';
+import { stripLangPrefix } from '../seo/localizedPaths';
 
 type Props = {
   forceReverseQA?: boolean;
@@ -11,8 +12,8 @@ type Props = {
 export default function VerbExercisePage({ forceReverseQA }: Props) {
   const { t } = useTranslation();
   const location = useLocation();
-  // Extract the form key from the URL path (e.g., /teform -> teform)
-  const formKey = location.pathname.replace('/', '');
+  const internalPath = stripLangPrefix(location.pathname);
+  const formKey = internalPath.slice(1);
   const engineKey = formKey === 'politeform-short' ? 'politeform' : formKey;
   const engine = verbEngines[engineKey];
 
@@ -42,7 +43,7 @@ export default function VerbExercisePage({ forceReverseQA }: Props) {
         ru: t('verb.typeLabels.ru'),
         irr: t('verb.typeLabels.irr'),
       }}
-      persistKey={location.pathname}
+      persistKey={internalPath}
       forceReverseQA={forceReverseQA}
     />
   );

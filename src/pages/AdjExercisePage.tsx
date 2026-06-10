@@ -3,12 +3,13 @@ import ConjugationExercise from '../components/ConjugationExercise';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import adjectives from '../data/dictConjugationAdjectives';
 import { useTranslation } from 'react-i18next';
+import { stripLangPrefix } from '../seo/localizedPaths';
 
 export default function AdjExercisePage() {
   const { t } = useTranslation();
   const location = useLocation();
-  // Extract the form key from the URL path (e.g., /adj-negativeform -> adj-negativeform)
-  const formKey = location.pathname.replace('/', '');
+  const internalPath = stripLangPrefix(location.pathname);
+  const formKey = internalPath.slice(1);
   const engine = adjEngines[formKey];
 
   if (!engine) {
@@ -32,7 +33,7 @@ export default function AdjExercisePage() {
         i: t('adjective.typeLabels.i'),
         na: t('adjective.typeLabels.na'),
       }}
-      persistKey={location.pathname}
+      persistKey={internalPath}
     />
   );
 }

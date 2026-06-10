@@ -7,6 +7,7 @@ import {
 } from '../utils/exerciseSessionDraft';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
+import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import KeyboardTip from '../components/KeyboardTip';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
@@ -693,10 +694,7 @@ export default function CountingThingsPage() {
                     setIsComposing(false);
                   }}
                   onKeyDown={handleKeyDown}
-                  autoCorrect="off"
-                  autoCapitalize="none"
-                  autoComplete="off"
-                  spellCheck={false}
+                  {...exerciseAnswerInputProps}
                 />
                 <KeyboardTip preferred="japanese" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>

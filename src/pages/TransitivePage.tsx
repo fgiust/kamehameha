@@ -11,6 +11,7 @@ import { transitiveData, VerbPair } from '../data/dictTransitivePairs';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
+import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import { PreviousAnswer, SETTINGS_KEYS } from '../types';
 import { readStoredConjugationDisplaySettings, writeStoredBool } from '../utils/utils';
 import JapaneseText from '../components/JapaneseText';
@@ -366,10 +367,7 @@ export default function TransitivePage() {
                 }}
                 onKeyDown={handleKeyDown}
                 placeholder=""
-                autoCorrect="off"
-                autoCapitalize="none"
-                autoComplete="off"
-                spellCheck={false}
+                {...exerciseAnswerInputProps}
               />
 
               <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>

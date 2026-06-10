@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
 import { exerciseChildRoutes } from './AppRoutes';
+import BackButton from './components/BackButton';
 import FeedbackPanel from './components/FeedbackPanel';
 import DebugModeIndicator from './components/DebugModeIndicator';
 import SettingsPanel from './components/SettingsPanel';
@@ -48,6 +49,7 @@ function AppShell() {
   const location = useLocation();
   const navType = useNavigationType();
   const internalPath = stripLangPrefix(location.pathname);
+  const showBack = internalPath !== '/';
   const showFeedback = !['/', '/disclaimer', '/contact', '/diff-test'].includes(internalPath);
   const currentPathKey = useMemo(() => location.pathname + location.search, [location.pathname, location.search]);
   const rafRef = useRef<number | null>(null);
@@ -124,6 +126,11 @@ function AppShell() {
     <>
       <PageMetaManager />
       <UmamiPageviews />
+      {showBack && (
+        <div className="back-nav-container">
+          <BackButton />
+        </div>
+      )}
       <SettingsPanel />
       <DebugModeIndicator />
       {showFeedback && <FeedbackPanel />}

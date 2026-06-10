@@ -21,6 +21,7 @@ import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 import AlternateLanguageLine from './AlternateLanguageLine';
 import { useDebugMode } from '../hooks/useDebugMode';
 import { useSpeechSettings } from '../hooks/useSpeechSettings';
+import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import { cancelSpeech, speakText, speakTextWithGestureFallback } from '../utils/systemSpeech';
 import { getSentencePrompts, resolveUiLang } from '../utils/bilingualPrompt';
 import { isEditableSentenceLesson } from '../lessons/lessonDataFile';
@@ -463,10 +464,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
                   }}
                   onKeyDown={handleKeyDown}
                   placeholder=""
-                  autoCorrect="off"
-                  autoCapitalize="none"
-                  autoComplete="off"
-                  spellCheck={false}
+                  {...exerciseAnswerInputProps}
                   />
                   {canEditSentenceData && dataLessonId && (
                     <button

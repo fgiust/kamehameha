@@ -11,6 +11,7 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
+import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import { DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
@@ -328,10 +329,7 @@ export default function TimePage() {
                   setUserInput(converted);
                 }}
                 onKeyDown={handleKeyDown}
-                autoCorrect="off"
-                autoCapitalize="none"
-                autoComplete="off"
-                spellCheck={false}
+                {...exerciseAnswerInputProps}
               />
 
               <div className={`answer-banner ${answerDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>

@@ -5,6 +5,7 @@ import SubmitButton, { SubmitState } from './SubmitButton';
 import DiffTestModal from './DiffTestModal';
 import AlternateLanguageLine from './AlternateLanguageLine';
 import { resolveUiLang } from '../utils/bilingualPrompt';
+import { stripLangPrefix } from '../seo/localizedPaths';
 import bugIcon from '../assets/icon-bug.svg';
 
 export default function FeedbackPanel() {
@@ -30,7 +31,7 @@ export default function FeedbackPanel() {
   // Sync state with global window object when opening or when a custom update event is fired
   const syncDetails = () => {
     const current = (window as Window & { currentQuestionDetails?: FeedbackDetails }).currentQuestionDetails;
-    const urlParts = window.location.pathname.split('/').filter(Boolean);
+    const urlParts = stripLangPrefix(window.location.pathname).split('/').filter(Boolean);
     const exerciseId = urlParts.length > 0 ? urlParts[urlParts.length - 1] : 'home';
 
     if (current) {
@@ -136,7 +137,7 @@ export default function FeedbackPanel() {
             <button type="button" className="modal-close-btn" onClick={() => setIsOpen(false)}>×</button>
           </div>
 
-          <form onSubmit={handleSubmit} className="feedback-panel-form">
+          <form onSubmit={handleSubmit} className="feedback-panel-form" autoComplete="off">
             <div className="feedback-text-group">
               <div className="feedback-section-title">{details.section}</div>
             </div>
