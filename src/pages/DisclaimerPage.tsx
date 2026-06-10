@@ -1,16 +1,13 @@
-import { useEffect } from 'react';
-import { APP_TITLE_PREFIX } from '../types';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 
 export default function DisclaimerPage() {
-  const { t, i18n } = useTranslation();
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + t('common.disclaimer');
-  }, [i18n.language]);
+  const { t } = useTranslation();
+  const pageMeta = useExercisePageMeta({ internalPath: '/disclaimer' });
 
   return (
-    <PageLayout pageTitle={t('common.disclaimer')}>
+    <PageLayout pageTitle={t('common.disclaimer')} intro={pageMeta.intro}>
       <div className="card">
         <div style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
           <p>

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { homeConfig } from '../data/homeSections';
-import { APP_TITLE_PREFIX } from '../types';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
+import { useLocalizedPath } from '../seo/useLocalizedPath';
 import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UPDATED_EVENT } from '../hooks/useSessionProgress';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
@@ -60,11 +61,13 @@ function MiniProgressBar({ persistKey, defaultTotal }: { persistKey: string; def
 
 function HomeLinkCard({
   to,
+  persistKey,
   children,
   defaultTotal,
   beta,
 }: {
   to: string;
+  persistKey: string;
   children: ReactNode;
   defaultTotal?: number;
   beta?: boolean;
@@ -76,7 +79,7 @@ function HomeLinkCard({
         {children}
         {beta ? <span className="link-card-beta-dot" aria-hidden="true" /> : null}
       </Link>
-      <MiniProgressBar persistKey={to} defaultTotal={total} />
+      <MiniProgressBar persistKey={persistKey} defaultTotal={total} />
     </div>
   );
 }
@@ -91,7 +94,12 @@ function resolveExerciseTitle(lang: 'en' | 'it', itemId: string, fallback: strin
   return fallback;
 }
 
-function renderSection(section: (typeof homeConfig.sections)[number], t: TFunction, lang: 'en' | 'it') {
+function renderSection(
+  section: (typeof homeConfig.sections)[number],
+  t: TFunction,
+  lang: 'en' | 'it',
+  localizePath: (path: string) => string,
+) {
   const titleClassName = section.titleClassName ?? 'section-title';
   const descriptionClassName = section.descriptionClassName ?? 'genki-supp-desc';
   const titleLevel = section.titleLevel ?? 2;
@@ -121,10 +129,10 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
             const def = homeConfig.exercises[item.id];
             const rawTitle = resolveText(t, item.title ?? def?.title ?? item.id);
             const title = resolveExerciseTitle(lang, item.id, rawTitle);
-            const to = def?.to;
+            const to = def?.to ? localizePath(def.to) : undefined;
             const defaultTotal = def?.defaultTotal ?? 12;
-            return to ? (
-              <HomeLinkCard key={item.id} to={to} defaultTotal={defaultTotal} beta={item.beta}>
+            return to && def?.to ? (
+              <HomeLinkCard key={item.id} to={to} persistKey={def.to} defaultTotal={defaultTotal} beta={item.beta}>
                 {title}
               </HomeLinkCard>
             ) : (
@@ -139,20 +147,17 @@ function renderSection(section: (typeof homeConfig.sections)[number], t: TFuncti
   );
 }
 
-const PAGE_TITLE = 'kamehameha!';
-
 export default function HomePage() {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + PAGE_TITLE;
-  }, [i18n.language]);
+  const pageMeta = useExercisePageMeta({ internalPath: '/' });
+  const localizePath = useLocalizedPath();
 
   return (
     <div className="app-container">
       <h1 className="page-heading home-brand">
         <span className="home-brand-logo" aria-hidden="true">亀</span>
-        <span className="home-brand-name">{PAGE_TITLE}</span>
+        <span className="home-brand-name">kamehameha!</span>
       </h1>
       <p className="home-tagline is-lead">
         {t('home.taglineLead')}
@@ -160,14 +165,15 @@ export default function HomePage() {
       <p className="home-tagline is-body">
         {t('home.taglineBody')}
       </p>
-      {homeConfig.sections.map(s => renderSection(s, t, lang))}
+      <p className="page-intro home-intro">{pageMeta.intro}</p>
+      {homeConfig.sections.map(s => renderSection(s, t, lang, localizePath))}
 
       <footer className="home-footer">
         <span className="home-footer-text">kamehameha v{__APP_VERSION__}</span>
         <span className="home-footer-sep">·</span>
-        <Link to="/disclaimer" className="home-footer-link">{t('common.disclaimer')}</Link>
+        <Link to={localizePath('/disclaimer')} className="home-footer-link">{t('common.disclaimer')}</Link>
         <span className="home-footer-sep">·</span>
-        <Link to="/contact" className="home-footer-link">{t('common.contact')}</Link>
+        <Link to={localizePath('/contact')} className="home-footer-link">{t('common.contact')}</Link>
 
         {/* <span className="home-footer-sep">·</span>
         <Link to="/diff-test" className="home-footer-link">TenshinDiff test page</Link> */}

@@ -9,7 +9,8 @@ import {
 } from '../utils/exerciseSessionDraft';
 import { adjEngines, adjFormLabels } from '../engines/adjConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { getConjugationPromptDisplay, matchesConjugationAnswer } from '../utils/conjugationAnswer';
 import adjectives from '../data/dictConjugationAdjectives';
@@ -274,9 +275,7 @@ export default function AdjRandomizePage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + pageTitle;
-  }, [i18n.language]);
+  const pageMeta = useExercisePageMeta({ internalPath: '/adj-randomize' });
 
   useEffect(() => {
     if (!currentWord || !currentFormKey || isFinished) return;
@@ -491,7 +490,7 @@ export default function AdjRandomizePage() {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle}>
+    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

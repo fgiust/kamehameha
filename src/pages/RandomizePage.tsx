@@ -9,7 +9,8 @@ import {
 } from '../utils/exerciseSessionDraft';
 import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { getReverseQAPromptDisplay, getReverseQAResponse, matchesConjugationAnswer, matchesReverseQAAnswer } from '../utils/conjugationAnswer';
 import verbs from '../data/dictConjugationVerbs';
@@ -281,9 +282,7 @@ export default function RandomizePage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + pageTitle;
-  }, [i18n.language]);
+  const pageMeta = useExercisePageMeta({ internalPath: '/randomize' });
 
   useEffect(() => {
     if (!currentWord || !currentForm || isFinished) return;
@@ -499,7 +498,7 @@ export default function RandomizePage() {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle}>
+    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

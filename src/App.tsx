@@ -1,26 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigationType } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
 import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
-import HomePage from './pages/HomePage';
-import GenkiLessonPage from './pages/GenkiLessonPage';
-import VerbExercisePage from './pages/VerbExercisePage';
-import AdjExercisePage from './pages/AdjExercisePage';
-import RandomizePage from './pages/RandomizePage';
-import AdjRandomizePage from './pages/AdjRandomizePage';
-import CountersPage from './pages/CountersPage';
-import DaysPage from './pages/DaysPage';
-import NumbersPage from './pages/NumbersPage';
-import TimePage from './pages/TimePage';
-import CountingThingsPage from './pages/CountingThingsPage';
-import TransitivePage from './pages/TransitivePage';
-import FamilyNamesPage from './pages/FamilyNamesPage';
-import DisclaimerPage from './pages/DisclaimerPage';
-import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
-import SentenceTxtLessonPage from './pages/SentenceTxtLessonPage';
-import ContactPage from './pages/ContactPage';
+import { ExerciseRouteTree } from './AppRoutes';
 import FeedbackPanel from './components/FeedbackPanel';
 import DebugModeIndicator from './components/DebugModeIndicator';
 import SettingsPanel from './components/SettingsPanel';
 import UmamiPageviews from './components/UmamiPageviews';
+import PageMetaManager from './seo/PageMetaManager';
+import { stripLangPrefix } from './seo/localizedPaths';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/react"
 import { syncDebugModeFromSearch } from './utils/debugMode';
@@ -61,7 +47,8 @@ function setScrollMap(next: Record<string, number>) {
 function AppShell() {
   const location = useLocation();
   const navType = useNavigationType();
-  const showFeedback = !['/', '/disclaimer', '/contact', '/diff-test'].includes(location.pathname);
+  const internalPath = stripLangPrefix(location.pathname);
+  const showFeedback = !['/', '/disclaimer', '/contact', '/diff-test'].includes(internalPath);
   const currentPathKey = useMemo(() => location.pathname + location.search, [location.pathname, location.search]);
   const rafRef = useRef<number | null>(null);
 
@@ -78,10 +65,10 @@ function AppShell() {
   }, [location.search]);
 
   useEffect(() => {
-    if (location.pathname === '/') {
+    if (internalPath === '/') {
       clearAllExerciseSessionDrafts();
     }
-  }, [location.pathname]);
+  }, [internalPath]);
 
   useEffect(() => {
     try {
@@ -135,53 +122,18 @@ function AppShell() {
 
   return (
     <>
+      <PageMetaManager />
       <UmamiPageviews />
       <SettingsPanel />
       <DebugModeIndicator />
       {showFeedback && <FeedbackPanel />}
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/genki" element={<Navigate to="/" replace />} />
-        <Route path="/genki/:lessonId" element={<GenkiLessonPage />} />
-        <Route path="/sentence/:lessonId" element={<SentenceTxtLessonPage />} />
-
-        {/* Verb conjugation routes */}
-        <Route path="/teform" element={<VerbExercisePage />} />
-        <Route path="/causativeform" element={<VerbExercisePage />} />
-        <Route path="/conditionalform" element={<VerbExercisePage />} />
-        <Route path="/imperativeform" element={<VerbExercisePage />} />
-        <Route path="/negativeform" element={<VerbExercisePage />} />
-        <Route path="/passiveform" element={<VerbExercisePage />} />
-        <Route path="/pastform" element={<VerbExercisePage />} />
-        <Route path="/politeform" element={<VerbExercisePage />} />
-        <Route path="/politeform-short" element={<VerbExercisePage forceReverseQA={true} />} />
-        <Route path="/potentialform" element={<VerbExercisePage />} />
-        <Route path="/provisionalform" element={<VerbExercisePage />} />
-        <Route path="/volitionalform" element={<VerbExercisePage />} />
-        <Route path="/randomize" element={<RandomizePage />} />
-
-        {/* Adjective conjugation routes */}
-        <Route path="/adj-naruform" element={<AdjExercisePage />} />
-        <Route path="/adj-conditionalform" element={<AdjExercisePage />} />
-        <Route path="/adj-negativeform" element={<AdjExercisePage />} />
-        <Route path="/adj-pastform" element={<AdjExercisePage />} />
-        <Route path="/adj-volitionalform" element={<AdjExercisePage />} />
-        <Route path="/adj-randomize" element={<AdjRandomizePage />} />
-
-        {/* Numbers & Counters */}
-        <Route path="/counters" element={<CountersPage />} />
-        <Route path="/counters-people" element={<CountersPage peopleOnly={true} />} />
-        <Route path="/counting-things" element={<CountingThingsPage />} />
-        <Route path="/days" element={<DaysPage />} />
-        <Route path="/numbers" element={<NumbersPage />} />
-        <Route path="/time" element={<TimePage />} />
-
-        {/* Other */}
-        <Route path="/transitive" element={<TransitivePage />} />
-        <Route path="/family-names" element={<FamilyNamesPage />} />
-        <Route path="/adjectives-nouns" element={<AdjectivesNounsPage />} />
-     <Route path="/disclaimer" element={<DisclaimerPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/it">
+          <ExerciseRouteTree />
+        </Route>
+        <Route path="/">
+          <ExerciseRouteTree />
+        </Route>
         <Route path="*" element={
           <div className="app-container" style={{ textAlign: 'center', marginTop: 100 }}>
             <h1>404 - Not Found</h1>

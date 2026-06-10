@@ -8,7 +8,8 @@ import {
   sessionWordKeysFromWords,
 } from '../utils/exerciseSessionDraft';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
+import { CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, ConjugationEngine, OptionFlags, PreviousAnswer, TypeLabels, SETTINGS_KEYS } from '../types';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { getReverseQAPromptDisplay, getReverseQAResponse, matchesConjugationAnswer, matchesReverseQAAnswer } from '../utils/conjugationAnswer';
 import { toHiragana } from 'wanakana';
@@ -80,6 +81,7 @@ function finalizeIME(input: string) {
 }
 
 export default function ConjugationExercise({ title, wordData, engine, typeLabels, formLabel, persistKey, forceReverseQA }: Props) {
+  const pageMeta = useExercisePageMeta();
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
   const fingerprint = useMemo(
@@ -259,10 +261,6 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
       clearExerciseSessionDraft(persistKey);
     }
   }, [isFinished, persistKey]);
-
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + title;
-  }, [title]);
 
   // Update feedback details globally
   useEffect(() => {
@@ -534,7 +532,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   })();
 
   return (
-    <PageLayout pageTitle={title}>
+    <PageLayout pageTitle={title} intro={pageMeta.intro}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

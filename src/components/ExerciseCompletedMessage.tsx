@@ -1,9 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useLocalizedPath } from '../seo/useLocalizedPath';
 
 export default function ExerciseCompletedMessage() {
   const { t } = useTranslation();
+  const localizePath = useLocalizedPath();
   const ctaRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function ExerciseCompletedMessage() {
       </div>
       <Link
         ref={ctaRef}
-        to="/"
+        to={localizePath('/')}
         state={{ restoreScroll: true }}
         className="exercise-completed-link"
       >

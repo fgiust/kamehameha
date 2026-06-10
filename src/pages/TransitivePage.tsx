@@ -11,7 +11,8 @@ import { transitiveData, VerbPair } from '../data/dictTransitivePairs';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { PreviousAnswer, SETTINGS_KEYS } from '../types';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { readStoredConjugationDisplaySettings, writeStoredBool } from '../utils/utils';
 import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
@@ -187,9 +188,7 @@ export default function TransitivePage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + pageTitle;
-  }, [i18n.language, pageTitle]);
+  const pageMeta = useExercisePageMeta({ internalPath: '/transitive' });
 
   // Update feedback details globally
   useEffect(() => {
@@ -324,7 +323,7 @@ export default function TransitivePage() {
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle}>
+    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

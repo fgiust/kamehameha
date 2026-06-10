@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { setAppLanguage } from '../i18n/index';
+import { localizePath, stripLangPrefix } from '../seo/localizedPaths';
 import { useSpeechSettings } from '../hooks/useSpeechSettings';
 
 function GearIcon() {
@@ -106,6 +108,8 @@ function SettingsToggleRow({
 export default function SettingsPanel() {
   const { t, i18n } = useTranslation();
   const { speechEnabled, speechUseKanji, setSpeechEnabled, setSpeechUseKanji } = useSpeechSettings();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [dark, setDark] = useState(() => {
     try {
@@ -157,7 +161,12 @@ export default function SettingsPanel() {
                   aria-checked={lang === code}
                   className={`settings-lang-option ${lang === code ? 'is-active' : ''}`}
                   onClick={() => {
-                    void setAppLanguage(code);
+                    if (lang === code) return;
+                    const internalPath = stripLangPrefix(location.pathname);
+                    const nextPath = localizePath(internalPath, code) + location.search;
+                    void setAppLanguage(code).then(() => {
+                      navigate(nextPath, { replace: true });
+                    });
                   }}
                 >
                   {code.toUpperCase()}

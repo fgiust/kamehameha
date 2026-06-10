@@ -11,7 +11,8 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
-import { APP_TITLE_PREFIX, DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
+import { DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
@@ -40,7 +41,7 @@ type SlotTime = { hour: number; minute: number; amPm: 0 | 1 | 2 };
 const PERSIST_KEY = '/time';
 
 export default function TimePage() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const pageTitle = t('pages.time.title');
   const [reverse, setReverse] = useState(false);
   const fingerprint = useMemo(
@@ -223,9 +224,7 @@ export default function TimePage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + pageTitle;
-  }, [i18n.language]);
+  const pageMeta = useExercisePageMeta({ internalPath: '/time' });
 
   // Update feedback details globally
   useEffect(() => {
@@ -307,7 +306,7 @@ export default function TimePage() {
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle}>
+    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

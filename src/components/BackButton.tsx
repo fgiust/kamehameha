@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useLocalizedPath } from '../seo/useLocalizedPath';
 
 type Props = {
   className?: string;
@@ -8,6 +9,7 @@ type Props = {
 export default function BackButton({ className = 'header-btn' }: Props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const localizePath = useLocalizedPath();
 
   return (
     <button
@@ -15,7 +17,7 @@ export default function BackButton({ className = 'header-btn' }: Props) {
       className={className}
       aria-label={t('common.back')}
       onClick={() => {
-        navigate('/', { state: { restoreScroll: true } });
+        navigate(localizePath('/'), { state: { restoreScroll: true } });
       }}
     >
       {'<'}

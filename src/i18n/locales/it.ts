@@ -262,6 +262,50 @@ const it = {
     japanese: 'suggerimento: passa alla tastiera giapponese per l\'inserimento dei kanji',
     latin: 'suggerimento: usa la tastiera latina per l\'inserimento in hiragana senza conversione kanji',
   },
+  seo: {
+    homeTitle: '亀 kamehameha! — Esercizi di grammatica giapponese',
+    homeDescription:
+      'Esercizi gratuiti di grammatica giapponese: frasi in stile Genki, coniugazione di verbi e aggettivi, contatori e altro. Esercizi supplementari originali per studenti di Genki.',
+    homeIntro:
+      'Allenamento interattivo di grammatica giapponese con coniugazioni, esercizi di traduzione allineati al Genki, contatori e lettura. Esercizi originali per chi studia con i libri Genki.',
+    genkiExerciseTitle: '亀 kamehameha! · {{topic}} · Esercizio Genki lezione {{lesson}}',
+    genkiExerciseDescription:
+      'Esercizi di traduzione in giapponese su {{topic}} (Genki lezione {{lesson}}, esercizio {{exercise}}). Esercizi supplementari originali per studenti di Genki.',
+    genkiExerciseIntro:
+      'Traduci prompt in inglese o italiano in giapponese su {{topic}}, allineato alla lezione {{lesson}} del Genki. Esercizi originali — non copiati dal libro — pensati come pratica supplementare strutturata.',
+    sentenceExerciseTitle: '亀 kamehameha! · {{topic}} · Esercizio di frasi giapponesi',
+    sentenceExerciseDescription:
+      'Esercizi di traduzione in giapponese: {{topic}}. Esercizi interattivi con feedback immediato per studenti di livello intermedio.',
+    sentenceExerciseIntro:
+      'Migliora la fluidità traducendo prompt in giapponese su {{topic}}. Parte della raccolta gratuita di grammatica kamehameha! per studio autonomo e ripasso.',
+    conjugationTitle: '亀 kamehameha! · {{form}} · Esercizio coniugazione verbale',
+    conjugationDescription:
+      'Esercizi online di coniugazione verbale giapponese: {{form}}. Verbi godan, ichidan e irregolari con feedback immediato — allenamento gratuito in stile Genki.',
+    conjugationIntro:
+      'Coniuga verbi giapponesi alla {{form}}. Esercizi randomizzati su tutti i tipi di verbo, con kanji, furigana e opzione Q-R inversa.',
+    adjectiveConjugationTitle: '亀 kamehameha! · {{form}} · Esercizio coniugazione aggettivi',
+    adjectiveConjugationDescription:
+      'Esercizi online di coniugazione degli aggettivi giapponesi: {{form}}. Aggettivi い e な con feedback immediato.',
+    adjectiveConjugationIntro:
+      'Coniuga aggettivi giapponesi alla {{form}}. Esercizi interattivi per aggettivi い e な con tracciamento dei progressi.',
+    exerciseTitle: '亀 kamehameha! · {{name}} · Esercizi di giapponese',
+    exerciseDescription:
+      'Esercizi di {{name}} in giapponese con drill interattivi e feedback immediato. Allenamento grammaticale gratuito su kamehameha!',
+    exerciseIntro:
+      'Esercizi interattivi di {{name}} per studenti di giapponese. Studia al tuo ritmo con tracciamento dei progressi e feedback dettagliato.',
+    disclaimerTitle: '亀 kamehameha! · Disclaimer',
+    disclaimerDescription:
+      'Disclaimer di kamehameha! — app indipendente di grammatica giapponese con esercizi originali allineati al Genki.',
+    disclaimerIntro:
+      'Informazioni legali e attribuzioni per kamehameha!, app indipendente di giapponese ispirata ai classici trainer di grammatica online.',
+    contactTitle: '亀 kamehameha! · Contatti',
+    contactDescription:
+      'Contatta il creatore di kamehameha! — suggerimenti, feedback e domande su questa app di grammatica giapponese.',
+    contactIntro:
+      'Scrivici per feedback, suggerimenti o domande sugli esercizi di grammatica giapponese di kamehameha!.',
+    notFoundTitle: '亀 kamehameha! · Pagina non trovata',
+    notFoundDescription: 'La pagina richiesta non è stata trovata su kamehameha! esercizi di grammatica giapponese.',
+  },
 };
 
 export default it;

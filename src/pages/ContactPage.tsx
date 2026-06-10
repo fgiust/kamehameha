@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react';
-import { APP_TITLE_PREFIX } from '../types';
+import { useState } from 'react';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { useTranslation } from 'react-i18next';
 import SubmitButton, { SubmitState } from '../components/SubmitButton';
 import PageLayout from '../components/PageLayout';
 
 export default function ContactPage() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const pageMeta = useExercisePageMeta({ internalPath: '/contact' });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
-
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + t('common.contact');
-  }, [i18n.language]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +43,7 @@ export default function ContactPage() {
   };
 
   return (
-    <PageLayout pageTitle={t('common.contact')}>
+    <PageLayout pageTitle={t('common.contact')} intro={pageMeta.intro}>
       <p className="home-tagline is-body">
         {t('contact.intro')}
       </p>

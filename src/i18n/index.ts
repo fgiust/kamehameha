@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import en from './locales/en';
 import it from './locales/it';
+import { getLanguageFromPathname } from '../seo/localizedPaths';
 
 export type AppLanguage = 'en' | 'it';
 
@@ -32,6 +33,10 @@ export function setAppLanguage(lang: AppLanguage) {
 }
 
 export function getInitialLanguage(): AppLanguage {
+  if (typeof window !== 'undefined') {
+    const fromPath = getLanguageFromPathname(window.location.pathname);
+    if (fromPath) return fromPath;
+  }
   return readStoredLanguage() ?? detectBrowserLanguage();
 }
 

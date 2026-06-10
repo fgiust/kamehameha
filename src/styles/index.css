@@ -955,6 +955,18 @@ a:hover { color: var(--accent-hover); }
   line-height: 1.6;
 }
 
+.page-intro {
+  color: var(--text-secondary);
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 52rem;
+}
+
+.home-intro {
+  margin: 0 0 24px;
+}
+
 .home-footer {
   display: flex;
   justify-content: center;

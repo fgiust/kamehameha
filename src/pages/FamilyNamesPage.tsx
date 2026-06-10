@@ -1,20 +1,17 @@
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReadingExercise from '../components/ReadingExercise';
 import { getReadingTxtLessonById } from '../lessons/readingTxtLessons';
-import { APP_TITLE_PREFIX } from '../types';
 import PageLayout from '../components/PageLayout';
+import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 
 export default function FamilyNamesPage() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const pageTitle = t('pages.familyNames.title');
-  useEffect(() => {
-    document.title = APP_TITLE_PREFIX + pageTitle;
-  }, [i18n.language, pageTitle]);
+  const pageMeta = useExercisePageMeta({ internalPath: '/family-names' });
   const lesson = getReadingTxtLessonById('reading-familynames');
 
   return (
-    <PageLayout pageTitle={pageTitle}>
+    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
       {lesson && (
         <ReadingExercise
           session={lesson}
