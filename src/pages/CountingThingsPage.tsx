@@ -11,7 +11,6 @@ import KeyboardTip from '../components/KeyboardTip';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { PreviousAnswer } from '../types';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from 'tenshindiff';
 import DiffDisplay from '../components/DiffDisplay';
 import { useTranslation } from 'react-i18next';
@@ -551,8 +550,6 @@ export default function CountingThingsPage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  const pageMeta = useExercisePageMeta({ internalPath: '/counting-things' });
-
   useEffect(() => {
     if (!question || isFinished) return;
     updateFeedbackDetails({
@@ -650,7 +647,7 @@ export default function CountingThingsPage() {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

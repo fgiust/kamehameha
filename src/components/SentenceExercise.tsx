@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { SentenceItem, PreviousAnswer } from '../types';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import type { DiffUnitOp } from 'tenshindiff';
 import { diffSentenceAnswer, generateAnswersFromTemplate, matchesByRubyUnits, pickBestDiffFromTemplate, speechTextFromDiffOps, stripRuby } from 'tenshindiff';
 import { SENTENCE_DIFF_OPTIONS } from '../utils/sentenceDiffOptions';
@@ -80,7 +79,6 @@ function markReloadPromptHandled(): void {
 }
 
 export default function SentenceExercise({ title, sentenceData, persistKey, dataLessonId }: Props) {
-  const pageMeta = useExercisePageMeta();
   const { t, i18n } = useTranslation();
   const lang = resolveUiLang(i18n.resolvedLanguage ?? i18n.language);
   const debugMode = useDebugMode();
@@ -376,7 +374,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
   })();
 
   return (
-    <PageLayout pageTitle={title} intro={pageMeta.intro}>
+    <PageLayout pageTitle={title}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

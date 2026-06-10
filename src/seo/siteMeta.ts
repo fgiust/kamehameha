@@ -29,9 +29,11 @@ export type HreflangAlternate = { lang: string; href: string };
 export type PageMeta = {
   lang: SeoLang;
   internalPath: string;
+  /** SEO / share title (og:, twitter, JSON-LD). */
   title: string;
+  /** Short title shown in the browser tab. */
+  documentTitle: string;
   description: string;
-  intro: string;
   canonical: string;
   og: {
     title: string;
@@ -160,19 +162,19 @@ export function buildPageMeta(options: BuildPageMetaOptions): PageMeta {
   const hreflangAlternates = buildHreflangAlternates(internalPath);
 
   let title = seo.homeTitle;
+  let documentTitle = 'kamehameha!';
   let description = seo.homeDescription;
-  let intro = seo.homeIntro;
 
   if (internalPath === '/') {
     // defaults above
   } else if (internalPath === '/disclaimer') {
     title = seo.disclaimerTitle;
+    documentTitle = resolveI18nKey(lang, 'common.disclaimer');
     description = seo.disclaimerDescription;
-    intro = seo.disclaimerIntro;
   } else if (internalPath === '/contact') {
     title = seo.contactTitle;
+    documentTitle = resolveI18nKey(lang, 'common.contact');
     description = seo.contactDescription;
-    intro = seo.contactIntro;
   } else if (internalPath.startsWith('/genki/')) {
     const lessonId = internalPath.slice('/genki/'.length);
     const lesson = genkiLessons.find(l => l.id === lessonId);
@@ -182,40 +184,38 @@ export function buildPageMeta(options: BuildPageMetaOptions): PageMeta {
     const exerciseNum = parsed?.exercise ?? 0;
     const vars = { topic, lesson: lessonNum, exercise: exerciseNum };
     title = interpolate(seo.genkiExerciseTitle, vars);
+    documentTitle = topic;
     description = interpolate(seo.genkiExerciseDescription, vars);
-    intro = interpolate(seo.genkiExerciseIntro, vars);
   } else if (internalPath.startsWith('/sentence/')) {
     const lessonId = internalPath.slice('/sentence/'.length);
     const lesson = sentenceLessons.find(l => l.id === lessonId);
     const topic = lang === 'it' ? (lesson?.titleItalian ?? lesson?.title ?? lessonId) : (lesson?.title ?? lessonId);
     const vars = { topic };
     title = interpolate(seo.sentenceExerciseTitle, vars);
+    documentTitle = topic;
     description = interpolate(seo.sentenceExerciseDescription, vars);
-    intro = interpolate(seo.sentenceExerciseIntro, vars);
   } else {
     const exercise = EXERCISE_BY_PATH[internalPath];
     if (exercise) {
       const formName = exerciseNameForId(lang, exercise.id);
+      documentTitle = formName;
       if (VERB_CONJ_IDS.has(exercise.id)) {
         const vars = { form: formName };
         title = interpolate(seo.conjugationTitle, vars);
         description = interpolate(seo.conjugationDescription, vars);
-        intro = interpolate(seo.conjugationIntro, vars);
       } else if (ADJ_CONJ_IDS.has(exercise.id)) {
         const vars = { form: formName };
         title = interpolate(seo.adjectiveConjugationTitle, vars);
         description = interpolate(seo.adjectiveConjugationDescription, vars);
-        intro = interpolate(seo.adjectiveConjugationIntro, vars);
       } else {
         const vars = { name: formName };
         title = interpolate(seo.exerciseTitle, vars);
         description = interpolate(seo.exerciseDescription, vars);
-        intro = interpolate(seo.exerciseIntro, vars);
       }
     } else {
       title = seo.notFoundTitle;
+      documentTitle = '404';
       description = seo.notFoundDescription;
-      intro = seo.notFoundDescription;
     }
   }
 
@@ -226,8 +226,8 @@ export function buildPageMeta(options: BuildPageMetaOptions): PageMeta {
     lang,
     internalPath,
     title,
+    documentTitle,
     description,
-    intro,
     canonical,
     og: {
       title,

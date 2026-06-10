@@ -12,7 +12,6 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { PreviousAnswer, SETTINGS_KEYS } from '../types';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { readStoredConjugationDisplaySettings, writeStoredBool } from '../utils/utils';
 import JapaneseText from '../components/JapaneseText';
 import OptionToggle from '../components/OptionToggle';
@@ -188,8 +187,6 @@ export default function TransitivePage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  const pageMeta = useExercisePageMeta({ internalPath: '/transitive' });
-
   // Update feedback details globally
   useEffect(() => {
     if (!currentPair || isFinished) return;
@@ -323,7 +320,7 @@ export default function TransitivePage() {
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

@@ -28,15 +28,19 @@ describe('buildPageMeta', () => {
         sentenceData: [],
       }],
     });
+    expect(meta.documentTitle).toBe('好き/きらい(な)');
     expect(meta.title).toContain('好き/きらい(な)');
     expect(meta.title).toMatch(/Genki Lesson 5/i);
+    expect(meta.og.title).toBe(meta.title);
     expect(meta.description).toMatch(/Genki Lesson 5/i);
     expect(meta.canonical).toBe('https://kamehameha.fgiust.com/genki/genki5-2');
   });
 
   it('builds te-form conjugation meta', () => {
     const meta = buildPageMeta({ internalPath: '/teform', lang: 'en' });
+    expect(meta.documentTitle).toBe('て-Form');
     expect(meta.title).toMatch(/て-Form/i);
+    expect(meta.title).toContain('kamehameha');
     expect(meta.description).toMatch(/verb conjugation/i);
   });
 

@@ -266,43 +266,27 @@ const en = {
     homeTitle: '亀 kamehameha! — Japanese grammar practice',
     homeDescription:
       'Free Japanese grammar practice: Genki-style sentence exercises, verb and adjective conjugation drills, counters, and more. Original supplementary exercises for Genki learners.',
-    homeIntro:
-      'Interactive Japanese grammar training with conjugation drills, Genki-aligned sentence exercises, counters, and reading practice. Original exercises for students using the Genki textbook series.',
     genkiExerciseTitle: '亀 kamehameha! · {{topic}} · Genki Lesson {{lesson}} exercise',
     genkiExerciseDescription:
       'Practice Japanese sentence translation on {{topic}} (Genki Lesson {{lesson}}, exercise {{exercise}}). Original supplementary grammar drills for Genki students.',
-    genkiExerciseIntro:
-      'Translate English or Italian prompts into Japanese on {{topic}}, aligned with Genki Lesson {{lesson}}. Original exercises — not copied from the textbook — designed as structured supplementary practice for Genki students.',
     sentenceExerciseTitle: '亀 kamehameha! · {{topic}} · Japanese sentence exercise',
     sentenceExerciseDescription:
       'Practice Japanese sentence translation: {{topic}}. Interactive grammar drills with instant feedback for intermediate learners.',
-    sentenceExerciseIntro:
-      'Build fluency by translating prompts into Japanese on {{topic}}. Part of the free kamehameha! grammar practice collection for self-study and classroom review.',
     conjugationTitle: '亀 kamehameha! · {{form}} · verb conjugation practice',
     conjugationDescription:
       'Practice Japanese {{form}} verb conjugation online. Drill godan, ichidan, and irregular verbs with instant feedback — free Genki-style grammar training.',
-    conjugationIntro:
-      'Conjugate Japanese verbs in the {{form}}. Randomized drills across verb types with kanji, furigana, and reverse Q&A options for focused grammar practice.',
     adjectiveConjugationTitle: '亀 kamehameha! · {{form}} · adjective conjugation practice',
     adjectiveConjugationDescription:
       'Practice Japanese {{form}} adjective conjugation online. Drill い-adjectives and な-adjectives with instant feedback.',
-    adjectiveConjugationIntro:
-      'Conjugate Japanese adjectives in the {{form}}. Interactive drills for い-adjectives and な-adjectives with progress tracking.',
     exerciseTitle: '亀 kamehameha! · {{name}} · Japanese practice',
     exerciseDescription:
       'Practice {{name}} in Japanese with interactive drills and instant feedback. Free supplementary grammar training on kamehameha!',
-    exerciseIntro:
-      'Interactive {{name}} exercises for Japanese learners. Practice at your own pace with progress tracking and detailed answer feedback.',
     disclaimerTitle: '亀 kamehameha! · Disclaimer',
     disclaimerDescription:
       'Disclaimer for kamehameha! — an independent Japanese grammar practice app with original Genki-aligned exercises.',
-    disclaimerIntro:
-      'Legal and attribution information for kamehameha!, an independent Japanese learning app inspired by classic online grammar trainers.',
     contactTitle: '亀 kamehameha! · Contact',
     contactDescription:
       'Contact the creator of kamehameha! — suggestions, feedback, and questions about this Japanese grammar practice app.',
-    contactIntro:
-      'Get in touch with feedback, suggestions, or questions about kamehameha! Japanese grammar exercises.',
     notFoundTitle: '亀 kamehameha! · Page not found',
     notFoundDescription: 'The requested page was not found on kamehameha! Japanese grammar practice.',
   },

@@ -13,7 +13,6 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { CONJUGATION_SESSION_TARGET_TOTAL } from '../types';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
@@ -396,10 +395,6 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     if (isFinished) clearExerciseSessionDraft(persistKey);
   }, [isFinished, persistKey]);
 
-  const pageMeta = useExercisePageMeta({
-    internalPath: peopleOnly ? '/counters-people' : '/counters',
-  });
-
   // Update feedback details globally
   useEffect(() => {
     if (!question) return;
@@ -495,7 +490,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

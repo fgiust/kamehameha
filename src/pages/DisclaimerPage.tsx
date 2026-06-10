@@ -1,13 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
-
 export default function DisclaimerPage() {
   const { t } = useTranslation();
-  const pageMeta = useExercisePageMeta({ internalPath: '/disclaimer' });
 
   return (
-    <PageLayout pageTitle={t('common.disclaimer')} intro={pageMeta.intro}>
+    <PageLayout pageTitle={t('common.disclaimer')}>
       <div className="card">
         <div style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
           <p>

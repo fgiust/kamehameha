@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { homeConfig } from '../data/homeSections';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { useLocalizedPath } from '../seo/useLocalizedPath';
 import { ProgressSegmentState, readPersistedSessionProgress, SESSION_PROGRESS_UPDATED_EVENT } from '../hooks/useSessionProgress';
 import { useTranslation } from 'react-i18next';
@@ -150,7 +149,6 @@ function renderSection(
 export default function HomePage() {
   const { t, i18n } = useTranslation();
   const lang = (i18n.resolvedLanguage ?? i18n.language) === 'it' ? 'it' : 'en';
-  const pageMeta = useExercisePageMeta({ internalPath: '/' });
   const localizePath = useLocalizedPath();
 
   return (
@@ -165,7 +163,6 @@ export default function HomePage() {
       <p className="home-tagline is-body">
         {t('home.taglineBody')}
       </p>
-      <p className="page-intro home-intro">{pageMeta.intro}</p>
       {homeConfig.sections.map(s => renderSection(s, t, lang, localizePath))}
 
       <footer className="home-footer">

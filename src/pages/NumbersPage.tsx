@@ -12,7 +12,6 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
@@ -216,8 +215,6 @@ export default function NumbersPage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  const pageMeta = useExercisePageMeta({ internalPath: '/numbers' });
-
   // Update feedback details globally
   useEffect(() => {
     if (!question || isFinished) return;
@@ -305,7 +302,7 @@ export default function NumbersPage() {
   const pct = correct + incorrect > 0 ? Math.round((correct / (correct + incorrect)) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

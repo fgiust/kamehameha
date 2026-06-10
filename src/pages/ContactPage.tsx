@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { useTranslation } from 'react-i18next';
 import SubmitButton, { SubmitState } from '../components/SubmitButton';
 import PageLayout from '../components/PageLayout';
 
 export default function ContactPage() {
   const { t } = useTranslation();
-  const pageMeta = useExercisePageMeta({ internalPath: '/contact' });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -43,7 +41,7 @@ export default function ContactPage() {
   };
 
   return (
-    <PageLayout pageTitle={t('common.contact')} intro={pageMeta.intro}>
+    <PageLayout pageTitle={t('common.contact')}>
       <p className="home-tagline is-body">
         {t('contact.intro')}
       </p>

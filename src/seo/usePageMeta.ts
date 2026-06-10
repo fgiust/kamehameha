@@ -44,7 +44,7 @@ function upsertJsonLd(id: string, data: Record<string, unknown>): void {
 
 export function applyPageMeta(meta: PageMeta): void {
   document.documentElement.lang = meta.lang;
-  document.title = meta.title;
+  document.title = meta.documentTitle;
 
   upsertMeta('name', 'description', meta.description);
   upsertLink('canonical', meta.canonical);

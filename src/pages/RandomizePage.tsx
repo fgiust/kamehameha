@@ -10,7 +10,6 @@ import {
 import { verbEngines, verbFormLabels } from '../engines/verbConjugation';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { CONJUGATION_SESSION_TARGET_TOTAL, ConjugationWord, OptionFlags, PreviousAnswer, SETTINGS_KEYS } from '../types';
-import { useExercisePageMeta } from '../seo/useExercisePageMeta';
 import { getConjugationFormHintLocalized, pickRandomSubset, readStoredBool, readStoredConjugationDisplaySettings, stripRubyTags, toKanaReading, toRubyInnerHtml, writeStoredBool } from '../utils/utils';
 import { getReverseQAPromptDisplay, getReverseQAResponse, matchesConjugationAnswer, matchesReverseQAAnswer } from '../utils/conjugationAnswer';
 import verbs from '../data/dictConjugationVerbs';
@@ -282,8 +281,6 @@ export default function RandomizePage() {
     if (isFinished) clearExerciseSessionDraft(PERSIST_KEY);
   }, [isFinished]);
 
-  const pageMeta = useExercisePageMeta({ internalPath: '/randomize' });
-
   useEffect(() => {
     if (!currentWord || !currentForm || isFinished) return;
     const engine = verbEngines[currentForm];
@@ -498,7 +495,7 @@ export default function RandomizePage() {
   const pct = total > 0 ? Math.round((correct / total) * 100) : 100;
 
   return (
-    <PageLayout pageTitle={pageTitle} intro={pageMeta.intro}>
+    <PageLayout pageTitle={pageTitle}>
       <div className="card">
         <div className="exercise-container">
           {isFinished && <ExerciseCompletedMessage />}

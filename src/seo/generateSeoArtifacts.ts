@@ -26,7 +26,7 @@ function stripExistingSeoTags(html: string): string {
 export function injectMetaIntoHtml(html: string, meta: ReturnType<typeof buildPageMeta>): string {
   let out = stripExistingSeoTags(html);
   out = out.replace(/<html lang="[^"]*">/, `<html lang="${meta.lang}">`);
-  out = out.replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(meta.title)}</title>`);
+  out = out.replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(meta.documentTitle)}</title>`);
   out = out.replace('</head>', `  ${renderMetaTags(meta)}\n</head>`);
   return out;
 }
