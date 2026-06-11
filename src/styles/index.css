@@ -1484,6 +1484,126 @@ body.dark .settings-info-btn {
   gap: 14px;
 }
 
+.settings-speech-test-link {
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.settings-speech-test-link:hover {
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+}
+
+.settings-speech-test-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.speech-test-modal {
+  max-width: 640px;
+}
+
+.speech-test-title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.speech-test-intro {
+  margin: 0 0 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.speech-test-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.speech-test-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg-card) 92%, var(--text) 8%);
+}
+
+.speech-test-phrase {
+  flex: 1;
+  min-width: 0;
+}
+
+.speech-test-japanese {
+  display: inline;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.speech-test-japanese-part {
+  display: inline;
+  justify-content: flex-start !important;
+}
+
+.speech-test-highlight {
+  color: var(--correct);
+}
+
+.speech-test-translation {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.speech-test-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.speech-test-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.speech-test-btn:hover {
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+}
+
+.speech-test-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 @media (max-width: 600px) {
   .app-container { padding: 12px; }
   .page-header { margin-bottom: 10px; }

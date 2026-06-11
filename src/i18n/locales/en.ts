@@ -38,6 +38,14 @@ const en = {
       'Reads the prompt and answer using your browser’s text-to-speech. Quality and available voices vary by browser and device.',
     speechUseKanjiHint:
       'Speaks answers reading kanji instead of kana. Can improve pitch accent but may pick readings that differ from the answer shown. When off, uses kana readings, closer to the exercise text but without pitch-accent contrast. Depends on your system and browser.',
+    speechTestLink: 'Audio test',
+  },
+  speechTest: {
+    title: 'Audio test',
+    intro:
+      'Use these sample sentences to check how well your device reads Japanese aloud. Compare the kanji and kana buttons and listen for pitch accent in homophone pairs (e.g. 雨 vs 飴). Then decide whether to enable “Use kanji for speech” in settings.',
+    speakKanji: 'Read with kanji',
+    speakKana: 'Read with kana',
   },
   sentenceExercise: {
     promptTranslate: 'Translate into Japanese:',

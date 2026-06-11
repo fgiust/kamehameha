@@ -38,6 +38,14 @@ const it = {
       'Legge prompt e risposta con la sintesi vocale del sistema. Qualità e voci disponibili variano in base a browser e dispositivo.',
     speechUseKanjiHint:
       'Pronuncia le risposte leggendo la versione in kanji anziché in kana. Può migliorare l’accento tonico ma usare letture diverse da quella mostrata. Se disattivato, usa la traslitterazione in kana, più fedele all’esercizio ma senza contrasto di accenti. Dipende da sistema e browser.',
+    speechTestLink: 'Test audio',
+  },
+  speechTest: {
+    title: 'Test audio',
+    intro:
+      'Con queste frasi di esempio puoi verificare la qualità della sintesi vocale sul tuo dispositivo. Confronta i pulsanti kanji e kana e fai attenzione agli accenti tonali nelle coppie di omografi (es. 雨 vs 飴). Poi decidi se conviene abilitare «Usa kanji nella lettura» nelle impostazioni.',
+    speakKanji: 'Leggi con kanji',
+    speakKana: 'Leggi con kana',
   },
   sentenceExercise: {
     promptTranslate: 'Traduci in giapponese:',

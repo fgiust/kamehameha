@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { DiffUnitOp } from '../src/types';
-import { speechTextFromDiffOps } from '../src/speech';
+import { speechTextFromDiffOps, speechTextFromRubyNotation } from '../src/speech';
 
 describe('speechTextFromDiffOps', () => {
   it('excludes extra (red) chars and includes missing (white) units', () => {
@@ -29,5 +29,18 @@ describe('speechTextFromDiffOps', () => {
   it('returns empty string when all ops are extra', () => {
     const ops: DiffUnitOp[] = [{ kind: 'extra', text: 'wrong' }];
     expect(speechTextFromDiffOps(ops, 'kanji')).toBe('');
+  });
+});
+
+describe('speechTextFromRubyNotation', () => {
+  it('keeps okurigana before a ruby kanji in kana mode', () => {
+    const text = '雨[あめ]が降[ふ]っている間[あいだ]に飴[あめ]を食[た]べた';
+    expect(speechTextFromRubyNotation(text, 'kanji')).toBe('雨が降っている間に飴を食べた');
+    expect(speechTextFromRubyNotation(text, 'kana')).toBe('あめがふっているあいだにあめをたべた');
+  });
+
+  it('keeps okurigana after a ruby kanji in kana mode', () => {
+    const text = '橋[はし]の端[はし]で箸[はし]を使[つか]いました';
+    expect(speechTextFromRubyNotation(text, 'kana')).toBe('はしのはしではしをつかいました');
   });
 });

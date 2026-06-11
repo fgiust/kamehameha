@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { setAppLanguage } from '../i18n/index';
 import { localizePath, stripLangPrefix } from '../seo/localizedPaths';
 import { useSpeechSettings } from '../hooks/useSpeechSettings';
+import SpeechTestModal from './SpeechTestModal';
 
 function GearIcon() {
   return (
@@ -111,6 +112,7 @@ export default function SettingsPanel() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [speechTestOpen, setSpeechTestOpen] = useState(false);
   const [dark, setDark] = useState(() => {
     try {
       return localStorage.getItem('theme') !== 'light';
@@ -212,9 +214,17 @@ export default function SettingsPanel() {
               onChange={setSpeechUseKanji}
               disabled={!speechEnabled}
             />
+            <button
+              type="button"
+              className="settings-speech-test-link"
+              onClick={() => setSpeechTestOpen(true)}
+            >
+              {t('settings.speechTestLink')}
+            </button>
           </div>
         </div>
       )}
+      <SpeechTestModal isOpen={speechTestOpen} onClose={() => setSpeechTestOpen(false)} />
     </div>
   );
 }

@@ -27,7 +27,7 @@ export {
   scoreSegmentAt,
 } from './resolve';
 export { formatDiffPlainText } from './plain';
-export { speechTextFromDiffOps, type SpeechTextMode } from './speech';
+export { speechTextFromDiffOps, speechTextFromRubyNotation, type SpeechTextMode } from './speech';
 export { renderDiffHtml } from './render';
 export { gradeAnswer } from './grade';
 export {
