@@ -277,8 +277,8 @@ export const homeConfig: HomeConfig = {
         { id: 'genki10-4' },
         { id: 'adj-naruform', title: { key: 'home.genkiOverrides.adjectiveNaru' } },
         { id: 'genki10-5' },
-        { id: 'genki10-6', beta: true },
-        { id: 'genki10-7', beta: true },
+        { id: 'genki10-6' },
+        { id: 'genki10-7' },
       ],
     },
     {

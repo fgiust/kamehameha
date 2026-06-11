@@ -9,13 +9,13 @@ No, I didn't travel anywhere.
 No, non sono andato in viaggio da nessuna parte.
 いいえ、どこに{も|}旅行[りょこう]しませんでした
 
-Did you meet anyone new?
-Hai incontrato qualcuno di nuovo?
-新[あたら]しい人[ひと]に会[あ]いましたか
+Did you meet anyone?
+Hai incontrato qualcuno?
+誰[だれ]かに会[あ]いましたか
 
 No, I didn't meet anyone.
 No, non ho incontrato nessuno.
-いいえ、だれに{も|}会[あ]いませんでした
+いいえ、誰[だれ]に{も|}会[あ]いませんでした
 
 Did you buy anything at the store?
 Hai comprato qualcosa al negozio?
