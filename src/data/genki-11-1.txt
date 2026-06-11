@@ -1,8 +1,8 @@
 ～たい
 ～たい
 
-I want to learn to play the guitar.
-Voglio imparare a suonare la chitarra.
+I want to play the guitar.
+Voglio suonare la chitarra.
 {私[わたし]は|}ギターを弾[ひ]きたいです
 
 I want to live in Japan someday.
@@ -13,8 +13,8 @@ I wanted to try on this coat.
 Volevo provare questo cappotto.
 {私[わたし]は|}このコートを着[き]てみたかったです
 
-I want to learn to swim.
-Voglio imparare a nuotare.
+I want to learn to swim (I want to swim).
+Voglio imparare a nuotare (voglio nuotare).
 {私[わたし]は|}泳[およ]ぎたいです
 
 I want to drink hot tea.
