@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { trackGaPageview } from '../utils/googleAnalytics';
+import { loadGoogleAnalytics } from '../utils/loadGoogleAnalytics';
+import { loadUmami } from '../utils/loadUmami';
+import { runWhenIdle } from '../utils/runWhenIdle';
 import { trackUmamiPageview } from '../utils/umami';
 
 const TRACKER_READY_MAX_ATTEMPTS = 30;
@@ -34,7 +37,13 @@ export default function UmamiPageviews() {
       }
     };
 
-    send();
+    runWhenIdle(() => {
+      if (cancelled) return;
+      void Promise.allSettled([loadUmami(), loadGoogleAnalytics()]).then(() => {
+        if (!cancelled) send();
+      });
+    });
+
     return () => {
       cancelled = true;
     };

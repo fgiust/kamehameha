@@ -17,7 +17,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "tenshindiff": "workspace:*",
+    "@fontsource/noto-sans-jp": "5.2.9",
     "@vercel/analytics": "2.0.1",
     "@vercel/kv": "3.0.0",
     "@vercel/speed-insights": "2.0.0",
@@ -26,6 +26,7 @@
     "react-dom": "^18.3.1",
     "react-i18next": "17.0.8",
     "react-router-dom": "7.15.1",
+    "tenshindiff": "workspace:*",
     "wanakana": "5.3.1"
   },
   "devDependencies": {

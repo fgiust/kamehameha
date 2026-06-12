@@ -1,21 +1,23 @@
+import { lazy } from 'react';
 import { Navigate, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import GenkiLessonPage from './pages/GenkiLessonPage';
-import VerbExercisePage from './pages/VerbExercisePage';
-import AdjExercisePage from './pages/AdjExercisePage';
-import RandomizePage from './pages/RandomizePage';
-import AdjRandomizePage from './pages/AdjRandomizePage';
-import CountersPage from './pages/CountersPage';
-import DaysPage from './pages/DaysPage';
-import NumbersPage from './pages/NumbersPage';
-import TimePage from './pages/TimePage';
-import CountingThingsPage from './pages/CountingThingsPage';
-import TransitivePage from './pages/TransitivePage';
-import FamilyNamesPage from './pages/FamilyNamesPage';
-import DisclaimerPage from './pages/DisclaimerPage';
-import AdjectivesNounsPage from './pages/AdjectivesNounsPage';
-import SentenceTxtLessonPage from './pages/SentenceTxtLessonPage';
-import ContactPage from './pages/ContactPage';
+
+const GenkiLessonPage = lazy(() => import('./pages/GenkiLessonPage'));
+const VerbExercisePage = lazy(() => import('./pages/VerbExercisePage'));
+const AdjExercisePage = lazy(() => import('./pages/AdjExercisePage'));
+const RandomizePage = lazy(() => import('./pages/RandomizePage'));
+const AdjRandomizePage = lazy(() => import('./pages/AdjRandomizePage'));
+const CountersPage = lazy(() => import('./pages/CountersPage'));
+const DaysPage = lazy(() => import('./pages/DaysPage'));
+const NumbersPage = lazy(() => import('./pages/NumbersPage'));
+const TimePage = lazy(() => import('./pages/TimePage'));
+const CountingThingsPage = lazy(() => import('./pages/CountingThingsPage'));
+const TransitivePage = lazy(() => import('./pages/TransitivePage'));
+const FamilyNamesPage = lazy(() => import('./pages/FamilyNamesPage'));
+const DisclaimerPage = lazy(() => import('./pages/DisclaimerPage'));
+const AdjectivesNounsPage = lazy(() => import('./pages/AdjectivesNounsPage'));
+const SentenceTxtLessonPage = lazy(() => import('./pages/SentenceTxtLessonPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 
 /** Child <Route> elements for a localized route prefix (/ or /it). */
 export function exerciseChildRoutes() {

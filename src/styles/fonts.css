@@ -1,0 +1,41 @@
+/* Critical UI fonts — served from /public/fonts for stable preload URLs. */
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: url('/fonts/open-sans-latin-300-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/open-sans-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src: url('/fonts/open-sans-latin-600-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url('/fonts/open-sans-latin-700-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Lobster Two';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('/fonts/lobster-two-latin-400-normal.woff2') format('woff2');
+}

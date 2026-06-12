@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation, useNavigationType } from 'react-router-dom';
-import { useLayoutEffect, useMemo, useRef, useEffect } from 'react';
+import { Suspense, lazy, useLayoutEffect, useMemo, useRef, useEffect } from 'react';
 import { exerciseChildRoutes } from './AppRoutes';
 import BackButton from './components/BackButton';
 import FeedbackPanel from './components/FeedbackPanel';
@@ -8,10 +8,12 @@ import SettingsPanel from './components/SettingsPanel';
 import UmamiPageviews from './components/UmamiPageviews';
 import PageMetaManager from './seo/PageMetaManager';
 import { stripLangPrefix } from './seo/localizedPaths';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { scheduleNotoSansJpLoad } from './utils/loadNotoSansJp';
 import { syncDebugModeFromSearch } from './utils/debugMode';
 import { clearAllExerciseSessionDrafts } from './utils/exerciseSessionDraft';
+
+const Analytics = lazy(() => import('@vercel/analytics/react').then(m => ({ default: m.Analytics })));
+const SpeedInsights = lazy(() => import('@vercel/speed-insights/react').then(m => ({ default: m.SpeedInsights })));
 
 export default function App() {
   return (
@@ -53,6 +55,10 @@ function AppShell() {
   const showFeedback = !['/', '/disclaimer', '/contact', '/diff-test'].includes(internalPath);
   const currentPathKey = useMemo(() => location.pathname + location.search, [location.pathname, location.search]);
   const rafRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    scheduleNotoSansJpLoad();
+  }, []);
 
   useEffect(() => {
     try {
@@ -134,18 +140,23 @@ function AppShell() {
       <SettingsPanel />
       <DebugModeIndicator />
       {showFeedback && <FeedbackPanel />}
-      <Routes>
-        <Route path="/it">{exerciseChildRoutes()}</Route>
-        <Route path="/">{exerciseChildRoutes()}</Route>
-        <Route path="*" element={
-          <div className="app-container" style={{ textAlign: 'center', marginTop: 100 }}>
-            <h1>404 - Not Found</h1>
-            <p>Page not found</p>
-            <a href="/" style={{ color: 'var(--accent)' }}>Go to Homepage</a>
-          </div>
-        } />
-      </Routes><Analytics />
-      <SpeedInsights />
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/it">{exerciseChildRoutes()}</Route>
+          <Route path="/">{exerciseChildRoutes()}</Route>
+          <Route path="*" element={
+            <div className="app-container" style={{ textAlign: 'center', marginTop: 100 }}>
+              <h1>404 - Not Found</h1>
+              <p>Page not found</p>
+              <a href="/" style={{ color: 'var(--accent)' }}>Go to Homepage</a>
+            </div>
+          } />
+        </Routes>
+      </Suspense>
+      <Suspense fallback={null}>
+        <Analytics />
+        <SpeedInsights />
+      </Suspense>
     </>
   );
 }

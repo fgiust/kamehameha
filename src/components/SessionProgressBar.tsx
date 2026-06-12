@@ -2,21 +2,23 @@ import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDebugMode } from '../hooks/useDebugMode';
 import { isDebugAnimationRequest } from '../utils/debugMode';
-import { kamehamehaGifSrc, triggerKamehamehaCelebration } from '../utils/kamehamehaCelebration';
+import { triggerKamehamehaCelebration } from '../utils/kamehamehaCelebration';
 
-function KamehamehaCelebrationGif({ gifKey }: { gifKey: number }) {
+function KamehamehaCelebrationGif({ src }: { src: string }) {
   return (
     <img
-      src={kamehamehaGifSrc(gifKey)}
+      src={src}
       alt=""
       className="kamehameha-celebration-gif"
     />
   );
 }
 
-function playCelebration(setGifKey: (k: number) => void, setShow: (v: boolean) => void) {
-  setGifKey(triggerKamehamehaCelebration());
-  setShow(true);
+function playCelebration(setGifSrc: (src: string) => void, setShow: (v: boolean) => void) {
+  void triggerKamehamehaCelebration().then(({ gifSrc }) => {
+    setGifSrc(gifSrc);
+    setShow(true);
+  });
 }
 
 export default function SessionProgressBar({
@@ -35,13 +37,13 @@ export default function SessionProgressBar({
   const debugMode = useDebugMode();
   const { search } = useLocation();
   const [showKamehameha, setShowKamehameha] = useState(false);
-  const [kamehamehaKey, setKamehamehaKey] = useState(0);
+  const [gifSrc, setGifSrc] = useState<string | null>(null);
   const isInitialMountRef = useRef(true);
   const wasAllGreenRef = useRef(false);
 
   useEffect(() => {
     if (!debugMode || !isDebugAnimationRequest(search)) return;
-    playCelebration(setKamehamehaKey, setShowKamehameha);
+    playCelebration(setGifSrc, setShowKamehameha);
   }, [debugMode, search]);
 
   useEffect(() => {
@@ -54,14 +56,14 @@ export default function SessionProgressBar({
     }
 
     if (allGreen && !wasAllGreenRef.current) {
-      playCelebration(setKamehamehaKey, setShowKamehameha);
+      playCelebration(setGifSrc, setShowKamehameha);
     }
     wasAllGreenRef.current = allGreen;
   }, [segments]);
 
   return (
     <div className="session-progress-row" aria-hidden="true" style={{ position: 'relative' }}>
-      {showKamehameha && <KamehamehaCelebrationGif gifKey={kamehamehaKey} />}
+      {showKamehameha && gifSrc ? <KamehamehaCelebrationGif src={gifSrc} /> : null}
       <div className="session-progress-left">
         {typeof correct === 'number' && typeof incorrect === 'number' && (
           <>
