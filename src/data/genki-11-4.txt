@@ -2,7 +2,7 @@ NounA や NounB
 SostantivoA や SostantivoB
 
 I visited Nara and Hiroshima (among other places).
-Ho visitato Nara e Hiroshima (tra gli altri posti).
+Sono stato a Nara e Hiroshima (tra gli altri posti).
 奈良[なら]や広島[ひろしま]{に|へ}行[い]きました
 
 I like ramen and udon (among other dishes).
