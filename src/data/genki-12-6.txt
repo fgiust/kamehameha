@@ -27,14 +27,14 @@ Quel ristorante probabilmente è costoso.
 
 Ken probably went home already.
 Ken probabilmente è già tornato a casa.
-けんさんはもう帰[かえ]ったでしょう
+けんさんは{|家[いえ]に}もう帰[かえ]ったでしょう
 
 It probably won't snow this week.
 Probabilmente non nevicherà questa settimana.
 今週[こんしゅう]雪[ゆき]は降[ふ]らないでしょう
 
 The bus will probably arrive soon.
-L'autobus probabilmente arriverà presto.
+L'autobus probabilmente arriverà a breve.
 バスはもうすぐ来[く]るでしょう
 
 The exam will probably be difficult.
