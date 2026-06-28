@@ -15,11 +15,11 @@ Voglio andare in bagno.
 
 My grade is not good.
 I miei voti non sono buoni.
-成績[せいせき]がよくないんです
+成績[せいせき]が良[よ]くないんです
 
 The exam is over.
 L'esame è finito.
-試験[しけん]は終[お]わったんです
+試験[しけん]{は|が}終[お]わったんです
 
 Why were you late for class?
 Perché sei arrivato in ritardo a lezione?
@@ -35,8 +35,8 @@ Che cosa è successo?
 
 My cat died.
 Il mio gatto è morto.
-猫[ねこ]が死[し]んだんです
+{私[わたし]の|}猫[ねこ]が死[し]んだんです
 
 My dog ran away.
 Il mio cane è scappato.
-犬[いぬ]が逃[に]げたんです
+{私[わたし]の|}犬[いぬ]が逃[に]げたんです
