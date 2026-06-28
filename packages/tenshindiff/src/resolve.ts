@@ -171,6 +171,7 @@ function diffFixedSegmentUserConsumed(rest: string, segment: string, rubyOptions
 type SegmentScore = {
   exact: boolean;
   matched: number;
+  coverage: number;
 };
 
 /**
@@ -186,7 +187,11 @@ function segmentAlignmentScore(rest: string, segment: string, rubyOptions: RubyM
   for (const op of ops) {
     if (op.kind === 'extra') {
       if (!seenCorrect) return 0;
-      break;
+      continue;
+    }
+    if (op.kind === 'unit' && op.status === 'missing') {
+      if (seenCorrect) break;
+      continue;
     }
     if (op.kind === 'unit' && (op.status === 'correct_kanji' || op.status === 'correct_kana')) {
       seenCorrect = true;
@@ -206,7 +211,7 @@ export function scoreSegmentAt(
   options: DiffOptions = DEFAULT_DIFF_OPTIONS,
 ): SegmentScore {
   if (segment === '') {
-    return { exact: false, matched: 0 };
+    return { exact: false, matched: 0, coverage: 0 };
   }
 
   const rubyOpts = { allowNumericalAlternatives: options.allowNumericalAlternatives };
@@ -215,12 +220,13 @@ export function scoreSegmentAt(
   const segmentLen = stripRuby(segment).length;
 
   if (greedy === segmentLen) {
-    return { exact: true, matched: greedy };
+    return { exact: true, matched: greedy, coverage: 1 };
   }
 
   // Diff alignment (e.g. user するの vs template をするの: を missing, 3 chars still match).
   const aligned = segmentAlignmentScore(rest, segment, rubyOpts);
-  return { exact: false, matched: Math.max(greedy, aligned) };
+  const matched = Math.max(greedy, aligned);
+  return { exact: false, matched, coverage: segmentLen > 0 ? matched / segmentLen : 0 };
 }
 
 /** Pick one alternative from a {a|b} group (first configured wins ties). */
@@ -250,10 +256,12 @@ export function pickSegmentAlternative(
   const maxMatched = scored.reduce((max, s) => Math.max(max, s.matched), 0);
   if (maxMatched > 0) {
     const tied = scored.filter(s => s.matched === maxMatched);
+    const maxCoverage = tied.reduce((max, s) => Math.max(max, s.coverage), 0);
+    const covered = tied.filter(s => s.coverage === maxCoverage);
     const rest = user.slice(cursor);
-    const literal = tied.find(s => rest.startsWith(stripRuby(s.alt)));
+    const literal = covered.find(s => rest.startsWith(stripRuby(s.alt)));
     if (literal) return literal.alt;
-    return tied.reduce((best, s) => (s.index < best.index ? s : best)).alt;
+    return covered.reduce((best, s) => (s.index < best.index ? s : best)).alt;
   }
 
   // Optional empty alt: prefer "" unless the user literally typed a non-empty option (e.g. optional 、).

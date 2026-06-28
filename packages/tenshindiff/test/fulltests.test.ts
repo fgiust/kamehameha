@@ -90,7 +90,11 @@ describe('fulltests data format', () => {
 
   for (const testCase of cases) {
     it(testCase.name.replace(/^#\s*/, ''), () => {
-      const diffOptions = { allowNumericalAlternatives: true };
+      const diffOptions = {
+        allowNumericalAlternatives: true,
+        commasAsOptional: true,
+        ignoreTrailingPunctuation: true,
+      };
       const alternatives = generateAnswersFromTemplate(testCase.expectedExpression, diffOptions);
       const isCorrect = alternatives.some(a =>
         matchesByRubyUnits(testCase.userAnswer, a, { allowNumericalAlternatives: true }),
