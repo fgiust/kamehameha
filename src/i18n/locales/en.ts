@@ -4,6 +4,8 @@ const en = {
     back: 'Back',
     contact: 'Contact',
     disclaimer: 'Disclaimer',
+    privacyPolicy: 'Privacy Policy',
+    termsOfService: 'Terms of Service',
     feedback: 'Feedback',
     loading: '...',
     or: 'or',
@@ -165,6 +167,79 @@ const en = {
     p1b: '), with the goal of providing a more up-to-date and interactive set of exercises for learners.',
     p2: 'All exercises included in this app are original and do not reproduce any copyrighted material. While the exercises are organized following the structure of the Genki textbooks for convenience, they are independently created and are not derived from or copied from the Genki books or workbooks.',
     p3: 'Please note that, as this is an independent project created by a fellow learner, the content may contain occasional mistakes or inaccuracies. Feedback is highly appreciated: users are encouraged to report any errors or suggest improvements using the feedback tools available within the exercise pages.',
+  },
+  legal: {
+    effectiveDate: 'Effective date',
+  },
+  privacyPolicy: {
+    effectiveDateValue: 'June 29, 2026',
+    introTitle: 'Overview',
+    introP1:
+      'This Privacy Policy explains how kamehameha! collects, uses, and stores information when you use the application.',
+    introP2:
+      'The app is designed for Japanese language practice. Most content can be used without creating an account, while optional sign-in enables cloud synchronization of exercise progress across devices.',
+    dataTitle: 'Information we collect',
+    dataP1:
+      'If you sign in with Google, the app may receive basic account information such as your name, email address, and profile image from Google and Supabase authentication.',
+    dataP2:
+      'The app may also store exercise progress data, such as the completion state of progress bars, and technical information strictly required to operate authentication, synchronization, analytics, or feedback features.',
+    useTitle: 'How information is used',
+    useP1:
+      'Information is used to authenticate your account, keep your progress synchronized between devices, provide core app functionality, and maintain the security and reliability of the service.',
+    useP2:
+      'Information may also be used in aggregate form to understand how the app is used and to improve the learning experience, content quality, and technical stability.',
+    sharingTitle: 'Services and data sharing',
+    sharingP1:
+      'The app relies on third-party infrastructure providers such as Supabase for authentication and database services, Google for sign-in, and Vercel for hosting and delivery.',
+    sharingP2:
+      'Your personal information is not sold. Data is only shared with service providers when necessary to operate the application and its core features.',
+    retentionTitle: 'Retention and your choices',
+    retentionP1:
+      'Locally stored progress remains on your device until you clear your browser data. Cloud-synced progress is retained for as long as it is needed to provide your account functionality.',
+    retentionP2:
+      'You may stop using the app at any time. If you want account-related data to be removed, you can contact the app owner using the contact details or support channel provided with the project.',
+    childrenTitle: 'Children',
+    childrenP1:
+      'The app is not intentionally directed to children under the age required by applicable law to consent to online services on their own.',
+    changesTitle: 'Changes to this policy',
+    changesP1:
+      'This policy may be updated from time to time. Continued use of the app after an update means you accept the revised policy.',
+  },
+  termsOfService: {
+    effectiveDateValue: 'June 29, 2026',
+    acceptanceTitle: 'Acceptance of these terms',
+    acceptanceP1:
+      'By accessing or using kamehameha!, you agree to these Terms of Service. If you do not agree, please do not use the application.',
+    acceptanceP2:
+      'These terms apply whether you use the app as a guest or through an optional authenticated account.',
+    useTitle: 'Permitted use',
+    useP1:
+      'The app is provided for personal educational use related to Japanese language practice. You agree not to misuse the service, interfere with its normal operation, or attempt to access data that does not belong to you.',
+    useP2:
+      'You also agree not to use the app for unlawful, abusive, or disruptive activity, including attempts to reverse engineer, scrape, or overload the service beyond reasonable personal use.',
+    accountTitle: 'Accounts',
+    accountP1:
+      'If you choose to sign in, you are responsible for using your account lawfully and for the activity that occurs through your authenticated session on your devices.',
+    accountP2:
+      'The app owner may suspend or restrict access to authenticated features if misuse, abuse, or security issues are detected.',
+    contentTitle: 'Content and intellectual property',
+    contentP1:
+      'Unless otherwise stated, the application interface, original exercises, code, and related materials are provided by the project owner or their respective licensors.',
+    contentP2:
+      'This app is an independent learning project and is not affiliated with or endorsed by third-party textbook publishers unless explicitly stated.',
+    availabilityTitle: 'Availability and changes',
+    availabilityP1:
+      'The app is provided on an “as available” basis. Features may change, be improved, be removed, or become temporarily unavailable without prior notice.',
+    availabilityP2:
+      'The owner may update the application, authentication methods, storage model, or exercise content at any time in order to maintain or improve the service.',
+    liabilityTitle: 'Disclaimer of warranties and liability',
+    liabilityP1:
+      'Reasonable efforts are made to keep the app useful and accurate, but no guarantee is made that the service will always be uninterrupted, error-free, or perfectly accurate.',
+    liabilityP2:
+      'To the maximum extent permitted by law, the app owner is not liable for indirect or consequential damages arising from the use of, or inability to use, the application.',
+    changesTitle: 'Changes to these terms',
+    changesP1:
+      'These Terms of Service may be updated from time to time. Continued use of the app after changes become effective means you accept the updated terms.',
   },
   answerTemplatePreview: {
     label: 'Answer preview',
@@ -332,6 +407,12 @@ const en = {
     disclaimerTitle: '亀 kamehameha! · Disclaimer',
     disclaimerDescription:
       'Disclaimer for kamehameha! - an independent Japanese grammar practice app with original Genki-aligned exercises.',
+    privacyPolicyTitle: '亀 kamehameha! · Privacy Policy',
+    privacyPolicyDescription:
+      'Privacy Policy for kamehameha! - information about authentication, cloud progress sync, and data handling in the app.',
+    termsOfServiceTitle: '亀 kamehameha! · Terms of Service',
+    termsOfServiceDescription:
+      'Terms of Service for kamehameha! - rules, permitted use, and service disclaimers for this Japanese learning app.',
     contactTitle: '亀 kamehameha! · Contact',
     contactDescription:
       'Contact the creator of kamehameha! - suggestions, feedback, and questions about this Japanese grammar practice app.',

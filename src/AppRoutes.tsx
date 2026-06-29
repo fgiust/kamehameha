@@ -15,6 +15,8 @@ const CountingThingsPage = lazy(() => import('./pages/CountingThingsPage'));
 const TransitivePage = lazy(() => import('./pages/TransitivePage'));
 const FamilyNamesPage = lazy(() => import('./pages/FamilyNamesPage'));
 const DisclaimerPage = lazy(() => import('./pages/DisclaimerPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
 const AdjectivesNounsPage = lazy(() => import('./pages/AdjectivesNounsPage'));
 const SentenceTxtLessonPage = lazy(() => import('./pages/SentenceTxtLessonPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
@@ -61,6 +63,8 @@ export function exerciseChildRoutes() {
     <Route key="family-names" path="family-names" element={<FamilyNamesPage />} />,
     <Route key="adjectives-nouns" path="adjectives-nouns" element={<AdjectivesNounsPage />} />,
     <Route key="disclaimer" path="disclaimer" element={<DisclaimerPage />} />,
+    <Route key="privacy-policy" path="privacy-policy" element={<PrivacyPolicyPage />} />,
+    <Route key="terms-of-service" path="terms-of-service" element={<TermsOfServicePage />} />,
     <Route key="contact" path="contact" element={<ContactPage />} />,
   ];
 }

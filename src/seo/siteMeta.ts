@@ -145,6 +145,8 @@ export function listPublicInternalPaths(
     if (ex.to) paths.add(ex.to);
   }
   paths.add('/disclaimer');
+  paths.add('/privacy-policy');
+  paths.add('/terms-of-service');
   paths.add('/contact');
   return [...paths].sort();
 }
@@ -171,6 +173,14 @@ export function buildPageMeta(options: BuildPageMetaOptions): PageMeta {
     title = seo.disclaimerTitle;
     documentTitle = resolveI18nKey(lang, 'common.disclaimer');
     description = seo.disclaimerDescription;
+  } else if (internalPath === '/privacy-policy') {
+    title = seo.privacyPolicyTitle;
+    documentTitle = resolveI18nKey(lang, 'common.privacyPolicy');
+    description = seo.privacyPolicyDescription;
+  } else if (internalPath === '/terms-of-service') {
+    title = seo.termsOfServiceTitle;
+    documentTitle = resolveI18nKey(lang, 'common.termsOfService');
+    description = seo.termsOfServiceDescription;
   } else if (internalPath === '/contact') {
     title = seo.contactTitle;
     documentTitle = resolveI18nKey(lang, 'common.contact');

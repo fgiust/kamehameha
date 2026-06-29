@@ -439,6 +439,39 @@ a:hover { color: var(--accent-hover); }
   line-height: 1.6;
 }
 
+.legal-page-card {
+  max-width: 860px;
+}
+
+.legal-page-meta {
+  margin: 0 0 18px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.legal-page-copy {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.legal-page-section + .legal-page-section {
+  margin-top: 26px;
+}
+
+.legal-page-section-title {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: var(--text);
+}
+
+.legal-page-copy p {
+  margin: 0;
+}
+
+.legal-page-copy p + p {
+  margin-top: 12px;
+}
+
 .auth-callback-home {
   margin-top: 24px;
 }
