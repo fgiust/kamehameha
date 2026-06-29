@@ -9,18 +9,26 @@ function dispatchSpeechSettingsChange() {
   window.dispatchEvent(new Event(SPEECH_SETTINGS_CHANGE_EVENT));
 }
 
+function hasStoredSpeechUseKanjiPreference() {
+  try {
+    return localStorage.getItem(SETTINGS_KEYS.speechUseKanji) !== null;
+  } catch {
+    return false;
+  }
+}
+
 export function useSpeechSettings() {
   const [speechEnabled, setSpeechEnabledState] = useState(() =>
     readStoredBool(SETTINGS_KEYS.speechEnabled, false),
   );
   const [speechUseKanji, setSpeechUseKanjiState] = useState(() =>
-    readStoredBool(SETTINGS_KEYS.speechUseKanji, false),
+    readStoredBool(SETTINGS_KEYS.speechUseKanji, true),
   );
 
   useEffect(() => {
     const refresh = () => {
       setSpeechEnabledState(readStoredBool(SETTINGS_KEYS.speechEnabled, false));
-      setSpeechUseKanjiState(readStoredBool(SETTINGS_KEYS.speechUseKanji, false));
+      setSpeechUseKanjiState(readStoredBool(SETTINGS_KEYS.speechUseKanji, true));
     };
     window.addEventListener(SPEECH_SETTINGS_CHANGE_EVENT, refresh);
     window.addEventListener('storage', refresh);
@@ -33,7 +41,13 @@ export function useSpeechSettings() {
   const setSpeechEnabled = useCallback((value: boolean) => {
     writeStoredBool(SETTINGS_KEYS.speechEnabled, value);
     setSpeechEnabledState(value);
-    if (value) recoverStuckSpeechSynthesis();
+    if (value) {
+      if (!hasStoredSpeechUseKanjiPreference()) {
+        writeStoredBool(SETTINGS_KEYS.speechUseKanji, true);
+        setSpeechUseKanjiState(true);
+      }
+      recoverStuckSpeechSynthesis();
+    }
     dispatchSpeechSettingsChange();
   }, []);
 

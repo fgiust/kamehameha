@@ -64,7 +64,7 @@ const en = {
     speechEnabledHint:
       'Reads the prompt and answer using your browser’s text-to-speech. Quality and available voices vary by browser and device.',
     speechUseKanjiHint:
-      'Speaks answers reading kanji instead of kana. Can improve pitch accent but may pick readings that differ from the answer shown. When off, uses kana readings, closer to the exercise text but without pitch-accent contrast. Depends on your system and browser.',
+      'Speaks answers reading kanji instead of kana. Can improve pitch accent but may pick readings that differ from the answer shown. When off, uses kana readings, closer to the exercise text but without pitch-accent contrast. Keep it enabled unless you notice multiple wrong readings on your device.',
     speechTestLink: 'Audio test',
   },
   auth: {
