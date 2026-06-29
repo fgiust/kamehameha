@@ -16,6 +16,7 @@ import verbs from '../data/dictConjugationVerbs';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import KeyboardTip from '../components/KeyboardTip';
 import OptionToggle from '../components/OptionToggle';
@@ -133,6 +134,7 @@ export default function RandomizePage() {
     persistKey: PERSIST_KEY,
     initialProgress: restoredDraft?.progress,
   });
+  useDebugCompleteExerciseShortcut({ persistKey: PERSIST_KEY, totalSegments: sessionWords.length });
 
   usePersistExerciseDraft(
     PERSIST_KEY,

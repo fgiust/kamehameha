@@ -10,6 +10,7 @@ import SessionProgressBar from '../components/SessionProgressBar';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import KeyboardTip from '../components/KeyboardTip';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { PreviousAnswer } from '../types';
 import { diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from 'tenshindiff';
@@ -422,6 +423,7 @@ export default function CountingThingsPage() {
     persistKey: PERSIST_KEY,
     initialProgress: restoredDraft?.progress,
   });
+  useDebugCompleteExerciseShortcut({ persistKey: PERSIST_KEY, totalSegments: ITEMS.length });
 
   usePersistExerciseDraft(
     PERSIST_KEY,

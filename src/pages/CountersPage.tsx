@@ -10,6 +10,7 @@ import { toHiragana } from 'wanakana';
 import counters, { JapaneseCounter } from '../data/dictCounters';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
@@ -200,6 +201,7 @@ export default function CountersPage({ peopleOnly: peopleOnlyProp }: Props) {
     persistKey,
     initialProgress: restoredDraft?.progress,
   });
+  useDebugCompleteExerciseShortcut({ persistKey, totalSegments: totalQuestions });
 
   useEffect(() => {
     progressSegmentsRef.current = progressSegments;

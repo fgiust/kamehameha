@@ -6,6 +6,7 @@ import KeyboardTip from './KeyboardTip';
 import JapaneseText from './JapaneseText';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
 import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
 import {
@@ -85,6 +86,7 @@ export default function ReadingExercise({
     persistKey,
     initialProgress: restoredDraft?.progress,
   });
+  useDebugCompleteExerciseShortcut({ persistKey, totalSegments: totalItems });
 
   const { persistNow } = usePersistExerciseDraft(
     persistKey,

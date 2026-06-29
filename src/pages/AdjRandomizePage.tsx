@@ -16,6 +16,7 @@ import adjectives from '../data/dictConjugationAdjectives';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from '../components/SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import OptionToggle from '../components/OptionToggle';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
 import KeyboardTip from '../components/KeyboardTip';
@@ -128,6 +129,7 @@ export default function AdjRandomizePage() {
     persistKey: PERSIST_KEY,
     initialProgress: restoredDraft?.progress,
   });
+  useDebugCompleteExerciseShortcut({ persistKey: PERSIST_KEY, totalSegments: sessionWords.length });
 
   usePersistExerciseDraft(
     PERSIST_KEY,

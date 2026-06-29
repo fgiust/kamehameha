@@ -8,6 +8,7 @@ import DiffDisplay from './DiffDisplay';
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import { useExerciseSessionDraft } from '../hooks/useExerciseSessionDraft';
 import { usePersistExerciseDraft } from '../hooks/usePersistExerciseDraft';
 import {
@@ -140,6 +141,7 @@ export default function SentenceExercise({ title, sentenceData, persistKey, data
     persistKey,
     initialProgress: restoredDraft?.progress,
   });
+  useDebugCompleteExerciseShortcut({ persistKey, totalSegments: sentenceItems.length });
 
   const { persistNow } = usePersistExerciseDraft(
     persistKey,

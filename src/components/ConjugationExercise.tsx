@@ -14,6 +14,7 @@ import { getReverseQAPromptDisplay, getReverseQAResponse, matchesConjugationAnsw
 import { toHiragana } from 'wanakana';
 import SessionProgressBar from './SessionProgressBar';
 import { useSessionProgress } from '../hooks/useSessionProgress';
+import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import OptionToggle from './OptionToggle';
 import KeyboardTip from './KeyboardTip';
 import { useTranslation } from 'react-i18next';
@@ -136,6 +137,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     persistKey,
     initialProgress: restoredDraft?.progress,
   });
+  useDebugCompleteExerciseShortcut({ persistKey, totalSegments: totalWords });
 
   const { persistNow } = usePersistExerciseDraft(
     persistKey,
