@@ -40,6 +40,21 @@ const it = {
       'Pronuncia le risposte leggendo la versione in kanji anziché in kana. Può migliorare l’accento tonico ma usare letture diverse da quella mostrata. Se disattivato, usa la traslitterazione in kana, più fedele all’esercizio ma senza contrasto di accenti. Dipende da sistema e browser.',
     speechTestLink: 'Test audio',
   },
+  auth: {
+    account: 'Account',
+    accountSection: 'Account',
+    loginSection: 'Login',
+    signIn: 'Login',
+    signOut: 'Logout',
+    continueWithGoogle: 'Continua con Google',
+    syncDescription: 'Accedi per sincronizzare i tuoi progressi tra diversi dispositivi.',
+    notConfigured: 'Autenticazione non ancora configurata.',
+    genericError: 'Errore di autenticazione',
+    callbackLoading: 'Completamento login...',
+    callbackLoadingBody: 'Un attimo, sto collegando la tua sessione Google.',
+    callbackErrorTitle: 'Login Google non riuscito',
+    callbackMissingCode: 'Manca il codice di autorizzazione nell’URL di callback.',
+  },
   speechTest: {
     title: 'Test audio',
     intro:

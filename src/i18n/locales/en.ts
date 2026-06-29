@@ -40,6 +40,21 @@ const en = {
       'Speaks answers reading kanji instead of kana. Can improve pitch accent but may pick readings that differ from the answer shown. When off, uses kana readings, closer to the exercise text but without pitch-accent contrast. Depends on your system and browser.',
     speechTestLink: 'Audio test',
   },
+  auth: {
+    account: 'Account',
+    accountSection: 'Account',
+    loginSection: 'Login',
+    signIn: 'Login',
+    signOut: 'Sign out',
+    continueWithGoogle: 'Continue with Google',
+    syncDescription: 'Sign in to sync your progress across multiple devices.',
+    notConfigured: 'Authentication is not configured yet.',
+    genericError: 'Authentication error',
+    callbackLoading: 'Completing sign-in...',
+    callbackLoadingBody: 'A moment, your Google session is being connected.',
+    callbackErrorTitle: 'Google sign-in failed',
+    callbackMissingCode: 'Missing authorization code in the callback URL.',
+  },
   speechTest: {
     title: 'Audio test',
     intro:

@@ -18,6 +18,7 @@ const DisclaimerPage = lazy(() => import('./pages/DisclaimerPage'));
 const AdjectivesNounsPage = lazy(() => import('./pages/AdjectivesNounsPage'));
 const SentenceTxtLessonPage = lazy(() => import('./pages/SentenceTxtLessonPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const AuthCallbackPage = lazy(() => import('./pages/AuthCallbackPage'));
 
 /** Child <Route> elements for a localized route prefix (/ or /it). */
 export function exerciseChildRoutes() {
@@ -26,6 +27,7 @@ export function exerciseChildRoutes() {
     <Route key="genki" path="genki" element={<Navigate to=".." replace />} />,
     <Route key="genki-lesson" path="genki/:lessonId" element={<GenkiLessonPage />} />,
     <Route key="sentence-lesson" path="sentence/:lessonId" element={<SentenceTxtLessonPage />} />,
+    <Route key="auth-callback" path="auth/callback" element={<AuthCallbackPage />} />,
 
     <Route key="teform" path="teform" element={<VerbExercisePage />} />,
     <Route key="causativeform" path="causativeform" element={<VerbExercisePage />} />,
