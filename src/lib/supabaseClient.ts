@@ -18,6 +18,11 @@ export function getSupabaseBrowserClient() {
   if (browserClient) return browserClient;
 
   browserClient = createClient(supabaseUrl!, supabasePublishableKey!, {
+    global: {
+      headers: {
+        apikey: supabasePublishableKey!,
+      },
+    },
     auth: {
       flowType: 'pkce',
       detectSessionInUrl: false,

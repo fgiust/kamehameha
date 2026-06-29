@@ -8,7 +8,7 @@ import {
 
 export type ProgressSegmentState = 0 | 1 | 2;
 
-const SESSION_PROGRESS_STORAGE_PREFIX = 'kamehameha.sessionProgress.v1.';
+export const SESSION_PROGRESS_STORAGE_PREFIX = 'kamehameha.sessionProgress.v1.';
 
 export const SESSION_PROGRESS_UPDATED_EVENT = 'kamehameha.sessionProgressUpdated.v1';
 
@@ -37,33 +37,54 @@ export function buildSessionProgressStorageKey(persistKey: string) {
   return SESSION_PROGRESS_STORAGE_PREFIX + encodeURIComponent(persistKey);
 }
 
-export function readPersistedSessionProgress(persistKey: string): ProgressSegmentState[] | null {
+export type PersistedSessionProgressRecord = {
+  persistKey: string;
+  segments: ProgressSegmentState[];
+  total: number;
+  at: number | null;
+};
+
+function parsePersistedSessionProgressRaw(raw: string): Omit<PersistedSessionProgressRecord, 'persistKey'> | null {
   try {
-    const raw = localStorage.getItem(buildSessionProgressStorageKey(persistKey));
-    if (!raw) return null;
     const parsed = JSON.parse(raw) as unknown;
     if (!parsed || typeof parsed !== 'object') return null;
-    const obj = parsed as { segments?: unknown; total?: unknown };
-    const total = typeof obj.total === 'number' && Number.isFinite(obj.total) ? Math.max(0, Math.floor(obj.total)) : null;
+    const obj = parsed as { segments?: unknown; total?: unknown; at?: unknown };
+    const total =
+      typeof obj.total === 'number' && Number.isFinite(obj.total)
+        ? Math.max(0, Math.floor(obj.total))
+        : null;
+    const at = typeof obj.at === 'number' && Number.isFinite(obj.at) ? Math.floor(obj.at) : null;
 
     if (typeof obj.segments === 'string') {
       const decoded = decodeSegments(obj.segments);
       if (!decoded) return null;
-      if (total !== null) {
-        if (decoded.length > total) return decoded.slice(0, total);
-        if (decoded.length < total) return [...decoded, ...(Array(total - decoded.length).fill(0) as ProgressSegmentState[])];
-      }
-      return decoded;
+      const normalized = total !== null
+        ? decoded.length > total
+          ? decoded.slice(0, total)
+          : [...decoded, ...(Array(total - decoded.length).fill(0) as ProgressSegmentState[])]
+        : decoded;
+
+      return {
+        segments: normalized,
+        total: total ?? normalized.length,
+        at,
+      };
     }
 
     if (Array.isArray(obj.segments)) {
       if (!obj.segments.every(v => v === 0 || v === 1 || v === 2)) return null;
       const arr = obj.segments as ProgressSegmentState[];
-      if (total !== null) {
-        if (arr.length > total) return arr.slice(0, total);
-        if (arr.length < total) return [...arr, ...(Array(total - arr.length).fill(0) as ProgressSegmentState[])];
-      }
-      return arr;
+      const normalized = total !== null
+        ? arr.length > total
+          ? arr.slice(0, total)
+          : [...arr, ...(Array(total - arr.length).fill(0) as ProgressSegmentState[])]
+        : arr;
+
+      return {
+        segments: normalized,
+        total: total ?? normalized.length,
+        at,
+      };
     }
 
     return null;
@@ -72,11 +93,63 @@ export function readPersistedSessionProgress(persistKey: string): ProgressSegmen
   }
 }
 
-function writePersistedSessionProgress(persistKey: string, segments: ProgressSegmentState[]) {
+function decodePersistKeyFromStorageKey(storageKey: string) {
+  if (!storageKey.startsWith(SESSION_PROGRESS_STORAGE_PREFIX)) return null;
+  try {
+    return decodeURIComponent(storageKey.slice(SESSION_PROGRESS_STORAGE_PREFIX.length));
+  } catch {
+    return null;
+  }
+}
+
+export function readPersistedSessionProgressRecord(persistKey: string): PersistedSessionProgressRecord | null {
+  try {
+    const raw = localStorage.getItem(buildSessionProgressStorageKey(persistKey));
+    if (!raw) return null;
+    const parsed = parsePersistedSessionProgressRaw(raw);
+    if (!parsed) return null;
+    return {
+      persistKey,
+      ...parsed,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export function readPersistedSessionProgress(persistKey: string): ProgressSegmentState[] | null {
+  return readPersistedSessionProgressRecord(persistKey)?.segments ?? null;
+}
+
+export function listPersistedSessionProgressRecords(): PersistedSessionProgressRecord[] {
+  try {
+    const out: PersistedSessionProgressRecord[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const storageKey = localStorage.key(i);
+      if (!storageKey) continue;
+      const persistKey = decodePersistKeyFromStorageKey(storageKey);
+      if (!persistKey) continue;
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) continue;
+      const parsed = parsePersistedSessionProgressRaw(raw);
+      if (!parsed) continue;
+      out.push({ persistKey, ...parsed });
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
+export function writePersistedSessionProgressRecord(
+  persistKey: string,
+  segments: ProgressSegmentState[],
+  at = Date.now(),
+) {
   try {
     localStorage.setItem(
       buildSessionProgressStorageKey(persistKey),
-      JSON.stringify({ segments: encodeSegments(segments), total: segments.length, at: Date.now() })
+      JSON.stringify({ segments: encodeSegments(segments), total: segments.length, at })
     );
     return true;
   } catch {
@@ -84,7 +157,11 @@ function writePersistedSessionProgress(persistKey: string, segments: ProgressSeg
   }
 }
 
-function notifySessionProgressUpdated(persistKey: string) {
+function writePersistedSessionProgress(persistKey: string, segments: ProgressSegmentState[]) {
+  return writePersistedSessionProgressRecord(persistKey, segments);
+}
+
+export function notifySessionProgressUpdated(persistKey?: string) {
   try {
     window.dispatchEvent(new CustomEvent(SESSION_PROGRESS_UPDATED_EVENT, { detail: { persistKey } }));
   } catch {

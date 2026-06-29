@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
+  listPersistedSessionProgressRecords,
   hydrateSessionProgressSnapshot,
   normalizeSegments,
+  readPersistedSessionProgressRecord,
+  writePersistedSessionProgressRecord,
   type ProgressSegmentState,
 } from '../../src/hooks/useSessionProgress';
 
@@ -94,5 +97,66 @@ describe('useSessionProgress hydration', () => {
     });
 
     expect(segmentsRef.current).toEqual([1, 2, 0]);
+  });
+
+  it('reads and lists persisted progress records with timestamps', () => {
+    const storage = new Map<string, string>();
+    const localStorageMock = {
+      getItem: (key: string) => storage.get(key) ?? null,
+      setItem: (key: string, value: string) => {
+        storage.set(key, value);
+      },
+      removeItem: (key: string) => {
+        storage.delete(key);
+      },
+      clear: () => {
+        storage.clear();
+      },
+      key: (index: number) => [...storage.keys()][index] ?? null,
+      get length() {
+        return storage.size;
+      },
+    } as Storage;
+
+    const previousLocalStorage = globalThis.localStorage;
+    Object.defineProperty(globalThis, 'localStorage', {
+      configurable: true,
+      value: localStorageMock,
+    });
+
+    try {
+      localStorage.clear();
+      writePersistedSessionProgressRecord('/verbs/plain', [1, 2, 0], 1234);
+      writePersistedSessionProgressRecord('/sentence/genki-01-1', [1, 1], 5678);
+
+      expect(readPersistedSessionProgressRecord('/verbs/plain')).toEqual({
+        persistKey: '/verbs/plain',
+        segments: [1, 2, 0],
+        total: 3,
+        at: 1234,
+      });
+
+      expect(listPersistedSessionProgressRecords()).toEqual(
+        expect.arrayContaining([
+          {
+            persistKey: '/verbs/plain',
+            segments: [1, 2, 0],
+            total: 3,
+            at: 1234,
+          },
+          {
+            persistKey: '/sentence/genki-01-1',
+            segments: [1, 1],
+            total: 2,
+            at: 5678,
+          },
+        ]),
+      );
+    } finally {
+      Object.defineProperty(globalThis, 'localStorage', {
+        configurable: true,
+        value: previousLocalStorage,
+      });
+    }
   });
 });
