@@ -170,6 +170,8 @@ export default function HomePage() {
         <span className="home-footer-sep">·</span>
         <Link to={localizePath('/disclaimer')} className="home-footer-link">{t('common.disclaimer')}</Link>
         <span className="home-footer-sep">·</span>
+        <Link to={localizePath('/privacy-policy')} className="home-footer-link">{t('common.privacyPolicy')}</Link>
+        <span className="home-footer-sep">·</span>
         <Link to={localizePath('/contact')} className="home-footer-link">{t('common.contact')}</Link>
 
         {/* <span className="home-footer-sep">·</span>
