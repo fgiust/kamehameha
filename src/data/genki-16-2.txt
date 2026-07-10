@@ -5,8 +5,8 @@ Could you help me move this desk?
 Potrebbe aiutarmi a spostare questa scrivania?
 この机[つくえ]を動[うご]かしていただけませんか
 
-Could you repeat that once more?
-Potrebbe ripetere quello ancora una volta?
+Could you repeat once more?
+Potrebbe ripetere ancora una volta?
 もう一度[いちど]言[い]っていただけませんか
 
 Could you pick that thing up and pass it to me?
@@ -27,7 +27,7 @@ Per favore parli giapponese, va bene?
 
 Please open the window, will you?
 Per favore apra la finestra, va bene?
-窓[まど]を開[あ]けていただけませんか
+窓[まど]を開[あ]けて{いただけませんか|くれませんか|くれない}
 
 Please help me with the luggage.
 Per favore mi aiuti con i bagagli.

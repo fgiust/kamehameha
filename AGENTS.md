@@ -19,7 +19,7 @@ Standard commands are in `package.json`:
 - The feedback endpoint is mocked locally (appends to `feedback.txt` in the project root) — no Vercel KV credentials needed.
 
 ### Environment variables
-No environment variables are required for local dev. Production-only vars (`KV_REST_API_URL`, `KV_REST_API_TOKEN`, `RESEND_API_KEY`, etc.) are only needed for deployed API routes.
+No environment variables are required for local dev. Production-only vars (`SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, etc.) are only needed for deployed API routes.
 
 ### Lint
 ESLint exits with code 1 due to pre-existing issues (13 react-hooks warnings + 1 `no-useless-escape` error in `src/utils/rubyNotation.ts`). These are not blockers for development.

@@ -27,7 +27,7 @@ Il mio coinquilino a volte mi cucina la cena.
 
 The teacher explained the grammar to us.
 L'insegnante ci ha spiegato la grammatica.
-先生[せんせい]{が|は}文法[ぶんぽう]を説明[せつめい]してくれました
+先生[せんせい]{が|は}文法[ぶんぽう]を{説明[せつめいして]|教[おし]えて}くれました
 
 My older sister sent me a letter.
 Mia sorella maggiore mi ha mandato una lettera.

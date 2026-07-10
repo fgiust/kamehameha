@@ -1,4 +1,4 @@
-import { kv } from '@vercel/kv';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
 
@@ -24,8 +24,12 @@ type VercelResponse = {
   end(body?: string): void;
 };
 
-const FEEDBACK_LIST_KEY = 'kamehameha:feedback:v1';
-const FEEDBACK_EXPORTED_COUNT_KEY = 'kamehameha:feedback:exportedCount:v1';
+type FeedbackRow = {
+  id: number;
+  entry_text: string;
+  created_at: string;
+  exported_at: string | null;
+};
 
 function formatTimestamp(date: Date) {
   try {
@@ -110,7 +114,52 @@ function jsonError(res: VercelResponse, code: number, message: string) {
   res.end(JSON.stringify({ success: false, error: message }));
 }
 
+function getSupabaseAdminClient(): SupabaseClient {
+  const url = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !serviceRoleKey) {
+    throw new Error('Supabase feedback storage is not configured');
+  }
+
+  return createClient(url, serviceRoleKey, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+    },
+  });
+}
+
+function isSchemaMissingError(error: { code?: string; message?: string; details?: string | null; hint?: string | null }) {
+  const combined = [error.code, error.message, error.details, error.hint]
+    .filter(value => typeof value === 'string' && value.length > 0)
+    .join(' ')
+    .toLowerCase();
+
+  return (
+    error.code === 'PGRST205' ||
+    error.code === '42P01' ||
+    combined.includes('relation does not exist') ||
+    combined.includes('schema cache') ||
+    combined.includes('could not find the table')
+  );
+}
+
+function describeFeedbackStorageError(error: unknown) {
+  if (error && typeof error === 'object') {
+    const candidate = error as { code?: string; message?: string; details?: string | null; hint?: string | null };
+    if (isSchemaMissingError(candidate)) {
+      return 'Supabase feedback schema not initialized. Run "npm run db:migrate".';
+    }
+    if (typeof candidate.message === 'string' && candidate.message.trim().length > 0) {
+      return candidate.message;
+    }
+  }
+
+  return error instanceof Error ? error.message : 'Unknown error';
+}
+
 async function handleExport(req: VercelRequest, res: VercelResponse) {
+  const client = getSupabaseAdminClient();
   const requiredKey = process.env.FEEDBACK_EXPORT_KEY;
   if (requiredKey) {
     const key = firstQueryValue(req, 'key');
@@ -130,33 +179,49 @@ async function handleExport(req: VercelRequest, res: VercelResponse) {
   let totalCount = 0;
   let exportedCount = 0;
 
+  const [totalResult, exportedResult] = await Promise.all([
+    client
+      .from('feedback_entries')
+      .select('id', { count: 'exact', head: true }),
+    client
+      .from('feedback_entries')
+      .select('id', { count: 'exact', head: true })
+      .not('exported_at', 'is', null),
+  ]);
+
+  if (totalResult.error) throw totalResult.error;
+  if (exportedResult.error) throw exportedResult.error;
+
+  totalCount = totalResult.count ?? 0;
+  exportedCount = exportedResult.count ?? 0;
+
   if (all) {
-    const entries = (await kv.lrange<string>(FEEDBACK_LIST_KEY, 0, -1)) || [];
-    const ordered = Array.isArray(entries) ? [...entries].reverse() : [];
-    text = ordered.filter(x => typeof x === 'string').join('');
-    totalCount = Array.isArray(entries) ? entries.length : 0;
-    const exportedRaw = await kv.get<number>(FEEDBACK_EXPORTED_COUNT_KEY);
-    exportedCount = typeof exportedRaw === 'number' ? exportedRaw : 0;
+    const { data, error } = await client
+      .from('feedback_entries')
+      .select('entry_text')
+      .order('created_at', { ascending: true });
+    if (error) throw error;
+    text = (data ?? []).map(row => row.entry_text).join('');
   } else {
-    const total = await kv.llen(FEEDBACK_LIST_KEY);
-    totalCount = typeof total === 'number' ? total : 0;
+    const { data, error } = await client
+      .from('feedback_entries')
+      .select('id, entry_text, created_at, exported_at')
+      .is('exported_at', null)
+      .order('created_at', { ascending: true })
+      .limit(limit);
+    if (error) throw error;
 
-    const exportedRaw = await kv.get<number>(FEEDBACK_EXPORTED_COUNT_KEY);
-    exportedCount = typeof exportedRaw === 'number' ? exportedRaw : 0;
-    if (exportedCount > totalCount) exportedCount = totalCount;
+    const rows = (data ?? []) as FeedbackRow[];
+    text = rows.map(row => row.entry_text).join('');
 
-    const unexported = Math.max(0, totalCount - exportedCount);
-    const batch = Math.min(limit, unexported);
-    if (batch > 0) {
-      const start = unexported - batch;
-      const end = unexported - 1;
-      const chunk = (await kv.lrange<string>(FEEDBACK_LIST_KEY, start, end)) || [];
-      const ordered = Array.isArray(chunk) ? [...chunk].reverse() : [];
-      text = ordered.filter(x => typeof x === 'string').join('');
-      if (mark) {
-        exportedCount += batch;
-        await kv.set(FEEDBACK_EXPORTED_COUNT_KEY, exportedCount);
-      }
+    if (mark && rows.length > 0) {
+      const ids = rows.map(row => row.id);
+      const { error: updateError } = await client
+        .from('feedback_entries')
+        .update({ exported_at: new Date().toISOString() })
+        .in('id', ids);
+      if (updateError) throw updateError;
+      exportedCount += rows.length;
     }
   }
 
@@ -194,11 +259,21 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
+    const client = getSupabaseAdminClient();
     const data = parseBody(req.body);
     const entry = buildLogEntry(data);
-    await kv.lpush(FEEDBACK_LIST_KEY, entry);
+    const { error } = await client.from('feedback_entries').insert({
+      exercise_id: data.exerciseId || null,
+      section: data.section || null,
+      question: data.question || null,
+      correct_answer: data.correctAnswer || null,
+      user_answer: data.userAnswer || null,
+      notes: data.notes || null,
+      entry_text: entry,
+    });
+    if (error) throw error;
     jsonOk(res, { success: true, message: 'Feedback saved successfully!' });
   } catch (err) {
-    jsonError(res, 500, err instanceof Error ? err.message : 'Unknown error');
+    jsonError(res, 500, describeFeedbackStorageError(err));
   }
 }

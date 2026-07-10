@@ -3,20 +3,24 @@
 This project supports two different implementations for the same endpoint:
 
 - Local development (`npm run dev`): appends feedback entries to `feedback.txt` on disk (Vite dev middleware).
-- Production on Vercel: stores feedback entries in Redis (Vercel KV / Upstash) and provides an export endpoint to download them as a `.txt` file.
+- Production on Vercel: stores feedback entries in Supabase Postgres and provides an export endpoint to download them as a `.txt` file.
 
 ## Environment variables (Vercel)
 
-Required for Redis storage:
+Required for Supabase storage:
 
-- `KV_REST_API_URL`
-- `KV_REST_API_TOKEN`
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
 
 Recommended for export privacy (acts like a “secret URL”):
 
 - `FEEDBACK_EXPORT_KEY`
 
 If `FEEDBACK_EXPORT_KEY` is set, the export endpoint returns 404 unless you pass the correct `?key=...` query parameter.
+
+Before using feedback storage on Vercel, make sure the database migrations have been applied:
+
+- `npm run db:migrate`
 
 ## Endpoints
 
@@ -49,7 +53,7 @@ The downloaded filename format is:
 Response headers:
 
 - `X-Feedback-Total`: total number of feedback entries currently stored
-- `X-Feedback-Exported`: how many entries have been marked as exported (incremental mode only; in `all=1` mode it’s the current counter value but it is ignored for selection)
+- `X-Feedback-Exported`: how many entries are currently marked as exported
 
 ## Export modes
 
