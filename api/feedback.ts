@@ -1,4 +1,5 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import { sendConfiguredTextEmail } from '../server/resendEmail';
 
 type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
 
@@ -9,6 +10,7 @@ type FeedbackPayload = {
   userAnswer?: string;
   notes?: string;
   exerciseId?: string;
+  userEmail?: string;
 };
 
 type VercelRequest = {
@@ -55,6 +57,7 @@ function buildLogEntry(data: FeedbackPayload) {
 ----------------------------------------
 ID/URL:           ${data.exerciseId || 'N/A'}
 Section/Exercise: ${data.section || 'N/A'}
+User Email:       ${data.userEmail || 'N/A'}
 Question:         ${data.question || 'N/A'}
 Correct Answer:   ${data.correctAnswer || 'N/A'}
 User Answer:      ${data.userAnswer || 'N/A'}
@@ -62,6 +65,27 @@ Notes/Issues:
 ${data.notes || 'N/A'}
 ========================================
 `;
+}
+
+async function sendFeedbackNotificationEmail(data: FeedbackPayload, entryText: string) {
+  const subjectParts = ['[kamehameha] New feedback'];
+  if (data.section && data.section.trim().length > 0) {
+    subjectParts.push(`- ${data.section.trim()}`);
+  }
+
+  const text = [
+    'A new exercise feedback entry has been saved.',
+    '',
+    entryText.trim(),
+    '',
+    `Saved at: ${new Date().toISOString()}`,
+  ].join('\n');
+
+  await sendConfiguredTextEmail({
+    subject: subjectParts.join(' '),
+    text,
+    replyTo: data.userEmail || undefined,
+  });
 }
 
 function parseBool(raw: unknown) {
@@ -268,10 +292,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       question: data.question || null,
       correct_answer: data.correctAnswer || null,
       user_answer: data.userAnswer || null,
+      user_email: data.userEmail || null,
       notes: data.notes || null,
       entry_text: entry,
     });
     if (error) throw error;
+
+    try {
+      await sendFeedbackNotificationEmail(data, entry);
+    } catch (emailError) {
+      console.error('Failed to send feedback notification email', emailError);
+    }
+
     jsonOk(res, { success: true, message: 'Feedback saved successfully!' });
   } catch (err) {
     jsonError(res, 500, describeFeedbackStorageError(err));

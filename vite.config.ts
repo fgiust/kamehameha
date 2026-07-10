@@ -269,6 +269,7 @@ export default defineConfig({
 ----------------------------------------
 ID/URL:           ${data.exerciseId || 'N/A'}
 Section/Exercise: ${data.section || 'N/A'}
+User Email:       ${data.userEmail || 'N/A'}
 Question:         ${data.question || 'N/A'}
 Correct Answer:   ${data.correctAnswer || 'N/A'}
 User Answer:      ${data.userAnswer || 'N/A'}

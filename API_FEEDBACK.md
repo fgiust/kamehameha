@@ -3,7 +3,7 @@
 This project supports two different implementations for the same endpoint:
 
 - Local development (`npm run dev`): appends feedback entries to `feedback.txt` on disk (Vite dev middleware).
-- Production on Vercel: stores feedback entries in Supabase Postgres and provides an export endpoint to download them as a `.txt` file.
+- Production on Vercel: stores feedback entries in Supabase Postgres, sends a notification email using the same Resend settings as the contact form, and provides an export endpoint to download them as a `.txt` file.
 
 ## Environment variables (Vercel)
 
@@ -34,6 +34,7 @@ Request body (JSON):
 - `question` (string)
 - `correctAnswer` (string)
 - `userAnswer` (string)
+- `userEmail` (optional string, filled when the user is logged in)
 - `notes` (string)
 
 Response (JSON):

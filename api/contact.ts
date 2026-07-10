@@ -1,3 +1,5 @@
+import { sendConfiguredTextEmail } from '../server/resendEmail';
+
 type ContactPayload = {
   name?: string;
   email?: string;
@@ -64,14 +66,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return;
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-    const to = process.env.CONTACT_TO_EMAIL;
-    const from = process.env.CONTACT_FROM_EMAIL;
-    if (!apiKey || !to || !from) {
-      json(res, 500, { success: false, error: 'Contact email is not configured' });
-      return;
-    }
-
     const subject = `[kamehameha] Contact form: ${name}`;
     const text = [
       'New contact message',
@@ -84,30 +78,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       `Sent at: ${new Date().toISOString()}`,
     ].join('\n');
 
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        subject,
-        text,
-        reply_to: email,
-      }),
+    await sendConfiguredTextEmail({
+      subject,
+      text,
+      replyTo: email,
     });
-
-    if (!r.ok) {
-      const raw = await r.text().catch(() => '');
-      json(res, 502, { success: false, error: raw || 'Failed to send email' });
-      return;
-    }
 
     json(res, 200, { success: true, message: 'Message sent successfully!' });
   } catch (err) {
     json(res, 500, { success: false, error: err instanceof Error ? err.message : 'Unknown error' });
   }
 }
-

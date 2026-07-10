@@ -7,9 +7,11 @@ import AlternateLanguageLine from './AlternateLanguageLine';
 import { resolveUiLang } from '../utils/bilingualPrompt';
 import { stripLangPrefix } from '../seo/localizedPaths';
 import bugIcon from '../assets/icon-bug.svg';
+import { useAuth } from '../auth/AuthProvider';
 
 export default function FeedbackPanel() {
   const { t, i18n } = useTranslation();
+  const { user } = useAuth();
   const lang = resolveUiLang(i18n.resolvedLanguage ?? i18n.language);
   const questionAltLabel = lang === 'it' ? t('feedbackPanel.altLangEnglish') : t('feedbackPanel.altLangItalian');
   const [isOpen, setIsOpen] = useState(false);
@@ -85,6 +87,7 @@ export default function FeedbackPanel() {
         body: JSON.stringify({
           ...details,
           notes,
+          userEmail: user?.email ?? '',
         }),
       });
 
