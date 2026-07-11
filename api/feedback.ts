@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
-import { sendConfiguredTextEmail } from '../server/resendEmail';
+import { sendConfiguredTextEmail } from './_lib/resendEmail.js';
 
 type JsonValue = null | boolean | number | string | JsonValue[] | { [key: string]: JsonValue };
 

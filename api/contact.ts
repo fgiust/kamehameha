@@ -1,4 +1,4 @@
-import { sendConfiguredTextEmail } from '../server/resendEmail';
+import { sendConfiguredTextEmail } from './_lib/resendEmail.js';
 
 type ContactPayload = {
   name?: string;
