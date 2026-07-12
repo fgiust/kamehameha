@@ -26,11 +26,11 @@ Mi dispiace di non avertelo detto.
 
 I am sorry for making noise last night.
 Mi dispiace per il rumore di ieri sera.
-昨夜[さくや]うるさくして{すみませんでした|ごめん}
+昨夜[ゆうべ]うるさくして{すみませんでした|ごめん}
 
 I am sorry for losing your pen.
 Mi dispiace di aver perso la tua penna.
-あなたのペンをなくして{すみませんでした|ごめん}
+あなたのペンを無[な]くして{すみませんでした|ごめん}
 
 I am sorry for being rude yesterday.
 Mi dispiace per il comportamento scortese di ieri.
@@ -42,4 +42,4 @@ Mi dispiace per il ritardo alla riunione.
 
 I am sorry for breaking your cup.
 Mi dispiace di aver rotto la tua tazza.
-あなたのコップを割[わ]って{すみませんでした|ごめん}
+あなたのカップを割[わ]って{すみませんでした|ごめん}
