@@ -4,32 +4,32 @@
 # (short, present) + いいですね/いいね = I hope... (for you/them)
 # (short, present) + いいんですが／いいんだけど = I hope... (for myself)
 
-I hope it doesn't rain.
-Spero che non piova.
+I hope (for you) it doesn't rain.
+Spero (per te) che non piova.
 雨[あめ]が降[ふ]らないといい{ね|ですね}
 
 I am hoping that the exam is easy.
 Spero che l'esame sia facile.
-試験[しけん]が易[やさ]しいといいん{ですが|だけど}
+試験[しけん]が{易[やさ]しい|簡単[かんたん]だ}といいん{ですが|だけど}
 
 I hope Mary passes the test.
 Spero che Mary passi l'esame.
-メアリーさんが試験[しけん]に受[う]かるといい{ですね|ね}
+メアリーさんが試験[しけん]に{受[う]かる|合格[ごうかく]する}といい{ですね|ね}
 
-I hope I can catch the eight o'clock train.
-Spero di prendere il treno delle otto.
+I hope I can be in time for the eight o'clock train.
+Spero di fare in tempo a prendere il treno delle otto.
 八時[はちじ]の電車[でんしゃ]に間[ま]に合[あ]うといいん{ですが|だけど}
 
 I hope you feel better soon.
 Spero che tu stia meglio presto.
 早[はや]く良[よ]くなるといい{ですね|ね}
 
-I hope the weather is nice tomorrow.
-Spero che domani il tempo sia bello.
-明日[あした]は天気[てんき]が{いい|よい}といいん{ですが|だけど}
+I hope (for myself)　the weather is nice tomorrow.
+Spero (per me) che domani il tempo sia bello.
+明日[あした]は天気[てんき]が{いい|良[よ]い}といいん{ですが|だけど}
 
-I hope the typhoon doesn't come.
-Spero che il tifone non arrivi.
+I hope (for you) the typhoon doesn't come.
+Spero  (per te) che il tifone non arrivi.
 台風[たいふう]が来[こ]ないといい{ですね|ね}
 
 I hope I don't catch a cold.
