@@ -9,21 +9,21 @@ Se domani piove, resterò a casa.
 
 We will go for a walk if the weather is fine.
 Faremo una passeggiata se il tempo è bello.
-天気[てんき]がよかったら、散歩[さんぽ]します
+天気[てんき]が良[よ]かったら、散歩[さんぽ]します
 
 We will go to the park if the weather is nice.
 Andremo al parco se il tempo è bello.
-天気[てんき]がよかったら、公園[こうえん]に行[い]きます
+天気[てんき]が良[よ]かったら、公園[こうえん]に行[い]きます
 
 I will ask about it if I see Takeshi.
-Lo chiederò se vedo Takeshi.
+Lo chiederò se incontro Takeshi.
 たけしさんに会[あ]ったら、聞[き]きます
 
 When I finish work, I will call you.
 Quando finisco il lavoro, ti chiamerò.
 仕事[しごと]が終[お]わったら、電話[でんわ]します
 
-Let's watch a movie when dinner is ready.
+Let's watch a movie when dinner is ready!
 Guardiamo un film quando la cena è pronta.
 {晩[ばん]御[ご]飯[はん]|晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}ができたら、映画[えいが]を見[み]ましょう
 
@@ -31,13 +31,13 @@ If I were rich, I would travel the world.
 Se fossi ricco, viaggerei per il mondo.
 お金[かね]持[も]ちだったら、世界[せかい]旅行[りょこう]をします
 
-If I had more time, I would learn piano.
-Se avessi più tempo, imparerei il pianoforte.
+If I had time, I would learn piano.
+Se avessi tempo, imparerei il pianoforte.
 時間[じかん]があったら、ピアノを習[なら]います
 
 If the bus is late, I will be late for class.
 Se l'autobus è in ritardo, sarò in ritardo per la lezione.
-バスが遅[おそ]かったら、授業[じゅぎょう]に遅刻[ちこく]します
+バスが{遅[おそ]かっ|遅[おく]れ}たら、授業[じゅぎょう]に{遅刻[ちこく]します|遅[おく]れます}
 
 If I feel tired, I will go to bed early.
 Se mi sento stanco, andrò a letto presto.

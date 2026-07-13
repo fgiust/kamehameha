@@ -4,42 +4,42 @@
 # In informal speech, you can add って at the end of a sentence, instead of そうです to quote what you have heard.
 # って is the informal variant of the quotation particle と and follows the short forms
 
-What did the teacher say?
-Che cosa ha detto l'insegnante?
-先生[せんせい]は何[なん]と言[い]っていましたか
-
 She said she finished her homework.
 Ha detto che ha finito i compiti.
-宿題[しゅくだい]が終[お]わったと言[い]っていました
+宿題[しゅくだい]が終[お]わったって
 
 He said he will visit his parents.
 Ha detto che visiterà i suoi genitori.
-両親[りょうしん]に会[あ]いに行[い]くと言[い]っていました
+両親[りょうしん]に会[あ]いに行[い]くって
 
 Mary said she bought a new bag.
 Mary ha detto che ha comprato una nuova borsa.
-メアリーさんは新[あたら]しい{カバン|鞄[かばん]}を買[か]ったと言[い]っていました
+メアリーさんは新[あたら]しい{カバン|鞄[かばん]}を買[か]ったって
 
 Ken said he got married.
 Ken ha detto che si è sposato.
-けんさんは結婚[けっこん]したと言[い]っていました
+けんさんは結婚[けっこん]したって
 
 He says he is busy today.
 Dice che oggi è occupato.
-今日[きょう]は忙[いそが]しいと{言[い]います|言[い]っていました}
+今日[きょう]は忙[いそが]しいって
 
 The teacher said the exam would be difficult.
 L'insegnante ha detto che l'esame sarebbe stato difficile.
-試験[しけん]は難[むずか]しいと言[い]っていました
+先生[せんせい]は試験[しけん]が難[むずか]しいって
 
 Robert said his father is kind.
 Robert ha detto che suo padre è gentile.
-父[ちち]は{親切[しんせつ]だ|優[やさ]しい}と言[い]っていました
+ロバートさんは父[ちち]が{親切[しんせつ]だ|優[やさ]しい}って
 
-The forecast said it would rain tomorrow.
-Le previsioni hanno detto che domani avrebbe piovuto.
-明日[あした]雨[あめ]が降[ふ]ると言[い]っていました
+I hear it will rain tomorrow.
+Ho sentito che domani pioverà.
+明日[あした]は雨[あめ]が降[ふ]るって
 
 Sora said she likes music.
 Sora ha detto che le piace la musica.
-音楽[おんがく]が好[す]きだと言[い]っていました
+ソラさんは音楽[おんがく]が好[す]きだって
+
+Naomi said the test was easy.
+Naomi ha detto che il test era facile.
+直美[なおみ]さんはテスト{は|が}{易[やさ]しかった|簡単[かんたん]だった}って

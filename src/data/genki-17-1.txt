@@ -15,7 +15,7 @@ Ho sentito che la biblioteca chiude presto il venerdì.
 
 According to the news, prices went up.
 Secondo le notizie, i prezzi sono saliti.
-ニュースによると、値段[ねだん]が上[あ]がったそうです
+ニュースによると、値段[ねだん]{が|は}上[あ]がったそうです
 
 According to the radio, the concert was cancelled.
 Secondo la radio, il concerto è stato cancellato.
@@ -31,12 +31,12 @@ Ho sentito che farà caldo questo fine settimana.
 
 According to Sora, the train was late.
 Secondo Sora, il treno era in ritardo.
-ソラさんによると、電車[でんしゃ]は遅[おく]れたそうです
+ソラさんによると、電車[でんしゃ]{は|が}遅[おく]れたそうです
 
-I've heard that apartment rent is high here.
-Ho sentito che l'affitto degli appartamenti qui è alto.
-この辺[あたり]のアパートの家賃[やちん]は高[たか]いそうです
+I've heard that apartment rent is high.
+Ho sentito che l'affitto degli appartamenti è alto.
+アパートの家賃[やちん]は高[たか]いそうです
 
 I hear that the exam will be difficult.
 Ho sentito che l'esame sarà difficile.
-試験[しけん]は難[むずか]しいそうです
+試験[しけん]{は|が}難[むずか]しいそうです
