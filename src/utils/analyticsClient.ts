@@ -1,4 +1,4 @@
-import type { AnalyticsEventName, AnalyticsEventParams } from 'ga4-analytics';
+import type { AnalyticsEventName, AnalyticsEventParams } from '../analytics/types';
 import { runWhenIdle } from './runWhenIdle';
 
 const CLIENT_ID_KEY = 'nihongo.analytics.client_id';

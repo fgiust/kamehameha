@@ -3,7 +3,7 @@ import {
   MAX_CLIENT_ID_LENGTH,
   MAX_PARAM_STRING_LENGTH,
   type AnalyticsEventName,
-} from './ga4Constants';
+} from './ga4Constants.js';
 
 export type AnalyticsEventParams = Record<string, string | number | boolean>;
 

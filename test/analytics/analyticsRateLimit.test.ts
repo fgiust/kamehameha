@@ -1,9 +1,11 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import {
   ANALYTICS_RATE_LIMIT_PER_MINUTE,
+} from '../../api/_lib/ga4/ga4Constants';
+import {
   isAnalyticsRateLimited,
   resetAnalyticsRateLimit,
-} from 'ga4-analytics/server';
+} from '../../api/_lib/ga4/analyticsRateLimit';
 
 describe('analyticsRateLimit', () => {
   afterEach(() => {

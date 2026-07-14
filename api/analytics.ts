@@ -1,12 +1,14 @@
 import {
   GA_MEASUREMENT_ID,
   MAX_ANALYTICS_BODY_BYTES,
+} from './_lib/ga4/ga4Constants.js';
+import { isAnalyticsRateLimited } from './_lib/ga4/analyticsRateLimit.js';
+import {
   buildGa4MpBody,
   getClientIpFromHeaders,
   getUserAgentFromHeaders,
   parseAnalyticsClientPayload,
-} from 'ga4-analytics';
-import { isAnalyticsRateLimited } from 'ga4-analytics/server';
+} from './_lib/ga4/ga4Mp.js';
 
 type VercelRequest = {
   method?: string;

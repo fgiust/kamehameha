@@ -4,7 +4,7 @@ import {
   getClientIpFromHeaders,
   parseAnalyticsClientPayload,
   sanitizeAnalyticsParams,
-} from 'ga4-analytics';
+} from '../../api/_lib/ga4/ga4Mp';
 
 describe('ga4Mp', () => {
   it('parses valid page_view payload', () => {

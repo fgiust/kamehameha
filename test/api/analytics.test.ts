@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { parseAnalyticsClientPayload } from 'ga4-analytics';
+import { parseAnalyticsClientPayload } from '../../api/_lib/ga4/ga4Mp';
 import { forwardToGa4Mp } from '../../api/analytics';
 
 describe('api/analytics forwardToGa4Mp', () => {

@@ -1,4 +1,4 @@
-import { ANALYTICS_RATE_LIMIT_PER_MINUTE } from './ga4Constants';
+import { ANALYTICS_RATE_LIMIT_PER_MINUTE } from './ga4Constants.js';
 
 const WINDOW_MS = 60_000;
 const hitsByKey = new Map<string, number[]>();

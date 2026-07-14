@@ -28,16 +28,15 @@ No environment variables are required for local dev. Production-only vars are on
 Local dev mocks `/api/analytics` in Vite (returns 204). Umami remains client-side for comparison during the GA4 evaluation period.
 
 ### Vercel API routes (`api/`)
-Vercel deploys each file under `api/` as an isolated serverless function. **Do not import from `src/` or `server/`** — those paths are not bundled at runtime (`Cannot find module .../src/...`).
+Vercel deploys each handler in `api/*.ts` as an isolated serverless function at runtime (Node.js ESM). **Do not import from `src/` or workspace packages** (`packages/*`) — those paths are not available in `/var/task`.
 
-Allowed imports for `api/**/*.ts`:
-- npm packages (`@supabase/supabase-js`, etc.)
-- workspace packages under `packages/` (e.g. `ga4-analytics`, `ga4-analytics/server`)
-- relative imports within `api/` (prefer `.js` extensions if using shared `api/_lib/` files)
+Allowed imports for API handlers:
+- npm packages published to `node_modules` (e.g. `@supabase/supabase-js`)
+- relative imports under `api/`, especially `api/_lib/` helpers (use `.js` extensions in import paths)
+
+Shared server logic belongs in `api/_lib/`. The Vite app under `src/` may duplicate small client-only types (see `src/analytics/types.ts`) rather than importing from `api/`.
 
 `npm run build` runs `scripts/check-api-imports.mjs` to catch forbidden imports before deploy.
-
-When client and server need shared logic, add a workspace package in `packages/` rather than importing from `src/`.
 
 ### Lint
 ESLint exits with code 1 due to pre-existing issues (13 react-hooks warnings + 1 `no-useless-escape` error in `src/utils/rubyNotation.ts`). These are not blockers for development.
