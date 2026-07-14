@@ -1,6 +1,6 @@
 # tenshindiff
 
-Japanese sentence answer diff with Genki-style templates: furigana `漢[かん]`, alternatives `{です|だ}`, optional segments `{primary|}`, and kana-vs-kanji matching.
+Japanese sentence answer diff with variation templates: furigana `漢[かん]`, alternatives `{です|だ}`, optional segments `{primary|}`, and kana-vs-kanji matching.
 
 ## Install (monorepo / workspace)
 
