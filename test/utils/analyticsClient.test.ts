@@ -2,6 +2,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   getOrCreateAnalyticsClientId,
+  getOrCreateAnalyticsSessionId,
   trackAnalyticsEvent,
   trackAnalyticsPageView,
 } from '../../src/utils/analyticsClient';
@@ -9,6 +10,7 @@ import {
 describe('analyticsClient', () => {
   beforeEach(() => {
     localStorage.clear();
+    sessionStorage.clear();
     vi.restoreAllMocks();
     vi.stubGlobal('navigator', {
       ...navigator,
@@ -23,6 +25,19 @@ describe('analyticsClient', () => {
     expect(localStorage.getItem('nihongo.analytics.client_id')).toBe(first);
   });
 
+  it('persists session_id in sessionStorage', () => {
+    const first = getOrCreateAnalyticsSessionId(1_700_000_000_000);
+    const second = getOrCreateAnalyticsSessionId(1_700_000_000_500);
+    expect(first).toBe(second);
+    expect(sessionStorage.getItem('nihongo.analytics.session_id')).toBe(String(first));
+  });
+
+  it('starts a new session after 30 minutes of inactivity', () => {
+    const first = getOrCreateAnalyticsSessionId(1_700_000_000_000);
+    const second = getOrCreateAnalyticsSessionId(1_700_000_000_000 + 30 * 60 * 1000 + 1);
+    expect(second).toBeGreaterThan(first);
+  });
+
   it('posts page_view to first-party analytics API', async () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 204 });
     vi.stubGlobal('fetch', fetchMock);
@@ -33,9 +48,18 @@ describe('analyticsClient', () => {
 
     const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe('/api/analytics');
-    const body = JSON.parse(String(init.body)) as { name: string; params: { page_path: string } };
+    const body = JSON.parse(String(init.body)) as {
+      name: string;
+      params: {
+        page_path: string;
+        session_id: number;
+        engagement_time_msec: number;
+      };
+    };
     expect(body.name).toBe('page_view');
     expect(body.params.page_path).toBe('/genki/17-2');
+    expect(body.params.session_id).toEqual(expect.any(Number));
+    expect(body.params.engagement_time_msec).toBe(100);
   });
 
   it('posts custom events', async () => {

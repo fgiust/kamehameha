@@ -2,6 +2,10 @@ import type { AnalyticsEventName, AnalyticsEventParams } from '../analytics/type
 import { runWhenIdle } from './runWhenIdle';
 
 const CLIENT_ID_KEY = 'nihongo.analytics.client_id';
+const SESSION_ID_KEY = 'nihongo.analytics.session_id';
+const SESSION_LAST_ACTIVITY_KEY = 'nihongo.analytics.session_last_activity';
+const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
+const DEFAULT_ENGAGEMENT_TIME_MSEC = 100;
 
 export function getOrCreateAnalyticsClientId(): string {
   try {
@@ -13,6 +17,34 @@ export function getOrCreateAnalyticsClientId(): string {
   } catch {
     return crypto.randomUUID();
   }
+}
+
+/** GA4 MP requires session_id + engagement_time_msec for Realtime active users. */
+export function getOrCreateAnalyticsSessionId(now = Date.now()): number {
+  try {
+    const storedId = sessionStorage.getItem(SESSION_ID_KEY);
+    const lastActivityRaw = sessionStorage.getItem(SESSION_LAST_ACTIVITY_KEY);
+    const lastActivity = lastActivityRaw ? Number(lastActivityRaw) : NaN;
+
+    if (storedId && Number.isFinite(lastActivity) && now - lastActivity < SESSION_TIMEOUT_MS) {
+      sessionStorage.setItem(SESSION_LAST_ACTIVITY_KEY, String(now));
+      return Number(storedId);
+    }
+
+    const sessionId = Math.floor(now / 1000);
+    sessionStorage.setItem(SESSION_ID_KEY, String(sessionId));
+    sessionStorage.setItem(SESSION_LAST_ACTIVITY_KEY, String(now));
+    return sessionId;
+  } catch {
+    return Math.floor(now / 1000);
+  }
+}
+
+function buildSessionParams(now = Date.now()): AnalyticsEventParams {
+  return {
+    session_id: getOrCreateAnalyticsSessionId(now),
+    engagement_time_msec: DEFAULT_ENGAGEMENT_TIME_MSEC,
+  };
 }
 
 function buildPageViewParams(pagePath: string): AnalyticsEventParams {
@@ -39,7 +71,10 @@ async function postAnalyticsEvent(
   const payload = {
     client_id: getOrCreateAnalyticsClientId(),
     name,
-    ...(params ? { params } : {}),
+    params: {
+      ...buildSessionParams(),
+      ...(params ?? {}),
+    },
   };
 
   const body = JSON.stringify(payload);
