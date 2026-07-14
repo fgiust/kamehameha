@@ -27,6 +27,8 @@ No environment variables are required for local dev. Production-only vars are on
 
 Local dev mocks `/api/analytics` in Vite (returns 204). Umami remains client-side for comparison during the GA4 evaluation period.
 
+GA4 uses a **hybrid channel**: gtag.js when `googletagmanager.com` loads; first-party Measurement Protocol (`/api/analytics`) when the script is blocked (adblock). The choice is cached in `sessionStorage` for the tab — never both channels for the same session.
+
 ### Vercel API routes (`api/`)
 Vercel deploys each handler in `api/*.ts` as an isolated serverless function at runtime (Node.js ESM). **Do not import from `src/` or workspace packages** (`packages/*`) — those paths are not available in `/var/task`.
 

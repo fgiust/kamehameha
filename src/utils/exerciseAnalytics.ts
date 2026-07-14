@@ -1,4 +1,4 @@
-import { scheduleAnalyticsEvent } from './analyticsClient';
+import { scheduleGaEvent } from './gaTracking';
 import { trackUmamiEvent } from './umami';
 
 export type ProgressSegment = 0 | 1 | 2;
@@ -14,11 +14,11 @@ export function shouldTrackKamehamehaCompletion(wasAllGreen: boolean, nextAllGre
 export function trackExerciseQuestion(exerciseId: string, correct: boolean): void {
   const data = { exercise: exerciseId, correct };
   trackUmamiEvent('question', data);
-  scheduleAnalyticsEvent('question', data);
+  scheduleGaEvent('question', data);
 }
 
 export function trackExerciseKamehameha(exerciseId: string): void {
   const data = { exercise: exerciseId };
   trackUmamiEvent('kamehameha', data);
-  scheduleAnalyticsEvent('kamehameha', data);
+  scheduleGaEvent('kamehameha', data);
 }
