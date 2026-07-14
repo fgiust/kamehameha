@@ -1,7 +1,8 @@
+import { GA_MEASUREMENT_ID } from '../analytics/constants';
 import type { AnalyticsEventParams } from '../analytics/types';
 import { isGoogleAnalyticsScriptLoaded } from './loadGoogleAnalytics';
 
-function getGtag(): ((...args: unknown[]) => void) | undefined {
+function getGtag() {
   if (!isGoogleAnalyticsScriptLoaded()) return undefined;
   return window.gtag;
 }
@@ -12,10 +13,18 @@ export function trackGaPageview(pagePath: string): void {
     if (!gtag) return;
 
     const normalizedPath = pagePath.startsWith('/') ? pagePath : `/${pagePath}`;
+    const pageLocation = `${window.location.origin}${normalizedPath}`;
+    const pageTitle = document.title;
+
     gtag('event', 'page_view', {
       page_path: normalizedPath,
-      page_location: `${window.location.origin}${normalizedPath}`,
-      page_title: document.title,
+      page_location: pageLocation,
+      page_title: pageTitle,
+    });
+    gtag('config', GA_MEASUREMENT_ID, {
+      page_path: normalizedPath,
+      page_location: pageLocation,
+      page_title: pageTitle,
     });
   } catch {
     // ignore

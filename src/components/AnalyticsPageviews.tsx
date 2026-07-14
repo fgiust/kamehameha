@@ -30,9 +30,10 @@ export default function AnalyticsPageviews() {
       umamiSent = true;
     };
 
+    void sendGaPageView(pathKey);
+
     runWhenIdle(() => {
       if (cancelled) return;
-      void sendGaPageView(pathKey);
       void loadUmami().finally(() => {
         if (!cancelled) sendUmami();
       });

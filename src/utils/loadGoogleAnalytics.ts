@@ -10,20 +10,29 @@ let scriptLoaded = false;
 declare global {
   interface Window {
     dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
+    gtag?: Gtag;
     google_tag_manager?: Record<string, unknown>;
   }
 }
 
-function isGtagRuntimeReady(): boolean {
-  return typeof window.google_tag_manager === 'object' && window.google_tag_manager !== null;
-}
+type Gtag = {
+  (command: 'js', date: Date): void;
+  (command: 'config', measurementId: string, params?: Record<string, unknown>): void;
+  (command: 'event', eventName: string, params?: Record<string, unknown>): void;
+};
 
 function initGtagStub(): void {
   window.dataLayer = window.dataLayer || [];
-  window.gtag = window.gtag || function gtag(...args: unknown[]) {
-    window.dataLayer!.push(args);
-  };
+  if (typeof window.gtag === 'function') return;
+
+  // Official GA snippet uses `arguments`, not a rest-params array — gtag.js expects that shape.
+  window.gtag = function gtag() {
+    window.dataLayer!.push(arguments);
+  } as Gtag;
+}
+
+export function applyGoogleAnalyticsConfig(): void {
+  if (typeof window.gtag !== 'function') return;
   window.gtag('js', new Date());
   window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
 }
@@ -31,16 +40,11 @@ function initGtagStub(): void {
 function markScriptLoaded(script: HTMLScriptElement): void {
   script.setAttribute(GTAG_LOADED_ATTR, '1');
   scriptLoaded = true;
+  applyGoogleAnalyticsConfig();
 }
 
 function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
-  if (scriptLoaded || isGtagRuntimeReady()) {
-    markScriptLoaded(script);
-    return Promise.resolve(true);
-  }
-
-  if (script.getAttribute(GTAG_LOADED_ATTR) === '1') {
-    scriptLoaded = true;
+  if (script.getAttribute(GTAG_LOADED_ATTR) === '1' && scriptLoaded) {
     return Promise.resolve(true);
   }
 
@@ -65,17 +69,14 @@ function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
   });
 }
 
-/** True only after googletagmanager.com/gtag/js loaded successfully (not the pre-load stub). */
+/** True only after googletagmanager.com/gtag/js loaded and config applied. */
 export function isGoogleAnalyticsScriptLoaded(): boolean {
-  return scriptLoaded || isGtagRuntimeReady();
+  return scriptLoaded;
 }
 
 export function loadGoogleAnalytics(): Promise<boolean> {
   if (typeof document === 'undefined') return Promise.resolve(false);
-  if (isGoogleAnalyticsScriptLoaded()) {
-    scriptLoaded = true;
-    return Promise.resolve(true);
-  }
+  if (scriptLoaded) return Promise.resolve(true);
   if (loadPromise) return loadPromise;
 
   loadPromise = (async () => {
