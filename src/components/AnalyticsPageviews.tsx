@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { scheduleGaPageView } from '../utils/gaTracking';
+import { sendGaPageView } from '../utils/gaTracking';
 import { loadUmami } from '../utils/loadUmami';
 import { runWhenIdle } from '../utils/runWhenIdle';
 import { trackUmamiPageview } from '../utils/umami';
@@ -32,7 +32,7 @@ export default function AnalyticsPageviews() {
 
     runWhenIdle(() => {
       if (cancelled) return;
-      scheduleGaPageView(pathKey);
+      void sendGaPageView(pathKey);
       void loadUmami().finally(() => {
         if (!cancelled) sendUmami();
       });

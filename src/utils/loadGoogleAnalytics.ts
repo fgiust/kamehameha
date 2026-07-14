@@ -1,7 +1,7 @@
 import { GA_MEASUREMENT_ID } from '../analytics/constants';
 
 const GTAG_SCRIPT = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-const GTAG_LOAD_TIMEOUT_MS = 4000;
+const GTAG_LOAD_TIMEOUT_MS = 8000;
 
 let loadPromise: Promise<boolean> | null = null;
 let scriptLoaded = false;
@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-function initGtag(): void {
+function initGtagStub(): void {
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function gtag(...args: unknown[]) {
     window.dataLayer!.push(args);
@@ -22,22 +22,9 @@ function initGtag(): void {
   window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
 }
 
-/** True only after googletagmanager.com/gtag/js loaded successfully (not the pre-load stub). */
-export function isGoogleAnalyticsScriptLoaded(): boolean {
-  return scriptLoaded;
-}
-
-export function loadGoogleAnalytics(): Promise<boolean> {
-  if (typeof document === 'undefined') return Promise.resolve(false);
-  if (scriptLoaded) return Promise.resolve(true);
-  if (loadPromise) return loadPromise;
-
-  loadPromise = new Promise((resolve) => {
-    initGtag();
-
-    const existing = document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js"]');
-    if (existing) {
-      scriptLoaded = true;
+function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (scriptLoaded) {
       resolve(true);
       return;
     }
@@ -50,15 +37,36 @@ export function loadGoogleAnalytics(): Promise<boolean> {
       resolve(ok);
     };
 
+    script.addEventListener('load', () => finish(true), { once: true });
+    script.addEventListener('error', () => finish(false), { once: true });
+    window.setTimeout(() => finish(false), GTAG_LOAD_TIMEOUT_MS);
+  });
+}
+
+/** True only after googletagmanager.com/gtag/js loaded successfully (not the pre-load stub). */
+export function isGoogleAnalyticsScriptLoaded(): boolean {
+  return scriptLoaded;
+}
+
+export function loadGoogleAnalytics(): Promise<boolean> {
+  if (typeof document === 'undefined') return Promise.resolve(false);
+  if (scriptLoaded) return Promise.resolve(true);
+  if (loadPromise) return loadPromise;
+
+  loadPromise = (async () => {
+    initGtagStub();
+
+    const existing = document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js"]');
+    if (existing instanceof HTMLScriptElement) {
+      return waitForScriptElement(existing);
+    }
+
     const script = document.createElement('script');
     script.src = GTAG_SCRIPT;
     script.async = true;
-    script.onload = () => finish(true);
-    script.onerror = () => finish(false);
     document.head.appendChild(script);
-
-    window.setTimeout(() => finish(false), GTAG_LOAD_TIMEOUT_MS);
-  });
+    return waitForScriptElement(script);
+  })();
 
   return loadPromise;
 }

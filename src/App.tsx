@@ -9,6 +9,7 @@ import AnalyticsPageviews from './components/AnalyticsPageviews';
 import PageMetaManager from './seo/PageMetaManager';
 import { stripLangPrefix } from './seo/localizedPaths';
 import { scheduleNotoSansJpLoad } from './utils/loadNotoSansJp';
+import { resolveGaTrackingChannel } from './utils/gaTrackingChannel';
 import { syncDebugModeFromSearch } from './utils/debugMode';
 import { clearAllExerciseSessionDrafts } from './utils/exerciseSessionDraft';
 
@@ -58,6 +59,7 @@ function AppShell() {
 
   useEffect(() => {
     scheduleNotoSansJpLoad();
+    void resolveGaTrackingChannel();
   }, []);
 
   useEffect(() => {

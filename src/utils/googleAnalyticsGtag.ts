@@ -1,4 +1,3 @@
-import { GA_MEASUREMENT_ID } from '../analytics/constants';
 import type { AnalyticsEventParams } from '../analytics/types';
 import { isGoogleAnalyticsScriptLoaded } from './loadGoogleAnalytics';
 
@@ -11,7 +10,13 @@ export function trackGaPageview(pagePath: string): void {
   try {
     const gtag = getGtag();
     if (!gtag) return;
-    gtag('config', GA_MEASUREMENT_ID, { page_path: pagePath });
+
+    const normalizedPath = pagePath.startsWith('/') ? pagePath : `/${pagePath}`;
+    gtag('event', 'page_view', {
+      page_path: normalizedPath,
+      page_location: `${window.location.origin}${normalizedPath}`,
+      page_title: document.title,
+    });
   } catch {
     // ignore
   }
