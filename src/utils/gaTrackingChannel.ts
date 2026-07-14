@@ -1,4 +1,4 @@
-import { isGoogleAnalyticsScriptLoaded, loadGoogleAnalytics } from './loadGoogleAnalytics';
+import { loadGoogleAnalytics } from './loadGoogleAnalytics';
 
 const CHANNEL_KEY = 'nihongo.analytics.ga_channel';
 
