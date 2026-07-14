@@ -14,6 +14,7 @@ export default function AnalyticsPageviews() {
 
   // useLayoutEffect: fire before paint so fast SPA navigations are not dropped between frames.
   useLayoutEffect(() => {
+    console.log('[GA4-DEBUG] AnalyticsPageviews useLayoutEffect detected navigation to:', pathKey);
     sendGaPageView(pathKey);
   }, [pathKey]);
 

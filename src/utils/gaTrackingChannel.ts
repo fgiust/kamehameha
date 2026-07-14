@@ -15,15 +15,17 @@ function readCachedChannel(): GaTrackingChannel | null {
 }
 
 export function isGaTrackingBlocked(): boolean {
-  return readCachedChannel() === 'mp';
+  const cached = readCachedChannel();
+  return cached === 'mp';
 }
 
 /** Call only when gtag.js fails to load (adblock). */
 export function markGaTrackingBlocked(): void {
+  console.log('[GA4-DEBUG] markGaTrackingBlocked called! Saving "mp" channel to sessionStorage.');
   try {
     sessionStorage.setItem(CHANNEL_KEY, 'mp');
-  } catch {
-    // ignore
+  } catch (err) {
+    console.error('[GA4-DEBUG] Failed to save ga_channel to sessionStorage:', err);
   }
 }
 
@@ -33,10 +35,18 @@ export function getCachedGaTrackingChannel(): GaTrackingChannel | null {
 
 /** One-time bootstrap on app start. MP fallback only on script error, never on timeout. */
 export function bootstrapGaTrackingChannel(): Promise<GaTrackingChannel> {
-  if (isGaTrackingBlocked()) return Promise.resolve('mp');
+  const isBlocked = isGaTrackingBlocked();
+  console.log('[GA4-DEBUG] bootstrapGaTrackingChannel called. isGaTrackingBlocked:', isBlocked);
+  if (isBlocked) {
+    console.log('[GA4-DEBUG] bootstrapGaTrackingChannel: already blocked, resolving to "mp"');
+    return Promise.resolve('mp');
+  }
 
+  console.log('[GA4-DEBUG] bootstrapGaTrackingChannel: loading google analytics...');
   return loadGoogleAnalytics().then((loaded) => {
-    return loaded && !isGaTrackingBlocked() ? 'gtag' : 'mp';
+    const finalBlockedState = isGaTrackingBlocked();
+    console.log('[GA4-DEBUG] bootstrapGaTrackingChannel resolved with loaded:', loaded, 'finalBlockedState:', finalBlockedState);
+    return loaded && !finalBlockedState ? 'gtag' : 'mp';
   });
 }
 
