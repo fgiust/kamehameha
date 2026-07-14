@@ -10,6 +10,7 @@ import PageMetaManager from './seo/PageMetaManager';
 import { stripLangPrefix } from './seo/localizedPaths';
 import { scheduleNotoSansJpLoad } from './utils/loadNotoSansJp';
 import { ensureGtagBootstrap } from './utils/loadGoogleAnalytics';
+import { bootstrapGaTrackingChannel } from './utils/gaTrackingChannel';
 import { syncDebugModeFromSearch } from './utils/debugMode';
 import { clearAllExerciseSessionDrafts } from './utils/exerciseSessionDraft';
 
@@ -60,6 +61,7 @@ function AppShell() {
   useEffect(() => {
     scheduleNotoSansJpLoad();
     ensureGtagBootstrap();
+    void bootstrapGaTrackingChannel();
   }, []);
 
   useEffect(() => {

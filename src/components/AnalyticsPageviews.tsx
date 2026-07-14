@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { sendGaPageView } from '../utils/gaTracking';
 import { loadUmami } from '../utils/loadUmami';
@@ -12,7 +12,12 @@ export default function AnalyticsPageviews() {
   const location = useLocation();
   const pathKey = location.pathname + location.search;
 
-  useEffect(() => {
+  // useLayoutEffect: fire before paint so fast SPA navigations are not dropped between frames.
+  useLayoutEffect(() => {
+    sendGaPageView(pathKey);
+  }, [pathKey]);
+
+  useLayoutEffect(() => {
     let cancelled = false;
     let attempts = 0;
     let umamiSent = false;
@@ -29,8 +34,6 @@ export default function AnalyticsPageviews() {
       trackUmamiPageview(pathKey);
       umamiSent = true;
     };
-
-    void sendGaPageView(pathKey);
 
     runWhenIdle(() => {
       if (cancelled) return;

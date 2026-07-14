@@ -1,6 +1,8 @@
 // @vitest-environment happy-dom
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  bootstrapGaTrackingChannel,
+  markGaTrackingBlocked,
   resetGaTrackingChannelCache,
   resolveGaTrackingChannel,
 } from '../../src/utils/gaTrackingChannel';
@@ -10,10 +12,7 @@ vi.mock('../../src/utils/loadGoogleAnalytics', () => ({
   loadGoogleAnalytics: vi.fn(),
 }));
 
-import {
-  isGoogleAnalyticsScriptLoaded,
-  loadGoogleAnalytics,
-} from '../../src/utils/loadGoogleAnalytics';
+import { isGoogleAnalyticsScriptLoaded, loadGoogleAnalytics } from '../../src/utils/loadGoogleAnalytics';
 
 describe('gaTrackingChannel', () => {
   beforeEach(() => {
@@ -26,37 +25,20 @@ describe('gaTrackingChannel', () => {
   it('uses gtag when the script loads', async () => {
     vi.mocked(loadGoogleAnalytics).mockResolvedValue(true);
     vi.mocked(isGoogleAnalyticsScriptLoaded).mockReturnValue(true);
-    await expect(resolveGaTrackingChannel()).resolves.toBe('gtag');
-    expect(sessionStorage.getItem('nihongo.analytics.ga_channel')).toBe('gtag');
-    expect(loadGoogleAnalytics).toHaveBeenCalledTimes(1);
+    await expect(bootstrapGaTrackingChannel()).resolves.toBe('gtag');
+    expect(sessionStorage.getItem('nihongo.analytics.ga_channel')).toBeNull();
   });
 
-  it('falls back to mp when the script fails to load', async () => {
-    vi.mocked(loadGoogleAnalytics).mockResolvedValue(false);
-    vi.mocked(isGoogleAnalyticsScriptLoaded).mockReturnValue(false);
-    await expect(resolveGaTrackingChannel()).resolves.toBe('mp');
-    expect(sessionStorage.getItem('nihongo.analytics.ga_channel')).toBe('mp');
-  });
-
-  it('reuses mp without probing again', async () => {
-    sessionStorage.setItem('nihongo.analytics.ga_channel', 'mp');
+  it('marks mp only when explicitly blocked', async () => {
+    markGaTrackingBlocked();
     await expect(resolveGaTrackingChannel()).resolves.toBe('mp');
     expect(loadGoogleAnalytics).not.toHaveBeenCalled();
   });
 
-  it('probes gtag when sessionStorage says gtag (e.g. after reload)', async () => {
-    sessionStorage.setItem('nihongo.analytics.ga_channel', 'gtag');
+  it('does not persist gtag in sessionStorage', async () => {
     vi.mocked(loadGoogleAnalytics).mockResolvedValue(true);
     vi.mocked(isGoogleAnalyticsScriptLoaded).mockReturnValue(true);
-    await expect(resolveGaTrackingChannel()).resolves.toBe('gtag');
-    expect(loadGoogleAnalytics).toHaveBeenCalledTimes(1);
-  });
-
-  it('downgrades cached gtag to mp when the script no longer loads', async () => {
-    sessionStorage.setItem('nihongo.analytics.ga_channel', 'gtag');
-    vi.mocked(loadGoogleAnalytics).mockResolvedValue(false);
-    vi.mocked(isGoogleAnalyticsScriptLoaded).mockReturnValue(false);
-    await expect(resolveGaTrackingChannel()).resolves.toBe('mp');
-    expect(sessionStorage.getItem('nihongo.analytics.ga_channel')).toBe('mp');
+    await bootstrapGaTrackingChannel();
+    expect(sessionStorage.getItem('nihongo.analytics.ga_channel')).toBeNull();
   });
 });

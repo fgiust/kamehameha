@@ -1,8 +1,7 @@
 import { GA_MEASUREMENT_ID } from '../analytics/constants';
+import { markGaTrackingBlocked } from './gaTrackingChannel';
 
 const GTAG_SCRIPT = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-const GTAG_LOAD_TIMEOUT_MS = 3000;
-const GTAG_POLL_MS = 50;
 const GTAG_LOADED_ATTR = 'data-ga-loaded';
 
 let loadPromise: Promise<boolean> | null = null;
@@ -72,28 +71,29 @@ function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
 
   return new Promise((resolve) => {
     let settled = false;
-    const finish = (ok: boolean) => {
+    const finishOk = () => {
       if (settled) return;
       settled = true;
       window.clearInterval(pollId);
-      window.clearTimeout(timeoutId);
-      if (ok || isGtagRuntimeReady()) {
-        markScriptLoaded(script);
-        resolve(true);
-        return;
-      }
+      markScriptLoaded(script);
+      resolve(true);
+    };
+    const finishBlocked = () => {
+      if (settled) return;
+      settled = true;
+      window.clearInterval(pollId);
+      markGaTrackingBlocked();
       scriptLoaded = false;
       loadPromise = null;
       resolve(false);
     };
 
     const pollId = window.setInterval(() => {
-      if (isGtagRuntimeReady()) finish(true);
-    }, GTAG_POLL_MS);
+      if (isScriptElementAlreadyLoaded(script)) finishOk();
+    }, 50);
 
-    const timeoutId = window.setTimeout(() => finish(isGtagRuntimeReady()), GTAG_LOAD_TIMEOUT_MS);
-    script.addEventListener('load', () => finish(true), { once: true });
-    script.addEventListener('error', () => finish(false), { once: true });
+    script.addEventListener('load', finishOk, { once: true });
+    script.addEventListener('error', finishBlocked, { once: true });
   });
 }
 
