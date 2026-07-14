@@ -22,23 +22,23 @@ function cacheChannel(channel: GaTrackingChannel): void {
   }
 }
 
-async function resolveChannel(): Promise<GaTrackingChannel> {
-  const cached = readCachedChannel();
-  if (cached === 'mp') return 'mp';
-
-  const loaded = await loadGoogleAnalytics();
-  const channel: GaTrackingChannel = loaded && isGoogleAnalyticsScriptLoaded() ? 'gtag' : 'mp';
-  cacheChannel(channel);
-  return channel;
+export function getCachedGaTrackingChannel(): GaTrackingChannel | null {
+  return readCachedChannel();
 }
 
-/**
- * Pick gtag when the script loads; otherwise Measurement Protocol for the tab session.
- * Cached "gtag" still re-loads the script on each page load — sessionStorage survives reloads
- * but the gtag module state and DOM script do not.
- */
+/** Background probe: confirm gtag.js loads, or switch to MP for the tab. */
+export function probeGaTrackingChannel(): Promise<GaTrackingChannel> {
+  if (readCachedChannel() === 'mp') return Promise.resolve('mp');
+
+  return loadGoogleAnalytics().then((loaded) => {
+    const channel: GaTrackingChannel = loaded && isGoogleAnalyticsScriptLoaded() ? 'gtag' : 'mp';
+    cacheChannel(channel);
+    return channel;
+  });
+}
+
 export function resolveGaTrackingChannel(): Promise<GaTrackingChannel> {
-  return resolveChannel();
+  return probeGaTrackingChannel();
 }
 
 /** Test helper */

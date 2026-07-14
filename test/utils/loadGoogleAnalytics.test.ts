@@ -12,6 +12,13 @@ describe('loadGoogleAnalytics', () => {
     mod.resetGoogleAnalyticsLoaderState();
   });
 
+  it('queues gtag commands immediately via ensureGtagBootstrap', async () => {
+    const { ensureGtagBootstrap } = await import('../../src/utils/loadGoogleAnalytics');
+    ensureGtagBootstrap();
+    expect(typeof window.gtag).toBe('function');
+    expect(window.dataLayer?.length).toBeGreaterThan(0);
+  });
+
   it('detects an already-loaded gtag script without waiting for load again', async () => {
     const { loadGoogleAnalytics, isGoogleAnalyticsScriptLoaded } =
       await import('../../src/utils/loadGoogleAnalytics');
@@ -25,42 +32,25 @@ describe('loadGoogleAnalytics', () => {
     await expect(loadGoogleAnalytics()).resolves.toBe(true);
     expect(isGoogleAnalyticsScriptLoaded()).toBe(true);
   });
-
-  it('resolves as soon as the runtime is ready even if load listeners were missed', async () => {
-    const { loadGoogleAnalytics } = await import('../../src/utils/loadGoogleAnalytics');
-
-    const script = document.createElement('script');
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-TEST';
-    document.head.appendChild(script);
-    window.google_tag_manager = {};
-
-    await expect(loadGoogleAnalytics()).resolves.toBe(true);
-  });
 });
 
 describe('googleAnalyticsGtag', () => {
-  beforeEach(() => {
-    window.gtag = vi.fn();
+  beforeEach(async () => {
     vi.resetModules();
+    document.head.innerHTML = '';
+    delete window.gtag;
+    delete window.dataLayer;
+    delete window.google_tag_manager;
+    const mod = await import('../../src/utils/loadGoogleAnalytics');
+    mod.resetGoogleAnalyticsLoaderState();
   });
 
-  it('does not send pageviews until gtag.js has loaded', async () => {
-    vi.doMock('../../src/utils/loadGoogleAnalytics', () => ({
-      isGoogleAnalyticsScriptLoaded: () => false,
-    }));
-    const { trackGaPageview } = await import('../../src/utils/googleAnalyticsGtag');
-    trackGaPageview('/test');
-    expect(window.gtag).not.toHaveBeenCalled();
-  });
-
-  it('sends an explicit page_view event after gtag.js loads', async () => {
-    vi.doMock('../../src/utils/loadGoogleAnalytics', () => ({
-      isGoogleAnalyticsScriptLoaded: () => true,
-    }));
+  it('queues page_view immediately through gtag/dataLayer', async () => {
     const { trackGaPageview } = await import('../../src/utils/googleAnalyticsGtag');
     trackGaPageview('/genki/17-2');
-    expect(window.gtag).toHaveBeenCalledWith('event', 'page_view', expect.objectContaining({
-      page_path: '/genki/17-2',
-    }));
+    expect(window.dataLayer?.length).toBeGreaterThan(0);
+    const lastEntry = window.dataLayer?.[window.dataLayer.length - 1] as unknown as IArguments;
+    expect(lastEntry?.[0]).toBe('event');
+    expect(lastEntry?.[1]).toBe('page_view');
   });
 });

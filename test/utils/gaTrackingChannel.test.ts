@@ -44,7 +44,7 @@ describe('gaTrackingChannel', () => {
     expect(loadGoogleAnalytics).not.toHaveBeenCalled();
   });
 
-  it('still loads gtag when sessionStorage says gtag (e.g. after reload)', async () => {
+  it('probes gtag when sessionStorage says gtag (e.g. after reload)', async () => {
     sessionStorage.setItem('nihongo.analytics.ga_channel', 'gtag');
     vi.mocked(loadGoogleAnalytics).mockResolvedValue(true);
     vi.mocked(isGoogleAnalyticsScriptLoaded).mockReturnValue(true);

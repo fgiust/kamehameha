@@ -1,24 +1,17 @@
 import type { AnalyticsEventParams } from '../analytics/types';
-import { isGoogleAnalyticsScriptLoaded } from './loadGoogleAnalytics';
-
-function getGtag() {
-  if (!isGoogleAnalyticsScriptLoaded()) return undefined;
-  return window.gtag;
-}
+import { ensureGtagBootstrap } from './loadGoogleAnalytics';
 
 export function trackGaPageview(pagePath: string): void {
   try {
-    const gtag = getGtag();
+    ensureGtagBootstrap();
+    const gtag = window.gtag;
     if (!gtag) return;
 
     const normalizedPath = pagePath.startsWith('/') ? pagePath : `/${pagePath}`;
-    const pageLocation = `${window.location.origin}${normalizedPath}`;
-    const pageTitle = document.title;
-
     gtag('event', 'page_view', {
       page_path: normalizedPath,
-      page_location: pageLocation,
-      page_title: pageTitle,
+      page_location: `${window.location.origin}${normalizedPath}`,
+      page_title: document.title,
     });
   } catch {
     // ignore
@@ -27,7 +20,8 @@ export function trackGaPageview(pagePath: string): void {
 
 export function trackGaEvent(name: string, params: AnalyticsEventParams): void {
   try {
-    const gtag = getGtag();
+    ensureGtagBootstrap();
+    const gtag = window.gtag;
     if (!gtag) return;
     gtag('event', name, params);
   } catch {

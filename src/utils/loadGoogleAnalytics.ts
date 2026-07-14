@@ -2,10 +2,12 @@ import { GA_MEASUREMENT_ID } from '../analytics/constants';
 
 const GTAG_SCRIPT = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
 const GTAG_LOAD_TIMEOUT_MS = 3000;
+const GTAG_POLL_MS = 50;
 const GTAG_LOADED_ATTR = 'data-ga-loaded';
 
 let loadPromise: Promise<boolean> | null = null;
 let scriptLoaded = false;
+let configQueued = false;
 
 declare global {
   interface Window {
@@ -29,22 +31,29 @@ function initGtagStub(): void {
   window.dataLayer = window.dataLayer || [];
   if (typeof window.gtag === 'function') return;
 
-  // Official GA snippet uses `arguments`, not a rest-params array — gtag.js expects that shape.
   window.gtag = function gtag() {
     window.dataLayer!.push(arguments);
   } as Gtag;
 }
 
-export function applyGoogleAnalyticsConfig(): void {
-  if (typeof window.gtag !== 'function') return;
+function queueInitialConfig(): void {
+  if (configQueued || typeof window.gtag !== 'function') return;
+  configQueued = true;
   window.gtag('js', new Date());
   window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
+}
+
+/** Queue gtag commands immediately; start loading gtag.js in the background. */
+export function ensureGtagBootstrap(): void {
+  if (typeof document === 'undefined') return;
+  initGtagStub();
+  queueInitialConfig();
+  void loadGoogleAnalytics();
 }
 
 function markScriptLoaded(script: HTMLScriptElement): void {
   script.setAttribute(GTAG_LOADED_ATTR, '1');
   scriptLoaded = true;
-  applyGoogleAnalyticsConfig();
 }
 
 function isScriptElementAlreadyLoaded(script: HTMLScriptElement): boolean {
@@ -66,24 +75,28 @@ function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
     const finish = (ok: boolean) => {
       if (settled) return;
       settled = true;
+      window.clearInterval(pollId);
+      window.clearTimeout(timeoutId);
       if (ok || isGtagRuntimeReady()) {
         markScriptLoaded(script);
         resolve(true);
         return;
       }
       scriptLoaded = false;
-      script.remove();
       loadPromise = null;
       resolve(false);
     };
 
+    const pollId = window.setInterval(() => {
+      if (isGtagRuntimeReady()) finish(true);
+    }, GTAG_POLL_MS);
+
+    const timeoutId = window.setTimeout(() => finish(isGtagRuntimeReady()), GTAG_LOAD_TIMEOUT_MS);
     script.addEventListener('load', () => finish(true), { once: true });
     script.addEventListener('error', () => finish(false), { once: true });
-    window.setTimeout(() => finish(isGtagRuntimeReady()), GTAG_LOAD_TIMEOUT_MS);
   });
 }
 
-/** True only after googletagmanager.com/gtag/js loaded and config applied. */
 export function isGoogleAnalyticsScriptLoaded(): boolean {
   return scriptLoaded || isGtagRuntimeReady();
 }
@@ -98,6 +111,7 @@ export function loadGoogleAnalytics(): Promise<boolean> {
 
   loadPromise = (async () => {
     initGtagStub();
+    queueInitialConfig();
 
     const existing = document.querySelector('script[src^="https://www.googletagmanager.com/gtag/js"]');
     if (existing instanceof HTMLScriptElement) {
@@ -118,4 +132,5 @@ export function loadGoogleAnalytics(): Promise<boolean> {
 export function resetGoogleAnalyticsLoaderState(): void {
   loadPromise = null;
   scriptLoaded = false;
+  configQueued = false;
 }
