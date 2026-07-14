@@ -1,0 +1,10 @@
+{
+  "name": "ga4-analytics",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts"
+  }
+}

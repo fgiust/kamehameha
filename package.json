@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "vite",
     "clean": "rm -rf dist",
-    "build": "npm run build -w tenshindiff && npm run validate:data && vitest run && tsc -b && vite build && npm run generate:seo",
+    "build": "npm run build -w tenshindiff && npm run validate:data && node scripts/check-api-imports.mjs && vitest run && tsc -b && vite build && npm run generate:seo",
     "db:link": "node scripts/run-supabase-cli.mjs link",
     "db:migrate": "node scripts/run-supabase-cli.mjs db push --include-all",
     "db:status": "node scripts/run-supabase-cli.mjs migration list",
@@ -21,7 +21,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fontsource/noto-sans-jp": "5.2.9",
+    "ga4-analytics": "workspace:*",
     "@supabase/supabase-js": "2.108.2",
     "@vercel/analytics": "2.0.1",
     "@vercel/speed-insights": "2.0.0",

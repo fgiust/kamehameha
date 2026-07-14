@@ -6,10 +6,6 @@ import {
   trackExerciseQuestion,
 } from '../../src/utils/exerciseAnalytics';
 
-vi.mock('@vercel/analytics', () => ({
-  track: vi.fn(),
-}));
-
 vi.mock('../../src/utils/umami', () => ({
   trackUmamiEvent: vi.fn(),
 }));
@@ -18,32 +14,27 @@ vi.mock('../../src/utils/analyticsClient', () => ({
   scheduleAnalyticsEvent: vi.fn(),
 }));
 
-import { track } from '@vercel/analytics';
 import { scheduleAnalyticsEvent } from '../../src/utils/analyticsClient';
 import { trackUmamiEvent } from '../../src/utils/umami';
 
 describe('exerciseAnalytics', () => {
   beforeEach(() => {
-    vi.mocked(track).mockClear();
     vi.mocked(trackUmamiEvent).mockClear();
     vi.mocked(scheduleAnalyticsEvent).mockClear();
   });
 
   it('tracks question events with exercise id and correctness', () => {
     trackExerciseQuestion('/genki/08-3', true);
-    expect(track).toHaveBeenCalledWith('question', { exercise: '/genki/08-3', correct: true });
     expect(trackUmamiEvent).toHaveBeenCalledWith('question', { exercise: '/genki/08-3', correct: true });
     expect(scheduleAnalyticsEvent).toHaveBeenCalledWith('question', { exercise: '/genki/08-3', correct: true });
 
     trackExerciseQuestion('/numbers', false);
-    expect(track).toHaveBeenCalledWith('question', { exercise: '/numbers', correct: false });
     expect(trackUmamiEvent).toHaveBeenCalledWith('question', { exercise: '/numbers', correct: false });
     expect(scheduleAnalyticsEvent).toHaveBeenCalledWith('question', { exercise: '/numbers', correct: false });
   });
 
   it('tracks kamehameha events with exercise id', () => {
     trackExerciseKamehameha('/time');
-    expect(track).toHaveBeenCalledWith('kamehameha', { exercise: '/time' });
     expect(trackUmamiEvent).toHaveBeenCalledWith('kamehameha', { exercise: '/time' });
     expect(scheduleAnalyticsEvent).toHaveBeenCalledWith('kamehameha', { exercise: '/time' });
   });
