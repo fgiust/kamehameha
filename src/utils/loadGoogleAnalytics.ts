@@ -2,6 +2,7 @@ import { GA_MEASUREMENT_ID } from '../analytics/constants';
 
 const GTAG_SCRIPT = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
 const GTAG_LOAD_TIMEOUT_MS = 8000;
+const GTAG_LOADED_ATTR = 'data-ga-loaded';
 
 let loadPromise: Promise<boolean> | null = null;
 let scriptLoaded = false;
@@ -10,7 +11,12 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    google_tag_manager?: Record<string, unknown>;
   }
+}
+
+function isGtagRuntimeReady(): boolean {
+  return typeof window.google_tag_manager === 'object' && window.google_tag_manager !== null;
 }
 
 function initGtagStub(): void {
@@ -22,18 +28,34 @@ function initGtagStub(): void {
   window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
 }
 
-function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
-  return new Promise((resolve) => {
-    if (scriptLoaded) {
-      resolve(true);
-      return;
-    }
+function markScriptLoaded(script: HTMLScriptElement): void {
+  script.setAttribute(GTAG_LOADED_ATTR, '1');
+  scriptLoaded = true;
+}
 
+function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
+  if (scriptLoaded || isGtagRuntimeReady()) {
+    markScriptLoaded(script);
+    return Promise.resolve(true);
+  }
+
+  if (script.getAttribute(GTAG_LOADED_ATTR) === '1') {
+    scriptLoaded = true;
+    return Promise.resolve(true);
+  }
+
+  return new Promise((resolve) => {
     let settled = false;
     const finish = (ok: boolean) => {
       if (settled) return;
       settled = true;
-      scriptLoaded = ok;
+      if (ok) {
+        markScriptLoaded(script);
+      } else {
+        scriptLoaded = false;
+        script.remove();
+        loadPromise = null;
+      }
       resolve(ok);
     };
 
@@ -45,12 +67,15 @@ function waitForScriptElement(script: HTMLScriptElement): Promise<boolean> {
 
 /** True only after googletagmanager.com/gtag/js loaded successfully (not the pre-load stub). */
 export function isGoogleAnalyticsScriptLoaded(): boolean {
-  return scriptLoaded;
+  return scriptLoaded || isGtagRuntimeReady();
 }
 
 export function loadGoogleAnalytics(): Promise<boolean> {
   if (typeof document === 'undefined') return Promise.resolve(false);
-  if (scriptLoaded) return Promise.resolve(true);
+  if (isGoogleAnalyticsScriptLoaded()) {
+    scriptLoaded = true;
+    return Promise.resolve(true);
+  }
   if (loadPromise) return loadPromise;
 
   loadPromise = (async () => {
@@ -69,4 +94,10 @@ export function loadGoogleAnalytics(): Promise<boolean> {
   })();
 
   return loadPromise;
+}
+
+/** Test helper */
+export function resetGoogleAnalyticsLoaderState(): void {
+  loadPromise = null;
+  scriptLoaded = false;
 }

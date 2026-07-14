@@ -1,10 +1,8 @@
-import { loadGoogleAnalytics } from './loadGoogleAnalytics';
+import { isGoogleAnalyticsScriptLoaded, loadGoogleAnalytics } from './loadGoogleAnalytics';
 
 const CHANNEL_KEY = 'nihongo.analytics.ga_channel';
 
 export type GaTrackingChannel = 'gtag' | 'mp';
-
-let resolvePromise: Promise<GaTrackingChannel> | null = null;
 
 function readCachedChannel(): GaTrackingChannel | null {
   try {
@@ -24,27 +22,27 @@ function cacheChannel(channel: GaTrackingChannel): void {
   }
 }
 
-async function probeChannel(): Promise<GaTrackingChannel> {
+async function resolveChannel(): Promise<GaTrackingChannel> {
+  const cached = readCachedChannel();
+  if (cached === 'mp') return 'mp';
+
   const loaded = await loadGoogleAnalytics();
-  const channel: GaTrackingChannel = loaded ? 'gtag' : 'mp';
+  const channel: GaTrackingChannel = loaded && isGoogleAnalyticsScriptLoaded() ? 'gtag' : 'mp';
   cacheChannel(channel);
   return channel;
 }
 
-/** Pick gtag when the script loads; otherwise Measurement Protocol for the rest of the tab session. */
+/**
+ * Pick gtag when the script loads; otherwise Measurement Protocol for the tab session.
+ * Cached "gtag" still re-loads the script on each page load — sessionStorage survives reloads
+ * but the gtag module state and DOM script do not.
+ */
 export function resolveGaTrackingChannel(): Promise<GaTrackingChannel> {
-  const cached = readCachedChannel();
-  if (cached) return Promise.resolve(cached);
-
-  if (!resolvePromise) {
-    resolvePromise = probeChannel();
-  }
-  return resolvePromise;
+  return resolveChannel();
 }
 
 /** Test helper */
 export function resetGaTrackingChannelCache(): void {
-  resolvePromise = null;
   try {
     sessionStorage.removeItem(CHANNEL_KEY);
   } catch {
