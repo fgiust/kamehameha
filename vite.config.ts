@@ -293,7 +293,33 @@ ${data.notes || 'N/A'}
             next();
           }
         });
-      }
+      },
+    },
+    {
+      name: 'analytics-api',
+      configureServer(server) {
+        server.middlewares.use((req, res, next) => {
+          if (req.url !== '/api/analytics' || req.method !== 'POST') {
+            next();
+            return;
+          }
+          let body = '';
+          req.on('data', chunk => {
+            body += chunk;
+          });
+          req.on('end', () => {
+            try {
+              JSON.parse(body || '{}');
+              res.statusCode = 204;
+              res.end();
+            } catch {
+              res.statusCode = 400;
+              res.setHeader('Content-Type', 'application/json');
+              res.end(JSON.stringify({ ok: false, error: 'Invalid payload' }));
+            }
+          });
+        });
+      },
     }
   ],
 })

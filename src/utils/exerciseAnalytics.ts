@@ -1,4 +1,5 @@
 import { track } from '@vercel/analytics';
+import { scheduleAnalyticsEvent } from './analyticsClient';
 import { trackUmamiEvent } from './umami';
 
 export type ProgressSegment = 0 | 1 | 2;
@@ -15,10 +16,12 @@ export function trackExerciseQuestion(exerciseId: string, correct: boolean): voi
   const data = { exercise: exerciseId, correct };
   track('question', data);
   trackUmamiEvent('question', data);
+  scheduleAnalyticsEvent('question', data);
 }
 
 export function trackExerciseKamehameha(exerciseId: string): void {
   const data = { exercise: exerciseId };
   track('kamehameha', data);
   trackUmamiEvent('kamehameha', data);
+  scheduleAnalyticsEvent('kamehameha', data);
 }

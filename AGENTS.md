@@ -19,7 +19,13 @@ Standard commands are in `package.json`:
 - The feedback endpoint is mocked locally (appends to `feedback.txt` in the project root) — no Vercel KV credentials needed.
 
 ### Environment variables
-No environment variables are required for local dev. Production-only vars (`SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, etc.) are only needed for deployed API routes.
+No environment variables are required for local dev. Production-only vars are only needed for deployed API routes:
+
+- `GA_MEASUREMENT_ID` — GA4 property id (defaults to `G-QEYQ7EPJXP` if unset)
+- `GA_MEASUREMENT_API_SECRET` — GA4 Measurement Protocol secret (**required** for `/api/analytics` in production; rotate if exposed)
+- `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, etc. — feedback/contact APIs
+
+Local dev mocks `/api/analytics` in Vite (returns 204). Umami remains client-side for comparison during the GA4 evaluation period.
 
 ### Lint
 ESLint exits with code 1 due to pre-existing issues (13 react-hooks warnings + 1 `no-useless-escape` error in `src/utils/rubyNotation.ts`). These are not blockers for development.

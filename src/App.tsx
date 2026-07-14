@@ -5,7 +5,7 @@ import BackButton from './components/BackButton';
 import FeedbackPanel from './components/FeedbackPanel';
 import DebugModeIndicator from './components/DebugModeIndicator';
 import SettingsPanel from './components/SettingsPanel';
-import UmamiPageviews from './components/UmamiPageviews';
+import AnalyticsPageviews from './components/AnalyticsPageviews';
 import PageMetaManager from './seo/PageMetaManager';
 import { stripLangPrefix } from './seo/localizedPaths';
 import { scheduleNotoSansJpLoad } from './utils/loadNotoSansJp';
@@ -131,7 +131,7 @@ function AppShell() {
   return (
     <>
       <PageMetaManager />
-      <UmamiPageviews />
+      <AnalyticsPageviews />
       {showBack && (
         <div className="back-nav-container">
           <BackButton />
