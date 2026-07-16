@@ -1,6 +1,16 @@
 Prohibition form
 Forma di divieto
 
+# "it's not okay if you do that"
+#
+# verb suffix: 
+#    ~ては
+#    ~ちゃ
+# end:
+#    いけません　(いけない)
+#    だめです　(だめだよ)
+
+
 No smoking
 Non fumare
 {|たばこを}吸[す]{っては|っちゃ}{いけません|いけない|だめです|だめだよ}

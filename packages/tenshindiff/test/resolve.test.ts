@@ -76,6 +76,25 @@ describe('alternative after earlier typo', () => {
     expect(shown).toContain('今夜[こんや]');
     expect(shown).not.toMatch(/今夜.*今晩/u);
   });
+
+  it('picks る not ます after typo in ついてい (くれ vs い)', () => {
+    const tpl = '電[でん]気[き]がついてい{ます|る}';
+    const user = '電気がつくれている';
+    const answer = resolveAnswerFromTemplate(user, tpl);
+    expect(answer).toBe('電[でん]気[き]がついている');
+
+    const { ops } = pickBestDiffFromTemplate(user, tpl);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+
+    expect(shown).toBe('電[でん]気[き]がつくれいている');
+    expect(shown).not.toContain('ます');
+  });
 });
 
 describe('partial optional segment match', () => {

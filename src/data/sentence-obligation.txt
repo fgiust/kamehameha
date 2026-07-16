@@ -1,6 +1,19 @@
 Obligation form
 Forma di dovere
 
+# "it's not okay if you do NOT do that"
+#
+# verb suffix: 
+#    ないと
+#    なければ　(なきゃ)
+#    なくては　(なくちゃ)
+# end:
+#    いけません　(いけない)
+#    だめです　(だめだよ)
+#    なりません　(ならない)
+#    <nothing>
+
+
 I must study tonight
 Devo studiare stasera
 {今晩[こんばん]|今夜[こんや]}勉強[べんきょう]しな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}

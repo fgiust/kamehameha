@@ -1,44 +1,44 @@
-～ながら
-～ながら
+～と
+～と
 
-# V1（stem）+ ながら、V2 =  while V1-ing, V2
+# clause A (short, present) と clause B = Whenever A happens, B happens, too
 
-I listen to podcasts while cooking dinner.
-Ascolto podcast mentre cucino la cena.
-{晩[ばん]御[ご]飯[はん]|晩[ばん]ご飯[はん]|夕食[ゆうしょく]|夕飯[ゆうはん]}を作[つく]りながら、ポッドキャストを聞[き]きます
+When spring comes, the weather gets warm.
+Quando arriva la primavera, il tempo diventa caldo.
+春[はる]になると、暖[あたた]かくなります
 
-She knits while watching dramas.
-Lei fa il lavoro a maglia mentre guarda drammi.
-{|彼女[かのじょ]は}ドラマを見[み]ながら、編[あ]み物[もの]をします
+When I drink coffee at night, I can't sleep.
+Quando bevo caffè di sera, non riesco a dormire.
+夜[よる]コーヒーを飲[の]むと、眠[ねむ]れません
 
-He cleans the kitchen while humming a tune.
-Pulisce la cucina canticchiando una melodia.
-鼻歌[はなうた]を歌[うた]いながら、台所[だいどころ]を掃除[そうじ]しています
+When my friend moves away, I feel lonely.
+Quando il mio amico si trasferisce, mi sento solo.
+友達[ともだち]が引[ひ]っ越[こ]すと、寂[さび]しいです
 
-It is hard to study while taking care of a baby.
-È difficile studiare mentre si occupa di un bambino.
-赤[あか]ちゃんの世話[せわ]をしながら、勉強[べんきょう]するのは大変[たいへん]です
+When I was a student, I often stayed up late.
+Quando ero studente, restavo spesso alzato fino a tardi.
+学生[がくせい]のとき、よく夜更[よふ]かしをしました
 
-I stretch while waiting for the bus.
-Mi allungo mentre aspetto l'autobus.
-バスを待[ま]ちながら、ストレッチをします
+When summer comes, many people go to the beach.
+Quando arriva l'estate, molta gente va in spiaggia.
+夏[なつ]になると、海[うみ]に行[い]く人[ひと]が多[おお]いです
 
-They chatted while drinking tea.
-Hanno chiacchierato bevendo tè.
-お茶[ちゃ]を飲[の]みながら、話[はな]しました
+When morning comes, birds start singing.
+Quando arriva il mattino, gli uccelli iniziano a cantare.
+朝[あさ]になると、鳥[とり]が鳴[な]き始[はじ]めます
 
-She waved goodbye while running for the train.
-Ha salutato correndo per il treno.
-走[はし]りながら、手[て]を振[ふ]ってさよならしました
+When the phone rings, I get nervous.
+Quando squilla il telefono, mi innervosisco.
+電話[でんわ]が鳴[な]ると、緊張[きんちょう]します
 
-He answered the question, smiling.
-Ha risposto alla domanda sorridendo.
-笑[わら]いながら、質問[しつもん]に答[こた]えました
+Whenever I use a computer, my eyes hurt.
+Ogni volta che uso un computer, mi fanno male gli occhi.
+パソコンを使[つか]うと、目[め]が痛[いた]くなります
 
-I plan my week while drinking morning coffee.
-Pianifico la settimana mentre bevo il caffè del mattino.
-朝[あさ]のコーヒーを飲[の]みながら、一週間[いっしゅうかん]の予定[よてい]を立[た]てます
+When I skip breakfast, I get hungry before noon.
+Quando salto la colazione, ho fame prima di mezzogiorno.
+{朝[あさ]御[ご]飯[はん]|朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べないと、午前中[ごぜんちゅう]にお腹[なか]がすきます
 
-She reviews vocabulary while riding the train.
-Ripassa il vocabolario mentre è sul treno.
-電車[でんしゃ]に乗[の]りながら、単語[たんご]を復習[ふくしゅう]します
+When I run too fast, I get out of breath.
+Quando corro troppo veloce, resto senza fiato.
+走[はし]りすぎると、息[いき]が切[き]れます

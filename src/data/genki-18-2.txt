@@ -1,54 +1,45 @@
-～てしまう
-～てしまう
+Paired Intransitive Verbs + ている
+Coppie di verbi intransitivi + ている
 
-# The te-form of a verb + しまう has two meanings:
-#
-# In the first instance, しまう indicates that one "carries out with determination" 
-# a plan described by the verb. It typically involves bringing something to a culmination. 
-# You, in other words, do something completely, or finish doing something, or have something done.
-#
-# The second meaning of しまう is "lack of premeditation or control over how things turn out." 
-# This often comes with the sense of regret; something regrettable happens, or you do something 
-# which you did not intend to.
-#
-# In speech，～てしまう and ~でしまう are often contracted to ～ちゃう and 〜じゃう，respectively.
+# Similarly, when followed by ている, transitive verbs refer to actions in progress,
+# while intransitive verbs refer to states that hold true after the change takes place.
 
-I ate all the cookies.
-Ho mangiato tutti i biscotti.
-クッキーを全部[ぜんぶ]食[た]べ{てしまいました|ちゃった}
+Michiko is closing the door.
+Michiko sta chiudendo la porta.
+みちこさんはドアを閉[し]めてい{ます|る}
 
-I accidentally sent the wrong file.
-Ho inviato per sbaglio il file sbagliato.
-間違[まちが]ったファイルを送[おく]っ{てしまいました|ちゃった}
+The door is closed.
+La porta è chiusa.
+ドア{は|が}閉[し]まってい{ます|る}
 
-I left my phone at the café.
-Ho dimenticato il telefono al bar.
-{喫茶店[きっさてん]|カフェ}に携帯[けいたい]を忘[わす]れ{てしまいました|ちゃった}
+Ken is turning on the light.
+Ken sta accendendo la luce.
+けんさん{は|が}電[でん]気[き]をつけてい{ます|る}
 
-I spilled coffee on my shirt.
-Ho rovesciato il caffè sulla camicia.
-シャツにコーヒーをこぼし{てしまいました|ちゃった}
+The light is on.
+La luce è accesa.
+電[でん]気[き]がついてい{ます|る}
 
-I drank all the wine
-Ho bevuto tutto il vino
-ワインを全部[ぜんぶ]飲[の]ん{でしまいました|じゃった}
+Yui is putting a book in her bag.
+Yui sta mettendo un libro nella borsa.
+ゆいさんは{カバン|鞄[かばん]}に本[ほん]を入[い]れてい{ます|る}
 
-I missed the last train!
-Ho perso l'ultimo treno!
-終電[しゅうでん]に乗[の]り遅[おく]れ{てしまいました|ちゃった}
+There is a book in the bag.
+C'è un libro nella borsa.
+{カバン|鞄[かばん]}に本[ほん]が入[はい]ってい{ます|る}
 
-I already mailed the package.
-Ho già spedito il pacco.
-荷物[にもつ]を送[おく]っ{てしまいました|ちゃった}
+The cat is making the shirt dirty.
+Il gatto sta sporcando la camicia.
+猫[ねこ]がシャツを汚[よご]してい{ます|る}
 
-I was tired, but I stayed up late anyway.
-Ero assonnato, ma sono comunque rimasto alzato fino a tardi.
-眠[ねむ]かったのに、夜更[よふ]かしし{てしまいました|ちゃった}
+The shirt is dirty.
+La camicia è sporca.
+シャツが汚[よご]れてい{ます|る}
 
-I promised to be careful, but I dropped the plate.
-Avevo promesso di stare attento, ma ho fatto cadere il piatto.
-気[き]をつけると言[い]ったのに、{|お}皿[さら]を落[お]とし{てしまいました|ちゃった}
+Naomi is boiling water.
+Naomi sta facendo bollire l'acqua.
+なおみさんはお湯[ゆ]を沸[わ]かしてい{ます|る}
 
-I ate too much.
-Ho mangiato troppo.
-食[た]べ過[す]ぎ{てしまいました|ちゃった}
+The water is boiling.
+L'acqua bolle.
+お湯[ゆ]{が|は}沸[わ]いてい{ます|る}

@@ -1,44 +1,54 @@
-～と
-～と
+～てしまう
+～てしまう
 
-# clause A (short, present) と clause B = Whenever A happens, B happens, too
+# The te-form of a verb + しまう has two meanings:
+#
+# In the first instance, しまう indicates that one "carries out with determination" 
+# a plan described by the verb. It typically involves bringing something to a culmination. 
+# You, in other words, do something completely, or finish doing something, or have something done.
+#
+# The second meaning of しまう is "lack of premeditation or control over how things turn out." 
+# This often comes with the sense of regret; something regrettable happens, or you do something 
+# which you did not intend to.
+#
+# In speech，～てしまう and ~でしまう are often contracted to ～ちゃう and 〜じゃう，respectively.
 
-When spring comes, the weather gets warm.
-Quando arriva la primavera, il tempo diventa caldo.
-春[はる]になると、暖[あたた]かくなります
+I ate all the cookies.
+Ho mangiato tutti i biscotti.
+クッキーを全部[ぜんぶ]食[た]べ{てしまいました|ちゃった}
 
-When I drink coffee at night, I can't sleep.
-Quando bevo caffè di sera, non riesco a dormire.
-夜[よる]コーヒーを飲[の]むと、眠[ねむ]れません
+I accidentally sent the wrong file.
+Ho inviato per sbaglio il file sbagliato.
+間違[まちが]ったファイルを送[おく]っ{てしまいました|ちゃった}
 
-When my friend moves away, I feel lonely.
-Quando il mio amico si trasferisce, mi sento solo.
-友達[ともだち]が引[ひ]っ越[こ]すと、寂[さび]しいです
+I left my phone at the café.
+Ho dimenticato il telefono al bar.
+{喫茶店[きっさてん]|カフェ}に携帯[けいたい]を忘[わす]れ{てしまいました|ちゃった}
 
-When I was a student, I often stayed up late.
-Quando ero studente, restavo spesso alzato fino a tardi.
-学生[がくせい]のとき、よく夜更[よふ]かしをしました
+I spilled coffee on my shirt.
+Ho rovesciato il caffè sulla camicia.
+シャツにコーヒーをこぼし{てしまいました|ちゃった}
 
-When summer comes, many people go to the beach.
-Quando arriva l'estate, molta gente va in spiaggia.
-夏[なつ]になると、海[うみ]に行[い]く人[ひと]が多[おお]いです
+I drank all the wine
+Ho bevuto tutto il vino
+ワインを全部[ぜんぶ]飲[の]ん{でしまいました|じゃった}
 
-When morning comes, birds start singing.
-Quando arriva il mattino, gli uccelli iniziano a cantare.
-朝[あさ]になると、鳥[とり]が鳴[な]き始[はじ]めます
+I missed the last train!
+Ho perso l'ultimo treno!
+終電[しゅうでん]に乗[の]り遅[おく]れ{てしまいました|ちゃった}
 
-When the phone rings, I get nervous.
-Quando squilla il telefono, mi innervosisco.
-電話[でんわ]が鳴[な]ると、緊張[きんちょう]します
+I already mailed the package.
+Ho già spedito il pacco.
+荷物[にもつ]を送[おく]っ{てしまいました|ちゃった}
 
-Whenever I use a computer, my eyes hurt.
-Ogni volta che uso un computer, mi fanno male gli occhi.
-パソコンを使[つか]うと、目[め]が痛[いた]くなります
+I was tired, but I stayed up late anyway.
+Ero assonnato, ma sono comunque rimasto alzato fino a tardi.
+眠[ねむ]かったのに、夜更[よふ]かしし{てしまいました|ちゃった}
 
-When I skip breakfast, I get hungry before noon.
-Quando salto la colazione, ho fame prima di mezzogiorno.
-{朝[あさ]御[ご]飯[はん]|朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べないと、午前中[ごぜんちゅう]にお腹[なか]がすきます
+I promised to be careful, but I dropped the plate.
+Avevo promesso di stare attento, ma ho fatto cadere il piatto.
+気[き]をつけると言[い]ったのに、{|お}皿[さら]を落[お]とし{てしまいました|ちゃった}
 
-When I run too fast, I get out of breath.
-Quando corro troppo veloce, resto senza fiato.
-走[はし]りすぎると、息[いき]が切[き]れます
+I ate too much.
+Ho mangiato troppo.
+食[た]べ過[す]ぎ{てしまいました|ちゃった}

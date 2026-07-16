@@ -76,9 +76,17 @@ function consumeFixedPartUserChars(
       step = consumeFixedRubyUnit(rest, unit, rubyOptions);
     }
 
+    // Look ahead for a short typo before this plain char (e.g. おは → は), but never
+    // steal a later copy of the same char that still appears in the remaining template
+    // (e.g. missing い in ついてい must not latch onto い in user ている).
     if (step === 0 && unit.kind === 'plain' && unit.surface.length === 1) {
-      const pos = rest.indexOf(unit.surface);
-      if (pos >= 0) step = pos + unit.surface.length;
+      const laterNeedsSame = units
+        .slice(i + 1)
+        .some(u => u.surface === unit.surface || (u.kind === 'plain' && u.surface.includes(unit.surface)));
+      if (!laterNeedsSame) {
+        const pos = rest.indexOf(unit.surface);
+        if (pos >= 0) step = pos + unit.surface.length;
+      }
     }
 
     if (step === 0) {
@@ -149,9 +157,23 @@ function diffFixedSegmentUserConsumed(rest: string, segment: string, rubyOptions
     if (op.kind === 'extra') {
       if (i < firstUnit) {
         const firstOp = ops[firstUnit]!;
-        // Short typo before the first template unit (e.g. ま for で, お before は), not leading junk (e.g. カフェ).
-        if (firstOp.kind === 'unit' && op.text.length <= 1) {
-          consumed += op.text.length;
+        if (firstOp.kind === 'unit' && (firstOp.status === 'correct_kanji' || firstOp.status === 'correct_kana')) {
+          // Short typo before a matched first unit (e.g. お before は), not leading junk (e.g. カフェ).
+          if (op.text.length <= 1) consumed += op.text.length;
+        } else if (firstOp.kind === 'unit' && firstOp.status === 'missing') {
+          // Typo / wrong chars where the next template unit is missing, but later units still
+          // align (e.g. くれ for い in ついてい → user つくれている). Skip if nothing later
+          // matches (e.g. leftover る vs てい).
+          const hasLaterCorrect = ops.some(
+            (o, j) =>
+              j > firstUnit
+              && o.kind === 'unit'
+              && (o.status === 'correct_kanji' || o.status === 'correct_kana'),
+          );
+          if (hasLaterCorrect) {
+            const remaining = remainingTemplateSurfaceLen(ops, i + 1);
+            if (op.text.length <= remaining) consumed += op.text.length;
+          }
         }
         continue;
       }
