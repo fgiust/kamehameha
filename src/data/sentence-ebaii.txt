@@ -1,0 +1,48 @@
+えばいい
+えばいい
+
+# ... ばいいですか - come dovrei fare per ...
+# es. 納豆は、どう食べればいいですか？ - Come si dovrebbe mangiare il natto?
+#
+# ... ばいいかわかりません - non so come dovrei...
+# es. どこで チケットを 買えばいいかわかりません - Non so dove dovrei comprare il biglietto
+
+How should I eat natto?
+Come dovrei mangiare il natto?
+納豆[なっとう]は、どう食[た]べればいいですか{|？}
+
+How should I go to the station?
+Come dovrei andare alla stazione?
+駅[えき]までどう行[い]けばいいですか{|？}
+
+What time should I wake up?
+A che ora dovrei svegliarmi?
+何時[なんじ]に起[お]きればいいですか{|？}
+
+Which train should I take?
+Quale treno dovrei prendere?
+どの電車[でんしゃ]に乗[の]ればいいですか{|？}
+
+How should I write this kanji?
+Come dovrei scrivere questo kanji?
+この漢字[かんじ]はどう書[か]けばいいですか{|？}
+
+I don't know where I should buy the ticket.
+Non so dove dovrei comprare il biglietto.
+どこで{チケット|切符[きっぷ]}を買[か]えばいいか分[わ]か{りません|らない}
+
+I don't know what I should bring.
+Non so cosa dovrei portare.
+何[なに]を持[も]って行[い]けばいいか分[わ]か{りません|らない}
+
+I don't know when I should go.
+Non so quando dovrei andare.
+いつ行[い]けばいいか分[わ]か{りません|らない}
+
+I don't know how I should explain it.
+Non so come dovrei spiegarlo.
+どう説[せつ]明[めい]すればいいか分[わ]か{りません|らない}
+
+I don't know how much I should pay.
+Non so quanto dovrei pagare.
+いくら払[はら]えばいいか分[わ]か{りません|らない}

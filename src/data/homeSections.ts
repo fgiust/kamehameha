@@ -129,6 +129,7 @@ export const homeConfig: HomeConfig = {
         { id: 'adjectives-nouns' },
         { id: 'sentence-obligation' },
         { id: 'sentence-prohibition' },
+        { id: 'sentence-ebaii' },
       ],
     },
     {

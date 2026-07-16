@@ -144,7 +144,7 @@ In detail:
 - if a segment matches a kanji both the kanji and furigana will be marked as green, if the users write it using correct hiragana the furigana will be displayed in green and the kanji below in jellow, but the answer will be considered correct.
 
 In sentence style texts (user must translate a sentence from english or italian to japanese) the answer provided may contains different variations that will be considered correct.
-Variation are included in the configured response inside curly braces and separated by |. A variation could also be empty meaning that the part should be considered optional. Variations configured should be used every time a different syntax could commonly be used, there are synomin for a specific term, or even for optional or alternatives puntuation forms (e.g. 、 or　。).
+Variation are included in the configured response inside curly braces and separated by `|`. A variation can also be empty, meaning that part is optional. Use `{a|b}` for real alternatives (synonyms, です/だ, etc.) and `{primary|}` / `{|optional}` when one side may be omitted.
 Furigana are added in the answer using square brackets.
 This is a sample configured phrase:
 {私[わたし]は|}猫[ねこ]も好[す]き{です|だ}
@@ -152,6 +152,13 @@ Here the first part 私は is considered optional (as it typically should be in 
 When creating a diff with the sentence inputted by the user:
 - if any of the segment matches exactly (either with kanji or hiragana) that segment is used
 - if none of the segments matches exactly the first option is used for the diff
+
+#### Authoring rules for `genki-*.txt` / `sentence-*.txt` answers (IMPORTANT)
+- **Kanji + furigana only:** write `分[わ]かりません`, not `{わかりません|分[わ]かりません}`. Matching already accepts the kana reading that matches the furigana, so a kana-only alternative is redundant.
+- **No trailing `。`:** do not put a sentence-final `。` in answers (not even as `{|。}`), unless a specific exercise explicitly requires practicing that punctuation.
+- **Optional `？`:** use `{|？}` (empty first = preferred without `？`, but `？` accepted). Never write `{|？|}` — that is empty | `？` | empty again, which is nonsense.
+- **Commas `、`:** write a literal `、` when the sentence includes one. Do **not** wrap as `{|、}` / `{、|}` — with default diff options commas are already treated as optional by the parser.
+- **Optional-group syntax reminder:** `{A|}` = A or nothing; `{|B}` = nothing (preferred) or B; `{A|B}` = A or B (both non-empty). The first listed option is the preferred display when nothing matches.
 
 ### i18n
 The app supports english and italian. All the content (UI+exercises) must be translated in these 2 languages. Localization uses i18next for UI parts and bilingual tests in exercises data.
@@ -190,7 +197,7 @@ phrase in japanese (answer)
 
 Notes:
 - often "title in english" or "title in italian" contains japanese expression. In that case that part should not be translated (eg. a title could be "この/その/あの/どの + Noun" in english and "この/その/あの/どの + Sostantivo" in italian)
-- the answer contains furigana and alternatives as described in "Answer diff"
+- the answer contains furigana and alternatives as described in "Answer diff" (follow the **Authoring rules** there: kanji+furigana only, no trailing `。`, `{|？}` not `{|？|}`, literal `、`)
 - files are parsed at build time, any block of more or less than 3 lines will display an error
 
 
