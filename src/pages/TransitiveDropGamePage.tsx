@@ -329,6 +329,31 @@ export default function TransitiveDropGamePage() {
     resolveLanding(hard);
   }, [resolveLanding]);
 
+  /** Move into `lane` (if needed) and hard-drop there — used by mobile bin taps. */
+  const dropInLane = useCallback(
+    (lane: Lane) => {
+      if (phaseRef.current !== 'playing' || resolvingRef.current) return;
+      const piece = activeRef.current;
+      if (!piece || piece.state !== 'falling') return;
+
+      let next = piece;
+      if (piece.lane !== lane) {
+        if (stacksRef.current.filter(s => s.lane === lane).length >= MAX_STACK) return;
+        next = { ...piece, lane };
+        activeRef.current = next;
+        setActive(next);
+        playMoveSfx();
+      }
+
+      const target = landYFor(next.lane, next.kind, stacksRef.current);
+      const hard = { ...next, y: target };
+      activeRef.current = hard;
+      setActive(hard);
+      resolveLanding(hard);
+    },
+    [resolveLanding],
+  );
+
   const toggleFurigana = useCallback(() => {
     setShowFurigana(prev => !prev);
     playMoveSfx();
@@ -469,16 +494,18 @@ export default function TransitiveDropGamePage() {
     [moveToLane],
   );
 
-  const onHardDropPointerDown = useCallback(
+  const onDropZonePointerDown = useCallback(
     (e: ReactPointerEvent<HTMLDivElement>) => {
-      // Bottom tap-to-drop is a mobile/touch control; keep mouse for desktop keyboard play.
+      // Bottom tap = move to that column + hard drop (touch only; desktop keeps keyboard).
       if (e.pointerType === 'mouse') return;
       if (phaseRef.current !== 'playing') return;
       if (e.button !== 0) return;
       e.preventDefault();
-      hardDrop();
+      const rect = e.currentTarget.getBoundingClientRect();
+      const lane: Lane = e.clientX - rect.left < rect.width / 2 ? 0 : 1;
+      dropInLane(lane);
     },
-    [hardDrop],
+    [dropInLane],
   );
 
   const stackedNodes = stacks.map(piece => {
@@ -559,7 +586,7 @@ export default function TransitiveDropGamePage() {
 
             <div
               className="tdg-drop-zone"
-              onPointerDown={onHardDropPointerDown}
+              onPointerDown={onDropZonePointerDown}
               aria-label={t('transitiveDrop.helpHard')}
             >
               <div
