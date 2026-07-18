@@ -490,215 +490,226 @@
   outline-offset: 2px;
 }
 
-/* —— Mobile: touch controls, full-width, safe-area, no scroll —— */
-@media (max-width: 768px) {
-  html.tdg-mobile-lock {
-    overflow: hidden !important;
-    overscroll-behavior: none;
-    width: 100%;
-    max-width: 100%;
-    /* svh = smallest viewport (browser chrome expanded) — safer than dvh/vh on iOS. */
-    height: var(--tdg-app-height, 100svh);
-  }
-
-  body.tdg-mobile-lock {
-    overflow: hidden !important;
-    overscroll-behavior: none;
-    width: 100%;
-    max-width: 100%;
-    height: var(--tdg-app-height, 100svh);
-    max-height: var(--tdg-app-height, 100svh);
-    position: fixed;
-    top: var(--tdg-vv-top, 0px);
-    left: 0;
-    right: 0;
-    bottom: auto;
-  }
-
-  body.tdg-mobile-lock .feedback-tab,
-  body.tdg-mobile-lock .feedback-panel-backdrop,
-  body.tdg-mobile-lock .feedback-panel {
-    display: none !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-
-  body.tdg-mobile-lock .back-nav-container {
-    position: fixed;
-    top: max(8px, env(safe-area-inset-top, 0px));
-    left: max(8px, env(safe-area-inset-left, 0px));
-    z-index: 200;
-  }
-
-  body.tdg-mobile-lock .settings-panel-container {
-    position: fixed;
-    top: max(8px, env(safe-area-inset-top, 0px));
-    right: max(8px, env(safe-area-inset-right, 0px));
-    z-index: 200;
-  }
-
-  body.tdg-mobile-lock .app-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding:
-      calc(40px + env(safe-area-inset-top, 0px))
-      max(8px, env(safe-area-inset-right, 0px))
-      max(12px, env(safe-area-inset-bottom, 0px))
-      max(8px, env(safe-area-inset-left, 0px));
-    height: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-  }
-
-  /* Page title is redundant with the arcade title bar — reclaim vertical space. */
-  body.tdg-mobile-lock .page-header {
-    display: none;
-  }
-
-  .tdg-page {
-    flex: 1;
-    min-height: 0;
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .tdg-shell {
-    flex: 1;
-    min-height: 0;
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    touch-action: manipulation;
-    overflow: hidden;
-  }
-
-  .tdg-title-bar {
-    padding: 6px 10px 2px;
-    font-size: 0.68rem;
-    flex-shrink: 0;
-  }
-
-  .tdg-hud {
-    padding: 6px 10px;
-    flex-shrink: 0;
-    gap: 8px;
-  }
-
-  .tdg-furi-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35em;
-    flex-shrink: 0;
-  }
-
-  .tdg-help {
-    display: none;
-  }
-
-  .tdg-playfield-wrap {
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
-    width: 100%;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 4px 8px 0;
-    overflow: hidden;
-  }
-
-  .tdg-playfield {
-    flex: 1;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    height: auto;
-    min-height: 0;
-    touch-action: none;
-    overflow: hidden;
-  }
-
-  .tdg-drop-zone {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    touch-action: none;
-    cursor: pointer;
-    overflow: hidden;
-  }
-
-  .tdg-gloss {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 1px;
-    height: 2.7rem;
-    min-height: 2.7rem;
-    max-height: 2.7rem;
-    padding: 3px 8px;
-    white-space: nowrap;
-  }
-
-  .tdg-gloss-verb {
-    flex: 0 0 auto;
-    max-width: 100%;
-    font-size: 0.95rem;
-  }
-
-  .tdg-gloss-meaning {
-    flex: 0 0 auto;
-    max-width: 100%;
-    font-size: 0.72rem;
-  }
-
-  .tdg-bins {
-    flex-shrink: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .tdg-bin {
-    padding: 8px 6px 10px;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  .tdg-bin::after {
-    content: '↓';
-    display: block;
-    margin-top: 2px;
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    opacity: 0.55;
-  }
-
-  .tdg-overlay {
-    padding: 16px;
-    gap: 12px;
-  }
-
-  .tdg-overlay h2 {
-    font-size: 1.15rem;
-  }
-
-  .tdg-overlay p {
-    font-size: 0.72rem;
-  }
-
-  .tdg-piece {
-    pointer-events: none;
-    width: 47%;
-    font-size: clamp(1.05rem, 5.5vw, 1.35rem);
-    padding: 0 2px;
-  }
+/*
+ * Viewport fit is class-driven (not only max-width), so Chrome/Comet shells that
+ * report a wide layout viewport still get a short, fully-visible frame.
+ * --tdg-app-height is set from JS as min(visualViewport, innerHeight, …) − safety.
+ */
+html.tdg-mobile-lock {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  width: 100%;
+  max-width: 100%;
 }
+
+body.tdg-mobile-lock.tdg-vv-fit {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+  width: 100%;
+  max-width: 100%;
+  height: var(--tdg-app-height, 100svh) !important;
+  max-height: var(--tdg-app-height, 100svh) !important;
+  position: fixed;
+  top: var(--tdg-vv-top, 0px);
+  left: 0;
+  right: 0;
+  bottom: auto;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit #root {
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .feedback-tab,
+body.tdg-mobile-lock.tdg-vv-fit .feedback-panel-backdrop,
+body.tdg-mobile-lock.tdg-vv-fit .feedback-panel {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .back-nav-container {
+  position: fixed;
+  top: max(8px, env(safe-area-inset-top, 0px));
+  left: max(8px, env(safe-area-inset-left, 0px));
+  z-index: 200;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .settings-panel-container {
+  position: fixed;
+  top: max(8px, env(safe-area-inset-top, 0px));
+  right: max(8px, env(safe-area-inset-right, 0px));
+  z-index: 200;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .app-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding:
+    calc(36px + env(safe-area-inset-top, 0px))
+    max(8px, env(safe-area-inset-right, 0px))
+    8px
+    max(8px, env(safe-area-inset-left, 0px));
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .page-header {
+  display: none;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-page {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-shell {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  touch-action: manipulation;
+  overflow: hidden;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-title-bar {
+  padding: 4px 10px 2px;
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-hud {
+  padding: 4px 10px;
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-furi-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  flex-shrink: 0;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-help {
+  display: none;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-playfield-wrap {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 8px 0;
+  overflow: hidden;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-playfield {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  touch-action: none;
+  overflow: hidden;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-drop-zone {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  touch-action: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-gloss {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1px;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-gloss-verb {
+  flex: 0 0 auto;
+  max-width: 100%;
+  font-size: 0.9rem;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-gloss-meaning {
+  flex: 0 0 auto;
+  max-width: 100%;
+  font-size: 0.68rem;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-bins {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-bin {
+  padding: 6px 6px 8px;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 0.65rem;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-bin::after {
+  content: '↓';
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  opacity: 0.55;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-bin span {
+  font-size: 0.85rem;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-overlay {
+  padding: 16px;
+  gap: 12px;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-overlay h2 {
+  font-size: 1.15rem;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-overlay p {
+  font-size: 0.72rem;
+}
+
+body.tdg-mobile-lock.tdg-vv-fit .tdg-piece {
+  pointer-events: none;
+  width: 47%;
+  font-size: clamp(1.05rem, 5.5vw, 1.35rem);
+  padding: 0 2px;
+}
+
