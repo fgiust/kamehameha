@@ -497,8 +497,8 @@
     overscroll-behavior: none;
     width: 100%;
     max-width: 100%;
-    height: 100%;
-    height: 100dvh;
+    /* svh = smallest viewport (browser chrome expanded) — safer than dvh/vh on iOS. */
+    height: var(--tdg-app-height, 100svh);
   }
 
   body.tdg-mobile-lock {
@@ -506,10 +506,13 @@
     overscroll-behavior: none;
     width: 100%;
     max-width: 100%;
-    height: 100%;
-    height: 100dvh;
+    height: var(--tdg-app-height, 100svh);
+    max-height: var(--tdg-app-height, 100svh);
     position: fixed;
-    inset: 0;
+    top: var(--tdg-vv-top, 0px);
+    left: 0;
+    right: 0;
+    bottom: auto;
   }
 
   body.tdg-mobile-lock .feedback-tab,
@@ -539,13 +542,12 @@
     max-width: 100%;
     margin: 0;
     padding:
-      calc(44px + env(safe-area-inset-top, 0px))
+      calc(40px + env(safe-area-inset-top, 0px))
       max(8px, env(safe-area-inset-right, 0px))
-      max(8px, env(safe-area-inset-bottom, 0px))
+      max(12px, env(safe-area-inset-bottom, 0px))
       max(8px, env(safe-area-inset-left, 0px));
     height: 100%;
-    height: 100dvh;
-    max-height: 100dvh;
+    max-height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -639,24 +641,24 @@
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 2px;
-    height: 3.1rem;
-    min-height: 3.1rem;
-    max-height: 3.1rem;
-    padding: 4px 8px;
+    gap: 1px;
+    height: 2.7rem;
+    min-height: 2.7rem;
+    max-height: 2.7rem;
+    padding: 3px 8px;
     white-space: nowrap;
   }
 
   .tdg-gloss-verb {
     flex: 0 0 auto;
     max-width: 100%;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .tdg-gloss-meaning {
     flex: 0 0 auto;
     max-width: 100%;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
   }
 
   .tdg-bins {
@@ -666,7 +668,7 @@
   }
 
   .tdg-bin {
-    padding: 10px 6px 12px;
+    padding: 8px 6px 10px;
     min-width: 0;
     overflow: hidden;
   }
@@ -674,8 +676,8 @@
   .tdg-bin::after {
     content: '↓';
     display: block;
-    margin-top: 4px;
-    font-size: 0.85rem;
+    margin-top: 2px;
+    font-size: 0.75rem;
     letter-spacing: 0.2em;
     opacity: 0.55;
   }

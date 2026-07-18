@@ -338,11 +338,30 @@ export default function TransitiveDropGamePage() {
     phaseRef.current = phase;
   }, [phase]);
 
-  // Lock scroll + hide feedback chrome on this page (mobile CSS uses the class).
+  // Lock scroll + size to the *visible* viewport (Safari URL bar is outside 100dvh).
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add('tdg-mobile-lock');
     document.body.classList.add('tdg-mobile-lock');
+
+    /** Extra px so the drop zone stays clear of browser chrome / home indicator. */
+    const SAFETY_PX = 16;
+
+    const syncViewportHeight = () => {
+      const vv = window.visualViewport;
+      const visible = vv?.height ?? window.innerHeight;
+      const top = vv?.offsetTop ?? 0;
+      const height = Math.max(240, Math.floor(visible - SAFETY_PX));
+      root.style.setProperty('--tdg-app-height', `${height}px`);
+      root.style.setProperty('--tdg-vv-top', `${Math.floor(top)}px`);
+    };
+    syncViewportHeight();
+
+    const vv = window.visualViewport;
+    vv?.addEventListener('resize', syncViewportHeight);
+    vv?.addEventListener('scroll', syncViewportHeight);
+    window.addEventListener('resize', syncViewportHeight);
+    window.addEventListener('orientationchange', syncViewportHeight);
 
     const onTouchMove = (e: TouchEvent) => {
       const el = e.target as HTMLElement | null;
@@ -356,6 +375,12 @@ export default function TransitiveDropGamePage() {
     return () => {
       root.classList.remove('tdg-mobile-lock');
       document.body.classList.remove('tdg-mobile-lock');
+      root.style.removeProperty('--tdg-app-height');
+      root.style.removeProperty('--tdg-vv-top');
+      vv?.removeEventListener('resize', syncViewportHeight);
+      vv?.removeEventListener('scroll', syncViewportHeight);
+      window.removeEventListener('resize', syncViewportHeight);
+      window.removeEventListener('orientationchange', syncViewportHeight);
       document.removeEventListener('touchmove', onTouchMove);
     };
   }, []);
