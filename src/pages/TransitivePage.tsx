@@ -5,7 +5,7 @@ import {
   buildExerciseFingerprint,
   clearExerciseSessionDraft,
 } from '../utils/exerciseSessionDraft';
-import { stripRuby } from 'tenshindiff';
+import { matchesByRubyUnits, stripRuby, toKana } from 'tenshindiff';
 import { toHiragana } from 'wanakana';
 import { transitiveData, VerbPair } from '../data/dictTransitivePairs';
 import SessionProgressBar from '../components/SessionProgressBar';
@@ -195,7 +195,7 @@ export default function TransitivePage() {
     const targetWord = askTransitive ? currentPair.t : currentPair.i;
 
     const expectedTargetKanji = stripRuby(targetWord.verb);
-    const expectedTargetHiragana = targetWord.verb.replace(/\[.*?\]/g, (match) => match.slice(1, -1));
+    const expectedTargetHiragana = toKana(targetWord.verb);
 
     updateFeedbackDetails({
       section: pageTitle,
@@ -252,13 +252,9 @@ export default function TransitivePage() {
     const targetWord = askTransitive ? currentPair.t : currentPair.i;
 
     const expectedKanji = stripRuby(targetWord.verb);
-    const expectedHiragana = targetWord.verb.replace(/\[.*?\]/g, (match) => {
-      // Extract the reading inside brackets
-      return match.slice(1, -1);
-    });
 
     const normalized = finalizeIME(userInput.trim());
-    const isCorrect = normalized === expectedHiragana || normalized === expectedKanji;
+    const isCorrect = matchesByRubyUnits(normalized, targetWord.verb);
 
     if (isCorrect) {
       setCorrect(c => c + 1);
@@ -372,7 +368,7 @@ export default function TransitivePage() {
 
               <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
                 {diffDisplay ? (
-                  <JapaneseText text={diffDisplay} showFurigana={showFurigana} />
+                  <JapaneseText text={diffDisplay} showFurigana />
                 ) : (
                   '\u00A0'
                 )}
