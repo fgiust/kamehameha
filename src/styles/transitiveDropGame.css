@@ -163,7 +163,7 @@
   transition: left 0.08s steps(2, end);
   font-family: 'Noto Sans JP', sans-serif;
   font-size: clamp(1.05rem, 3.8vw, 1.4rem);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1;
   color: #f4fff6;
   will-change: top, left, opacity;
@@ -191,7 +191,7 @@
 .tdg-piece rt {
   display: block;
   font-size: 0.36em;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0;
   line-height: 1;
   margin-bottom: 0.05em;

@@ -329,27 +329,36 @@ export default function TransitiveDropGamePage() {
     resolveLanding(hard);
   }, [resolveLanding]);
 
-  /** Move into `lane` (if needed) and hard-drop there — used by mobile bin taps. */
+  /** Move into `lane` first (let the lateral transition play), then hard-drop. */
   const dropInLane = useCallback(
     (lane: Lane) => {
       if (phaseRef.current !== 'playing' || resolvingRef.current) return;
       const piece = activeRef.current;
       if (!piece || piece.state !== 'falling') return;
 
-      let next = piece;
-      if (piece.lane !== lane) {
-        if (stacksRef.current.filter(s => s.lane === lane).length >= MAX_STACK) return;
-        next = { ...piece, lane };
-        activeRef.current = next;
-        setActive(next);
-        playMoveSfx();
+      const finishDrop = (p: ActivePiece) => {
+        if (phaseRef.current !== 'playing' || resolvingRef.current) return;
+        const current = activeRef.current;
+        if (!current || current.id !== p.id || current.state !== 'falling') return;
+        const target = landYFor(current.lane, current.kind, stacksRef.current);
+        const hard = { ...current, y: target };
+        activeRef.current = hard;
+        setActive(hard);
+        resolveLanding(hard);
+      };
+
+      if (piece.lane === lane) {
+        finishDrop(piece);
+        return;
       }
 
-      const target = landYFor(next.lane, next.kind, stacksRef.current);
-      const hard = { ...next, y: target };
-      activeRef.current = hard;
-      setActive(hard);
-      resolveLanding(hard);
+      if (stacksRef.current.filter(s => s.lane === lane).length >= MAX_STACK) return;
+      const moved = { ...piece, lane };
+      activeRef.current = moved;
+      setActive(moved);
+      playMoveSfx();
+      // Match `.tdg-piece` left transition so we don't snap down mid-slide.
+      window.setTimeout(() => finishDrop(moved), 100);
     },
     [resolveLanding],
   );
