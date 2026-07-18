@@ -21,6 +21,8 @@ const COUNTERS_PEOPLE_TOTAL = (() => {
   return Math.min(CONJUGATION_SESSION_TARGET_TOTAL, Object.keys(c.readings).length);
 })();
 const TRANSITIVE_TOTAL = transitiveData.length;
+/** One HP-bar segment per verb in the drop mini-game (both sides of each pair). */
+const TRANSITIVE_DROP_TOTAL = TRANSITIVE_TOTAL * 2;
 const DAYS_TOTAL = getReadingTxtLessonById('reading-days')?.items.length ?? 31;
 const FAMILY_NAMES_TOTAL = getReadingTxtLessonById('reading-familynames')?.items.length ?? 0;
 const ADJECTIVES_NOUNS_TOTAL = getSentenceTxtLessonById('sentence-adjectivenouns')?.sentenceData.length ?? 0;
@@ -82,7 +84,7 @@ export const homeConfig: HomeConfig = {
       id: 'transitive-drop',
       title: { key: 'pages.transitiveDrop.title' },
       to: '/transitive-drop',
-      defaultTotal: TRANSITIVE_TOTAL,
+      defaultTotal: TRANSITIVE_DROP_TOTAL,
     },
     'family-names': { id: 'family-names', title: { key: 'pages.familyNames.title' }, to: '/family-names', defaultTotal: FAMILY_NAMES_TOTAL },
     'adjectives-nouns': { id: 'adjectives-nouns', title: { key: 'pages.adjectivesNouns.title' }, to: '/adjectives-nouns', defaultTotal: ADJECTIVES_NOUNS_TOTAL },

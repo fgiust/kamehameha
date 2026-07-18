@@ -5,6 +5,14 @@ import JapaneseText from '../components/JapaneseText';
 import PageLayout from '../components/PageLayout';
 import { transitiveData } from '../data/dictTransitivePairs';
 import {
+  normalizeSegments,
+  notifySessionProgressUpdated,
+  readPersistedSessionProgress,
+  writePersistedSessionProgressRecord,
+  type ProgressSegmentState,
+} from '../hooks/useSessionProgress';
+import { trackExerciseQuestion } from '../utils/exerciseAnalytics';
+import {
   playCorrectSfx,
   playDropSfx,
   playGameOverSfx,
@@ -57,6 +65,15 @@ type Flash = {
 const MAX_STACK = 7;
 /** Slot height as a fraction of the playfield — must match `--tdg-slot` in CSS. */
 const PIECE_H = 0.1;
+const PERSIST_KEY = '/transitive-drop';
+/** HP bar length = number of verbs (both sides of each pair); rolling window of last N. */
+const PROGRESS_TOTAL = transitiveData.length * 2;
+
+function loadProgressHistory(): ProgressSegmentState[] {
+  const persisted = readPersistedSessionProgress(PERSIST_KEY);
+  if (!persisted) return [];
+  return persisted.filter((s): s is 1 | 2 => s === 1 || s === 2).slice(-PROGRESS_TOTAL);
+}
 const BASE_SPEED = 0.12;
 const SPEED_PER_SCORE = 0.006;
 const MAX_SPEED = 0.42;
@@ -121,6 +138,7 @@ export default function TransitiveDropGamePage() {
   const rafRef = useRef(0);
   const lastTsRef = useRef(0);
   const resolvingRef = useRef(false);
+  const progressHistoryRef = useRef<ProgressSegmentState[]>(loadProgressHistory());
 
   const [phase, setPhase] = useState<Phase>('ready');
   const [score, setScore] = useState(0);
@@ -182,6 +200,17 @@ export default function TransitiveDropGamePage() {
     playGameOverSfx();
   }, []);
 
+  const recordHpProgress = useCallback((ok: boolean) => {
+    const next = [...progressHistoryRef.current, (ok ? 1 : 2) as ProgressSegmentState].slice(
+      -PROGRESS_TOTAL,
+    );
+    progressHistoryRef.current = next;
+    const segments = normalizeSegments(next, PROGRESS_TOTAL);
+    writePersistedSessionProgressRecord(PERSIST_KEY, segments);
+    notifySessionProgressUpdated(PERSIST_KEY);
+    trackExerciseQuestion(PERSIST_KEY, ok);
+  }, []);
+
   const resolveLanding = useCallback(
     (piece: ActivePiece) => {
       if (resolvingRef.current) return;
@@ -190,6 +219,7 @@ export default function TransitiveDropGamePage() {
       const correctLane: Lane = piece.kind === 't' ? 0 : 1;
       const ok = piece.lane === correctLane;
       playDropSfx();
+      recordHpProgress(ok);
 
       if (ok) {
         playCorrectSfx();
@@ -252,7 +282,7 @@ export default function TransitiveDropGamePage() {
         if (phaseRef.current === 'playing') spawnPiece();
       }, 1000);
     },
-    [endGame, spawnPiece],
+    [endGame, recordHpProgress, spawnPiece],
   );
 
   const startGame = useCallback(() => {
