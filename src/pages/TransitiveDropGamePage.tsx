@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { stripRuby } from 'tenshindiff';
 import JapaneseText from '../components/JapaneseText';
@@ -306,9 +306,59 @@ export default function TransitiveDropGamePage() {
     spawnPiece();
   }, [allCards, spawnPiece]);
 
+  const moveToLane = useCallback((lane: Lane) => {
+    if (phaseRef.current !== 'playing' || resolvingRef.current) return;
+    const piece = activeRef.current;
+    if (!piece || piece.state !== 'falling') return;
+    if (piece.lane === lane) return;
+    if (stacksRef.current.filter(s => s.lane === lane).length >= MAX_STACK) return;
+    const next = { ...piece, lane };
+    activeRef.current = next;
+    setActive(next);
+    playMoveSfx();
+  }, []);
+
+  const hardDrop = useCallback(() => {
+    if (phaseRef.current !== 'playing' || resolvingRef.current) return;
+    const piece = activeRef.current;
+    if (!piece || piece.state !== 'falling') return;
+    const target = landYFor(piece.lane, piece.kind, stacksRef.current);
+    const hard = { ...piece, y: target };
+    activeRef.current = hard;
+    setActive(hard);
+    resolveLanding(hard);
+  }, [resolveLanding]);
+
+  const toggleFurigana = useCallback(() => {
+    setShowFurigana(prev => !prev);
+    playMoveSfx();
+  }, []);
+
   useEffect(() => {
     phaseRef.current = phase;
   }, [phase]);
+
+  // Lock scroll + hide feedback chrome on this page (mobile CSS uses the class).
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.add('tdg-mobile-lock');
+    document.body.classList.add('tdg-mobile-lock');
+
+    const onTouchMove = (e: TouchEvent) => {
+      const el = e.target as HTMLElement | null;
+      if (el?.closest('button, a, input, textarea, .settings-panel, .settings-panel-container')) {
+        return;
+      }
+      e.preventDefault();
+    };
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+
+    return () => {
+      root.classList.remove('tdg-mobile-lock');
+      document.body.classList.remove('tdg-mobile-lock');
+      document.removeEventListener('touchmove', onTouchMove);
+    };
+  }, []);
 
   useEffect(() => {
     if (phase !== 'playing') {
@@ -360,8 +410,7 @@ export default function TransitiveDropGamePage() {
 
       if (e.key === 'Shift' && !e.repeat) {
         e.preventDefault();
-        setShowFurigana(prev => !prev);
-        playMoveSfx();
+        toggleFurigana();
         return;
       }
 
@@ -375,21 +424,11 @@ export default function TransitiveDropGamePage() {
       if (!piece || piece.state !== 'falling') return;
 
       if (e.key === 'ArrowLeft') {
-        if (piece.lane === 0) return;
-        if (stacksRef.current.filter(s => s.lane === 0).length >= MAX_STACK) return;
-        const next = { ...piece, lane: 0 as Lane };
-        activeRef.current = next;
-        setActive(next);
-        playMoveSfx();
+        moveToLane(0);
         return;
       }
       if (e.key === 'ArrowRight') {
-        if (piece.lane === 1) return;
-        if (stacksRef.current.filter(s => s.lane === 1).length >= MAX_STACK) return;
-        const next = { ...piece, lane: 1 as Lane };
-        activeRef.current = next;
-        setActive(next);
-        playMoveSfx();
+        moveToLane(1);
         return;
       }
       if (e.key === 'ArrowDown') {
@@ -397,11 +436,7 @@ export default function TransitiveDropGamePage() {
         return;
       }
       if (e.key === ' ') {
-        const target = landYFor(piece.lane, piece.kind, stacksRef.current);
-        const hard = { ...piece, y: target };
-        activeRef.current = hard;
-        setActive(hard);
-        resolveLanding(hard);
+        hardDrop();
       }
     };
 
@@ -415,7 +450,34 @@ export default function TransitiveDropGamePage() {
       window.removeEventListener('keydown', onKeyDown);
       window.removeEventListener('keyup', onKeyUp);
     };
-  }, [resolveLanding, startGame]);
+  }, [hardDrop, moveToLane, startGame, toggleFurigana]);
+
+  const onPlayfieldPointerDown = useCallback(
+    (e: ReactPointerEvent<HTMLDivElement>) => {
+      if (phaseRef.current !== 'playing') return;
+      // Overlay buttons handle their own events; ignore non-primary pointers.
+      if (e.button !== 0) return;
+      const target = e.target as HTMLElement;
+      if (target.closest('button')) return;
+      e.preventDefault();
+      const rect = e.currentTarget.getBoundingClientRect();
+      const lane: Lane = e.clientX - rect.left < rect.width / 2 ? 0 : 1;
+      moveToLane(lane);
+    },
+    [moveToLane],
+  );
+
+  const onHardDropPointerDown = useCallback(
+    (e: ReactPointerEvent<HTMLDivElement>) => {
+      // Bottom tap-to-drop is a mobile/touch control; keep mouse for desktop keyboard play.
+      if (e.pointerType === 'mouse') return;
+      if (phaseRef.current !== 'playing') return;
+      if (e.button !== 0) return;
+      e.preventDefault();
+      hardDrop();
+    },
+    [hardDrop],
+  );
 
   const stackedNodes = stacks.map(piece => {
     const idx = stacks.filter(s => s.lane === piece.lane && s.id <= piece.id).length - 1;
@@ -445,13 +507,25 @@ export default function TransitiveDropGamePage() {
             <div>
               {t('transitiveDrop.score')} <strong>{score}</strong>
             </div>
+            <button
+              type="button"
+              className={`tdg-furi-toggle ${showFurigana ? 'is-on' : ''}`}
+              onClick={toggleFurigana}
+              aria-pressed={showFurigana}
+            >
+              {t('transitiveDrop.furiganaToggle')}{' '}
+              <strong>{showFurigana ? t('transitiveDrop.furiganaOn') : t('transitiveDrop.furiganaOff')}</strong>
+            </button>
             <div>
               {t('transitiveDrop.level')} <strong>{level}</strong>
             </div>
           </div>
 
           <div className="tdg-playfield-wrap">
-            <div className={`tdg-playfield ${shake ? 'is-shake' : ''}`}>
+            <div
+              className={`tdg-playfield ${shake ? 'is-shake' : ''}`}
+              onPointerDown={onPlayfieldPointerDown}
+            >
               <div className="tdg-lane-label is-left">{t('transitive.transitive')}</div>
               <div className="tdg-lane-label is-right">{t('transitive.intransitive')}</div>
 
@@ -482,27 +556,33 @@ export default function TransitiveDropGamePage() {
             </div>
 
             <div
-              className={`tdg-gloss ${flash ? (flash.ok ? 'is-ok' : 'is-bad') : 'is-idle'}`}
-              aria-live="polite"
+              className="tdg-drop-zone"
+              onPointerDown={onHardDropPointerDown}
+              aria-label={t('transitiveDrop.helpHard')}
             >
-              {flash ? (
-                <>
-                  <span className="tdg-gloss-verb">{flash.surface}</span>
-                  <span className="tdg-gloss-meaning">{flash.meaning}</span>
-                </>
-              ) : (
-                <span className="tdg-gloss-placeholder">—</span>
-              )}
-            </div>
-
-            <div className="tdg-bins">
-              <div className="tdg-bin is-left">
-                {t('transitive.transitive')}
-                <span>他動詞</span>
+              <div
+                className={`tdg-gloss ${flash ? (flash.ok ? 'is-ok' : 'is-bad') : 'is-idle'}`}
+                aria-live="polite"
+              >
+                {flash ? (
+                  <>
+                    <span className="tdg-gloss-verb">{flash.surface}</span>
+                    <span className="tdg-gloss-meaning">{flash.meaning}</span>
+                  </>
+                ) : (
+                  <span className="tdg-gloss-placeholder">—</span>
+                )}
               </div>
-              <div className="tdg-bin is-right">
-                {t('transitive.intransitive')}
-                <span>自動詞</span>
+
+              <div className="tdg-bins">
+                <div className="tdg-bin is-left">
+                  {t('transitive.transitive')}
+                  <span>他動詞</span>
+                </div>
+                <div className="tdg-bin is-right">
+                  {t('transitive.intransitive')}
+                  <span>自動詞</span>
+                </div>
               </div>
             </div>
           </div>
