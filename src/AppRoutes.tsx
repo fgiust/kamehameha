@@ -13,6 +13,7 @@ const NumbersPage = lazy(() => import('./pages/NumbersPage'));
 const TimePage = lazy(() => import('./pages/TimePage'));
 const CountingThingsPage = lazy(() => import('./pages/CountingThingsPage'));
 const TransitivePage = lazy(() => import('./pages/TransitivePage'));
+const TransitiveDropGamePage = lazy(() => import('./pages/TransitiveDropGamePage'));
 const FamilyNamesPage = lazy(() => import('./pages/FamilyNamesPage'));
 const DisclaimerPage = lazy(() => import('./pages/DisclaimerPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
@@ -60,6 +61,7 @@ export function exerciseChildRoutes() {
     <Route key="time" path="time" element={<TimePage />} />,
 
     <Route key="transitive" path="transitive" element={<TransitivePage />} />,
+    <Route key="transitive-drop" path="transitive-drop" element={<TransitiveDropGamePage />} />,
     <Route key="family-names" path="family-names" element={<FamilyNamesPage />} />,
     <Route key="adjectives-nouns" path="adjectives-nouns" element={<AdjectivesNounsPage />} />,
     <Route key="disclaimer" path="disclaimer" element={<DisclaimerPage />} />,

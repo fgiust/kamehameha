@@ -84,7 +84,7 @@ test/                         # vitest: sentenceEngine, parseTranslateSessionTxt
   - `#name` placeholder replacement,
   - detailed diff feedback for wrong/missing characters.
 - **Genki Sentence Exercises**: All Genki I and Genki II sentence exercises have been implemented with N5-N4 level content.
-- **Other Interactive Exercises**: Transitive/Intransitive pairs (`TransitivePage`, `dictTransitivePairs.ts`); counting-things; family names; adjectives+nouns (`sentence-adjectivenouns.txt`); obligation/prohibition sentence lessons on home.
+- **Other Interactive Exercises**: Transitive/Intransitive pairs (`TransitivePage`, `dictTransitivePairs.ts`); **Transitive Drop** mini-game (`TransitiveDropGamePage`, route `/transitive-drop`) — Tetris-like sort into 他動詞/自動詞 bins with retro SFX (`retroGameSfx.ts`); counting-things; family names; adjectives+nouns (`sentence-adjectivenouns.txt`); obligation/prohibition/えばいい sentence lessons on home.
 - **な vs の Adjectives**: implemented under `backup/` only; route and home entry **removed** (was disabled). `MultipleChoiceEngine` remains in repo but is not wired to any live page.
 
 ### Conjugation Exercise Global Options
