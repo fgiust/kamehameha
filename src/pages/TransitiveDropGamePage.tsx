@@ -338,66 +338,15 @@ export default function TransitiveDropGamePage() {
     phaseRef.current = phase;
   }, [phase]);
 
-  // Lock scroll + fit inside the *visible* area. Mobile browsers (esp. Chrome/Comet)
-  // overlay toolbars that 100vh/dvh/svh and even visualViewport alone can miss.
+  // Mobile: lock scroll. Height is capped in CSS (hard max) — browser chrome overlays
+  // make visualViewport/dvh unreliable on Chrome/Comet.
   useEffect(() => {
     const root = document.documentElement;
     const body = document.body;
     root.classList.add('tdg-mobile-lock');
     body.classList.add('tdg-mobile-lock');
 
-    const fitMq = window.matchMedia('(max-width: 900px), (pointer: coarse)');
-    const shouldFitViewport = () =>
-      fitMq.matches || (navigator.maxTouchPoints > 0 && window.innerWidth <= 1200);
-
-    const syncViewportHeight = () => {
-      if (!shouldFitViewport()) {
-        root.style.removeProperty('--tdg-app-height');
-        root.style.removeProperty('--tdg-vv-top');
-        body.style.removeProperty('height');
-        body.style.removeProperty('max-height');
-        body.style.removeProperty('top');
-        body.classList.remove('tdg-vv-fit');
-        return;
-      }
-
-      const vv = window.visualViewport;
-      const candidates = [
-        vv?.height,
-        window.innerHeight,
-        root.clientHeight,
-        document.documentElement.clientHeight,
-      ].filter((n): n is number => typeof n === 'number' && n > 0);
-
-      // Prefer the smallest reported height — some Chromium shells report an
-      // optimistic visualViewport that still sits under bottom browser chrome.
-      const visible = Math.min(...candidates);
-      // Wide safety: Chrome/Comet bottom chrome is often large; keep ≥16% too.
-      const safety = Math.max(140, Math.round(visible * 0.18));
-      const height = Math.max(260, Math.floor(visible - safety));
-      const top = Math.floor(vv?.offsetTop ?? 0);
-
-      root.style.setProperty('--tdg-app-height', `${height}px`);
-      root.style.setProperty('--tdg-vv-top', `${top}px`);
-      body.style.height = `${height}px`;
-      body.style.maxHeight = `${height}px`;
-      body.style.top = `${top}px`;
-      body.classList.add('tdg-vv-fit');
-    };
-
-    syncViewportHeight();
-    // Re-measure after browser chrome settles (orientation / URL bar animation).
-    const retryIds = [50, 150, 400].map(ms => window.setTimeout(syncViewportHeight, ms));
-
-    const vv = window.visualViewport;
-    vv?.addEventListener('resize', syncViewportHeight);
-    vv?.addEventListener('scroll', syncViewportHeight);
-    window.addEventListener('resize', syncViewportHeight);
-    window.addEventListener('orientationchange', syncViewportHeight);
-    fitMq.addEventListener('change', syncViewportHeight);
-
     const onTouchMove = (e: TouchEvent) => {
-      if (!shouldFitViewport()) return;
       const el = e.target as HTMLElement | null;
       if (el?.closest('button, a, input, textarea, .settings-panel, .settings-panel-container')) {
         return;
@@ -408,18 +357,7 @@ export default function TransitiveDropGamePage() {
 
     return () => {
       root.classList.remove('tdg-mobile-lock');
-      body.classList.remove('tdg-mobile-lock', 'tdg-vv-fit');
-      root.style.removeProperty('--tdg-app-height');
-      root.style.removeProperty('--tdg-vv-top');
-      body.style.removeProperty('height');
-      body.style.removeProperty('max-height');
-      body.style.removeProperty('top');
-      retryIds.forEach(id => window.clearTimeout(id));
-      vv?.removeEventListener('resize', syncViewportHeight);
-      vv?.removeEventListener('scroll', syncViewportHeight);
-      window.removeEventListener('resize', syncViewportHeight);
-      window.removeEventListener('orientationchange', syncViewportHeight);
-      fitMq.removeEventListener('change', syncViewportHeight);
+      body.classList.remove('tdg-mobile-lock');
       document.removeEventListener('touchmove', onTouchMove);
     };
   }, []);
