@@ -12,12 +12,18 @@
   --tdg-dim: #6a8a72;
   --tdg-left: #00e5ff;
   --tdg-right: #ff9f1c;
+  box-sizing: border-box;
+  width: 100%;
   max-width: 520px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .tdg-shell {
   position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
   background:
     radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.08), transparent 55%),
     var(--tdg-bg);
@@ -78,6 +84,10 @@
 
 .tdg-playfield-wrap {
   position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding: 8px 12px 0;
 }
 
@@ -239,6 +249,9 @@
   justify-content: center;
   gap: 0.45em 0.7em;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: 3.6rem;
   min-height: 3.6rem;
   max-height: 3.6rem;
@@ -271,6 +284,10 @@
 }
 
 .tdg-gloss-verb {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-family: 'Noto Sans JP', sans-serif;
   font-size: clamp(1.15rem, 4.5vw, 1.55rem);
   font-weight: 700;
@@ -289,6 +306,7 @@
 }
 
 .tdg-gloss-meaning {
+  flex: 1 1 auto;
   font-size: clamp(0.95rem, 3.6vw, 1.2rem);
   font-weight: 700;
   letter-spacing: 0.03em;
@@ -472,28 +490,60 @@
   outline-offset: 2px;
 }
 
-/* —— Mobile: touch controls, no scroll, hide feedback —— */
+/* —— Mobile: touch controls, full-width, safe-area, no scroll —— */
 @media (max-width: 768px) {
-  html.tdg-mobile-lock,
-  body.tdg-mobile-lock {
+  html.tdg-mobile-lock {
     overflow: hidden !important;
     overscroll-behavior: none;
+    width: 100%;
+    max-width: 100%;
     height: 100%;
     height: 100dvh;
   }
 
+  body.tdg-mobile-lock {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    height: 100dvh;
+    position: fixed;
+    inset: 0;
+  }
+
   body.tdg-mobile-lock .feedback-tab,
-  body.tdg-mobile-lock .feedback-panel-backdrop {
+  body.tdg-mobile-lock .feedback-panel-backdrop,
+  body.tdg-mobile-lock .feedback-panel {
     display: none !important;
+    visibility: hidden !important;
     pointer-events: none !important;
   }
 
   body.tdg-mobile-lock .back-nav-container {
-    margin-bottom: 0;
+    position: fixed;
+    top: max(8px, env(safe-area-inset-top, 0px));
+    left: max(8px, env(safe-area-inset-left, 0px));
+    z-index: 200;
+  }
+
+  body.tdg-mobile-lock .settings-panel-container {
+    position: fixed;
+    top: max(8px, env(safe-area-inset-top, 0px));
+    right: max(8px, env(safe-area-inset-right, 0px));
+    z-index: 200;
   }
 
   body.tdg-mobile-lock .app-container {
-    padding: 8px 10px 10px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding:
+      calc(44px + env(safe-area-inset-top, 0px))
+      max(8px, env(safe-area-inset-right, 0px))
+      max(8px, env(safe-area-inset-bottom, 0px))
+      max(8px, env(safe-area-inset-left, 0px));
+    height: 100%;
     height: 100dvh;
     max-height: 100dvh;
     overflow: hidden;
@@ -502,20 +552,17 @@
     box-sizing: border-box;
   }
 
+  /* Page title is redundant with the arcade title bar — reclaim vertical space. */
   body.tdg-mobile-lock .page-header {
-    margin-bottom: 6px;
-    flex-shrink: 0;
-  }
-
-  body.tdg-mobile-lock .page-heading {
-    font-size: 1.15rem;
-    margin-bottom: 0;
+    display: none;
   }
 
   .tdg-page {
     flex: 1;
     min-height: 0;
-    max-width: none;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -524,13 +571,16 @@
   .tdg-shell {
     flex: 1;
     min-height: 0;
+    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     touch-action: manipulation;
+    overflow: hidden;
   }
 
   .tdg-title-bar {
-    padding: 4px 10px 2px;
+    padding: 6px 10px 2px;
     font-size: 0.68rem;
     flex-shrink: 0;
   }
@@ -538,12 +588,14 @@
   .tdg-hud {
     padding: 6px 10px;
     flex-shrink: 0;
+    gap: 8px;
   }
 
   .tdg-furi-toggle {
     display: inline-flex;
     align-items: center;
     gap: 0.35em;
+    flex-shrink: 0;
   }
 
   .tdg-help {
@@ -552,37 +604,71 @@
 
   .tdg-playfield-wrap {
     flex: 1;
+    min-width: 0;
     min-height: 0;
+    width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 6px 10px 0;
+    padding: 4px 8px 0;
+    overflow: hidden;
   }
 
   .tdg-playfield {
     flex: 1;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     height: auto;
     min-height: 0;
     touch-action: none;
+    overflow: hidden;
   }
 
   .tdg-drop-zone {
     flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     touch-action: none;
     cursor: pointer;
+    overflow: hidden;
   }
 
   .tdg-gloss {
-    height: 2.9rem;
-    min-height: 2.9rem;
-    max-height: 2.9rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 2px;
+    height: 3.1rem;
+    min-height: 3.1rem;
+    max-height: 3.1rem;
+    padding: 4px 8px;
+    white-space: nowrap;
+  }
+
+  .tdg-gloss-verb {
+    flex: 0 0 auto;
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .tdg-gloss-meaning {
+    flex: 0 0 auto;
+    max-width: 100%;
+    font-size: 0.78rem;
   }
 
   .tdg-bins {
     flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
   }
 
   .tdg-bin {
-    padding: 12px 8px 14px;
+    padding: 10px 6px 12px;
+    min-width: 0;
+    overflow: hidden;
   }
 
   .tdg-bin::after {
@@ -609,6 +695,8 @@
 
   .tdg-piece {
     pointer-events: none;
-    font-size: clamp(0.95rem, 4.2vw, 1.25rem);
+    width: 47%;
+    font-size: clamp(1.05rem, 5.5vw, 1.35rem);
+    padding: 0 2px;
   }
 }

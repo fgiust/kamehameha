@@ -54,7 +54,7 @@ function AppShell() {
   const navType = useNavigationType();
   const internalPath = stripLangPrefix(location.pathname);
   const showBack = internalPath !== '/';
-  const showFeedback = !['/', '/disclaimer', '/privacy-policy', '/terms-of-service', '/contact', '/diff-test'].includes(internalPath);
+  const showFeedback = !['/', '/disclaimer', '/privacy-policy', '/terms-of-service', '/contact', '/diff-test', '/transitive-drop'].includes(internalPath);
   const currentPathKey = useMemo(() => location.pathname + location.search, [location.pathname, location.search]);
   const rafRef = useRef<number | null>(null);
 
