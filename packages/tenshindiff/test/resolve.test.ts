@@ -248,3 +248,57 @@ describe('optional 一緒に segment', () => {
     expect(ops.some(op => op.kind === 'extra')).toBe(false);
   });
 });
+
+describe('kana reading longer than kanji surface', () => {
+  const template =
+    '毎日[まいにち]{朝[あさ]ご飯[はん]|朝食[ちょうしょく]}を食[た]べな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}';
+
+  it('does not swallow later alts when 飯 is typed as はん', () => {
+    const user = '毎日朝ごはんを食べなければいけません';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer).toBe('毎日[まいにち]朝[あさ]ご飯[はん]を食[た]べなければいけません');
+    expect(answer).not.toContain('いと');
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+    expect(shown).toBe('毎日[まいにち]朝[あさ]ご飯[はん]を食[た]べなければいけません');
+    expect(ops.every(op => op.kind === 'unit')).toBe(true);
+    expect(ops.some(op => op.kind === 'unit' && op.status === 'missing')).toBe(false);
+  });
+});
+
+describe('full alternative after short leading typo', () => {
+  const template =
+    '{皿[さら]|お皿[さら]|食器[しょっき]}を洗[あ]わな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}';
+
+  it('prefers ければ over いと when an extra い precedes a full match', () => {
+    const user = 'お皿を洗わないければいけません';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer).toBe('お皿[さら]を洗[あ]わなければいけません');
+    expect(answer).toContain('ければ');
+    expect(answer).toContain('いけません');
+    expect(answer).not.toContain('いと');
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+    expect(shown).toBe('お皿[さら]を洗[あ]わないければいけません');
+    expect(ops.filter(op => op.kind === 'extra').map(op => (op.kind === 'extra' ? op.text : ''))).toEqual([
+      'い',
+    ]);
+    expect(ops.some(op => op.kind === 'unit' && op.status === 'missing')).toBe(false);
+  });
+});
+
+

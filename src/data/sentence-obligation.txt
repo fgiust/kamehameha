@@ -20,7 +20,7 @@ Devo studiare stasera
 
 You have to go to school tomorrow
 Devi andare a scuola domani
-明日[あした]{は|}学校[がっこう]へ行[い]かな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
+明日[あした]{は|}学校[がっこう]{へ|に}行[い]かな{いと|ければ|きゃ|くては|くちゃ}{いけません|いけない|だめです|だめだよ|なりません|ならない|}
 
 You must take the medicine
 Devi prendere la medicina

@@ -141,19 +141,32 @@ export function matchesByRubyUnits(
   return dfs(0, 0);
 }
 
-/** How many user chars align with the start of a ruby segment (unit-by-unit, left to right). */
+export type GreedyRubyConsume = {
+  /** User characters consumed from the start of `userRest`. */
+  consumed: number;
+  /** True when every ruby/plain unit in the segment matched (kanji or reading). */
+  complete: boolean;
+};
+
+/**
+ * How many user chars align with the start of a ruby segment (unit-by-unit, left to right).
+ * `complete` is independent of surface length: a kana reading longer than its kanji
+ * (はん vs 飯) is still a full match.
+ */
 export function greedyConsumeRubyPrefix(
   userRest: string,
   segmentWithRuby: string,
   options: RubyMatchOptions = {},
-): number {
+): GreedyRubyConsume {
   const allowNumbers = options.allowNumericalAlternatives === true;
   const units = parseRubyUnits(segmentWithRuby);
   let pos = 0;
 
   for (const unit of units) {
     if (unit.kind === 'plain') {
-      if (!surfacesAlignAt(userRest, pos, unit.surface, allowNumbers)) return pos;
+      if (!surfacesAlignAt(userRest, pos, unit.surface, allowNumbers)) {
+        return { consumed: pos, complete: false };
+      }
       pos += unit.surface.length;
       continue;
     }
@@ -168,8 +181,8 @@ export function greedyConsumeRubyPrefix(
       continue;
     }
 
-    return pos;
+    return { consumed: pos, complete: false };
   }
 
-  return pos;
+  return { consumed: pos, complete: true };
 }

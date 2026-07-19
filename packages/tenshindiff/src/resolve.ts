@@ -17,10 +17,9 @@ function consumeFixedRubyUnit(
   rubyOptions: RubyMatchOptions,
 ): number {
   const segment = rubyUnitSegment(unit);
-  const greedy = greedyConsumeRubyPrefix(rest, segment, rubyOptions);
-  const segmentLen = stripRuby(segment).length;
+  const { consumed: greedy, complete } = greedyConsumeRubyPrefix(rest, segment, rubyOptions);
 
-  if (greedy === segmentLen) return greedy;
+  if (complete) return greedy;
 
   if (unit.kind === 'plain') {
     if (greedy > 0) return diffFixedSegmentUserConsumed(rest, segment, rubyOptions);
@@ -33,7 +32,7 @@ function consumeFixedRubyUnit(
 
   for (let len = 1; len <= rest.length; len++) {
     const prefix = rest.slice(0, len);
-    const surfaceGreedy = greedyConsumeRubyPrefix(prefix, surface, rubyOptions);
+    const { consumed: surfaceGreedy } = greedyConsumeRubyPrefix(prefix, surface, rubyOptions);
     if (surfaceGreedy === surfaceLen) {
       best = len;
       break;
@@ -110,16 +109,29 @@ function consumeFixedPartUserChars(
   return consumed;
 }
 
-/** Chars consumed for a chosen {alt|…} segment (stops at first template-only missing). */
+/**
+ * Chars consumed for a chosen {alt|…} segment (stops at first template-only missing).
+ * Trailing user extras after the last template unit belong to later segments and are
+ * not consumed here (same rule as fixed segments).
+ */
 function diffPartialUserConsumed(rest: string, segment: string, rubyOptions: RubyMatchOptions = {}): number {
   const ops = diffSentenceAnswer(rest, segment, rubyOptions);
+  const unitIndices: number[] = [];
+  for (let i = 0; i < ops.length; i++) {
+    if (ops[i]!.kind === 'unit') unitIndices.push(i);
+  }
+  const lastUnit = unitIndices.length > 0 ? unitIndices[unitIndices.length - 1]! : -1;
   let consumed = 0;
 
-  for (const op of ops) {
+  for (let i = 0; i < ops.length; i++) {
+    const op = ops[i]!;
     if (op.kind === 'unit' && op.status === 'missing') break;
     if (op.kind === 'unit' && op.status === 'correct_kanji') consumed += op.unit.surface.length;
     else if (op.kind === 'unit' && op.status === 'correct_kana') consumed += op.unit.reading.length;
-    else if (op.kind === 'extra') consumed += op.text.length;
+    else if (op.kind === 'extra') {
+      if (i > lastUnit) break;
+      consumed += op.text.length;
+    }
   }
 
   return consumed;
@@ -225,6 +237,26 @@ function segmentAlignmentScore(rest: string, segment: string, rubyOptions: RubyM
   return matched;
 }
 
+const MAX_LEADING_TYPO_SKIP = 2;
+
+/**
+ * User-chars matched when the whole segment aligns after skipping a short leading typo
+ * (e.g. いければ… vs ければ). Long skip-ahead hits are rejected so optional prefixes
+ * like 私は do not latch onto a later は inside ごはん.
+ */
+function completeMatchAfterLeadingTypo(
+  rest: string,
+  segment: string,
+  rubyOptions: RubyMatchOptions = {},
+): number {
+  const limit = Math.min(MAX_LEADING_TYPO_SKIP, rest.length);
+  for (let skip = 1; skip <= limit; skip++) {
+    const { consumed, complete } = greedyConsumeRubyPrefix(rest.slice(skip), segment, rubyOptions);
+    if (complete) return consumed;
+  }
+  return 0;
+}
+
 /** Prefix alignment score for one template segment against user input at cursor. */
 export function scoreSegmentAt(
   user: string,
@@ -238,17 +270,27 @@ export function scoreSegmentAt(
 
   const rubyOpts = { allowNumericalAlternatives: options.allowNumericalAlternatives };
   const rest = user.slice(cursor);
-  const greedy = greedyConsumeRubyPrefix(rest, segment, rubyOpts);
+  const { consumed: greedy, complete } = greedyConsumeRubyPrefix(rest, segment, rubyOpts);
   const segmentLen = stripRuby(segment).length;
 
-  if (greedy === segmentLen) {
+  // Full unit match — including kana readings longer than their kanji surface.
+  if (complete) {
     return { exact: true, matched: greedy, coverage: 1 };
   }
 
+  // Full match after a 1–2 char typo beats a short prefix hit (いと vs ければ).
+  const afterTypo = completeMatchAfterLeadingTypo(rest, segment, rubyOpts);
+
   // Diff alignment (e.g. user するの vs template をするの: を missing, 3 chars still match).
   const aligned = segmentAlignmentScore(rest, segment, rubyOpts);
-  const matched = Math.max(greedy, aligned);
-  return { exact: false, matched, coverage: segmentLen > 0 ? matched / segmentLen : 0 };
+  const matched = Math.max(greedy, aligned, afterTypo);
+  const coverage =
+    afterTypo > 0 && afterTypo === matched
+      ? 1
+      : segmentLen > 0
+        ? matched / segmentLen
+        : 0;
+  return { exact: false, matched, coverage };
 }
 
 /** Pick one alternative from a {a|b} group (first configured wins ties). */
@@ -309,23 +351,19 @@ export function userCharsConsumedForSegment(
 
   const rubyOpts = { allowNumericalAlternatives: options.diff?.allowNumericalAlternatives };
   const rest = user.slice(cursor);
-  const greedy = greedyConsumeRubyPrefix(rest, segment, rubyOpts);
-  const segmentLen = stripRuby(segment).length;
+  const { consumed: greedy, complete } = greedyConsumeRubyPrefix(rest, segment, rubyOpts);
 
-  if (greedy === segmentLen) return greedy;
+  if (complete) return greedy;
 
   if (options.fixed) {
-    const byUnit = consumeFixedPartUserChars(user, cursor, segment, rubyOpts);
-    // No shared prefix (e.g. fixed 時々 while user typed カフェ…): do not skip ahead.
-    if (greedy === 0) return byUnit;
-    return byUnit;
+    // Incomplete fixed part: walk unit-by-unit (typos / kana length ≠ surface).
+    return consumeFixedPartUserChars(user, cursor, segment, rubyOpts);
   }
 
-  // Chosen {alt}: partial kanji (e.g. 三分 vs 三十分) must not swallow the next word (ぐらい).
-  if (greedy < segmentLen) {
-    const byUnit = consumeFixedPartUserChars(user, cursor, segment, rubyOpts);
-    if (byUnit > 0) return byUnit;
-  }
+  // Chosen {alt}: incomplete match must not swallow later segments (partial kanji,
+  // kana reading longer than surface, typos, etc.).
+  const byUnit = consumeFixedPartUserChars(user, cursor, segment, rubyOpts);
+  if (byUnit > 0) return byUnit;
 
   if (greedy === 0) return 0;
   return diffPartialUserConsumed(rest, segment, rubyOpts);
