@@ -246,6 +246,8 @@ export function useSessionProgress(
   );
   const indexToKeyRef = useRef<Array<string | null>>(Array(Math.max(0, totalSegments)).fill(null));
   const nextIndexRef = useRef(0);
+  /** Segment value before the latest `record` / `recordAt` — restored by undo. */
+  const previousByIndexRef = useRef<Map<number, ProgressSegmentState>>(new Map());
   const audioCtxRef = useRef<AudioContext | null>(null);
   const wasAllGreenRef = useRef(
     initialProgress
@@ -274,6 +276,7 @@ export function useSessionProgress(
       });
       setSegments(nextSegments);
       setPulses(Array(n).fill(0));
+      previousByIndexRef.current = new Map();
       pendingRestoreRef.current = null;
       appliedTotalRef.current = n;
       wasAllGreenRef.current = areAllSegmentsGreen(nextSegments);
@@ -291,6 +294,7 @@ export function useSessionProgress(
     keyToIndexRef.current = new Map();
     indexToKeyRef.current = Array(n).fill(null);
     nextIndexRef.current = 0;
+    previousByIndexRef.current = new Map();
     wasAllGreenRef.current = false;
   }, [totalSegments]);
 
@@ -322,6 +326,7 @@ export function useSessionProgress(
     const base = segmentsRef.current.length === totalSegments
       ? segmentsRef.current
       : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
+    previousByIndexRef.current.set(idx, (base[idx] ?? 0) as ProgressSegmentState);
     const nextSegments = [...base] as ProgressSegmentState[];
     nextSegments[idx] = isCorrect ? 1 : 2;
     segmentsRef.current = nextSegments;
@@ -377,6 +382,7 @@ export function useSessionProgress(
     const base = segmentsRef.current.length === totalSegments
       ? segmentsRef.current
       : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
+    previousByIndexRef.current.set(slot, (base[slot] ?? 0) as ProgressSegmentState);
     const nextSegments = [...base] as ProgressSegmentState[];
     nextSegments[slot] = isCorrect ? 1 : 2;
     segmentsRef.current = nextSegments;
@@ -425,10 +431,14 @@ export function useSessionProgress(
     const base = segmentsRef.current.length === totalSegments
       ? segmentsRef.current
       : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
-    if ((base[idx] ?? 0) === 0) return;
+    const restored = previousByIndexRef.current.has(idx)
+      ? (previousByIndexRef.current.get(idx) as ProgressSegmentState)
+      : 0;
+    previousByIndexRef.current.delete(idx);
+    if ((base[idx] ?? 0) === restored) return;
 
     const nextSegments = [...base] as ProgressSegmentState[];
-    nextSegments[idx] = 0;
+    nextSegments[idx] = restored;
     segmentsRef.current = nextSegments;
     setSegments(nextSegments);
 
@@ -453,10 +463,14 @@ export function useSessionProgress(
     const base = segmentsRef.current.length === totalSegments
       ? segmentsRef.current
       : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
-    if ((base[slot] ?? 0) === 0) return;
+    const restored = previousByIndexRef.current.has(slot)
+      ? (previousByIndexRef.current.get(slot) as ProgressSegmentState)
+      : 0;
+    previousByIndexRef.current.delete(slot);
+    if ((base[slot] ?? 0) === restored) return;
 
     const nextSegments = [...base] as ProgressSegmentState[];
-    nextSegments[slot] = 0;
+    nextSegments[slot] = restored;
     segmentsRef.current = nextSegments;
     setSegments(nextSegments);
 
