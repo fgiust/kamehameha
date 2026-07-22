@@ -23,6 +23,7 @@ const en = {
     debugPanelShow: 'Open debug panel',
     debugPanelHide: 'Close debug panel',
     previousAnswers: 'Previous Answers',
+    answerUndone: 'Your answer has been undone',
     forms: 'Forms:',
     kanji: 'Kanji',
     furigana: 'Furigana ⇧',

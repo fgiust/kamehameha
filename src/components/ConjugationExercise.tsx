@@ -22,6 +22,9 @@ import PageLayout from './PageLayout';
 import ExerciseCompletedMessage from './ExerciseCompletedMessage';
 import CopyablePlainText from './CopyablePlainText';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
+import { handleAwaitingNextKey } from '../utils/awaitingNextKeys';
+import { useAnswerUndoneBanner } from '../hooks/useAnswerUndoneBanner';
+import AnswerUndoneBanner from './AnswerUndoneBanner';
 
 function DiceIcon({ className }: { className?: string }) {
   return (
@@ -119,6 +122,8 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [diffDisplay, setDiffDisplay] = useState<string>('');
   const [awaitingNext, setAwaitingNext] = useState(false);
+  const [undoFlash, setUndoFlash] = useState(false);
+  const { undoneBanner, showUndoneBanner } = useAnswerUndoneBanner();
   const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
@@ -131,6 +136,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     segments: progressSegments,
     pulses: progressPulses,
     record: recordProgress,
+    unrecord: unrecordProgress,
     getState: getProgressState,
     getProgressSnapshot,
   } = useSessionProgress(totalWords, {
@@ -329,6 +335,21 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
     pickWord();
   }, [pickWord]);
 
+  const undoWrongAnswer = useCallback(() => {
+    if (!awaitingNext || inputState !== 'incorrect') return;
+    setAwaitingNext(false);
+    setIncorrect(c => Math.max(0, c - 1));
+    setInputState('');
+    setDiffDisplay('');
+    setPrevAnswers(prev => prev.slice(1));
+    unrecordProgress(String(currentWordIdx));
+    setUndoFlash(true);
+    window.setTimeout(() => setUndoFlash(false), 550);
+    showUndoneBanner();
+    persistNow();
+    window.requestAnimationFrame(() => inputRef.current?.focus());
+  }, [awaitingNext, currentWordIdx, inputState, persistNow, showUndoneBanner, unrecordProgress]);
+
   useEffect(() => {
     setFlags(buildDefaultFlags(engine));
     setRandomFlags(buildDefaultFlags(engine));
@@ -428,15 +449,11 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;
     if (awaitingNext) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        advanceToNext();
-        return;
-      }
-      if (!e.altKey && !e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete')) {
-        e.preventDefault();
-        advanceToNext();
-      }
+      handleAwaitingNextKey(e, {
+        canUndo: inputState === 'incorrect',
+        onUndo: undoWrongAnswer,
+        onAdvance: advanceToNext,
+      });
       return;
     }
 
@@ -563,7 +580,7 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
               <div className="exercise-input-block">
                 <input
                   ref={inputRef}
-                  className={`exercise-input ${inputState}`}
+                  className={`exercise-input ${inputState}${undoFlash ? ' is-undone' : ''}`}
                   value={userInput}
                   onChange={e => {
                     if (awaitingNext) return;
@@ -601,13 +618,17 @@ export default function ConjugationExercise({ title, wordData, engine, typeLabel
                 />
                 <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>
-              <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
-                {diffDisplay
-                  ? (settings.showKanji && settings.showFurigana && diffDisplay.includes('<rt>')
-                    ? <ruby dangerouslySetInnerHTML={{ __html: diffDisplay }} />
-                    : diffDisplay)
-                  : '\u00A0'}
-              </div>
+              {undoneBanner ? (
+                <AnswerUndoneBanner />
+              ) : (
+                <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
+                  {diffDisplay
+                    ? (settings.showKanji && settings.showFurigana && diffDisplay.includes('<rt>')
+                      ? <ruby dangerouslySetInnerHTML={{ __html: diffDisplay }} />
+                      : diffDisplay)
+                    : '\u00A0'}
+                </div>
+              )}
             </>
           )}
         </div>

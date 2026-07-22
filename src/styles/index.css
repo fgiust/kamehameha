@@ -358,6 +358,41 @@ a:hover { color: var(--accent-hover); }
   color: var(--incorrect);
 }
 
+.answer-banner.is-undone {
+  visibility: visible;
+  background: color-mix(in srgb, var(--accent) 14%, var(--bg-card));
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  animation: answer-undone-in 0.25s ease;
+}
+
+@keyframes answer-undone-in {
+  from {
+    opacity: 0.35;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.exercise-input.is-undone {
+  animation: answer-undo-flash 0.55s ease;
+}
+
+@keyframes answer-undo-flash {
+  0%, 100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+  35% {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 50%, transparent);
+  }
+}
+
 .page-header {
   display: flex;
   align-items: center;

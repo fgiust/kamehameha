@@ -417,8 +417,63 @@ export function useSessionProgress(
     }
   }, [options?.persistKey, totalSegments, trackAnswerAndCompletion]);
 
+  const unrecord = useCallback((key: string) => {
+    if (totalSegments <= 0) return;
+    const idx = keyToIndexRef.current.get(key);
+    if (idx === undefined) return;
+
+    const base = segmentsRef.current.length === totalSegments
+      ? segmentsRef.current
+      : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
+    if ((base[idx] ?? 0) === 0) return;
+
+    const nextSegments = [...base] as ProgressSegmentState[];
+    nextSegments[idx] = 0;
+    segmentsRef.current = nextSegments;
+    setSegments(nextSegments);
+
+    setPulses(prev => {
+      const next = prev.length === totalSegments ? [...prev] : Array(totalSegments).fill(0);
+      next[idx] = (next[idx] ?? 0) + 1;
+      return next;
+    });
+
+    if (options?.persistKey) {
+      const ok = writePersistedSessionProgress(options.persistKey, nextSegments);
+      if (ok) notifySessionProgressUpdated(options.persistKey);
+    }
+  }, [options?.persistKey, totalSegments]);
+
+  const unrecordAt = useCallback((idx: number) => {
+    if (totalSegments <= 0) return;
+    if (!Number.isFinite(idx)) return;
+    const slot = Math.floor(idx);
+    if (slot < 0 || slot >= totalSegments) return;
+
+    const base = segmentsRef.current.length === totalSegments
+      ? segmentsRef.current
+      : (Array(totalSegments).fill(0) as ProgressSegmentState[]);
+    if ((base[slot] ?? 0) === 0) return;
+
+    const nextSegments = [...base] as ProgressSegmentState[];
+    nextSegments[slot] = 0;
+    segmentsRef.current = nextSegments;
+    setSegments(nextSegments);
+
+    setPulses(prev => {
+      const next = prev.length === totalSegments ? [...prev] : Array(totalSegments).fill(0);
+      next[slot] = (next[slot] ?? 0) + 1;
+      return next;
+    });
+
+    if (options?.persistKey) {
+      const ok = writePersistedSessionProgress(options.persistKey, nextSegments);
+      if (ok) notifySessionProgressUpdated(options.persistKey);
+    }
+  }, [options?.persistKey, totalSegments]);
+
   return useMemo(
-    () => ({ segments, pulses, record, getState, recordAt, getProgressSnapshot }),
-    [segments, pulses, record, getState, recordAt, getProgressSnapshot],
+    () => ({ segments, pulses, record, getState, recordAt, unrecord, unrecordAt, getProgressSnapshot }),
+    [segments, pulses, record, getState, recordAt, unrecord, unrecordAt, getProgressSnapshot],
   );
 }

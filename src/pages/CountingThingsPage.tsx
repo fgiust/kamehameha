@@ -14,11 +14,14 @@ import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerc
 import { updateFeedbackDetails } from '../utils/feedback';
 import { PreviousAnswer } from '../types';
 import { diffSentenceAnswer, generateAnswers, matchesByRubyUnits, parseAnswerTemplate, pickBestDiff, stripRuby } from 'tenshindiff';
-import DiffDisplay from '../components/DiffDisplay';
+import { handleAwaitingNextKey } from '../utils/awaitingNextKeys';
+import { useAnswerUndoneBanner } from '../hooks/useAnswerUndoneBanner';
+import AnswerUndoneBanner from '../components/AnswerUndoneBanner';
 import { useTranslation } from 'react-i18next';
 import countingThings, { type CountingThingCounter } from '../data/dictCountingThings';
 import PageLayout from '../components/PageLayout';
 import ExerciseCompletedMessage from '../components/ExerciseCompletedMessage';
+import DiffDisplay from '../components/DiffDisplay';
 
 function toHiraganaIME(raw: string) {
   const trailingSingleN = /([^n])n$/i.test(raw) || /^n$/i.test(raw);
@@ -391,6 +394,8 @@ export default function CountingThingsPage() {
   const [didConvert, setDidConvert] = useState(false);
   const [isComposing, setIsComposing] = useState(false);
   const [awaitingNext, setAwaitingNext] = useState(false);
+  const [undoFlash, setUndoFlash] = useState(false);
+  const { undoneBanner, showUndoneBanner } = useAnswerUndoneBanner();
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
   const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
@@ -417,6 +422,7 @@ export default function CountingThingsPage() {
     segments: progressSegments,
     pulses: progressPulses,
     record: recordProgress,
+    unrecord: unrecordProgress,
     getState: getProgressState,
     getProgressSnapshot,
   } = useSessionProgress(ITEMS.length, {
@@ -586,6 +592,20 @@ export default function CountingThingsPage() {
     pickNext();
   }, [pickNext]);
 
+  const undoWrongAnswer = useCallback(() => {
+    if (!awaitingNext || answerFeedback?.isCorrect !== false) return;
+    setAwaitingNext(false);
+    setIncorrect(c => Math.max(0, c - 1));
+    setInputState('');
+    setAnswerFeedback(null);
+    setPrevAnswers(prev => prev.slice(1));
+    unrecordProgress(String(currentIdx));
+    setUndoFlash(true);
+    window.setTimeout(() => setUndoFlash(false), 550);
+    showUndoneBanner();
+    window.requestAnimationFrame(() => inputRef.current?.focus());
+  }, [answerFeedback?.isCorrect, awaitingNext, currentIdx, showUndoneBanner, unrecordProgress]);
+
   const checkAnswer = useCallback(() => {
     if (awaitingNext) return;
     if (isFinished) return;
@@ -626,15 +646,11 @@ export default function CountingThingsPage() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;
     if (awaitingNext) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        advanceToNext();
-        return;
-      }
-      if (!e.altKey && !e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete')) {
-        e.preventDefault();
-        advanceToNext();
-      }
+      handleAwaitingNextKey(e, {
+        canUndo: answerFeedback?.isCorrect === false,
+        onUndo: undoWrongAnswer,
+        onAdvance: advanceToNext,
+      });
       return;
     }
 
@@ -663,7 +679,7 @@ export default function CountingThingsPage() {
               <div className="exercise-input-block">
                 <input
                   ref={inputRef}
-                  className={`exercise-input ${inputState}`}
+                  className={`exercise-input ${inputState}${undoFlash ? ' is-undone' : ''}`}
                   value={userInput}
                   onChange={e => {
                     if (awaitingNext) return;
@@ -701,13 +717,17 @@ export default function CountingThingsPage() {
                 <KeyboardTip preferred="japanese" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>
 
-              <div className={`answer-banner ${answerFeedback ? (answerFeedback.isCorrect ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
-                {answerFeedback ? (
-                  <DiffDisplay ops={answerFeedback.ops} className="diff-answer" />
-                ) : (
-                  '\u00A0'
-                )}
-              </div>
+              {undoneBanner ? (
+                <AnswerUndoneBanner />
+              ) : (
+                <div className={`answer-banner ${answerFeedback ? (answerFeedback.isCorrect ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
+                  {answerFeedback ? (
+                    <DiffDisplay ops={answerFeedback.ops} className="diff-answer" />
+                  ) : (
+                    '\u00A0'
+                  )}
+                </div>
+              )}
             </>
           )}
         </div>

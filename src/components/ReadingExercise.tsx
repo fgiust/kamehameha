@@ -1,7 +1,10 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { ReadingExerciseItem, ReadingSessionData, PreviousAnswer } from '../types';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
+import { handleAwaitingNextKey } from '../utils/awaitingNextKeys';
+import { useAnswerUndoneBanner } from '../hooks/useAnswerUndoneBanner';
+import AnswerUndoneBanner from './AnswerUndoneBanner';
 import KeyboardTip from './KeyboardTip';
 import JapaneseText from './JapaneseText';
 import SessionProgressBar from './SessionProgressBar';
@@ -74,12 +77,15 @@ export default function ReadingExercise({
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [revealAnswer, setRevealAnswer] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
+  const [undoFlash, setUndoFlash] = useState(false);
+  const { undoneBanner, showUndoneBanner } = useAnswerUndoneBanner();
   const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
 
   const {
     segments: progressSegments,
     pulses: progressPulses,
     record: recordProgress,
+    unrecord: unrecordProgress,
     getState: getProgressState,
     getProgressSnapshot,
   } = useSessionProgress(totalItems, {
@@ -232,19 +238,30 @@ export default function ReadingExercise({
     persistNow();
   }, [acceptQuestionAsCorrect, currentIdx, currentItem, isFinished, recordProgress, userInput, persistNow]);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+  const undoWrongAnswer = useCallback(() => {
+    if (!awaitingNext || inputState !== 'incorrect') return;
+    setAwaitingNext(false);
+    setIncorrect(c => Math.max(0, c - 1));
+    setInputState('');
+    setRevealAnswer('');
+    setPrevAnswers(prev => prev.slice(1));
+    unrecordProgress(String(currentIdx));
+    setUndoFlash(true);
+    window.setTimeout(() => setUndoFlash(false), 550);
+    showUndoneBanner();
+    persistNow();
+    window.requestAnimationFrame(() => inputRef.current?.focus());
+  }, [awaitingNext, currentIdx, inputState, persistNow, showUndoneBanner, unrecordProgress]);
+
+  const handleKeyDown = useCallback((e: ReactKeyboardEvent) => {
     if (isFinished) return;
 
     if (awaitingNext) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        pickNext();
-        return;
-      }
-      if (!e.altKey && !e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete')) {
-        e.preventDefault();
-        pickNext();
-      }
+      handleAwaitingNextKey(e, {
+        canUndo: inputState === 'incorrect',
+        onUndo: undoWrongAnswer,
+        onAdvance: pickNext,
+      });
       return;
     }
 
@@ -254,7 +271,7 @@ export default function ReadingExercise({
       e.preventDefault();
       checkAnswer();
     }
-  }, [awaitingNext, checkAnswer, isFinished, pickNext]);
+  }, [awaitingNext, checkAnswer, inputState, isFinished, pickNext, undoWrongAnswer]);
 
   return (
     <>
@@ -272,7 +289,7 @@ export default function ReadingExercise({
           <div className="exercise-input-block">
             <input
               ref={inputRef}
-              className={`exercise-input ${inputState}`}
+              className={`exercise-input ${inputState}${undoFlash ? ' is-undone' : ''}`}
               value={userInput}
               onChange={e => {
                 if (awaitingNext) return;
@@ -312,13 +329,17 @@ export default function ReadingExercise({
             <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
           </div>
 
-          <div className={`answer-banner ${revealAnswer ? (inputState === 'correct' ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
-            {revealAnswer
-              ? (largeAnswer
-                ? <span className="is-japanese" style={{ fontSize: '1.4rem' }}>{revealAnswer}</span>
-                : revealAnswer)
-              : '\u00A0'}
-          </div>
+          {undoneBanner ? (
+            <AnswerUndoneBanner />
+          ) : (
+            <div className={`answer-banner ${revealAnswer ? (inputState === 'correct' ? 'is-correct' : 'is-incorrect') : 'is-empty'}`}>
+              {revealAnswer
+                ? (largeAnswer
+                  ? <span className="is-japanese" style={{ fontSize: '1.4rem' }}>{revealAnswer}</span>
+                  : revealAnswer)
+                : '\u00A0'}
+            </div>
+          )}
             </>
           )}
         </div>

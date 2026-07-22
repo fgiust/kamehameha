@@ -19,6 +19,9 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import { useDebugCompleteExerciseShortcut } from '../hooks/useDebugCompleteExerciseShortcut';
 import OptionToggle from '../components/OptionToggle';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
+import { handleAwaitingNextKey } from '../utils/awaitingNextKeys';
+import { useAnswerUndoneBanner } from '../hooks/useAnswerUndoneBanner';
+import AnswerUndoneBanner from '../components/AnswerUndoneBanner';
 import KeyboardTip from '../components/KeyboardTip';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
@@ -112,6 +115,8 @@ export default function AdjRandomizePage() {
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [diffDisplay, setDiffDisplay] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
+  const [undoFlash, setUndoFlash] = useState(false);
+  const { undoneBanner, showUndoneBanner } = useAnswerUndoneBanner();
   const [prevAnswers, setPrevAnswers] = useState<PreviousAnswer[]>(restoredDraft?.prevAnswers ?? []);
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingCaretRef = useRef<number | null>(null);
@@ -123,6 +128,7 @@ export default function AdjRandomizePage() {
     segments: progressSegments,
     pulses: progressPulses,
     record: recordProgress,
+    unrecord: unrecordProgress,
     getState: getProgressState,
     getProgressSnapshot,
   } = useSessionProgress(sessionWords.length, {
@@ -336,6 +342,20 @@ export default function AdjRandomizePage() {
     pickNext();
   }, [pickNext]);
 
+  const undoWrongAnswer = useCallback(() => {
+    if (!awaitingNext || inputState !== 'incorrect') return;
+    setAwaitingNext(false);
+    setIncorrect(c => Math.max(0, c - 1));
+    setInputState('');
+    setDiffDisplay('');
+    setPrevAnswers(prev => prev.slice(1));
+    unrecordProgress(String(currentWordIdx));
+    setUndoFlash(true);
+    window.setTimeout(() => setUndoFlash(false), 550);
+    showUndoneBanner();
+    window.requestAnimationFrame(() => inputRef.current?.focus());
+  }, [awaitingNext, currentWordIdx, inputState, showUndoneBanner, unrecordProgress]);
+
   const checkAnswer = useCallback(() => {
     if (awaitingNext) return;
     if (isFinished) return;
@@ -392,15 +412,11 @@ export default function AdjRandomizePage() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;
     if (awaitingNext) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        advanceToNext();
-        return;
-      }
-      if (!e.altKey && !e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete')) {
-        e.preventDefault();
-        advanceToNext();
-      }
+      handleAwaitingNextKey(e, {
+        canUndo: inputState === 'incorrect',
+        onUndo: undoWrongAnswer,
+        onAdvance: advanceToNext,
+      });
       return;
     }
 
@@ -520,7 +536,7 @@ export default function AdjRandomizePage() {
               <div className="exercise-input-block">
                 <input
                   ref={inputRef}
-                  className={`exercise-input ${inputState}`}
+                  className={`exercise-input ${inputState}${undoFlash ? ' is-undone' : ''}`}
                   value={userInput}
                   onChange={e => {
                     if (awaitingNext) return;
@@ -559,13 +575,17 @@ export default function AdjRandomizePage() {
                 <KeyboardTip preferred="latin" rawValue={rawInput} isComposing={isComposing} didConvert={didConvert} />
               </div>
 
-              <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
-                {diffDisplay
-                  ? (settings.showKanji && settings.showFurigana && diffDisplay.includes('<rt>')
-                    ? <ruby dangerouslySetInnerHTML={{ __html: diffDisplay }} />
-                    : diffDisplay)
-                  : '\u00A0'}
-              </div>
+              {undoneBanner ? (
+                <AnswerUndoneBanner />
+              ) : (
+                <div className={`answer-banner ${diffDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
+                  {diffDisplay
+                    ? (settings.showKanji && settings.showFurigana && diffDisplay.includes('<rt>')
+                      ? <ruby dangerouslySetInnerHTML={{ __html: diffDisplay }} />
+                      : diffDisplay)
+                    : '\u00A0'}
+                </div>
+              )}
             </>
           )}
         </div>

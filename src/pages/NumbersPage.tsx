@@ -12,6 +12,9 @@ import { useSessionProgress } from '../hooks/useSessionProgress';
 import OptionToggle from '../components/OptionToggle';
 import { updateFeedbackDetails } from '../utils/feedback';
 import { exerciseAnswerInputProps } from '../utils/exerciseInputProps';
+import { handleAwaitingNextKey } from '../utils/awaitingNextKeys';
+import { useAnswerUndoneBanner } from '../hooks/useAnswerUndoneBanner';
+import AnswerUndoneBanner from '../components/AnswerUndoneBanner';
 import { DEFAULT_MASTERY_RANDOM_TOTAL } from '../types';
 import { useTranslation } from 'react-i18next';
 import PageLayout from '../components/PageLayout';
@@ -75,6 +78,8 @@ export default function NumbersPage() {
 
   const [userInput, setUserInput] = useState('');
   const [awaitingNext, setAwaitingNext] = useState(false);
+  const [undoFlash, setUndoFlash] = useState(false);
+  const { undoneBanner, showUndoneBanner } = useAnswerUndoneBanner();
   const [inputState, setInputState] = useState<'' | 'correct' | 'incorrect'>('');
   const [correct, setCorrect] = useState(restoredDraft?.correct ?? 0);
   const [incorrect, setIncorrect] = useState(restoredDraft?.incorrect ?? 0);
@@ -92,6 +97,7 @@ export default function NumbersPage() {
     segments: progressSegments,
     pulses: progressPulses,
     recordAt: recordProgressAt,
+    unrecordAt: unrecordProgressAt,
     getProgressSnapshot,
   } = useSessionProgress(DEFAULT_MASTERY_RANDOM_TOTAL, {
     persistKey: PERSIST_KEY,
@@ -277,18 +283,27 @@ export default function NumbersPage() {
     setAwaitingNext(true);
   };
 
+  const undoWrongAnswer = useCallback(() => {
+    if (!awaitingNext || inputState !== 'incorrect') return;
+    setAwaitingNext(false);
+    setIncorrect(c => Math.max(0, c - 1));
+    setInputState('');
+    setAnswerDisplay('');
+    unrecordProgressAt(currentSlot);
+    setUndoFlash(true);
+    window.setTimeout(() => setUndoFlash(false), 550);
+    showUndoneBanner();
+    window.requestAnimationFrame(() => inputRef.current?.focus());
+  }, [awaitingNext, currentSlot, inputState, showUndoneBanner, unrecordProgressAt]);
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (isFinished) return;
     if (awaitingNext) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        pickNext();
-        return;
-      }
-      if (!e.altKey && !e.ctrlKey && !e.metaKey && (e.key.length === 1 || e.key === 'Backspace' || e.key === 'Delete')) {
-        e.preventDefault();
-        pickNext();
-      }
+      handleAwaitingNextKey(e, {
+        canUndo: inputState === 'incorrect',
+        onUndo: undoWrongAnswer,
+        onAdvance: pickNext,
+      });
       return;
     }
 
@@ -315,7 +330,7 @@ export default function NumbersPage() {
 
               <input
                 ref={inputRef}
-                className={`exercise-input ${inputState}`}
+                className={`exercise-input ${inputState}${undoFlash ? ' is-undone' : ''}`}
                 value={userInput}
                 onChange={e => {
                   if (awaitingNext) return;
@@ -331,9 +346,13 @@ export default function NumbersPage() {
                 {...exerciseAnswerInputProps}
               />
 
-              <div className={`answer-banner ${answerDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
-                {answerDisplay || '\u00A0'}
-              </div>
+              {undoneBanner ? (
+                <AnswerUndoneBanner />
+              ) : (
+                <div className={`answer-banner ${answerDisplay ? (inputState === 'correct' ? 'is-correct' : inputState === 'incorrect' ? 'is-incorrect' : '') : 'is-empty'}`}>
+                  {answerDisplay || '\u00A0'}
+                </div>
+              )}
             </>
           )}
         </div>
