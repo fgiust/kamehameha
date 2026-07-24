@@ -148,6 +148,14 @@ export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
   },
+  server: {
+    host: 'kamehameha.localhost.direct',
+    allowedHosts: ['kamehameha.localhost.direct'],
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'ssl/localhost.direct.SS.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'ssl/localhost.direct.SS.crt')),
+    },
+  },
   build: {
     rollupOptions: {
       output: {
