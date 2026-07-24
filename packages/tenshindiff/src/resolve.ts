@@ -5,12 +5,21 @@ import type { RubyMatchOptions } from './ruby';
 import { greedyConsumeRubyPrefix, parseRubyUnits, stripRuby } from './ruby';
 import type { DiffUnitOp, RubyUnit } from './types';
 
+/**
+ * Max user chars a segment may skip as a leading typo before aligning.
+ * Longer jumps latch onto later template parts (e.g. missing す → す inside です).
+ */
+const MAX_LEADING_TYPO_SKIP = 2;
+
 function rubyUnitSegment(unit: RubyUnit): string {
   if (unit.kind === 'plain') return unit.surface;
   return `${unit.surface}[${unit.reading}]`;
 }
 
-/** User chars consumed for one ruby/plain unit inside a fixed template part. */
+/**
+ * User chars consumed for one ruby/plain unit inside a fixed template part.
+ * Returns 0 when the unit is absent — never steals chars that belong to later units/parts.
+ */
 function consumeFixedRubyUnit(
   rest: string,
   unit: RubyUnit,
@@ -26,6 +35,7 @@ function consumeFixedRubyUnit(
     return 0;
   }
 
+  // Partial surface match for ruby (e.g. 三分 vs 三十分): grow only while aligned.
   const surface = unit.surface;
   const surfaceLen = surface.length;
   let best = 0;
@@ -33,9 +43,12 @@ function consumeFixedRubyUnit(
   for (let len = 1; len <= rest.length; len++) {
     const prefix = rest.slice(0, len);
     const { consumed: surfaceGreedy } = greedyConsumeRubyPrefix(prefix, surface, rubyOptions);
+    if (surfaceGreedy === 0) {
+      // No shared prefix with the kanji surface — unit is missing, do not steal a char.
+      return 0;
+    }
     if (surfaceGreedy === surfaceLen) {
-      best = len;
-      break;
+      return len;
     }
     if (len > surfaceGreedy + 1) break;
     best = len;
@@ -44,15 +57,18 @@ function consumeFixedRubyUnit(
   return best;
 }
 
-function remainingUnitsArePlain(units: RubyUnit[], from: number): boolean {
-  return units.slice(from).every(u => u.kind === 'plain');
-}
-
 function segmentFromUnits(units: RubyUnit[], from: number): string {
   return units.slice(from).map(rubyUnitSegment).join('');
 }
 
-/** Walk a fixed template part unit-by-unit so a typo in one ruby word does not swallow the next. */
+/**
+ * Walk a fixed template part unit-by-unit.
+ *
+ * Invariant: only consume user chars that belong to this part. Missing units are skipped
+ * (step 0 → continue); trailing user chars after the last matched unit stay for later
+ * template parts. Short leading typos (≤ MAX_LEADING_TYPO_SKIP) may be absorbed; long
+ * indexOf jumps must not (they desync every subsequent alternative).
+ */
 function consumeFixedPartUserChars(
   user: string,
   cursor: number,
@@ -75,36 +91,39 @@ function consumeFixedPartUserChars(
       step = consumeFixedRubyUnit(rest, unit, rubyOptions);
     }
 
-    // Look ahead for a short typo before this plain char (e.g. おは → は), but never
-    // steal a later copy of the same char that still appears in the remaining template
-    // (e.g. missing い in ついてい must not latch onto い in user ている).
+    // Short typo before this plain char (e.g. おは → は). Cap the skip so a missing
+    // unit cannot latch onto the same char in a later segment (す → です).
     if (step === 0 && unit.kind === 'plain' && unit.surface.length === 1) {
       const laterNeedsSame = units
         .slice(i + 1)
         .some(u => u.surface === unit.surface || (u.kind === 'plain' && u.surface.includes(unit.surface)));
       if (!laterNeedsSame) {
         const pos = rest.indexOf(unit.surface);
-        if (pos >= 0) step = pos + unit.surface.length;
+        if (pos >= 0 && pos <= MAX_LEADING_TYPO_SKIP) {
+          step = pos + unit.surface.length;
+        }
       }
     }
 
     if (step === 0) {
+      // Unit missing from the user answer — skip it and keep aligning later units in
+      // this part. Falling through to a bulk diff of the remainder is a last resort
+      // when later units still share a prefix with `rest` but per-unit matching stalled.
       const bulk = diffFixedSegmentUserConsumed(rest, segmentFromUnits(units, i), rubyOptions);
       if (bulk > 0) {
         consumed += bulk;
         break;
       }
-    }
-
-    if (step === 0 && remainingUnitsArePlain(units, i)) {
-      step = diffFixedSegmentUserConsumed(rest, segmentFromUnits(units, i), rubyOptions);
-      consumed += step;
-      break;
+      continue;
     }
 
     consumed += step;
-    if (step === 0) break;
   }
+
+  // Cap at whole-segment consumption so trailing extras (later {alt} text) are never kept.
+  const restFromStart = user.slice(cursor);
+  const whole = diffFixedSegmentUserConsumed(restFromStart, part, rubyOptions);
+  if (whole > 0 && consumed > whole) return whole;
 
   return consumed;
 }
@@ -236,8 +255,6 @@ function segmentAlignmentScore(rest: string, segment: string, rubyOptions: RubyM
 
   return matched;
 }
-
-const MAX_LEADING_TYPO_SKIP = 2;
 
 /**
  * User-chars matched when the whole segment aligns after skipping a short leading typo

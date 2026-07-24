@@ -14,7 +14,7 @@ Il pacco dovrebbe arrivare domani.
 荷物[にもつ]は明日[あした]届[とど]くはずです
 
 She should know how to use this app.
-Dovrebbe saper usare questa app.
+Dovrebbe saper come si usa questa app.
 このアプリの使[つか]い方[かた]を知[し]っているはずです
 
 They should have plenty of time.
@@ -27,14 +27,14 @@ Non dovrebbe fumare qui dentro.
 
 She should not be late for work.
 Non dovrebbe arrivare in ritardo al lavoro.
-仕事[しごと]に遅刻[ちこく]しないはずです
+仕事[しごと]に{遅刻[ちこく]し|遅[おく]れ}ないはずです
 
 He should speak English well.
 Dovrebbe parlare bene inglese.
 英語[えいご]が上手[じょうず]なはずです
 
 The package should have arrived.
-Il pacco dovrebbe essere arrivato.
+Il pacco dovrebbe essere già arrivato.
 荷[に]物[もつ]はもう着[つ]いたはずです
 
 Ken should be home now.

@@ -301,4 +301,29 @@ describe('full alternative after short leading typo', () => {
   });
 });
 
+describe('optional trailing alt after earlier missing units', () => {
+  const template = '毎日[まいにち]話[はな]す練習[れんしゅう]をしてよかった{です|}';
+
+  it('keeps です when す練習 is missing and does not latch onto す inside です', () => {
+    const user = '毎日話してよかったです';
+    const answer = resolveAnswerFromTemplate(user, template);
+    expect(answer).toBe('毎日[まいにち]話[はな]す練習[れんしゅう]をしてよかったです');
+    expect(answer.endsWith('です')).toBe(true);
+
+    const { ops } = pickBestDiffFromTemplate(user, template);
+    const shown = ops
+      .map(op => {
+        if (op.kind === 'extra') return op.text;
+        if (op.unit.kind === 'plain') return op.unit.surface;
+        return `${op.unit.surface}[${op.unit.reading}]`;
+      })
+      .join('');
+    expect(shown).toBe('毎日[まいにち]話[はな]す練習[れんしゅう]をしてよかったです');
+    expect(ops.some(op => op.kind === 'extra')).toBe(false);
+    const trailing = ops.slice(-2);
+    expect(trailing.every(op => op.kind === 'unit' && op.status === 'correct_kanji')).toBe(true);
+    expect(trailing.map(op => (op.kind === 'unit' ? op.unit.surface : '')).join('')).toBe('です');
+  });
+});
+
 
