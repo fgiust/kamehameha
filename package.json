@@ -7,9 +7,9 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "portless kamehameha vite",
     "clean": "rm -rf dist",
-    "build": "npm run build -w tenshindiff && npm run validate:data && node scripts/check-api-imports.mjs && vitest run && tsc -b && vite build && npm run generate:seo",
+    "build": "pnpm --filter tenshindiff build && pnpm validate:data && node scripts/check-api-imports.mjs && vitest run && tsc -b && vite build && pnpm generate:seo",
     "db:link": "node scripts/run-supabase-cli.mjs link",
     "db:migrate": "node scripts/run-supabase-cli.mjs db push --include-all",
     "db:status": "node scripts/run-supabase-cli.mjs migration list",
@@ -45,6 +45,7 @@
     "globals": "^15.11.0",
     "google-translate-api-x": "10.7.2",
     "happy-dom": "17.4.4",
+    "portless": "^0.15.6",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.11.0",
     "vite": "^5.4.10",

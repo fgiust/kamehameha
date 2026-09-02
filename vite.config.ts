@@ -4,6 +4,7 @@ import checker from 'vite-plugin-checker'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import pc from 'picocolors'
 import { parseTranslateSessionTxt } from './src/lessons/parseTranslateSessionTxt'
 import { parseReadingExerciseTxt } from './src/lessons/parseReadingExerciseTxt'
 import { updateTranslateBlockInFile } from './src/lessons/updateTranslateBlockInFile'
@@ -132,6 +133,42 @@ function genkiTxtPlugin(): Plugin {
 
 const tenshinRoot = path.resolve(__dirname, 'packages/tenshindiff');
 
+const isPortless = process.env.PORTLESS === '1' || Boolean(process.env.PORTLESS_URL);
+const portlessUrl = process.env.PORTLESS_URL;
+
+const serverConfig = (() => {
+  if (isPortless) {
+    return {
+      host: '127.0.0.1',
+      port: process.env.PORT ? Number(process.env.PORT) : undefined,
+      allowedHosts: ['kamehameha.localhost'],
+    };
+  }
+  return {
+    host: 'kamehameha.localhost.direct',
+    allowedHosts: ['kamehameha.localhost.direct'],
+    https: {
+      key: fs.readFileSync(path.resolve(__dirname, 'ssl/localhost.direct.SS.key')),
+      cert: fs.readFileSync(path.resolve(__dirname, 'ssl/localhost.direct.SS.crt')),
+    },
+  };
+})();
+
+function portlessBannerPlugin(): Plugin {
+  return {
+    name: 'portless-banner',
+    configureServer(server) {
+      if (!portlessUrl) return;
+      server.printUrls = function () {
+        server.config.logger.info('');
+        server.config.logger.info(`  ${pc.white('kamehameha!')} is running at:`);
+        server.config.logger.info(`  ${pc.green('➜')}  ${pc.cyan(portlessUrl)}`);
+        server.config.logger.info('');
+      };
+    },
+  };
+}
+
 // https://vite.dev/config/
 export default defineConfig({
   resolve: {
@@ -148,14 +185,7 @@ export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
   },
-  server: {
-    host: 'kamehameha.localhost.direct',
-    allowedHosts: ['kamehameha.localhost.direct'],
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'ssl/localhost.direct.SS.key')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'ssl/localhost.direct.SS.crt')),
-    },
-  },
+  server: serverConfig,
   build: {
     rollupOptions: {
       output: {
@@ -175,6 +205,7 @@ export default defineConfig({
   },
   plugins: [
     genkiTxtPlugin(),
+    portlessBannerPlugin(),
     {
       name: 'dev-favicon',
       enforce: 'pre',
