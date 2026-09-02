@@ -8,8 +8,8 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const result = spawnSync(
-  'npx',
-  ['vite-node', '--config', 'vite.config.ts', 'scripts/run-generate-seo.ts'],
+  'pnpm',
+  ['exec', 'vite-node', '--config', 'vite.config.ts', 'scripts/run-generate-seo.ts'],
   { cwd: root, stdio: 'inherit', shell: false },
 );
 
