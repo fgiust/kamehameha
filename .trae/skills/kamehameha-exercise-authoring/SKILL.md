@@ -7,6 +7,9 @@ description: "Authors correct Genki-style sentence exercise TXT files for the ka
 
 This skill describes **exactly** how to author valid and correct sentence exercise data files for the kamehameha! Japanese learning SPA.
 
+> **⚠️ MANDATORY FINAL STEP**
+> After **any** edit (creation, correction, single-line tweak) to a `genki-*.txt` or `sentence-*.txt` file, you **MUST** run `npm run validate:data` and confirm it exits with code 0 before considering the task done. Do **not** skip this step — the validator catches structural errors, missing exercises, copyright markers, and issues that will otherwise break the build pipeline.
+
 ## 1. File Naming & Location
 
 All files live under `src/data/` in the project root.
@@ -177,6 +180,7 @@ Before finalizing an answer line, verify:
 - [ ] Commas written literally as `、` without `{…}` wrapping.
 - [ ] `私[わたし]は` wrapped as `{私[わたし]は|}` when inferable.
 - [ ] `です` / `だ` variants written as `{です|だ}` when both should be accepted.
+- [ ] **After all exercises are written / edited:** `npm run validate:data` passes with exit code 0.
 
 ## 5. Prompt Quality Guidelines (Lines A & B)
 
@@ -255,7 +259,7 @@ The script exits with code 1 on any failure. It also runs automatically as part 
    - Every Japanese answer features the grammar point from the title.
    - Furigana on all kanji; alternatives & optionals with `{…|…}`; no trailing `。`.
    - Names from `genki_cast.txt`, vocab preferring the chapter range.
-4. **Run** `npm run validate:data`. Fix any reported errors.
+4. **✅ MANDATORY — Run** `npm run validate:data`. If it reports errors, fix them and re-run. Do **not** proceed or mark the task complete until the script exits with code 0.
 5. **Run** `npm run build` (optional but recommended) to confirm the whole pipeline passes (tests, types, validation, and Vite build including the TXT parser).
 
 ## 8. Complete Example: A Valid 10-Exercise `genki-21-2.txt` (～てある)
