@@ -17,5 +17,11 @@
     { "handle": "filesystem" },
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/(.*)", "dest": "/index.html" }
+  ],
+  "crons": [
+    {
+      "path": "/api/keep-alive",
+      "schedule": "0 12 * * *"
+    }
   ]
 }
