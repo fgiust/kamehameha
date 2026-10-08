@@ -6,6 +6,8 @@ vi.mock('@supabase/supabase-js', () => ({
   createClient: vi.fn(),
 }));
 
+const PINGED_AT = '2026-10-08T12:00:00+00:00';
+
 type MockRes = {
   statusCode: number;
   headers: Record<string, string>;
@@ -31,12 +33,16 @@ function parsed(res: MockRes) {
   return JSON.parse(res.body ?? 'null') as unknown;
 }
 
-function mockSelectLimit(result: { data: unknown; error: { message: string } | null }) {
-  const limit = vi.fn().mockResolvedValue(result);
+function mockKeepAliveClient(options?: {
+  select?: { data: unknown; error: { message: string } | null };
+  rpc?: { data: unknown; error: { message: string } | null };
+}) {
+  const limit = vi.fn().mockResolvedValue(options?.select ?? { data: [], error: null });
   const select = vi.fn().mockReturnValue({ limit });
   const from = vi.fn().mockReturnValue({ select });
-  vi.mocked(createClient).mockReturnValue({ from } as never);
-  return { from, select, limit };
+  const rpc = vi.fn().mockResolvedValue(options?.rpc ?? { data: PINGED_AT, error: null });
+  vi.mocked(createClient).mockReturnValue({ from, rpc } as never);
+  return { from, select, limit, rpc };
 }
 
 describe('isAuthorizedCronRequest', () => {
@@ -64,27 +70,42 @@ describe('isAuthorizedCronRequest', () => {
 });
 
 describe('pingSupabase', () => {
-  it('selects id from profiles with limit 1', async () => {
-    const limit = vi.fn().mockResolvedValue({ data: [], error: null });
-    const select = vi.fn().mockReturnValue({ limit });
-    const from = vi.fn().mockReturnValue({ select });
+  it('selects id from profiles then calls keepalive_ping', async () => {
+    const { from, select, limit, rpc } = mockKeepAliveClient();
 
-    await pingSupabase({ from } as never);
+    await expect(pingSupabase({ from, rpc } as never)).resolves.toBe(PINGED_AT);
 
     expect(from).toHaveBeenCalledWith('profiles');
     expect(select).toHaveBeenCalledWith('id');
     expect(limit).toHaveBeenCalledWith(1);
+    expect(rpc).toHaveBeenCalledWith('keepalive_ping');
   });
 
-  it('throws when PostgREST returns an error', async () => {
-    const limit = vi.fn().mockResolvedValue({
-      data: null,
-      error: { message: 'permission denied' },
+  it('throws when the profiles read fails', async () => {
+    const { from, rpc } = mockKeepAliveClient({
+      select: { data: null, error: { message: 'permission denied' } },
     });
-    const select = vi.fn().mockReturnValue({ limit });
-    const from = vi.fn().mockReturnValue({ select });
 
-    await expect(pingSupabase({ from } as never)).rejects.toThrow('permission denied');
+    await expect(pingSupabase({ from, rpc } as never)).rejects.toThrow('permission denied');
+    expect(rpc).not.toHaveBeenCalled();
+  });
+
+  it('throws when keepalive_ping returns an error', async () => {
+    const { from, rpc } = mockKeepAliveClient({
+      rpc: { data: null, error: { message: 'function not found' } },
+    });
+
+    await expect(pingSupabase({ from, rpc } as never)).rejects.toThrow('function not found');
+  });
+
+  it('throws when keepalive_ping returns no timestamp', async () => {
+    const { from, rpc } = mockKeepAliveClient({
+      rpc: { data: null, error: null },
+    });
+
+    await expect(pingSupabase({ from, rpc } as never)).rejects.toThrow(
+      'keepalive_ping returned no timestamp',
+    );
   });
 });
 
@@ -130,8 +151,8 @@ describe('api/keep-alive handler', () => {
     expect(parsed(res)).toEqual({ ok: false, error: 'Method not allowed' });
   });
 
-  it('pings profiles and returns ok on an authorized GET', async () => {
-    const { from, select, limit } = mockSelectLimit({ data: [], error: null });
+  it('pings profiles and keepalive_ping on an authorized GET', async () => {
+    const { from, select, limit, rpc } = mockKeepAliveClient();
     const res = createRes();
 
     await handler(
@@ -149,12 +170,15 @@ describe('api/keep-alive handler', () => {
     expect(from).toHaveBeenCalledWith('profiles');
     expect(select).toHaveBeenCalledWith('id');
     expect(limit).toHaveBeenCalledWith(1);
+    expect(rpc).toHaveBeenCalledWith('keepalive_ping');
     expect(res.statusCode).toBe(200);
-    expect(parsed(res)).toEqual({ ok: true });
+    expect(parsed(res)).toEqual({ ok: true, pinged_at: PINGED_AT });
   });
 
-  it('returns 500 when the database query fails', async () => {
-    mockSelectLimit({ data: null, error: { message: 'connection refused' } });
+  it('returns 500 when the profiles query fails', async () => {
+    mockKeepAliveClient({
+      select: { data: null, error: { message: 'connection refused' } },
+    });
     const res = createRes();
 
     await handler(
@@ -164,5 +188,35 @@ describe('api/keep-alive handler', () => {
 
     expect(res.statusCode).toBe(500);
     expect(parsed(res)).toEqual({ ok: false, error: 'connection refused' });
+  });
+
+  it('returns 500 when keepalive_ping fails', async () => {
+    mockKeepAliveClient({
+      rpc: { data: null, error: { message: 'function not found' } },
+    });
+    const res = createRes();
+
+    await handler(
+      { method: 'GET', headers: { authorization: 'Bearer cron-test-secret' } },
+      res,
+    );
+
+    expect(res.statusCode).toBe(500);
+    expect(parsed(res)).toEqual({ ok: false, error: 'function not found' });
+  });
+
+  it('returns 500 when keepalive_ping returns no timestamp', async () => {
+    mockKeepAliveClient({
+      rpc: { data: null, error: null },
+    });
+    const res = createRes();
+
+    await handler(
+      { method: 'GET', headers: { authorization: 'Bearer cron-test-secret' } },
+      res,
+    );
+
+    expect(res.statusCode).toBe(500);
+    expect(parsed(res)).toEqual({ ok: false, error: 'keepalive_ping returned no timestamp' });
   });
 });

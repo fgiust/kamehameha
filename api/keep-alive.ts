@@ -51,15 +51,32 @@ function getSupabaseAnonClient(): SupabaseClient {
   });
 }
 
+function asTimestamp(value: unknown): string | null {
+  if (typeof value === 'string' && value.length > 0) return value;
+  return null;
+}
+
 export async function pingSupabase(
-  client: Pick<SupabaseClient, 'from'> = getSupabaseAnonClient(),
-): Promise<void> {
+  client: Pick<SupabaseClient, 'from' | 'rpc'> = getSupabaseAnonClient(),
+): Promise<string> {
   // Harmless anon read: GRANT SELECT exists on profiles, RLS returns no rows
   // for the anonymous role. The request still reaches Postgres via PostgREST.
-  const { error } = await client.from('profiles').select('id').limit(1);
-  if (error) {
-    throw new Error(error.message);
+  const { error: readError } = await client.from('profiles').select('id').limit(1);
+  if (readError) {
+    throw new Error(readError.message);
   }
+
+  const { data, error: pingError } = await client.rpc('keepalive_ping');
+  if (pingError) {
+    throw new Error(pingError.message);
+  }
+
+  const pingedAt = asTimestamp(data);
+  if (!pingedAt) {
+    throw new Error('keepalive_ping returned no timestamp');
+  }
+
+  return pingedAt;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -76,8 +93,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    await pingSupabase();
-    json(res, 200, { ok: true });
+    const pingedAt = await pingSupabase();
+    json(res, 200, { ok: true, pinged_at: pingedAt });
   } catch (err) {
     json(res, 500, { ok: false, error: err instanceof Error ? err.message : 'Unknown error' });
   }
