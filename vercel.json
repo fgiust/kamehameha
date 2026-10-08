@@ -19,9 +19,11 @@
     { "src": "/(.*)", "dest": "/index.html" }
   ],
   "crons": [
-    {
-      "path": "/api/keep-alive",
-      "schedule": "0 12 * * *"
-    }
+    { "path": "/api/keep-alive", "schedule": "0 0 * * *" },
+    { "path": "/api/keep-alive", "schedule": "0 4 * * *" },
+    { "path": "/api/keep-alive", "schedule": "0 8 * * *" },
+    { "path": "/api/keep-alive", "schedule": "0 12 * * *" },
+    { "path": "/api/keep-alive", "schedule": "0 16 * * *" },
+    { "path": "/api/keep-alive", "schedule": "0 20 * * *" }
   ]
 }
